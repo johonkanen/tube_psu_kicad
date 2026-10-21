@@ -5,7 +5,7 @@ of every phase, see PLAN.md section 9.
 
 ```
 Read PLAN.md and STATUS.md in /home/jari/dev/tube_psu_kicad, and the playbook
-/home/jari/dev/ac_psu_kicad/CONVERSION_PLAYBOOK.md (Phase 1 preparation). Use Opus 5.5.
+/home/jari/dev/tube_psu_kicad/tools/p2k/CONVERSION_PLAYBOOK.md (Phase 1 preparation). Use Opus 5.5.
 Phase 0 is done. Start the Phase 1 preparation (PLAN.md section 3) for the tube_power_5_1
 Proteus -> KiCad 10.0.7 migration. Do not transcribe sheets yet (that is the Fable sessions).
 

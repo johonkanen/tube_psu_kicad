@@ -10,7 +10,7 @@ The Proteus project file is binary and cannot be read, so the IPC-D-356A netlist
 CADCAM export is the reference: 193 nets, 315 parts, 1165 pad/via/hole records, each with
 net, refdes, pin and coordinates. Every check in this repo compares against that file.
 
-The method follows `~/dev/ac_psu_kicad/CONVERSION_PLAYBOOK.md`. The tools are the shared
+The method follows `tools/p2k/CONVERSION_PLAYBOOK.md`. The tools are the shared
 [proteus2kicad](https://github.com/johonkanen/proteus2kicad) repository, a git submodule in
 `tools/p2k` (clone with `git clone --recurse-submodules`, or run
 `git submodule update --init`); everything specific to this board is in `p2k_config.py`.

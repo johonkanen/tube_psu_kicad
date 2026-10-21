@@ -5,7 +5,7 @@ Proteus gerbers so that every pad, track, via and pour carries the net from the 
 schematic. Prove with scripted checks that the KiCad design is electrically identical to
 the Proteus one.
 
-This follows the generic playbook `~/dev/ac_psu_kicad/CONVERSION_PLAYBOOK.md`, proven on
+This follows the generic playbook `tools/p2k/CONVERSION_PLAYBOOK.md`, proven on
 `~/dev/ac_psu_kicad` (single_phase_inverter_psu_v3, 267 parts, 4 layers). Read it first;
 this plan lists only what is specific to this board and where it differs from ac_psu.
 The ac_psu tools (`~/dev/ac_psu_kicad/tools/`) are reused; the playbook's section 4 says
