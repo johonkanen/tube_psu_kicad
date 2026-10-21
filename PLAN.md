@@ -20,7 +20,8 @@ Source folder `C:\Users\jaarh\Sync\proteus_projektit\Projects\tube_power\tube_po
 |---|---|
 | `source/tube_power_5_1.pdsprj` | Main-folder project, saved 2020-10-03 (zip of binary `ROOT.DSN` / `ROOT.LYT` / `ROOT.CDB`). The `proteus_8/` copy is the same project opened in another Proteus version (user, 2026-10-21); not used. Only useful via `strings`. |
 | `source/schematic_pdf/tube_power_5_1.PDF` | 11 sheets, printed 2026-10-15 from the same project (title block date 03/10/2020, "V5.1"). Text layer extracted to `schematic_text.txt`; page renders `hi-NN.png` (200 dpi). |
-| `source/tube_power_5_1 - CADCAM.ZIP` → `source/cadcam/` | Re-exported 2026-10-21 07:38 from `tube_power_5_1.pdsprj` with Proteus 8.12 SP2. RS-274X, metric, `FSLAX45Y45`, 4 copper layers (Top, Inner 1, Inner 14, Bottom), silk/resist/paste both sides, Top/Bottom Assembly, Mechanical 1 (outline), drill as Excellon (`.DRL`) **and** as gerber, **IPC-D-356A netlist**, READ-ME (apertures, drill tools, stack-up). |
+| `source/tube_power_5_1_X2 - CADCAM.ZIP` → `source/cadcam/` | **Used.** Re-exported 2026-10-21 07:51 with Gerber X2 attributes (Proteus 8.12 SP2), same project and settings otherwise: `%TA.AperFunction` on every aperture, one `TF.SameCoordinates` id, drill as gerbers `Drill TOP-BOT Plated` / `Drill TOP-BOT NonPlated` (no Excellon). IPC netlist identical to the RS-274X export apart from the header. Same file layout as the ac_psu export. |
+| `source/tube_power_5_1 - CADCAM.ZIP` → `source/cadcam_rs274x/` | Kept as cross-check (Excellon `.DRL`). Re-exported 2026-10-21 07:38 from `tube_power_5_1.pdsprj` with Proteus 8.12 SP2. RS-274X, metric, `FSLAX45Y45`, 4 copper layers (Top, Inner 1, Inner 14, Bottom), silk/resist/paste both sides, Top/Bottom Assembly, Mechanical 1 (outline), drill as Excellon (`.DRL`) **and** as gerber, **IPC-D-356A netlist**, READ-ME (apertures, drill tools, stack-up). |
 | Not used | `tube_power_5_1 - CADCAM.ZIP` of 2019 (overwritten by the re-export) and `tube_power_5_1_cleaned - CADCAM.ZIP` (2019-05-15): imperial RS-274X, no netlist, no outline, older layout than the 2020 project. |
 
 Sheets (PDF page → title from the title block; one KiCad sub-sheet each):
@@ -81,25 +82,22 @@ IPC-D-356A netlist (`tube_power_5_1 - CADCAM Netlist.IPC`, identical content to
 
 Differences from ac_psu that shape the plan:
 
-1. **The gerbers carry no X2 attributes** (no `%TA.AperFunction`, no `%TO`, no
-   `TF.SameCoordinates`), although they are RS-274X with regions. ac_psu's
-   `gerber_to_tracks.py` tells tracks, via pads, component pads, non-conductor lines and the
-   outline apart by aperture function. Two options:
-   - **(recommended)** re-export the CADCAM once more with Gerber X2 enabled in Proteus'
-     CADCAM output dialog (same project, nothing else changed) – then the ac_psu tools work
-     as they are;
-   - or classify geometrically: flash at an IPC via position = via pad, flash at an IPC
-     component pad = component pad, D01 draw = track unless it is a pour edge stroke or the
-     outline. Feasible, but one more source of error.
-   Decide at the start of Phase 0 (ask the user).
+1. ~~The gerbers carry no X2 attributes.~~ **Decided 2026-10-21: the user re-exported the
+   CADCAM with Gerber X2** (`source/cadcam/`, see the inventory). Aperture functions per
+   copper layer: Conductor, NonConductor (13 / 5 / 3 / 3 draws on Top / In1 / In14 /
+   Bottom), Profile (outline), ViaPad (283), ComponentPad (207), SMDPad,CuDef (225 top /
+   438 bottom), OtherPad,Unknown (12 = 4 free pads + **8 copper rings 3.5 mm around the
+   unplated 3.0 mm holes, on every layer**). The ac_psu tools work with the X2 functions as
+   they are; `tools/check_sources.py` asserts the flashes and drills against the IPC.
 2. Vias, free pads and mounting holes are blank-refdes records (see above); mounting holes
    are unplated (ac_psu: plated).
 3. High-voltage board (420 V DC link, −80 V/−100 V rails, mains input): design rules must
    come from Proteus' copper (smallest gap between nets per region), and KiCad net classes
    for HV nets are useful for later edits. Phase 3 measures the actual minimum gaps from
    the gerbers per net pair and sets rules no stricter than the board as built.
-4. Excellon drill available (ac_psu only had a drill gerber) – use it for the drill
-   comparison; keep the drill gerber as a cross-check.
+4. Drill: the X2 export writes drill gerbers (Plated with ViaDrill / ComponentDrill /
+   OtherDrill, NonPlated with 8 × 3.0 mm), like ac_psu – use them; the Excellon file of the
+   RS-274X export (`source/cadcam_rs274x/`) is an optional extra cross-check.
 
 ## 2. Phase 0 – skeleton and tooling (½ day)
 
@@ -107,7 +105,7 @@ Differences from ac_psu that shape the plan:
    `reports/`. Copy from ac_psu: `tools/bin/`, `kicad_env.sh`, `sexpr.py`, `geom2d.py`,
    `gerber.py`, `fpgeom.py`, `sch_builder.py`, `render_sheet.py`, `erc.sh`, `check_all.sh`
    (trim to the steps that exist).
-2. Ask the user about the Gerber X2 re-export (section 1, point 1).
+2. ~~Ask the user about the Gerber X2 re-export~~ – done, X2 export in `source/cadcam/`.
 3. `tools/ipc356.py` adapted: file name, blank-refdes records (vias / free pads / holes),
    `TRUNCATED_REFDES` for the terminals (positions from the IPC, names from the PDF),
    the KiCad refdes map for names with spaces/signs, `NET_ALIASES` (`GND=POWER` → `GND`),
@@ -167,7 +165,6 @@ the independent review and negative tests. Add both to `tools/check_all.sh`.
 
 ## 7. Risks and open points
 
-- Gerber X2 attributes missing (section 1, point 1) – decide before Phase 3.
 - Terminal refdes with spaces and signs – one refdes map used by every script.
 - HV clearances: KiCad rules must not be stricter than the copper as built, or DRC drowns
   in errors; and must not be looser than what the board needs for later edits (net classes).

@@ -1,0 +1,90 @@
+# Status
+
+Updated: 2026-10-21 (Phase 0 done)
+
+## Phase 0 – done (Opus 5.5)
+
+- **Gerber X2 decision:** the user re-exported the CADCAM with X2 attributes
+  (`tube_power_5_1_X2 - CADCAM.ZIP`, 2026-10-21 07:51). It is unpacked to `source/cadcam/`;
+  the earlier RS-274X export moved to `source/cadcam_rs274x/` (cross-check only, has the
+  Excellon `.DRL`). The X2 file layout equals the ac_psu export (same aperture functions,
+  drill as `Drill TOP-BOT Plated` / `NonPlated` gerbers), so the ac_psu Phase 3/4 tools apply.
+  PLAN.md section 1 updated.
+- Copied from ac_psu (generic): `tools/bin/{kipy,kicad-cli}`, `kicad_env.sh` (mount state in
+  `/tmp/tube_psu_kicad_mount.<uid>`), `sexpr.py`, `geom2d.py`, `gerber.py`, `fpgeom.py`,
+  `sch_builder.py` and `erc.sh` (renamed to `tube_psu`), `render_sheet.py`. `gerber.py`
+  reads all 15 X2 gerbers unchanged.
+- `tools/ipc356.py` adapted: blank-refdes records split into `via` (283), `free_pad` (4) and
+  `hole` (8); truncated terminal refdes restored; KiCad refdes map; `GND=POWER` alias; counts
+  of PLAN.md section 1 asserted. Output columns: `refdes` = **KiCad** refdes,
+  `refdes_proteus` = full Proteus name, `refdes_raw` = 6-char IPC field.
+- `tools/check_sources.py` (new): every copper flash (ViaPad / ComponentPad / OtherPad /
+  SMDPad per side) and every drill flash matches an IPC record 1:1 within 0.01 mm with the
+  same drill; one `SameCoordinates` id; outline 163.0 × 110.0 mm. Negative-tested (via
+  moved 0.05 mm, hole drill changed: both fail).
+- `tools/check_all.sh`: KiCad env, IPC self-check, X2 vs IPC check.
+
+### Last verification (`tools/check_all.sh`)
+
+```
+== KiCad environment
+pcbnew 10.0.7
+== IPC-D-356A parser self-check
+ipc356: nets=193, records=1165, refdes_raw=316, tht_records=502, smd_records=663, smd_top=225, smd_bottom=438, nc_pads=9, vias=283, free_pads=4, holes=8, parts=315
+ipc356: OK
+== Gerber X2 export vs IPC (pads, vias, drills, outline)
+  15 gerbers, one SameCoordinates id
+  Top Copper: Draw:Conductor 4642, Draw:NonConductor 13, Draw:Profile 4, Flash:ComponentPad 207, Flash:OtherPad,Unknown 12, Flash:SMDPad,CuDef 225, Flash:ViaPad 283, Region:- 342
+  Inner  1: Draw:Conductor 2868, Draw:NonConductor 5, Draw:Profile 4, Flash:ComponentPad 207, Flash:OtherPad,Unknown 12, Flash:ViaPad 283, Region:- 262
+  Inner 14: Draw:Conductor 2511, Draw:NonConductor 3, Draw:Profile 4, Flash:ComponentPad 207, Flash:OtherPad,Unknown 12, Flash:ViaPad 283, Region:- 162
+  Bottom Copper: Draw:Conductor 5380, Draw:NonConductor 3, Draw:Profile 4, Flash:ComponentPad 207, Flash:OtherPad,Unknown 12, Flash:SMDPad,CuDef 438, Flash:ViaPad 283, Region:- 327
+  drills: 494 plated, 8 non-plated
+  outline 163.0 x 110.0 mm at (-71.90, -18.70)
+check_sources: OK
+
+ALL CHECKS PASSED
+```
+
+`refdes_raw=316` counts the blank refdes of vias/free pads/holes; 315 parts.
+502 THT records = 207 component THT pads + 283 vias + 4 free pads + 8 holes.
+
+### Findings that matter for Phase 1
+
+- **Terminals** (13; each has two THT holes, both pin 1, same net). Truncated names
+  restored from the PDF (sheet 1) and renamed for KiCad (`KICAD_REFDES` in `tools/ipc356.py`,
+  one table used by every script – change it there if other names are wanted):
+
+  | Proteus | KiCad | net |
+  |---|---|---|
+  | `+15V OUT` (IPC `+15V O`) | `P15V_OUT` | 20V_ISO_SEC |
+  | `+5V OUT` (`+5V OU`) | `P5V_OUT` | 5V_ISOL |
+  | `-5V OUT` (`-5V OU`) | `N5V_OUT` | -5V_SEC |
+  | `-80V OUT` (`-80V O`) | `N80V_OUT` | -100V BIAS |
+  | `SEC GND` (`SEC GN`) | `SEC_GND` | ISO_GND |
+  | `+400V` | `P400V` | 420V |
+  | `GND`, `PE`, `IN1`, `IN2`, `HT_6V3`, `HT_GND` | unchanged | ISO_GND, PE, RES_IN, IN2, 6V3, HT_GND |
+
+  Note: terminal `GND` is on net ISO_GND (not GND), terminal `+15V OUT` on 20V_ISO_SEC,
+  `-80V OUT` on `-100V BIAS` – names on the PDF and nets differ; the IPC decides.
+- **Net names with spaces / special characters**: `PFC DRAIN 1`, `PFC DRAIN 2`,
+  `PFC CURRENT 2+`, `PFC CURRENT 3+`, `-100V BIAS`, `$HT_CS`, `$CUK_CS`. Phase 1 must check
+  how KiCad labels handle the spaces (compare is by pad sets, so names may be changed if
+  needed – record the mapping).
+- 87 auto-named nets (`#000xx`), 20 single-pin nets, 9 N/C pads (RL1-2, ISO1-15, ISO2-13,
+  DRV5/DRV6-7/12/13).
+- **No net record at all**: L1, L2, L3 pins `1` and `2` (the windings are `pri1`/`pri2`) –
+  probably mechanical/support pins; KiCad `unconnected-(…)` or no-connect.
+- Pin ids with letters: diodes `A`/`C` (22/20), SICD1/2 `A`/`K`, L1–L3 `pri1`/`pri2`.
+- Nets `Q13_DRAIN` / `Q14_DRAIN` connect Q2/Q1 drains (names from an older numbering).
+
+### Findings that matter for Phase 2/3
+
+- The 8 unplated 3.0 mm holes have a **3.5 mm copper ring on every copper layer**
+  (OtherPad flashes, no net). The NPTH footprint needs copper pads (no net) to reproduce it.
+- The 4 free wire pads (plated 2.55 mm / 4.0 mm, nets Q14_DRAIN, 6V3 ×2, Q13_DRAIN at
+  x = −42.8 mm) – board-only footprints or plain pads, user decision in Phase 2.
+- NonConductor draws on all copper layers (13 / 5 / 3 / 3) – copper graphics without net.
+
+## Next
+
+Phase 1 preparation (PLAN.md section 3, playbook Phase 1 preparation), see `next_prompt.md`.
