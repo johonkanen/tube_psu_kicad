@@ -19,7 +19,15 @@ Updated: 2026-10-21 (Phase 0 done; tools moved to the proteus2kicad submodule)
 - The Phase 1–4 tools are still only in `~/dev/ac_psu_kicad/tools`; each phase moves the ones
   it needs into proteus2kicad (config keys instead of hard-coded values), commits and pushes
   there, then bumps the submodule here. ac_psu is moved onto the shared tools later as the
-  regression test (step 3 of the plan, after the user has reviewed this).
+  regression test.
+- **ac_psu now runs on the shared tools too** (ac_psu_kicad branch `p2k-submodule`, not yet
+  merged/pushed – user decision): `check_all.sh` passes with identical output (plus the new
+  `check_sources` step), and `tools/regen_check.sh` there regenerates every file from a clean
+  clone byte-identical to the commit. `check_sources` was generalized for plated mounting
+  holes / no NonPlated drill file (ac_psu), output here unchanged.
+- **Regression procedure when moving or changing a shared tool:** commit and push in
+  `tools/p2k`; bump the submodule here and in ac_psu; in ac_psu run `tools/check_all.sh` and
+  `tools/regen_check.sh` – both must pass with ac_psu's committed files unchanged.
 
 ## Phase 0 – done (Opus 5.5)
 

@@ -21,11 +21,14 @@ with --version (hangs). KiCad symbol libraries are in the mount at <mount>/share
 (mount path in /tmp/p2k_kicad_mount.<uid>).
 Move (do not copy) the ac_psu Phase 1 tools from /home/jari/dev/ac_psu_kicad/tools into
 tools/p2k/p2k/: check_symbols.py, compare_netlists.py, make_skeleton.py, and the generic part of
-gen_symbols.py (the symbol list itself is board data: keep it in this repo, e.g.
-tools/symbols.py or lib/, and let the shared generator read it). Replace hard-coded ac_psu
-names/paths with p2k_config.py keys (document new keys in tools/p2k/README.md); grep for ac_psu
-refdes/net names first. Do not change ~/dev/ac_psu_kicad. Commit in tools/p2k and push to
-origin main, then commit the submodule bump here.
+gen_symbols.py (the symbol list itself is board data: keep it in each board repo, e.g.
+tools/symbols.py, and let the shared generator read it). Replace hard-coded ac_psu names/paths
+with p2k_config.py keys (document new keys in tools/p2k/README.md); grep for ac_psu refdes/net
+names first. ac_psu is the regression test (STATUS.md "Regression procedure"): switch its
+tools to the moved versions on its branch p2k-submodule (or main if the user has merged it),
+bump its submodule, and require its tools/check_all.sh and tools/regen_check.sh to pass with
+its committed files unchanged. Commit in tools/p2k and push to origin main; commit the
+submodule bumps in both repos (do not push ac_psu without asking).
 
 Verify state first: tools/check_all.sh. At handoff it printed
   pcbnew 10.0.7
