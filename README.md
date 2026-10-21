@@ -10,7 +10,10 @@ The Proteus project file is binary and cannot be read, so the IPC-D-356A netlist
 CADCAM export is the reference: 193 nets, 315 parts, 1165 pad/via/hole records, each with
 net, refdes, pin and coordinates. Every check in this repo compares against that file.
 
-The method follows `~/dev/ac_psu_kicad/CONVERSION_PLAYBOOK.md` and reuses the ac_psu tools.
+The method follows `~/dev/ac_psu_kicad/CONVERSION_PLAYBOOK.md`. The tools are the shared
+[proteus2kicad](https://github.com/johonkanen/proteus2kicad) repository, a git submodule in
+`tools/p2k` (clone with `git clone --recurse-submodules`, or run
+`git submodule update --init`); everything specific to this board is in `p2k_config.py`.
 
 - `PLAN.md`: the plan, inventory of the source files, risks and model usage.
 - `STATUS.md`: what is done, the last verification output, findings about the original
@@ -28,7 +31,8 @@ reference/   tables generated from the IPC netlist: pads (CSV/JSON), pin→net p
              pins per net
 lib/         project symbols / footprints, part and footprint maps (Phase 1-2)
 kicad/       KiCad project (Phase 1-3)
-tools/       scripts and checks
+p2k_config.py  board configuration of the proteus2kicad tools
+tools/       check_all.sh, erc.sh, board-specific scripts; p2k/ = proteus2kicad submodule
 reports/     generated reports
 ```
 
@@ -48,11 +52,13 @@ reports/     generated reports
 
 | Script | Checks |
 |---|---|
-| `tools/ipc356.py --check` | IPC parser counts and fix-ups; reference tables up to date |
-| `tools/check_sources.py` | Gerber X2 flashes (vias, pads, free pads, holes) and drills vs IPC; outline |
+| `tools/p2k/bin/p2k ipc356 --check` | IPC parser counts and fix-ups; reference tables up to date |
+| `tools/p2k/bin/p2k check_sources` | Gerber X2 flashes (vias, pads, free pads, holes) and drills vs IPC; outline |
+
+`tools/p2k/bin/p2k ipc356` regenerates `reference/` after a change of `p2k_config.py`.
 
 ## KiCad environment
 
-KiCad 10.0.7 AppImage at `~/kicad/kicad-10.0.7-x86_64.AppImage`. `tools/bin/kipy` (KiCad's
-Python with `pcbnew`) and `tools/bin/kicad-cli` mount it on demand (`tools/kicad_env.sh`).
+KiCad 10.0.7 AppImage at `~/kicad/kicad-10.0.7-x86_64.AppImage`. `tools/p2k/bin/kipy` (KiCad's
+Python with `pcbnew`) and `tools/p2k/bin/kicad-cli` mount it on demand (`tools/p2k/bin/kicad_env.sh`).
 Never run the AppImage with `--version`: it starts the GUI and hangs.

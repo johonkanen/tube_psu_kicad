@@ -9,7 +9,10 @@ This follows the generic playbook `~/dev/ac_psu_kicad/CONVERSION_PLAYBOOK.md`, p
 `~/dev/ac_psu_kicad` (single_phase_inverter_psu_v3, 267 parts, 4 layers). Read it first;
 this plan lists only what is specific to this board and where it differs from ac_psu.
 The ac_psu tools (`~/dev/ac_psu_kicad/tools/`) are reused; the playbook's section 4 says
-which are generic and which need adapting.
+which are generic and which need adapting. **Since 2026-10-21 they are moved, phase by phase,
+into the shared [proteus2kicad](https://github.com/johonkanen/proteus2kicad) repository
+(submodule `tools/p2k`, board values in `p2k_config.py`) instead of being copied** – see
+STATUS.md. Tool paths in the phase sections below are the original plan.
 
 ## 1. Inventory (checked 2026-10-21)
 

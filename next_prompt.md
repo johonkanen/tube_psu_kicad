@@ -13,18 +13,26 @@ Read first: STATUS.md "Findings that matter for Phase 1" (terminal refdes map, n
 spaces, L1-L3 pins without net, letter pin ids), reference/pin_nets_by_component.md and
 reference/ipc356_pads.json (column `refdes` = KiCad refdes, `refdes_proteus`, `refdes_raw`),
 source/schematic_pdf/schematic_text.txt and hi-NN.png (11 sheets).
-Reuse the ac_psu Phase 1 tools (/home/jari/dev/ac_psu_kicad/tools: gen_symbols.py,
-check_symbols.py, compare_netlists.py, make_skeleton.py; sch_builder.py and render_sheet.py are
-already copied). Grep them for ac_psu refdes/net names before reuse. Tools: tools/bin/kicad-cli
-and tools/bin/kipy mount the AppImage on demand; never run the AppImage with --version (hangs).
-KiCad symbol libraries are in the mount at <mount>/share/kicad/symbols (mount path in
-/tmp/tube_psu_kicad_mount.<uid>).
+Tools: the shared proteus2kicad repo is the submodule tools/p2k (a git clone of
+https://github.com/johonkanen/proteus2kicad; board values in p2k_config.py, keys in
+tools/p2k/README.md). Run tools with tools/p2k/bin/p2k <tool> (system python3) or
+tools/p2k/bin/kipy -m p2k.<tool> (pcbnew); tools/p2k/bin/kicad-cli. Never run the AppImage
+with --version (hangs). KiCad symbol libraries are in the mount at <mount>/share/kicad/symbols
+(mount path in /tmp/p2k_kicad_mount.<uid>).
+Move (do not copy) the ac_psu Phase 1 tools from /home/jari/dev/ac_psu_kicad/tools into
+tools/p2k/p2k/: check_symbols.py, compare_netlists.py, make_skeleton.py, and the generic part of
+gen_symbols.py (the symbol list itself is board data: keep it in this repo, e.g.
+tools/symbols.py or lib/, and let the shared generator read it). Replace hard-coded ac_psu
+names/paths with p2k_config.py keys (document new keys in tools/p2k/README.md); grep for ac_psu
+refdes/net names first. Do not change ~/dev/ac_psu_kicad. Commit in tools/p2k and push to
+origin main, then commit the submodule bump here.
 
 Verify state first: tools/check_all.sh. At handoff it printed
   pcbnew 10.0.7
   ipc356: nets=193, records=1165, refdes_raw=316, tht_records=502, smd_records=663, smd_top=225, smd_bottom=438, nc_pads=9, vias=283, free_pads=4, holes=8, parts=315
   check_sources: OK
   ALL CHECKS PASSED
+(if tools/p2k is empty: git submodule update --init)
 
 Steps:
 1. lib/part_map.csv: refdes -> sheet (PDF page), symbol, value, part number for all 315 parts
