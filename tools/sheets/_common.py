@@ -208,25 +208,33 @@ def sh_value(ref):
     return _PART_MAP[ref]
 
 
-def lmh6658_diffamp(sh, ref, unit, AX, AY, inp, bias, bias_top, inn_gnd, fb, cfb, rout, out_label, cout):
+def lmh6658_diffamp(sh, ref, unit, AX, AY, inp, bias, bias_top, inn_gnd, fb, cfb, rout, out_label, cout,
+                    cbias=None, rout_amp=1, cout_label=2):
     """One half of an LMH6658 drawn as on sheets 8/10: non-inverting amplifier with the input
     through inp = (label, (rref, rval)) (pin 1 at the op-amp), the + node biased by bias = (rref,
-    rval) to +2V5_BIAS (`bias_top` = pin on the +2V5_BIAS side), the - node to GND through
-    inn_gnd = (rref, rval) (pin 2 at GND), feedback fb = (rref, rval) and cfb = (cref, cval) (pin 2
-    at the - node), output through rout = (rref, rval) (pin 1 at the op-amp) to the global label
-    out_label with cout = (cref, cval) to GND (pin 2 at the label). Returns the placed unit."""
+    rval) to +2V5_BIAS (`bias_top` = pin on the +2V5_BIAS side), optionally with cbias = (cref,
+    cval, top) in parallel (sheet 10), the - node to GND through inn_gnd = (rref, rval) (pin 2 at
+    GND), feedback fb = (rref, rval) and cfb = (cref, cval) (pin 2 at the - node), output through
+    rout = (rref, rval) (pin `rout_amp` at the op-amp) to the global label out_label with cout =
+    (cref, cval) to GND (pin `cout_label` at the label). Returns the placed unit."""
     u = sh.place("LMH6658", ref, AX, AY, unit=unit, value="LMH6658")
     pins = {1: (3, 2, 1), 2: (5, 6, 7)}[unit]
     INP, INN, OUT = (u.pin(n) for n in pins)
-    # + input
+    # + input (the resistor moves left when the bias cap needs the room)
     lab, (rref, rval) = inp
-    _, rl, rr = horiz2(sh, "R", rref, AX - g(22), INP[1], rval, left=2)
+    _, rl, rr = horiz2(sh, "R", rref, AX - g(26 if cbias else 22), INP[1], rval, left=2)
     sh.wire(rr, INP)
     glabel_left(sh, lab, rl, 3)
     rref, rval = bias
     _, rt, rb = vert2(sh, "R", rref, AX - g(12), INP[1] - g(3), rval, top=bias_top)
     sh.junction(*rb)
     power_at(sh, "+2V5_BIAS", rt, "up")
+    if cbias:
+        cref, cval, ctop = cbias
+        _, ct, cb = vert2(sh, "C", cref, AX - g(18), INP[1] - g(3), cval, top=ctop, text="left")
+        sh.wire(ct, rt)
+        sh.junction(*rt)
+        sh.junction(*cb)
     # - input: ground resistor, feedback resistor and cap on the row below
     row = AY + g(10)
     sh.wire(INN, (AX - g(12), INN[1]), (AX - g(12), row))
@@ -251,13 +259,13 @@ def lmh6658_diffamp(sh, ref, unit, AX, AY, inp, bias, bias_top, inn_gnd, fb, cfb
     sh.wire(OUT, node)
     sh.junction(*node)
     rref, rval = rout
-    _, rl, rr = horiz2(sh, "R", rref, AX + g(16), OUT[1], rval, left=1)
+    _, rl, rr = horiz2(sh, "R", rref, AX + g(16), OUT[1], rval, left=rout_amp)
     sh.wire(node, rl)
     q = (AX + g(24), OUT[1])
     sh.wire(rr, q, (AX + g(28), OUT[1]))
     sh.glabel(out_label, AX + g(28), OUT[1], 0)
     cref, cval = cout
-    _, ct, cb = vert2(sh, "C", cref, q[0], q[1] + g(3), cval, top=2)
+    _, ct, cb = vert2(sh, "C", cref, q[0], q[1] + g(3), cval, top=cout_label)
     sh.junction(*q)
     power_at(sh, "GND", cb, "down")
     return u

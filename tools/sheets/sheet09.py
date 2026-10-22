@@ -56,8 +56,5 @@ power_at(sh, "GND", right(cr, 3), "right")
 power_at(sh, "GND", VN, "down")
 
 sh.text("PDF labels pfc_pwm1/2, gate1/2 = nets PFC_PWM1/2, GATE1/2.", g(40), g(160))
-sh.text("PWR_FLAGs for +3V3 (V4 on sheet 4) and +2V5_BIAS (divider on sheet 4) here until sheet 4 is drawn.", g(40), g(163))
-flagged_power(sh, "+3V3", g(44), g(172))
-flagged_power(sh, "+2V5_BIAS", g(60), g(172))
 sh.save()
 print("sheet09: written")
