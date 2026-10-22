@@ -8000,81 +8000,6 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 193.04 106.68) (xy 193.04 109.22)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7205bc22-4ba2-5901-ac13-1931b03dd99b")
-	)
-	(symbol
-		(lib_id "tube_psu:PWR_FLAG")
-		(at 193.04 109.22 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "0ddadfdb-5f6e-5845-8e20-4244f03aa6a8")
-		(property "Reference" "#FLG032"
-			(at 193.04 111.125 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 193.04 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 193.04 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 193.04 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 193.04 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "6f729313-0651-50a3-ad49-5fdc71367836")
-		)
-		(instances
-			(project "tube_psu"
-				(path "/cce323c4-7450-4a52-888d-93ce286361fa/fe442bbb-6949-4e80-b157-a7b285488541"
-					(reference "#FLG032")
-					(unit 1)
-				)
-			)
-		)
-	)
 	(text "Primary (MCU side)"
 		(exclude_from_sim no)
 		(at 17.78 17.78 0)
@@ -8084,7 +8009,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "985f04dd-a02c-5874-92a6-119ba8c86a6d")
+		(uuid "7205bc22-4ba2-5901-ac13-1931b03dd99b")
 	)
 	(text "Secondary (isolated side)"
 		(exclude_from_sim no)
@@ -8095,7 +8020,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "3a32b60b-7c98-5e16-b6b5-68ae3fa86221")
+		(uuid "985f04dd-a02c-5874-92a6-119ba8c86a6d")
 	)
 	(text "Pin compatible with MAX11110, ADS7886 S/H, ADS7883 S/H (PDF note on the ADC)."
 		(exclude_from_sim no)
@@ -8106,7 +8031,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "8e6a3598-8a3d-53d3-80e6-1467951b562b")
+		(uuid "3a32b60b-7c98-5e16-b6b5-68ae3fa86221")
 	)
 	(text "V5.1 (PDF hand note)."
 		(exclude_from_sim no)
@@ -8117,7 +8042,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "18a82ccd-d543-5cbd-a7d2-94b844e3a76b")
+		(uuid "8e6a3598-8a3d-53d3-80e6-1467951b562b")
 	)
 	(text "PDF aliases: SEC_GND = ISO_GND, HT_AUX = 6V3, AD2_3v3 = AD2_3V3; lowercase labels = IPC names."
 		(exclude_from_sim no)
@@ -8128,7 +8053,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "d43d2de4-b404-553b-bae8-5f434926009a")
+		(uuid "18a82ccd-d543-5cbd-a7d2-94b844e3a76b")
 	)
 	(text "The HT rail (ISO1 VDD2, AD1 VA, U2 V+, V3 VOUT, C59/C104/C83) is an unnamed net in Proteus (#00086): plain wire."
 		(exclude_from_sim no)
@@ -8139,9 +8064,9 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "698d9819-258f-5919-a00a-777965af5178")
+		(uuid "d43d2de4-b404-553b-bae8-5f434926009a")
 	)
-	(text "PWR_FLAGs of 6V3 (at D2) and HT_GND (below): temporary, to be moved to sheet 6 (terminals HT_6V3 / HT_GND)."
+	(text "6V3 and HT_GND have their PWR_FLAGs on sheet 6 (terminals HT_6V3 / HT_GND)."
 		(exclude_from_sim no)
 		(at 17.78 210.82 0)
 		(effects
@@ -8150,7 +8075,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "3026e918-54da-5d03-82e0-b32b201c5752")
+		(uuid "698d9819-258f-5919-a00a-777965af5178")
 	)
 	(text "The PWR_FLAG on V3 VIN is permanent (the net is fed by D3 and C13 only)."
 		(exclude_from_sim no)
@@ -8161,147 +8086,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "4c954c7a-3789-5ed8-bbb2-93d5a133c65c")
-	)
-	(symbol
-		(lib_id "tube_psu:HT_GND")
-		(at 38.1 223.52 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "d229b7aa-c075-5e47-b753-af67ac0300b6")
-		(property "Reference" "#PWR033"
-			(at 38.1 229.87 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "HT_GND"
-			(at 38.1 227.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 38.1 223.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 38.1 223.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol for net \"HT_GND\" (IPC net name)"
-			(at 38.1 223.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "b8b8b75c-9771-5f1a-9806-8fa93e5d713e")
-		)
-		(instances
-			(project "tube_psu"
-				(path "/cce323c4-7450-4a52-888d-93ce286361fa/fe442bbb-6949-4e80-b157-a7b285488541"
-					(reference "#PWR033")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 38.1 223.52) (xy 38.1 220.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a20f1475-678c-5b27-a997-9e9799beafdb")
-	)
-	(symbol
-		(lib_id "tube_psu:PWR_FLAG")
-		(at 38.1 220.98 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "5cf76493-45a7-5ffa-bb44-3bc6d351cb24")
-		(property "Reference" "#FLG034"
-			(at 38.1 219.075 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 38.1 217.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 38.1 220.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 38.1 220.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 38.1 220.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c7981371-84a8-5ea3-a3bd-a20efe938e5a")
-		)
-		(instances
-			(project "tube_psu"
-				(path "/cce323c4-7450-4a52-888d-93ce286361fa/fe442bbb-6949-4e80-b157-a7b285488541"
-					(reference "#FLG034")
-					(unit 1)
-				)
-			)
-		)
+		(uuid "3026e918-54da-5d03-82e0-b32b201c5752")
 	)
 	(embedded_fonts no)
 )

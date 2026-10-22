@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-10-22 (Phase 1 transcription: sheets 11, 2, 9, 8, 10, 4, 3 done; next: 6, 7, 5, 1)
+Updated: 2026-10-22 (Phase 1 transcription: sheets 11, 2, 9, 8, 10, 4, 3, 6 done; next: 7, 5, 1)
 
 ## Shared tools – proteus2kicad (2026-10-21)
 
@@ -238,9 +238,10 @@ ALL CHECKS PASSED
 | 10 PFC current measurement | 18/18 | compare 0 wrong-net pins, 0 errors; ERC 0 errors |
 | 4 MCU socket and misc | 27/27 | compare 0 wrong-net pins, 0 errors; ERC 0 errors |
 | 3 Isolated measurements | 29/29 | compare 0 wrong-net pins, 0 errors; ERC 2 errors = cross-sheet (see below) |
+| 6 Heaters | 47/47 | compare 0 wrong-net pins, 0 errors; ERC 1 error = cross-sheet (U3 +, sheet 7) |
 
 Scripts: `tools/sheets/sheet11.py`, `sheet02.py`, `sheet09.py`, `sheet08.py`, `sheet10.py`, `sheet04.py`,
-`sheet03.py` (channel function `iso_channel`, used twice);
+`sheet03.py` (channel function `iso_channel`, used twice), `sheet06.py`;
 board block helpers in `tools/sheets/_common.py`: `si8274_cell` (sheet 2), `ixdd609_cell` (sheet 9),
 `lmh6658_diffamp` (sheets 8 and 10; optional `cbias` = cap parallel to the bias resistor, `rout_amp` /
 `cout_label` = which pin of the output resistor / cap sits at the op-amp / label – sheet 10 has them the
@@ -257,6 +258,7 @@ Per-sheet compare output (`p2k compare_netlists --allow-missing --sheet N`):
 10: parts 82/315 present, 0 missing on sheet 10, 0 extra; pins compared 221, wrong-net pins 0
  4: parts 109/315 present, 0 missing on sheet 4, 0 extra; pins compared 331, wrong-net pins 0
  3: parts 138/315 present, 0 missing on sheet 3, 0 extra; pins compared 437, wrong-net pins 0
+ 6: parts 185/315 present, 0 missing on sheet 6, 0 extra; pins compared 559, wrong-net pins 0
 ```
 
 ### Sheet 3 (Isolated measurements) – done
@@ -275,10 +277,28 @@ ISO1-15 are no-connects (IPC N/C).
   the isolated-global-label warnings; nothing on sheet 3 can fix them legitimately.
 - V3 VIN (net #00092 = D3 cathode + C13, passives only) feeds a power-input pin: **permanent PWR_FLAG**
   on the V3 input column (same reason as the Si8274 bootstrap flags on sheet 2).
-- 6V3 and HT_GND: on sheet 3 only passives / power-input pins touch them (D2 anode resp. the ADC, LDO
-  and op-amp grounds) → **temporary PWR_FLAGs on sheet 3** (6V3 at D2, HT_GND standalone at the bottom
-  left), to be moved to sheet 6 (terminals HT_6V3 / HT_GND).
+- 6V3 and HT_GND: on sheet 3 only passives / power-input pins touch them; their PWR_FLAGs were put on
+  sheet 3 temporarily and **moved to sheet 6** (terminals HT_6V3 / HT_GND) in the same session.
 - Sheet 4's V4 crossing (GND wire column crosses the EN wire) is still open – cosmetic only.
+
+### Sheet 6 (Heaters) – done
+
+`sheet06.py`: heater half-bridge Q11/Q10 on column A (DC+ → Q11 → HEATER_HI_SOURCE → Q10 → HEATER_CURRENT
+→ R30 → GND), TR2 primary (pins 1/2 and 4/5 on short buses), the resonance caps C49/C42 (DC+ side, on one
+column that crosses the HEATER_HI_SOURCE row without junction – the PDF has the same crossing) and
+C41/C22, C20 at the right; TR2 secondary and Q1/Q2 through local labels Q14_DRAIN / Q13_DRAIN; the 6V3
+bank with the terminals HT_6V3 / HT_GND (`terminal()`), the divider R54/R55; DRV3 (Si8271) drawn inline,
+DRV9 through `ixdd609_cell` (new options `diode`, `local`, `r_gate_top` – sheet 9 output byte-identical),
+DRV4 (IXDD604) inline.
+
+- **PWR_FLAGs:** 6V3 and HT_GND permanent on sheet 6 (terminals); DRV3 VDD2 (#00304, fed through D11 /
+  R99) and HEATER_HI_SOURCE (DRV3 GND2 = MOSFET node) permanent, like the Si8274 bootstrap flags.
+- **TR2 centre taps (finding):** the PDF transformer symbol has centre-tap pins on both windings that have
+  no footprint pad – the primary one ends in a dangling terminal `ct1`, the secondary one is wired to 6V3.
+  The IPC has no TR2 pad on 6V3 (TR2 pads 1,2,4,5,6,7,9,10 only), so the KiCad TR2 has no centre-tap pin
+  and the 6V3 rail is drawn without TR2 (noted as text). On the board the winding wires presumably go to
+  the free wire pads (6V3 ×2, Q13_DRAIN, Q14_DRAIN – Phase 0 finding).
+- R66 (pull-down of HEATER_LOW_GATE) has pin 1 at the gate, the sheet 9 pull-downs pin 2: `r_gate_top`.
 
 ### ERC warnings (45, all expected)
 
@@ -353,6 +373,9 @@ ISO1-15 are no-connects (IPC N/C).
   rail (ISO1 VDD2, AD1 VA, U2 V+, V3 VOUT, C59/C104/C83) has no name in Proteus (#00086) although the
   secondary one is named AD2_3V3. Notes kept as text: "Pin compatible with MAX11110 / ADS7886 S/H /
   ADS7883 S/H", "V5.1".
+- Sheet 6: PDF labels DC-, HT_AUX, heater_current, heater_cap_meas, q13_drain, EPWM5A_iso / EPWM6A_iso =
+  GND, 6V3, HEATER_CURRENT, HEATER_CAP_MEAS, Q13_DRAIN, EPWM5A_ISO / EPWM6A_ISO. Notes kept as text:
+  "E25 : 64/2/2, check primary turns!", "20n resonance cap, note X7R cap voltage bias", "V5.1".
 - No crossings-without-junction were needed except where the PDF has them; the Si8274 and IXDD609
   pin order (supply pins around the input pins) forces the EN pins to get their own supply symbol.
 

@@ -130,13 +130,17 @@ def si8274_cell(sh, ref, UX, UY, vdd, gnd, pwm, nc1, dt, cdec, boot, rail, railc
     return u
 
 
-def ixdd609_cell(sh, ref, UX, UY, vcc, gnd, in_label, r_in, cdec, r_out, out_label, r_gate):
+def ixdd609_cell(sh, ref, UX, UY, vcc, gnd, in_label, r_in, cdec, r_out, out_label, r_gate,
+                 diode=None, local=False, r_gate_top=2):
     """IXDD609 MOSFET driver cell as on sheet 9 (DRV1 / DRV2), IC at (UX, UY): VCC pins 1/8
     on a bus fed by the `vcc` power symbol with decoupling cap cdec = (cref, cval, top), EN (3)
     tied to vcc by its own symbol, IN (2) from global label in_label with pull-down r_in =
     (rref, rval), GND pins 4/5/9 on a bus to `gnd`; OUTA/OUTB joined into the parallel gate
     resistors r_out = [(rref, rval), (rref, rval)] (pin 1 on the driver side) and the gate node
-    with global label out_label and pull-down r_gate = (rref, rval)."""
+    with global label out_label and pull-down r_gate = (rref, rval).
+    Sheet 6 (DRV9): diode = (dref, dval) puts a Schottky diode in series with the second resistor
+    (cathode at the resistor, anode at the gate node: fast turn-off path), local = True makes the
+    gate label a local one (one-sheet net), r_gate_top = pin of the pull-down at the gate node."""
     u = sh.place("IXDD609", ref, UX, UY, value=sh_value(ref))
     VCC1, VCC8, IN, EN = u.pin(1), u.pin(8), u.pin(2), u.pin(3)
     OUTA, OUTB, GND4, GND5, TAB = u.pin(7), u.pin(6), u.pin(4), u.pin(5), u.pin(9)
@@ -185,12 +189,19 @@ def ixdd609_cell(sh, ref, UX, UY, vcc, gnd, in_label, r_in, cdec, r_out, out_lab
     sh.wire((UX + g(16), rowb), (UX + g(16), rowa), al)
     sh.wire((UX + g(16), rowb), bl)
     sh.junction(UX + g(16), rowb)
-    sh.wire(ar, (UX + g(28), rowa), (UX + g(28), rowb))
-    sh.wire(br, (UX + g(38), rowb))
-    sh.junction(UX + g(28), rowb)
-    sh.glabel(out_label, UX + g(38), rowb, 0)
+    xj = UX + g(28)                       # column joining the two paths into the gate node
+    if diode:
+        dref, dval = diode
+        _, dc, da = horiz2(sh, "D_Schottky", dref, UX + g(30), rowb, dval, left="C", text="below")
+        sh.wire(br, dc)
+        br = da
+        xj = UX + g(36)
+    sh.wire(ar, (xj, rowa), (xj, rowb))
+    sh.wire(br, (xj + g(10), rowb))
+    sh.junction(xj, rowb)
+    (sh.label if local else sh.glabel)(out_label, xj + g(10), rowb, 0)
     rref, rval = r_gate
-    _, rt, rb = vert2(sh, "R", rref, UX + g(34), rowb + g(3), rval, top=2, text="left")
+    _, rt, rb = vert2(sh, "R", rref, xj + g(6), rowb + g(3), rval, top=r_gate_top, text="left")
     sh.junction(*rt)
     power_at(sh, gnd, rb, "down")
     return u

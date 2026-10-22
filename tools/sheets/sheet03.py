@@ -29,7 +29,7 @@ def iso_channel(sh, IX, IY, iso, left_pins, out_pins, cdec, adc, c_vin, r_in, am
     node, pin 2 to gnd); r_fb = feedback resistor (pin 1 at the - node); gnd = isolated ground
     power net; rail_power = power symbol on the rail or None (auto net); rail_caps = cap refs
     (pin 1 on the rail); reg = LDO ref, c_nr = NR cap (pin 1 at NR), c_in = input cap (pin 1 at VIN);
-    vin = ("power", net) or ("diodes", [refs A->C from the source], flagged source power net)."""
+    vin = ("power", net) or ("diodes", [refs A->C from the source], source power net)."""
     u = sh.place("SI8661", iso, IX, IY, value=sh_value(iso))
     # --- MCU side (left) -------------------------------------------------------------------
     VDD1, GND1 = u.pin(1), u.pin(8)
@@ -159,7 +159,7 @@ def iso_channel(sh, IX, IY, iso, left_pins, out_pins, cdec, adc, c_vin, r_in, am
             prev = da
         q = (prev[0] - g(4), DROW)
         sh.wire(prev, q)
-        flagged_power(sh, vin[2], *q)
+        power_at(sh, vin[2], q, "up")
     return u
 
 
@@ -185,10 +185,8 @@ sh.text("Pin compatible with MAX11110, ADS7886 S/H, ADS7883 S/H (PDF note on the
 sh.text("V5.1 (PDF hand note).", g(14), g(21))
 sh.text("PDF aliases: SEC_GND = ISO_GND, HT_AUX = 6V3, AD2_3v3 = AD2_3V3; lowercase labels = IPC names.", g(14), g(160))
 sh.text("The HT rail (ISO1 VDD2, AD1 VA, U2 V+, V3 VOUT, C59/C104/C83) is an unnamed net in Proteus (#00086): plain wire.", g(14), g(163))
-# 6V3 and HT_GND enter through the terminals HT_6V3 / HT_GND on sheet 6; on this sheet only passives and
-# power-input pins touch them, so they carry PWR_FLAGs here until sheet 6 is drawn.
-sh.text("PWR_FLAGs of 6V3 (at D2) and HT_GND (below): temporary, to be moved to sheet 6 (terminals HT_6V3 / HT_GND).", g(14), g(166))
+# 6V3 and HT_GND enter through the terminals HT_6V3 / HT_GND on sheet 6, where their PWR_FLAGs are.
+sh.text("6V3 and HT_GND have their PWR_FLAGs on sheet 6 (terminals HT_6V3 / HT_GND).", g(14), g(166))
 sh.text("The PWR_FLAG on V3 VIN is permanent (the net is fed by D3 and C13 only).", g(14), g(169))
-flagged_power(sh, "HT_GND", g(30), g(176))
 sh.save()
 print("sheet03: written")
