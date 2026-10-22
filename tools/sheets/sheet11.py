@@ -22,9 +22,9 @@ sh.wire((X0, BOT), (xs[-1], BOT))
 for x in xs[:-1]:
     sh.junction(x, TOP)
     sh.junction(x, BOT)
-# DC+ and GND enter this bank from the PFC (sheet 5); PWR_FLAGs here until sheet 5 is drawn
-flagged_power(sh, "DC+", X0, TOP)
-flagged_power(sh, "GND", X0, BOT)
+# DC+ and GND come from the PFC bridge (sheet 5), where their PWR_FLAGs are
+power_at(sh, "DC+", (X0, TOP), "up")
+power_at(sh, "GND", (X0, BOT), "down")
 
 # C14: 20V buffer (PDF: 20V terminal to the DC- = GND rail)
 XC = xs[-1] + g(16)
@@ -36,8 +36,8 @@ sh.wire(pt, (XC, g(40)))
 flagged_power(sh, "20V", XC, g(40))      # 20V is generated on sheet 1 (AUX supply); flag here until then
 
 sh.text("Bulk capacitors of the DC link (C29/C56/C28/C37: EEE-FTE221XAP note in the PDF).", X0, g(74))
-sh.text("PDF terminal DC- = net GND. PWR_FLAGs for DC+, GND (from the PFC, sheet 5) and 20V (AUX supply, sheet 1)", X0, g(78))
-sh.text("are placed here until those sheets are drawn.", X0, g(81))
+sh.text("PDF terminal DC- = net GND. The PWR_FLAG for 20V (AUX supply, sheet 1) is placed here until that sheet", X0, g(78))
+sh.text("is drawn; DC+ and GND have theirs on sheet 5 (bridge DB1).", X0, g(81))
 sh.text("The PDF page also wires the terminals HT_AUX and 6V3 together: HT_AUX is an alias of the 6V3 net (no part here).", X0, g(86))
 sh.save()
 print("sheet11: written")

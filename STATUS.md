@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-10-22 (Phase 1 transcription: sheets 11, 2, 9, 8, 10, 4, 3, 6, 7 done; next: 5, 1)
+Updated: 2026-10-22 (Phase 1 transcription: sheets 11, 2, 9, 8, 10, 4, 3, 6, 7, 5 done; next: 1)
 
 ## Shared tools – proteus2kicad (2026-10-21)
 
@@ -240,10 +240,11 @@ ALL CHECKS PASSED
 | 3 Isolated measurements | 29/29 | compare 0 wrong-net pins, 0 errors; ERC 2 errors = cross-sheet (see below) |
 | 6 Heaters | 47/47 | compare 0 wrong-net pins, 0 errors; ERC 1 error = cross-sheet (U3 +, sheet 7) |
 | 7 DHB | 46/46 | compare 0 wrong-net pins, 0 errors; ERC 0 errors, 28 warnings |
+| 5 PFC | 35/35 | compare 0 wrong-net pins, 0 errors; ERC 0 errors, 23 warnings |
 
 Scripts: `tools/sheets/sheet11.py`, `sheet02.py`, `sheet09.py`, `sheet08.py`, `sheet10.py`, `sheet04.py`,
 `sheet03.py` (channel function `iso_channel`, used twice), `sheet06.py`, `sheet07.py` (gate network
-helper `gate_net`, used four times);
+helper `gate_net`, used four times), `sheet05.py` (helpers `ycap`, `xcap`, `choke`);
 board block helpers in `tools/sheets/_common.py`: `si8274_cell` (sheet 2), `ixdd609_cell` (sheet 9),
 `lmh6658_diffamp` (sheets 8 and 10; optional `cbias` = cap parallel to the bias resistor, `rout_amp` /
 `cout_label` = which pin of the output resistor / cap sits at the op-amp / label – sheet 10 has them the
@@ -262,6 +263,7 @@ Per-sheet compare output (`p2k compare_netlists --allow-missing --sheet N`):
  3: parts 138/315 present, 0 missing on sheet 3, 0 extra; pins compared 437, wrong-net pins 0
  6: parts 185/315 present, 0 missing on sheet 6, 0 extra; pins compared 559, wrong-net pins 0
  7: parts 231/315 present, 0 missing on sheet 7, 0 extra; pins compared 657, wrong-net pins 0
+ 5: parts 266/315 present, 0 missing on sheet 5, 0 extra; pins compared 740, wrong-net pins 0
 ```
 
 ### Sheet 3 (Isolated measurements) – done
@@ -320,13 +322,34 @@ and R120/R119/R118 → CUK_CAP_MEAS- (vertical global label on top).
   DHB_HI_SOURCE / DHB_HI_SOURCE_SEC keep their permanent flags on sheet 2 (Si8274 cells).
 - With sheet 7 the last cross-sheet `pin_not_driven` error (U3 +, CUK_CAP_MEAS2) is gone: ERC 0 errors.
 
-### ERC warnings (28 after sheet 7, all expected)
+### Sheet 5 (PFC) – done
+
+`sheet05.py`: two mains lines (top RES_OUT → L1_PRI2 → AC1, bottom IN2 → L2_PRI2 → AC2, 16 grid units
+apart) with the terminals IN1 / IN2 at the left, the relay RL1 (rotated 180: contacts on the left,
+coil on the right) above the top line with R27, Q9 / R44 / C35 / R32 (GPIO_BYPASS_RLY) and the
+freewheel D9 + D28 to 5V; X / Y caps and the common-mode chokes CM1 / CM4 as pass-through filters
+(`choke()`, verticals from the pins to the lines, ref above / value below the lines); AC1 / AC2 global
+labels on stubs; the AC2 line drops to a lower row for the PFC section so that Q5 (under the AC1 line)
+and C64 do not cross it; L2 / Q5 / SICD1 and L1 / Q6 / SICD2 to a common DC+ column; DB1 standalone
+with AC1 / AC2 labels and the permanent DC+ / GND PWR_FLAGs; C82 and the PE terminal (PE is a
+one-sheet net → local labels); R4 / R5 / R6 between the local labels IN2 and RES_IN.
+
+- **PWR_FLAGs:** DC+ and GND permanent on DB1 (sheet 5); the temporary ones on sheet 11 removed (only
+  the 20V flag stays there until sheet 1).
+- Symbol change SCF20-05-550 → Filter_EMI_LL_1423 shape (see "Symbol changes").
+- Finding: the TBS22K symbol (from Device:D_Bridge_+A-A, Proteus ids 1=AC1 2=+ 3=AC2 4=DC-) has the
+  pin names AC1 / AC2 swapped against the nets of DB1 (pin 1 = net AC2, pin 3 = net AC1 – the PDF draws
+  it the same way). Both are AC inputs, so nothing is wrong electrically; noted as text on the sheet.
+- Finding: the PDF's "PFC drain 1" / "pfc drain 2" labels are one-sheet nets (wired here); the PDF
+  crosses them over the L1 line and C64 over the AC2 line without junctions – avoided by the row drop.
+
+### ERC warnings (23 after sheet 5, all expected)
 
 - 20 × `isolated_pin_label` for the single-pin nets of J2 (sheet 4; local labels ADA0, ADA1, ADA2, ADA4,
   ADB0, CUK_CAP_MEAS_RAW, EPWM1A, F16, G15, HEATER_CAP_AD_MEAS, K16, L16, N14, N15, N16, P15, P16,
   R16, T14, T15): permanent, the IPC has exactly one pad on each.
-- 5 × `isolated_pin_label` global labels whose other pins are on sheet 5 (not drawn yet): PFC CURRENT 2+,
-  PFC CURRENT 3+ (sheet 10), GPIO_BYPASS_RLY (sheet 4), AC1, AC2 (sheet 9). Everything else is complete.
+- after sheet 5 (23 warnings): no isolated global labels left; the 20 J2 labels and the 3
+  `ground_pin_not_ground` remain.
 - 3 × `ground_pin_not_ground` (DRV5 pin 9 GNDB, DRV6 pin 14 GNDA, DRV3 pin 5 GND2): KiCad 10 flags power
   pins named GND* that are not on a ground-named net. These are the floating high-side returns of the
   Si8274 / Si8271 (nets DHB_HI_SOURCE / DHB_HI_SOURCE_SEC / HEATER_HI_SOURCE = MOSFET nodes) – correct,
@@ -349,6 +372,13 @@ and R120/R119/R118 → CUK_CAP_MEAS- (vertical global label on top).
   (VI_E = 6, VO_E = 11) and the drawn symbol ($PINDEFAULT records) and the layout use SO16W; the nets
   agree (MCU clock J2 → ISO-6, ISO-11 → ADC CLK, both channels). The real Si8661 is 5 forward (A–E)
   / 1 reverse (F); description corrected. Pin numbers/nets unchanged, only names and ERC types.
+- **SCF20-05-550 (common-mode chokes CM1 / CM4) now derived from Device:Filter_EMI_LL_1423** instead
+  of Device:Transformer_1P_1S (2026-10-22, sheet 5). The transformer shape has both ends of a winding
+  on one side, so a left-to-right mains line through the choke cannot be drawn without a wire
+  crossing; the EMI-filter shape is a pass-through (as the PDF draws it, and as ac_psu's chokes).
+  Proteus ids mapped to the PDF positions: 1 top-left, 2 top-right (winding 1-2), 3 bottom-left,
+  4 bottom-right (winding 3-4); pin numbers / nets unchanged (`pins={"2": "1", "3": "2", "1": "3",
+  "4": "4"}`).
 - **ETD34_TRAN_1P1S pins 3 / 4 swapped in position** (2026-10-22, sheet 7): the KiCad source symbol
   (Device:Transformer_1P_1S) has its pin 3 at the bottom right and pin 4 at the top right; Proteus draws
   TR3 with pin 3 (TRANS_SEC) top right and 4 (DHB_HI_SOURCE_SEC) bottom right, like pins 1 (top) / 2
@@ -361,7 +391,7 @@ and R120/R119/R118 → CUK_CAP_MEAS- (vertical global label on top).
 
 ### PWR_FLAG placement (temporary unless marked)
 
-- Sheet 11: DC+, GND (both come from the PFC bridge, sheet 5), 20V (AUX supply, sheet 1).
+- Sheet 11: 20V (AUX supply, sheet 1). The DC+ / GND flags moved to sheet 5 (DB1) when it was drawn.
 - Sheet 3: V3 VIN (#00092, D3 + C13) permanent. Sheet 6: 6V3, HT_GND (terminals), DRV3 VDD2 (#00304,
   bootstrap) and HEATER_HI_SOURCE (DRV3 GND2) permanent. Sheet 7: 420V (terminal +400V) permanent.
 - Sheet 2: 5V, 5V_ISOL, 20V_ISO_SEC (diode outputs of the AUX supply, sheet 1), ISO_GND (enters via
@@ -405,6 +435,10 @@ and R120/R119/R118 → CUK_CAP_MEAS- (vertical global label on top).
 - Sheet 6: PDF labels DC-, HT_AUX, heater_current, heater_cap_meas, q13_drain, EPWM5A_iso / EPWM6A_iso =
   GND, 6V3, HEATER_CURRENT, HEATER_CAP_MEAS, Q13_DRAIN, EPWM5A_ISO / EPWM6A_ISO. Notes kept as text:
   "E25 : 64/2/2, check primary turns!", "20n resonance cap, note X7R cap voltage bias", "V5.1".
+- Sheet 5: PDF labels gate1 / gate2, "PFC current 2+/3+", res_in, in2 = GATE1 / GATE2, PFC CURRENT 2+/3+,
+  RES_IN, IN2; terminals DC+ / GND at DB1 = power nets. Notes kept as text: "TBS22k - diode bridge",
+  "DEBB33F222KN3A/ 2n2", "T60405-R6131-X204 VAC", "R463F247040N0M/ 47n 305VAC", "R463F310040M1M/ 100nf
+  310VAC", "HF bypass for low side bridge rectifier diodes", "V5.1".
 - Sheet 7: PDF labels DHB_HI_gate / DHB_low_gate / DHB_HI_gate_sec / DHB_low_gate_sec / DHB_HI_SOURCE_sec /
   dhb_current / trans_pri / trans_sec / DHB_cap / iso_GND / Cuk_cap_meas2 = IPC names; the PDF joins the
   terminals SEC_GND and ISO_GND by a bare wire (no part; one net ISO_GND) and the terminal `GND` is on
