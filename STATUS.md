@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-10-22 (Phase 1 transcription: sheets 11, 2, 9, 8, 10, 4 done; next: 3, 6, 7, 5, 1)
+Updated: 2026-10-22 (Phase 1 transcription: sheets 11, 2, 9, 8, 10, 4, 3 done; next: 6, 7, 5, 1)
 
 ## Shared tools – proteus2kicad (2026-10-21)
 
@@ -237,8 +237,10 @@ ALL CHECKS PASSED
 | 8 Current measurement | 15/15 | compare 0 wrong-net pins, 0 errors; ERC 0 errors |
 | 10 PFC current measurement | 18/18 | compare 0 wrong-net pins, 0 errors; ERC 0 errors |
 | 4 MCU socket and misc | 27/27 | compare 0 wrong-net pins, 0 errors; ERC 0 errors |
+| 3 Isolated measurements | 29/29 | compare 0 wrong-net pins, 0 errors; ERC 2 errors = cross-sheet (see below) |
 
-Scripts: `tools/sheets/sheet11.py`, `sheet02.py`, `sheet09.py`, `sheet08.py`, `sheet10.py`, `sheet04.py`;
+Scripts: `tools/sheets/sheet11.py`, `sheet02.py`, `sheet09.py`, `sheet08.py`, `sheet10.py`, `sheet04.py`,
+`sheet03.py` (channel function `iso_channel`, used twice);
 board block helpers in `tools/sheets/_common.py`: `si8274_cell` (sheet 2), `ixdd609_cell` (sheet 9),
 `lmh6658_diffamp` (sheets 8 and 10; optional `cbias` = cap parallel to the bias resistor, `rout_amp` /
 `cout_label` = which pin of the output resistor / cap sits at the op-amp / label – sheet 10 has them the
@@ -254,35 +256,29 @@ Per-sheet compare output (`p2k compare_netlists --allow-missing --sheet N`):
  8: parts 64/315 present, 0 missing on sheet 8, 0 extra; pins compared 179, wrong-net pins 0
 10: parts 82/315 present, 0 missing on sheet 10, 0 extra; pins compared 221, wrong-net pins 0
  4: parts 109/315 present, 0 missing on sheet 4, 0 extra; pins compared 331, wrong-net pins 0
+ 3: parts 138/315 present, 0 missing on sheet 3, 0 extra; pins compared 437, wrong-net pins 0
 ```
 
-### Sheet 3 (Isolated measurements) – in progress, nothing drawn yet
+### Sheet 3 (Isolated measurements) – done
 
-Analysis done (parts/nets listed by a scratch script; nothing in `kicad/03_*.kicad_sch`), design
-decided but `tools/sheets/sheet03.py` not written. Decisions for the next session:
+Two identical channels drawn by `iso_channel()` in `sheet03.py`: ISO2/AD2/U3/V2 (secondary, ISO_GND,
+rail AD2_3V3 as power symbol, V2 from 5V_ISOL) and ISO1/AD1/U2/V3 (HT side, HT_GND, rail = Proteus
+auto net #00086 drawn as a wire, V3 fed from 6V3 through D2 + D3). Geometry: ADC rotated 180 (VO_E →
+CLK and VI_F ← SDATA straight, VO_D → CS loops down with two wire crossings as in the PDF), op-amp
+above the ADC row with the rail on top, LDO rotated 180 (VOUT on the rail), ADC VA reaches the rail by
+a loop under the ADC. Inputs tied to GND (ISO2 VI_C, ISO1 VI_A) get their own GND symbol; ISO2-13 and
+ISO1-15 are no-connects (IPC N/C).
 
-- Two identical channels (function in sheet03.py, parameters per channel): ISO2/AD2/U3/V2 (secondary,
-  ISO_GND, rail AD2_3V3 = power symbol, V2 input 5V_ISOL with C21, NR cap C34) and ISO1/AD1/U2/V3
-  (primary HT side, HT_GND, rail = auto net #00086 drawn as a wire: ISO1-16, AD1-1, V3-5, U2-5, C104,
-  C83, C59; V3 input #00092 = D3 cathode, D2/D3 in series from 6V3 (PDF terminal HT_AUX = 6V3), C13;
-  NR cap C78).
-- ISO left side (MCU): VDD1 +3V3 (C97/C98 decoupling), GND1 GND, VI_C(ISO2-4)/VI_A(ISO1-2) tied to
-  GND, global labels EPWM2A/EPWM2B/$CUK_CS/CUK_CLK/CUK_SDATA resp. SYNCH_1/SYNCH_2/$HT_CS/HT_CLK/HT_SDATA.
-  Right side: VO_A/VO_B/VO_C = ISO_SEC_DHB_HI/ISO_SEC_DHB_LO/N-C (ISO2) resp. N-C/EPWM5A_ISO/EPWM6A_ISO
-  (ISO1); VO_D(12) -> ADC CS(6), VO_E(11) -> ADC CLK(4), VI_F(10) <- ADC SDATA(5).
-- Suggested geometry: ADC rotated 180 (digital pins facing the ISO: E and F straight, D loops down with
-  2 wire crossings like the PDF), supply rail on top with the op-amp (TLV316, + = global label
-  CUK_CAP_MEAS2 / HEATER_VOLTAGE_MEAS, - = CUK_CAP_MEAS- + R113 feedback / R121 to HT_GND + R122
-  feedback) above the ADC row, output -> R13/R18 -> ADC Vin node with C5/C7 to ground; regulator rotated
-  180 at the far right so VOUT (left pin) feeds the rail directly, NR cap horizontal above the rail with
-  a ground pointing left, GND pin with a ground pointing right between the EN/VIN wires (EN and VIN tied
-  by a column further right). ADC VA (bottom-right pin after rotation) reaches the rail by a loop
-  (down, right past the op-amp output column, up).
-- Check with ERC whether 6V3 and HT_GND need a PWR_FLAG (terminals HT_6V3/HT_GND are on sheet 6; 6V3
-  has only passives + D2 anode): if so put a temporary flag on sheet 3 and note it.
-- Sheet 4's V4 has a wire crossing (GND wire column crosses the EN wire): redraw V4 with the GND pin
-  going left to a ground symbol pointing left between the VIN and EN wires (join column further left).
-  Cosmetic only; compare/ERC are clean.
+- **ERC errors after sheet 3 (2, cross-sheet, disappear with sheets 6 and 7):** `pin_not_driven` on
+  U3 pin 3 (+, global label CUK_CAP_MEAS2 – other pins on sheet 7) and U2 pin 3 (+, HEATER_VOLTAGE_MEAS –
+  other pins on sheet 6). KiCad counts a passive pin as a driver, so these are the input-pin version of
+  the isolated-global-label warnings; nothing on sheet 3 can fix them legitimately.
+- V3 VIN (net #00092 = D3 cathode + C13, passives only) feeds a power-input pin: **permanent PWR_FLAG**
+  on the V3 input column (same reason as the Si8274 bootstrap flags on sheet 2).
+- 6V3 and HT_GND: on sheet 3 only passives / power-input pins touch them (D2 anode resp. the ADC, LDO
+  and op-amp grounds) → **temporary PWR_FLAGs on sheet 3** (6V3 at D2, HT_GND standalone at the bottom
+  left), to be moved to sheet 6 (terminals HT_6V3 / HT_GND).
+- Sheet 4's V4 crossing (GND wire column crosses the EN wire) is still open – cosmetic only.
 
 ### ERC warnings (45, all expected)
 
@@ -351,6 +347,12 @@ decided but `tools/sheets/sheet03.py` not written. Decisions for the next sessio
   Notes kept as text: "MORE CAPACITANCE TO BIAS VOLTAGE / BUFFER REF OUTPUT or add load 220R load
   resistor", "AD converter range [0 - 3v3]", 18.7/3V3, 663/3V3. REF1 (ISL21010, Proteus ids 1=GND
   2=VIN 3=VOUT) and the TPS73033 device (value for MIC5205 on V2/V3) drawn with the DSN pin ids.
+- Sheet 3: PDF labels SEC_GND / HT_AUX / AD2_3v3 / synch_1,2 / ht_clk / ht_sdata / CUK_clk / CUK_sdata /
+  Cuk_cap_meas2 / Cuk_cap_meas- and the overlined CUK_CS / HT_CS are the IPC nets ISO_GND, 6V3, AD2_3V3,
+  SYNCH_1/2, HT_CLK, HT_SDATA, CUK_CLK, CUK_SDATA, CUK_CAP_MEAS2, CUK_CAP_MEAS-, $CUK_CS, $HT_CS. The HT
+  rail (ISO1 VDD2, AD1 VA, U2 V+, V3 VOUT, C59/C104/C83) has no name in Proteus (#00086) although the
+  secondary one is named AD2_3V3. Notes kept as text: "Pin compatible with MAX11110 / ADS7886 S/H /
+  ADS7883 S/H", "V5.1".
 - No crossings-without-junction were needed except where the PDF has them; the Si8274 and IXDD609
   pin order (supply pins around the input pins) forces the EN pins to get their own supply symbol.
 
