@@ -736,121 +736,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "tube_psu:PWR_FLAG"
-			(power global)
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "#FLG"
-				(at 0 1.905 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "PWR_FLAG"
-				(at 0 3.81 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Special symbol for telling ERC where power comes from"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "flag power"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "PWR_FLAG_0_0"
-				(pin power_out line
-					(at 0 0 90)
-					(length 0)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "PWR_FLAG_0_1"
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 	)
 	(symbol
 		(lib_id "tube_psu:C")
@@ -1693,81 +1578,6 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 147.32 50.8) (xy 147.32 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2f2d8c24-d62e-52c2-b92c-e2cd305707a9")
-	)
-	(symbol
-		(lib_id "tube_psu:PWR_FLAG")
-		(at 147.32 53.34 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "091103a2-c209-5658-ad32-a44fa2a3895a")
-		(property "Reference" "#FLG004"
-			(at 147.32 55.245 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 147.32 57.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 147.32 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 147.32 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 147.32 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "63e6b747-2ed3-5081-8270-2da6eea23a5d")
-		)
-		(instances
-			(project "tube_psu"
-				(path "/cce323c4-7450-4a52-888d-93ce286361fa/3020f7dc-c4e3-40e5-8c14-fc10c4f3df1f"
-					(reference "#FLG004")
-					(unit 1)
-				)
-			)
-		)
-	)
 	(text "Bulk capacitors of the DC link (C29/C56/C28/C37: EEE-FTE221XAP note in the PDF)."
 		(exclude_from_sim no)
 		(at 50.8 93.98 0)
@@ -1777,9 +1587,9 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "5ee1e661-82df-5f9c-b13b-957663a29185")
+		(uuid "2f2d8c24-d62e-52c2-b92c-e2cd305707a9")
 	)
-	(text "PDF terminal DC- = net GND. The PWR_FLAG for 20V (AUX supply, sheet 1) is placed here until that sheet"
+	(text "PDF terminal DC- = net GND. PWR_FLAGs: 20V on sheet 1 (AUX supply), DC+ and GND on sheet 5 (bridge DB1)."
 		(exclude_from_sim no)
 		(at 50.8 99.06 0)
 		(effects
@@ -1788,18 +1598,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "d1a636e6-d68f-5407-bf96-3ef5714fee2a")
-	)
-	(text "is drawn; DC+ and GND have theirs on sheet 5 (bridge DB1)."
-		(exclude_from_sim no)
-		(at 50.8 102.87 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5824d467-02a1-5f07-8616-287caaab31c9")
+		(uuid "5ee1e661-82df-5f9c-b13b-957663a29185")
 	)
 	(text "The PDF page also wires the terminals HT_AUX and 6V3 together: HT_AUX is an alias of the 6V3 net (no part here)."
 		(exclude_from_sim no)
@@ -1810,7 +1609,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "823e3894-deaf-55e3-aeb9-517bc3adca44")
+		(uuid "d1a636e6-d68f-5407-bf96-3ef5714fee2a")
 	)
 	(embedded_fonts no)
 )

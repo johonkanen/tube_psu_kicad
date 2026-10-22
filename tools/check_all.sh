@@ -15,8 +15,8 @@ step "Part map up to date" python3 tools/make_part_map.py --check
 step "Symbol library up to date" python3 tools/gen_symbols.py --check
 step "Symbol pin sets vs IPC" tools/p2k/bin/p2k check_symbols
 step "ERC" tools/erc.sh
-# --allow-missing while sheets are being drawn (PLAN.md section 3); drop it when all 11 are done
-step "Netlist comparison vs IPC" tools/p2k/bin/p2k compare_netlists --allow-missing
+# all 11 sheets are drawn: every part must be present (no --allow-missing)
+step "Netlist comparison vs IPC" tools/p2k/bin/p2k compare_netlists
 
 echo
 [ $fail -eq 0 ] && echo "ALL CHECKS PASSED" || echo "SOME CHECKS FAILED"

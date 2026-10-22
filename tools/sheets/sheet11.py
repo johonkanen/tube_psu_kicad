@@ -33,11 +33,10 @@ sh.wire(pb, (XC, BOT))
 sh.wire((xs[-1], BOT), (XC, BOT))
 sh.junction(xs[-1], BOT)
 sh.wire(pt, (XC, g(40)))
-flagged_power(sh, "20V", XC, g(40))      # 20V is generated on sheet 1 (AUX supply); flag here until then
+power_at(sh, "20V", (XC, g(40)), "up")   # 20V is generated on sheet 1 (AUX supply), PWR_FLAG there
 
 sh.text("Bulk capacitors of the DC link (C29/C56/C28/C37: EEE-FTE221XAP note in the PDF).", X0, g(74))
-sh.text("PDF terminal DC- = net GND. The PWR_FLAG for 20V (AUX supply, sheet 1) is placed here until that sheet", X0, g(78))
-sh.text("is drawn; DC+ and GND have theirs on sheet 5 (bridge DB1).", X0, g(81))
+sh.text("PDF terminal DC- = net GND. PWR_FLAGs: 20V on sheet 1 (AUX supply), DC+ and GND on sheet 5 (bridge DB1).", X0, g(78))
 sh.text("The PDF page also wires the terminals HT_AUX and 6V3 together: HT_AUX is an alias of the 6V3 net (no part here).", X0, g(86))
 sh.save()
 print("sheet11: written")

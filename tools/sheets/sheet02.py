@@ -29,12 +29,9 @@ si8274_cell(sh, "DRV6", g(100), g(130), vdd="5V_ISOL", gnd="ISO_GND",
 sh.text("Pin 2 (NC1) of both drivers carries a signal in Proteus (PRI_DHB_HI / ISO_SEC_DHB_LO); on the Si8274 it is a no-connect pin.",
         g(48), g(160))
 
-# Rails entering this sheet: generated on sheet 1 (AUX supply: 5V, 5V_ISOL, 20V_ISO_SEC; ISO_GND
-# through the SEC GND terminal). PWR_FLAGs here until sheet 1 is drawn, one flag per rail.
-sh.text("PWR_FLAGs of the rails entering this sheet (5V, 5V_ISOL, 20V_ISO_SEC, ISO_GND): to be moved to sheet 1 (AUX supply) when it is drawn.",
+# Rails entering this sheet (5V, 5V_ISOL, 20V_ISO_SEC, ISO_GND) are generated on sheet 1 (AUX supply),
+# where their PWR_FLAGs are.
+sh.text("The rails entering this sheet (5V, 5V_ISOL, 20V_ISO_SEC, ISO_GND) have their PWR_FLAGs on sheet 1 (AUX supply).",
         g(48), g(170))
-for i, net in enumerate(["5V", "5V_ISOL", "20V_ISO_SEC"]):
-    flagged_power(sh, net, g(52 + 16 * i), g(176))
-flagged_power(sh, "ISO_GND", g(100), g(176))
 sh.save()
 print("sheet02: written")
