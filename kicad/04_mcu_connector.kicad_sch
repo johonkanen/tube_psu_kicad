@@ -5912,7 +5912,7 @@
 	)
 	(wire
 		(pts
-			(xy 66.04 111.76) (xy 58.42 111.76)
+			(xy 66.04 111.76) (xy 50.8 111.76)
 		)
 		(stroke
 			(width 0)
@@ -5922,7 +5922,7 @@
 	)
 	(wire
 		(pts
-			(xy 58.42 111.76) (xy 58.42 116.84)
+			(xy 50.8 111.76) (xy 50.8 116.84)
 		)
 		(stroke
 			(width 0)
@@ -5932,7 +5932,7 @@
 	)
 	(wire
 		(pts
-			(xy 58.42 116.84) (xy 66.04 116.84)
+			(xy 50.8 116.84) (xy 66.04 116.84)
 		)
 		(stroke
 			(width 0)
@@ -5941,14 +5941,14 @@
 		(uuid "77913f22-066d-5d6b-a659-56da05a536e8")
 	)
 	(junction
-		(at 58.42 111.76)
+		(at 50.8 111.76)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1ec03edf-b89c-5638-a34d-16e99f28d008")
 	)
 	(wire
 		(pts
-			(xy 58.42 111.76) (xy 58.42 106.68)
+			(xy 50.8 111.76) (xy 50.8 106.68)
 		)
 		(stroke
 			(width 0)
@@ -5958,7 +5958,7 @@
 	)
 	(symbol
 		(lib_id "tube_psu:5V")
-		(at 58.42 106.68 0)
+		(at 50.8 106.68 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5966,7 +5966,7 @@
 		(dnp no)
 		(uuid "3841e22a-3c07-58db-b8a8-d7e4e5fcbb0f")
 		(property "Reference" "#PWR009"
-			(at 58.42 110.49 0)
+			(at 50.8 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5975,7 +5975,7 @@
 			)
 		)
 		(property "Value" "5V"
-			(at 58.42 103.124 0)
+			(at 50.8 103.124 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5983,7 +5983,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 58.42 106.68 0)
+			(at 50.8 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5992,7 +5992,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 58.42 106.68 0)
+			(at 50.8 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6001,7 +6001,7 @@
 			)
 		)
 		(property "Description" "Power symbol for net \"5V\" (IPC net name)"
-			(at 58.42 106.68 0)
+			(at 50.8 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6023,7 +6023,7 @@
 	)
 	(symbol
 		(lib_id "tube_psu:C")
-		(at 48.26 113.03 0)
+		(at 40.64 113.03 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6031,7 +6031,7 @@
 		(dnp no)
 		(uuid "a1e96f4b-5593-5b11-aed8-bfb877decea3")
 		(property "Reference" "C75"
-			(at 52.45 111.76 0)
+			(at 44.83 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6039,7 +6039,7 @@
 			)
 		)
 		(property "Value" "1u"
-			(at 51.9 114.3 0)
+			(at 44.28 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6047,7 +6047,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 49.2252 116.84 0)
+			(at 41.6052 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6056,7 +6056,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 48.26 113.03 0)
+			(at 40.64 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6065,7 +6065,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 48.26 113.03 0)
+			(at 40.64 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6090,7 +6090,7 @@
 	)
 	(wire
 		(pts
-			(xy 48.26 109.22) (xy 48.26 109.22)
+			(xy 40.64 109.22) (xy 40.64 106.68)
 		)
 		(stroke
 			(width 0)
@@ -6100,7 +6100,7 @@
 	)
 	(wire
 		(pts
-			(xy 48.26 109.22) (xy 48.26 106.68)
+			(xy 40.64 106.68) (xy 50.8 106.68)
 		)
 		(stroke
 			(width 0)
@@ -6108,25 +6108,15 @@
 		)
 		(uuid "6282c3c5-a013-596b-8c28-0adcb7e961a8")
 	)
-	(wire
-		(pts
-			(xy 48.26 106.68) (xy 58.42 106.68)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "df7e94f6-94d3-5c4d-b09e-b763b06a44a6")
-	)
 	(junction
-		(at 58.42 106.68)
+		(at 50.8 106.68)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "c56ed3e8-fa5c-5126-9737-1e7175045001")
+		(uuid "df7e94f6-94d3-5c4d-b09e-b763b06a44a6")
 	)
 	(symbol
 		(lib_id "tube_psu:GND")
-		(at 48.26 116.84 0)
+		(at 40.64 116.84 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6134,7 +6124,7 @@
 		(dnp no)
 		(uuid "de0ee163-1df6-50cc-a107-65e954805484")
 		(property "Reference" "#PWR010"
-			(at 48.26 123.19 0)
+			(at 40.64 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6143,7 +6133,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 48.26 120.65 0)
+			(at 40.64 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6151,7 +6141,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 48.26 116.84 0)
+			(at 40.64 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6160,7 +6150,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 48.26 116.84 0)
+			(at 40.64 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6169,7 +6159,7 @@
 			)
 		)
 		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
-			(at 48.26 116.84 0)
+			(at 40.64 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6191,27 +6181,17 @@
 	)
 	(wire
 		(pts
-			(xy 66.04 114.3) (xy 60.96 114.3)
+			(xy 66.04 114.3) (xy 63.5 114.3)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "eeba5a46-52c6-56cc-9d89-4e5e279687cf")
-	)
-	(wire
-		(pts
-			(xy 60.96 114.3) (xy 60.96 121.92)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "90b3771a-406d-580a-81b2-35f39ce70858")
+		(uuid "c56ed3e8-fa5c-5126-9737-1e7175045001")
 	)
 	(symbol
 		(lib_id "tube_psu:GND")
-		(at 60.96 121.92 0)
+		(at 63.5 114.3 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6219,7 +6199,7 @@
 		(dnp no)
 		(uuid "f5c99272-f09e-59da-9529-e6f5342927f4")
 		(property "Reference" "#PWR011"
-			(at 60.96 128.27 0)
+			(at 57.15 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6228,15 +6208,16 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 60.96 125.73 0)
+			(at 60.2 114.3 270)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
-			(at 60.96 121.92 0)
+			(at 63.5 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6245,7 +6226,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 60.96 121.92 0)
+			(at 63.5 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6254,7 +6235,7 @@
 			)
 		)
 		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
-			(at 60.96 121.92 0)
+			(at 63.5 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6282,7 +6263,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "919e7584-8a15-5a23-97b6-f282b9d9797e")
+		(uuid "eeba5a46-52c6-56cc-9d89-4e5e279687cf")
 	)
 	(symbol
 		(lib_id "tube_psu:C")
@@ -6424,13 +6405,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2e550449-a871-54e8-a32a-e2947a4f64c4")
+		(uuid "90b3771a-406d-580a-81b2-35f39ce70858")
 	)
 	(junction
 		(at 104.14 114.3)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "3143eab6-b941-5b52-a701-50443e1de60e")
+		(uuid "919e7584-8a15-5a23-97b6-f282b9d9797e")
 	)
 	(wire
 		(pts
@@ -6440,7 +6421,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c61c093b-522f-57a1-95ef-1592761497af")
+		(uuid "2e550449-a871-54e8-a32a-e2947a4f64c4")
 	)
 	(symbol
 		(lib_id "tube_psu:+3V3")
@@ -6648,7 +6629,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "8684880b-f62f-5180-b44e-0590c58def92")
+		(uuid "3143eab6-b941-5b52-a701-50443e1de60e")
 	)
 	(symbol
 		(lib_id "tube_psu:R")
@@ -6725,7 +6706,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "8374fa74-2df2-5e8e-8a9e-a7d1bafb016c")
+		(uuid "c61c093b-522f-57a1-95ef-1592761497af")
 	)
 	(symbol
 		(lib_id "tube_psu:20V")
@@ -6800,7 +6781,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "afae96cc-af98-5030-8ea4-0ec12944ba1e")
+		(uuid "8684880b-f62f-5180-b44e-0590c58def92")
 	)
 	(symbol
 		(lib_id "tube_psu:R")
@@ -6877,13 +6858,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d4e08f63-8d5e-5ee7-a00a-ca0935c1f48e")
+		(uuid "8374fa74-2df2-5e8e-8a9e-a7d1bafb016c")
 	)
 	(junction
 		(at 30.48 184.15)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "4bc1c524-dc0e-5b40-a360-d34b07a025cc")
+		(uuid "afae96cc-af98-5030-8ea4-0ec12944ba1e")
 	)
 	(symbol
 		(lib_id "tube_psu:C")
@@ -6960,7 +6941,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "cbae8728-86e6-575a-ad81-47e2c626d7a6")
+		(uuid "d4e08f63-8d5e-5ee7-a00a-ca0935c1f48e")
 	)
 	(wire
 		(pts
@@ -6970,7 +6951,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d8e83ba3-3768-589c-a154-2fa5e4ed4993")
+		(uuid "4bc1c524-dc0e-5b40-a360-d34b07a025cc")
 	)
 	(wire
 		(pts
@@ -6980,13 +6961,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7139186b-8af5-5596-a788-61c29c90796f")
+		(uuid "cbae8728-86e6-575a-ad81-47e2c626d7a6")
 	)
 	(junction
 		(at 40.64 184.15)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "b87429d0-dd94-5753-a79e-a89215bb5fb8")
+		(uuid "d8e83ba3-3768-589c-a154-2fa5e4ed4993")
 	)
 	(label "AUX_MEAS"
 		(at 45.72 184.15 0)
@@ -6996,7 +6977,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "3d817d7f-cb02-57d2-965f-fd17c828fc1f")
+		(uuid "7139186b-8af5-5596-a788-61c29c90796f")
 	)
 	(wire
 		(pts
@@ -7006,7 +6987,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "170a676c-6fcd-509b-b1f4-ec962fd8103d")
+		(uuid "b87429d0-dd94-5753-a79e-a89215bb5fb8")
 	)
 	(wire
 		(pts
@@ -7016,7 +6997,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d646d7f2-96f6-54b7-952e-e4f80a596157")
+		(uuid "3d817d7f-cb02-57d2-965f-fd17c828fc1f")
 	)
 	(wire
 		(pts
@@ -7026,13 +7007,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "86b5e67b-813e-5029-8c9a-6556c431fc26")
+		(uuid "170a676c-6fcd-509b-b1f4-ec962fd8103d")
 	)
 	(junction
 		(at 30.48 196.85)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "c4a1df42-2c00-5386-97ef-eb9ae2c124e9")
+		(uuid "d646d7f2-96f6-54b7-952e-e4f80a596157")
 	)
 	(symbol
 		(lib_id "tube_psu:GND")
@@ -7108,7 +7089,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "6b741e57-d0e6-56c7-8e8d-5f91fdb4801d")
+		(uuid "86b5e67b-813e-5029-8c9a-6556c431fc26")
 	)
 	(symbol
 		(lib_id "tube_psu:TLV316IDBVR")
@@ -7264,7 +7245,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "a6413918-8da0-59c6-8a65-483f58d9ee5e")
+		(uuid "c4a1df42-2c00-5386-97ef-eb9ae2c124e9")
 	)
 	(symbol
 		(lib_id "tube_psu:DC+")
@@ -7406,7 +7387,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "9e4c47a9-e06f-5eae-9626-65326c51b8a6")
+		(uuid "6b741e57-d0e6-56c7-8e8d-5f91fdb4801d")
 	)
 	(symbol
 		(lib_id "tube_psu:R")
@@ -7483,7 +7464,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "a03297c1-73bd-580f-9620-889e1af57162")
+		(uuid "a6413918-8da0-59c6-8a65-483f58d9ee5e")
 	)
 	(wire
 		(pts
@@ -7493,7 +7474,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "0361287c-2a80-5fd4-a227-fb871369afbc")
+		(uuid "9e4c47a9-e06f-5eae-9626-65326c51b8a6")
 	)
 	(wire
 		(pts
@@ -7503,13 +7484,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b88e2d09-f638-5da1-badc-ca6f3ce9c5db")
+		(uuid "a03297c1-73bd-580f-9620-889e1af57162")
 	)
 	(junction
 		(at 127 200.66)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "da7443f0-27a9-559c-bc47-a57ad93fef3d")
+		(uuid "0361287c-2a80-5fd4-a227-fb871369afbc")
 	)
 	(symbol
 		(lib_id "tube_psu:R")
@@ -7586,7 +7567,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "197b0f36-c69e-509d-a273-bf8c7222744c")
+		(uuid "b88e2d09-f638-5da1-badc-ca6f3ce9c5db")
 	)
 	(wire
 		(pts
@@ -7596,7 +7577,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "8eebce3a-5246-5f8e-8b76-76f6213e0f36")
+		(uuid "da7443f0-27a9-559c-bc47-a57ad93fef3d")
 	)
 	(symbol
 		(lib_id "tube_psu:GND")
@@ -7672,7 +7653,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "88d0b2a0-8b28-57a9-b7c8-d091a3242f54")
+		(uuid "197b0f36-c69e-509d-a273-bf8c7222744c")
 	)
 	(symbol
 		(lib_id "tube_psu:R")
@@ -7749,7 +7730,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "24adf029-b478-5b0c-bb72-042109c3b7a4")
+		(uuid "8eebce3a-5246-5f8e-8b76-76f6213e0f36")
 	)
 	(symbol
 		(lib_id "tube_psu:R")
@@ -7826,7 +7807,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "cdb61f25-6e2b-5588-9f0b-724eaefb8d4c")
+		(uuid "88d0b2a0-8b28-57a9-b7c8-d091a3242f54")
 	)
 	(symbol
 		(lib_id "tube_psu:R")
@@ -7903,7 +7884,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "fa754961-c331-59ca-9997-7371d561ff89")
+		(uuid "24adf029-b478-5b0c-bb72-042109c3b7a4")
 	)
 	(wire
 		(pts
@@ -7913,7 +7894,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "0b7e98f5-97e1-5a43-af37-795ec28287b6")
+		(uuid "cdb61f25-6e2b-5588-9f0b-724eaefb8d4c")
 	)
 	(symbol
 		(lib_id "tube_psu:GND")
@@ -7984,7 +7965,7 @@
 		(at 139.7 205.74)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "567f15ec-e9f1-5bbb-b370-0d312909deee")
+		(uuid "fa754961-c331-59ca-9997-7371d561ff89")
 	)
 	(symbol
 		(lib_id "tube_psu:R")
@@ -8061,7 +8042,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "868cdfdc-0f5c-5efd-9c0b-0ea9d9ca3de8")
+		(uuid "0b7e98f5-97e1-5a43-af37-795ec28287b6")
 	)
 	(wire
 		(pts
@@ -8071,7 +8052,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6d0a6470-552a-56a2-ad3f-1b6a355ddeb6")
+		(uuid "567f15ec-e9f1-5bbb-b370-0d312909deee")
 	)
 	(wire
 		(pts
@@ -8081,7 +8062,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f423d953-3d43-557e-9479-4edd1bea5e1b")
+		(uuid "868cdfdc-0f5c-5efd-9c0b-0ea9d9ca3de8")
 	)
 	(wire
 		(pts
@@ -8091,7 +8072,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "94bbbc01-528f-5d87-8e1f-0df197109462")
+		(uuid "6d0a6470-552a-56a2-ad3f-1b6a355ddeb6")
 	)
 	(wire
 		(pts
@@ -8101,13 +8082,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5f1ae6a5-a9ef-5eb0-858c-52ee6ff464b2")
+		(uuid "f423d953-3d43-557e-9479-4edd1bea5e1b")
 	)
 	(junction
 		(at 165.1 203.2)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "2f26e9e5-bc17-5263-b0b5-bda226752633")
+		(uuid "94bbbc01-528f-5d87-8e1f-0df197109462")
 	)
 	(symbol
 		(lib_id "tube_psu:R")
@@ -8184,7 +8165,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "0026cab7-6371-5e07-af7e-599375f13cea")
+		(uuid "5f1ae6a5-a9ef-5eb0-858c-52ee6ff464b2")
 	)
 	(wire
 		(pts
@@ -8194,7 +8175,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e40c79d3-b3c9-5a20-b970-a8a966d1af55")
+		(uuid "2f26e9e5-bc17-5263-b0b5-bda226752633")
 	)
 	(wire
 		(pts
@@ -8204,7 +8185,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1ab58382-7d24-5388-8b99-4bd376fdc8ce")
+		(uuid "0026cab7-6371-5e07-af7e-599375f13cea")
 	)
 	(label "DC_LINK_MEAS"
 		(at 187.96 203.2 0)
@@ -8214,7 +8195,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "a6bc28a8-15b5-5fe5-91de-d7ca8b9519e3")
+		(uuid "e40c79d3-b3c9-5a20-b970-a8a966d1af55")
 	)
 	(symbol
 		(lib_id "tube_psu:C")
@@ -8287,7 +8268,7 @@
 		(at 182.88 203.2)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "b51533a0-28e5-5b29-bce4-9bec4799990f")
+		(uuid "1ab58382-7d24-5388-8b99-4bd376fdc8ce")
 	)
 	(symbol
 		(lib_id "tube_psu:GND")
@@ -8362,7 +8343,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1a437b93-366a-5741-8a47-7935bd2abb72")
+		(uuid "a6bc28a8-15b5-5fe5-91de-d7ca8b9519e3")
 	)
 	(symbol
 		(lib_id "tube_psu:+3V3")
@@ -8504,13 +8485,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e921abe8-e182-5d6c-ba86-0e67c73c8352")
+		(uuid "b51533a0-28e5-5b29-bce4-9bec4799990f")
 	)
 	(junction
 		(at 149.86 190.5)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "cc4b2d77-087e-5dc7-b443-15be892af9bb")
+		(uuid "1a437b93-366a-5741-8a47-7935bd2abb72")
 	)
 	(wire
 		(pts
@@ -8520,7 +8501,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "4ca839f3-c36d-5d78-a9cc-c99a12a129a1")
+		(uuid "e921abe8-e182-5d6c-ba86-0e67c73c8352")
 	)
 	(symbol
 		(lib_id "tube_psu:GND")
@@ -8662,7 +8643,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "3e09e893-c9cc-5bab-a8e1-314fbd287349")
+		(uuid "cc4b2d77-087e-5dc7-b443-15be892af9bb")
 	)
 	(symbol
 		(lib_id "tube_psu:CONN_01X03")
@@ -8742,10 +8723,30 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6bf83246-f044-5e25-bb50-2ab4345bac42")
+		(uuid "4ca839f3-c36d-5d78-a9cc-c99a12a129a1")
 	)
 	(label "RX"
 		(at 256.54 213.36 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3e09e893-c9cc-5bab-a8e1-314fbd287349")
+	)
+	(wire
+		(pts
+			(xy 261.62 215.9) (xy 256.54 215.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6bf83246-f044-5e25-bb50-2ab4345bac42")
+	)
+	(label "TX"
+		(at 256.54 215.9 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8756,33 +8757,13 @@
 	)
 	(wire
 		(pts
-			(xy 261.62 215.9) (xy 256.54 215.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "392ddf0b-fb34-56e5-bb28-d0880a61eb77")
-	)
-	(label "TX"
-		(at 256.54 215.9 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "da9a1c88-819d-568e-b76e-8eff924fedda")
-	)
-	(wire
-		(pts
 			(xy 261.62 218.44) (xy 256.54 218.44)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "ee9212ad-9409-5253-82a3-133886e106f6")
+		(uuid "392ddf0b-fb34-56e5-bb28-d0880a61eb77")
 	)
 	(symbol
 		(lib_id "tube_psu:GND")

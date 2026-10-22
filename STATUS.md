@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-10-22 (Phase 1 transcription: sheets 11, 2, 9, 8, 10, 4, 3, 6 done; next: 7, 5, 1)
+Updated: 2026-10-22 (Phase 1 transcription: sheets 11, 2, 9, 8, 10, 4, 3, 6, 7 done; next: 5, 1)
 
 ## Shared tools – proteus2kicad (2026-10-21)
 
@@ -239,9 +239,11 @@ ALL CHECKS PASSED
 | 4 MCU socket and misc | 27/27 | compare 0 wrong-net pins, 0 errors; ERC 0 errors |
 | 3 Isolated measurements | 29/29 | compare 0 wrong-net pins, 0 errors; ERC 2 errors = cross-sheet (see below) |
 | 6 Heaters | 47/47 | compare 0 wrong-net pins, 0 errors; ERC 1 error = cross-sheet (U3 +, sheet 7) |
+| 7 DHB | 46/46 | compare 0 wrong-net pins, 0 errors; ERC 0 errors, 28 warnings |
 
 Scripts: `tools/sheets/sheet11.py`, `sheet02.py`, `sheet09.py`, `sheet08.py`, `sheet10.py`, `sheet04.py`,
-`sheet03.py` (channel function `iso_channel`, used twice), `sheet06.py`;
+`sheet03.py` (channel function `iso_channel`, used twice), `sheet06.py`, `sheet07.py` (gate network
+helper `gate_net`, used four times);
 board block helpers in `tools/sheets/_common.py`: `si8274_cell` (sheet 2), `ixdd609_cell` (sheet 9),
 `lmh6658_diffamp` (sheets 8 and 10; optional `cbias` = cap parallel to the bias resistor, `rout_amp` /
 `cout_label` = which pin of the output resistor / cap sits at the op-amp / label – sheet 10 has them the
@@ -259,6 +261,7 @@ Per-sheet compare output (`p2k compare_netlists --allow-missing --sheet N`):
  4: parts 109/315 present, 0 missing on sheet 4, 0 extra; pins compared 331, wrong-net pins 0
  3: parts 138/315 present, 0 missing on sheet 3, 0 extra; pins compared 437, wrong-net pins 0
  6: parts 185/315 present, 0 missing on sheet 6, 0 extra; pins compared 559, wrong-net pins 0
+ 7: parts 231/315 present, 0 missing on sheet 7, 0 extra; pins compared 657, wrong-net pins 0
 ```
 
 ### Sheet 3 (Isolated measurements) – done
@@ -279,7 +282,8 @@ ISO1-15 are no-connects (IPC N/C).
   on the V3 input column (same reason as the Si8274 bootstrap flags on sheet 2).
 - 6V3 and HT_GND: on sheet 3 only passives / power-input pins touch them; their PWR_FLAGs were put on
   sheet 3 temporarily and **moved to sheet 6** (terminals HT_6V3 / HT_GND) in the same session.
-- Sheet 4's V4 crossing (GND wire column crosses the EN wire) is still open – cosmetic only.
+- Sheet 4's V4 crossing is fixed: the GND pin now has its own ground symbol pointing left between the
+  VIN and EN wires, the VIN/EN join column moved further left (compare/ERC unchanged).
 
 ### Sheet 6 (Heaters) – done
 
@@ -300,19 +304,36 @@ DRV4 (IXDD604) inline.
   the free wire pads (6V3 ×2, Q13_DRAIN, Q14_DRAIN – Phase 0 finding).
 - R66 (pull-down of HEATER_LOW_GATE) has pin 1 at the gate, the sheet 9 pull-downs pin 2: `r_gate_top`.
 
-### ERC warnings (45, all expected)
+### Sheet 7 (DHB) – done
+
+`sheet07.py`: primary half-bridge Q19/Q7 on column A (DC+ → DHB_HI_SOURCE → DHB_CURRENT → R83 → GND),
+C47/C54 column with the DHB_CAP node → L3 → TR3 primary (local labels DHB_CAP, TRANS_PRI), C67/C70 with
+their own DC+ symbol; secondary Q21/Q8 (420V → DHB_HI_SOURCE_SEC → ISO_GND), C16/C55 with TRANS_SEC at
+TR3's secondary, C89/C90; the four gate networks by `gate_net()` (global gate label → 40R, diode + 3.3R
+turn-off path, optional pull-down to the source row / GND); the 420V bank with the terminals P400V and
+GND (`terminal()`, GND is on ISO_GND), C91 next to C101, dividers R23/R34/R39 → CUK_CAP_MEAS2 (R38, C27)
+and R120/R119/R118 → CUK_CAP_MEAS- (vertical global label on top).
+
+- The C47/C54 and C16/C55 columns cross the source rows without a junction – the PDF draws the same
+  crossing (checked on the zoomed render; the IPC keeps DHB_CAP / TRANS_SEC separate from the sources).
+- **PWR_FLAG:** 420V permanent on sheet 7 (the rail enters through the terminal +400V; passive pins only).
+  DHB_HI_SOURCE / DHB_HI_SOURCE_SEC keep their permanent flags on sheet 2 (Si8274 cells).
+- With sheet 7 the last cross-sheet `pin_not_driven` error (U3 +, CUK_CAP_MEAS2) is gone: ERC 0 errors.
+
+### ERC warnings (28 after sheet 7, all expected)
 
 - 20 × `isolated_pin_label` for the single-pin nets of J2 (sheet 4; local labels ADA0, ADA1, ADA2, ADA4,
   ADB0, CUK_CAP_MEAS_RAW, EPWM1A, F16, G15, HEATER_CAP_AD_MEAS, K16, L16, N14, N15, N16, P15, P16,
   R16, T14, T15): permanent, the IPC has exactly one pad on each.
-- 23 × `isolated_pin_label` global labels whose other pins are on sheets not drawn yet: sheet 3
-  ($CUK_CS, $HT_CS, CUK_CLK, CUK_SDATA, EPWM2A, EPWM2B, HT_CLK, HT_SDATA, SYNCH_1, SYNCH_2), sheet 5
-  (PFC CURRENT 2+, PFC CURRENT 3+, GPIO_BYPASS_RLY, AC1, AC2), sheet 6 (EPWM5A, EPWM6A, HEATER_CURRENT),
-  sheet 7 (DHB_HI_GATE, DHB_LOW_GATE, DHB_HI_GATE_SEC, DHB_LOW_GATE_SEC, DHB_CURRENT). VAC_MEAS,
-  DHB_I_MEAS, HEATER_I_MEAS, PFC_I1/I2_MEAS, PFC_PWM1/2, PRI_DHB_HI, B12 are complete now.
-- 2 × `ground_pin_not_ground` (DRV5 pin 9 GNDB, DRV6 pin 14 GNDA): KiCad 10 flags power pins
-  named GND* that are not on a ground-named net. These are the floating high-side returns of the
-  Si8274 (nets DHB_HI_SOURCE / DHB_HI_SOURCE_SEC = MOSFET sources on sheet 7) – correct, permanent.
+- 5 × `isolated_pin_label` global labels whose other pins are on sheet 5 (not drawn yet): PFC CURRENT 2+,
+  PFC CURRENT 3+ (sheet 10), GPIO_BYPASS_RLY (sheet 4), AC1, AC2 (sheet 9). Everything else is complete.
+- 3 × `ground_pin_not_ground` (DRV5 pin 9 GNDB, DRV6 pin 14 GNDA, DRV3 pin 5 GND2): KiCad 10 flags power
+  pins named GND* that are not on a ground-named net. These are the floating high-side returns of the
+  Si8274 / Si8271 (nets DHB_HI_SOURCE / DHB_HI_SOURCE_SEC / HEATER_HI_SOURCE = MOSFET nodes) – correct,
+  permanent.
+- Note: a global label whose only other pins are on an undrawn sheet gives a `pin_not_driven` **error**
+  (not a warning) when the pin on the drawn sheet is an input and nothing else (not even a passive) is on
+  the net – seen on sheet 3 (U3/U2 +) until sheets 6/7 were drawn; it is expected while sheets are missing.
 
 ### Symbol changes (tools/gen_symbols.py, reasons)
 
@@ -328,6 +349,12 @@ DRV4 (IXDD604) inline.
   (VI_E = 6, VO_E = 11) and the drawn symbol ($PINDEFAULT records) and the layout use SO16W; the nets
   agree (MCU clock J2 → ISO-6, ISO-11 → ADC CLK, both channels). The real Si8661 is 5 forward (A–E)
   / 1 reverse (F); description corrected. Pin numbers/nets unchanged, only names and ERC types.
+- **ETD34_TRAN_1P1S pins 3 / 4 swapped in position** (2026-10-22, sheet 7): the KiCad source symbol
+  (Device:Transformer_1P_1S) has its pin 3 at the bottom right and pin 4 at the top right; Proteus draws
+  TR3 with pin 3 (TRANS_SEC) top right and 4 (DHB_HI_SOURCE_SEC) bottom right, like pins 1 (top) / 2
+  (bottom) on the primary. The symbol has no polarity dots, so only the pin positions changed
+  (`pins={"3": "4", "4": "3"}` in gen_symbols.py); numbers, names and nets are unchanged. Without the
+  swap the secondary wires of sheet 7 would cross or the layout would be mirrored against the PDF.
 - **IXDD609 pin 6 `OUTB`: output → passive.** OUTA and OUTB are the same driver output on two
   pins and are tied together on sheet 9 (both → R1/R14 resp. R19/R20); two output-type pins on
   one net is an ERC error. IXDD604 (DRV4, sheet 6) has separate outputs and is unchanged.
@@ -335,6 +362,8 @@ DRV4 (IXDD604) inline.
 ### PWR_FLAG placement (temporary unless marked)
 
 - Sheet 11: DC+, GND (both come from the PFC bridge, sheet 5), 20V (AUX supply, sheet 1).
+- Sheet 3: V3 VIN (#00092, D3 + C13) permanent. Sheet 6: 6V3, HT_GND (terminals), DRV3 VDD2 (#00304,
+  bootstrap) and HEATER_HI_SOURCE (DRV3 GND2) permanent. Sheet 7: 420V (terminal +400V) permanent.
 - Sheet 2: 5V, 5V_ISOL, 20V_ISO_SEC (diode outputs of the AUX supply, sheet 1), ISO_GND (enters via
   the `SEC GND` terminal, sheet 1) – standalone symbol+flag pairs at the bottom of the sheet.
   Permanent: flags on the bootstrap nodes (#00053, #00063) and the high-side sources
@@ -376,6 +405,10 @@ DRV4 (IXDD604) inline.
 - Sheet 6: PDF labels DC-, HT_AUX, heater_current, heater_cap_meas, q13_drain, EPWM5A_iso / EPWM6A_iso =
   GND, 6V3, HEATER_CURRENT, HEATER_CAP_MEAS, Q13_DRAIN, EPWM5A_ISO / EPWM6A_ISO. Notes kept as text:
   "E25 : 64/2/2, check primary turns!", "20n resonance cap, note X7R cap voltage bias", "V5.1".
+- Sheet 7: PDF labels DHB_HI_gate / DHB_low_gate / DHB_HI_gate_sec / DHB_low_gate_sec / DHB_HI_SOURCE_sec /
+  dhb_current / trans_pri / trans_sec / DHB_cap / iso_GND / Cuk_cap_meas2 = IPC names; the PDF joins the
+  terminals SEC_GND and ISO_GND by a bare wire (no part; one net ISO_GND) and the terminal `GND` is on
+  ISO_GND. Notes kept as text: "1W core loss: ETD34 : 32, RM12 : 26", "V5.1".
 - No crossings-without-junction were needed except where the PDF has them; the Si8274 and IXDD609
   pin order (supply pins around the input pins) forces the EN pins to get their own supply symbol.
 
@@ -384,18 +417,19 @@ DRV4 (IXDD604) inline.
 ```
 pcbnew 10.0.7
 ipc356: nets=193, records=1165, refdes_raw=316, tht_records=502, smd_records=663, smd_top=225, smd_bottom=438, nc_pads=9, vias=283, free_pads=4, holes=8, parts=315
+ipc356: OK
 check_sources: OK
 make_part_map: lib/part_map.csv up to date (315 parts)
 gen_symbols: lib/tube_psu.kicad_sym up to date (46 symbols)
 symbols: 30 part types, 315 refdes, 15 power symbols
 symbols: OK
-erc: 0 errors, 45 warnings (reports/erc.rpt)
-compare: parts 109/315 present, 206 missing, 0 extra; pins compared 331, wrong-net pins 0; IPC nets touched 113, complete 76
-compare: per sheet (drawn/total) 1:0/49 2:20/20 3:0/29 4:27/27 5:0/35 6:0/47 7:0/46 8:15/15 9:23/23 10:18/18 11:6/6
+erc: 0 errors, 28 warnings (reports/erc.rpt)
+compare: parts 231/315 present, 84 missing, 0 extra; pins compared 657, wrong-net pins 0; IPC nets touched 173, complete 159
+compare: per sheet (drawn/total) 1:0/49 2:20/20 3:29/29 4:27/27 5:0/35 6:47/47 7:46/46 8:15/15 9:23/23 10:18/18 11:6/6
 compare: OK
 ALL CHECKS PASSED
 ```
 
 ## Next
 
-Phase 1 transcription continues with sheets 3, 6, 7, 5, 1 (Fable 5.1), see `next_prompt.md`.
+Phase 1 transcription continues with sheets 5 and 1 (Fable 5.1), see `next_prompt.md`.

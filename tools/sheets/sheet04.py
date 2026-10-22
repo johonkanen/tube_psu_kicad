@@ -95,7 +95,7 @@ sh.text("+2V5_BIAS PWR_FLAG lives here (R110 from REF1); +3V3 is driven by V4 VO
 VX, VY = g(60), g(90)
 v4 = sh.place("TPS73033", "V4", VX, VY, value=sh_value("V4"))
 VIN, VGND, EN, NR, VOUT = (v4.pin(n) for n in (1, 2, 3, 4, 5))
-xin = VX - g(14)
+xin = VX - g(20)
 sh.wire(VIN, (xin, VIN[1]), (xin, EN[1]), EN)       # VIN and EN both on 5V
 sh.junction(xin, VIN[1])
 top5 = (xin, VIN[1] - g(4))
@@ -105,10 +105,9 @@ _, ct, cb = vert2(sh, "C", "C75", xin - g(8), VIN[1] + g(1), "1u", top=1)   # pi
 sh.wire(ct, (xin - g(8), top5[1]), top5)
 sh.junction(*top5)
 power_at(sh, "GND", cb, "down")
-q = (VGND[0] - g(4), VGND[1])
+q = left(VGND, 2)                                   # GND between the VIN and EN wires, no crossing
 sh.wire(VGND, q)
-sh.wire(q, (q[0], q[1] + g(6)))
-power_at(sh, "GND", (q[0], q[1] + g(6)), "down")
+power_at(sh, "GND", q, "left")
 # NR cap, output
 xo = VX + g(14)
 sh.wire(NR, (xo, NR[1]))
