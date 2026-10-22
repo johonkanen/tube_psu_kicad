@@ -1,0 +1,15 @@
+(kicad_sch
+	(version 20260101)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "3569d951-1384-4f99-9e5d-cf95a77d7426")
+	(paper "A3")
+	(title_block
+		(title "Tube power supply - Isolated measurements")
+		(company "Tube power supply")
+		(rev "V5.1")
+		(comment 1 "Redrawn from Proteus tube_power_5_1")
+	)
+	(lib_symbols)
+	(embedded_fonts no)
+)

@@ -1,0 +1,15 @@
+(kicad_sch
+	(version 20260101)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "4277128b-5e31-4586-b442-a6034bf2fa28")
+	(paper "A3")
+	(title_block
+		(title "Tube power supply - MCU connector")
+		(company "Tube power supply")
+		(rev "V5.1")
+		(comment 1 "Redrawn from Proteus tube_power_5_1")
+	)
+	(lib_symbols)
+	(embedded_fonts no)
+)

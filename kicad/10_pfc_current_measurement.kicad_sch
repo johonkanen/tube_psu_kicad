@@ -1,0 +1,15 @@
+(kicad_sch
+	(version 20260101)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "f36cbca4-5f85-42fe-b4c6-e48eeefde59c")
+	(paper "A3")
+	(title_block
+		(title "Tube power supply - PFC current measurement")
+		(company "Tube power supply")
+		(rev "V5.1")
+		(comment 1 "Redrawn from Proteus tube_power_5_1")
+	)
+	(lib_symbols)
+	(embedded_fonts no)
+)

@@ -1,0 +1,4 @@
+(sym_lib_table
+	(version 7)
+	(lib (name "tube_psu")(type "KiCad")(uri "${KIPRJMOD}/../lib/tube_psu.kicad_sym")(options "")(descr "Project symbols, pin ids = IPC"))
+)

@@ -1,0 +1,15 @@
+(kicad_sch
+	(version 20260101)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "93a43975-b73f-43be-83c4-e750131ac9fb")
+	(paper "A3")
+	(title_block
+		(title "Tube power supply - Startup")
+		(company "Tube power supply")
+		(rev "V5.1")
+		(comment 1 "Redrawn from Proteus tube_power_5_1")
+	)
+	(lib_symbols)
+	(embedded_fonts no)
+)

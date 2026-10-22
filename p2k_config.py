@@ -9,6 +9,29 @@ PROJECT = "tube_psu"  # KiCad project / library name
 CADCAM = "source/cadcam"
 IPC = "source/cadcam/tube_power_5_1_X2 - CADCAM Netlist.IPC"
 
+# --- Schematic skeleton (make_skeleton) ----------------------------------------------
+
+# (Proteus page, sheet name, file) - names from the PATH field of the PDF title blocks
+SHEETS = [
+    (1, "AUX supply", "01_aux_supply.kicad_sch"),
+    (2, "DHB gate drive", "02_dhb_gate_drive.kicad_sch"),
+    (3, "Isolated measurements", "03_isolated_measurements.kicad_sch"),
+    (4, "MCU connector", "04_mcu_connector.kicad_sch"),
+    (5, "PFC", "05_pfc.kicad_sch"),
+    (6, "Heaters", "06_heaters.kicad_sch"),
+    (7, "DHB", "07_dhb.kicad_sch"),
+    (8, "Current measurement", "08_current_measurement.kicad_sch"),
+    (9, "AC measurement", "09_ac_measurement.kicad_sch"),
+    (10, "PFC current measurement", "10_pfc_current_measurement.kicad_sch"),  # untitled in the PDF
+    (11, "Startup", "11_startup.kicad_sch"),
+]
+SCH_TITLE = "Tube power supply"
+SCH_COMPANY = "Tube power supply"
+SCH_REV = "V5.1"
+SCH_COMMENT = "Redrawn from Proteus tube_power_5_1"
+SCH_NOTE = ("Tube power supply V5.1 - redrawn from Proteus. One sheet per Proteus PDF page.\n"
+            "Net names follow the IPC-D-356A netlist (reference/pins_by_net.md).")
+
 # --- IPC-D-356A fix-ups (ipc356) -----------------------------------------------------
 
 # Truncated refdes (6 chars) -> full Proteus refdes. The terminals are named after their

@@ -1,0 +1,15 @@
+(kicad_sch
+	(version 20260101)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "075ed0ae-87d3-44f9-b84e-ac89c1ab2405")
+	(paper "A3")
+	(title_block
+		(title "Tube power supply - DHB")
+		(company "Tube power supply")
+		(rev "V5.1")
+		(comment 1 "Redrawn from Proteus tube_power_5_1")
+	)
+	(lib_symbols)
+	(embedded_fonts no)
+)

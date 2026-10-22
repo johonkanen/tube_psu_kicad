@@ -11,6 +11,12 @@ step() { echo "== $1"; shift; "$@" || { echo "!! FAILED: $*"; fail=1; }; }
 step "KiCad environment" tools/p2k/bin/kipy -c "import pcbnew; v = pcbnew.GetBuildVersion(); print('pcbnew', v); assert v.startswith('10.0.7'), v"
 step "IPC-D-356A parser self-check" tools/p2k/bin/p2k ipc356 --check
 step "Gerber X2 export vs IPC (pads, vias, drills, outline)" tools/p2k/bin/p2k check_sources
+step "Part map up to date" python3 tools/make_part_map.py --check
+step "Symbol library up to date" python3 tools/gen_symbols.py --check
+step "Symbol pin sets vs IPC" tools/p2k/bin/p2k check_symbols
+step "ERC" tools/erc.sh
+# --allow-missing while sheets are being drawn (PLAN.md section 3); drop it when all 11 are done
+step "Netlist comparison vs IPC" tools/p2k/bin/p2k compare_netlists --allow-missing
 
 echo
 [ $fail -eq 0 ] && echo "ALL CHECKS PASSED" || echo "SOME CHECKS FAILED"

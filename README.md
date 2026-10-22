@@ -29,10 +29,11 @@ source/      Proteus exports (read-only): schematic PDF + page renders + text, t
              cadcam_rs274x/ = earlier RS-274X export with Excellon drill (cross-check only)
 reference/   tables generated from the IPC netlist: pads (CSV/JSON), pin→net per part,
              pins per net
-lib/         project symbols / footprints, part and footprint maps (Phase 1-2)
-kicad/       KiCad project (Phase 1-3)
+lib/         tube_psu.kicad_sym (generated), part_map.csv (generated), footprints (Phase 2)
+kicad/       KiCad project: root sheet + 11 sub-sheets (one per PDF page)
 p2k_config.py  board configuration of the proteus2kicad tools
-tools/       check_all.sh, erc.sh, board-specific scripts; p2k/ = proteus2kicad submodule
+tools/       check_all.sh, erc.sh, make_part_map.py, gen_symbols.py, sheets/ (one script per
+             sheet); p2k/ = proteus2kicad submodule
 reports/     generated reports
 ```
 
@@ -41,7 +42,7 @@ reports/     generated reports
 | Phase | Content | State |
 |---|---|---|
 | 0 | Tooling: KiCad AppImage wrappers, IPC-D-356A parser, reference tables, X2 export check | done |
-| 1 | Schematic: symbols, part map, netlist comparison, 11 sheets redrawn | – |
+| 1 | Schematic: part map, symbols, netlist comparison, skeleton (done); 11 sheets redrawn | preparation done |
 | 2 | Footprints, fitted to the IPC pads | – |
 | 3 | PCB: board, tracks/vias from gerbers, nets, zones, DRC | – |
 | 4 | Independent verification: gerber round trip, IPC-D-356 diff | – |
@@ -54,6 +55,11 @@ reports/     generated reports
 |---|---|
 | `tools/p2k/bin/p2k ipc356 --check` | IPC parser counts and fix-ups; reference tables up to date |
 | `tools/p2k/bin/p2k check_sources` | Gerber X2 flashes (vias, pads, free pads, holes) and drills vs IPC; outline |
+| `tools/make_part_map.py --check` | `lib/part_map.csv` up to date with the .pdsprj, PDF and IPC |
+| `tools/gen_symbols.py --check` | `lib/tube_psu.kicad_sym` up to date |
+| `tools/p2k/bin/p2k check_symbols` | symbol pin set = IPC pin set for every refdes |
+| `tools/erc.sh` | KiCad ERC, 0 errors |
+| `tools/p2k/bin/p2k compare_netlists` | schematic netlist vs IPC by pad sets (`--sheet N`, `--allow-missing` while drawing) |
 
 `tools/p2k/bin/p2k ipc356` regenerates `reference/` after a change of `p2k_config.py`.
 

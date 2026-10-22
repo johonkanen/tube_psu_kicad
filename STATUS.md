@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-10-21 (Phase 0 done; tools moved to the proteus2kicad submodule)
+Updated: 2026-10-22 (Phase 1 preparation done; next: sheet transcription)
 
 ## Shared tools – proteus2kicad (2026-10-21)
 
@@ -77,7 +77,7 @@ ALL CHECKS PASSED
 
 ### Findings that matter for Phase 1
 
-- **Terminals** (13; each has two THT holes, both pin 1, same net). Truncated names
+- **Terminals** (12; each has two THT holes, both pin 1, same net). Truncated names
   restored from the PDF (sheet 1) and renamed for KiCad (`KICAD_REFDES` in `p2k_config.py`,
   one table used by every script – change it there if other names are wanted):
 
@@ -112,6 +112,121 @@ ALL CHECKS PASSED
   x = −42.8 mm) – board-only footprints or plain pads, user decision in Phase 2.
 - NonConductor draws on all copper layers (13 / 5 / 3 / 3) – copper graphics without net.
 
+## Phase 1 preparation – done (Opus 5.5, 2026-10-22)
+
+Shared tools (proteus2kicad, now `32f8fd3`): `check_symbols`, `compare_netlists`,
+`make_skeleton`, `symgen` (generator helpers of gen_symbols) and `sheetkit` (generic sheet
+helpers) moved from ac_psu; new `pdsprj` (reads the .pdsprj) and `pdftext` (PDF words, refdes
+pages). ac_psu runs on them with identical `check_all.sh` output and byte-identical
+`regen_check.sh` (ac_psu commits not pushed yet).
+
+New in this repo:
+
+- `tools/make_part_map.py` → `lib/part_map.csv` (315 parts; `--check`): sheet = PDF page
+  (text layer; `PAGE_OVERRIDES` for C15, C16, C91, GND, HT_GND, V2, V3 – resolved on the
+  renders), `lib_id` from the Proteus device (`SYMBOL_BY_DEVICE`), **value = schematic value
+  from ROOT.DSN** (identical to the PDF wherever the PDF value could be read), device and
+  package from the ROOT.LYT layout record, `proteus_refdes` for the 6 renamed terminals.
+  Parts per sheet: 1:49 2:20 3:29 4:27 5:35 6:47 7:46 8:15 9:23 10:18 11:6.
+- `tools/gen_symbols.py` → `lib/tube_psu.kicad_sym` (46 symbols: 30 part symbols, PWR_FLAG,
+  15 power symbols). Box symbols carry the Proteus pin names of the DSN pinouts.
+- `p2k_config.py`: `SHEETS` (titles from the PATH field of the PDF title blocks; page 10 is
+  untitled → "PFC current measurement") and `SCH_*`. `p2k make_skeleton` → `kicad/`
+  (tube_psu.kicad_pro, sym-lib-table, root + 11 empty sheets).
+- `tools/sheets/_common.py`: imports `p2k.sheetkit`; add board-specific block helpers here.
+  Smoke-tested in a scratch copy (C14/C28/C29 on sheet 11: compare 0 wrong pins, ERC clean).
+- `tools/check_all.sh`: + part map, symbol library, symbol pins vs IPC, ERC, netlist
+  comparison (`--allow-missing` until all sheets are drawn).
+- Net names with spaces, `$`, `+` and a leading `-` work in KiCad 10 as global/local labels
+  and power symbols (tested: `PFC DRAIN 1`, `PFC CURRENT 2+`, `$HT_CS`, `-100V BIAS`), so
+  **no net-name map**: KiCad nets carry the IPC names unchanged.
+
+### Last verification (`tools/check_all.sh`)
+
+```
+pcbnew 10.0.7
+ipc356: nets=193, records=1165, refdes_raw=316, tht_records=502, smd_records=663, smd_top=225, smd_bottom=438, nc_pads=9, vias=283, free_pads=4, holes=8, parts=315
+check_sources: OK
+make_part_map: lib/part_map.csv up to date (315 parts)
+gen_symbols: lib/tube_psu.kicad_sym up to date (46 symbols)
+symbols: 30 part types, 315 refdes, 15 power symbols
+symbols: OK
+erc: 0 errors, 0 warnings (reports/erc.rpt)
+compare: parts 0/315 present, 315 missing, 0 extra; pins compared 0, wrong-net pins 0; IPC nets touched 0, complete 0
+compare: OK
+ALL CHECKS PASSED
+```
+
+### Findings (report, not fixed)
+
+- **Stale layout values:** ROOT.LYT has other values than the schematic for 24 parts:
+  C10, C26 (schematic `na`, layout 100n); R2 1k/4.2k, R3 470/220, R18 100R/1k, R35 33R/4.2k,
+  R38 15k/20k, R42 33/4.2k, R54 15k/22k, R55 6.8k/12k, R60 6.8k/10k, R64 39k/220k,
+  R65 100R/4.2k, R84 33k/N.A., R89 33k/15k, R95 6.8k/10k, R98 6.8k/10k, R100 6.8k/10k,
+  R102 15k/10k, R103 33k/15k, R105 15k/10k, R113 15k/1k, R121 15k/22k, R122 6.8k/12k
+  (schematic/layout). The part map uses the schematic values (= PDF). A BOM made from the
+  layout would be wrong for these.
+- **C91** (100n 1206, 420V–ISO_GND, top side) has no refdes printed anywhere in the PDF
+  (hidden label); assigned to page 7, the only page with 420V. Draw it next to C101.
+- **REF1** (value ISL21010CFH315Z-TK, Proteus device ADR380, SOT-23): Proteus pin ids
+  1=GND 2=VIN 3=VOUT, nets 1=GND 2=+3V3 3=#00137. The ADR380 and ISL21010 datasheets use
+  1=VIN 2=VOUT 3=GND – check the footprint pads in Phase 2 (cf. REF3025 on ac_psu).
+- **Q9** (value 2n7000, Proteus device BSS138, SOT-23): Proteus ids 1=D 2=G 3=S; the
+  common SOT-23 MOSFET pinout is 1=G 2=S 3=D – check in Phase 2.
+- **Q1/Q2** (BUK9Y15-60E, LFPAK): Proteus ids 1=S 2=G 3=D; the three source leads are
+  three pads all numbered 1.
+- Devices with another value: V2/V3 = MIC5205 on the TPS73033 device (same pinout); U1/U4 =
+  LMH6658 on the OPA2353UA device (standard dual op-amp pinout); Q7/Q8/Q19/Q21 = STF7N60M2
+  and Q10/Q11 = IPA60R280CFD7XKSA1 on the IRFBE20 device (1=G 2=D 3=S); Q5/Q6 =
+  C2M0160120D on the IRFP460 device (TO-247, 1=G 2=D 3=S, confirmed by the nets).
+- The 12 terminals are drawn as `PIN` (blade connector, 2 holes numbered 1).
+
+### Transcription rules (for the sheet sessions)
+
+- Use only `tube_psu:` symbols, exactly the `lib_id` of `lib/part_map.csv` for each refdes,
+  and that file's value. Refdes = the `refdes` column (KiCad names: `P15V_OUT`, `P5V_OUT`,
+  `N5V_OUT`, `N80V_OUT`, `SEC_GND`, `P400V` for the Proteus terminals `+15V OUT`, `+5V OUT`,
+  `-5V OUT`, `-80V OUT`, `SEC GND`, `+400V`).
+- **Net names = IPC names** (`reference/pins_by_net.md`), whatever the PDF shows:
+  - case: the PDF often writes lowercase (`iso_GND`, `5v_isol`, `20V_ISO_sec`, `gate1`,
+    `Cuk_cap_meas2`, `DHB_HI_gate_sec`, `res_in`, …) – use the IPC spelling (`ISO_GND`,
+    `5V_ISOL`, `20V_ISO_SEC`, `GATE1`, `CUK_CAP_MEAS2`, `DHB_HI_GATE_SEC`, `RES_IN`);
+  - PDF aliases of one net: `SEC_GND`, `RET_ISO`/`RET_iso`, `iso_GND` → **ISO_GND**;
+    `DC-` → **GND**; overlined `CUK_CS` / `HT_CS` → **$CUK_CS** / **$HT_CS**; `HT_AUX`,
+    `PRI_DHB_LO`, `DGND` (J2) → whatever IPC net their pins are on (look up the pins in
+    `reference/pin_nets_by_component.md`; `compare_netlists` prints name hints). Never put two
+    names on one net (ERC `multiple_net_names`).
+- **Power symbols** (Proteus power terminals and ground symbols) for the 15 rails: GND,
+  ISO_GND, HT_GND, DC+, 420V, 20V, 20V_ISO_SEC, 6V3, 5V, 5V_ISOL, +3V3, AD2_3V3, +2V5_BIAS,
+  -5V_SEC, -100V BIAS. Use `flagged_power` (power symbol + PWR_FLAG) once per rail where ERC
+  reports an undriven power pin – on the sheet where the rail is generated or enters.
+- Other named nets → labels. Proteus terminals are global: **global labels** for the 54 named
+  nets that reach more than one sheet (all named nets with pins on several sheets – check
+  with `pins_by_net.md` + `lib/part_map.csv`), local labels for one-sheet nets. Auto-named
+  `#00xxx` nets are plain wires (none crosses a sheet).
+- N/C pins (no-connect flag): DRV5-7 DRV5-12 DRV5-13 DRV6-7 DRV6-12 DRV6-13 ISO1-15 ISO2-13
+  RL1-2. L1/L2/L3 pins `1` and `2` (bobbin pins, no net) are `no_connect`-type pins of
+  `RM8_INDUCTOR` – leave them open (no flag needed, ERC accepts them).
+- Single-pin nets (all on J2, sheet 4): ADA0, ADA1, ADA2, ADA4, ADB0, CUK_CAP_MEAS_RAW,
+  EPWM1A, F16, G15, HEATER_CAP_AD_MEAS, K16, L16, N14, N15, N16, P15, P16, R16, T14, T15 –
+  a label on the J2 pin; ERC "isolated label" warnings for them are expected. Note that the
+  J2 labels `C15`, `C16`, `R16`, … are net names, not parts.
+- Hand notes in the PDF (page 1 `V1/V2/V3` turn counts, `R64 = 39k / v2 trans`, "pin
+  compatible with …", `2k = 22k||2.2k`) → KiCad text items, optional.
+- Keep symbols, wires and labels on the 1.27 mm grid. Use `p2k.sheetkit` helpers
+  (`vert2`, `horiz2`, `power_at`, `glabel_left/right`, `terminal`, `flagged_power`, …); put
+  repeated blocks of this board (gate-driver cells, LMH6658 difference amplifiers on sheets
+  8/10, …) into `tools/sheets/_common.py`.
+- One script per sheet: `tools/sheets/sheetNN.py` (NN = PDF page) rebuilding
+  `kicad/NN_*.kicad_sch` from scratch; render with `tools/p2k/bin/p2k render_sheet
+  kicad/NN_*.kicad_sch` and compare with `source/schematic_pdf/hi-NN.png`.
+- After each sheet: `tools/p2k/bin/p2k compare_netlists --allow-missing --sheet N` and
+  `tools/erc.sh`, then `tools/check_all.sh`. Target per sheet: 0 missing on that sheet,
+  0 compare errors, 0 ERC errors (warnings explained here).
+- Order (PLAN.md section 3): 11 startup → 2 DHB gate drive → 9 AC measurement → 8 current
+  measurement → 10 PFC current measurement → 4 MCU connector → 3 isolated measurements →
+  6 heaters → 7 DHB → 5 PFC → 1 AUX supply.
+
 ## Next
 
-Phase 1 preparation (PLAN.md section 3, playbook Phase 1 preparation), see `next_prompt.md`.
+Phase 1 transcription, sheet by sheet (Fable 5.1), see `next_prompt.md`.

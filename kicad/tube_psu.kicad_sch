@@ -1,0 +1,482 @@
+(kicad_sch
+	(version 20260101)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "cce323c4-7450-4a52-888d-93ce286361fa")
+	(paper "A3")
+	(title_block
+		(title "Tube power supply")
+		(company "Tube power supply")
+		(rev "V5.1")
+		(comment 1 "Redrawn from Proteus tube_power_5_1")
+	)
+	(lib_symbols)
+	(text "Tube power supply V5.1 - redrawn from Proteus. One sheet per Proteus PDF page.\nNet names follow the IPC-D-356A netlist (reference/pins_by_net.md)."
+		(exclude_from_sim no)
+		(at 25.4 22.86 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "1aaf91a3-b015-4695-b9a1-928688a6a6fe")
+	)
+	(sheet
+		(at 25.4 38.1)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "415f4607-59f6-4888-a9c9-16076e86f54c")
+		(property "Sheetname" "01 AUX supply"
+			(at 25.4 37.4 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "01_aux_supply.kicad_sch"
+			(at 25.4 59.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_psu"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 152.4 38.1)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "8037fda7-c30a-4858-8ec9-bdfcbfc7d405")
+		(property "Sheetname" "02 DHB gate drive"
+			(at 152.4 37.4 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "02_dhb_gate_drive.kicad_sch"
+			(at 152.4 59.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_psu"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 279.4 38.1)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "fe442bbb-6949-4e80-b157-a7b285488541")
+		(property "Sheetname" "03 Isolated measurements"
+			(at 279.4 37.4 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "03_isolated_measurements.kicad_sch"
+			(at 279.4 59.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_psu"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 25.4 88.9)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "50ce8637-beca-4745-9ce6-9d1bd3bb08df")
+		(property "Sheetname" "04 MCU connector"
+			(at 25.4 88.2 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "04_mcu_connector.kicad_sch"
+			(at 25.4 109.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_psu"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 152.4 88.9)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "e40f778b-4e02-442f-91ba-cfe25cfad6e5")
+		(property "Sheetname" "05 PFC"
+			(at 152.4 88.2 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "05_pfc.kicad_sch"
+			(at 152.4 109.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_psu"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 279.4 88.9)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "4416e662-eba0-45a4-b6fd-17fcd8a13965")
+		(property "Sheetname" "06 Heaters"
+			(at 279.4 88.2 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "06_heaters.kicad_sch"
+			(at 279.4 109.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_psu"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa"
+					(page "7")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 25.4 139.7)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "75114165-edbc-4990-a42e-1d9c53861b3e")
+		(property "Sheetname" "07 DHB"
+			(at 25.4 139 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "07_dhb.kicad_sch"
+			(at 25.4 160.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_psu"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa"
+					(page "8")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 152.4 139.7)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "41091289-a0b0-4a3b-96be-33eb8bb03585")
+		(property "Sheetname" "08 Current measurement"
+			(at 152.4 139 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "08_current_measurement.kicad_sch"
+			(at 152.4 160.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_psu"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa"
+					(page "9")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 279.4 139.7)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "6eb35f48-6b08-4c9b-99f9-370c4b4c9404")
+		(property "Sheetname" "09 AC measurement"
+			(at 279.4 139 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "09_ac_measurement.kicad_sch"
+			(at 279.4 160.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_psu"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa"
+					(page "10")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 25.4 190.5)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "553ab6bc-8d29-430e-9326-7f1259a8c57d")
+		(property "Sheetname" "10 PFC current measurement"
+			(at 25.4 189.8 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "10_pfc_current_measurement.kicad_sch"
+			(at 25.4 211.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_psu"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa"
+					(page "11")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 152.4 190.5)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "3020f7dc-c4e3-40e5-8c14-fc10c4f3df1f")
+		(property "Sheetname" "11 Startup"
+			(at 152.4 189.8 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "11_startup.kicad_sch"
+			(at 152.4 211.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_psu"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa"
+					(page "12")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)
