@@ -77,8 +77,10 @@ def build():
         box("IXDD604", "DRV", [(6, "VCC", PI), (1, "ENA", IN), (2, "INA", IN), (3, "INB", IN), (4, "ENB", IN)],
             [(8, "OUTA", OUT), (5, "OUTB", OUT), None, (7, "GND", PI), (9, "TAB", PAS)],
             desc="Dual 4 A gate driver DFN-8 with thermal pad"),
+        # OUTA and OUTB are one output on two pins (tied together on sheet 9): OUTB is passive
+        # so that ERC does not report Output-Output (STATUS.md, Phase 1 transcription).
         box("IXDD609", "DRV", [(1, "VCC", PI), (8, "VCC", PI), (2, "IN", IN), (3, "EN", IN)],
-            [(7, "OUTA", OUT), (6, "OUTB", OUT), (4, "GND", PI), (5, "GND", PI), (9, "TAB", PAS)],
+            [(7, "OUTA", OUT), (6, "OUTB", PAS), (4, "GND", PI), (5, "GND", PI), (9, "TAB", PAS)],
             desc="9 A gate driver DFN-8 with thermal pad"),
         box("IW1818", "PWM", [(5, "Vcc", PI), (4, "Vsense", IN), (2, "I_sense", IN), (1, "E", PAS)],
             [(8, "C", PAS), (7, "C", PAS), None, (3, "GND", PI)],
@@ -86,8 +88,11 @@ def build():
         box("SI8271", "DRV", [(2, "VDD1", PI), (1, "Vin", IN), (4, "EN", IN), (3, "GND1", PI)],
             [(8, "VDD2", PI), (7, "OUT+", OUT), (6, "OUT-", OUT), (5, "GND2", PI)],
             desc="Isolated single gate driver SOIC-8"),
+        # Pin 2 (NC1) carries a signal in the Proteus design (DRV5-2 PRI_DHB_HI, DRV6-2
+        # ISO_SEC_DHB_LO; sheet 2). A KiCad no_connect-type pin is left out of the netlist,
+        # so it is passive here (STATUS.md, Phase 1 transcription).
         box("SI8274", "DRV", [(3, "VDD1", PI), (8, "VDD1", PI), (1, "PWM", IN), (5, "EN", IN), (6, "DT", IN),
-                              (4, "GND1", PI), (2, "NC1", NC), (7, "NC2", NC)],
+                              (4, "GND1", PI), (2, "NC1", PAS), (7, "NC2", NC)],
             [(16, "VDDA", PI), (15, "VOA", OUT), (14, "GNDA", PI), (13, "NC3", NC), (12, "NC4", NC),
              (11, "VDDB", PI), (10, "VOB", OUT), (9, "GNDB", PI)],
             desc="Isolated half-bridge gate driver SOIC-16"),
