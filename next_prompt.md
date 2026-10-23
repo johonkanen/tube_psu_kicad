@@ -1,98 +1,69 @@
 # Next prompt
 
-Ready-to-paste prompt for the next agent session (Phase 4 – independent verification).
+Ready-to-paste prompt for the next agent session (Phase 5 – clean-up, user decisions first).
 Replaced at the end of every phase or session, see PLAN.md section 9.
 
 ```
-Read PLAN.md (section 6) and STATUS.md in /home/jari/dev/tube_psu_kicad (especially "Phase 3 – PCB":
-steps, design rules, the Phase 3 pad-size change, remaining DRC items, findings such as the stacked
-duplicate vias, and the "Shared tools" regression procedure), and the playbook
-tools/p2k/CONVERSION_PLAYBOOK.md sections 3 "Phase 4", 4 (shared tools) and 5 (pitfalls). Phases 0–3 are
-complete: schematic (315/315 parts, 208/208 IPC nets, ERC 0 errors), footprints (fit ≤ 0.037 mm) and
-kicad/tube_psu.kicad_pcb rebuilt by tools/make_pcb.sh from the schematic and the Proteus gerbers
-(shared tools p2k.build_pcb / gerber_to_tracks / assign_nets / pours_to_zones; check_board, assign_nets
---check, DRC 0 shorts / 0 unconnected / 0 parity). You are the independent reviewer: do not trust the
-earlier sessions' claims, verify them.
+Read PLAN.md and STATUS.md in /home/jari/dev/tube_psu_kicad (especially "Phase 4 – independent
+verification": the two new checks, the reviewed findings, the per-refdes pad-size table and the "Open user
+decisions" list) and the playbook tools/p2k/CONVERSION_PLAYBOOK.md sections 3 "Phase 5" and 4. Phases 0–4
+are complete: the schematic (315/315 parts, 208/208 IPC nets, ERC 0 errors), the footprints (fit
+≤ 0.037 mm), the generated board kicad/tube_psu.kicad_pcb (tools/make_pcb.sh, byte-identical rebuild,
+0 shorts / 0 opens / 0 unconnected / 0 parity) and the independent verification against the Proteus
+CADCAM files: p2k ipc356_diff (1165/1165 records, 193 nets 1:1, 0 mismatches) and p2k gerber_roundtrip
+(0 unexplained copper clusters, 0 uncovered draws/flashes, 502/502 drills incl. the Excellon
+cross-check). Every remaining difference is a pad shape / KiCad pad clearance or a recorded decision.
 
-Phase 4 (PLAN.md section 6):
-1. Move ac_psu's gerber_roundtrip.py and ipc356_diff.py (read only: ~/dev/ac_psu_kicad tools/, and its
-   STATUS.md "Phase 4") into the tools/p2k submodule (proteus2kicad) with config keys instead of board
-   values (tolerances, raster grid, expected differences, deviation hooks like p2k.check_board's
-   added / extra_vias); commit + push there, bump the submodule here. Shared-tool changes need the
-   ac_psu regression: ac_psu_kicad is worked on in parallel – use a git worktree on a local branch based
-   on its branch p2k-pcb (which already carries the Phase 2/3 tool moves), never touch its main checkout,
-   never push it; its tools/check_all.sh and tools/regen_check.sh must pass with its committed files
-   unchanged (STATUS.md "Regression procedure"). Note: a worktree shares .git/config – do not leave
-   submodule.tools/p2k.url changed in the main repo.
-2. This board's specifics: 283 IPC via records on 267 board vias (16 stacked duplicates – STATUS.md
-   finding), 4 free pads (board-only WP1–WP4 with nets), 8 unplated 3.0 mm holes with 3.5 mm copper
-   rings (H1–H8, NonPlated drill gerber), the renamed terminals (KICAD_REFDES in p2k_config.py; kicad-cli
-   ipcd356 truncates refdes and long net names), RM8 bobbin pins without net, NonConductor copper graphics.
-   gerber_roundtrip: copper XOR per layer with 0.05 mm tolerance, centre-line coverage of every draw and
-   flash both ways, drills (plated + NonPlated; the RS-274X Excellon in source/cadcam_rs274x/ as an
-   optional cross-check); classify the difference clusters (pad shape / clearance / zone fill / other =
-   finding). ipc356_diff: kicad-cli pcb export ipcd356 vs the Proteus file – every pad/via/hole/free pad
-   within 0.05 mm, side, THT/SMD, nets 1:1 by pad sets, N/C equal. Add both to tools/check_all.sh.
-3. Review: read the generating scripts and config, spot-check the easy-to-get-wrong places (thermal
-   reliefs, floating NonConductor graphics, mounting holes with copper rings, free pads, bottom-side
-   parts, multi-pad pins (terminals, TR3, LFPAK Q1/Q2), the 45°/315° RM8 chokes, single-pin nets), the
-   Phase 3 pad-size change (143 parts on Proteus pads: is each change forced by a DRC conflict?), and
-   confirm or refute every earlier finding in STATUS.md.
-4. Negative-test every new check (move a track, change a net, shift a pad 0.1 mm, delete a via, change a
-   drill) and confirm it fails.
-5. STATUS.md "Phase 4" (results, reviewed findings, open user decisions), next_prompt.md → Phase 5
-   (clean-up, user decisions first) or "done".
-
-Open user decisions (do not change without asking; list them again at the end): the Phase 3 pad-size
-change (Proteus pads on 10 footprints / 143 parts, reversible – STATUS.md "Phase 3 – pad sizes"), the
-KiCad drills smaller than Proteus (Q5/Q6 TO-247 1.5 vs 1.651, C_Disc 1.0 vs 1.016, C64/C66 1.0 vs 1.066,
-J4 1.0 vs 1.016), C102's outline, the SICD pin-1 assumption, free pads as one-pad footprints vs plain
-pads, mounting hole H4 inside the RM8 choke L2's area.
+Phase 5 (optional clean-up) – ASK THE USER FIRST, then implement only what was decided:
+1. Pad sizes of the 143 parts on Proteus pads (STATUS.md Phase 4 table): keep all (default), narrow the
+   Proteus pads to the 22 DRC-conflicting refdes (U2 U3 U6 V2 V3 V4, AD1 AD2, Q9 REF1, DRV3, DRV5, C28 C37
+   C56, J2, R40, R79 R88 R109, C25 C92 – a `refdes` condition in tools/gen_footprints.py RULES), or
+   FOOTPRINT_PAD_SIZES = "proteus" everywhere. After a change: tools/gen_footprints.py, all
+   tools/sheets/sheetNN.py, kipy -m p2k.check_footprints --pcbnew, tools/make_pcb.sh, tools/check_all.sh.
+2. KiCad drills smaller than Proteus (Q5/Q6 TO-247 1.5 vs 1.651, C_Disc + J4 1.0 vs 1.016, C64/C66 1.0 vs
+   1.067): keep (DRILL_SMALLER in p2k_config.py) or Proteus drills (derived footprints with ipc_sizes or
+   a drill override; then remove the DRILL_SMALLER entries so the checks enforce it).
+3. SICD1/SICD2 (TO-220-2): body side and pin 1 – the Proteus silk puts the body/tab line on the other side
+   of the pin row than KiCad's TO-220-2_Vertical (coordinates in STATUS.md). Needs the physical part or
+   the built board; if the footprint is mirrored, re-check pin-1 mark, body side and courtyard.
+4. C102 outline (UCS2G560MND9 on a 10 mm / 5 mm-pitch footprint), free pads WP1–WP4 as board-only
+   footprints vs plain pads, RM8 footprint body from the Proteus silk (19.7 mm RM outline, not centred on
+   the pads; would remove the 3 accepted courtyard errors H4/L2, C64-1/L2, C66-1/L1), other IPC-built
+   bodies from the silk (EF20/EF25/ETD34, CM chokes, relay, bridge), silk/refdes positions (199 + 199
+   warnings), the 18 floating NonConductor copper lines (keep / move to silk), the 6 dangling stubs and
+   the one-layer GND via, the stale layout values (24 parts, STATUS.md Phase 1).
+5. ac_psu_kicad: the local branches p2k-footprints → p2k-pcb → p2k-phase4 carry the shared-tool moves and
+   pass check_all.sh + regen_check.sh; merging/pushing them is the user's call.
+6. When the user starts editing the board in KiCad: stop regenerating it (remove the make_pcb --check step
+   from tools/check_all.sh, say so in STATUS.md); the IPC diff and the gerber round trip keep working on
+   the edited board and will then show the intended differences.
 
 Rules: do not change the symbol library, the part map, the sheets, the footprint rules or the board
 generation without saying why in STATUS.md; a problem in the original design is reported, not silently
-fixed (playbook principle 7). Tools: tools/p2k/bin/kicad-cli and tools/p2k/bin/kipy mount the KiCad
-AppImage on demand (`kipy -m p2k.TOOL`); never run the AppImage with --version (hangs). Use the
-scratchpad directory for temporary files. Commit here (not push) at each completed step; keep STATUS.md
-and next_prompt.md current at each commit.
+fixed (playbook principle 7). Shared-tool changes go into tools/p2k (proteus2kicad) with the ac_psu
+regression (STATUS.md "Regression procedure"; ac_psu is worked on in parallel – use a git worktree on a
+local branch based on p2k-phase4, never touch its main checkout, never push it, leave .git/config
+submodule.tools/p2k.url as https://github.com/johonkanen/proteus2kicad.git, remove the worktree by
+rm -rf + git worktree prune). Tools: tools/p2k/bin/kicad-cli and tools/p2k/bin/kipy mount the KiCad
+AppImage on demand (`kipy -m p2k.TOOL`, `p2k TOOL`); never run the AppImage with --version (hangs). Use
+the scratchpad directory for temporary files. Commit here (not push) at each completed step; keep
+STATUS.md and next_prompt.md current at each commit.
 
-Verify state first: tools/check_all.sh. At handoff it printed
-  pcbnew 10.0.7
-  ipc356: nets=193, records=1165, refdes_raw=316, tht_records=502, smd_records=663, smd_top=225, smd_bottom=438, nc_pads=9, vias=283, free_pads=4, holes=8, parts=315
-  check_sources: OK
-  make_part_map: lib/part_map.csv up to date (315 parts)
-  gen_symbols: lib/tube_psu.kicad_sym up to date (46 symbols)
-  symbols: 30 part types, 315 refdes, 15 power symbols
-  erc: 0 errors, 23 warnings (reports/erc.rpt)
-  compare: parts 315/315 present, 0 missing, 0 extra; pins compared 846, wrong-net pins 0; IPC nets touched 208, complete 208
-  compare: per sheet (drawn/total) 1:49/49 2:20/20 3:29/29 4:27/27 5:35/35 6:47/47 7:46/46 8:15/15 9:23/23 10:18/18 11:6/6
-  gen_footprints: 315 parts, 44 footprints (29 project), up to date
-  check_footprints: pcbnew placement of 315 parts, worst pad offset 0.038 mm
-  check_footprints: 315/315 parts fitted, 870 pads, 44 footprints, worst residual 0.037 mm (limit 0.05)
-  build_pcb: 315 footprints placed (0 excluded from board), 8 mounting holes, 4 free pads, 208 nets, 4 outline segments
-  gerber_to_tracks: 3412 tracks, 267 vias (IPC 283, 16 stacked duplicate via records merged), 85 pour outlines on User.1-4
-  assign_nets: stage A (no pours): 510 groups, 0 shorts, 52 orphans, 32 opens
-  assign_nets: stage B (with pours): 216 groups, 0 shorts, 0 orphans, 0 opens
-  pours_to_zones: 85 pours -> 85 zones; 161 holes closed by the stroke, 847 holes kept
-  make_pcb: board rebuilt from scratch, byte-identical
-  check_board: 327 footprints, 870 pads, worst pad offset 0.038 mm (limit 0.05), 193 IPC nets mapped 1:1, 8 mounting holes, 4 free pads
-  check_board: 3412 tracks, 267 vias, 85 zones
-  assign_nets: after zone fill: 216 groups, 0 shorts, 0 orphans, 0 opens, 0 items with a foreign net
-  assign_nets: OK (report reports/assign_nets.txt)
+Verify state first: tools/check_all.sh (≈ 6 min; the round trip alone ≈ 2.5 min). At handoff it ended with
   drc: 562 violations, 0 shorts, 0 unconnected, 0 parity issues (reports/drc.json)
-  drc:    149 error    courtyards_overlap  accepted: KiCad courtyards vs the Proteus placement
-  drc:      6 error    pth_inside_courtyard  accepted: KiCad courtyards vs the Proteus placement
-  drc:      1 error    npth_inside_courtyard  accepted: mounting hole H4 inside the RM8 choke L2's pad-box courtyard (Proteus placement)
-  drc:    199 warning  silk_overlap
-  drc:    199 warning  silk_over_copper
-  drc:      6 warning  track_dangling
-  drc:      1 warning  via_dangling
-  drc:      1 warning  silk_edge_clearance
+  ipc356_diff: Proteus 1165 records, KiCad 1149; matched 1165 (870 pads incl. 15 N/C, 283 vias (16 stacked duplicate via records on matched vias), 8 holes, 4 free pads), worst position offset 0.038 mm (limit 0.05)
+  ipc356_diff: 193 Proteus nets mapped 1:1 onto KiCad nets, 0 mismatches
+  roundtrip: F.Cu   XOR   65.91 mm^2, beyond 0.05 mm: only Proteus   4.73, only KiCad  37.74 mm^2; clusters >= 0.01 mm^2: 134 pad shape, 10 clearance; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+  roundtrip: In1.Cu XOR   82.65 mm^2, beyond 0.05 mm: only Proteus   4.35, only KiCad  57.90 mm^2; clusters >= 0.01 mm^2: 90 pad shape, 13 clearance; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+  roundtrip: In2.Cu XOR   93.59 mm^2, beyond 0.05 mm: only Proteus   5.05, only KiCad  68.61 mm^2; clusters >= 0.01 mm^2: 99 pad shape, 18 clearance; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+  roundtrip: B.Cu   XOR  109.22 mm^2, beyond 0.05 mm: only Proteus   8.40, only KiCad  66.06 mm^2; clusters >= 0.01 mm^2: 281 pad shape, 12 clearance; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+  roundtrip: drills 0 mismatches, 16 stacked duplicate Proteus records; KiCad drill smaller, accepted (DRILL_SMALLER): 12x 1.016->1.0, 4x 1.0668->1.0, 6x 1.651->1.5; report reports/roundtrip/roundtrip.txt, overlays reports/roundtrip/*.png
   ALL CHECKS PASSED
-(if tools/p2k is empty: git submodule update --init)
+(full output in STATUS.md "Phase 4 – Last verification"; if tools/p2k is empty: git submodule update --init)
 
-Done for this session when: gerber_roundtrip and ipc356_diff are shared tools, in tools/check_all.sh and
-pass here (every remaining difference classified and explained), ac_psu regression OK, every new check
-negative-tested, the review is written to STATUS.md "Phase 4" with every earlier finding confirmed or
-refuted, next_prompt.md is replaced; committed (not pushed); the session ends with that prompt.
+Done for this session when: the decided clean-ups are implemented in the generators (not by hand in the
+board), tools/make_pcb.sh rebuilt the board, tools/check_all.sh passes with the accepted DRC counts
+updated, STATUS.md has a "Phase 5" section (what was decided, what changed, the new check output) and
+next_prompt.md is replaced ("done" if nothing is left); committed (not pushed); the session ends with
+that prompt.
 ```

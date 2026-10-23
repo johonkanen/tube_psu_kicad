@@ -137,6 +137,25 @@ HOLE_VALUE = "MountingHole_3.0mm"
 FREE_PAD_FOOTPRINT = "tube_psu:WirePad_D4.0mm_Drill2.55mm"      # 4 plated wire pads with a net
 FREE_PAD_VALUE = "WirePad_2.55mm"
 FREE_PAD_PREFIX = "WP"
+# --- Phase 4 checks (p2k.gerber_roundtrip, p2k.ipc356_diff) ---------------------------
+
+# The Proteus IPC / drill gerber has 16 extra via records stacked on 12 positions of a GND via
+# array (x = 2.7 / 3.8 / 4.8, y = 12.3 .. 15.3; one drill hole each, STATUS.md "Phase 3" finding):
+# 283 records, 267 board vias. Both checks expect exactly this many shared records.
+STACKED_VIAS = 16
+# KiCad footprint drills smaller than the Proteus drill, kept so far (OPEN USER DECISION, see
+# STATUS.md; Phase 3 chose KiCad library drills where DRC did not force a change). Listed here so
+# the checks report them instead of failing; remove an entry to make the check fail again.
+DRILL_SMALLER = {
+    (1.651, 1.5): "Q5/Q6 TO-247-3_Vertical (KiCad 1.5 mm, Proteus 1.651 = 65 mil)",
+    (1.016, 1.0): "C65/C81/C82-2/C84/C85 C_Disc_D12.5mm and J4 PinHeader_1x03 (KiCad 1.0, Proteus 1.016 = 40 mil)",
+    (1.067, 1.0): "C64/C66 C_Rect_L13.0mm_W5.0mm_P10.00mm (KiCad 1.0, Proteus 1.0668 = 42 mil)",
+}
+# Excellon drill file of the earlier RS-274X export of the same board: cross-check against the
+# X2 drill gerbers (positions and diameters 1:1).
+DRILL_EXCELLON = "source/cadcam_rs274x/tube_power_5_1 - CADCAM Drill.DRL"
+# ROUNDTRIP tolerances stay at the defaults (res 0.025, tol 0.05, min_area 0.01, overlay_res 0.1, drill_tol 0.005).
+
 # Error-severity DRC types that remain by design ({type: reason}, see STATUS.md "Phase 3").
 DRC_ACCEPTED = {
     "courtyards_overlap": "KiCad courtyards vs the Proteus placement",
