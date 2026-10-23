@@ -1069,7 +1069,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "tube_psu:R_0603_1608Metric_Proteus1.73"
 			(at 93.98 59.182 0)
 			(effects
 				(font
@@ -1178,7 +1178,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "tube_psu:R_0603_1608Metric_Proteus1.73"
 			(at 109.982 57.15 0)
 			(effects
 				(font
@@ -1425,7 +1425,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "tube_psu:R_0603_1608Metric_Proteus1.73"
 			(at 104.14 74.422 0)
 			(effects
 				(font
@@ -1577,7 +1577,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "tube_psu:R_0603_1608Metric_Proteus1.73"
 			(at 121.92 74.422 0)
 			(effects
 				(font
@@ -1809,7 +1809,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "tube_psu:R_0603_1608Metric_Proteus1.73"
 			(at 147.32 61.722 0)
 			(effects
 				(font
@@ -2138,7 +2138,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "tube_psu:R_0603_1608Metric_Proteus1.73"
 			(at 93.98 135.382 0)
 			(effects
 				(font
@@ -2247,7 +2247,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "tube_psu:R_0603_1608Metric_Proteus1.73"
 			(at 113.538 133.35 0)
 			(effects
 				(font
@@ -2494,7 +2494,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "tube_psu:R_0603_1608Metric_Proteus1.73"
 			(at 104.14 150.622 0)
 			(effects
 				(font
@@ -2656,7 +2656,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "tube_psu:R_0603_1608Metric_Proteus1.73"
 			(at 121.92 150.622 0)
 			(effects
 				(font
@@ -2928,7 +2928,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "tube_psu:R_0603_1608Metric_Proteus1.73"
 			(at 147.32 137.922 0)
 			(effects
 				(font

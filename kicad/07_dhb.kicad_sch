@@ -2716,7 +2716,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "tube_psu:R_0805_2012Metric_Proteus"
 			(at 43.18 52.578 0)
 			(effects
 				(font
@@ -2904,7 +2904,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "tube_psu:R_0805_2012Metric_Proteus"
 			(at 48.26 57.658 0)
 			(effects
 				(font
@@ -3041,7 +3041,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "tube_psu:R_0603_1608Metric_Proteus1.73"
 			(at 54.102 59.69 0)
 			(effects
 				(font
@@ -3162,7 +3162,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "tube_psu:R_0805_2012Metric_Proteus"
 			(at 43.18 77.978 0)
 			(effects
 				(font
@@ -3350,7 +3350,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "tube_psu:R_0805_2012Metric_Proteus"
 			(at 48.26 83.058 0)
 			(effects
 				(font
@@ -3467,7 +3467,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "tube_psu:R_0603_1608Metric_Proteus1.73"
 			(at 54.102 85.09 0)
 			(effects
 				(font
@@ -3987,7 +3987,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "tube_psu:C_1206_3216Metric_Proteus3.15"
 			(at 105.1052 91.44 0)
 			(effects
 				(font
@@ -4141,7 +4141,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "tube_psu:C_1206_3216Metric_Proteus3.15"
 			(at 115.2652 91.44 0)
 			(effects
 				(font
@@ -4503,7 +4503,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "tube_psu:R_0805_2012Metric_Proteus"
 			(at 210.82 52.578 0)
 			(effects
 				(font
@@ -4691,7 +4691,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "tube_psu:R_0805_2012Metric_Proteus"
 			(at 215.9 57.658 0)
 			(effects
 				(font
@@ -4828,7 +4828,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "tube_psu:R_0603_1608Metric_Proteus1.73"
 			(at 221.742 59.69 0)
 			(effects
 				(font
@@ -4907,7 +4907,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "tube_psu:R_0805_2012Metric_Proteus"
 			(at 210.82 77.978 0)
 			(effects
 				(font
@@ -5095,7 +5095,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "tube_psu:R_0805_2012Metric_Proteus"
 			(at 215.9 83.058 0)
 			(effects
 				(font
@@ -5500,7 +5500,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "tube_psu:C_1206_3216Metric_Proteus3.15"
 			(at 260.0452 48.26 0)
 			(effects
 				(font
@@ -5583,7 +5583,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "tube_psu:C_1206_3216Metric_Proteus3.15"
 			(at 270.2052 48.26 0)
 			(effects
 				(font
@@ -6031,7 +6031,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "tube_psu:C_1206_3216Metric_Proteus3.15"
 			(at 163.5252 139.7 0)
 			(effects
 				(font
@@ -6120,7 +6120,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "tube_psu:C_1206_3216Metric_Proteus3.15"
 			(at 173.6852 139.7 0)
 			(effects
 				(font
@@ -6397,7 +6397,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "tube_psu:C_1206_3216Metric_Proteus3.15"
 			(at 204.1652 139.7 0)
 			(effects
 				(font
@@ -6486,7 +6486,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "tube_psu:C_1206_3216Metric_Proteus3.15"
 			(at 214.3252 139.7 0)
 			(effects
 				(font
@@ -6731,7 +6731,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "tube_psu:R_0805_2012Metric_Proteus"
 			(at 231.902 138.43 0)
 			(effects
 				(font
@@ -6808,7 +6808,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "tube_psu:R_0805_2012Metric_Proteus"
 			(at 231.902 146.05 0)
 			(effects
 				(font
@@ -6875,7 +6875,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "tube_psu:R_0805_2012Metric_Proteus"
 			(at 231.902 153.67 0)
 			(effects
 				(font
@@ -6942,7 +6942,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "tube_psu:R_0603_1608Metric_Proteus1.73"
 			(at 231.902 161.29 0)
 			(effects
 				(font
@@ -7282,7 +7282,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "tube_psu:R_0805_2012Metric_Proteus"
 			(at 276.098 138.43 0)
 			(effects
 				(font
@@ -7359,7 +7359,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "tube_psu:R_0805_2012Metric_Proteus"
 			(at 276.098 146.05 0)
 			(effects
 				(font
@@ -7426,7 +7426,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "tube_psu:R_0805_2012Metric_Proteus"
 			(at 276.098 153.67 0)
 			(effects
 				(font

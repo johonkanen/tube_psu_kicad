@@ -112,3 +112,34 @@ DRILL_PLATED = "Drill TOP-BOT Plated"
 DRILL_NONPLATED = "Drill TOP-BOT NonPlated"
 OUTLINE = "Mechanical 1"
 OUTLINE_RECT = (-71.9, -18.7, 163.0, 110.0)  # x, y, width, height
+
+# --- PCB (p2k.build_pcb, gerber_to_tracks, assign_nets, pours_to_zones, check_board, drc) ---
+
+# Proteus stack (CADCAM READ-ME): 4 x 0.036 Cu, 0.32 prepreg / 0.772 core / 0.32 prepreg.
+PCB_THICKNESS = 1.556  # mm, without the 2 x 0.01 mm solder resist
+# Design rules from the Proteus copper as built (STATUS.md "Phase 3", measured gaps), in mm.
+PCB_RULES = dict(
+    min_track=0.15,       # thinnest conductor draw 0.1524 (6 mil)
+    min_via=0.5,          # vias 0.5/0.3 (279) and 1.016/0.381 (4)
+    min_annular=0.1,      # (0.5 - 0.3) / 2
+    min_drill=0.3,
+    clearance=0.15,       # smallest different-net gap 0.1524 (6 mil, pours/pads/tracks; tools/measure_gaps.py)
+    hole_clearance=0.15,  # via drills: 0.1 annular + >= 0.1564 gap
+    hole_to_hole=0.25,    # smallest drill-to-drill 0.335
+    edge_clearance=0.5,   # copper to outline >= 0.90
+    track=0.254,          # Default netclass
+    via=0.5,
+    via_drill=0.3,
+)
+# Board-only footprints (lib/tube_psu.pretty, tools/gen_footprints.py PROJECT).
+HOLE_FOOTPRINT = "tube_psu:MountingHole_3.0mm_NPTH_Ring3.5mm"   # 8 unplated holes, copper ring, no net
+HOLE_VALUE = "MountingHole_3.0mm"
+FREE_PAD_FOOTPRINT = "tube_psu:WirePad_D4.0mm_Drill2.55mm"      # 4 plated wire pads with a net
+FREE_PAD_VALUE = "WirePad_2.55mm"
+FREE_PAD_PREFIX = "WP"
+# Error-severity DRC types that remain by design ({type: reason}, see STATUS.md "Phase 3").
+DRC_ACCEPTED = {
+    "courtyards_overlap": "KiCad courtyards vs the Proteus placement",
+    "pth_inside_courtyard": "KiCad courtyards vs the Proteus placement",
+    "npth_inside_courtyard": "mounting hole H4 inside the RM8 choke L2's pad-box courtyard (Proteus placement)",
+}

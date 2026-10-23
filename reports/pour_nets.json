@@ -1,0 +1,682 @@
+[
+ {
+  "layer": "B.Cu",
+  "index": 0,
+  "net": "6V3",
+  "order": 0,
+  "width": 0.1524,
+  "group": 70
+ },
+ {
+  "layer": "B.Cu",
+  "index": 1,
+  "net": "GND",
+  "order": 17,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "B.Cu",
+  "index": 2,
+  "net": "GND",
+  "order": 32,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "B.Cu",
+  "index": 3,
+  "net": "/06 Heaters/Q14_DRAIN",
+  "order": 34,
+  "width": 0.1524,
+  "group": 303
+ },
+ {
+  "layer": "B.Cu",
+  "index": 4,
+  "net": "GND",
+  "order": 54,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "B.Cu",
+  "index": 5,
+  "net": "GND",
+  "order": 84,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "B.Cu",
+  "index": 6,
+  "net": "GND",
+  "order": 90,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "B.Cu",
+  "index": 7,
+  "net": "GND",
+  "order": 96,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "B.Cu",
+  "index": 8,
+  "net": "GND",
+  "order": 99,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "B.Cu",
+  "index": 9,
+  "net": "GND",
+  "order": 102,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "B.Cu",
+  "index": 10,
+  "net": "GND",
+  "order": 105,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "B.Cu",
+  "index": 11,
+  "net": "GND",
+  "order": 110,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "B.Cu",
+  "index": 12,
+  "net": "ISO_GND",
+  "order": 119,
+  "width": 0.3048,
+  "group": 58
+ },
+ {
+  "layer": "B.Cu",
+  "index": 13,
+  "net": "ISO_GND",
+  "order": 166,
+  "width": 0.3048,
+  "group": 58
+ },
+ {
+  "layer": "B.Cu",
+  "index": 14,
+  "net": "ISO_GND",
+  "order": 170,
+  "width": 0.3048,
+  "group": 58
+ },
+ {
+  "layer": "B.Cu",
+  "index": 15,
+  "net": "ISO_GND",
+  "order": 171,
+  "width": 0.3048,
+  "group": 58
+ },
+ {
+  "layer": "B.Cu",
+  "index": 16,
+  "net": "/06 Heaters/Q13_DRAIN",
+  "order": 179,
+  "width": 0.1524,
+  "group": 301
+ },
+ {
+  "layer": "B.Cu",
+  "index": 17,
+  "net": "PFC CURRENT 2+",
+  "order": 199,
+  "width": 0.1524,
+  "group": 62
+ },
+ {
+  "layer": "B.Cu",
+  "index": 18,
+  "net": "PFC CURRENT 3+",
+  "order": 202,
+  "width": 0.1524,
+  "group": 65
+ },
+ {
+  "layer": "B.Cu",
+  "index": 19,
+  "net": "20V",
+  "order": 205,
+  "width": 0.1524,
+  "group": 99
+ },
+ {
+  "layer": "B.Cu",
+  "index": 20,
+  "net": "HEATER_CURRENT",
+  "order": 208,
+  "width": 0.1524,
+  "group": 82
+ },
+ {
+  "layer": "B.Cu",
+  "index": 21,
+  "net": "GND",
+  "order": 211,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "B.Cu",
+  "index": 22,
+  "net": "GND",
+  "order": 264,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "B.Cu",
+  "index": 23,
+  "net": "DHB_CURRENT",
+  "order": 278,
+  "width": 0.1524,
+  "group": 203
+ },
+ {
+  "layer": "B.Cu",
+  "index": 24,
+  "net": "GND",
+  "order": 281,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "B.Cu",
+  "index": 25,
+  "net": "420V",
+  "order": 305,
+  "width": 0.1524,
+  "group": 76
+ },
+ {
+  "layer": "F.Cu",
+  "index": 0,
+  "net": "HT_GND",
+  "order": 0,
+  "width": 0.1524,
+  "group": 71
+ },
+ {
+  "layer": "F.Cu",
+  "index": 1,
+  "net": "Net-(L1-1)",
+  "order": 25,
+  "width": 0.1524,
+  "group": 64
+ },
+ {
+  "layer": "F.Cu",
+  "index": 2,
+  "net": "Net-(D8-K)",
+  "order": 29,
+  "width": 0.1524,
+  "group": 55
+ },
+ {
+  "layer": "F.Cu",
+  "index": 3,
+  "net": "Net-(D14-K)",
+  "order": 31,
+  "width": 0.1524,
+  "group": 57
+ },
+ {
+  "layer": "F.Cu",
+  "index": 4,
+  "net": "GND",
+  "order": 34,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "F.Cu",
+  "index": 5,
+  "net": "Net-(D5-PadA)",
+  "order": 38,
+  "width": 0.1524,
+  "group": 50
+ },
+ {
+  "layer": "F.Cu",
+  "index": 6,
+  "net": "Net-(D4-PadA)",
+  "order": 41,
+  "width": 0.1524,
+  "group": 59
+ },
+ {
+  "layer": "F.Cu",
+  "index": 7,
+  "net": "20V",
+  "order": 44,
+  "width": 0.1524,
+  "group": 99
+ },
+ {
+  "layer": "F.Cu",
+  "index": 8,
+  "net": "GND",
+  "order": 48,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "F.Cu",
+  "index": 9,
+  "net": "/06 Heaters/Q14_DRAIN",
+  "order": 56,
+  "width": 0.1524,
+  "group": 303
+ },
+ {
+  "layer": "F.Cu",
+  "index": 10,
+  "net": "Net-(L2-2)",
+  "order": 77,
+  "width": 0.1524,
+  "group": 61
+ },
+ {
+  "layer": "F.Cu",
+  "index": 11,
+  "net": "/05 PFC/RES_IN",
+  "order": 81,
+  "width": 0.1524,
+  "group": 79
+ },
+ {
+  "layer": "F.Cu",
+  "index": 12,
+  "net": "/06 Heaters/HEATER_HI_SOURCE",
+  "order": 88,
+  "width": 0.254,
+  "group": 81
+ },
+ {
+  "layer": "F.Cu",
+  "index": 13,
+  "net": "ISO_GND",
+  "order": 94,
+  "width": 0.1524,
+  "group": 58
+ },
+ {
+  "layer": "F.Cu",
+  "index": 14,
+  "net": "420V",
+  "order": 117,
+  "width": 0.1524,
+  "group": 76
+ },
+ {
+  "layer": "F.Cu",
+  "index": 15,
+  "net": "/06 Heaters/Q13_DRAIN",
+  "order": 148,
+  "width": 0.1524,
+  "group": 301
+ },
+ {
+  "layer": "F.Cu",
+  "index": 16,
+  "net": "Net-(RL1-COM)",
+  "order": 169,
+  "width": 0.1524,
+  "group": 78
+ },
+ {
+  "layer": "F.Cu",
+  "index": 17,
+  "net": "/05 PFC/L1_PRI2",
+  "order": 176,
+  "width": 0.381,
+  "group": 112
+ },
+ {
+  "layer": "F.Cu",
+  "index": 18,
+  "net": "-5V_SEC",
+  "order": 181,
+  "width": 0.1524,
+  "group": 90
+ },
+ {
+  "layer": "F.Cu",
+  "index": 19,
+  "net": "ISO_GND",
+  "order": 188,
+  "width": 0.1524,
+  "group": 58
+ },
+ {
+  "layer": "F.Cu",
+  "index": 20,
+  "net": "20V_ISO_SEC",
+  "order": 200,
+  "width": 0.1524,
+  "group": 87
+ },
+ {
+  "layer": "F.Cu",
+  "index": 21,
+  "net": "-100V BIAS",
+  "order": 206,
+  "width": 0.1524,
+  "group": 131
+ },
+ {
+  "layer": "F.Cu",
+  "index": 22,
+  "net": "/07 DHB/DHB_CAP",
+  "order": 212,
+  "width": 0.1524,
+  "group": 213
+ },
+ {
+  "layer": "F.Cu",
+  "index": 23,
+  "net": "DHB_CURRENT",
+  "order": 216,
+  "width": 0.1524,
+  "group": 203
+ },
+ {
+  "layer": "F.Cu",
+  "index": 24,
+  "net": "HEATER_CURRENT",
+  "order": 221,
+  "width": 0.1524,
+  "group": 82
+ },
+ {
+  "layer": "F.Cu",
+  "index": 25,
+  "net": "/06 Heaters/HEATER_CAP_MEAS",
+  "order": 226,
+  "width": 0.1524,
+  "group": 299
+ },
+ {
+  "layer": "F.Cu",
+  "index": 26,
+  "net": "/07 DHB/TRANS_SEC",
+  "order": 233,
+  "width": 0.1524,
+  "group": 198
+ },
+ {
+  "layer": "F.Cu",
+  "index": 27,
+  "net": "/07 DHB/TRANS_PRI",
+  "order": 239,
+  "width": 0.1524,
+  "group": 214
+ },
+ {
+  "layer": "F.Cu",
+  "index": 28,
+  "net": "DHB_HI_SOURCE",
+  "order": 244,
+  "width": 0.1524,
+  "group": 74
+ },
+ {
+  "layer": "F.Cu",
+  "index": 29,
+  "net": "DC+",
+  "order": 250,
+  "width": 0.1524,
+  "group": 53
+ },
+ {
+  "layer": "F.Cu",
+  "index": 30,
+  "net": "GND",
+  "order": 277,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "F.Cu",
+  "index": 31,
+  "net": "GND",
+  "order": 293,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "F.Cu",
+  "index": 32,
+  "net": "6V3",
+  "order": 311,
+  "width": 0.1524,
+  "group": 70
+ },
+ {
+  "layer": "F.Cu",
+  "index": 33,
+  "net": "AC1",
+  "order": 318,
+  "width": 0.1524,
+  "group": 126
+ },
+ {
+  "layer": "F.Cu",
+  "index": 34,
+  "net": "AC2",
+  "order": 324,
+  "width": 0.1524,
+  "group": 123
+ },
+ {
+  "layer": "F.Cu",
+  "index": 35,
+  "net": "/05 PFC/IN2",
+  "order": 330,
+  "width": 0.1524,
+  "group": 116
+ },
+ {
+  "layer": "F.Cu",
+  "index": 36,
+  "net": "/05 PFC/L2_PRI2",
+  "order": 337,
+  "width": 0.1524,
+  "group": 114
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 0,
+  "net": "HT_GND",
+  "order": 0,
+  "width": 0.1524,
+  "group": 71
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 1,
+  "net": "GND",
+  "order": 10,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 2,
+  "net": "Net-(L1-1)",
+  "order": 25,
+  "width": 0.1524,
+  "group": 64
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 3,
+  "net": "/06 Heaters/Q14_DRAIN",
+  "order": 29,
+  "width": 0.1524,
+  "group": 303
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 4,
+  "net": "Net-(L2-2)",
+  "order": 49,
+  "width": 0.1524,
+  "group": 61
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 5,
+  "net": "/05 PFC/RES_IN",
+  "order": 53,
+  "width": 0.1524,
+  "group": 79
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 6,
+  "net": "ISO_GND",
+  "order": 59,
+  "width": 0.3048,
+  "group": 58
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 7,
+  "net": "/06 Heaters/Q13_DRAIN",
+  "order": 107,
+  "width": 0.1524,
+  "group": 301
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 8,
+  "net": "GND",
+  "order": 127,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 9,
+  "net": "GND",
+  "order": 189,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 10,
+  "net": "/05 PFC/IN2",
+  "order": 251,
+  "width": 0.1524,
+  "group": 116
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 11,
+  "net": "/05 PFC/L2_PRI2",
+  "order": 257,
+  "width": 0.1524,
+  "group": 114
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 0,
+  "net": "HT_GND",
+  "order": 0,
+  "width": 0.1524,
+  "group": 71
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 1,
+  "net": "GND",
+  "order": 10,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 2,
+  "net": "GND",
+  "order": 19,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 3,
+  "net": "/06 Heaters/Q14_DRAIN",
+  "order": 21,
+  "width": 0.1524,
+  "group": 303
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 4,
+  "net": "ISO_GND",
+  "order": 41,
+  "width": 0.1524,
+  "group": 58
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 5,
+  "net": "/06 Heaters/Q13_DRAIN",
+  "order": 76,
+  "width": 0.1524,
+  "group": 301
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 6,
+  "net": "DHB_HI_SOURCE_SEC",
+  "order": 96,
+  "width": 0.1524,
+  "group": 77
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 7,
+  "net": "GND",
+  "order": 106,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 8,
+  "net": "/05 PFC/IN2",
+  "order": 151,
+  "width": 0.1524,
+  "group": 116
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 9,
+  "net": "/05 PFC/L2_PRI2",
+  "order": 157,
+  "width": 0.1524,
+  "group": 114
+ }
+]

@@ -29,9 +29,9 @@ from p2k import footprints  # noqa: E402
 # pad = (w, h) of the IPC pads, drill, package / device (lib/part_map.csv columns).
 RULES = [
     # --- resistors
-    ("R", dict(tht=False, span=1.73, pad=(0.889, 0.889)), "Resistor_SMD:R_0603_1608Metric", "0603 (Proteus pads 1.73 mm apart)"),
+    ("R", dict(tht=False, span=1.73, pad=(0.889, 0.889)), "tube_psu:R_0603_1608Metric_Proteus1.73", "0603 (Proteus pads 1.73 mm apart)"),
     ("R", dict(tht=False, span=1.60, pad=(0.939, 0.99)), "Resistor_SMD:R_0603_1608Metric", "0603"),
-    ("R", dict(tht=False, span=2.00, pad=(0.939, 1.447)), "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder", "0805"),
+    ("R", dict(tht=False, span=2.00, pad=(0.939, 1.447)), "tube_psu:R_0805_2012Metric_Proteus", "0805"),
     ("R", dict(tht=False, span=2.13, pad=(1.016, 1.27)), "tube_psu:R_0805_2012Metric_Proteus2.13", "0805 (Proteus pads 2.13 mm apart)"),
     ("R", dict(tht=False, span=2.90, pad=(1.143, 1.803)), "Resistor_SMD:R_1206_3216Metric", "1206"),
     ("R", dict(tht=False, span=0.975, pad=(0.35, 2.0)), "tube_psu:R_0508_1220Metric_KRL2012", "KRL2012 0508 shunt, long-side terminals"),
@@ -39,7 +39,7 @@ RULES = [
     # --- capacitors
     ("C", dict(tht=False, span=1.60, pad=(0.939, 0.99)), "Capacitor_SMD:C_0603_1608Metric", "0603"),
     ("C", dict(tht=False, span=3.00, pad=(1.143, 1.803)), "Capacitor_SMD:C_1206_3216Metric", "1206 (3.0 mm pad spacing)"),
-    ("C", dict(tht=False, span=3.15, pad=(1.016, 1.524)), "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder", "1206"),
+    ("C", dict(tht=False, span=3.15, pad=(1.016, 1.524)), "tube_psu:C_1206_3216Metric_Proteus3.15", "1206"),
     ("C", dict(tht=False, span=5.20, pad=(1.397, 5.257)), "Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder", "2220"),
     ("C", dict(tht=True, span=7.50, pad=(1.524, 1.524)), "Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm", "Y2 2n2 disc (DEBB), P7.5"),
     ("C", dict(tht=True, span=10.00, pad=(1.778, 1.778)), "Capacitor_THT:C_Rect_L13.0mm_W5.0mm_P10.00mm_FKS3_FKP3_MKS4",
@@ -49,7 +49,7 @@ RULES = [
     ("C", dict(tht=True, span=22.50, package="X2 W6MM CAP 22.5MM RASTER"), "Capacitor_THT:C_Rect_L26.5mm_W6.0mm_P22.50mm_MKS4",
      "X2 film P22.5, 6 mm wide"),
     ("C_Polarized", dict(tht=True, span=5.00, drill=0.812), "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm", "10 mm radial electrolytic, P5"),
-    ("C_Polarized", dict(tht=True, span=5.00, drill=1.016), "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm", "12.5 mm radial electrolytic, P5"),
+    ("C_Polarized", dict(tht=True, span=5.00, drill=1.016), "tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus", "12.5 mm radial electrolytic, P5"),
     ("C_Polarized", dict(tht=True, span=3.50), "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm", "8 mm radial electrolytic, P3.5"),
     ("C_Polarized", dict(tht=False, span=4.50), "tube_psu:CP_Elec_6.3x7.7_EEEFTE221XAP", "EEEFTE221XAP SMD electrolytic, Proteus pads"),
     # --- diodes
@@ -81,7 +81,7 @@ RULES = [
     ("RM8_INDUCTOR", dict(), "tube_psu:L_RM8_Proteus", "RM8 choke: winding pads pri1/pri2, bobbin pins 1/2 (no net); 45 deg on the board"),
     ("SCF20-05-550", dict(), "tube_psu:L_CommonMode_SCF20-05-550", "common-mode choke, 4 pins"),
     ("SONGLE_RELAY", dict(), "tube_psu:Relay_Songle_SRD_5pin", "Songle relay, pads 1-5"),
-    ("HEADER_2X25_50MIL", dict(), "Connector_PinHeader_1.27mm:PinHeader_2x25_P1.27mm_Vertical", "2x25 1.27 mm header"),
+    ("HEADER_2X25_50MIL", dict(), "tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus", "2x25 1.27 mm header"),
     ("CONN_01X03", dict(), "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical", "1x3 2.54 mm (FCI 66226-003)"),
     ("PIN", dict(n=2), "tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm", "blade terminal, two holes both pad 1"),
 ]
@@ -107,21 +107,34 @@ PROJECT = {
     "TO-220-2_Vertical_AK": dict(base="Package_TO_SOT_THT:TO-220-2_Vertical", renumber={"1": "A", "2": "K"}, ipc="SICD1",
                                  descr="TO-220-2 diode, pads A (pin 1) / K (pin 2, tab), Proteus pad positions"),
     "D_Bridge_TBS": dict(ipc="DB1", descr="Taiwan Semiconductor TBS bridge rectifier (SMD, pads 1-4)"),
+    # Phase 3 DRC (STATUS.md "Phase 3 - pad sizes"): ipc_sizes=True (Proteus pad sizes) on the footprints
+    # whose KiCad pads short or come closer than 0.15 mm to Proteus tracks/vias; remove the flag (and the
+    # CP_Radial _Proteus spec) to go back to the KiCad sizes.
+    "CP_Radial_D12.5mm_P5.00mm_Proteus": dict(base="Capacitor_THT:CP_Radial_D12.5mm_P5.00mm", ipc="C28", ipc_sizes=True,
+                                              descr="12.5 mm radial electrolytic P5, Proteus pads (1.524 mm, drill 1.016)"),
+    "R_0603_1608Metric_Proteus1.73": dict(base="Resistor_SMD:R_0603_1608Metric", ipc="R40", ipc_sizes=True,
+                                          descr="0603 resistor, Proteus pads 0.889 x 0.889, 1.73 mm apart"),
+    "R_0805_2012Metric_Proteus": dict(base="Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder", ipc="R79", ipc_sizes=True,
+                                      descr="0805 resistor, Proteus pads 0.94 x 1.448, 2.0 mm apart"),
+    "C_1206_3216Metric_Proteus3.15": dict(base="Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder", ipc="C25",
+                                          ipc_sizes=True, descr="1206 capacitor, Proteus pads 1.016 x 1.524, 3.15 mm apart"),
+    "PinHeader_2x25_P1.27mm_Vertical_Proteus": dict(base="Connector_PinHeader_1.27mm:PinHeader_2x25_P1.27mm_Vertical", ipc="J2",
+                                                    ipc_sizes=True, descr="2x25 1.27 mm header, Proteus pads 0.812 mm, drill 0.5"),
     # SOT-23 with Proteus pad numbering: pad 1 sits alone on one side (JEDEC pin 3), pads 2 and 3 are
     # JEDEC pins 1 and 2 (chirality verified by the fit on the bottom-side parts REF1 / Q9)
     "SOT-23_Proteus": dict(base="Package_TO_SOT_SMD:SOT-23", renumber={"3": "1", "1": "2", "2": "3"}, ipc="REF1",
-                           descr="SOT-23 with Proteus pad numbering: pad 1 = JEDEC pin 3 (single side), "
+                           ipc_sizes=True, descr="SOT-23 with Proteus pad numbering: pad 1 = JEDEC pin 3 (single side), "
                                  "pad 2 = JEDEC pin 1, pad 3 = JEDEC pin 2; Proteus pad positions"),
     "LFPAK56_Proteus": dict(base="Package_TO_SOT_SMD:LFPAK56", renumber={"1": "1", "2": "1", "3": "1", "4": "2", "5": "3"},
                             ipc="Q1", descr="LFPAK56 (BUK9Y15-60E): source pads 1,2,3 all numbered 1, gate 4 -> 2, "
                                            "drain tab 5 -> 3; Proteus pad positions"),
-    "SOT-23-5_Proteus": dict(base="Package_TO_SOT_SMD:SOT-23-5", ipc="U2",
+    "SOT-23-5_Proteus": dict(base="Package_TO_SOT_SMD:SOT-23-5", ipc="U2", ipc_sizes=True,
                              descr="SOT-23-5, Proteus pad positions (rows 2.39 mm apart)"),
-    "SOT-23-6_Proteus": dict(base="Package_TO_SOT_SMD:SOT-23-6", ipc="AD1",
+    "SOT-23-6_Proteus": dict(base="Package_TO_SOT_SMD:SOT-23-6", ipc="AD1", ipc_sizes=True,
                              descr="SOT-23-6, Proteus pad positions (rows 2.39 mm apart)"),
-    "SOIC-8_3.9x4.9mm_P1.27mm_Proteus": dict(base="Package_SO:SOIC-8_3.9x4.9mm_P1.27mm", ipc="DRV3",
+    "SOIC-8_3.9x4.9mm_P1.27mm_Proteus": dict(base="Package_SO:SOIC-8_3.9x4.9mm_P1.27mm", ipc="DRV3", ipc_sizes=True,
                                              descr="SOIC-8, Proteus pad positions (rows 5.5 mm apart)"),
-    "SOIC-16_3.9x9.9mm_P1.27mm_Proteus": dict(base="Package_SO:SOIC-16_3.9x9.9mm_P1.27mm", ipc="DRV5",
+    "SOIC-16_3.9x9.9mm_P1.27mm_Proteus": dict(base="Package_SO:SOIC-16_3.9x9.9mm_P1.27mm", ipc="DRV5", ipc_sizes=True,
                                               descr="SOIC-16, Proteus pad positions (rows 5.4 mm apart)"),
     "SOIC-16W_7.5x10.3mm_P1.27mm_Proteus": dict(base="Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm", ipc="ISO1",
                                                 descr="SOIC-16W, Proteus pad positions (rows 9.4 mm apart)"),
@@ -138,6 +151,11 @@ PROJECT = {
                                                                            "4 pins (body from the Proteus silk)"),
     "Relay_Songle_SRD_5pin": dict(ipc="RL1", descr="Songle relay, pads 1-5"),
     "Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm": dict(ipc="GND", descr="Blade wire terminal, two holes both pad 1"),
+    # Board-only items (no symbol; placed by p2k.build_pcb at the IPC 'hole' / 'free_pad' records)
+    "MountingHole_3.0mm_NPTH_Ring3.5mm": dict(board_only=True, pad=(3.5, 3.0), plated=False,
+                                              descr="Unplated 3.0 mm hole with a 3.5 mm copper ring on every layer, no net"),
+    "WirePad_D4.0mm_Drill2.55mm": dict(board_only=True, pad=(4.0, 2.55), plated=True,
+                                       descr="Plated 2.55 mm wire pad (transformer winding wire), 4.0 mm pad"),
 }
 
 

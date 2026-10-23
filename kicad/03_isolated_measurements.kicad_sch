@@ -3741,7 +3741,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "tube_psu:R_0603_1608Metric_Proteus1.73"
 			(at 132.08 71.882 0)
 			(effects
 				(font
@@ -4094,7 +4094,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "tube_psu:R_0603_1608Metric_Proteus1.73"
 			(at 132.08 65.278 0)
 			(effects
 				(font
@@ -6334,7 +6334,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "tube_psu:R_0603_1608Metric_Proteus1.73"
 			(at 132.08 160.782 0)
 			(effects
 				(font
@@ -6655,7 +6655,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "tube_psu:R_0603_1608Metric_Proteus1.73"
 			(at 110.49 137.922 0)
 			(effects
 				(font
@@ -6808,7 +6808,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "tube_psu:R_0603_1608Metric_Proteus1.73"
 			(at 132.08 154.178 0)
 			(effects
 				(font

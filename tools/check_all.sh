@@ -19,6 +19,10 @@ step "ERC" tools/erc.sh
 step "Netlist comparison vs IPC" tools/p2k/bin/p2k compare_netlists
 step "Footprint library and map up to date" python3 tools/gen_footprints.py --check
 step "Footprints vs IPC pad geometry" tools/p2k/bin/kipy -m p2k.check_footprints --pcbnew
+step "PCB rebuilt from schematic + gerbers, up to date" tools/make_pcb.sh --check
+step "Board pads, holes, free pads, vias vs IPC" tools/p2k/bin/kipy -m p2k.check_board
+step "Board copper connectivity after zone fill" tools/p2k/bin/kipy -m p2k.assign_nets --check
+step "DRC with schematic parity" tools/p2k/bin/p2k drc
 
 echo
 [ $fail -eq 0 ] && echo "ALL CHECKS PASSED" || echo "SOME CHECKS FAILED"

@@ -1,0 +1,92 @@
+== stage A: pads + tracks + vias (Proteus pad flashes)
+items 4561, groups 510, shorts 0, orphans 52, opens 32
+  orphan group 884 (1 via) net from vias ['420V']: via(77.400,81.500)
+  orphan group 885 (1 via) net from vias ['GND']: via(4.800,12.300)
+  orphan group 886 (1 via) net from vias ['GND']: via(5.800,12.300)
+  orphan group 887 (1 via) net from vias ['ISO_GND']: via(77.475,67.520)
+  orphan group 888 (1 via) net from vias ['GND']: via(44.000,25.400)
+  orphan group 889 (1 via) net from vias ['420V']: via(77.400,79.500)
+  orphan group 891 (1 via) net from vias ['ISO_GND']: via(74.935,72.600)
+  orphan group 892 (1 via) net from vias ['GND']: via(3.800,14.300)
+  orphan group 893 (1 via) net from vias ['ISO_GND']: via(77.475,72.600)
+  orphan group 895 (1 via) net from vias ['ISO_GND']: via(76.205,72.600)
+  orphan group 896 (1 via) net from vias ['ISO_GND']: via(77.475,71.330)
+  orphan group 897 (1 via) net from vias ['ISO_GND']: via(76.205,70.060)
+  orphan group 898 (1 via) net from vias ['GND']: via(4.800,13.300)
+  orphan group 899 (1 via) net from vias ['GND']: via(3.800,13.300)
+  orphan group 900 (1 via) net from vias ['420V']: via(75.900,82.500)
+  orphan group 901 (1 via) net from vias ['GND']: via(5.800,15.300)
+  orphan group 902 (1 via) net from vias ['420V']: via(77.400,80.500)
+  orphan group 903 (1 via) net from vias ['GND']: via(4.800,14.300)
+  orphan group 904 (1 via) net from vias ['ISO_GND']: via(74.935,68.790)
+  orphan group 905 (1 via) net from vias ['GND']: via(3.800,12.300)
+  orphan group 906 (1 via) net from vias ['420V']: via(77.400,83.500)
+  orphan group 907 (1 via) net from vias ['GND']: via(2.700,14.300)
+  orphan group 908 (1 via) net from vias ['420V']: via(75.900,79.500)
+  orphan group 909 (1 via) net from vias ['GND']: via(2.700,13.300)
+  orphan group 910 (1 via) net from vias ['ISO_GND']: via(76.205,68.790)
+  orphan group 911 (1 via) net from vias ['420V']: via(77.400,78.500)
+  orphan group 912 (1 via) net from vias ['ISO_GND']: via(74.935,71.330)
+  orphan group 913 (1 via) net from vias ['GND']: via(31.623,11.430)
+  orphan group 914 (1 via) net from vias ['ISO_GND']: via(74.935,67.520)
+  orphan group 915 (1 via) net from vias ['ISO_GND']: via(77.475,70.060)
+  orphan group 916 (1 via) net from vias ['ISO_GND']: via(76.205,71.330)
+  orphan group 917 (1 via) net from vias ['ISO_GND']: via(77.475,68.790)
+  orphan group 918 (1 via) net from vias ['420V']: via(75.900,83.500)
+  orphan group 919 (1 via) net from vias ['GND']: via(32.009,2.979)
+  orphan group 920 (1 via) net from vias ['420V']: via(75.900,78.500)
+  orphan group 921 (1 via) net from vias ['420V']: via(75.900,81.500)
+  orphan group 922 (1 via) net from vias ['GND']: via(5.800,13.300)
+  orphan group 923 (1 via) net from vias ['GND']: via(2.700,12.300)
+  orphan group 924 (1 via) net from vias ['420V']: via(74.400,78.500)
+  orphan group 925 (1 via) net from vias ['420V']: via(77.400,82.500)
+  orphan group 926 (1 via) net from vias ['ISO_GND']: via(76.205,67.520)
+  orphan group 927 (1 via) net from vias ['420V']: via(75.900,80.500)
+  orphan group 928 (1 via) net from vias ['GND']: via(5.800,14.300)
+  orphan group 1670 (1 via) net from vias ['GND']: via(16.300,15.200)
+  orphan group 1678 (1 via) net from vias ['GND']: via(16.300,12.900)
+  orphan group 1681 (1 via) net from vias ['GND']: via(16.300,16.400)
+  orphan group 1684 (1 via) net from vias ['GND']: via(16.300,14.000)
+  orphan group 2249 (1 via) net from vias ['420V']: via(74.400,83.500)
+  orphan group 2250 (1 via) net from vias ['420V']: via(74.400,80.500)
+  orphan group 2251 (1 via) net from vias ['420V']: via(74.400,82.500)
+  orphan group 2252 (1 via) net from vias ['420V']: via(74.400,79.500)
+  orphan group 2253 (1 via) net from vias ['420V']: via(74.400,81.500)
+  open -100V BIAS: 3 groups [C102-2 C45-2 D8-A R68-2] [N80V_OUT-1] [N80V_OUT-1]
+  open -5V_SEC: 4 groups [C40-2 C44-2 D14-A] [N5V_OUT-1] [N5V_OUT-1] [R123-2]
+  open /05 PFC/L1_PRI2: 4 groups [C81-1] [CM1-2] [CM4-1] [C38-1]
+  open /05 PFC/L2_PRI2: 4 groups [C65-1] [CM1-4] [CM4-3] [C38-2]
+  open /05 PFC/RES_IN: 5 groups [R27-2] [RL1-3] [IN1-1] [IN1-1] [R6-1]
+  open /06 Heaters/HEATER_CAP_MEAS: 6 groups [TR2-4] [TR2-5] [C42-2] [C49-2] [C22-1] [C41-1]
+  open /06 Heaters/HEATER_HI_SOURCE: 5 groups [Q10-2] [C25-2 Q11-3 R36-2] [TR2-1] [TR2-2] [DRV3-5]
+  open /06 Heaters/Q13_DRAIN: 4 groups [TR2-6] [TR2-7] [Q2-3] [WP1-1]
+  open /06 Heaters/Q14_DRAIN: 4 groups [TR2-9] [TR2-10] [Q1-3] [WP4-1]
+  open /07 DHB/DHB_CAP: 2 groups [L3-pri1] [C47-2 C54-1]
+  open /07 DHB/TRANS_PRI: 4 groups [L3-pri2] [TR3-1] [TR3-1] [TR3-1]
+  open /07 DHB/TRANS_SEC: 5 groups [C16-2] [C55-1] [TR3-3] [TR3-3] [TR3-3]
+  open 20V: 4 groups [D5-C] [C1-1 C14-1 C18-1 C52-1 C79-1 ...] [C39-1] [C80-1 D10-A DRV2-1 DRV2-3 DRV2-8 ...]
+  open 20V_ISO_SEC: 3 groups [C2-1 C3-1 C43-2 C72-2 D18-A ...] [P15V_OUT-1 R124-2] [P15V_OUT-1]
+  open 420V: 13 groups [Q21-2] [C16-1] [C30-1] [C19-1] [P400V-1] [P400V-1] [R23-1] [C89-1] [C90-1] [C91-1] [C99-1] [C100-1] [C101-1]
+  open 6V3: 15 groups [C24-1 HT_6V3-1] [C31-1] [C32-1] [R54-1] [C8-1] [C23-1] [C33-1] [C9-1] [HT_6V3-1] [C17-1 DRV4-1] [DRV4-4] [DRV4-6] [WP3-1] [WP2-1] [D2-A]
+  open AC1: 5 groups [L2-pri1] [C117-1] [CM4-2] [DB1-3] [C64-1 R47-1]
+  open AC2: 5 groups [L1-pri2 R50-1] [C117-2] [CM4-4] [DB1-1] [C66-1]
+  open DC+: 18 groups [C12-1 C15-2 R116-1 R45-1 TR1-4] [SICD2-K] [SICD1-K] [Q19-2] [Q11-2] [C29-1] [C37-1] [C56-1] [C28-1] [R16-1] [C47-1] [C42-1] [C49-1] [C20-1] [DB1-2] [C73-1] [C67-1] [C70-1]
+  open DHB_CURRENT: 4 groups [Q7-3 R104-2 R83-1] [C54-2] [C67-2] [C70-2]
+  open DHB_HI_SOURCE: 4 groups [Q19-3 Q7-2 R22-2] [TR3-2] [TR3-2] [C92-1 DRV5-9 TR3-2]
+  open DHB_HI_SOURCE_SEC: 3 groups [Q21-3 R56-2 TR3-4 TR3-4 TR3-4] [Q8-2] [C46-1 DRV6-14]
+  open GND: 75 groups [J2-1] [C4-1 J2-35] [J2-36] [TR1-2] [C1-2] [C39-2] [C82-1] [ISO1-2] [ISO1-8] [C98-2 ISO2-4] [ISO2-8] [C97-2] [C61-1 R12-2] [C29-2] [C37-2 C62-2 R112-1 R7-1 U6-2] [C56-2 R94-2] [C28-2] [C15-1 C50-1 C51-2 C58-2 PWM2-3 ...] [C14-2] [C26-1 C88-2] [C10-1] [J4-3] [DB1-4] [C73-2] [C64-2 C66-2] [C87-2 R101-2 R29-2 R30-2 U1-4] [C35-2 Q9-3 R32-2] [DRV1-4] [DRV1-5] [DRV1-9] [DRV2-4] [DRV2-5] [DRV2-9] [R21-2] [C80-2] [C79-2] [DRV9-4] [DRV9-5] [DRV9-9] [C52-2] [C53-2 DRV3-3] [R40-2] [C18-2] [R93-2] [U4-4] [R97-2] [U8-2] [C60-2] [R69-1] [R71-1] [R77-1] [R78-1] [R17-2] [C6-1] [C36-1] [C94-2 DRV5-4] [C95-1 DRV5-14] [R83-2] [C96-2] [R73-1] [R74-1] [C68-2] [V4-2] [C77-2] [R43-1] [REF1-1] [R3-2] [C74-2] [C48-2] [C69-2] [C71-1] [C75-2] [C76-2] [R66-2] [R70-2]
+  open HT_GND: 21 groups [C24-2 HT_GND-1] [C31-2] [C32-2] [R55-2] [C8-2] [AD1-2 C104-2 C13-2 C59-2 C7-2 ...] [C23-2] [C33-2] [C9-2] [HT_GND-1] [Q1-1] [Q1-1] [Q1-1] [Q2-1] [Q2-1] [Q2-1] [DRV4-7] [DRV4-9] [C17-2] [R107-2] [R108-2]
+  open ISO_GND: 34 groups [C102-1 C114-2 C115-2 C2-2 C3-2 ...] [C5-2 V2-2] [AD2-2 C105-2 C27-1 R38-2] [C55-2] [C30-2] [C19-2] [Q8-3] [C103-2] [GND-1] [GND-1] [SEC_GND-1] [SEC_GND-1] [C89-2] [C90-2] [C91-2] [R123-1] [U3-2] [C21-2] [C34-2 C57-2] [DRV6-4] [DRV6-9] [C72-1] [R25-2] [C43-1] [C93-2] [R68-1] [R75-1] [R76-1] [R118-1] [R67-1] [R124-1] [C99-2] [C100-2] [C101-2]
+  open Net-(D14-K): 2 groups [TR1-8] [D14-C]
+  open Net-(D5-PadA): 2 groups [TR1-1] [D5-A]
+  open Net-(L1-1): 3 groups [Q6-2] [SICD2-A] [L1-pri1]
+  open Net-(L2-2): 3 groups [Q5-2] [SICD1-A] [L2-pri2]
+  open Net-(RL1-COM): 5 groups [R27-1] [C85-1] [C86-1] [RL1-1] [CM1-1]
+  open PFC CURRENT 2+: 3 groups [Q5-3] [R93-1] [R33-2]
+  open PFC CURRENT 3+: 2 groups [Q6-3] [R21-1 R62-2]
+== stage B: + Proteus pours
+items 4646, groups 216, shorts 0, orphans 0, opens 0
+== assignment: 3679 tracks/vias got a net, 0 without
+== after zone fill (KiCad pads, tracks, vias, filled zones)
+items 4646, groups 216, shorts 0, orphans 0, opens 0
+items carrying another net than their group: 0
