@@ -2970,7 +2970,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu:Relay_Songle_SRD_5pin"
 			(at 55.88 60.96 0)
 			(effects
 				(font
@@ -3052,7 +3052,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
 			(at 30.48 53.34 0)
 			(effects
 				(font
@@ -3132,7 +3132,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Radial_Power_L13.0mm_W9.0mm_P5.00mm"
 			(at 42.418 62.23 0)
 			(effects
 				(font
@@ -3349,7 +3349,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu:SOT-23_Proteus"
 			(at 101.6 68.58 0)
 			(effects
 				(font
@@ -3510,7 +3510,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu:D_SOD-323_AC"
 			(at 106.68 53.34 0)
 			(effects
 				(font
@@ -3577,7 +3577,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu:D_SOD-323_AC"
 			(at 119.38 53.34 0)
 			(effects
 				(font
@@ -3739,7 +3739,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 81.28 69.342 0)
 			(effects
 				(font
@@ -3822,7 +3822,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 89.8652 78.74 0)
 			(effects
 				(font
@@ -3992,7 +3992,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 71.882 74.93 0)
 			(effects
 				(font
@@ -4126,7 +4126,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
 			(at 30.48 104.14 0)
 			(effects
 				(font
@@ -4226,7 +4226,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm"
 			(at 120.9548 81.28 0)
 			(effects
 				(font
@@ -4309,7 +4309,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm"
 			(at 122.8852 116.84 0)
 			(effects
 				(font
@@ -4392,7 +4392,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L26.5mm_W11.5mm_P22.50mm_MKS4"
 			(at 133.0452 102.87 0)
 			(effects
 				(font
@@ -4491,7 +4491,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu:L_CommonMode_SCF20-05-550"
 			(at 149.86 105.41 0)
 			(effects
 				(font
@@ -4624,7 +4624,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm"
 			(at 166.6748 81.28 0)
 			(effects
 				(font
@@ -4707,7 +4707,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm"
 			(at 168.6052 116.84 0)
 			(effects
 				(font
@@ -4790,7 +4790,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L26.5mm_W6.0mm_P22.50mm_MKS4"
 			(at 178.7652 102.87 0)
 			(effects
 				(font
@@ -4889,7 +4889,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu:L_CommonMode_SCF20-05-550"
 			(at 195.58 105.41 0)
 			(effects
 				(font
@@ -5074,7 +5074,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L26.5mm_W11.5mm_P22.50mm_MKS4"
 			(at 214.3252 102.87 0)
 			(effects
 				(font
@@ -5269,7 +5269,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L13.0mm_W5.0mm_P10.00mm_FKS3_FKP3_MKS4"
 			(at 239.7252 96.52 0)
 			(effects
 				(font
@@ -5407,7 +5407,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L13.0mm_W5.0mm_P10.00mm_FKS3_FKP3_MKS4"
 			(at 239.7252 160.02 0)
 			(effects
 				(font
@@ -5545,7 +5545,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu:L_RM8_Proteus"
 			(at 254 88.9 0)
 			(effects
 				(font
@@ -5630,7 +5630,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_TO_SOT_THT:TO-247-3_Vertical"
 			(at 274.32 93.98 0)
 			(effects
 				(font
@@ -5726,7 +5726,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu:TO-220-2_Vertical_AK"
 			(at 284.48 88.9 0)
 			(effects
 				(font
@@ -5893,7 +5893,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu:R_0508_1220Metric_KRL2012"
 			(at 270.002 110.49 0)
 			(effects
 				(font
@@ -6025,7 +6025,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu:L_RM8_Proteus"
 			(at 254 152.4 0)
 			(effects
 				(font
@@ -6110,7 +6110,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_TO_SOT_THT:TO-247-3_Vertical"
 			(at 274.32 157.48 0)
 			(effects
 				(font
@@ -6206,7 +6206,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu:TO-220-2_Vertical_AK"
 			(at 284.48 152.4 0)
 			(effects
 				(font
@@ -6373,7 +6373,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu:R_0508_1220Metric_KRL2012"
 			(at 270.002 173.99 0)
 			(effects
 				(font
@@ -6609,7 +6609,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu:D_Bridge_TBS"
 			(at 342.9 50.8 0)
 			(effects
 				(font
@@ -7068,7 +7068,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm"
 			(at 380.0348 95.25 0)
 			(effects
 				(font
@@ -7210,7 +7210,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
 			(at 375.92 127 0)
 			(effects
 				(font
@@ -7304,7 +7304,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 60.96 188.722 0)
 			(effects
 				(font
@@ -7381,7 +7381,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 73.66 188.722 0)
 			(effects
 				(font
@@ -7458,7 +7458,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 86.36 188.722 0)
 			(effects
 				(font

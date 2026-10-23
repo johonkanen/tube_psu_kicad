@@ -1758,7 +1758,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu:SOIC-16_3.9x9.9mm_P1.27mm_Proteus"
 			(at 127 55.88 0)
 			(effects
 				(font
@@ -1980,7 +1980,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 102.5652 43.18 0)
 			(effects
 				(font
@@ -2236,7 +2236,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 83.058 54.61 0)
 			(effects
 				(font
@@ -2426,7 +2426,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 83.058 77.47 0)
 			(effects
 				(font
@@ -2574,7 +2574,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 99.822 59.69 0)
 			(effects
 				(font
@@ -2752,7 +2752,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu:D_SMA_AC"
 			(at 172.72 30.48 0)
 			(effects
 				(font
@@ -2819,7 +2819,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 185.42 32.258 0)
 			(effects
 				(font
@@ -2981,7 +2981,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 146.3548 30.48 0)
 			(effects
 				(font
@@ -3119,7 +3119,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 158.4452 38.1 0)
 			(effects
 				(font
@@ -3495,7 +3495,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 164.1348 58.42 0)
 			(effects
 				(font
@@ -3751,7 +3751,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu:SOIC-16_3.9x9.9mm_P1.27mm_Proteus"
 			(at 127 165.1 0)
 			(effects
 				(font
@@ -3973,7 +3973,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 102.5652 152.4 0)
 			(effects
 				(font
@@ -4229,7 +4229,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 83.058 163.83 0)
 			(effects
 				(font
@@ -4419,7 +4419,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 83.058 186.69 0)
 			(effects
 				(font
@@ -4567,7 +4567,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 99.822 168.91 0)
 			(effects
 				(font
@@ -4745,7 +4745,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu:D_SMA_AC"
 			(at 172.72 139.7 0)
 			(effects
 				(font
@@ -4812,7 +4812,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 185.42 141.478 0)
 			(effects
 				(font
@@ -4964,7 +4964,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 146.3548 139.7 0)
 			(effects
 				(font
@@ -5102,7 +5102,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 156.5148 139.7 0)
 			(effects
 				(font
@@ -5536,7 +5536,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 164.1348 154.94 0)
 			(effects
 				(font

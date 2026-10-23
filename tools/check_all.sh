@@ -17,6 +17,8 @@ step "Symbol pin sets vs IPC" tools/p2k/bin/p2k check_symbols
 step "ERC" tools/erc.sh
 # all 11 sheets are drawn: every part must be present (no --allow-missing)
 step "Netlist comparison vs IPC" tools/p2k/bin/p2k compare_netlists
+step "Footprint library and map up to date" python3 tools/gen_footprints.py --check
+step "Footprints vs IPC pad geometry" tools/p2k/bin/kipy -m p2k.check_footprints --pcbnew
 
 echo
 [ $fail -eq 0 ] && echo "ALL CHECKS PASSED" || echo "SOME CHECKS FAILED"

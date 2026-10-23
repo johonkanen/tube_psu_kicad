@@ -5,6 +5,14 @@ Plain Python; every value here is specific to this board. Coordinates in mm, IPC
 
 PROJECT = "tube_psu"  # KiCad project / library name
 
+# --- Footprints (gen_footprints) -----------------------------------------------------
+
+# Pad sizes of the footprints: "kicad" = KiCad library pad sizes and drills (the default chosen
+# in Phase 2, pad centres always on the Proteus positions), "proteus" = every footprint gets
+# the Proteus pad sizes and drills (KiCad library footprints are replaced by derived project
+# footprints). Switch here, re-run tools/gen_footprints.py and the sheet scripts.
+FOOTPRINT_PAD_SIZES = "kicad"
+
 # Sources (relative to the repo root). The CADCAM export with Gerber X2 attributes.
 CADCAM = "source/cadcam"
 IPC = "source/cadcam/tube_power_5_1_X2 - CADCAM Netlist.IPC"

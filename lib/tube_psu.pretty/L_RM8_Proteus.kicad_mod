@@ -1,0 +1,92 @@
+(footprint "L_RM8_Proteus"
+	(version 20260206)
+	(generator "tube_psu_gen_footprints")
+	(layer "F.Cu")
+	(descr "RM8 PFC choke: winding pads pri1/pri2 (2.54 mm), bobbin pins 1/2 (1.905 mm, no net); footprint frame rotated 45 deg against the board (tube_psu, pads from IPC-D-356A L1)")
+	(property "Reference" "REF**"
+		(at 0 -14.1582 0)
+		(layer "F.SilkS")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "L_RM8_Proteus"
+		(at 0 14.1582 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_rect
+		(start -6.5471 -12.8382)
+		(end 6.9961 12.8382)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+	)
+	(fp_rect
+		(start -6.6671 -12.9582)
+		(end 7.1161 12.9582)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+	)
+	(fp_rect
+		(start -6.7971 -13.0882)
+		(end 7.2461 13.0882)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at -5.2001 11.4912 135)
+		(size 1.905 1.905)
+		(drill 1.397)
+		(layers "*.Cu" "*.Mask")
+	)
+	(pad "2" thru_hole circle
+		(at -5.1633 -11.4912 135)
+		(size 1.905 1.905)
+		(drill 1.397)
+		(layers "*.Cu" "*.Mask")
+	)
+	(pad "pri1" thru_hole circle
+		(at 5.2001 4.5912 135)
+		(size 2.54 2.54)
+		(drill 1.905)
+		(layers "*.Cu" "*.Mask")
+	)
+	(pad "pri2" thru_hole circle
+		(at 5.1994 -3.8283 135)
+		(size 2.54 2.54)
+		(drill 1.905)
+		(layers "*.Cu" "*.Mask")
+	)
+	(embedded_fonts no)
+)
