@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-10-29 (Phase 5 clean-up in progress, see "Phase 5")
+Updated: 2026-10-29 (Phase 5 clean-up done: all user decisions implemented in the generators, ALL CHECKS PASSED; migration complete)
 
 ## Shared tools – proteus2kicad (2026-10-21)
 
@@ -1143,7 +1143,7 @@ roundtrip: OK
 ALL CHECKS PASSED
 ```
 
-## Phase 5 – clean-up (Opus 5.5, 2026-10-29)
+## Phase 5 – clean-up – done (Opus 5.5, 2026-10-29)
 
 Verified state first: `tools/check_all.sh` printed exactly the Phase 4 handoff output (ALL CHECKS PASSED).
 
@@ -1294,7 +1294,104 @@ C64/C66 1.0 vs 1.067) is now a decided, not an open, item.
   SMD pads; silk lines of abutting parts crossing) – changing them would mean editing library footprint
   graphics per board instance; left as warnings.
 
+### Shared tools (proteus2kicad `7d3b245`, `ecd7490`, `dc8e5fe`, `c5682dd` on top of `8828f55`; pushed to `main`; submodule at `c5682dd`)
+
+Commits: refdes rule condition (step 1), `body_poly` (3a), recorded copper deviations (3c/3d),
+`place_refdes` + README / playbook (3b). All new behaviour is opt-in (config keys / spec keys / a new
+tool); no existing tool output changes without them.
+
+**ac_psu regression** (main checkout untouched; git worktree on the new local branch **`p2k-phase5`** =
+`p2k-phase4` + `dc98be2` (submodule → `c5682dd`), not pushed, not merged): `tools/check_all.sh` output
+identical to the baseline run on `p2k-phase4` in the same worktree (ALL CHECKS PASSED, `diff` empty except
+the `time` lines), `tools/regen_check.sh`: OK (every generated file byte-identical). Worktree removed
+(`rm -rf` + `git worktree prune`), `.git/config submodule.tools/p2k.url` still
+`https://github.com/johonkanen/proteus2kicad.git`. `~/dev/proteus2kicad` fast-forwarded to `c5682dd`.
+
+### DRC before / after Phase 5
+
+| Type | Phase 4 | Phase 5 |
+|---|---|---|
+| shorts / unconnected / parity / clearance / solder-mask bridge / hole clearance | 0 | 0 |
+| courtyards_overlap (error, accepted) | 149 | 146 |
+| pth_inside_courtyard (error, accepted) | 6 | 4 |
+| npth_inside_courtyard (error) | 1 (accepted) | 0 (no longer accepted) |
+| silk_over_copper (warning) | 199 | 51 |
+| silk_overlap (warning) | 199 | 50 |
+| track_dangling / via_dangling (warning) | 6 / 1 | 0 / 0 |
+| silk_edge_clearance (warning) | 1 | 0 |
+| total | 562 | 251 |
+
+### Left open (reported, not changed)
+
+- 146 courtyard overlaps / 4 pth_inside_courtyard: Proteus placement denser than KiCad courtyards
+  (accepted types); 101 silk warnings from KiCad library footprint graphics on that placement.
+- As decided: C102 outline, SICD1/SICD2 tab side (needs the physical part), WP1–WP4 one-pad footprints,
+  ac_psu branches `p2k-footprints` → `p2k-pcb` → `p2k-phase4` → `p2k-phase5` unmerged / unpushed.
+- When the board is edited by hand in KiCad: stop regenerating it (remove the `make_pcb.sh --check` step
+  from `tools/check_all.sh` and say so here); ipc356_diff / gerber_roundtrip keep working on the edited
+  board and show the intended differences (add them to the recorded deviations / hooks).
+
+### Last verification (`tools/check_all.sh`, 2026-10-29)
+
+```
+pcbnew 10.0.7
+ipc356: nets=193, records=1165, refdes_raw=316, tht_records=502, smd_records=663, smd_top=225, smd_bottom=438, nc_pads=9, vias=283, free_pads=4, holes=8, parts=315
+ipc356: OK
+check_sources: OK
+make_part_map: lib/part_map.csv up to date (315 parts)
+gen_symbols: lib/tube_psu.kicad_sym up to date (46 symbols)
+symbols: 30 part types, 315 refdes, 15 power symbols
+symbols: OK
+erc: 0 errors, 23 warnings (reports/erc.rpt)
+compare: parts 315/315 present, 0 missing, 0 extra; pins compared 846, wrong-net pins 0; IPC nets touched 208, complete 208
+compare: per sheet (drawn/total) 1:49/49 2:20/20 3:29/29 4:27/27 5:35/35 6:47/47 7:46/46 8:15/15 9:23/23 10:18/18 11:6/6
+compare: OK
+gen_footprints: 315 parts, 48 footprints (30 project), up to date
+silk_bodies: 7 footprint bodies from the Proteus silk, 10 parts, up to date
+check_footprints: pcbnew placement of 315 parts, worst pad offset 0.039 mm
+check_footprints: 315/315 parts fitted, 870 pads, 48 footprints, worst residual 0.039 mm (limit 0.05)
+check_footprints: OK
+build_pcb: 315 footprints placed (0 excluded from board), 8 mounting holes, 4 free pads, 208 nets, 4 outline segments
+gerber_to_tracks: 3406 tracks, 266 vias (IPC 282, 16 stacked duplicate via records merged), 85 pour outlines on User.1-4; removed as recorded: 6 tracks (REMOVED_TRACKS), 1 vias (REMOVED_VIAS); 14 NonConductor lines moved off copper (NONCONDUCTOR_LAYERS)
+assign_nets: stage A (no pours): 510 groups, 0 shorts, 52 orphans, 32 opens
+assign_nets: stage B (with pours): 216 groups, 0 shorts, 0 orphans, 0 opens
+pours_to_zones: 85 pours -> 85 zones; 161 holes closed by the stroke, 847 holes kept
+place_refdes: 5 Fab only, 139 kept, 182 moved, 1 moved, 0.8 mm text (sizes 1.0, 0.8 mm)
+make_pcb: board rebuilt from scratch, byte-identical
+check_board: 327 footprints, 870 pads, worst pad offset 0.039 mm (limit 0.05), 193 IPC nets mapped 1:1, 8 mounting holes, 4 free pads
+check_board: 1 IPC via records without board via as recorded (REMOVED_VIAS)
+check_board: 3406 tracks, 266 vias, 85 zones
+check_board: OK
+assign_nets: after zone fill: 216 groups, 0 shorts, 0 orphans, 0 opens, 0 items with a foreign net
+assign_nets: OK (report reports/assign_nets.txt)
+drc: 251 violations, 0 shorts, 0 unconnected, 0 parity issues (reports/drc.json)
+drc:    146 error    courtyards_overlap  accepted: KiCad courtyards vs the Proteus placement
+drc:      4 error    pth_inside_courtyard  accepted: KiCad courtyards vs the Proteus placement
+drc:     51 warning  silk_over_copper
+drc:     50 warning  silk_overlap
+drc: OK
+check_values: 315 parts, board value = schematic value for 315
+check_values: 24 parts with a stale Proteus layout value carry the schematic value: C10 na (layout 100n), C26 na (layout 100n), R100 6.8k (layout 10k), R102 15k (layout 10k), R103 33k (layout 15k), R105 15k (layout 10k), R113 15k (layout 1k), R121 15k (layout 22k), R122 6.8k (layout 12k), R18 100R (layout 1k), R2 1k (layout 4.2k), R3 470 (layout 220), R35 33R (layout 4.2k), R38 15k (layout 20k), R42 33 (layout 4.2k), R54 15k (layout 22k), R55 6.8k (layout 12k), R60 6.8k (layout 10k), R64 39k (layout 220k), R65 100R (layout 4.2k), R84 33k (layout N.A.), R89 33k (layout 15k), R95 6.8k (layout 10k), R98 6.8k (layout 10k)
+check_values: OK
+ipc356_diff: 1 Proteus via records removed as recorded (REMOVED_VIAS): (-45.461, 43.769) GND
+ipc356_diff: Proteus 1165 records, KiCad 1148; matched 1164 (870 pads incl. 15 N/C, 282 vias (16 stacked duplicate via records on matched vias), 8 holes, 4 free pads), worst position offset 0.040 mm (limit 0.05)
+ipc356_diff: 193 Proteus nets mapped 1:1 onto KiCad nets, 0 mismatches
+ipc356_diff: KiCad drill larger (footprint kept): 11x 0.762->0.8, 7x 0.812->1.001, 2x 0.965->1.199, 4x 1.016->1.1, 8x 1.016->1.199, 18x 1.066->1.1
+ipc356_diff: KiCad drill smaller, accepted (DRILL_SMALLER): 12x 1.016->1.001, 4x 1.066->1.001, 6x 1.651->1.501
+ipc356_diff: pads with another size in KiCad (info): C 200, D 40, DRV 16, ISO 32, J 3, PWM 7, Q 26, R 232, SICD 4
+ipc356_diff: OK
+roundtrip: F.Cu   XOR   79.60 mm^2, beyond 0.05 mm: only Proteus   5.40, only KiCad  45.24 mm^2; clusters >= 0.01 mm^2: 221 pad shape, 13 clearance; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+roundtrip: In1.Cu XOR   86.43 mm^2, beyond 0.05 mm: only Proteus   4.74, only KiCad  59.94 mm^2; clusters >= 0.01 mm^2: 87 pad shape, 14 clearance; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+roundtrip: In2.Cu XOR   99.77 mm^2, beyond 0.05 mm: only Proteus   5.05, only KiCad  74.50 mm^2; clusters >= 0.01 mm^2: 97 pad shape, 18 clearance; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+roundtrip: B.Cu   XOR  137.31 mm^2, beyond 0.05 mm: only Proteus   9.62, only KiCad  80.14 mm^2; clusters >= 0.01 mm^2: 488 pad shape, 14 clearance; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+roundtrip: Proteus objects not compared (recorded deviations, all layers): 6 Conductor draws (REMOVED_TRACKS), 6 NonConductor draws (moved to B.SilkS, NONCONDUCTOR_LAYERS), 18 NonConductor draws (moved to F.SilkS, NONCONDUCTOR_LAYERS), 4 via pads (REMOVED_VIAS)
+roundtrip: drills 0 mismatches, 16 stacked duplicate Proteus records; KiCad drill smaller, accepted (DRILL_SMALLER): 12x 1.016->1.0, 4x 1.0668->1.0, 6x 1.651->1.5; report reports/roundtrip/roundtrip.txt, overlays reports/roundtrip/*.png
+roundtrip: OK
+
+ALL CHECKS PASSED
+```
+
 ## Next
 
-Phase 5 in progress: steps 1, 2, 3a, 3c, 3d, 3b done; next the ac_psu regression of the shared-tool changes, push proteus2kicad, final check (see
-`next_prompt.md`).
+Phase 5 is complete; the migration is done (all user decisions implemented, ALL CHECKS PASSED). Nothing
+is planned; see "Left open" above and `next_prompt.md`.
