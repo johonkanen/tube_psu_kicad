@@ -1274,7 +1274,27 @@ C64/C66 1.0 vs 1.067) is now a decided, not an open, item.
   (board with the silk lines) → round trip 6 `other` clusters (1.6–2.2 mm²) and 24 Proteus draws
   uncovered, FAILED.
 
+### Step 3b – silk / refdes tidy-up (decision 3b)
+
+- proteus2kicad: new tool **`p2k.place_refdes`** (kipy), the last step of `tools/make_pcb.sh`. For every
+  footprint with its reference on a silk layer (smallest courtyard first): keep the reference if it is
+  clear; else try 1.0 mm text, then 0.8 mm (the board's minimum silk text height), horizontal and
+  vertical, centred above / below / left / right of the courtyard box, shifted along the sides, at the
+  four corners, in the part's middle – first clear spot wins; else the reference goes to the Fab layer
+  (hidden there when the footprint has a `${REFERENCE}` Fab text). "Clear" uses KiCad's own text outline
+  (`SHAPE.Collide`): 0.1 mm from every pad on that side, 0.1 mm from every other silk item (footprint
+  graphics and texts, board silk lines, references already placed), 0.5 mm from Edge.Cuts. Optional
+  config key `REFDES_PLACEMENT` (sizes / gaps); not used here (defaults). Deterministic and idempotent
+  (a second run keeps all 322 references; make_pcb --check byte-identical).
+- Result: 139 references kept, 183 moved (1 of them with 0.8 mm text), **5 Fab only: R63, R81 (top),
+  R100, R109, R111 (bottom)** – dense 0603/0805 groups where no clear spot exists next to the part.
+- DRC: **silk_over_copper 199 → 51, silk_overlap 199 → 50, silk_edge_clearance 1 → 0**; no remaining
+  silk warning involves a reference. The remaining 101 are KiCad library footprint graphics on the
+  dense Proteus placement (silk lines over a neighbour's pads, e.g. the C37 / C86 / C117 outlines over
+  SMD pads; silk lines of abutting parts crossing) – changing them would mean editing library footprint
+  graphics per board instance; left as warnings.
+
 ## Next
 
-Phase 5 in progress: steps 1, 2, 3a, 3c, 3d done; next 3b (refdes / silk tidy-up, see
+Phase 5 in progress: steps 1, 2, 3a, 3c, 3d, 3b done; next the ac_psu regression of the shared-tool changes, push proteus2kicad, final check (see
 `next_prompt.md`).
