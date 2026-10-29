@@ -137,6 +137,30 @@ HOLE_VALUE = "MountingHole_3.0mm"
 FREE_PAD_FOOTPRINT = "tube_psu:WirePad_D4.0mm_Drill2.55mm"      # 4 plated wire pads with a net
 FREE_PAD_VALUE = "WirePad_2.55mm"
 FREE_PAD_PREFIX = "WP"
+# Phase 5 (user decision 3c/3d, STATUS.md "Phase 5"): recorded deviations from the Proteus copper.
+# gerber_to_tracks does not build them; check_board / ipc356_diff / gerber_roundtrip accept exactly
+# these (IPC frame, mm, Y up).
+# The NonConductor draws (Proteus lines on the copper layers that carry no net, 18 lines on the board:
+# the isolation-boundary mark beside HT_6V3 / H1 on all four layers, one line in the 420V area on Top,
+# one beside the GND pour on Inner 1) go to the silk screen: top and Inner 1 -> F.SilkS, Inner 14 and
+# bottom -> B.SilkS (identical lines once per silk layer).
+NONCONDUCTOR_LAYERS = {"F.Cu": "F.SilkS", "In1.Cu": "F.SilkS", "In2.Cu": "B.SilkS", "B.Cu": "B.SilkS"}
+# Dangling stubs (each a 0.02-0.1 mm draw from a track junction whose free end lies on the copper of
+# the joined tracks; KiCad DRC track_dangling): not built. Copper covered by the joined tracks.
+REMOVED_TRACKS = {
+    ("B.Cu", -48.2804, 59.8746, -48.2804, 59.9): "HT_GND stub 0.025 mm",
+    ("F.Cu", 39.2, -16.944, 39.3, -16.944): "DC+ stub 0.1 mm (1.27 mm wide, on the continuing DC+ track)",
+    ("B.Cu", 17.159, 49.24101, 17.159, 49.275): "5V stub 0.034 mm",
+    ("B.Cu", 16.32107, 39.58, 16.3, 39.58): "20V stub 0.021 mm",
+    ("B.Cu", 40.661, 30.856, 40.661, 30.9085): "20V stub 0.053 mm",
+    ("B.Cu", 83.3, 23.2, 83.3, 23.1): "CUK_CAP_MEAS- stub 0.1 mm",
+}
+# GND via connected on Bottom only, at a junction of three GND tracks that meet at its centre (KiCad
+# DRC via_dangling): removing it changes no connection (the tracks stay joined at the same point).
+REMOVED_VIAS = {
+    (-45.461, 43.769): "GND via 0.5/0.3 connected on B.Cu only (track junction), no other layer",
+}
+
 # --- Phase 4 checks (p2k.gerber_roundtrip, p2k.ipc356_diff) ---------------------------
 
 # The Proteus IPC / drill gerber has 16 extra via records stacked on 12 positions of a GND via

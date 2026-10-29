@@ -24,6 +24,7 @@ step "PCB rebuilt from schematic + gerbers, up to date" tools/make_pcb.sh --chec
 step "Board pads, holes, free pads, vias vs IPC" tools/p2k/bin/kipy -m p2k.check_board
 step "Board copper connectivity after zone fill" tools/p2k/bin/kipy -m p2k.assign_nets --check
 step "DRC with schematic parity" tools/p2k/bin/p2k drc
+step "Board values = schematic values (24 stale Proteus layout values)" python3 tools/check_values.py
 # Phase 4: the finished board against the Proteus CADCAM files (independent of the generators)
 step "IPC-D-356 from the board vs Proteus (pads, vias, holes, free pads, nets)" tools/p2k/bin/p2k ipc356_diff
 step "Gerber round trip vs Proteus (copper XOR, coverage, drills, Excellon)" tools/p2k/bin/p2k gerber_roundtrip --check

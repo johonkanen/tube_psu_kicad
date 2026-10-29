@@ -2,11 +2,12 @@ Gerber round trip: KiCad plot of kicad/tube_psu.kicad_pcb vs the Proteus CADCAM 
 raster 0.025 mm/px, tolerance 0.05 mm, clusters >= 0.01 mm^2 counted, positions in the IPC frame (mm, Y up)
 board outline -71.9 .. 91.1 x -18.7 .. 91.3 mm
 
-== F.Cu: Proteus copper 7674.8 mm^2, KiCad copper 7718.5 mm^2
+== F.Cu: Proteus objects not compared (recorded deviations): 1 Conductor draws (REMOVED_TRACKS), 13 NonConductor draws (moved to F.SilkS, NONCONDUCTOR_LAYERS), 1 via pads (REMOVED_VIAS)
+== F.Cu: Proteus copper 7670.9 mm^2, KiCad copper 7714.5 mm^2
    raw XOR 79.60 mm^2; after 0.05 mm tolerance: only Proteus 5.40 mm^2, only KiCad 45.24 mm^2, 527 clusters (293 below 0.01 mm^2)
    pad shape   221 clusters, 49.06 mm^2
    clearance    13 clusters, 0.58 mm^2
-   coverage: Proteus 4659 draws / 727 flashes, 0 not on KiCad copper (12 explained by clearance / pad shape); KiCad 1182 draws / 711 flashes, 0 not on Proteus copper (0 explained by pad shape)
+   coverage: Proteus 4645 draws / 726 flashes, 0 not on KiCad copper (12 explained by clearance / pad shape); KiCad 1174 draws / 710 flashes, 0 not on Proteus copper (0 explained by pad shape)
    explained Proteus draw Conductor 0.1524 mm at (-68.300, 73.962)  0 samples off copper, 111 in clearance/pad shape, of 167; near C24-1 (6V3) 0.79 mm
    explained Proteus draw Conductor 0.1524 mm at (-63.000, 75.600)  0 samples off copper, 19 in clearance/pad shape, of 66; near C31-1 (6V3) 0.99 mm
    explained Proteus draw Conductor 0.1524 mm at (-63.000, 77.000)  0 samples off copper, 19 in clearance/pad shape, of 66; near C31-1 (6V3) 0.99 mm
@@ -273,11 +274,12 @@ board outline -71.9 .. 91.1 x -18.7 .. 91.3 mm
    pad shape  only Proteus  0.010 mm^2 at ( -64.481,    0.023) 0.12x0.15 mm  near R4-1 (#00264) 1.02 mm, via (GPIO_BYPASS_RLY) 46.45 mm
    pad shape  only Proteus  0.010 mm^2 at (  50.323,  -13.681) 0.15x0.12 mm  near R72-2 (#00027) 1.02 mm, via (+3V3) 13.75 mm
 
-== In1.Cu: Proteus copper 6985.2 mm^2, KiCad copper 7049.0 mm^2
+== In1.Cu: Proteus objects not compared (recorded deviations): 5 NonConductor draws (moved to F.SilkS, NONCONDUCTOR_LAYERS), 1 via pads (REMOVED_VIAS)
+== In1.Cu: Proteus copper 6980.8 mm^2, KiCad copper 7044.7 mm^2
    raw XOR 86.43 mm^2; after 0.05 mm tolerance: only Proteus 4.74 mm^2, only KiCad 59.94 mm^2, 125 clusters (24 below 0.01 mm^2)
    pad shape    87 clusters, 63.33 mm^2
    clearance    14 clusters, 1.32 mm^2
-   coverage: Proteus 2877 draws / 502 flashes, 0 not on KiCad copper (28 explained by clearance / pad shape); KiCad 192 draws / 486 flashes, 0 not on Proteus copper (0 explained by pad shape)
+   coverage: Proteus 2872 draws / 501 flashes, 0 not on KiCad copper (28 explained by clearance / pad shape); KiCad 187 draws / 485 flashes, 0 not on Proteus copper (0 explained by pad shape)
    explained Proteus draw Conductor 0.1524 mm at (-63.018, 75.618)  0 samples off copper, 19 in clearance/pad shape, of 64; near C31-1 (6V3) 0.97 mm
    explained Proteus draw Conductor 0.1524 mm at (-63.018, 76.982)  0 samples off copper, 19 in clearance/pad shape, of 64; near C31-1 (6V3) 0.97 mm
    explained Proteus draw Conductor 0.1524 mm at (-64.382, 76.982)  0 samples off copper, 22 in clearance/pad shape, of 64; near C31-1 (6V3) 0.97 mm
@@ -422,11 +424,12 @@ board outline -71.9 .. 91.1 x -18.7 .. 91.3 mm
    pad shape  only KiCad    0.086 mm^2 at (  21.021,    3.179) 0.48x0.48 mm  near C37-1 (DC+) 0.88 mm, via (#00399) 3.49 mm
    pad shape  only KiCad    0.010 mm^2 at (  67.287,   41.950) 0.03x0.40 mm  near Q8-3 (ISO_GND) 0.95 mm, via (20V_ISO_SEC) 8.63 mm
 
-== In2.Cu: Proteus copper 4630.5 mm^2, KiCad copper 4709.5 mm^2
+== In2.Cu: Proteus objects not compared (recorded deviations): 3 NonConductor draws (moved to B.SilkS, NONCONDUCTOR_LAYERS), 1 via pads (REMOVED_VIAS)
+== In2.Cu: Proteus copper 4628.1 mm^2, KiCad copper 4707.1 mm^2
    raw XOR 99.77 mm^2; after 0.05 mm tolerance: only Proteus 5.05 mm^2, only KiCad 74.50 mm^2, 144 clusters (29 below 0.01 mm^2)
    pad shape    97 clusters, 78.87 mm^2
    clearance    18 clusters, 0.63 mm^2
-   coverage: Proteus 2518 draws / 502 flashes, 0 not on KiCad copper (19 explained by clearance / pad shape); KiCad 603 draws / 486 flashes, 0 not on Proteus copper (0 explained by pad shape)
+   coverage: Proteus 2515 draws / 501 flashes, 0 not on KiCad copper (19 explained by clearance / pad shape); KiCad 600 draws / 485 flashes, 0 not on Proteus copper (0 explained by pad shape)
    explained Proteus draw Conductor 0.1524 mm at (-63.000, 75.600)  0 samples off copper, 19 in clearance/pad shape, of 66; near C31-1 (6V3) 0.99 mm
    explained Proteus draw Conductor 0.1524 mm at (-63.000, 77.000)  0 samples off copper, 19 in clearance/pad shape, of 66; near C31-1 (6V3) 0.99 mm
    explained Proteus draw Conductor 0.1524 mm at (-64.400, 77.000)  0 samples off copper, 22 in clearance/pad shape, of 66; near C31-1 (6V3) 0.99 mm
@@ -576,11 +579,12 @@ board outline -71.9 .. 91.1 x -18.7 .. 91.3 mm
    pad shape  only KiCad    0.086 mm^2 at (  19.779,    3.179) 0.48x0.48 mm  near C37-1 (DC+) 0.88 mm, via (#00399) 3.18 mm
    pad shape  only KiCad    0.086 mm^2 at (  21.021,    3.179) 0.48x0.48 mm  near C37-1 (DC+) 0.88 mm, via (#00399) 3.49 mm
 
-== B.Cu: Proteus copper 6397.9 mm^2, KiCad copper 6479.4 mm^2
+== B.Cu: Proteus objects not compared (recorded deviations): 5 Conductor draws (REMOVED_TRACKS), 3 NonConductor draws (moved to B.SilkS, NONCONDUCTOR_LAYERS), 1 via pads (REMOVED_VIAS)
+== B.Cu: Proteus copper 6395.6 mm^2, KiCad copper 6477.1 mm^2
    raw XOR 137.31 mm^2; after 0.05 mm tolerance: only Proteus 9.62 mm^2, only KiCad 80.14 mm^2, 1109 clusters (607 below 0.01 mm^2)
    pad shape   488 clusters, 87.28 mm^2
    clearance    14 clusters, 0.80 mm^2
-   coverage: Proteus 5387 draws / 940 flashes, 0 not on KiCad copper (20 explained by clearance / pad shape); KiCad 1453 draws / 924 flashes, 0 not on Proteus copper (0 explained by pad shape)
+   coverage: Proteus 5379 draws / 939 flashes, 0 not on KiCad copper (20 explained by clearance / pad shape); KiCad 1445 draws / 923 flashes, 0 not on Proteus copper (0 explained by pad shape)
    explained Proteus draw Conductor 0.1524 mm at (51.965, 14.158)  0 samples off copper, 2 in clearance/pad shape, of 29; near C71-2 (5V) 1.07 mm
    explained Proteus draw Conductor 0.1524 mm at (51.838, 14.463)  0 samples off copper, 4 in clearance/pad shape, of 29; near C71-2 (5V) 1.17 mm
    explained Proteus draw Conductor 0.1524 mm at (49.450, 29.310)  0 samples off copper, 19 in clearance/pad shape, of 75; near J4-1 (RX) 1.12 mm
@@ -1127,8 +1131,9 @@ board outline -71.9 .. 91.1 x -18.7 .. 91.3 mm
    pad shape  only Proteus  0.010 mm^2 at (  20.069,   -2.552) 0.12x0.15 mm  near R82-1 (#00221) 0.62 mm, via (#00226) 2.61 mm
    pad shape  only Proteus  0.010 mm^2 at (  20.069,   -3.448) 0.12x0.15 mm  near R82-1 (#00221) 0.62 mm, via (#00226) 2.61 mm
 
-== plated drills: Proteus 494, KiCad 478, matched 478 within 0.05 mm, 16 stacked duplicate Proteus records on matched drills
-    263 x Proteus 0.3000 mm -> KiCad 0.3000 mm
+== plated drills: 1 Proteus via drills not compared (REMOVED_VIAS)
+== plated drills: Proteus 493, KiCad 477, matched 477 within 0.05 mm, 16 stacked duplicate Proteus records on matched drills
+    262 x Proteus 0.3000 mm -> KiCad 0.3000 mm
       4 x Proteus 0.3810 mm -> KiCad 0.3810 mm
      50 x Proteus 0.5000 mm -> KiCad 0.5000 mm
      11 x Proteus 0.7620 mm -> KiCad 0.8000 mm  KiCad footprint drill kept (larger)

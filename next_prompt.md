@@ -9,9 +9,8 @@ decisions and the steps done so far) and the playbook tools/p2k/CONVERSION_PLAYB
 "Phase 5" and 4. The user decisions are recorded in STATUS.md "Phase 5"; do not ask again.
 
 Continue Phase 5 with the first step that STATUS.md does not list as done:
-  3c NonConductor copper lines -> silk, 3d dangling stubs / one-layer GND
-     via removed (config keys + both Phase 4 checks), stale layout values checked, 3b refdes placement
-     (generator step in tools/make_pcb.sh).
+  3b silk / refdes tidy-up (refdes placement / size, Fab-only refdes where silk cannot fit) as a
+     generator step in tools/make_pcb.sh; then the ac_psu regression, push proteus2kicad, final check.
 All in the generators (not by hand in the board); after a change: tools/gen_footprints.py, the sheet
 scripts, kipy -m p2k.check_footprints --pcbnew, tools/make_pcb.sh, tools/check_all.sh. Every board change
 must keep ipc356_diff and gerber_roundtrip passing; update their accepted lists / config keys where a

@@ -1225,7 +1225,56 @@ C64/C66 1.0 vs 1.067) is now a decided, not an open, item.
   overlap there). `npth_inside_courtyard` removed from `DRC_ACCEPTED` (it would now fail).
   Silk warnings unchanged (199 / 199). Copper and drills unchanged (round trip / IPC diff identical).
 
+### Step 3c / 3d – NonConductor lines to silk, dangling stubs and the one-layer via removed, values (decisions 3c, 3d)
+
+- proteus2kicad: recorded copper deviations as config keys (helpers in `p2k.pcb`:
+  `nonconductor_layer`, `removed_track`, `removed_via`), used by `gerber_to_tracks` and accepted by the
+  checks:
+  - `NONCONDUCTOR_LAYERS = {copper layer: layer}` – gerber_to_tracks draws the NonConductor lines of that
+    copper layer on the named layer (identical moved lines once per target layer); gerber_roundtrip drops
+    them from the Proteus copper before comparing (counted in the report).
+  - `REMOVED_TRACKS = {(layer, x1, y1, x2, y2): reason}` – those Conductor draws are not built (every
+    entry must match a draw, else gerber_to_tracks fails); gerber_roundtrip drops them from the Proteus
+    side.
+  - `REMOVED_VIAS = {(x, y): reason}` – ViaPad flashes and the ViaDrill there are not built (every entry
+    must be an IPC via record); check_board and ipc356_diff expect **no** board via at that IPC record
+    (and fail if one is there or the count differs), gerber_roundtrip drops the Proteus via pads and the
+    via drill (the Excellon cross-check still compares all Proteus drills 1:1).
+  Without the keys every tool behaves as before (ac_psu regression below).
+- `p2k_config.py` (with reasons): `NONCONDUCTOR_LAYERS` top / Inner 1 → F.SilkS, Inner 14 / bottom →
+  B.SilkS: the 18 floating copper lines (24 draws) become **14 silk lines** (11 F.SilkS: the
+  isolation-boundary polyline (−70.1, 83.26) → (−66.2, 83.25) → (−62.5, 86.95) → (−62.5, 90.09) in its
+  Top and Inner 1 variants, (−40.1, 34.2)–(−40.1, 41.1)–(−42.0, 43.0) from Inner 1, (80.95, 42.16)–
+  (89.74, 42.16) from Top; 3 B.SilkS: the polyline). `REMOVED_TRACKS`: the 6 stubs (HT_GND B.Cu
+  (−48.2804, 59.8746)–(−48.2804, 59.9), DC+ F.Cu (39.2, −16.944)–(39.3, −16.944) 1.27 mm wide on the
+  continuing DC+ track, 5V B.Cu (17.159, 49.241)–(17.159, 49.275), 20V B.Cu (16.3211, 39.58)–(16.3, 39.58)
+  and (40.661, 30.856)–(40.661, 30.9085), CUK_CAP_MEAS− B.Cu (83.3, 23.2)–(83.3, 23.1); IPC frame) – each
+  starts at a track junction and ends on the copper of the joined tracks. `REMOVED_VIAS`: the GND via
+  **(−45.461, 43.769)** (IPC frame; KiCad (−45.461, −43.769)), 0.5 / 0.3 mm: on B.Cu it is the junction of
+  three GND tracks ((−45.792, 44.1), (−40.5, 43.769), (−45.461, 43.21) 0.254 mm) that meet at its centre,
+  on F / In1 / In2 nothing touches it (the pours there keep their Proteus clearance holes) – removing it
+  changes no connection (assign_nets 216 groups, 0 opens, unchanged; DRC 0 unconnected).
+- Results: gerber_to_tracks 3412 → **3406 tracks**, 267 → **266 vias** (IPC 283 records = 266 + 16 stacked
+  + 1 removed); DRC **track_dangling 6 → 0, via_dangling 1 → 0**, no new silk warning from the moved
+  lines; check_board "1 IPC via records without board via as recorded"; ipc356_diff matched 1164 of 1165
+  (+ 1 removed via record, listed), 193 nets 1:1, 0 mismatches; round trip unchanged areas (XOR to the
+  0.01 mm²), "Proteus objects not compared: 6 Conductor draws (REMOVED_TRACKS), 18 + 6 NonConductor draws
+  (moved to F.SilkS / B.SilkS), 4 via pads (REMOVED_VIAS)", plated drills "1 Proteus via drill not
+  compared", 0 mismatches.
+- **Stale layout values:** the board values already came from the schematic (p2k.build_pcb copies the
+  symbol value; DRC schematic parity compares them). Made explicit by `tools/check_values.py` (new step in
+  check_all): all 315 board values = `lib/part_map.csv` (ROOT.DSN) values, and the 24 parts whose ROOT.LYT
+  value differs (C10 C26 R2 R3 R18 R35 R38 R42 R54 R55 R60 R64 R65 R84 R89 R95 R98 R100 R102 R103 R105
+  R113 R121 R122) are listed with both values; fails if a board value differs or the stale count is not 24.
+- Negative tests (config edited temporarily, restored): without `REMOVED_VIAS` (board without the via)
+  check_board "IPC via (−45.461, 43.769) GND: no board via", ipc356_diff "nearest KiCad record 2.724 mm
+  away", round trip 4 `other` clusters (0.218 mm² on F / In1 / In2 at the via, 0.018 mm² on B.Cu), 3
+  draws uncovered, "ViaDrill 0.3 mm … has no KiCad drill" – all FAILED; a `REMOVED_TRACKS` entry with a
+  wrong end point → gerber_to_tracks "6 listed, found 5 draws (missing …)"; without `NONCONDUCTOR_LAYERS`
+  (board with the silk lines) → round trip 6 `other` clusters (1.6–2.2 mm²) and 24 Proteus draws
+  uncovered, FAILED.
+
 ## Next
 
-Phase 5 in progress: steps 1, 2, 3a done; next 3c (NonConductor lines to silk), 3d, 3b (see
+Phase 5 in progress: steps 1, 2, 3a, 3c, 3d done; next 3b (refdes / silk tidy-up, see
 `next_prompt.md`).
