@@ -18,6 +18,7 @@ step "ERC" tools/erc.sh
 # all 11 sheets are drawn: every part must be present (no --allow-missing)
 step "Netlist comparison vs IPC" tools/p2k/bin/p2k compare_netlists
 step "Footprint library and map up to date" python3 tools/gen_footprints.py --check
+step "Footprint bodies = Proteus silk outlines" python3 tools/silk_bodies.py --check
 step "Footprints vs IPC pad geometry" tools/p2k/bin/kipy -m p2k.check_footprints --pcbnew
 step "PCB rebuilt from schematic + gerbers, up to date" tools/make_pcb.sh --check
 step "Board pads, holes, free pads, vias vs IPC" tools/p2k/bin/kipy -m p2k.check_board

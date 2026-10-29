@@ -9,8 +9,7 @@ decisions and the steps done so far) and the playbook tools/p2k/CONVERSION_PLAYB
 "Phase 5" and 4. The user decisions are recorded in STATUS.md "Phase 5"; do not ask again.
 
 Continue Phase 5 with the first step that STATUS.md does not list as done:
-  3a footprint bodies / courtyards from the Proteus silk (tools/silk_bodies.py measures them, spec key
-     body_poly in p2k.footprints), 3c NonConductor copper lines -> silk, 3d dangling stubs / one-layer GND
+  3c NonConductor copper lines -> silk, 3d dangling stubs / one-layer GND
      via removed (config keys + both Phase 4 checks), stale layout values checked, 3b refdes placement
      (generator step in tools/make_pcb.sh).
 All in the generators (not by hand in the board); after a change: tools/gen_footprints.py, the sheet

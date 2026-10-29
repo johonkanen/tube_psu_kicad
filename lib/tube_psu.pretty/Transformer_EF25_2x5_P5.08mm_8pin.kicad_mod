@@ -4,7 +4,7 @@
 	(layer "F.Cu")
 	(descr "EF25 heater transformer, pads 1,2,4,5,6,7,9,10 (body from the Proteus silk) (tube_psu, pads from IPC-D-356A TR2)")
 	(property "Reference" "REF**"
-		(at 0 -15.32 0)
+		(at 0 -15.16 0)
 		(layer "F.SilkS")
 		(effects
 			(font
@@ -14,7 +14,7 @@
 		)
 	)
 	(property "Value" "Transformer_EF25_2x5_P5.08mm_8pin"
-		(at 0 15.32 0)
+		(at 0 15.48 0)
 		(layer "F.Fab")
 		(effects
 			(font
@@ -24,9 +24,10 @@
 		)
 	)
 	(attr through_hole)
-	(fp_rect
-		(start -8.5 -14)
-		(end 8.5 14)
+	(fp_poly
+		(pts
+			(xy -8.65 14.16) (xy 8.35 14.16) (xy 8.35 -13.84) (xy -8.65 -13.84)
+		)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -34,19 +35,46 @@
 		(fill no)
 		(layer "F.Fab")
 	)
-	(fp_rect
-		(start -8.62 -14.12)
-		(end 8.62 14.12)
+	(fp_line
+		(start -8.65 14.16)
+		(end 8.35 14.16)
 		(stroke
 			(width 0.12)
 			(type solid)
 		)
-		(fill no)
 		(layer "F.SilkS")
 	)
-	(fp_rect
-		(start -8.75 -14.25)
-		(end 8.75 14.25)
+	(fp_line
+		(start 8.35 14.16)
+		(end 8.35 -13.84)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start 8.35 -13.84)
+		(end -8.65 -13.84)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start -8.65 -13.84)
+		(end -8.65 14.16)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_poly
+		(pts
+			(xy -8.9 14.2636) (xy -8.7536 14.41) (xy 8.4536 14.41) (xy 8.6 14.2636) (xy 8.6 -13.9436) (xy 8.4536 -14.09) (xy -8.7536 -14.09) (xy -8.9 -13.9436)
+		)
 		(stroke
 			(width 0.05)
 			(type solid)

@@ -157,8 +157,9 @@ DRILL_EXCELLON = "source/cadcam_rs274x/tube_power_5_1 - CADCAM Drill.DRL"
 # ROUNDTRIP tolerances stay at the defaults (res 0.025, tol 0.05, min_area 0.01, overlay_res 0.1, drill_tol 0.005).
 
 # Error-severity DRC types that remain by design ({type: reason}, see STATUS.md "Phase 3").
+# Phase 5: npth_inside_courtyard (H4 in L2's pad-box courtyard) is gone with the RM8 body from the
+# Proteus silk and no longer accepted.
 DRC_ACCEPTED = {
     "courtyards_overlap": "KiCad courtyards vs the Proteus placement",
     "pth_inside_courtyard": "KiCad courtyards vs the Proteus placement",
-    "npth_inside_courtyard": "mounting hole H4 inside the RM8 choke L2's pad-box courtyard (Proteus placement)",
 }

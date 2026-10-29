@@ -4,7 +4,7 @@
 	(layer "F.Cu")
 	(descr "Common-mode choke SCF20-05-550 (VAC T60405-R6131-X204), 4 pins (body from the Proteus silk) (tube_psu, pads from IPC-D-356A CM1)")
 	(property "Reference" "REF**"
-		(at 0 -13.82 0)
+		(at 0 -13.821 0)
 		(layer "F.SilkS")
 		(effects
 			(font
@@ -14,7 +14,7 @@
 		)
 	)
 	(property "Value" "L_CommonMode_SCF20-05-550"
-		(at 0 13.82 0)
+		(at 0 13.819 0)
 		(layer "F.Fab")
 		(effects
 			(font
@@ -24,9 +24,10 @@
 		)
 	)
 	(attr through_hole)
-	(fp_rect
-		(start -7.5 -12.5)
-		(end 7.5 12.5)
+	(fp_poly
+		(pts
+			(xy -7.5 12.499) (xy 7.5 12.499) (xy 7.5 -12.501) (xy -7.5 -12.501)
+		)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -34,19 +35,46 @@
 		(fill no)
 		(layer "F.Fab")
 	)
-	(fp_rect
-		(start -7.62 -12.62)
-		(end 7.62 12.62)
+	(fp_line
+		(start -7.5 12.499)
+		(end 7.5 12.499)
 		(stroke
 			(width 0.12)
 			(type solid)
 		)
-		(fill no)
 		(layer "F.SilkS")
 	)
-	(fp_rect
-		(start -7.75 -12.75)
-		(end 7.75 12.75)
+	(fp_line
+		(start 7.5 12.499)
+		(end 7.5 -12.501)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start 7.5 -12.501)
+		(end -7.5 -12.501)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start -7.5 -12.501)
+		(end -7.5 12.499)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_poly
+		(pts
+			(xy -7.75 12.6026) (xy -7.6036 12.749) (xy 7.6036 12.749) (xy 7.75 12.6026) (xy 7.75 -12.6046) (xy 7.6036 -12.751) (xy -7.6036 -12.751) (xy -7.75 -12.6046)
+		)
 		(stroke
 			(width 0.05)
 			(type solid)

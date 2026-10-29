@@ -106,6 +106,20 @@ RULES = [
     ("PIN", dict(n=2), "tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm", "blade terminal, two holes both pad 1"),
 ]
 
+# Footprint bodies from the Proteus silk screen (Phase 5 decision 3a): outline polygons in board
+# coordinates of the spec's `ipc` part, measured and checked by tools/silk_bodies.py (do not edit by
+# hand: run it and copy its output). Fab = outline, silk = outline with gaps at the pads, courtyard =
+# convex hull of outline and pads + 0.25 mm.
+SILK_BODY = {
+    "L_RM8_Proteus": [(-12.992, -17.377), (-4.407, -17.341), (-0.869, -13.802), (-0.833, -5.253), (-8.484, 2.398), (-17.069, 2.362), (-20.572, -1.14), (-20.608, -9.725)],
+    "Transformer_EF20_2x5_P3.81mm": [(56.658, -6.517), (70.628, -6.517), (70.628, 15.327), (56.658, 15.327)],
+    "Transformer_EF25_2x5_P5.08mm_8pin": [(-38.7, 62.08), (-21.7, 62.08), (-21.7, 90.08), (-38.7, 90.08)],
+    "Transformer_ETD34_4x3pads": [(35.25, 49.114), (62.25, 49.114), (62.25, 88.614), (35.25, 88.614)],
+    "L_CommonMode_SCF20-05-550": [(-52.685, 3.695), (-37.685, 3.695), (-37.685, 28.695), (-52.685, 28.695)],
+    "Relay_Songle_SRD_5pin": [(-70.308, 22.151), (-53.03, 22.151), (-53.03, 37.905), (-70.308, 37.905)],
+    "D_Bridge_TBS": [(-0.85, 8.8), (7.75, 8.8), (7.75, 15.5), (-0.85, 15.5)],
+}
+
 # Project footprints (spec keys: see p2k.footprints). `ipc` = refdes whose IPC pads give the
 # pad centres; the footprint is built for the top side and mirrored by placement when needed.
 PROJECT = {
@@ -126,7 +140,8 @@ PROJECT = {
     # the geometry cannot confirm the order; the nets come from the IPC either way.
     "TO-220-2_Vertical_AK": dict(base="Package_TO_SOT_THT:TO-220-2_Vertical", renumber={"1": "A", "2": "K"}, ipc="SICD1",
                                  descr="TO-220-2 diode, pads A (pin 1) / K (pin 2, tab), Proteus pad positions"),
-    "D_Bridge_TBS": dict(ipc="DB1", descr="Taiwan Semiconductor TBS bridge rectifier (SMD, pads 1-4)"),
+    "D_Bridge_TBS": dict(ipc="DB1", body_poly=SILK_BODY["D_Bridge_TBS"],
+                         descr="Taiwan Semiconductor TBS bridge rectifier (SMD, pads 1-4), body from the Proteus silk"),
     # Phase 3 DRC (STATUS.md "Phase 3 - pad sizes"), narrowed in Phase 5: ipc_sizes=True (Proteus pad
     # sizes) on the footprints of the PROTEUS_PADS parts, whose KiCad pads short or come closer than
     # 0.15 mm to Proteus tracks/vias; the other parts of these packages use the KiCad pads.
@@ -163,16 +178,20 @@ PROJECT = {
                                                 descr="SOIC-16W, Proteus pad positions (rows 9.4 mm apart)"),
     "DFN-8-1EP_P0.95mm_IXDD60xD2": dict(ipc="DRV4", descr="IXYS IXDD604/609 D2 package: 8 pads 0.45 x 1.2 at 0.95 mm pitch, "
                                                            "rows 4.5 mm apart, thermal pad 9 (2.6 x 3.1)"),
-    "Transformer_EF20_2x5_P3.81mm": dict(ipc="TR1", body=(14.0, 22.0), descr="EF20 auxiliary transformer, pads 1-10"),
-    "Transformer_EF25_2x5_P5.08mm_8pin": dict(ipc="TR2", body=(17.0, 28.0),
+    "Transformer_EF20_2x5_P3.81mm": dict(ipc="TR1", body_poly=SILK_BODY["Transformer_EF20_2x5_P3.81mm"],
+                                         descr="EF20 auxiliary transformer, pads 1-10 (body from the Proteus silk)"),
+    "Transformer_EF25_2x5_P5.08mm_8pin": dict(ipc="TR2", body_poly=SILK_BODY["Transformer_EF25_2x5_P5.08mm_8pin"],
                                               descr="EF25 heater transformer, pads 1,2,4,5,6,7,9,10 (body from the Proteus silk)"),
-    "Transformer_ETD34_4x3pads": dict(ipc="TR3", descr="ETD34 transformer, pins 1-4 with three 2.5 mm pads each"),
-    "L_RM8_Proteus": dict(ipc="L1", rotate=45.0,
+    "Transformer_ETD34_4x3pads": dict(ipc="TR3", body_poly=SILK_BODY["Transformer_ETD34_4x3pads"],
+                                      descr="ETD34 transformer, pins 1-4 with three 2.5 mm pads each (body from the Proteus silk)"),
+    "L_RM8_Proteus": dict(ipc="L1", rotate=45.0, body_poly=SILK_BODY["L_RM8_Proteus"],
                           descr="RM8 PFC choke: winding pads pri1/pri2 (2.54 mm), bobbin pins 1/2 (1.905 mm, no net); "
                                 "footprint frame rotated 45 deg against the board"),
-    "L_CommonMode_SCF20-05-550": dict(ipc="CM1", body=(15.0, 25.0), descr="Common-mode choke SCF20-05-550 (VAC T60405-R6131-X204), "
-                                                                           "4 pins (body from the Proteus silk)"),
-    "Relay_Songle_SRD_5pin": dict(ipc="RL1", descr="Songle relay, pads 1-5"),
+    "L_CommonMode_SCF20-05-550": dict(ipc="CM1", body_poly=SILK_BODY["L_CommonMode_SCF20-05-550"],
+                                      descr="Common-mode choke SCF20-05-550 (VAC T60405-R6131-X204), "
+                                            "4 pins (body from the Proteus silk)"),
+    "Relay_Songle_SRD_5pin": dict(ipc="RL1", body_poly=SILK_BODY["Relay_Songle_SRD_5pin"],
+                                  descr="Songle relay, pads 1-5 (body from the Proteus silk)"),
     "Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm": dict(ipc="GND", descr="Blade wire terminal, two holes both pad 1"),
     # Board-only items (no symbol; placed by p2k.build_pcb at the IPC 'hole' / 'free_pad' records)
     "MountingHole_3.0mm_NPTH_Ring3.5mm": dict(board_only=True, pad=(3.5, 3.0), plated=False,

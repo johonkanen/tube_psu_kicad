@@ -4,7 +4,7 @@
 	(layer "F.Cu")
 	(descr "RM8 PFC choke: winding pads pri1/pri2 (2.54 mm), bobbin pins 1/2 (1.905 mm, no net); footprint frame rotated 45 deg against the board (tube_psu, pads from IPC-D-356A L1)")
 	(property "Reference" "REF**"
-		(at 0 -14.1582 0)
+		(at 0 -12.7603 0)
 		(layer "F.SilkS")
 		(effects
 			(font
@@ -14,7 +14,7 @@
 		)
 	)
 	(property "Value" "L_RM8_Proteus"
-		(at 0 14.1582 0)
+		(at 0 12.7659 0)
 		(layer "F.Fab")
 		(effects
 			(font
@@ -24,9 +24,10 @@
 		)
 	)
 	(attr through_hole)
-	(fp_rect
-		(start -6.5471 -12.8382)
-		(end 6.9961 12.8382)
+	(fp_poly
+		(pts
+			(xy -13.8388 5.4009) (xy -7.7428 11.4459) (xy -2.7386 11.4452) (xy 3.3319 5.4256) (xy 3.3319 -5.3945) (xy -2.7641 -11.4396) (xy -7.7174 -11.4403) (xy -13.8133 -5.3952)
+		)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -34,19 +35,100 @@
 		(fill no)
 		(layer "F.Fab")
 	)
-	(fp_rect
-		(start -6.6671 -12.9582)
-		(end 7.1161 12.9582)
+	(fp_line
+		(start -13.8388 5.4009)
+		(end -7.7428 11.4459)
 		(stroke
 			(width 0.12)
 			(type solid)
 		)
-		(fill no)
 		(layer "F.SilkS")
 	)
-	(fp_rect
-		(start -6.7971 -13.0882)
-		(end 7.2461 13.0882)
+	(fp_line
+		(start -7.7428 11.4459)
+		(end -6.3517 11.4457)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start -4.0485 11.4454)
+		(end -2.7386 11.4452)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start -2.7386 11.4452)
+		(end 3.3319 5.4256)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start 3.3319 5.4256)
+		(end 3.3319 -5.3945)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start 3.3319 -5.3945)
+		(end -2.7641 -11.4396)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start -2.7641 -11.4396)
+		(end -4.0119 -11.4398)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start -6.3147 -11.4401)
+		(end -7.7174 -11.4403)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start -7.7174 -11.4403)
+		(end -13.8133 -5.3952)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start -13.8133 -5.3952)
+		(end -13.8388 5.4009)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_poly
+		(pts
+			(xy -14.0888 5.5044) (xy -13.9423 5.6509) (xy -7.8464 11.6959) (xy -5.6753 12.6384) (xy -5.3036 12.7124) (xy -5.0965 12.7124) (xy -4.7249 12.6384) (xy -2.6351 11.6952) (xy 6.2192 5.7569) (xy 6.3657 5.6104) (xy 6.6464 5.1903) (xy 6.7449 4.6948) (xy 6.7449 4.4877) (xy 6.7442 -3.9318) (xy 6.6457 -4.4274) (xy 6.365 -4.8474) (xy 6.2185 -4.9939) (xy -2.6605 -11.6896) (xy -4.6881 -12.6384) (xy -5.0597 -12.7124) (xy -5.2668 -12.7124) (xy -5.6385 -12.6384) (xy -7.8209 -11.6903) (xy -13.9169 -5.6452) (xy -14.0633 -5.4988) (xy -14.0888 5.2973)
+		)
 		(stroke
 			(width 0.05)
 			(type solid)

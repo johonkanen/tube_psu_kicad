@@ -1198,7 +1198,34 @@ Verified state first: `tools/check_all.sh` printed exactly the Phase 4 handoff o
 Nothing to change: the KiCad drills stay, `DRILL_SMALLER` (Q5/Q6 1.5 vs 1.651, C_Disc + J4 1.0 vs 1.016,
 C64/C66 1.0 vs 1.067) is now a decided, not an open, item.
 
+### Step 3a – footprint bodies and courtyards from the Proteus silk (decision 3a)
+
+- proteus2kicad `p2k.footprints`: spec key **`body_poly`** for IPC-built footprints = body outline polygon
+  in board coordinates of the spec's `ipc` part (transformed like the pads: `rotate`, bottom mirror,
+  pad-box centre). Fab = the polygon; silk = the polygon with gaps around the pads (circumscribed pad
+  circle + `SILK_PAD_GAP` 0.2 mm); courtyard = convex hull of the polygon and the pad outlines (round
+  pads as 16-gons) grown by 0.25 mm (bevelled corners). Without the key nothing changes (`body` / pad
+  box as before).
+- `tools/silk_bodies.py` (new, stdlib) measures the outlines in the Proteus `Top Silk Screen` gerber:
+  the smallest closed silk polyline around the centre of the part's pads (collinear vertices merged),
+  or for DB1 (sides drawn with gaps at the pad corners) the bounding box of the silk draws > 1 mm in the
+  pad box + 1.5 mm. Every other part on the same footprint is measured too and compared with the
+  reference outline moved onto its pads (rigid fit): L2 / L3 vs L1 ≤ 0.002 mm, CM4 vs CM1 0.001 mm.
+  `--check` (new step in `tools/check_all.sh`) fails unless `tools/gen_footprints.py` `SILK_BODY`
+  carries exactly the measured polygons.
+- Bodies (board coordinates of the reference part, mm): RM8 `L_RM8_Proteus` (L1) octagon 19.8 × 19.8
+  with 3.5 mm cut corners, not centred on the pads (the winding pads pri1 / pri2 just outside, the
+  bobbin pins 1 / 2 on two cut corners); EF20 TR1 13.97 × 21.84; EF25 TR2 17.0 × 28.0 (was the centred
+  `body=(17, 28)` – same size, now at the silk position); ETD34 TR3 27.0 × 39.5; CM chokes (CM1)
+  15.0 × 25.0 (was `body=(15, 25)`); relay RL1 17.28 × 15.75; bridge DB1 8.6 × 6.7.
+- DRC: **npth_inside_courtyard 1 → 0** (H4 / L2) and **pth_inside_courtyard 6 → 4** (C64-1 / L2 and
+  C66-1 / L1 gone; left: L1-pri1 in SICD2, Q7-3 in R83, IN1-1 and CM1-3 in C86 – KiCad library
+  courtyards of SICD2 / R83 / C86 vs the Proteus placement), courtyards_overlap 149 → 146 (the silk
+  bodies of RL1 / CM1 / C84 / C85 / C38 … touch each other in Proteus, so the new courtyards still
+  overlap there). `npth_inside_courtyard` removed from `DRC_ACCEPTED` (it would now fail).
+  Silk warnings unchanged (199 / 199). Copper and drills unchanged (round trip / IPC diff identical).
+
 ## Next
 
-Phase 5 in progress: steps 1–2 done; next step 3a (bodies from the Proteus silk), then 3c, 3d, 3b (see
+Phase 5 in progress: steps 1, 2, 3a done; next 3c (NonConductor lines to silk), 3d, 3b (see
 `next_prompt.md`).
