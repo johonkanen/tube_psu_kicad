@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-10-23 (Phase 4 verification done: KiCad gerbers / IPC-D-356 vs Proteus pass, every earlier finding reviewed, negative tests OK; next: Phase 5 clean-up after the user decisions)
+Updated: 2026-10-29 (Phase 5 clean-up in progress, see "Phase 5")
 
 ## Shared tools – proteus2kicad (2026-10-21)
 
@@ -1143,8 +1143,62 @@ roundtrip: OK
 ALL CHECKS PASSED
 ```
 
+## Phase 5 – clean-up (Opus 5.5, 2026-10-29)
+
+Verified state first: `tools/check_all.sh` printed exactly the Phase 4 handoff output (ALL CHECKS PASSED).
+
+### User decisions (2026-10-29, asked before this session by the coordinator)
+
+1. **Pad sizes: narrow** the Proteus pads to the 22 DRC-conflicting refdes (U2 U3 U6 V2 V3 V4, AD1 AD2,
+   Q9 REF1, DRV3, DRV5, C28 C37 C56, J2, R40, R79 R88 R109, C25 C92) via a refdes condition in the
+   footprint rules; the other parts go back to the KiCad pads. DRC must stay at 0 shorts / 0 clearance /
+   0 mask-bridge / 0 hole-clearance; a part outside the 22 that then conflicts is added (and said so).
+2. **Drills: keep the KiCad drills** (`DRILL_SMALLER` stays).
+3. **Clean-ups, all in the generators** (not by hand in the board): (a) footprint bodies / courtyards
+   from the Proteus silk for the IPC-built footprints (RM8, EF20 / EF25 / ETD34, CM chokes, relay,
+   bridge) – removes the H4/L2, C64-1/L2, C66-1/L1 accepted courtyard errors; (b) silk / refdes tidy-up
+   (fewer silk_overlap / silk_over_copper warnings: refdes placement / size, Fab-only refdes where silk
+   cannot fit), generator-driven and reproducible; (c) the 18 floating NonConductor copper lines moved
+   to silk; (d) the 6 dangling track stubs removed, the one-layer GND via handled (removed if that
+   changes nothing electrically; coordinates documented), the 24 stale layout values corrected (the
+   schematic DSN values are authoritative; board / footprint value fields from the schematic). Every
+   board change keeps ipc356_diff and gerber_roundtrip passing (accepted lists / config updated where a
+   deliberate difference results).
+4. **Left as they are:** C102 outline, SICD1/SICD2 tab side, the free pads WP1–WP4 as one-pad footprints,
+   the ac_psu branches unmerged.
+
+### Step 1 – Proteus pad sizes only where the KiCad pads collide (decision 1)
+
+- proteus2kicad: `p2k.footprints` rule condition **`refdes`** (a tuple/set of refdes: the rule applies
+  to those parts only; every refdes named in such a condition must be assigned by one of the rules naming
+  it, else gen_footprints fails).
+- `tools/gen_footprints.py`: `PROTEUS_PADS` = the 22 refdes **+ U8**; the rules with
+  `refdes=PROTEUS_PADS` come first and point to the existing Proteus-pad footprints (`SOT-23_Proteus`,
+  `SOT-23-5_Proteus`, `SOT-23-6_Proteus`, `SOIC-8_…_Proteus`, `SOIC-16_…_Proteus`,
+  `CP_Radial_D12.5mm_P5.00mm_Proteus`, `PinHeader_2x25_…_Proteus`, `R_0603_…_Proteus1.73`,
+  `R_0805_…_Proteus`, `C_1206_…_Proteus3.15`, unchanged); the general rules are back on the Phase 2
+  footprints: `Resistor_SMD:R_0603_1608Metric` (57 parts), `R_0805_…_Pad1.20x1.40mm_HandSolder` (28),
+  `C_1206_…_Pad1.33x1.80mm_HandSolder` (33), `Capacitor_THT:CP_Radial_D12.5mm_P5.00mm` (C29) and the new
+  derived `SOIC-16_3.9x9.9mm_P1.27mm_Proteus_KiCadPads` (DRV6: Proteus pad positions, KiCad pads). The
+  packages whose every part conflicts (SOT-23, SOT-23-6, SOIC-8, J2) carry the condition too, so a new
+  part on them would fail the assignment instead of silently getting the Proteus pads.
+- **U8 added (outside the 22):** DRC with KiCad pads on U8 stays clean, but the gerber round trip failed:
+  with the larger KiCad SOT-23-5 pads the zone fill loses 0.45 mm² of Proteus copper of net #00372 beside
+  U8-5 on B.Cu (one `other` cluster at (34.20, −13.02), 3 Proteus tracks uncovered). U8 keeps the Proteus
+  pads; `SOT-23-5_Proteus_KiCadPads` was dropped again.
+- Result: **23 parts on Proteus pads, 120 back on KiCad pads**; 121 schematic Footprint fields changed by
+  the sheet scripts (then U8 back: 120); footprint fit worst residual 0.039 mm; DRC 0 shorts, 0 clearance,
+  0 solder-mask bridges, 0 hole-clearance (counts by type unchanged: 149 / 6 / 1 errors, 199 / 199 / 6 /
+  1 / 1 warnings); ipc356_diff OK (pads with another size: C 200, D 40, DRV 16, ISO 32, J 3, PWM 7, Q 26,
+  R 232, SICD 4 – information only), round trip OK (more `pad shape` clusters, e.g. B.Cu 281 → 488,
+  `clearance` 10/13/18/12 → 13/14/18/14 – both accepted categories; no `other`, 0 uncovered draws).
+
+### Step 2 – drills (decision 2)
+
+Nothing to change: the KiCad drills stay, `DRILL_SMALLER` (Q5/Q6 1.5 vs 1.651, C_Disc + J4 1.0 vs 1.016,
+C64/C66 1.0 vs 1.067) is now a decided, not an open, item.
+
 ## Next
 
-Phase 4 is complete; the migration is electrically verified against the Proteus CADCAM files (IPC-D-356
-1:1, copper to 0.05 mm, drills 1:1). Next: Phase 5 clean-up after the user decisions above (see
+Phase 5 in progress: steps 1–2 done; next step 3a (bodies from the Proteus silk), then 3c, 3d, 3b (see
 `next_prompt.md`).

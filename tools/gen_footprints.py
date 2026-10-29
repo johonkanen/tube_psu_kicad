@@ -25,13 +25,28 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "p2k"))  # proteus2kicad
 from p2k import footprints  # noqa: E402
 
+# Phase 5 user decision (STATUS.md "Phase 5"): the Proteus pad sizes only on the parts whose KiCad
+# pads collide with the Proteus copper (DRC with KiCad pads: short / clearance < 0.15 mm / solder-mask
+# bridge / hole clearance; STATUS.md "Phase 4" per-refdes table). Every other part has the KiCad pads.
+# The rules with `refdes=PROTEUS_PADS` come first; a refdes listed here must be taken by such a rule.
+# U8 (not a DRC conflict) added in Phase 5: with KiCad's SOT-23-5 pads the zone fill loses 0.45 mm^2
+# of Proteus copper (net #00372 beside U8-5, B.Cu; gerber round trip 'other' cluster, 3 tracks uncovered).
+PROTEUS_PADS = frozenset("""
+    U2 U3 U6 V2 V3 V4 AD1 AD2 Q9 REF1 DRV3 DRV5 C28 C37 C56 J2 R40 R79 R88 R109 C25 C92
+    U8
+""".split())
+
 # (symbol, conditions, footprint, note). Conditions: n = pad count, tht, span (mm, +-0.02),
-# pad = (w, h) of the IPC pads, drill, package / device (lib/part_map.csv columns).
+# pad = (w, h) of the IPC pads, drill, package / device (lib/part_map.csv columns), refdes.
 RULES = [
     # --- resistors
-    ("R", dict(tht=False, span=1.73, pad=(0.889, 0.889)), "tube_psu:R_0603_1608Metric_Proteus1.73", "0603 (Proteus pads 1.73 mm apart)"),
+    ("R", dict(tht=False, span=1.73, pad=(0.889, 0.889), refdes=PROTEUS_PADS), "tube_psu:R_0603_1608Metric_Proteus1.73",
+     "0603 (Proteus pads 1.73 mm apart), Proteus pad size"),
+    ("R", dict(tht=False, span=1.73, pad=(0.889, 0.889)), "Resistor_SMD:R_0603_1608Metric", "0603 (Proteus pads 1.73 mm apart)"),
     ("R", dict(tht=False, span=1.60, pad=(0.939, 0.99)), "Resistor_SMD:R_0603_1608Metric", "0603"),
-    ("R", dict(tht=False, span=2.00, pad=(0.939, 1.447)), "tube_psu:R_0805_2012Metric_Proteus", "0805"),
+    ("R", dict(tht=False, span=2.00, pad=(0.939, 1.447), refdes=PROTEUS_PADS), "tube_psu:R_0805_2012Metric_Proteus",
+     "0805, Proteus pad size"),
+    ("R", dict(tht=False, span=2.00, pad=(0.939, 1.447)), "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder", "0805"),
     ("R", dict(tht=False, span=2.13, pad=(1.016, 1.27)), "tube_psu:R_0805_2012Metric_Proteus2.13", "0805 (Proteus pads 2.13 mm apart)"),
     ("R", dict(tht=False, span=2.90, pad=(1.143, 1.803)), "Resistor_SMD:R_1206_3216Metric", "1206"),
     ("R", dict(tht=False, span=0.975, pad=(0.35, 2.0)), "tube_psu:R_0508_1220Metric_KRL2012", "KRL2012 0508 shunt, long-side terminals"),
@@ -39,7 +54,9 @@ RULES = [
     # --- capacitors
     ("C", dict(tht=False, span=1.60, pad=(0.939, 0.99)), "Capacitor_SMD:C_0603_1608Metric", "0603"),
     ("C", dict(tht=False, span=3.00, pad=(1.143, 1.803)), "Capacitor_SMD:C_1206_3216Metric", "1206 (3.0 mm pad spacing)"),
-    ("C", dict(tht=False, span=3.15, pad=(1.016, 1.524)), "tube_psu:C_1206_3216Metric_Proteus3.15", "1206"),
+    ("C", dict(tht=False, span=3.15, pad=(1.016, 1.524), refdes=PROTEUS_PADS), "tube_psu:C_1206_3216Metric_Proteus3.15",
+     "1206, Proteus pad size"),
+    ("C", dict(tht=False, span=3.15, pad=(1.016, 1.524)), "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder", "1206"),
     ("C", dict(tht=False, span=5.20, pad=(1.397, 5.257)), "Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder", "2220"),
     ("C", dict(tht=True, span=7.50, pad=(1.524, 1.524)), "Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm", "Y2 2n2 disc (DEBB), P7.5"),
     ("C", dict(tht=True, span=10.00, pad=(1.778, 1.778)), "Capacitor_THT:C_Rect_L13.0mm_W5.0mm_P10.00mm_FKS3_FKP3_MKS4",
@@ -49,7 +66,9 @@ RULES = [
     ("C", dict(tht=True, span=22.50, package="X2 W6MM CAP 22.5MM RASTER"), "Capacitor_THT:C_Rect_L26.5mm_W6.0mm_P22.50mm_MKS4",
      "X2 film P22.5, 6 mm wide"),
     ("C_Polarized", dict(tht=True, span=5.00, drill=0.812), "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm", "10 mm radial electrolytic, P5"),
-    ("C_Polarized", dict(tht=True, span=5.00, drill=1.016), "tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus", "12.5 mm radial electrolytic, P5"),
+    ("C_Polarized", dict(tht=True, span=5.00, drill=1.016, refdes=PROTEUS_PADS), "tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus",
+     "12.5 mm radial electrolytic, P5, Proteus pad size"),
+    ("C_Polarized", dict(tht=True, span=5.00, drill=1.016), "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm", "12.5 mm radial electrolytic, P5"),
     ("C_Polarized", dict(tht=True, span=3.50), "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm", "8 mm radial electrolytic, P3.5"),
     ("C_Polarized", dict(tht=False, span=4.50), "tube_psu:CP_Elec_6.3x7.7_EEEFTE221XAP", "EEEFTE221XAP SMD electrolytic, Proteus pads"),
     # --- diodes
@@ -58,18 +77,19 @@ RULES = [
     ("C3D02060A", dict(), "tube_psu:TO-220-2_Vertical_AK", "TO-220-2, pads A/K"),
     ("TBS22K", dict(), "tube_psu:D_Bridge_TBS", "TBS SMD bridge, Proteus land pattern"),
     # --- transistors
-    ("ADR380", dict(), "tube_psu:SOT-23_Proteus", "SOT-23, Proteus pad numbering (REF1 ISL21010)"),
-    ("Q_NMOS_DGS", dict(), "tube_psu:SOT-23_Proteus", "SOT-23, Proteus pad numbering (Q9 2N7000)"),
+    ("ADR380", dict(refdes=PROTEUS_PADS), "tube_psu:SOT-23_Proteus", "SOT-23, Proteus pad numbering (REF1 ISL21010)"),
+    ("Q_NMOS_DGS", dict(refdes=PROTEUS_PADS), "tube_psu:SOT-23_Proteus", "SOT-23, Proteus pad numbering (Q9 2N7000)"),
     ("Q_NMOS_SGD", dict(), "tube_psu:LFPAK56_Proteus", "LFPAK56, three source pads numbered 1, 2 = G, 3 = D tab"),
     ("Q_NMOS_GDS", dict(span=5.08), "Package_TO_SOT_THT:TO-220-3_Vertical", "TO-220(F), 1=G 2=D 3=S"),
     ("Q_NMOS_GDS", dict(span=10.92), "Package_TO_SOT_THT:TO-247-3_Vertical", "TO-247, 1=G 2=D 3=S (KiCad pitch 5.45, Proteus 5.461)"),
     # --- ICs
-    ("TLV316IDBVR", dict(), "tube_psu:SOT-23-5_Proteus", "SOT-23-5, Proteus pad rows 2.39 mm apart"),
-    ("TPS73033", dict(), "tube_psu:SOT-23-5_Proteus", "SOT-23-5, Proteus pad rows 2.39 mm apart"),
-    ("ADC121S101", dict(), "tube_psu:SOT-23-6_Proteus", "SOT-23-6, Proteus pad rows 2.39 mm apart"),
+    ("TLV316IDBVR", dict(refdes=PROTEUS_PADS), "tube_psu:SOT-23-5_Proteus", "SOT-23-5, Proteus pad rows 2.39 mm apart, Proteus pad size"),
+    ("TPS73033", dict(refdes=PROTEUS_PADS), "tube_psu:SOT-23-5_Proteus", "SOT-23-5, Proteus pad rows 2.39 mm apart, Proteus pad size"),
+    ("ADC121S101", dict(refdes=PROTEUS_PADS), "tube_psu:SOT-23-6_Proteus", "SOT-23-6, Proteus pad rows 2.39 mm apart"),
     ("LMH6658", dict(), "Package_SO:TSSOP-8_3x3mm_P0.65mm", "TSSOP-8 (device OPA2353UA; the pads are TSSOP, not SO-8)"),
-    ("SI8271", dict(), "tube_psu:SOIC-8_3.9x4.9mm_P1.27mm_Proteus", "SOIC-8, Proteus pad rows 5.5 mm apart"),
-    ("SI8274", dict(), "tube_psu:SOIC-16_3.9x9.9mm_P1.27mm_Proteus", "SOIC-16, Proteus pad rows 5.4 mm apart"),
+    ("SI8271", dict(refdes=PROTEUS_PADS), "tube_psu:SOIC-8_3.9x4.9mm_P1.27mm_Proteus", "SOIC-8, Proteus pad rows 5.5 mm apart"),
+    ("SI8274", dict(refdes=PROTEUS_PADS), "tube_psu:SOIC-16_3.9x9.9mm_P1.27mm_Proteus", "SOIC-16, Proteus pad rows 5.4 mm apart, Proteus pad size"),
+    ("SI8274", dict(), "tube_psu:SOIC-16_3.9x9.9mm_P1.27mm_Proteus_KiCadPads", "SOIC-16, Proteus pad rows 5.4 mm apart"),
     ("SI8661", dict(), "tube_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus", "SOIC-16W, Proteus pad rows 9.4 mm apart"),
     ("IXDD604", dict(), "tube_psu:DFN-8-1EP_P0.95mm_IXDD60xD2", "IXYS D2 DFN-8 with thermal pad 9, Proteus land pattern"),
     ("IXDD609", dict(), "tube_psu:DFN-8-1EP_P0.95mm_IXDD60xD2", "IXYS D2 DFN-8 with thermal pad 9, Proteus land pattern"),
@@ -81,7 +101,7 @@ RULES = [
     ("RM8_INDUCTOR", dict(), "tube_psu:L_RM8_Proteus", "RM8 choke: winding pads pri1/pri2, bobbin pins 1/2 (no net); 45 deg on the board"),
     ("SCF20-05-550", dict(), "tube_psu:L_CommonMode_SCF20-05-550", "common-mode choke, 4 pins"),
     ("SONGLE_RELAY", dict(), "tube_psu:Relay_Songle_SRD_5pin", "Songle relay, pads 1-5"),
-    ("HEADER_2X25_50MIL", dict(), "tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus", "2x25 1.27 mm header"),
+    ("HEADER_2X25_50MIL", dict(refdes=PROTEUS_PADS), "tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus", "2x25 1.27 mm header"),
     ("CONN_01X03", dict(), "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical", "1x3 2.54 mm (FCI 66226-003)"),
     ("PIN", dict(n=2), "tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm", "blade terminal, two holes both pad 1"),
 ]
@@ -107,9 +127,9 @@ PROJECT = {
     "TO-220-2_Vertical_AK": dict(base="Package_TO_SOT_THT:TO-220-2_Vertical", renumber={"1": "A", "2": "K"}, ipc="SICD1",
                                  descr="TO-220-2 diode, pads A (pin 1) / K (pin 2, tab), Proteus pad positions"),
     "D_Bridge_TBS": dict(ipc="DB1", descr="Taiwan Semiconductor TBS bridge rectifier (SMD, pads 1-4)"),
-    # Phase 3 DRC (STATUS.md "Phase 3 - pad sizes"): ipc_sizes=True (Proteus pad sizes) on the footprints
-    # whose KiCad pads short or come closer than 0.15 mm to Proteus tracks/vias; remove the flag (and the
-    # CP_Radial _Proteus spec) to go back to the KiCad sizes.
+    # Phase 3 DRC (STATUS.md "Phase 3 - pad sizes"), narrowed in Phase 5: ipc_sizes=True (Proteus pad
+    # sizes) on the footprints of the PROTEUS_PADS parts, whose KiCad pads short or come closer than
+    # 0.15 mm to Proteus tracks/vias; the other parts of these packages use the KiCad pads.
     "CP_Radial_D12.5mm_P5.00mm_Proteus": dict(base="Capacitor_THT:CP_Radial_D12.5mm_P5.00mm", ipc="C28", ipc_sizes=True,
                                               descr="12.5 mm radial electrolytic P5, Proteus pads (1.524 mm, drill 1.016)"),
     "R_0603_1608Metric_Proteus1.73": dict(base="Resistor_SMD:R_0603_1608Metric", ipc="R40", ipc_sizes=True,
@@ -136,6 +156,9 @@ PROJECT = {
                                              descr="SOIC-8, Proteus pad positions (rows 5.5 mm apart)"),
     "SOIC-16_3.9x9.9mm_P1.27mm_Proteus": dict(base="Package_SO:SOIC-16_3.9x9.9mm_P1.27mm", ipc="DRV5", ipc_sizes=True,
                                               descr="SOIC-16, Proteus pad positions (rows 5.4 mm apart)"),
+    "SOIC-16_3.9x9.9mm_P1.27mm_Proteus_KiCadPads": dict(base="Package_SO:SOIC-16_3.9x9.9mm_P1.27mm", ipc="DRV6",
+                                                        descr="SOIC-16, Proteus pad positions (rows 5.4 mm apart), "
+                                                              "KiCad pad size"),
     "SOIC-16W_7.5x10.3mm_P1.27mm_Proteus": dict(base="Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm", ipc="ISO1",
                                                 descr="SOIC-16W, Proteus pad positions (rows 9.4 mm apart)"),
     "DFN-8-1EP_P0.95mm_IXDD60xD2": dict(ipc="DRV4", descr="IXYS IXDD604/609 D2 package: 8 pads 0.45 x 1.2 at 0.95 mm pitch, "
