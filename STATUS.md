@@ -1391,6 +1391,36 @@ roundtrip: OK
 ALL CHECKS PASSED
 ```
 
+## Measurement-circuit simulations – done (Opus 5.5, 2026-11-14)
+
+`simulation/` (plan: simulation/PLAN.md, details and findings: simulation/README.md). The 9 ADC
+measurement paths, simulated in ngspice 47 (`.ac` 1 Hz – 50 MHz, the reference) and as hVHDL_ode
+models in NVC (Welch H1 from dithered runs), then compared. Runs on its own with
+`python3 simulation/run_sim.py` (about 75 s, peak RSS 250 MB, VUnit `-p 1` forced). It is not
+part of `tools/check_all.sh`, and nothing in kicad/ was changed.
+
+- hVHDL_ode is a submodule at `simulation/hVHDL_ode`, pinned to cdbe46e (origin main).
+- Values come from the KiCad netlist (`kicad-cli sch export netlist`). The golden check against
+  simulation/INVENTORY.md is OK: 73 R/C, 26 IC pins, 36 unnamed nets mapped one-to-one, and all
+  9 role topologies match. A changed value or pin fails it (tested).
+- Bias +2V5_BIAS = 1.65 V in both simulators (REF1 ideal source 2.5589 V). Op-amps use the same
+  macromodel in both (TLV316 10 MHz / 250 Ω, LMH6658 140 MHz / 95 dB). 0.2 pF across each 1 MΩ
+  in group B.
+- Result: **all 9 pass**. RMS error 0.007–0.028 dB / 0.03–0.19°, DC gain VHDL = ngspice,
+  −3 dB within 1.0 % (simulation/out/report.md, out/<id>_bode.png).
+- Departures from the plan: four bands per circuit (1 GS/s … 2 kS/s) instead of one fixed-step
+  run; first-order-hold dither instead of zero-order hold + `freq_deskew=zoh`; DC gain from two
+  DC operating points instead of a step (reasons in simulation/README.md).
+- Design findings (simulation/README.md): (1) VAC_MEAS feeds the line voltage into the
+  unbuffered bias (142 Ω), which puts ±15 mV at 325 V peak on all current channels (≈ 0.19 A on
+  the PFC channels) and raises VAC's gain 0.94 %. (2) VAC_MEAS has no filter, and with 1 MΩ
+  parasitics its gain rises 22 dB above DC in the MHz range. (3) The DC_LINK_MEAS filter
+  bottoms out at −58…−64 dB. (4) AD2 (420 V) bandwidth is 8.86 kHz (C27). (5) HEATER_I_MEAS is
+  0.18 % low from the LMH6658's finite gain. Also the REF1 value mismatch and U1 decoupling
+  already listed in PLAN.md.
+- Open: vendor op-amp models (PLAN step 5); the parameter export for tube_power_control_fpga's
+  `isolated_adc_model`.
+
 ## Next
 
 Phase 5 is complete; the migration is done (all user decisions implemented, ALL CHECKS PASSED). Nothing

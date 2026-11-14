@@ -61,27 +61,34 @@ Patterns copied from hVHDL_ode (`ngspice_ref_models/fc_5level.py`: netlist from 
 
 ## 3. Steps
 
-0. **Prerequisite:** ngspice (`sudo apt install ngspice`, Ubuntu 22.04 gives ngspice 36).
-   Not installed now; PySpice is not needed.
-1. **Netlist extraction + golden check.** `spice/extract.py` cuts each circuit out of the
+Status 2026-11-14: steps 0–4 and 6 (run_sim.py, STATUS.md) **done**, all 9 circuits pass
+(simulation/README.md, out/report.md); step 5 open; the parameter export of step 6 open.
+
+0. **[done]** **Prerequisite:** ngspice (`sudo apt install ngspice`, Ubuntu 22.04 gives ngspice 36).
+   PySpice is not needed. Installed: ngspice 47 (built from source, ~/.local/bin).
+1. **[done]** **Netlist extraction + golden check.** `spice/extract.py` cuts each circuit out of the
    KiCad netlist by refdes set; a test compares it with the hand inventory (`simulation/INVENTORY.md`) so a schematic change shows up.
-2. **ngspice references.** Op-amps as a macromodel first (TLV316: 10 MHz GBW, rail-to-rail;
+2. **[done]** **ngspice references.** Op-amps as a macromodel first (TLV316: 10 MHz GBW, rail-to-rail;
    LMH6658 / OPA2353: datasheet GBW and output resistance), 0.2 pF per 1 MΩ resistor for
    group B. `.ac dec 50 1 Hz – 50 MHz`, input = shunt current / line or rail voltage,
    output = J2 / ADC Vin node. DC operating point checked against the transfer column above
    and `tube_power_control_fpga/docs/TUBE_POWER_J2_MEASUREMENTS.md`.
-3. **VHDL models.** Nodal state equations per group (one state per capacitor; op-amp as the
+3. **[done]** **VHDL models.** Nodal state equations per group (one state per capacitor; op-amp as the
    same single- or two-pole macromodel, so both simulators model the same circuit).
    `generic_trbdf2` for the stiff ones (15.9 MHz output RC next to a 10 kHz bias pole),
    rk4/vern7 elsewhere. Step ≤ 1/(20·fastest pole); run length ≥ 5 Welch windows of the
    lowest frequency of interest; dither + one step, `freq_deskew=zoh`.
-4. **Comparison.** `compare.py` from the VUnit post_run; pass limits per circuit (start:
+   *As built:* one parameterised topology for groups A–D; trbdf2 in all bands; four bands
+   (1 GS/s … 2 kS/s) instead of one run; first-order-hold dither (no deskew; the
+   zero-order hold is wrong for circuits fast compared with fs) and the DC gain from two
+   DC operating points instead of a step (README "How the comparison works").
+4. **[done]** **Comparison.** `compare.py` from the VUnit post_run; pass limits per circuit (start:
    ≤ 0.5 dB / 5° RMS over the band where coherence > 0.95, DC gain ≤ 0.5 %, -3 dB frequency
    ≤ 5 %). Report + overlay plots with `test_plot.py`.
-5. **Vendor op-amp models (optional).** Rerun ngspice with TI's TLV316 / OPA2353 models to
+5. **[open]** **Vendor op-amp models (optional).** Rerun ngspice with TI's TLV316 / OPA2353 models to
    show where the macromodel stops being valid (only the SPICE side; the VHDL keeps the
    macromodel).
-6. **Hook-up.** `simulation/run_sim.py` runs separately (not part of tools/check_all.sh);
+6. **[done, except the parameter export]** **Hook-up.** `simulation/run_sim.py` runs separately (not part of tools/check_all.sh);
    STATUS.md section; later a parameter export (gain, poles) for tube_power_control_fpga's
    `isolated_adc_model`.
 
