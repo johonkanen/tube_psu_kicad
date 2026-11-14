@@ -1,0 +1,5 @@
+# generated (simulation/run_sim.py, spice/run_ac.py, VUnit)
+*
+!.gitignore
+!report.md
+!*.png
