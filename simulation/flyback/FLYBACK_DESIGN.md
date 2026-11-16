@@ -165,12 +165,12 @@ the first model had reported 20.6 V. What was wrong, in order of size:
 6. **Winding order**: confirmed by the user as modelled (primary, 8 T, 3 T, 4 tape layers,
    7 T, 3 T, 3 T, 42 T, one tape layer between windings). No change.
 
-**Result:** the calibrated model gives **15V = CURRENT_IDLE V at *idle*** (measured ≈ 15.5 V)
-and CURRENT_LIGHT V at *light*; nominal-load results moved by < 0.1 V. The remaining
+**Result:** the calibrated model gives **15V = 15.95 V at *idle*** (measured ≈ 15.5 V)
+and 16.64 V at *light*; nominal-load results moved by < 0.1 V. The remaining
 difference is within what the unknowns allow (the real idle loads on 5V and 15V, the IW1818
 knee sampling, and HF damping of the leakage ringing by winding capacitance / proximity
 losses, which the model does not have). **The worst case for the AUX_MEAS limit is not light
-load but *min_15V* (isolated rails loaded, primary gate drivers idle): CURRENT_MIN15 V on the
+load but *min_15V* (isolated rails loaded, primary gate drivers idle): 19.92 V on the
 current transformer** – possible on this board because +15V OUT / +5V OUT / −5V OUT / −80V OUT
 go off-board. Measure 15V in that condition (isolated outputs loaded, DHB / PFC / heater
 drivers idle) to confirm.
@@ -213,11 +213,21 @@ written once `recommended` has been simulated.
 
 ## 6. Other findings on sheet 1
 
-- **Rectifier voltage ratings (schematic value ES1A = 50 V):** reverse voltage at
-  DC+ = 420 V is Vout + Vin·Ns/Np: D6 / D29 / D14 (3 T) ≈ 29 V – OK; D5 (8 T) ≈ 80 V,
-  D4 (7 T) ≈ 70 V, **D8 (42 T) ≈ 420 V** plus ringing – far above 50 V. Either the fitted
-  parts differ from the schematic value or the value must change (e.g. ES1D 200 V for the
-  15 V rails, ES1J / US1J 600 V for −80 V). Check the BOM / the board.
+- **D8 (−100V BIAS) is overstressed – design finding.** The fitted rectifiers are the 200 V
+  versions of ES1A (ES1D class, user). D8 blocks while the switch is on: the 42 T winding
+  (pin 6 dot, D8 cathode at pin 6) then sits at +Vin × 42/52 against ISO_GND while the
+  anode is at −80 V, so **V_R(D8) = 0.808 × DC+ + 80 V + Vf** – 403 V at DC+ = 400 V
+  (simulated 389–402 V over all load cases, 50 ns filtered), 419 V at 420 V and still
+  341 V at 325 V before the PFC runs. A 200 V part would only be within its rating below
+  DC+ ≈ 150 V. The polarity is checked against the schematic (dots at pins 2, 4, 6, 8, 9):
+  the −80 V rail can only be made in the flyback interval, so the reverse voltage cannot be
+  avoided by the winding. On top comes the ringing at switch-on (the model's hard turn-on
+  gives raw spikes to ~940 V; with the IW1818's valley switching the real spike is smaller,
+  but measure it). **D8 needs a ≥ 600 V part** (ES1J / US1J / RS1J, SMA, same footprint;
+  1000 V US1M / RS1M for margin against the turn-on ringing). If a 200 V ES1D is really
+  fitted at D8 today it runs in reverse breakdown every cycle – see the `d8bv200` check
+  below for what the model predicts then. D4 / D5 (7 T / 8 T) see 67–81 V and D6 / D14 / D29
+  (3 T) 28–29 V: ES1D (200 V) is fine there.
 - **15V_ISO_SEC = 12.6–14.4 V** with the 7 T winding (target 15 V): check the Si8274 UVLO
   grade; an 8 T winding gives ≈ 15 V.
 - **15V rail at light load exceeds the AUX_MEAS range** (current build, 20.6 V vs 18.7 V).

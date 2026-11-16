@@ -37,6 +37,16 @@ def dc(case):
     return case.replace("_20V", "_15V")
 
 
+ISOLATION = {
+    "current": "enamel + 3 mm margin tape both sides (6 mm creepage), 4 tape layers at the barrier",
+    "stacked": "as current",
+    "margin_sandwich": "as current, two barriers (4 tape layers each) around the secondaries",
+    "tiw_simple": "TIW (TCA3, reinforced by the wire) on all isolated windings, no margins; 1 tape layer",
+    "tiw_sandwich": "TIW on all isolated windings, no margins; P1–P2 crossover sleeved across the secondaries",
+    "tiw_sandwich_stacked": "as tiw_sandwich",
+    "recommended": "as tiw_sandwich",
+    "recommended_pre": "as tiw_sandwich",
+}
 COLORS = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6", "#e34948"]
 
 
@@ -244,6 +254,26 @@ def main(names):
             return f"{max(v):.0f}" + (" **> 200**" if max(v) > 200 else "") if v else "–"
         s.append(f"| {r['name']} | " + " | ".join(vr(x) for x in RAILS) +
                  f" | {max(v['vcol'] for v in res.values()):.0f} | {res['nom']['pr45']:.3f} |")
+    s += ["", "## Losses, flux, build and isolation per option (nominal case)", "",
+          "Winding losses: MKF (DC + skin + proximity, 60 °C) from the simulated currents of the *nom* case; "
+          "core losses differ 10× between MKF's models and are the same for every option (same Lp, Ipk, f). "
+          "Bpk: MKF at *nom*; at the 1 V current limit (0.803 A) Bpk = Lp·Ipk/(Np·Ae) = 0.21 T for every option.", "",
+          "| option | winding losses W | of which primary W | core W (Roshen–iGSE) | Bpk nom T | radial build mm (window 3.40) | isolation |",
+          "|---|---|---|---|---|---|---|"]
+    for r in summary:
+        p = os.path.join(OUT, "losses", f"{r['name']}.json")
+        lo = json.load(open(p)) if os.path.exists(p) else {}
+        per = lo.get("per_winding_W") or {}
+        prim = sum(v for k, v in per.items() if k in ("P", "P1", "P2"))
+        wl = lo.get("winding_losses_W")
+        s.append(f"| {r['name']} | {wl:.3f} | {prim:.3f} | " if wl is not None else f"| {r['name']} | – | – | ")
+        if wl is not None:
+            s[-1] += (f"{lo.get('core_losses_W_ROSHEN', 0):.2f}–{lo.get('core_losses_W_IGSE', 0):.2f} | "
+                      f"{lo.get('B_peak_T', 0):.3f} | ")
+        else:
+            s[-1] += "– | – | "
+        g = r["om"]["geometry"]
+        s[-1] += f"{g['radial_build_mm']:.2f}{'' if g['fits'] else ' **DOES NOT FIT**'} | {ISOLATION.get(r['name'], '')} |"
     s += ["", "## Spread (max − min over the load cases at 400 V), V", "",
           "| option | " + " | ".join(dn(x) for x in RAILS) + " |", "|---" * (len(RAILS) + 1) + "|"]
     for r in summary:

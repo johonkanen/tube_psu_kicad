@@ -11,6 +11,10 @@
   1 %); the high A5–S5 leakage of tiw_sandwich came from the layout mode "bifilar"
   (alternating whole 3-strand turns). New om_model mode "multifilar" (strand by strand);
   all bifilar/trifilar sections in options.py use it (tiw_sandwich A5–S5 15.8 → 4.1 µH).
+- Step 0 results (current transformer, calibrated model, 16 cases + nom325): 15V idle
+  15.95 V (measured 15.5 V), light 16.64 V, nominal 15.44 V, worst case min_15V 19.92 V
+  (isolated rails loaded, primary 15V only its fixed load) – exceeds 18.7 V. D8 reverse
+  389–402 V at 400 V (341 V at 325 V): 200 V ES1D overstressed (FLYBACK_DESIGN.md 6).
 - Step 2 – batch running: `--om-only --force` for all options, then current, tiw_sandwich,
   tiw_simple, recommended, recommended_pre, stacked, tiw_sandwich_stacked, margin_sandwich
   (one ngspice at a time). If stopped: rerun the same commands; cached cases are skipped.

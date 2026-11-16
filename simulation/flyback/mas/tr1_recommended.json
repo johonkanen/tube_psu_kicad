@@ -1,0 +1,6206 @@
+{
+ "inputs": {
+  "designRequirements": {
+   "name": "TR1 recommended",
+   "magnetizingInductance": {
+    "nominal": 0.00011848119240310656
+   },
+   "turnsRatios": [
+    {
+     "nominal": 3.25
+    },
+    {
+     "nominal": 8.666666666666666
+    },
+    {
+     "nominal": 8.666666666666666
+    },
+    {
+     "nominal": 8.666666666666666
+    },
+    {
+     "nominal": 0.6190476190476191
+    },
+    {
+     "nominal": 3.25
+    },
+    {
+     "nominal": 1.0
+    }
+   ],
+   "isolationSides": [
+    "primary",
+    "secondary"
+   ],
+   "insulation": {
+    "insulationType": "Reinforced",
+    "pollutionDegree": "P2",
+    "overvoltageCategory": "OVC-II",
+    "cti": "Group IIIA",
+    "altitude": {
+     "maximum": 2000
+    },
+    "mainSupplyVoltage": {
+     "nominal": 230,
+     "maximum": 264
+    },
+    "standards": [
+     "IEC 62368-1"
+    ]
+   }
+  },
+  "operatingPoints": []
+ },
+ "magnetic": {
+  "core": {
+   "functionalDescription": {
+    "gapping": [
+     {
+      "area": 3.2205e-05,
+      "coordinates": [
+       0.0,
+       0.00014375,
+       0.0
+      ],
+      "distanceClosestNormalSurface": 0.00705625,
+      "distanceClosestParallelSurface": 0.00435,
+      "length": 0.0002875,
+      "sectionDimensions": [
+       0.0057,
+       0.00565
+      ],
+      "shape": "rectangular",
+      "type": "subtractive"
+     },
+     {
+      "area": 1.6103e-05,
+      "coordinates": [
+       0.008625,
+       0.0,
+       0.0
+      ],
+      "distanceClosestNormalSurface": 0.007195,
+      "distanceClosestParallelSurface": 0.00435,
+      "length": 1e-05,
+      "sectionDimensions": [
+       0.00285,
+       0.00565
+      ],
+      "shape": "rectangular",
+      "type": "residual"
+     },
+     {
+      "area": 1.6103e-05,
+      "coordinates": [
+       -0.008625,
+       0.0,
+       0.0
+      ],
+      "distanceClosestNormalSurface": 0.007195,
+      "distanceClosestParallelSurface": 0.00435,
+      "length": 1e-05,
+      "sectionDimensions": [
+       0.00285,
+       0.00565
+      ],
+      "shape": "rectangular",
+      "type": "residual"
+     }
+    ],
+    "material": {
+     "application": [
+      "power"
+     ],
+     "coerciveForce": [
+      {
+       "magneticField": 21.74,
+       "magneticFluxDensity": 0.0,
+       "temperature": 25.0
+      },
+      {
+       "magneticField": 12.78,
+       "magneticFluxDensity": 0.0,
+       "temperature": 100.0
+      }
+     ],
+     "curieTemperature": 210.0,
+     "density": 4850.0,
+     "family": "N",
+     "heatCapacity": {
+      "nominal": 700.0
+     },
+     "heatConductivity": {
+      "maximum": 7.0,
+      "minimum": 4.0
+     },
+     "manufacturerInfo": {
+      "datasheetUrl": "https://www.tdk-electronics.tdk.com/download/528882/990c299b916e9f3eb7e44ad563b7f0b9/pdf-n87.pdf",
+      "name": "TDK"
+     },
+     "material": "ferrite",
+     "materialComposition": "MnZn",
+     "name": "N87",
+     "permeability": {
+      "complex": {
+       "imaginary": [
+        {
+         "frequency": 12589.0,
+         "value": 8.0
+        },
+        {
+         "frequency": 14125.0,
+         "value": 5.0
+        },
+        {
+         "frequency": 15849.0,
+         "value": 1.0
+        },
+        {
+         "frequency": 17783.0,
+         "value": 6.0
+        },
+        {
+         "frequency": 19953.0,
+         "value": 4.0
+        },
+        {
+         "frequency": 22387.0,
+         "value": 6.0
+        },
+        {
+         "frequency": 25119.0,
+         "value": 6.0
+        },
+        {
+         "frequency": 28184.0,
+         "value": 6.0
+        },
+        {
+         "frequency": 31623.0,
+         "value": 2.0
+        },
+        {
+         "frequency": 35481.0,
+         "value": 5.0
+        },
+        {
+         "frequency": 39811.0,
+         "value": 7.0
+        },
+        {
+         "frequency": 44668.0,
+         "value": 6.0
+        },
+        {
+         "frequency": 50119.0,
+         "value": 9.0
+        },
+        {
+         "frequency": 56234.0,
+         "value": 9.0
+        },
+        {
+         "frequency": 63096.0,
+         "value": 11.0
+        },
+        {
+         "frequency": 70795.0,
+         "value": 11.0
+        },
+        {
+         "frequency": 79433.0,
+         "value": 12.0
+        },
+        {
+         "frequency": 89125.0,
+         "value": 12.0
+        },
+        {
+         "frequency": 100000.0,
+         "value": 14.0
+        },
+        {
+         "frequency": 112202.0,
+         "value": 15.0
+        },
+        {
+         "frequency": 125893.0,
+         "value": 16.0
+        },
+        {
+         "frequency": 141254.0,
+         "value": 18.0
+        },
+        {
+         "frequency": 158489.0,
+         "value": 21.0
+        },
+        {
+         "frequency": 177828.0,
+         "value": 21.0
+        },
+        {
+         "frequency": 199526.0,
+         "value": 23.0
+        },
+        {
+         "frequency": 223872.0,
+         "value": 26.0
+        },
+        {
+         "frequency": 251189.0,
+         "value": 29.0
+        },
+        {
+         "frequency": 281838.0,
+         "value": 33.0
+        },
+        {
+         "frequency": 316228.0,
+         "value": 39.0
+        },
+        {
+         "frequency": 354813.0,
+         "value": 44.0
+        },
+        {
+         "frequency": 398107.0,
+         "value": 52.0
+        },
+        {
+         "frequency": 446684.0,
+         "value": 65.0
+        },
+        {
+         "frequency": 501187.0,
+         "value": 81.0
+        },
+        {
+         "frequency": 562341.0,
+         "value": 108.0
+        },
+        {
+         "frequency": 630957.0,
+         "value": 155.0
+        },
+        {
+         "frequency": 707946.0,
+         "value": 227.0
+        },
+        {
+         "frequency": 794328.0,
+         "value": 343.0
+        },
+        {
+         "frequency": 891251.0,
+         "value": 504.0
+        },
+        {
+         "frequency": 1000000.0,
+         "value": 699.0
+        },
+        {
+         "frequency": 1122019.0,
+         "value": 918.0
+        },
+        {
+         "frequency": 1258925.0,
+         "value": 1101.0
+        },
+        {
+         "frequency": 1412538.0,
+         "value": 1299.0
+        },
+        {
+         "frequency": 1584893.0,
+         "value": 1504.0
+        },
+        {
+         "frequency": 1778279.0,
+         "value": 1642.0
+        },
+        {
+         "frequency": 1995262.0,
+         "value": 1753.0
+        },
+        {
+         "frequency": 2238721.0,
+         "value": 1803.0
+        },
+        {
+         "frequency": 2511887.0,
+         "value": 1791.0
+        },
+        {
+         "frequency": 2818383.0,
+         "value": 1734.0
+        },
+        {
+         "frequency": 3162278.0,
+         "value": 1626.0
+        },
+        {
+         "frequency": 3548134.0,
+         "value": 1499.0
+        },
+        {
+         "frequency": 3981072.0,
+         "value": 1354.0
+        },
+        {
+         "frequency": 4466836.0,
+         "value": 1200.0
+        },
+        {
+         "frequency": 5011873.0,
+         "value": 1042.0
+        },
+        {
+         "frequency": 5623414.0,
+         "value": 895.0
+        },
+        {
+         "frequency": 6309574.0,
+         "value": 760.0
+        },
+        {
+         "frequency": 7079458.0,
+         "value": 640.0
+        },
+        {
+         "frequency": 7943283.0,
+         "value": 538.0
+        },
+        {
+         "frequency": 8912510.0,
+         "value": 449.0
+        },
+        {
+         "frequency": 10000001.0,
+         "value": 378.0
+        },
+        {
+         "frequency": 11220185.0,
+         "value": 318.0
+        },
+        {
+         "frequency": 12589255.0,
+         "value": 269.0
+        },
+        {
+         "frequency": 14125376.0,
+         "value": 229.0
+        },
+        {
+         "frequency": 15848933.0,
+         "value": 195.0
+        },
+        {
+         "frequency": 17782795.0,
+         "value": 169.0
+        },
+        {
+         "frequency": 19952625.0,
+         "value": 146.0
+        },
+        {
+         "frequency": 22387213.0,
+         "value": 126.0
+        },
+        {
+         "frequency": 25118866.0,
+         "value": 109.0
+        },
+        {
+         "frequency": 28183831.0,
+         "value": 94.0
+        },
+        {
+         "frequency": 31622779.0,
+         "value": 81.0
+        },
+        {
+         "frequency": 35481342.0,
+         "value": 70.0
+        },
+        {
+         "frequency": 39810717.0,
+         "value": 61.0
+        },
+        {
+         "frequency": 44668359.0,
+         "value": 53.0
+        },
+        {
+         "frequency": 50451246.0,
+         "value": 46.0
+        },
+        {
+         "frequency": 56234133.0,
+         "value": 40.0
+        },
+        {
+         "frequency": 63095734.0,
+         "value": 35.0
+        },
+        {
+         "frequency": 70794578.0,
+         "value": 31.0
+        },
+        {
+         "frequency": 79432823.0,
+         "value": 27.0
+        },
+        {
+         "frequency": 89716412.0,
+         "value": 23.0
+        },
+        {
+         "frequency": 100000000.0,
+         "value": 21.0
+        },
+        {
+         "frequency": 112201845.0,
+         "value": 18.0
+        },
+        {
+         "frequency": 125892541.0,
+         "value": 16.0
+        },
+        {
+         "frequency": 141253755.0,
+         "value": 14.0
+        },
+        {
+         "frequency": 159540848.0,
+         "value": 12.0
+        },
+        {
+         "frequency": 177827941.0,
+         "value": 11.0
+        },
+        {
+         "frequency": 199526232.0,
+         "value": 9.0
+        },
+        {
+         "frequency": 223872114.0,
+         "value": 8.0
+        },
+        {
+         "frequency": 251188643.0,
+         "value": 7.0
+        },
+        {
+         "frequency": 283708205.0,
+         "value": 6.0
+        },
+        {
+         "frequency": 316227766.0,
+         "value": 6.0
+        },
+        {
+         "frequency": 354813389.0,
+         "value": 5.0
+        },
+        {
+         "frequency": 398107171.0,
+         "value": 4.0
+        },
+        {
+         "frequency": 446683592.0,
+         "value": 4.0
+        },
+        {
+         "frequency": 504512459.0,
+         "value": 4.0
+        },
+        {
+         "frequency": 562341325.0,
+         "value": 3.0
+        },
+        {
+         "frequency": 630957345.0,
+         "value": 3.0
+        },
+        {
+         "frequency": 707945784.0,
+         "value": 3.0
+        },
+        {
+         "frequency": 794328235.0,
+         "value": 2.0
+        },
+        {
+         "frequency": 897164117.0,
+         "value": 2.0
+        },
+        {
+         "frequency": 1000000000.0,
+         "value": 2.0
+        }
+       ],
+       "real": [
+        {
+         "frequency": 10000.0,
+         "value": 2150.0
+        },
+        {
+         "frequency": 11220.0,
+         "value": 2160.0
+        },
+        {
+         "frequency": 12589.0,
+         "value": 2157.0
+        },
+        {
+         "frequency": 14125.0,
+         "value": 2161.0
+        },
+        {
+         "frequency": 15849.0,
+         "value": 2158.0
+        },
+        {
+         "frequency": 17783.0,
+         "value": 2155.0
+        },
+        {
+         "frequency": 19953.0,
+         "value": 2155.0
+        },
+        {
+         "frequency": 22387.0,
+         "value": 2155.0
+        },
+        {
+         "frequency": 25119.0,
+         "value": 2158.0
+        },
+        {
+         "frequency": 28184.0,
+         "value": 2159.0
+        },
+        {
+         "frequency": 31623.0,
+         "value": 2153.0
+        },
+        {
+         "frequency": 35481.0,
+         "value": 2156.0
+        },
+        {
+         "frequency": 39811.0,
+         "value": 2155.0
+        },
+        {
+         "frequency": 44668.0,
+         "value": 2156.0
+        },
+        {
+         "frequency": 50119.0,
+         "value": 2155.0
+        },
+        {
+         "frequency": 56234.0,
+         "value": 2155.0
+        },
+        {
+         "frequency": 63096.0,
+         "value": 2156.0
+        },
+        {
+         "frequency": 70795.0,
+         "value": 2156.0
+        },
+        {
+         "frequency": 79433.0,
+         "value": 2156.0
+        },
+        {
+         "frequency": 89125.0,
+         "value": 2157.0
+        },
+        {
+         "frequency": 100000.0,
+         "value": 2157.0
+        },
+        {
+         "frequency": 112202.0,
+         "value": 2159.0
+        },
+        {
+         "frequency": 125893.0,
+         "value": 2160.0
+        },
+        {
+         "frequency": 141254.0,
+         "value": 2162.0
+        },
+        {
+         "frequency": 158489.0,
+         "value": 2165.0
+        },
+        {
+         "frequency": 177828.0,
+         "value": 2169.0
+        },
+        {
+         "frequency": 199526.0,
+         "value": 2173.0
+        },
+        {
+         "frequency": 223872.0,
+         "value": 2179.0
+        },
+        {
+         "frequency": 251189.0,
+         "value": 2186.0
+        },
+        {
+         "frequency": 281838.0,
+         "value": 2196.0
+        },
+        {
+         "frequency": 316228.0,
+         "value": 2208.0
+        },
+        {
+         "frequency": 354813.0,
+         "value": 2224.0
+        },
+        {
+         "frequency": 398107.0,
+         "value": 2245.0
+        },
+        {
+         "frequency": 446684.0,
+         "value": 2273.0
+        },
+        {
+         "frequency": 501187.0,
+         "value": 2311.0
+        },
+        {
+         "frequency": 562341.0,
+         "value": 2359.0
+        },
+        {
+         "frequency": 630957.0,
+         "value": 2419.0
+        },
+        {
+         "frequency": 707946.0,
+         "value": 2489.0
+        },
+        {
+         "frequency": 794328.0,
+         "value": 2555.0
+        },
+        {
+         "frequency": 891251.0,
+         "value": 2598.0
+        },
+        {
+         "frequency": 1000000.0,
+         "value": 2595.0
+        },
+        {
+         "frequency": 1122019.0,
+         "value": 2540.0
+        },
+        {
+         "frequency": 1258925.0,
+         "value": 2452.0
+        },
+        {
+         "frequency": 1412538.0,
+         "value": 2318.0
+        },
+        {
+         "frequency": 1584893.0,
+         "value": 2127.0
+        },
+        {
+         "frequency": 1778279.0,
+         "value": 1912.0
+        },
+        {
+         "frequency": 1995262.0,
+         "value": 1644.0
+        },
+        {
+         "frequency": 2238721.0,
+         "value": 1355.0
+        },
+        {
+         "frequency": 2511887.0,
+         "value": 1070.0
+        },
+        {
+         "frequency": 2818383.0,
+         "value": 793.0
+        },
+        {
+         "frequency": 3162278.0,
+         "value": 574.0
+        },
+        {
+         "frequency": 3548134.0,
+         "value": 375.0
+        },
+        {
+         "frequency": 3981072.0,
+         "value": 211.0
+        },
+        {
+         "frequency": 4466836.0,
+         "value": 83.0
+        }
+       ]
+      },
+      "initial": [
+       {
+        "temperature": -60.0,
+        "value": 1139.0
+       },
+       {
+        "temperature": -50.0,
+        "value": 1240.0
+       },
+       {
+        "temperature": -40.0,
+        "value": 1365.0
+       },
+       {
+        "temperature": -30.0,
+        "value": 1473.0
+       },
+       {
+        "temperature": -20.0,
+        "value": 1605.0
+       },
+       {
+        "temperature": -10.0,
+        "value": 1756.0
+       },
+       {
+        "temperature": 0.0,
+        "value": 1888.0
+       },
+       {
+        "temperature": 10.0,
+        "value": 2039.0
+       },
+       {
+        "temperature": 20.0,
+        "value": 2208.0
+       },
+       {
+        "temperature": 30.0,
+        "value": 2409.0
+       },
+       {
+        "temperature": 40.0,
+        "value": 2658.0
+       },
+       {
+        "temperature": 50.0,
+        "value": 2895.0
+       },
+       {
+        "temperature": 60.0,
+        "value": 3180.0
+       },
+       {
+        "temperature": 70.0,
+        "value": 3448.0
+       },
+       {
+        "temperature": 80.0,
+        "value": 3712.0
+       },
+       {
+        "temperature": 90.0,
+        "value": 3868.0
+       },
+       {
+        "temperature": 100.0,
+        "value": 3983.0
+       },
+       {
+        "temperature": 110.0,
+        "value": 3995.0
+       },
+       {
+        "temperature": 120.0,
+        "value": 3931.0
+       },
+       {
+        "temperature": 130.0,
+        "value": 3862.0
+       },
+       {
+        "temperature": 140.0,
+        "value": 3863.0
+       },
+       {
+        "temperature": 150.0,
+        "value": 3896.0
+       },
+       {
+        "temperature": 160.0,
+        "value": 3965.0
+       },
+       {
+        "temperature": 170.0,
+        "value": 4054.0
+       },
+       {
+        "temperature": 180.0,
+        "value": 4202.0
+       },
+       {
+        "temperature": 190.0,
+        "value": 4421.0
+       },
+       {
+        "temperature": 200.0,
+        "value": 4757.0
+       },
+       {
+        "temperature": 210.0,
+        "value": 4893.0
+       },
+       {
+        "temperature": 220.0,
+        "value": 36.0
+       }
+      ]
+     },
+     "provenance": [
+      {
+       "fields": [
+        "heatConductivity",
+        "heatCapacity"
+       ],
+       "retrievedDate": "2026-10-11",
+       "source": "manufacturerDatasheet",
+       "sourceName": "EPCOS AG (TDK group) - Ferrites and Accessories - Data Book 2013 (chapter General - Definitions, section 8)",
+       "sourceUrl": "https://cdn.components.ru/media/PDF/3038290.pdf",
+       "verification": "valuesReadFromSource",
+       "verificationDate": "2026-10-11",
+       "verificationMethod": "Chapter 'General - Definitions', section 8 'General mechanical, thermal, electrical and magnetic properties of ferrites', printed page 136 (PDF page 137). Source scope: EPCOS/TDK SIFERRIT ferrites (data book covers both MnZn and NiZn grades, e.g. K1/K10 NiZn and N/T-series MnZn). Heading: 'Typical figures for the mechanical and thermal properties of ferrites'. Suggested records (TDK-Electronics/EPCOS-line grades):. As printed: Thermal conductivity approx. 4 ... 7\u00b710^-3 J/(mm\u00b7s\u00b7K) -> 4-7 W/(m\u00b7K); Specific heat approx. 0.7 J/(g\u00b7K) -> 700 J/(kg\u00b7K). Note: Vendor-authored PDF (Author metadata 'EPCOS AG', title 'Ferrites and Accessories - Data Book 2013') hosted by distributor components.ru; TDK's own epcos.com/ferrites_databook link now 404s. Same table also in the older EPCOS ferrite catalog copy at https://www.thierry-lequeu.fr/data/FER-SIEM.pdf ('approx. 4 ... 7\u00b710-3 J/mm\u00b7s\u00b7K', 'approx. 0,7 J/g\u00b7K'). Table is generic to 'ferrites' (not split MnZn/NiZn); values are 'approx.'. Existing TDK PC47/PC95 records carry 4-7 W/mK (matches this table) but 700-800 J/kgK (only 700 is in this table). Applies equally as a TDK-wide statement; the TDK-Japan summary below gives different numbers for the Japan-line grades."
+      }
+     ],
+     "recommendations": {
+      "maximumFrequency": 500000.0,
+      "minimumFrequency": 25000.0
+     },
+     "remanence": [
+      {
+       "magneticField": 0.0,
+       "magneticFluxDensity": 0.17491,
+       "temperature": 25.0
+      },
+      {
+       "magneticField": 0.0,
+       "magneticFluxDensity": 0.06983,
+       "temperature": 100.0
+      }
+     ],
+     "resistivity": [
+      {
+       "temperature": 25.0,
+       "value": 10.0
+      }
+     ],
+     "saturation": [
+      {
+       "magneticField": 1220.0,
+       "magneticFluxDensity": 0.49525,
+       "temperature": 25.0
+      },
+      {
+       "magneticField": 1210.0,
+       "magneticFluxDensity": 0.38980000000000004,
+       "temperature": 100.0
+      }
+     ],
+     "type": "commercial",
+     "volumetricLosses": {
+      "default": [
+       {
+        "method": "steinmetz",
+        "ranges": [
+         {
+          "alpha": 1.5224303492213431,
+          "beta": 2.887871015513804,
+          "ct0": 1.4927840709486713,
+          "ct1": 0.022452893513793756,
+          "ct2": 0.000109661227033876,
+          "k": 3.033588306643161,
+          "maximumFrequency": 150000.0,
+          "minimumFrequency": 25000.0
+         },
+         {
+          "alpha": 2.187913366666177,
+          "beta": 2.335358947447829,
+          "ct0": 1.2504668180113665,
+          "ct1": 0.011870520511274928,
+          "ct2": 7.407391163281085e-05,
+          "k": 0.0001190999921020533,
+          "maximumFrequency": 1000000.0,
+          "minimumFrequency": 150000.0
+         }
+        ]
+       },
+       {
+        "method": "roshen"
+       }
+      ]
+     }
+    },
+    "numberStacks": 1,
+    "shape": {
+     "aliases": [
+      "E 20/6",
+      "EF 20",
+      "E 20"
+     ],
+     "dimensions": {
+      "A": {
+       "maximum": 0.0208,
+       "minimum": 0.0194
+      },
+      "B": {
+       "maximum": 0.0102,
+       "minimum": 0.0098
+      },
+      "C": {
+       "maximum": 0.0059,
+       "minimum": 0.0054
+      },
+      "D": {
+       "maximum": 0.0074,
+       "minimum": 0.007
+      },
+      "E": {
+       "maximum": 0.0147,
+       "minimum": 0.0141
+      },
+      "F": {
+       "maximum": 0.0059,
+       "minimum": 0.0055
+      }
+     },
+     "family": "e",
+     "magneticCircuit": "open",
+     "name": "E 20/10/6",
+     "type": "standard"
+    },
+    "type": "twoPieceSet"
+   },
+   "geometricalDescription": [
+    {
+     "coordinates": [
+      0.0,
+      0.0,
+      -0.0
+     ],
+     "machining": [
+      {
+       "coordinates": [
+        0.0,
+        0.00014375,
+        0.0
+       ],
+       "length": 0.0002875
+      }
+     ],
+     "material": "N87",
+     "rotation": [
+      3.141592653589793,
+      3.141592653589793,
+      0.0
+     ],
+     "shape": {
+      "aliases": [
+       "E 20/6",
+       "EF 20",
+       "E 20"
+      ],
+      "dimensions": {
+       "A": {
+        "maximum": 0.0208,
+        "minimum": 0.0194
+       },
+       "B": {
+        "maximum": 0.0102,
+        "minimum": 0.0098
+       },
+       "C": {
+        "maximum": 0.0059,
+        "minimum": 0.0054
+       },
+       "D": {
+        "maximum": 0.0074,
+        "minimum": 0.007
+       },
+       "E": {
+        "maximum": 0.0147,
+        "minimum": 0.0141
+       },
+       "F": {
+        "maximum": 0.0059,
+        "minimum": 0.0055
+       }
+      },
+      "family": "e",
+      "magneticCircuit": "open",
+      "name": "E 20/10/6",
+      "type": "standard"
+     },
+     "type": "halfSet"
+    },
+    {
+     "coordinates": [
+      0.0,
+      -0.0,
+      -0.0
+     ],
+     "material": "N87",
+     "rotation": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "shape": {
+      "aliases": [
+       "E 20/6",
+       "EF 20",
+       "E 20"
+      ],
+      "dimensions": {
+       "A": {
+        "maximum": 0.0208,
+        "minimum": 0.0194
+       },
+       "B": {
+        "maximum": 0.0102,
+        "minimum": 0.0098
+       },
+       "C": {
+        "maximum": 0.0059,
+        "minimum": 0.0054
+       },
+       "D": {
+        "maximum": 0.0074,
+        "minimum": 0.007
+       },
+       "E": {
+        "maximum": 0.0147,
+        "minimum": 0.0141
+       },
+       "F": {
+        "maximum": 0.0059,
+        "minimum": 0.0055
+       }
+      },
+      "family": "e",
+      "magneticCircuit": "open",
+      "name": "E 20/10/6",
+      "type": "standard"
+     },
+     "type": "halfSet"
+    }
+   ],
+   "processedDescription": {
+    "columns": [
+     {
+      "area": 3.2205e-05,
+      "coordinates": [
+       0.0,
+       0.0,
+       0.0
+      ],
+      "depth": 0.00565,
+      "height": 0.0144,
+      "shape": "rectangular",
+      "type": "central",
+      "width": 0.0057
+     },
+     {
+      "area": 1.6103e-05,
+      "coordinates": [
+       0.008625,
+       0.0,
+       0.0
+      ],
+      "depth": 0.00565,
+      "height": 0.0144,
+      "shape": "rectangular",
+      "type": "lateral",
+      "width": 0.00285
+     },
+     {
+      "area": 1.6103e-05,
+      "coordinates": [
+       -0.008625,
+       0.0,
+       0.0
+      ],
+      "depth": 0.00565,
+      "height": 0.0144,
+      "shape": "rectangular",
+      "type": "lateral",
+      "width": 0.00285
+     }
+    ],
+    "depth": 0.0056500000000000005,
+    "effectiveParameters": {
+     "effectiveArea": 3.204181986036011e-05,
+     "effectiveLength": 0.04380244058984917,
+     "effectiveVolume": 1.4035099108240728e-06,
+     "minimumArea": 3.164000000000001e-05
+    },
+    "height": 0.02,
+    "width": 0.0201,
+    "windingWindows": [
+     {
+      "area": 6.264e-05,
+      "coordinates": [
+       0.005025,
+       0.0
+      ],
+      "height": 0.0144,
+      "width": 0.00435
+     }
+    ]
+   }
+  },
+  "coil": {
+   "bobbin": {
+    "distributorsInfo": null,
+    "functionalDescription": {
+     "base": null,
+     "connections": null,
+     "dimensions": {
+      "c": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": null,
+       "minimum": 0.0061,
+       "nominal": null,
+       "unit": null
+      },
+      "e": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": 0.0139,
+       "minimum": null,
+       "nominal": null,
+       "unit": null
+      },
+      "f": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": null,
+       "minimum": 0.0061,
+       "nominal": null,
+       "unit": null
+      },
+      "l2": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": 0.0138,
+       "minimum": null,
+       "nominal": null,
+       "unit": null
+      },
+      "s1": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": null,
+       "minimum": 0.0005,
+       "nominal": null,
+       "unit": null
+      },
+      "s2": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": null,
+       "minimum": 0.0006,
+       "nominal": null,
+       "unit": null
+      }
+     },
+     "family": "e",
+     "familySubtype": null,
+     "material": "PA66",
+     "numberChambers": null,
+     "orientation": "vertical",
+     "pinout": {
+      "centralPitch": null,
+      "numberPins": 10,
+      "numberPinsPerRow": [
+       5,
+       5
+      ],
+      "numberRows": 2,
+      "pinDescription": null,
+      "pitch": 0.00381,
+      "rowDistance": 0.01016
+     },
+     "shape": "E 20/10/6",
+     "type": "standard",
+     "variant": null
+    },
+    "manufacturerInfo": {
+     "datasheetUrl": "https://www.norwe.eu/katalogbilder/001/09987a01.pdf",
+     "description": null,
+     "family": null,
+     "name": "Norwe",
+     "orderCode": null,
+     "provenance": null,
+     "reference": "09987-106",
+     "series": null,
+     "spiceModel": null,
+     "status": null
+    },
+    "name": "Bobbin EE 20 vertical 10-pin 3.81mm (Norwe 09987-106)",
+    "processedDescription": {
+     "columnCornerRadius": null,
+     "columnDepth": 0.00355,
+     "columnShape": "rectangular",
+     "columnThickness": 0.0005,
+     "columnWidth": 0.00355,
+     "coordinates": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dividers": null,
+     "pins": null,
+     "wallThickness": 0.0006,
+     "windingWindows": [
+      {
+       "angle": null,
+       "area": 4.283999999999999e-05,
+       "column": null,
+       "coordinates": [
+        0.0052499999999999995,
+        0.0
+       ],
+       "height": 0.0126,
+       "radialHeight": null,
+       "sectionsAlignment": null,
+       "sectionsOrientation": null,
+       "shape": null,
+       "width": 0.0033999999999999994,
+       "windingOrder": null
+      }
+     ]
+    }
+   },
+   "functionalDescription": [
+    {
+     "name": "P1",
+     "numberTurns": 26,
+     "numberParallels": 1,
+     "wire": {
+      "coating": {
+       "breakdownVoltage": 2110.0,
+       "grade": 2,
+       "material": null,
+       "numberLayers": null,
+       "temperatureRating": null,
+       "thickness": null,
+       "thicknessLayers": null,
+       "type": "enamelled"
+      },
+      "conductingArea": null,
+      "conductingDiameter": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": 0.000257,
+       "minimum": 0.000251,
+       "nominal": 0.000254,
+       "unit": null
+      },
+      "conductingHeight": null,
+      "conductingWidth": null,
+      "edgeRadius": null,
+      "manufacturerInfo": {
+       "datasheetUrl": null,
+       "description": null,
+       "family": null,
+       "name": "Elektrisola",
+       "orderCode": null,
+       "provenance": null,
+       "reference": null,
+       "series": null,
+       "spiceModel": null,
+       "status": null
+      },
+      "material": "copper",
+      "name": "Round 30.0 - Heavy Build",
+      "numberConductors": 1,
+      "outerDiameter": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": 0.000301999999999,
+       "minimum": 0.000287,
+       "nominal": 0.000294999999999,
+       "unit": null
+      },
+      "outerHeight": null,
+      "outerWidth": null,
+      "standard": "NEMA MW 1000 C",
+      "standardName": "30 AWG",
+      "strand": null,
+      "twistPitch": null,
+      "type": "round"
+     },
+     "isolationSide": "primary"
+    },
+    {
+     "name": "S15",
+     "numberTurns": 8,
+     "numberParallels": 3,
+     "wire": {
+      "coating": {
+       "breakdownVoltage": 6000.0,
+       "grade": null,
+       "material": "TCA",
+       "numberLayers": 3,
+       "temperatureRating": 155.0,
+       "thickness": null,
+       "thicknessLayers": 7.62e-05,
+       "type": "insulated"
+      },
+      "conductingArea": null,
+      "conductingDiameter": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": null,
+       "minimum": null,
+       "nominal": 0.000254,
+       "unit": null
+      },
+      "conductingHeight": null,
+      "conductingWidth": null,
+      "edgeRadius": null,
+      "manufacturerInfo": {
+       "datasheetUrl": null,
+       "description": null,
+       "family": null,
+       "name": "Rubadue",
+       "orderCode": null,
+       "provenance": null,
+       "reference": null,
+       "series": null,
+       "spiceModel": null,
+       "status": null
+      },
+      "material": "copper",
+      "name": "Round TCA3 30 AWG",
+      "numberConductors": 1,
+      "outerDiameter": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": null,
+       "minimum": null,
+       "nominal": 0.000483,
+       "unit": null
+      },
+      "outerHeight": null,
+      "outerWidth": null,
+      "standard": "NEMA MW 1000 C",
+      "standardName": "30 AWG",
+      "strand": null,
+      "twistPitch": null,
+      "type": "round"
+     },
+     "isolationSide": "secondary"
+    },
+    {
+     "name": "A5",
+     "numberTurns": 3,
+     "numberParallels": 3,
+     "wire": {
+      "coating": {
+       "breakdownVoltage": 2110.0,
+       "grade": 2,
+       "material": null,
+       "numberLayers": null,
+       "temperatureRating": null,
+       "thickness": null,
+       "thicknessLayers": null,
+       "type": "enamelled"
+      },
+      "conductingArea": null,
+      "conductingDiameter": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": 0.000257,
+       "minimum": 0.000251,
+       "nominal": 0.000254,
+       "unit": null
+      },
+      "conductingHeight": null,
+      "conductingWidth": null,
+      "edgeRadius": null,
+      "manufacturerInfo": {
+       "datasheetUrl": null,
+       "description": null,
+       "family": null,
+       "name": "Elektrisola",
+       "orderCode": null,
+       "provenance": null,
+       "reference": null,
+       "series": null,
+       "spiceModel": null,
+       "status": null
+      },
+      "material": "copper",
+      "name": "Round 30.0 - Heavy Build",
+      "numberConductors": 1,
+      "outerDiameter": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": 0.000301999999999,
+       "minimum": 0.000287,
+       "nominal": 0.000294999999999,
+       "unit": null
+      },
+      "outerHeight": null,
+      "outerWidth": null,
+      "standard": "NEMA MW 1000 C",
+      "standardName": "30 AWG",
+      "strand": null,
+      "twistPitch": null,
+      "type": "round"
+     },
+     "isolationSide": "primary"
+    },
+    {
+     "name": "S5",
+     "numberTurns": 3,
+     "numberParallels": 3,
+     "wire": {
+      "coating": {
+       "breakdownVoltage": 6000.0,
+       "grade": null,
+       "material": "TCA",
+       "numberLayers": 3,
+       "temperatureRating": 155.0,
+       "thickness": null,
+       "thicknessLayers": 7.62e-05,
+       "type": "insulated"
+      },
+      "conductingArea": null,
+      "conductingDiameter": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": null,
+       "minimum": null,
+       "nominal": 0.000254,
+       "unit": null
+      },
+      "conductingHeight": null,
+      "conductingWidth": null,
+      "edgeRadius": null,
+      "manufacturerInfo": {
+       "datasheetUrl": null,
+       "description": null,
+       "family": null,
+       "name": "Rubadue",
+       "orderCode": null,
+       "provenance": null,
+       "reference": null,
+       "series": null,
+       "spiceModel": null,
+       "status": null
+      },
+      "material": "copper",
+      "name": "Round TCA3 30 AWG",
+      "numberConductors": 1,
+      "outerDiameter": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": null,
+       "minimum": null,
+       "nominal": 0.000483,
+       "unit": null
+      },
+      "outerHeight": null,
+      "outerWidth": null,
+      "standard": "NEMA MW 1000 C",
+      "standardName": "30 AWG",
+      "strand": null,
+      "twistPitch": null,
+      "type": "round"
+     },
+     "isolationSide": "secondary"
+    },
+    {
+     "name": "SN5",
+     "numberTurns": 3,
+     "numberParallels": 3,
+     "wire": {
+      "coating": {
+       "breakdownVoltage": 6000.0,
+       "grade": null,
+       "material": "TCA",
+       "numberLayers": 3,
+       "temperatureRating": 155.0,
+       "thickness": null,
+       "thicknessLayers": 7.62e-05,
+       "type": "insulated"
+      },
+      "conductingArea": null,
+      "conductingDiameter": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": null,
+       "minimum": null,
+       "nominal": 0.000254,
+       "unit": null
+      },
+      "conductingHeight": null,
+      "conductingWidth": null,
+      "edgeRadius": null,
+      "manufacturerInfo": {
+       "datasheetUrl": null,
+       "description": null,
+       "family": null,
+       "name": "Rubadue",
+       "orderCode": null,
+       "provenance": null,
+       "reference": null,
+       "series": null,
+       "spiceModel": null,
+       "status": null
+      },
+      "material": "copper",
+      "name": "Round TCA3 30 AWG",
+      "numberConductors": 1,
+      "outerDiameter": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": null,
+       "minimum": null,
+       "nominal": 0.000483,
+       "unit": null
+      },
+      "outerHeight": null,
+      "outerWidth": null,
+      "standard": "NEMA MW 1000 C",
+      "standardName": "30 AWG",
+      "strand": null,
+      "twistPitch": null,
+      "type": "round"
+     },
+     "isolationSide": "secondary"
+    },
+    {
+     "name": "SHV",
+     "numberTurns": 42,
+     "numberParallels": 1,
+     "wire": {
+      "coating": {
+       "breakdownVoltage": 6000.0,
+       "grade": null,
+       "material": "TCA",
+       "numberLayers": 3,
+       "temperatureRating": 155.0,
+       "thickness": null,
+       "thicknessLayers": 7.62e-05,
+       "type": "insulated"
+      },
+      "conductingArea": null,
+      "conductingDiameter": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": null,
+       "minimum": null,
+       "nominal": 0.000203,
+       "unit": null
+      },
+      "conductingHeight": null,
+      "conductingWidth": null,
+      "edgeRadius": null,
+      "manufacturerInfo": {
+       "datasheetUrl": null,
+       "description": null,
+       "family": null,
+       "name": "Rubadue",
+       "orderCode": null,
+       "provenance": null,
+       "reference": null,
+       "series": null,
+       "spiceModel": null,
+       "status": null
+      },
+      "material": "copper",
+      "name": "Round TCA3 32 AWG",
+      "numberConductors": 1,
+      "outerDiameter": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": null,
+       "minimum": null,
+       "nominal": 0.000432,
+       "unit": null
+      },
+      "outerHeight": null,
+      "outerWidth": null,
+      "standard": "NEMA MW 1000 C",
+      "standardName": "32 AWG",
+      "strand": null,
+      "twistPitch": null,
+      "type": "round"
+     },
+     "isolationSide": "secondary"
+    },
+    {
+     "name": "A15",
+     "numberTurns": 8,
+     "numberParallels": 4,
+     "wire": {
+      "coating": {
+       "breakdownVoltage": 2110.0,
+       "grade": 2,
+       "material": null,
+       "numberLayers": null,
+       "temperatureRating": null,
+       "thickness": null,
+       "thicknessLayers": null,
+       "type": "enamelled"
+      },
+      "conductingArea": null,
+      "conductingDiameter": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": 0.000257,
+       "minimum": 0.000251,
+       "nominal": 0.000254,
+       "unit": null
+      },
+      "conductingHeight": null,
+      "conductingWidth": null,
+      "edgeRadius": null,
+      "manufacturerInfo": {
+       "datasheetUrl": null,
+       "description": null,
+       "family": null,
+       "name": "Elektrisola",
+       "orderCode": null,
+       "provenance": null,
+       "reference": null,
+       "series": null,
+       "spiceModel": null,
+       "status": null
+      },
+      "material": "copper",
+      "name": "Round 30.0 - Heavy Build",
+      "numberConductors": 1,
+      "outerDiameter": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": 0.000301999999999,
+       "minimum": 0.000287,
+       "nominal": 0.000294999999999,
+       "unit": null
+      },
+      "outerHeight": null,
+      "outerWidth": null,
+      "standard": "NEMA MW 1000 C",
+      "standardName": "30 AWG",
+      "strand": null,
+      "twistPitch": null,
+      "type": "round"
+     },
+     "isolationSide": "primary"
+    },
+    {
+     "name": "P2",
+     "numberTurns": 26,
+     "numberParallels": 1,
+     "wire": {
+      "coating": {
+       "breakdownVoltage": 2110.0,
+       "grade": 2,
+       "material": null,
+       "numberLayers": null,
+       "temperatureRating": null,
+       "thickness": null,
+       "thicknessLayers": null,
+       "type": "enamelled"
+      },
+      "conductingArea": null,
+      "conductingDiameter": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": 0.000257,
+       "minimum": 0.000251,
+       "nominal": 0.000254,
+       "unit": null
+      },
+      "conductingHeight": null,
+      "conductingWidth": null,
+      "edgeRadius": null,
+      "manufacturerInfo": {
+       "datasheetUrl": null,
+       "description": null,
+       "family": null,
+       "name": "Elektrisola",
+       "orderCode": null,
+       "provenance": null,
+       "reference": null,
+       "series": null,
+       "spiceModel": null,
+       "status": null
+      },
+      "material": "copper",
+      "name": "Round 30.0 - Heavy Build",
+      "numberConductors": 1,
+      "outerDiameter": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": 0.000301999999999,
+       "minimum": 0.000287,
+       "nominal": 0.000294999999999,
+       "unit": null
+      },
+      "outerHeight": null,
+      "outerWidth": null,
+      "standard": "NEMA MW 1000 C",
+      "standardName": "30 AWG",
+      "strand": null,
+      "twistPitch": null,
+      "type": "round"
+     },
+     "isolationSide": "primary"
+    }
+   ],
+   "groupsDescription": [
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0052499999999999995,
+      0.0
+     ],
+     "dimensions": [
+      0.0034,
+      0.0126
+     ],
+     "name": "Default group",
+     "partialWindings": [
+      {
+       "winding": "P1",
+       "parallelsProportion": [
+        1.0
+       ]
+      },
+      {
+       "winding": "S15",
+       "parallelsProportion": [
+        1.0,
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "winding": "A5",
+       "parallelsProportion": [
+        1.0,
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "winding": "S5",
+       "parallelsProportion": [
+        1.0,
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "winding": "SN5",
+       "parallelsProportion": [
+        1.0,
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "winding": "SHV",
+       "parallelsProportion": [
+        1.0
+       ]
+      },
+      {
+       "winding": "A15",
+       "parallelsProportion": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "winding": "P2",
+       "parallelsProportion": [
+        1.0
+       ]
+      }
+     ],
+     "sectionsOrientation": "overlapping",
+     "type": "wound"
+    }
+   ],
+   "sectionsDescription": [
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      0.00029499999999900006,
+      0.0126
+     ],
+     "fillingFactor": 1.0,
+     "group": "Default group",
+     "layersOrientation": "overlapping",
+     "margin": [
+      0.0,
+      0.0
+     ],
+     "name": "S0 P1",
+     "partialWindings": [
+      {
+       "winding": "P1",
+       "parallelsProportion": [
+        1.0
+       ]
+      }
+     ],
+     "type": "conduction",
+     "windingStyle": "windByConsecutiveParallels"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.003872499999999,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      5.5e-05,
+      0.0126
+     ],
+     "fillingFactor": 1.0,
+     "group": "Default group",
+     "layersOrientation": "overlapping",
+     "margin": null,
+     "name": "I0 tape x1",
+     "partialWindings": [],
+     "type": "insulation"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      0.0004829999999999999,
+      0.0126
+     ],
+     "fillingFactor": 1.0,
+     "group": "Default group",
+     "layersOrientation": "overlapping",
+     "margin": [
+      0.0,
+      0.0
+     ],
+     "name": "S1 S15",
+     "partialWindings": [
+      {
+       "winding": "S15",
+       "parallelsProportion": [
+        1.0,
+        1.0,
+        1.0
+       ]
+      }
+     ],
+     "type": "conduction",
+     "windingStyle": "windByConsecutiveParallels"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999998999,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      0.0004829999999999999,
+      0.0126
+     ],
+     "fillingFactor": 1.0,
+     "group": "Default group",
+     "layersOrientation": "overlapping",
+     "margin": [
+      0.0,
+      0.0
+     ],
+     "name": "S2 A5+S5+SN5",
+     "partialWindings": [
+      {
+       "winding": "A5",
+       "parallelsProportion": [
+        1.0,
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "winding": "S5",
+       "parallelsProportion": [
+        1.0,
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "winding": "SN5",
+       "parallelsProportion": [
+        1.0,
+        1.0,
+        1.0
+       ]
+      }
+     ],
+     "type": "conduction",
+     "windingStyle": "windByConsecutiveParallels"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005297999999999,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      0.0008640000000000002,
+      0.0126
+     ],
+     "fillingFactor": 1.0,
+     "group": "Default group",
+     "layersOrientation": "overlapping",
+     "margin": [
+      0.0,
+      0.0
+     ],
+     "name": "S3 SHV",
+     "partialWindings": [
+      {
+       "winding": "SHV",
+       "parallelsProportion": [
+        1.0
+       ]
+      }
+     ],
+     "type": "conduction",
+     "windingStyle": "windByConsecutiveParallels"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0057574999999989995,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      5.5e-05,
+      0.0126
+     ],
+     "fillingFactor": 1.0,
+     "group": "Default group",
+     "layersOrientation": "overlapping",
+     "margin": null,
+     "name": "I3 tape x1",
+     "partialWindings": [],
+     "type": "insulation"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      0.00029499999999900006,
+      0.0126
+     ],
+     "fillingFactor": 1.0,
+     "group": "Default group",
+     "layersOrientation": "overlapping",
+     "margin": [
+      0.0,
+      0.0
+     ],
+     "name": "S4 A15",
+     "partialWindings": [
+      {
+       "winding": "A15",
+       "parallelsProportion": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+       ]
+      }
+     ],
+     "type": "conduction",
+     "windingStyle": "windByConsecutiveParallels"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.006107499999998,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      5.5e-05,
+      0.0126
+     ],
+     "fillingFactor": 1.0,
+     "group": "Default group",
+     "layersOrientation": "overlapping",
+     "margin": null,
+     "name": "I4 tape x1",
+     "partialWindings": [],
+     "type": "insulation"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      0.00029499999999900006,
+      0.0126
+     ],
+     "fillingFactor": 1.0,
+     "group": "Default group",
+     "layersOrientation": "overlapping",
+     "margin": [
+      0.0,
+      0.0
+     ],
+     "name": "S5 P2",
+     "partialWindings": [
+      {
+       "winding": "P2",
+       "parallelsProportion": [
+        1.0
+       ]
+      }
+     ],
+     "type": "conduction",
+     "windingStyle": "windByConsecutiveParallels"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.006457499999997,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      5.5e-05,
+      0.0126
+     ],
+     "fillingFactor": 1.0,
+     "group": "Default group",
+     "layersOrientation": "overlapping",
+     "margin": null,
+     "name": "I5 tape x1",
+     "partialWindings": [],
+     "type": "insulation"
+    }
+   ],
+   "layersDescription": [
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      0.000294999999999,
+      0.0126
+     ],
+     "fillingFactor": 0.6087301587280953,
+     "name": "S0 P1 layer 0",
+     "orientation": "overlapping",
+     "partialWindings": [
+      {
+       "winding": "P1",
+       "parallelsProportion": [
+        1.0
+       ]
+      }
+     ],
+     "section": "S0 P1",
+     "turnsAlignment": "spread",
+     "type": "conduction",
+     "windingStyle": "windByConsecutiveParallels"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.003872499999999,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      5.5e-05,
+      0.0126
+     ],
+     "fillingFactor": 1.0,
+     "name": "I0 tape x1 layer 0",
+     "orientation": "overlapping",
+     "partialWindings": [],
+     "section": "I0 tape x1",
+     "turnsAlignment": "spread",
+     "type": "insulation"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      0.000483,
+      0.0126
+     ],
+     "fillingFactor": 0.9200000000000004,
+     "name": "S1 S15 layer 0",
+     "orientation": "overlapping",
+     "partialWindings": [
+      {
+       "winding": "S15",
+       "parallelsProportion": [
+        1.0,
+        1.0,
+        1.0
+       ]
+      }
+     ],
+     "section": "S1 S15",
+     "turnsAlignment": "spread",
+     "type": "conduction",
+     "windingStyle": "windByConsecutiveParallels"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      0.000483,
+      0.0126
+     ],
+     "fillingFactor": 0.9007142857135716,
+     "name": "S2 A5+S5+SN5 layer 0",
+     "orientation": "overlapping",
+     "partialWindings": [
+      {
+       "winding": "A5",
+       "parallelsProportion": [
+        1.0,
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "winding": "S5",
+       "parallelsProportion": [
+        1.0,
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "winding": "SN5",
+       "parallelsProportion": [
+        1.0,
+        1.0,
+        1.0
+       ]
+      }
+     ],
+     "section": "S2 A5+S5+SN5",
+     "turnsAlignment": "spread",
+     "type": "conduction",
+     "windingStyle": "windByConsecutiveParallels"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      0.000432,
+      0.0126
+     ],
+     "fillingFactor": 0.9942857142857143,
+     "name": "S3 SHV layer 0",
+     "orientation": "overlapping",
+     "partialWindings": [
+      {
+       "winding": "SHV",
+       "parallelsProportion": [
+        0.6904761904761905
+       ]
+      }
+     ],
+     "section": "S3 SHV",
+     "turnsAlignment": "spread",
+     "type": "conduction",
+     "windingStyle": "windByConsecutiveParallels"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005513999999999,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      0.000432,
+      0.0126
+     ],
+     "fillingFactor": 0.44571428571428573,
+     "name": "S3 SHV layer 1",
+     "orientation": "overlapping",
+     "partialWindings": [
+      {
+       "winding": "SHV",
+       "parallelsProportion": [
+        0.30952380952380953
+       ]
+      }
+     ],
+     "section": "S3 SHV",
+     "turnsAlignment": "spread",
+     "type": "conduction",
+     "windingStyle": "windByConsecutiveParallels"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0057574999999989995,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      5.5e-05,
+      0.0126
+     ],
+     "fillingFactor": 1.0,
+     "name": "I3 tape x1 layer 0",
+     "orientation": "overlapping",
+     "partialWindings": [],
+     "section": "I3 tape x1",
+     "turnsAlignment": "spread",
+     "type": "insulation"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      0.000294999999999,
+      0.0126
+     ],
+     "fillingFactor": 0.7492063492038092,
+     "name": "S4 A15 layer 0",
+     "orientation": "overlapping",
+     "partialWindings": [
+      {
+       "winding": "A15",
+       "parallelsProportion": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+       ]
+      }
+     ],
+     "section": "S4 A15",
+     "turnsAlignment": "spread",
+     "type": "conduction",
+     "windingStyle": "windByConsecutiveParallels"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.006107499999998,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      5.5e-05,
+      0.0126
+     ],
+     "fillingFactor": 1.0,
+     "name": "I4 tape x1 layer 0",
+     "orientation": "overlapping",
+     "partialWindings": [],
+     "section": "I4 tape x1",
+     "turnsAlignment": "spread",
+     "type": "insulation"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      0.000294999999999,
+      0.0126
+     ],
+     "fillingFactor": 0.6087301587280953,
+     "name": "S5 P2 layer 0",
+     "orientation": "overlapping",
+     "partialWindings": [
+      {
+       "winding": "P2",
+       "parallelsProportion": [
+        1.0
+       ]
+      }
+     ],
+     "section": "S5 P2",
+     "turnsAlignment": "spread",
+     "type": "conduction",
+     "windingStyle": "windByConsecutiveParallels"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.006457499999997,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      5.5e-05,
+      0.0126
+     ],
+     "fillingFactor": 1.0,
+     "name": "I5 tape x1 layer 0",
+     "orientation": "overlapping",
+     "partialWindings": [],
+     "section": "I5 tape x1",
+     "turnsAlignment": "spread",
+     "type": "insulation"
+    }
+   ],
+   "turnsDescription": [
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      -0.0061525000000005005
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 0",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      -0.005660300000000461
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 1",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      -0.005168100000000421
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 2",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      -0.004675900000000381
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 3",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      -0.004183700000000341
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 4",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      -0.003691500000000301
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 5",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      -0.003199300000000261
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 6",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      -0.0027071000000002212
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 7",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      -0.0022149000000001814
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 8",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      -0.0017227000000001413
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 9",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      -0.0012305000000001013
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 10",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      -0.0007383000000000613
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 11",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      -0.0002461000000000212
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 12",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      0.00024610000000001883
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 13",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      0.0007383000000000589
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 14",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      0.001230500000000099
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 15",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      0.001722700000000139
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 16",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      0.002214900000000179
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 17",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      0.0027071000000002186
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 18",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      0.0031993000000002584
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 19",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      0.0036915000000002983
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 20",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      0.004183700000000338
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 21",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      0.0046759000000003775
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 22",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      0.005168100000000417
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 23",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      0.005660300000000457
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 24",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0036974999999995,
+      0.006152500000000497
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S0 P1 layer 0",
+     "length": 0.029326769832805848,
+     "name": "P1 parallel 0 turn 25",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S0 P1",
+     "winding": "P1"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      -0.0060585
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 0 turn 0",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      -0.0055316739130434785
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 1 turn 0",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      -0.005004847826086957
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 2 turn 0",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      -0.004478021739130436
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 0 turn 1",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      -0.003951195652173915
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 1 turn 1",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      -0.0034243695652173937
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 2 turn 1",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      -0.002897543478260872
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 0 turn 2",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      -0.0023707173913043505
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 1 turn 2",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      -0.001843891304347829
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 2 turn 2",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      -0.0013170652173913073
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 0 turn 3",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      -0.0007902391304347857
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 1 turn 3",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      -0.00026341304347826417
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 2 turn 3",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      0.00026341304347825734
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 0 turn 4",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      0.0007902391304347788
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 1 turn 4",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      0.0013170652173913003
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 2 turn 4",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      0.001843891304347822
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 0 turn 5",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      0.0023707173913043436
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 1 turn 5",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      0.002897543478260865
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 2 turn 5",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      0.003424369565217387
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 0 turn 6",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      0.003951195652173909
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 1 turn 6",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      0.00447802173913043
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 2 turn 6",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      0.005004847826086951
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 0 turn 7",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      0.005531673913043472
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 1 turn 7",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004141499999999,
+      0.006058499999999994
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S1 S15 layer 0",
+     "length": 0.032116504109190445,
+     "name": "S15 parallel 2 turn 7",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S1 S15",
+     "winding": "S15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      -0.0061525000000005005
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "A5 parallel 0 turn 0",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      -0.005715384615385269
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "S5 parallel 0 turn 0",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "S5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      -0.005184269230769539
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "SN5 parallel 0 turn 0",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "SN5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      -0.004747153846154309
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "A5 parallel 1 turn 0",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      -0.004310038461539078
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "S5 parallel 1 turn 0",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "S5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      -0.0037789230769233483
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "SN5 parallel 1 turn 0",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "SN5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      -0.0033418076923081175
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "A5 parallel 2 turn 0",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      -0.0029046923076928867
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "S5 parallel 2 turn 0",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "S5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      -0.002373576923077156
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "SN5 parallel 2 turn 0",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "SN5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      -0.0019364615384619252
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "A5 parallel 0 turn 1",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      -0.0014993461538466946
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "S5 parallel 0 turn 1",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "S5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      -0.0009682307692309639
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "SN5 parallel 0 turn 1",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "SN5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      -0.0005311153846157331
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "A5 parallel 1 turn 1",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      -9.400000000050245e-05
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "S5 parallel 1 turn 1",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "S5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      0.0004371153846152283
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "SN5 parallel 1 turn 1",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "SN5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      0.000874230769230459
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "A5 parallel 2 turn 1",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      0.0013113461538456896
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "S5 parallel 2 turn 1",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "S5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      0.0018424615384614203
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "SN5 parallel 2 turn 1",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "SN5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      0.0022795769230766513
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "A5 parallel 0 turn 2",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      0.002716692307691882
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "S5 parallel 0 turn 2",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "S5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      0.003247807692307613
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "SN5 parallel 0 turn 2",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "SN5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      0.0036849230769228436
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "A5 parallel 1 turn 2",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      0.004122038461538075
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "S5 parallel 1 turn 2",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "S5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      0.004653153846153805
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "SN5 parallel 1 turn 2",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "SN5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      0.005090269230769035
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "A5 parallel 2 turn 2",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      0.005527384615384266
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "S5 parallel 2 turn 2",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "S5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004624499999999,
+      0.006058499999999996
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000483,
+      0.000483
+     ],
+     "layer": "S2 A5+S5+SN5 layer 0",
+     "length": 0.035151282612558184,
+     "name": "SN5 parallel 2 turn 2",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S2 A5+S5+SN5",
+     "winding": "SN5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      -0.006084
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 0",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      -0.005649428571428572
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 1",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      -0.0052148571428571435
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 2",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      -0.004780285714285715
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 3",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      -0.004345714285714287
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 4",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      -0.003911142857142859
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 5",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      -0.00347657142857143
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 6",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      -0.0030420000000000013
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 7",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      -0.0026074285714285726
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 8",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      -0.002172857142857144
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 9",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      -0.0017382857142857152
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 10",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      -0.0013037142857142867
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 11",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      -0.0008691428571428583
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 12",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      -0.00043457142857142983
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 13",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      -1.3010426069826053e-18
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 14",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      0.00043457142857142723
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 15",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      0.0008691428571428559
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 16",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      0.0013037142857142844
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 17",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      0.0017382857142857128
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 18",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      0.0021728571428571413
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 19",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      0.00260742857142857
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 20",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      0.0030419999999999987
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 21",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      0.0034765714285714274
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 22",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      0.003911142857142856
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 23",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      0.004345714285714284
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 24",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      0.004780285714285713
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 25",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      0.005214857142857141
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 26",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      0.005649428571428569
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 27",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005081999999999,
+      0.006083999999999997
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 0",
+     "length": 0.03802583989059284,
+     "name": "SHV parallel 0 turn 28",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005513999999999,
+      -0.006084
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 1",
+     "length": 0.040740175943294425,
+     "name": "SHV parallel 0 turn 29",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005513999999999,
+      -0.00507
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 1",
+     "length": 0.040740175943294425,
+     "name": "SHV parallel 0 turn 30",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005513999999999,
+      -0.004056
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 1",
+     "length": 0.040740175943294425,
+     "name": "SHV parallel 0 turn 31",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005513999999999,
+      -0.0030419999999999996
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 1",
+     "length": 0.040740175943294425,
+     "name": "SHV parallel 0 turn 32",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005513999999999,
+      -0.0020279999999999994
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 1",
+     "length": 0.040740175943294425,
+     "name": "SHV parallel 0 turn 33",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005513999999999,
+      -0.0010139999999999995
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 1",
+     "length": 0.040740175943294425,
+     "name": "SHV parallel 0 turn 34",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005513999999999,
+      3.7947076036992655e-19
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 1",
+     "length": 0.040740175943294425,
+     "name": "SHV parallel 0 turn 35",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005513999999999,
+      0.0010140000000000004
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 1",
+     "length": 0.040740175943294425,
+     "name": "SHV parallel 0 turn 36",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005513999999999,
+      0.0020280000000000003
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 1",
+     "length": 0.040740175943294425,
+     "name": "SHV parallel 0 turn 37",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005513999999999,
+      0.0030420000000000004
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 1",
+     "length": 0.040740175943294425,
+     "name": "SHV parallel 0 turn 38",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005513999999999,
+      0.004056000000000001
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 1",
+     "length": 0.040740175943294425,
+     "name": "SHV parallel 0 turn 39",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005513999999999,
+      0.005070000000000001
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 1",
+     "length": 0.040740175943294425,
+     "name": "SHV parallel 0 turn 40",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005513999999999,
+      0.006084000000000001
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000432,
+      0.000432
+     ],
+     "layer": "S3 SHV layer 1",
+     "length": 0.040740175943294425,
+     "name": "SHV parallel 0 turn 41",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S3 SHV",
+     "winding": "SHV"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      -0.0061525000000005005
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 0 turn 0",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      -0.005755564516129501
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 1 turn 0",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      -0.005358629032258501
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 2 turn 0",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      -0.004961693548387501
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 3 turn 0",
+     "orientation": "clockwise",
+     "parallel": 3,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      -0.004564758064516501
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 0 turn 1",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      -0.004167822580645501
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 1 turn 1",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      -0.003770887096774501
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 2 turn 1",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      -0.0033739516129035006
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 3 turn 1",
+     "orientation": "clockwise",
+     "parallel": 3,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      -0.0029770161290325003
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 0 turn 2",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      -0.0025800806451615
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 1 turn 2",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      -0.0021831451612904997
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 2 turn 2",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      -0.0017862096774194996
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 3 turn 2",
+     "orientation": "clockwise",
+     "parallel": 3,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      -0.0013892741935484995
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 0 turn 3",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      -0.0009923387096774994
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 1 turn 3",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      -0.0005954032258064994
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 2 turn 3",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      -0.00019846774193549925
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 3 turn 3",
+     "orientation": "clockwise",
+     "parallel": 3,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      0.00019846774193550088
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 0 turn 4",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      0.000595403225806501
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 1 turn 4",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      0.0009923387096775012
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 2 turn 4",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      0.0013892741935485012
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 3 turn 4",
+     "orientation": "clockwise",
+     "parallel": 3,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      0.0017862096774195013
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 0 turn 5",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      0.0021831451612905014
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 1 turn 5",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      0.0025800806451615017
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 2 turn 5",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      0.002977016129032502
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 3 turn 5",
+     "orientation": "clockwise",
+     "parallel": 3,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      0.0033739516129035023
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 0 turn 6",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      0.0037708870967745026
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 1 turn 6",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      0.004167822580645502
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 2 turn 6",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      0.004564758064516502
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 3 turn 6",
+     "orientation": "clockwise",
+     "parallel": 3,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      0.004961693548387502
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 0 turn 7",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      0.005358629032258502
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 1 turn 7",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      0.0057555645161295015
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 2 turn 7",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0059324999999985,
+      0.006152500000000501
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A15 layer 0",
+     "length": 0.04336968899434594,
+     "name": "A15 parallel 3 turn 7",
+     "orientation": "clockwise",
+     "parallel": 3,
+     "rotation": 0.0,
+     "section": "S4 A15",
+     "winding": "A15"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      -0.0061525000000005005
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 0",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      -0.005660300000000461
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 1",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      -0.005168100000000421
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 2",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      -0.004675900000000381
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 3",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      -0.004183700000000341
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 4",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      -0.003691500000000301
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 5",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      -0.003199300000000261
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 6",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      -0.0027071000000002212
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 7",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      -0.0022149000000001814
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 8",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      -0.0017227000000001413
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 9",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      -0.0012305000000001013
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 10",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      -0.0007383000000000613
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 11",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      -0.0002461000000000212
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 12",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      0.00024610000000001883
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 13",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      0.0007383000000000589
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 14",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      0.001230500000000099
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 15",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      0.001722700000000139
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 16",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      0.002214900000000179
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 17",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      0.0027071000000002186
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 18",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      0.0031993000000002584
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 19",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      0.0036915000000002983
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 20",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      0.004183700000000338
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 21",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      0.0046759000000003775
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 22",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      0.005168100000000417
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 23",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      0.005660300000000457
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 24",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0062824999999975,
+      0.006152500000000497
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 P2 layer 0",
+     "length": 0.04556880385185251,
+     "name": "P2 parallel 0 turn 25",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S5 P2",
+     "winding": "P2"
+    }
+   ]
+  },
+  "manufacturerInfo": {
+   "name": "tube_power_5_1",
+   "reference": "TR1 recommended"
+  }
+ },
+ "outputs": [
+  {
+   "inductance": {
+    "inductanceMatrix": [
+     {
+      "frequency": 72000.0,
+      "magnitude": {
+       "P1": {
+        "P1": {
+         "nominal": 0.00011848119240310656
+        },
+        "S15": {
+         "nominal": 3.6261278960948854e-05
+        },
+        "A5": {
+         "nominal": 1.3549870248847592e-05
+        },
+        "S5": {
+         "nominal": 1.3514865063718566e-05
+        },
+        "SN5": {
+         "nominal": 1.3463419730615945e-05
+        },
+        "SHV": {
+         "nominal": 0.0001873804198389134
+        },
+        "A15": {
+         "nominal": 3.532623139461963e-05
+        },
+        "P2": {
+         "nominal": 0.00011419342169071446
+        }
+       },
+       "S15": {
+        "P1": {
+         "nominal": 3.6261278960948854e-05
+        },
+        "S15": {
+         "nominal": 1.116235120390102e-05
+        },
+        "A5": {
+         "nominal": 4.175489493355208e-06
+        },
+        "S5": {
+         "nominal": 4.164916543704508e-06
+        },
+        "SN5": {
+         "nominal": 4.148932688740921e-06
+        },
+        "SHV": {
+         "nominal": 5.7738862622924895e-05
+        },
+        "A15": {
+         "nominal": 1.0884903754174861e-05
+        },
+        "P2": {
+         "nominal": 3.5185282839289976e-05
+        }
+       },
+       "A5": {
+        "P1": {
+         "nominal": 1.3549870248847592e-05
+        },
+        "S15": {
+         "nominal": 4.175489493355208e-06
+        },
+        "A5": {
+         "nominal": 1.5796401269041187e-06
+        },
+        "S5": {
+         "nominal": 1.5667521992779868e-06
+        },
+        "SN5": {
+         "nominal": 1.5595636940243095e-06
+        },
+        "SHV": {
+         "nominal": 2.1763128916468532e-05
+        },
+        "A15": {
+         "nominal": 4.102691643537857e-06
+        },
+        "P2": {
+         "nominal": 1.3261875449493745e-05
+        }
+       },
+       "S5": {
+        "P1": {
+         "nominal": 1.3514865063718566e-05
+        },
+        "S15": {
+         "nominal": 4.164916543704508e-06
+        },
+        "A5": {
+         "nominal": 1.5667521992779868e-06
+        },
+        "S5": {
+         "nominal": 1.5674729162735339e-06
+        },
+        "SN5": {
+         "nominal": 1.5557067179206618e-06
+        },
+        "SHV": {
+         "nominal": 2.1707847241394894e-05
+        },
+        "A15": {
+         "nominal": 4.0919766002472385e-06
+        },
+        "P2": {
+         "nominal": 1.322691250321625e-05
+        }
+       },
+       "SN5": {
+        "P1": {
+         "nominal": 1.3463419730615945e-05
+        },
+        "S15": {
+         "nominal": 4.148932688740921e-06
+        },
+        "A5": {
+         "nominal": 1.5595636940243095e-06
+        },
+        "S5": {
+         "nominal": 1.5557067179206618e-06
+        },
+        "SN5": {
+         "nominal": 1.5560901579856634e-06
+        },
+        "SHV": {
+         "nominal": 2.1624299953366522e-05
+        },
+        "A15": {
+         "nominal": 4.076242903515887e-06
+        },
+        "P2": {
+         "nominal": 1.3175966391045648e-05
+        }
+       },
+       "SHV": {
+        "P1": {
+         "nominal": 0.0001873804198389134
+        },
+        "S15": {
+         "nominal": 5.7738862622924895e-05
+        },
+        "A5": {
+         "nominal": 2.1763128916468532e-05
+        },
+        "S5": {
+         "nominal": 2.1707847241394894e-05
+        },
+        "SN5": {
+         "nominal": 2.1624299953366522e-05
+        },
+        "SHV": {
+         "nominal": 0.0003037402154748929
+        },
+        "A15": {
+         "nominal": 5.739803773272609e-05
+        },
+        "P2": {
+         "nominal": 0.00018552883127915734
+        }
+       },
+       "A15": {
+        "P1": {
+         "nominal": 3.532623139461963e-05
+        },
+        "S15": {
+         "nominal": 1.0884903754174861e-05
+        },
+        "A5": {
+         "nominal": 4.102691643537857e-06
+        },
+        "S5": {
+         "nominal": 4.0919766002472385e-06
+        },
+        "SN5": {
+         "nominal": 4.076242903515887e-06
+        },
+        "SHV": {
+         "nominal": 5.739803773272609e-05
+        },
+        "A15": {
+         "nominal": 1.0984874364835894e-05
+        },
+        "P2": {
+         "nominal": 3.553247676533973e-05
+        }
+       },
+       "P2": {
+        "P1": {
+         "nominal": 0.00011419342169071446
+        },
+        "S15": {
+         "nominal": 3.5185282839289976e-05
+        },
+        "A5": {
+         "nominal": 1.3261875449493745e-05
+        },
+        "S5": {
+         "nominal": 1.322691250321625e-05
+        },
+        "SN5": {
+         "nominal": 1.3175966391045648e-05
+        },
+        "SHV": {
+         "nominal": 0.00018552883127915734
+        },
+        "A15": {
+         "nominal": 3.553247676533973e-05
+        },
+        "P2": {
+         "nominal": 0.00011574773938503836
+        }
+       }
+      }
+     }
+    ]
+   }
+  }
+ ],
+ "_note": "TIW sandwich, S15 8 T: P1 | S15 | A5+S5+SN5 trifilar | SHV | A15 | P2 | written by simulation/flyback/run_flyback.py"
+}
