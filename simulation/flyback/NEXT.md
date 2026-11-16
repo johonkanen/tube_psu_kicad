@@ -76,15 +76,12 @@ command line contains that string (it kills the shell); kill by PID.
    this before comparing options: check the IW1818 supply current assumption (5 mA), the
    light-load (burst / PFM) controller model, the AUX_MEAS divider load (0.56 mA, not
    modelled) and the winding order below. The 18.7 V AUX_MEAS limit is met on the real board.
-3. **Winding order (user, verbatim):** "primary, then the 7 and 4 layer windings, then tape and
-   then the 8, 4 and 42V windings each separated with 1 layer of tape". Interpretation to
-   confirm with the user at the start of the next session (it does not match the assumed
-   order or the 3-turn counts of "52/8/3||7/3/3/42"): primary innermost; next the 7 T winding
-   (15V_ISO_SEC?) and a "4" winding; then the barrier tape; then the 8 T (15V), "4" and 42 T
-   (−100V) windings with one tape layer between each. Open points: are the 5 V windings 3 or
-   4 turns; where are the remaining 3 T windings (5V_ISOL, −5V_SEC, 5V/feedback); which side
-   of the barrier the 7 T and 42 T windings are on. Rebuild `om_model` for the current
-   transformer once confirmed.
+3. **Winding order (confirmed by the user):** primary innermost, then the primary-side windings
+   (8 T → 15V, 3 T → 5V + feedback), then the barrier tape (4 layers), then the isolated
+   windings 7 T (15V_ISO_SEC), 3 T (5V_ISOL), 3 T (−5V_SEC), 42 T (−100V BIAS), each separated
+   by one layer of tape. All 5 V windings have **3 turns** (as in "52/8/3||7/3/3/42"). This is
+   the order already assumed in `om_model` for the current transformer, so no rebuild is needed
+   for the order; check the tape layers between the isolated windings match.
 4. **Preload resistors on 15V and 5V are acceptable** (run `recommended_pre`).
 
 ## Open questions for the user
@@ -114,7 +111,7 @@ command line contains that string (it kills the shell); kill by PID.
 > (simulation/flyback/, read NEXT.md and FLYBACK_DESIGN.md first). Rules: one ngspice
 > simulation at a time, keep memory low, scratchpad for temp files, do not change the
 > schematic/board, commit after each step (trailer Co-Authored-By: Claude Opus 5.5
-> <noreply@anthropic.com>), do not push. Steps: (0) apply "User answers (2026-11-16)" in NEXT.md: 200 V rectifiers, calibrate to the measured 15.5 V light-load 15V rail, confirm and model the user's winding order, preloads allowed; (1) check MKF's leakage for windings
+> <noreply@anthropic.com>), do not push. Steps: (0) apply "User answers (2026-11-16)" in NEXT.md: 200 V rectifiers, calibrate to the measured 15.5 V light-load 15V rail, the winding order is confirmed (as already modelled), preloads allowed; (1) check MKF's leakage for windings
 > sharing one layer (grid settings listed in NEXT.md) and fix om_model if needed;
 > (2) finish tiw_sandwich and run tiw_sandwich_stacked, margin_sandwich, recommended,
 > recommended_pre; (3) cscale=1 check; (4) losses / Bpk / isolation / Vpeak per option;
