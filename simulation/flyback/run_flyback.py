@@ -7,7 +7,7 @@
     python3 simulation/flyback/run_flyback.py --om-only          # magnetics only (fast)
     python3 simulation/flyback/run_flyback.py --report           # tables + plots from cached results
 
-ngspice runs one at a time (memory rule). Results are cached per option/case in
+ngspice runs in a pool (--jobs, default 8, total RAM budget 3 GB). Results are cached per option/case in
 out/results/ (delete a file to rerun it); the OpenMagnetics analysis in out/om/.
 """
 from __future__ import annotations
@@ -125,6 +125,79 @@ def run_case(name: str, res: dict, case: dict, force=False, ic=None) -> dict:
     return r
 
 
+RAM_BUDGET = 3.0e9          # total for all simulations (user rule, 2026-11-16)
+RAM_PER_RUN = 0.25e9        # assumed per ngspice run before it is seen (idle/light ~0.2-0.3 GB, others ~0.1 GB)
+
+
+def ngspice_rss() -> float:
+    """Total resident memory of all ngspice processes (bytes), from /proc."""
+    tot = 0
+    for d in os.listdir("/proc"):
+        if not d.isdigit():
+            continue
+        try:
+            with open(f"/proc/{d}/comm") as f:
+                if f.read().strip() != "ngspice":
+                    continue
+            with open(f"/proc/{d}/statm") as f:
+                tot += int(f.read().split()[1]) * os.sysconf("SC_PAGE_SIZE")
+        except OSError:
+            pass
+    return tot
+
+
+class Pool:
+    """Up to `jobs` ngspice runs at once (threads, each starting its own ngspice subprocess
+    and parsing only its own log). A new run starts only while the measured ngspice memory
+    plus RAM_PER_RUN for each started-but-unseen run stays below RAM_BUDGET; peak memory and
+    wall time are recorded."""
+
+    def __init__(self, jobs):
+        import threading
+        self.jobs = max(1, jobs)
+        self.lock = threading.Lock()
+        self.starting = 0
+        self.peak = 0.0
+        self.stop = threading.Event()
+        self.mon = threading.Thread(target=self._monitor, daemon=True)
+        self.mon.start()
+
+    def _monitor(self):
+        while not self.stop.wait(0.5):
+            self.peak = max(self.peak, ngspice_rss())
+
+    def admit(self):
+        while True:
+            with self.lock:
+                if ngspice_rss() + (self.starting + 1) * RAM_PER_RUN <= RAM_BUDGET:
+                    self.starting += 1
+                    return
+            time.sleep(1.0)
+
+    def started(self):
+        with self.lock:
+            self.starting = max(0, self.starting - 1)
+
+    def map(self, fn, tasks):
+        from concurrent.futures import ThreadPoolExecutor
+
+        def wrap(t):
+            self.admit()
+            import threading
+            threading.Timer(3.0, self.started).start()   # ngspice has allocated by then
+            return fn(*t)
+        with ThreadPoolExecutor(max_workers=self.jobs) as ex:
+            return list(ex.map(wrap, tasks))         # results in task order (deterministic)
+
+    def close(self):
+        self.stop.set()
+
+
+def show(n, c, r):
+    print(f"  {n:>12} {c:>8}: " + " ".join(f"{SHORT[k]}={r[k]:.3f}" for k in fs.RAILS if r.get(k) is not None)
+          + f" Vcol={r['vcol']:.0f} VrD8={r['-100V BIAS vrev']:.0f} u={r['u']:.3f} drift20={r['20V drift'] * 1e3:.0f}mV ({r['seconds']:.0f}s)", flush=True)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("options", nargs="*")
@@ -132,27 +205,48 @@ def main(argv=None):
     ap.add_argument("--om-only", action="store_true")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--report", action="store_true")
+    ap.add_argument("--jobs", type=int, default=8, help="parallel ngspice runs (default 8, RAM budget 3 GB)")
     a = ap.parse_args(argv)
     names = a.options or list(opts.OPTIONS)
     if a.report:
         import report
         report.main(names)
         return 0
+    om = {}
     for n in names:
         res = om_analysis(n, force=a.force)
+        om[n] = res
         print(f"[om] {n}: gap {res['gap'] * 1e3:.3f} mm, Lp {res['L'][0][0] * 1e6:.1f} uH, "
               f"build {res['geometry']['radial_build_mm']:.2f}/{res['geometry']['window_radial_mm']:.2f} mm", flush=True)
-        if a.om_only:
-            continue
-        ic = None
-        for c in cases():
-            if a.cases and c["name"] not in a.cases:
-                continue
-            r = run_case(n, res, c, force=a.force, ic=ic)
-            if c["name"] == "nom":
-                ic = {k: r[k] for k in fs.RAILS if r.get(k)}
-            print(f"  {n:>12} {c['name']:>8}: " + " ".join(f"{SHORT[k]}={r[k]:.3f}" for k in fs.RAILS if r.get(k) is not None)
-                  + f" Vcol={r['vcol']:.0f} VrD8={r['-100V BIAS vrev']:.0f} u={r['u']:.3f} drift20={r['20V drift'] * 1e3:.0f}mV ({r['seconds']:.0f}s)", flush=True)
+    if a.om_only:
+        return 0
+    sel = [c for c in cases() if not a.cases or c["name"] in a.cases]
+    pool = Pool(a.jobs)
+    t0 = time.time()
+    try:
+        # pass 1: the nominal case of every option (its rail voltages are the initial
+        # conditions of that option's other cases); pass 2: all other cases, longest first
+        noms = [(n, om[n], c, a.force, None) for n in names for c in sel if c["name"] == "nom"]
+        for (n, _, c, _, _), r in zip(noms, pool.map(run_case, noms)):
+            show(n, c["name"], r)
+        ics = {}
+        for n in names:
+            p = os.path.join(OUT, "results", f"{n}__nom.json")
+            if os.path.exists(p):
+                with open(p) as f:
+                    r = json.load(f)
+                ics[n] = {k: r[k] for k in fs.RAILS if r.get(k)}
+        rest = [(n, om[n], c, a.force, ics.get(n)) for n in names for c in sel if c["name"] != "nom"]
+        weight = {"idle": 0, "light": 1}
+        order = sorted(range(len(rest)), key=lambda i: (weight.get(rest[i][2]["name"], 2 if rest[i][2]["name"].startswith("min") else 3), i))
+        out = pool.map(run_case, [rest[i] for i in order])
+        res_by = {order[k]: out[k] for k in range(len(order))}
+        for i, (n, _, c, _, _) in enumerate(rest):
+            show(n, c["name"], res_by[i])
+    finally:
+        pool.close()
+    print(f"[pool] {len(noms) + len(rest)} cases, jobs {a.jobs}, wall {time.time() - t0:.0f} s, "
+          f"peak ngspice memory {pool.peak / 1e6:.0f} MB", flush=True)
     return 0
 
 

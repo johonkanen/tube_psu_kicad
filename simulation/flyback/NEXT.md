@@ -86,7 +86,9 @@ python3 simulation/flyback/run_flyback.py --report current stacked tiw_simple ti
 python3 simulation/flyback/losses.py current recommended
 ```
 
-Run one ngspice at a time (the script does). Cached results: `out/results/<option>__<case>.json`
+run_flyback.py runs the load cases in a pool (`--jobs N`, default 8, total ngspice RAM
+budget 3 GB enforced from /proc; user rule since 2026-11-16 – do not start several
+run_flyback.py processes on top of the pool). Cached results: `out/results/<option>__<case>.json`
 (git-ignored); delete to rerun. Do not `pkill -f run_flyback` from a shell whose own
 command line contains that string (it kills the shell); kill by PID.
 
@@ -133,8 +135,8 @@ command line contains that string (it kills the shell); kill by PID.
 ## Prompt for the next session
 
 > Continue the TR1 flyback cross-regulation study in /home/jari/dev/tube_psu_kicad
-> (simulation/flyback/, read NEXT.md and FLYBACK_DESIGN.md first). Rules: one ngspice
-> simulation at a time, keep memory low, scratchpad for temp files, do not change the
+> (simulation/flyback/, read NEXT.md and FLYBACK_DESIGN.md first). Rules: up to 8 parallel
+> simulations within 3 GB total (run_flyback.py --jobs), scratchpad for temp files, do not change the
 > schematic/board, commit after each step (trailer Co-Authored-By: Claude Opus 5.5
 > <noreply@anthropic.com>), do not push. Steps: (0) apply "User answers (2026-11-16)" in NEXT.md: 200 V rectifiers, calibrate to the measured 15.5 V light-load 15V rail, the winding order is confirmed (as already modelled), preloads allowed; (1) check MKF's leakage for windings
 > sharing one layer (grid settings listed in NEXT.md) and fix om_model if needed;
