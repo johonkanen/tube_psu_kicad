@@ -180,13 +180,33 @@ def recommended(preload=None):
     return o
 
 
+def sandwich_paired(order="b"):
+    """TIW sandwich with every voltage class paired in one multifilar layer: the two 15 V
+    windings (A15 enamel + S15 TIW, both 8 T) and the three 5 V windings (A5 + S5 + SN5,
+    3 T) each share a layer, so each pair sees the same leakage field and the feedback
+    winding A5 sits directly beside the 15 V pair.
+    order b: P1 | SHV | A15+S15 | A5+S5+SN5 | P2   (low-turn layers shielded from P1 by SHV)
+    order c: P1 | A5+S5+SN5 | A15+S15 | SHV | P2   (feedback layer next to the primary)"""
+    p1 = {"windings": [("P1", 26, 1, W30, PRI)], "align": "spread", "tape_after": 1}
+    p2 = {"windings": [("P2", 26, 1, W30, PRI)], "align": "spread", "tape_after": 1}
+    shv = {"windings": [("SHV", 42, 1, TIW32, SEC)], "align": "spread"}
+    w15 = {"windings": [("A15", 8, 3, W30, PRI), ("S15", 8, 3, TIW30, SEC)], "mode": "multifilar", "align": "spread"}
+    w5 = {"windings": [("A5", 3, 3, W30, PRI), ("S5", 3, 3, TIW30, SEC), ("SN5", 3, 3, TIW30, SEC)],
+          "mode": "multifilar", "align": "spread"}
+    secs = [p1, shv, w15, w5, p2] if order == "b" else [p1, w5, w15, shv, p2]
+    names = " | ".join("+".join(w[0] for w in x["windings"]) for x in secs)
+    return {"name": f"sandwich_paired_{order}", "title": f"TIW sandwich, paired layers, S15 8 T: {names}",
+            "sections": secs}
+
+
 PRELOAD = {"20V": 3300.0, "5V": 1000.0}      # what-if preload resistors (not in the schematic)
 
 
 OPTIONS = {"current": current, "stacked": stacked, "margin_sandwich": margin_sandwich,
            "tiw_simple": tiw_simple, "tiw_sandwich": tiw_sandwich,
            "tiw_sandwich_stacked": tiw_sandwich_stacked,
-           "recommended": recommended, "recommended_pre": lambda: recommended(PRELOAD)}
+           "recommended": recommended, "recommended_pre": lambda: recommended(PRELOAD),
+           "sandwich_paired_b": lambda: sandwich_paired("b"), "sandwich_paired_c": lambda: sandwich_paired("c")}
 
 
 def get(name):

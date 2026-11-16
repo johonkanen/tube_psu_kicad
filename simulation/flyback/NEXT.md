@@ -15,6 +15,11 @@
   15.95 V (measured 15.5 V), light 16.64 V, nominal 15.44 V, worst case min_15V 19.92 V
   (isolated rails loaded, primary 15V only its fixed load) – exceeds 18.7 V. D8 reverse
   389–402 V at 400 V (341 V at 325 V): 200 V ES1D overstressed (FLYBACK_DESIGN.md 6).
+- Step 2 partial results (calibrated): current, tiw_sandwich, tiw_simple, recommended done
+  (see results.md); recommended_pre, stacked, tiw_sandwich_stacked, margin_sandwich running.
+  Added options sandwich_paired_b / _c (15 V pair and 5 V triple each in one multifilar
+  layer) – to run after the batch: `run_flyback.py --om-only sandwich_paired_b
+  sandwich_paired_c`, then each option.
 - Step 2 – batch running: `--om-only --force` for all options, then current, tiw_sandwich,
   tiw_simple, recommended, recommended_pre, stacked, tiw_sandwich_stacked, margin_sandwich
   (one ngspice at a time). If stopped: rerun the same commands; cached cases are skipped.

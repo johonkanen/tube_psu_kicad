@@ -46,6 +46,8 @@ ISOLATION = {
     "tiw_sandwich_stacked": "as tiw_sandwich",
     "recommended": "as tiw_sandwich",
     "recommended_pre": "as tiw_sandwich",
+    "sandwich_paired_b": "as tiw_sandwich (TIW S15 / S5 / SN5 interleaved strand by strand with enamel A15 / A5)",
+    "sandwich_paired_c": "as sandwich_paired_b",
 }
 COLORS = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6", "#e34948"]
 
