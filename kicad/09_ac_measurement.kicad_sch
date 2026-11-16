@@ -242,7 +242,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "tube_psu:20V"
+		(symbol "tube_psu:15V"
 			(power global)
 			(pin_numbers
 				(hide yes)
@@ -267,7 +267,7 @@
 					)
 				)
 			)
-			(property "Value" "20V"
+			(property "Value" "15V"
 				(at 0 3.556 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -299,7 +299,7 @@
 					)
 				)
 			)
-			(property "Description" "Power symbol for net \"20V\" (IPC net name)"
+			(property "Description" "Power symbol for net \"15V\" (IPC net name)"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -321,7 +321,7 @@
 					)
 				)
 			)
-			(symbol "20V_0_1"
+			(symbol "15V_0_1"
 				(polyline
 					(pts
 						(xy -0.762 1.27) (xy 0 2.54)
@@ -359,7 +359,7 @@
 					)
 				)
 			)
-			(symbol "20V_1_1"
+			(symbol "15V_1_1"
 				(pin power_in line
 					(at 0 0 90)
 					(length 0)
@@ -986,7 +986,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "tube_psu:+2V5_BIAS"
+		(symbol "tube_psu:+1V65_BIAS"
 			(power global)
 			(pin_numbers
 				(hide yes)
@@ -1011,7 +1011,7 @@
 					)
 				)
 			)
-			(property "Value" "+2V5_BIAS"
+			(property "Value" "+1V65_BIAS"
 				(at 0 3.556 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1043,7 +1043,7 @@
 					)
 				)
 			)
-			(property "Description" "Power symbol for net \"+2V5_BIAS\" (IPC net name)"
+			(property "Description" "Power symbol for net \"+1V65_BIAS\" (IPC net name)"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1065,7 +1065,7 @@
 					)
 				)
 			)
-			(symbol "+2V5_BIAS_0_1"
+			(symbol "+1V65_BIAS_0_1"
 				(polyline
 					(pts
 						(xy -0.762 1.27) (xy 0 2.54)
@@ -1103,7 +1103,7 @@
 					)
 				)
 			)
-			(symbol "+2V5_BIAS_1_1"
+			(symbol "+1V65_BIAS_1_1"
 				(pin power_in line
 					(at 0 0 90)
 					(length 0)
@@ -1392,7 +1392,7 @@
 		(uuid "01d8a0aa-d56d-56d7-afe5-8f51702f0934")
 	)
 	(symbol
-		(lib_id "tube_psu:20V")
+		(lib_id "tube_psu:15V")
 		(at 60.96 35.56 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1409,7 +1409,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "20V"
+		(property "Value" "15V"
 			(at 60.96 32.004 0)
 			(effects
 				(font
@@ -1435,7 +1435,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"20V\" (IPC net name)"
+		(property "Description" "Power symbol for net \"15V\" (IPC net name)"
 			(at 60.96 35.56 0)
 			(effects
 				(font
@@ -1625,7 +1625,7 @@
 		(uuid "62f21bca-3c18-58b4-a9b2-d524ca01a555")
 	)
 	(symbol
-		(lib_id "tube_psu:20V")
+		(lib_id "tube_psu:15V")
 		(at 63.5 53.34 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1642,7 +1642,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "20V"
+		(property "Value" "15V"
 			(at 60.2 53.34 90)
 			(effects
 				(font
@@ -1669,7 +1669,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"20V\" (IPC net name)"
+		(property "Description" "Power symbol for net \"15V\" (IPC net name)"
 			(at 63.5 53.34 0)
 			(effects
 				(font
@@ -2506,7 +2506,7 @@
 		(uuid "52153d10-def8-5e8b-ba03-bf900d610222")
 	)
 	(symbol
-		(lib_id "tube_psu:20V")
+		(lib_id "tube_psu:15V")
 		(at 200.66 35.56 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2523,7 +2523,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "20V"
+		(property "Value" "15V"
 			(at 200.66 32.004 0)
 			(effects
 				(font
@@ -2549,7 +2549,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"20V\" (IPC net name)"
+		(property "Description" "Power symbol for net \"15V\" (IPC net name)"
 			(at 200.66 35.56 0)
 			(effects
 				(font
@@ -2739,7 +2739,7 @@
 		(uuid "c2fb85cd-7dd0-54e2-a729-7eb364426ee6")
 	)
 	(symbol
-		(lib_id "tube_psu:20V")
+		(lib_id "tube_psu:15V")
 		(at 203.2 53.34 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2756,7 +2756,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "20V"
+		(property "Value" "15V"
 			(at 199.9 53.34 90)
 			(effects
 				(font
@@ -2783,7 +2783,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"20V\" (IPC net name)"
+		(property "Description" "Power symbol for net \"15V\" (IPC net name)"
 			(at 203.2 53.34 0)
 			(effects
 				(font
@@ -4192,7 +4192,7 @@
 		(uuid "461cbc5d-7807-5673-91c5-af97de3a4cc3")
 	)
 	(symbol
-		(lib_id "tube_psu:+2V5_BIAS")
+		(lib_id "tube_psu:+1V65_BIAS")
 		(at 111.76 142.24 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4209,7 +4209,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+2V5_BIAS"
+		(property "Value" "+1V65_BIAS"
 			(at 111.76 138.684 0)
 			(effects
 				(font
@@ -4235,7 +4235,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"+2V5_BIAS\" (IPC net name)"
+		(property "Description" "Power symbol for net \"+1V65_BIAS\" (IPC net name)"
 			(at 111.76 142.24 0)
 			(effects
 				(font

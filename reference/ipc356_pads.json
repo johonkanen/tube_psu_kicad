@@ -2,7 +2,10 @@
  "source": "tube_power_5_1_X2 - CADCAM Netlist.IPC",
  "units": "mm, IPC coordinates (Y up)",
  "net_aliases": {
-  "GND=POWER": "GND"
+  "GND=POWER": "GND",
+  "20V": "15V",
+  "20V_ISO_SEC": "15V_ISO_SEC",
+  "+2V5_BIAS": "+1V65_BIAS"
  },
  "truncated_refdes": {
   "+15V O": "+15V OUT",
@@ -100,9 +103,9 @@
   "NNAME00085": "HEATER_HI_SOURCE",
   "NNAME00086": "HEATER_CURRENT",
   "NNAME00087": "HEATER_HI_GATE",
-  "NNAME00088": "20V_ISO_SEC",
+  "NNAME00088": "15V_ISO_SEC",
   "NNAME00089": "-5V_SEC",
-  "NNAME00090": "20V",
+  "NNAME00090": "15V",
   "NNAME00091": "#00382",
   "NNAME00092": "HEATER_VOLTAGE_MEAS",
   "NNAME00093": "L1_PRI2",
@@ -167,7 +170,7 @@
   "NNAME00164": "#00392",
   "NNAME00165": "#00393",
   "NNAME00166": "#00394",
-  "NNAME00167": "+2V5_BIAS",
+  "NNAME00167": "+1V65_BIAS",
   "NNAME00168": "#00371",
   "NNAME00169": "#00027",
   "NNAME00170": "#00030",
@@ -2357,7 +2360,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V_ISO_SEC",
+   "net": "15V_ISO_SEC",
    "net_raw": "20V_ISO_SEC",
    "net_id": "NNAME00088",
    "refdes": "D4",
@@ -2377,7 +2380,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V_ISO_SEC",
+   "net": "15V_ISO_SEC",
    "net_raw": "20V_ISO_SEC",
    "net_id": "NNAME00088",
    "refdes": "C3",
@@ -2497,7 +2500,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V_ISO_SEC",
+   "net": "15V_ISO_SEC",
    "net_raw": "20V_ISO_SEC",
    "net_id": "NNAME00088",
    "refdes": "C2",
@@ -2597,7 +2600,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "D5",
@@ -2617,7 +2620,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "C1",
@@ -2657,7 +2660,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "C39",
@@ -2737,7 +2740,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "DRV1",
@@ -2777,7 +2780,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "DRV1",
@@ -2877,7 +2880,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "DRV1",
@@ -2917,7 +2920,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "DRV2",
@@ -2957,7 +2960,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "DRV2",
@@ -3057,7 +3060,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "DRV2",
@@ -3897,7 +3900,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "C80",
@@ -3937,7 +3940,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "C79",
@@ -4397,7 +4400,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "DRV9",
@@ -4437,7 +4440,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "DRV9",
@@ -4537,7 +4540,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "DRV9",
@@ -4577,7 +4580,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "C52",
@@ -7257,7 +7260,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V_ISO_SEC",
+   "net": "15V_ISO_SEC",
    "net_raw": "20V_ISO_SEC",
    "net_id": "NNAME00088",
    "refdes": "DRV6",
@@ -7557,7 +7560,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V_ISO_SEC",
+   "net": "15V_ISO_SEC",
    "net_raw": "20V_ISO_SEC",
    "net_id": "NNAME00088",
    "refdes": "C72",
@@ -8337,7 +8340,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "C18",
@@ -8397,7 +8400,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V_ISO_SEC",
+   "net": "15V_ISO_SEC",
    "net_raw": "20V_ISO_SEC",
    "net_id": "NNAME00088",
    "refdes": "C43",
@@ -8537,7 +8540,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "R11",
@@ -9257,7 +9260,7 @@
   },
   {
    "kind": "pad",
-   "net": "+2V5_BIAS",
+   "net": "+1V65_BIAS",
    "net_raw": "+2V5_BIAS",
    "net_id": "NNAME00167",
    "refdes": "R60",
@@ -9717,7 +9720,7 @@
   },
   {
    "kind": "pad",
-   "net": "+2V5_BIAS",
+   "net": "+1V65_BIAS",
    "net_raw": "+2V5_BIAS",
    "net_id": "NNAME00167",
    "refdes": "R80",
@@ -9857,7 +9860,7 @@
   },
   {
    "kind": "pad",
-   "net": "+2V5_BIAS",
+   "net": "+1V65_BIAS",
    "net_raw": "+2V5_BIAS",
    "net_id": "NNAME00167",
    "refdes": "R100",
@@ -10557,7 +10560,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "D10",
@@ -10837,7 +10840,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V_ISO_SEC",
+   "net": "15V_ISO_SEC",
    "net_raw": "20V_ISO_SEC",
    "net_id": "NNAME00088",
    "refdes": "P15V_OUT",
@@ -10857,7 +10860,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V_ISO_SEC",
+   "net": "15V_ISO_SEC",
    "net_raw": "20V_ISO_SEC",
    "net_id": "NNAME00088",
    "refdes": "P15V_OUT",
@@ -11117,7 +11120,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "C14",
@@ -13357,7 +13360,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "DRV5",
@@ -13557,7 +13560,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "C95",
@@ -13577,7 +13580,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "C96",
@@ -14397,7 +14400,7 @@
   },
   {
    "kind": "pad",
-   "net": "+2V5_BIAS",
+   "net": "+1V65_BIAS",
    "net_raw": "+2V5_BIAS",
    "net_id": "NNAME00167",
    "refdes": "R103",
@@ -14417,7 +14420,7 @@
   },
   {
    "kind": "pad",
-   "net": "+2V5_BIAS",
+   "net": "+1V65_BIAS",
    "net_raw": "+2V5_BIAS",
    "net_id": "NNAME00167",
    "refdes": "R105",
@@ -14797,7 +14800,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "D19",
@@ -14837,7 +14840,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V_ISO_SEC",
+   "net": "15V_ISO_SEC",
    "net_raw": "20V_ISO_SEC",
    "net_id": "NNAME00088",
    "refdes": "D18",
@@ -14877,7 +14880,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "D11",
@@ -16497,7 +16500,7 @@
   },
   {
    "kind": "pad",
-   "net": "+2V5_BIAS",
+   "net": "+1V65_BIAS",
    "net_raw": "+2V5_BIAS",
    "net_id": "NNAME00167",
    "refdes": "R110",
@@ -16537,7 +16540,7 @@
   },
   {
    "kind": "pad",
-   "net": "+2V5_BIAS",
+   "net": "+1V65_BIAS",
    "net_raw": "+2V5_BIAS",
    "net_id": "NNAME00167",
    "refdes": "R3",
@@ -16617,7 +16620,7 @@
   },
   {
    "kind": "pad",
-   "net": "+2V5_BIAS",
+   "net": "+1V65_BIAS",
    "net_raw": "+2V5_BIAS",
    "net_id": "NNAME00167",
    "refdes": "C48",
@@ -17597,7 +17600,7 @@
   },
   {
    "kind": "pad",
-   "net": "20V_ISO_SEC",
+   "net": "15V_ISO_SEC",
    "net_raw": "20V_ISO_SEC",
    "net_id": "NNAME00088",
    "refdes": "R124",
@@ -17777,7 +17780,7 @@
   },
   {
    "kind": "pad",
-   "net": "+2V5_BIAS",
+   "net": "+1V65_BIAS",
    "net_raw": "+2V5_BIAS",
    "net_id": "NNAME00167",
    "refdes": "C106",
@@ -17817,7 +17820,7 @@
   },
   {
    "kind": "pad",
-   "net": "+2V5_BIAS",
+   "net": "+1V65_BIAS",
    "net_raw": "+2V5_BIAS",
    "net_id": "NNAME00167",
    "refdes": "C107",
@@ -17857,7 +17860,7 @@
   },
   {
    "kind": "via",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "",
@@ -19237,7 +19240,7 @@
   },
   {
    "kind": "via",
-   "net": "20V_ISO_SEC",
+   "net": "15V_ISO_SEC",
    "net_raw": "20V_ISO_SEC",
    "net_id": "NNAME00088",
    "refdes": "",
@@ -19257,7 +19260,7 @@
   },
   {
    "kind": "via",
-   "net": "20V_ISO_SEC",
+   "net": "15V_ISO_SEC",
    "net_raw": "20V_ISO_SEC",
    "net_id": "NNAME00088",
    "refdes": "",
@@ -19277,7 +19280,7 @@
   },
   {
    "kind": "via",
-   "net": "20V_ISO_SEC",
+   "net": "15V_ISO_SEC",
    "net_raw": "20V_ISO_SEC",
    "net_id": "NNAME00088",
    "refdes": "",
@@ -19517,7 +19520,7 @@
   },
   {
    "kind": "via",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "",
@@ -19697,7 +19700,7 @@
   },
   {
    "kind": "via",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "",
@@ -19717,7 +19720,7 @@
   },
   {
    "kind": "via",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "",
@@ -19737,7 +19740,7 @@
   },
   {
    "kind": "via",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "",
@@ -19837,7 +19840,7 @@
   },
   {
    "kind": "via",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "",
@@ -20057,7 +20060,7 @@
   },
   {
    "kind": "via",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "",
@@ -20617,7 +20620,7 @@
   },
   {
    "kind": "via",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "",
@@ -20657,7 +20660,7 @@
   },
   {
    "kind": "via",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "",
@@ -20777,7 +20780,7 @@
   },
   {
    "kind": "via",
-   "net": "+2V5_BIAS",
+   "net": "+1V65_BIAS",
    "net_raw": "+2V5_BIAS",
    "net_id": "NNAME00167",
    "refdes": "",
@@ -22437,7 +22440,7 @@
   },
   {
    "kind": "via",
-   "net": "20V",
+   "net": "15V",
    "net_raw": "20V",
    "net_id": "NNAME00090",
    "refdes": "",
@@ -22617,7 +22620,7 @@
   },
   {
    "kind": "via",
-   "net": "+2V5_BIAS",
+   "net": "+1V65_BIAS",
    "net_raw": "+2V5_BIAS",
    "net_id": "NNAME00167",
    "refdes": "",
@@ -22637,7 +22640,7 @@
   },
   {
    "kind": "via",
-   "net": "+2V5_BIAS",
+   "net": "+1V65_BIAS",
    "net_raw": "+2V5_BIAS",
    "net_id": "NNAME00167",
    "refdes": "",
@@ -22657,7 +22660,7 @@
   },
   {
    "kind": "via",
-   "net": "+2V5_BIAS",
+   "net": "+1V65_BIAS",
    "net_raw": "+2V5_BIAS",
    "net_id": "NNAME00167",
    "refdes": "",
@@ -22857,7 +22860,7 @@
   },
   {
    "kind": "via",
-   "net": "+2V5_BIAS",
+   "net": "+1V65_BIAS",
    "net_raw": "+2V5_BIAS",
    "net_id": "NNAME00167",
    "refdes": "",
@@ -23397,7 +23400,7 @@
   },
   {
    "kind": "via",
-   "net": "+2V5_BIAS",
+   "net": "+1V65_BIAS",
    "net_raw": "+2V5_BIAS",
    "net_id": "NNAME00167",
    "refdes": "",
@@ -23477,7 +23480,7 @@
   },
   {
    "kind": "via",
-   "net": "+2V5_BIAS",
+   "net": "+1V65_BIAS",
    "net_raw": "+2V5_BIAS",
    "net_id": "NNAME00167",
    "refdes": "",
@@ -23497,7 +23500,7 @@
   },
   {
    "kind": "via",
-   "net": "+2V5_BIAS",
+   "net": "+1V65_BIAS",
    "net_raw": "+2V5_BIAS",
    "net_id": "NNAME00167",
    "refdes": "",

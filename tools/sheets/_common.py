@@ -223,7 +223,7 @@ def lmh6658_diffamp(sh, ref, unit, AX, AY, inp, bias, bias_top, inn_gnd, fb, cfb
                     cbias=None, rout_amp=1, cout_label=2):
     """One half of an LMH6658 drawn as on sheets 8/10: non-inverting amplifier with the input
     through inp = (label, (rref, rval)) (pin 1 at the op-amp), the + node biased by bias = (rref,
-    rval) to +2V5_BIAS (`bias_top` = pin on the +2V5_BIAS side), optionally with cbias = (cref,
+    rval) to +1V65_BIAS (`bias_top` = pin on the +1V65_BIAS side), optionally with cbias = (cref,
     cval, top) in parallel (sheet 10), the - node to GND through inn_gnd = (rref, rval) (pin 2 at
     GND), feedback fb = (rref, rval) and cfb = (cref, cval) (pin 2 at the - node), output through
     rout = (rref, rval) (pin `rout_amp` at the op-amp) to the global label out_label with cout =
@@ -239,7 +239,7 @@ def lmh6658_diffamp(sh, ref, unit, AX, AY, inp, bias, bias_top, inn_gnd, fb, cfb
     rref, rval = bias
     _, rt, rb = vert2(sh, "R", rref, AX - g(12), INP[1] - g(3), rval, top=bias_top)
     sh.junction(*rb)
-    power_at(sh, "+2V5_BIAS", rt, "up")
+    power_at(sh, "+1V65_BIAS", rt, "up")
     if cbias:
         cref, cval, ctop = cbias
         _, ct, cb = vert2(sh, "C", cref, AX - g(18), INP[1] - g(3), cval, top=ctop, text="left")

@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 """Sheet 1 - AUX supply (PDF page 1): the flyback auxiliary supply. PWM2 (IW1818) switches the primary
-of TR1 (EF20, pins 4/5) from DC+ with the RCD snubber D7 / R72 / R45 || C12; its Vcc comes from 20V
+of TR1 (EF20, pins 4/5) from DC+ with the RCD snubber D7 / R72 / R45 || C12; its Vcc comes from 15V
 through D10 (startup through R116 / R115 / R114 from DC+, C58 / C51), the current sense from the
 shunt R8 || R9 (pins E and I_sense), the feedback from the 5V winding (AUX_FB: R64 || R81 -> R86 ->
-Vsense, R84 || R85 || C50 to GND). Primary-side windings: 1-2 -> D5 -> 20V (C1, C39), 2-3 -> D6 -> 5V
-(C36, C6, C71). Secondary windings: 10 -> D4 -> 20V_ISO_SEC (C3, C2), 8 -> D14 -> -5V_SEC (C44, C40),
+Vsense, R84 || R85 || C50 to GND). Primary-side windings: 1-2 -> D5 -> 15V (C1, C39), 2-3 -> D6 -> 5V
+(C36, C6, C71). Secondary windings: 10 -> D4 -> 15V_ISO_SEC (C3, C2), 8 -> D14 -> -5V_SEC (C44, C40),
 7 -> D29 -> 5V_ISOL (C114, C115), 6 -> D8 -> -100V BIAS (C45, C102); pin 9 = ISO_GND. The outputs go
 to the terminals +15V OUT / -5V OUT / -80V OUT / +5V OUT / SEC GND (KiCad refdes P15V_OUT, N5V_OUT,
 N80V_OUT, P5V_OUT, SEC_GND) with the bleeders R124 / R123 / R68 / R67.
 
 PDF: DC- = GND, RET_iso / RET_ISO / ISO_GND = ISO_GND (the page joins the terminals RET_iso and
-ISO_GND by a bare wire, no part), 20V_ISO_sec = 20V_ISO_SEC, 5v_isol = 5V_ISOL, -100V bias = -100V
+ISO_GND by a bare wire, no part), 20V_ISO_sec = 15V_ISO_SEC, 5v_isol = 5V_ISOL, -100V bias = -100V
 BIAS; the PDF net labels d5_A, Sec11, d14_k, d15_K (IPC D5_A, SEC11, D14_K, D15_K) are the winding
 ends, wired directly here; aux_fb (two terminals in the PDF) = AUX_FB local labels. This sheet
-generates 20V, 5V, 20V_ISO_SEC, -5V_SEC, 5V_ISOL, -100V BIAS and ISO_GND (terminal SEC GND): their
+generates 15V, 5V, 15V_ISO_SEC, -5V_SEC, 5V_ISOL, -100V BIAS and ISO_GND (terminal SEC GND): their
 permanent PWR_FLAGs are here; PWM2 Vcc (#00032, fed through D10 / R114 only) has one too."""
 from _common import *  # noqa: F401,F403
 
@@ -24,21 +24,21 @@ TX, TY = g(150), g(70)
 tr = sh.place("EF20", "TR1", TX, TY, value=sh_value("TR1"))
 P1, P2, P3, P4, P5 = (tr.pin(str(n)) for n in (1, 2, 3, 4, 5))
 P10, P9, P8, P7, P6 = (tr.pin(str(n)) for n in (10, 9, 8, 7, 6))
-# pin 1 -> D5 -> 20V rail (raised above the 5V group), C39 / C1 to GND
+# pin 1 -> D5 -> 15V rail (raised above the 5V group), C39 / C1 to GND
 _, dc, da = horiz2(sh, "D", "D5", TX - g(14), P1[1], sh_value("D5"), left="C", text="above")
 sh.wire(da, P1)
 x20 = TX - g(24)
 R20 = P1[1] - g(10)
 sh.wire(dc, (x20, P1[1]), (x20, R20), (TX - g(46), R20))
 for x, ref, sym in ((TX - g(32), "C39", "C"), (TX - g(40), "C1", "C_Polarized")):
-    _, ct, cb = vert2(sh, sym, ref, x, R20 + g(3), sh_value(ref), top=1)         # pin 1 = 20V
+    _, ct, cb = vert2(sh, sym, ref, x, R20 + g(3), sh_value(ref), top=1)         # pin 1 = 15V
     sh.junction(x, R20)
     if ref == "C39":
         sh.wire(cb, (x - g(8), cb[1]))
     else:
         sh.junction(*cb)
         power_at(sh, "GND", cb, "down")
-flagged_power(sh, "20V", TX - g(46), R20)
+flagged_power(sh, "15V", TX - g(46), R20)
 # pin 2 = GND
 sh.wire(P2, left(P2, 2))
 power_at(sh, "GND", left(P2, 2), "left")
@@ -95,13 +95,13 @@ power_at(sh, "DC+", rt, "up")
 _, ct, cb = vert2(sh, "C", "C15", g(100), g(91), sh_value("C15"), top=2)           # pin 2 = DC+
 power_at(sh, "DC+", ct, "up")
 power_at(sh, "GND", cb, "down")
-# Vcc: D10 from 20V, startup chain R116 / R115 / R114 from DC+, C58 / C51, PWR_FLAG (passive feed)
+# Vcc: D10 from 15V, startup chain R116 / R115 / R114 from DC+, C58 / C51, PWR_FLAG (passive feed)
 xv = PX - g(18)
 NV = VCC[1] - g(12)
 sh.wire(VCC, (xv, VCC[1]), (xv, NV))
-_, da, dc = horiz2(sh, "D_Schottky", "D10", PX - g(38), NV, sh_value("D10"), left="A")   # A = 20V
+_, da, dc = horiz2(sh, "D_Schottky", "D10", PX - g(38), NV, sh_value("D10"), left="A")   # A = 15V
 sh.wire(da, left(da, 2))
-power_at(sh, "20V", left(da, 2), "left")
+power_at(sh, "15V", left(da, 2), "left")
 sh.wire(dc, (xv, NV), (xv + g(4), NV))
 sh.junction(xv, NV)
 sh.pwr_flag(xv + g(4), NV, 270)
@@ -164,7 +164,7 @@ sh.wire(P9, right(P9, 4))
 power_at(sh, "ISO_GND", right(P9, 4), "right")
 XN = TX + g(26)                                                 # rail start column
 groups = [  # pin, column offset, row, diode (ref, pin at the transformer side), rail net, caps (ref, sym, top), cap text
-    (P10, 2, g(52), ("D4", "A"), "20V_ISO_SEC", [("C3", "C", 1), ("C2", "C_Polarized", 1)]),
+    (P10, 2, g(52), ("D4", "A"), "15V_ISO_SEC", [("C3", "C", 1), ("C2", "C_Polarized", 1)]),
     (P8, 6, g(84), ("D14", "C"), "-5V_SEC", [("C44", "C", 2), ("C40", "C", 2)]),
     (P7, 4, g(100), ("D29", "A"), "5V_ISOL", [("C114", "C", 1), ("C115", "C", 1)]),
     (P6, 2, g(116), ("D8", "C"), "-100V BIAS", [("C45", "C", 2), ("C102", "C_Polarized", 2)]),
@@ -192,7 +192,7 @@ y = g(136)
 terminal(sh, "SEC_GND", XT, y, "right")
 sh.wire((XT - g(20), y), (XT, y))
 flagged_power(sh, "ISO_GND", XT - g(20), y)
-for i, (tref, rail, rref) in enumerate((("P15V_OUT", "20V_ISO_SEC", "R124"), ("N5V_OUT", "-5V_SEC", "R123"),
+for i, (tref, rail, rref) in enumerate((("P15V_OUT", "15V_ISO_SEC", "R124"), ("N5V_OUT", "-5V_SEC", "R123"),
                                          ("N80V_OUT", "-100V BIAS", "R68"), ("P5V_OUT", "5V_ISOL", "R67"))):
     y = g(148 + 12 * i)
     terminal(sh, tref, XT, y, "right")
@@ -210,6 +210,6 @@ for i, t in enumerate(("vsense nominal = 1.536 V; vsense OVP threshold = 1.838 V
                        "V1 : 67/9/4/54;  V2 : 52/8/3||7/3/3/42;  V3 : 58/9/4/47;  TR1 : core 171nh (winding notes)",
                        "R64 = 39k/ v2 trans;  Vsense @ 1.536V = 5.8368Vaux;  Isense ocp = 1.15V;  V5.1")):
     sh.text(t + " (PDF note).", g(16), g(20 + 3 * i))
-sh.text("PWR_FLAGs: 20V, 5V, 20V_ISO_SEC, -5V_SEC, 5V_ISOL, -100V BIAS (rectifier outputs), ISO_GND (SEC GND terminal), PWM2 Vcc (D10 / R114): permanent.", g(16), g(34))
+sh.text("PWR_FLAGs: 15V, 5V, 15V_ISO_SEC, -5V_SEC, 5V_ISOL, -100V BIAS (rectifier outputs), ISO_GND (SEC GND terminal), PWM2 Vcc (D10 / R114): permanent.", g(16), g(34))
 sh.save()
 print("sheet01: written")

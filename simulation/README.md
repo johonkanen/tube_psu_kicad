@@ -61,7 +61,7 @@ nets (e.g. the + leg chain runs from the input net to the op-amp + pin).
 `vhdl/meas_models_pkg.vhd`): a + leg (input → 1–3 series sections, optionally with a parasitic C
 across each → NP → R ‖ C to the reference), a − leg (ground → 1–3 sections → NN → R ‖ C
 → VO), the op-amp, and an output R + C. The reference is either ground or the
-+2V5_BIAS node. Group A (shunt diff amps, circuits 1–4), B (HV diff amps 5, 6, 8),
++1V65_BIAS node. Group A (shunt diff amps, circuits 1–4), B (HV diff amps 5, 6, 8),
 C (divider 7) and D (non-inverting 9) are parameter sets of it. One state per capacitor;
 the nodes without a capacitor are solved algebraically inside the derivative.
 
@@ -72,7 +72,7 @@ LMH6658: GBW 140 MHz, A_VOL 95 dB (datasheet SNOSA35), Rout 10 Ω (assumed, not 
 The real parts are not checked against this model (vendor models: PLAN step 5, not done).
 
 **Bias network**: REF1 is an ideal source at its VOUT net, set to 2.5589 V so the loaded
-+2V5_BIAS node is 1.65 V (user decision). ngspice simulates circuits 1–5 together with
++1V65_BIAS node is 1.65 V (user decision). ngspice simulates circuits 1–5 together with
 the whole bias network (only the circuit under test driven). The VHDL model of each of
 those circuits has the bias node as a state, its own + leg exactly, and the + legs of the
 four others as one DC resistance (their 20 pF caps and the 1M parasitics dropped). The
@@ -136,7 +136,7 @@ the −3 dB frequencies agree within 1.0 %. See [out/report.md](out/report.md).
 
 The findings with recommended fixes and what-if simulations are in [FINDINGS.md](FINDINGS.md).
 
-1. **VAC_MEAS couples into the bias and the current channels.** The +2V5_BIAS source has
+1. **VAC_MEAS couples into the bias and the current channels.** The +1V65_BIAS source has
    a Thevenin resistance of 142 Ω (R110 ‖ R3 ‖ loads). Circuit 5's + leg (3 MΩ from AC2)
    feeds the line voltage into it, so the bias moves by 4.7·10⁻⁵ × V(AC2), ±15 mV at
    325 V peak. Every bias-referenced output carries this 1:1 (ngspice, 1 Hz): about

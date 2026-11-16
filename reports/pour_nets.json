@@ -154,7 +154,7 @@
  {
   "layer": "B.Cu",
   "index": 19,
-  "net": "20V",
+  "net": "15V",
   "order": 205,
   "width": 0.1524,
   "group": 99
@@ -266,7 +266,7 @@
  {
   "layer": "F.Cu",
   "index": 7,
-  "net": "20V",
+  "net": "15V",
   "order": 44,
   "width": 0.1524,
   "group": 99
@@ -370,7 +370,7 @@
  {
   "layer": "F.Cu",
   "index": 20,
-  "net": "20V_ISO_SEC",
+  "net": "15V_ISO_SEC",
   "order": 200,
   "width": 0.1524,
   "group": 87

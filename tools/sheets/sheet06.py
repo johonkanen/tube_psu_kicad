@@ -5,7 +5,7 @@ C41/C22 (shunt side) with the HEATER_CAP_MEAS node at TR2 pins 4/5; the synchron
 Q1 / Q2 on the secondary (Q14_DRAIN / Q13_DRAIN, sources on HT_GND); the 6V3 heater rail with its
 capacitor bank, the divider R54 / R55 -> HEATER_VOLTAGE_MEAS and the terminals HT_6V3 / HT_GND;
 the isolated high-side driver DRV3 (Si8271, EPWM5A -> HEATER_HI_GATE, bootstrap D11 / R99 / C25
-from 20V), the low-side driver DRV9 (IXDD609, EPWM6A -> HEATER_LOW_GATE through R37 and R31 + D33)
+from 15V), the low-side driver DRV9 (IXDD609, EPWM6A -> HEATER_LOW_GATE through R37 and R31 + D33)
 and the rectifier gate driver DRV4 (IXDD604 on 6V3, EPWM6A_ISO / EPWM5A_ISO -> HEATER_SYNC_GATE_1/2).
 
 PDF: DC- = GND, HT_AUX = 6V3, heater_current / heater_cap_meas / q13_drain / EPWMxA_iso = the IPC
@@ -159,15 +159,15 @@ sh.glabel("EPWM5A", DX - g(32), VIN[1], 180)
 _, rt, rb = vert2(sh, "R", "R78", DX - g(28), VIN[1] + g(3), sh_value("R78"), top=2)   # pin 2 = EPWM5A
 sh.junction(*rt)
 power_at(sh, "GND", rb, "down")
-for x, ref, net in ((DX - g(44), "C53", "5V"), (DX - g(54), "C18", "20V")):           # decoupling, standalone pairs
+for x, ref, net in ((DX - g(44), "C53", "5V"), (DX - g(54), "C18", "15V")):           # decoupling, standalone pairs
     _, ct, cb = vert2(sh, "C", ref, x, DY - g(1), sh_value(ref), top=1, text="left")   # pin 1 = rail
     sh.wire(ct, up(ct, 2))
     power_at(sh, net, up(ct, 2), "up")
     power_at(sh, "GND", cb, "down")
-# bootstrap: 20V -> D11 -> R99 -> VDD2, C25 VDD2 - GND2 (= HEATER_HI_SOURCE)
+# bootstrap: 15V -> D11 -> R99 -> VDD2, C25 VDD2 - GND2 (= HEATER_HI_SOURCE)
 BR = DY - g(14)
 sh.wire((DX - g(8), BR), (DX - g(5), BR))
-power_at(sh, "20V", (DX - g(8), BR), "up")
+power_at(sh, "15V", (DX - g(8), BR), "up")
 _, da, dc = horiz2(sh, "D", "D11", DX - g(2), BR, sh_value("D11"), left="A")
 _, r2, r1 = horiz2(sh, "R", "R99", DX + g(8), BR, sh_value("R99"), left=2)             # pin 1 = VDD2 side
 sh.wire(dc, r2)
@@ -199,7 +199,7 @@ sh.label("HEATER_HI_GATE", DX + g(30), OUTM[1], 0)
 sh.text("Si8271: PWR_FLAGs on VDD2 (bootstrap through D11 / R99) and on the high-side return HEATER_HI_SOURCE.", DX - g(40), BOT + g(8))
 
 # --- DRV9: IXDD609 low-side driver (EPWM6A -> HEATER_LOW_GATE via R37 and R31 + D33) ----------
-ixdd609_cell(sh, "DRV9", g(74), g(154), vcc="20V", gnd="GND", in_label="EPWM6A", r_in=("R77", "10k"),
+ixdd609_cell(sh, "DRV9", g(74), g(154), vcc="15V", gnd="GND", in_label="EPWM6A", r_in=("R77", "10k"),
              cdec=("C52", "4.7u", 1), r_out=[("R37", "10R"), ("R31", "3.3R")], out_label="HEATER_LOW_GATE",
              r_gate=("R66", "10k"), diode=("D33", "ZLLS400TA"), local=True, r_gate_top=1)
 

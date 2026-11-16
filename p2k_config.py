@@ -74,6 +74,11 @@ KICAD_REFDES = {
 
 NET_ALIASES = {
     "GND=POWER": "GND",
+    # Renamed to the real voltages (user, 2026-11-16): the 15 V aux-flyback rails kept their
+    # old-revision name "20V", and the bias is 1.65 V (fitted REF1).
+    "20V": "15V",
+    "20V_ISO_SEC": "15V_ISO_SEC",
+    "+2V5_BIAS": "+1V65_BIAS",
 }
 
 # Blank-refdes records: a net and one of these drills = via, a net and another drill =

@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """Sheet 9 - AC measurement (PDF page 9): the two PFC MOSFET drivers DRV1 / DRV2 (IXDD609,
 PFC_PWM1/2 -> GATE1/2) and the mains voltage difference amplifier U8 (TLV316) from AC1 / AC2
-through 3 x 1M per leg, biased at +2V5_BIAS, output VAC_MEAS."""
+through 3 x 1M per leg, biased at +1V65_BIAS, output VAC_MEAS."""
 from _common import *  # noqa: F401,F403
 
 sh = sheet("09_ac_measurement.kicad_sch")
 
 # PDF labels pfc_pwm1/2 and gate1/2 = IPC nets PFC_PWM1/2 and GATE1/2
-ixdd609_cell(sh, "DRV1", g(60), g(40), vcc="20V", gnd="GND", in_label="PFC_PWM1", r_in=("R71", "10k"),
+ixdd609_cell(sh, "DRV1", g(60), g(40), vcc="15V", gnd="GND", in_label="PFC_PWM1", r_in=("R71", "10k"),
              cdec=("C79", "4.7u", 1), r_out=[("R14", "5R"), ("R1", "5R")], out_label="GATE1",
              r_gate=("R43", "10k"))
-ixdd609_cell(sh, "DRV2", g(170), g(40), vcc="20V", gnd="GND", in_label="PFC_PWM2", r_in=("R69", "10k"),
+ixdd609_cell(sh, "DRV2", g(170), g(40), vcc="15V", gnd="GND", in_label="PFC_PWM2", r_in=("R69", "10k"),
              cdec=("C80", "4.7u", 1), r_out=[("R20", "5R"), ("R19", "5R")], out_label="GATE2",
              r_gate=("R7", "10k"))
 
@@ -29,9 +29,9 @@ for x, lab, chain, pin in ((AX - g(30), "AC1", ("R47", "R48", "R79"), INN),
         prev = rb
     sh.wire(prev, (x, pin[1]), pin)
 # bias of the + input, feedback of the - input
-_, rt, rb = vert2(sh, "R", "R80", AX - g(12), AY - g(5), "15k", top=1)     # pin 1 = +2V5_BIAS
+_, rt, rb = vert2(sh, "R", "R80", AX - g(12), AY - g(5), "15k", top=1)     # pin 1 = +1V65_BIAS
 sh.junction(*rb)
-power_at(sh, "+2V5_BIAS", rt, "up")
+power_at(sh, "+1V65_BIAS", rt, "up")
 node = (AX + g(12), OUT[1])
 sh.wire(OUT, node)
 _, rl, rr = horiz2(sh, "R", "R49", AX + g(2), AY + g(12), "15k", left=2, text="below")   # pin 1 = output

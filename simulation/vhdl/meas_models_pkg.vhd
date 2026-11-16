@@ -8,7 +8,7 @@
 --   - leg : 0  --[g:    1..3 sections R (|| c_par)]-- NN --[r_f || c_f]-- VO
 --   op-amp: dx/dt = wp*(a0*(NP - NN) - x), wp = 2*pi*gbw/a0, VO = x - rout*i_out
 --   output: VO --[r_o]-- OUT --[c_o]-- 0          (c_o = 0: OUT = VO, r_o unloaded)
---   REF   : the +2V5_BIAS node (vref -[r_btop]- REF -[r_bbot || c_bias]- 0, plus the
+--   REF   : the +1V65_BIAS node (vref -[r_btop]- REF -[r_bbot || c_bias]- 0, plus the
 --           other circuits' + legs as one resistance r_bother) or ground
 --
 --   group A shunt diff amp: IN = in_scale * u (u = shunt current, in_scale = R_shunt;

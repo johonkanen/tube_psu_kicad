@@ -7,7 +7,7 @@ through spice/extract.py. One topology covers all four model groups (vhdl/meas_m
     - leg:  0  --[g:    1..3 sections R (|| Cpar)]-- NN --[f:     R || C]-- VO
     op-amp: NP, NN -> VO (macromodel: A0, one pole at GBW/A0, Rout)
     output: VO --[o: R]-- OUT --[c_o: C]-- 0        (no c_o: OUT = VO, R unloaded)
-    REF = the +2V5_BIAS node (REF1 -> R110 / R3 || C48 + the loads of the other circuits)
+    REF = the +1V65_BIAS node (REF1 -> R110 / R3 || C48 + the loads of the other circuits)
           or the circuit's ground
 
   group A shunt diff amp (1-4):   IN = shunt voltage (input = shunt current x R_shunt)
@@ -32,7 +32,7 @@ OPAMPS = {
 # parasitic capacitance added across every 1 Mohm resistor of the group-B chains (PLAN step 2)
 C_PAR_PER_MOHM = 0.2e-12
 
-BIAS_NET = "+2V5_BIAS"
+BIAS_NET = "+1V65_BIAS"
 BIAS_VOLTAGE = 1.65            # user decision 2026-11-14: loaded bias node = 1.65 V
 BIAS_REFS = dict(ref="REF1", r_top="R110", r_bot="R3", c_bias="C48", c_ref="C69")
 GROUNDS = ("GND", "ISO_GND", "HT_GND")
@@ -92,7 +92,7 @@ CIRCUITS = [
                     g=["R112", "R111", "R109"], f="R82", c_f=None, o="R2", c_o="C4"),
          extra=[], inventory=6),
     dict(id="c7", title="AUX_MEAS (J2-40)", group="C", out="AUX_MEAS",
-         input=dict(kind="V", net="20V", dc=20.0, unit="V"),
+         input=dict(kind="V", net="15V", dc=15.0, unit="V"),
          opamp=None, ref="GND",
          roles=dict(in_p=["R11"], ref_p="R12", c_ref_p="C61"),
          extra=[], inventory=7),

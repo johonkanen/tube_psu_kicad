@@ -597,7 +597,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "tube_psu:20V"
+		(symbol "tube_psu:15V"
 			(power global)
 			(pin_numbers
 				(hide yes)
@@ -622,7 +622,7 @@
 					)
 				)
 			)
-			(property "Value" "20V"
+			(property "Value" "15V"
 				(at 0 3.556 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -654,7 +654,7 @@
 					)
 				)
 			)
-			(property "Description" "Power symbol for net \"20V\" (IPC net name)"
+			(property "Description" "Power symbol for net \"15V\" (IPC net name)"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -676,7 +676,7 @@
 					)
 				)
 			)
-			(symbol "20V_0_1"
+			(symbol "15V_0_1"
 				(polyline
 					(pts
 						(xy -0.762 1.27) (xy 0 2.54)
@@ -714,7 +714,7 @@
 					)
 				)
 			)
-			(symbol "20V_1_1"
+			(symbol "15V_1_1"
 				(pin power_in line
 					(at 0 0 90)
 					(length 0)
@@ -1514,7 +1514,7 @@
 		(uuid "6c8567aa-8583-5a9a-946f-02986e6a7113")
 	)
 	(symbol
-		(lib_id "tube_psu:20V")
+		(lib_id "tube_psu:15V")
 		(at 147.32 50.8 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1531,7 +1531,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "20V"
+		(property "Value" "15V"
 			(at 147.32 47.244 0)
 			(effects
 				(font
@@ -1557,7 +1557,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"20V\" (IPC net name)"
+		(property "Description" "Power symbol for net \"15V\" (IPC net name)"
 			(at 147.32 50.8 0)
 			(effects
 				(font
@@ -1589,7 +1589,7 @@
 		)
 		(uuid "2f2d8c24-d62e-52c2-b92c-e2cd305707a9")
 	)
-	(text "PDF terminal DC- = net GND. PWR_FLAGs: 20V on sheet 1 (AUX supply), DC+ and GND on sheet 5 (bridge DB1)."
+	(text "PDF terminal DC- = net GND. PWR_FLAGs: 15V on sheet 1 (AUX supply), DC+ and GND on sheet 5 (bridge DB1)."
 		(exclude_from_sim no)
 		(at 50.8 99.06 0)
 		(effects

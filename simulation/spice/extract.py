@@ -230,7 +230,7 @@ def parse_inventory(path=INVENTORY):
             continue
         if line.startswith("## "):
             sec = None
-        if line.startswith("- +2V5_BIAS:"):
+        if line.startswith("- +1V65_BIAS:"):
             sec = "bias"
         elif line.startswith("- ") and sec == "bias":
             sec = None

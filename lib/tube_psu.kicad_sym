@@ -8307,7 +8307,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(symbol "20V"
+	(symbol "15V"
 		(power global)
 		(pin_numbers
 			(hide yes)
@@ -8332,7 +8332,7 @@
 				)
 			)
 		)
-		(property "Value" "20V"
+		(property "Value" "15V"
 			(at 0 3.556 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8364,7 +8364,7 @@
 				)
 			)
 		)
-		(property "Description" "Power symbol for net \"20V\" (IPC net name)"
+		(property "Description" "Power symbol for net \"15V\" (IPC net name)"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8386,7 +8386,7 @@
 				)
 			)
 		)
-		(symbol "20V_0_1"
+		(symbol "15V_0_1"
 			(polyline
 				(pts
 					(xy -0.762 1.27) (xy 0 2.54)
@@ -8424,7 +8424,7 @@
 				)
 			)
 		)
-		(symbol "20V_1_1"
+		(symbol "15V_1_1"
 			(pin power_in line
 				(at 0 0 90)
 				(length 0)
@@ -8446,7 +8446,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(symbol "20V_ISO_SEC"
+	(symbol "15V_ISO_SEC"
 		(power global)
 		(pin_numbers
 			(hide yes)
@@ -8471,7 +8471,7 @@
 				)
 			)
 		)
-		(property "Value" "20V_ISO_SEC"
+		(property "Value" "15V_ISO_SEC"
 			(at 0 3.556 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8503,7 +8503,7 @@
 				)
 			)
 		)
-		(property "Description" "Power symbol for net \"20V_ISO_SEC\" (IPC net name)"
+		(property "Description" "Power symbol for net \"15V_ISO_SEC\" (IPC net name)"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8525,7 +8525,7 @@
 				)
 			)
 		)
-		(symbol "20V_ISO_SEC_0_1"
+		(symbol "15V_ISO_SEC_0_1"
 			(polyline
 				(pts
 					(xy -0.762 1.27) (xy 0 2.54)
@@ -8563,7 +8563,7 @@
 				)
 			)
 		)
-		(symbol "20V_ISO_SEC_1_1"
+		(symbol "15V_ISO_SEC_1_1"
 			(pin power_in line
 				(at 0 0 90)
 				(length 0)
@@ -9280,7 +9280,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(symbol "+2V5_BIAS"
+	(symbol "+1V65_BIAS"
 		(power global)
 		(pin_numbers
 			(hide yes)
@@ -9305,7 +9305,7 @@
 				)
 			)
 		)
-		(property "Value" "+2V5_BIAS"
+		(property "Value" "+1V65_BIAS"
 			(at 0 3.556 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9337,7 +9337,7 @@
 				)
 			)
 		)
-		(property "Description" "Power symbol for net \"+2V5_BIAS\" (IPC net name)"
+		(property "Description" "Power symbol for net \"+1V65_BIAS\" (IPC net name)"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9359,7 +9359,7 @@
 				)
 			)
 		)
-		(symbol "+2V5_BIAS_0_1"
+		(symbol "+1V65_BIAS_0_1"
 			(polyline
 				(pts
 					(xy -0.762 1.27) (xy 0 2.54)
@@ -9397,7 +9397,7 @@
 				)
 			)
 		)
-		(symbol "+2V5_BIAS_1_1"
+		(symbol "+1V65_BIAS_1_1"
 			(pin power_in line
 				(at 0 0 90)
 				(length 0)

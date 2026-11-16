@@ -189,7 +189,7 @@ package meas_params_pkg is
             r_bbot    => 4.7000000000e+02,
             c_bias    => 1.0000000000e-07,
             r_bother  => 1.0000000000e+00,
-            u0        => 2.0000000000e+01,
+            u0        => 1.5000000000e+01,
             u_amp     => 5.6808510638e-01),
         -- c8: 420V -> AD2 Vin (ISO_GND), U3 (group B)
         8 => (

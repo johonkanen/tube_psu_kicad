@@ -13,7 +13,7 @@ ngspice: --ngspice PATH, $NGSPICE, or PATH (same lookup as hVHDL_ode fc_5level.p
 
 Netlist rules:
   * all R / C of the circuit with the schematic values; not-fitted parts (value 'na') left out
-  * circuits 1-5 share +2V5_BIAS: their netlists hold all five circuits and the bias network
+  * circuits 1-5 share +1V65_BIAS: their netlists hold all five circuits and the bias network
     (REF1 = ideal source on its VOUT net, value set for 1.65 V on the loaded bias node);
     only the circuit under test is driven, the other inputs sit at their DC value
   * op-amps: the macromodel of circuits.OPAMPS (spice/models/opamp_macro.lib), no rails

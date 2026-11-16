@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Sheet 4 - MCU socket and misc (PDF page 4): the 2x25 MCU header J2, the +3V3 regulator V4
-(TPS73033 from 5V), the +2V5_BIAS reference REF1 with R110 / R3 / C48, the 20V measurement
+(TPS73033 from 5V), the +1V65_BIAS reference REF1 with R110 / R3 / C48, the 15V measurement
 divider R11 / R12 (AUX_MEAS), the DC-link measurement amplifier U6 (TLV316, DC+ through
 3 x 1M) -> DC_LINK_MEAS, and the UART connector J4 (RX / TX).
 
@@ -53,7 +53,7 @@ sh.text("J2: MCU pin names of the PDF as small texts; nets = IPC names (PDF DGND
 sh.text("Single-pin nets (ADA0.., F16, G15, ...): label on the J2 pin only (PDF: no other connection).", J2X - g(44), J2Y + g(35))
 sh.text("AD converter range [0 - 3v3] (PDF note).", J2X - g(44), J2Y + g(38))
 
-# --- REF1: +2V5_BIAS reference ------------------------------------------------------------------
+# --- REF1: +1V65_BIAS reference ------------------------------------------------------------------
 RX_, RY = g(60), g(40)
 ref = sh.place("ADR380", "REF1", RX_, RY, value=sh_value("REF1"))
 VIN, VOUT, RGND = ref.pin(2), ref.pin(3), ref.pin(1)
@@ -71,16 +71,16 @@ sh.junction(xo, VOUT[1])
 sh.wire(cb, (xo, GROW))
 _, rl, rr = horiz2(sh, "R", "R110", RX_ + g(22), VOUT[1], "220", left=2, text="above")     # pin 2 = REF1 VOUT
 sh.wire((xo, VOUT[1]), rl)
-xb = RX_ + g(30)                            # +2V5_BIAS node
+xb = RX_ + g(30)                            # +1V65_BIAS node
 sh.wire(rr, (xb, VOUT[1]))
 sh.junction(xb, VOUT[1])
 sh.wire((xb, VOUT[1]), (xb, VOUT[1] - g(8)))
-flagged_power(sh, "+2V5_BIAS", xb, VOUT[1] - g(8))   # permanent: the rail is made by R110 (passive)
-_, rt, rb = vert2(sh, "R", "R3", xb, VOUT[1] + g(3), "470", top=1)          # pin 1 = +2V5_BIAS
+flagged_power(sh, "+1V65_BIAS", xb, VOUT[1] - g(8))   # permanent: the rail is made by R110 (passive)
+_, rt, rb = vert2(sh, "R", "R3", xb, VOUT[1] + g(3), "470", top=1)          # pin 1 = +1V65_BIAS
 sh.wire(rb, (xb, GROW))
 xc = xb + g(8)
 sh.wire((xb, VOUT[1]), (xc, VOUT[1]))
-_, ct, cb = vert2(sh, "C", "C48", xc, VOUT[1] + g(3), "100n", top=1)         # pin 1 = +2V5_BIAS
+_, ct, cb = vert2(sh, "C", "C48", xc, VOUT[1] + g(3), "100n", top=1)         # pin 1 = +1V65_BIAS
 sh.wire(ct, (xc, VOUT[1]))
 sh.wire(cb, (xc, GROW))
 sh.wire(RGND, (RX_, GROW))
@@ -89,7 +89,7 @@ for x in (xin, xo, RX_, xb):
     sh.junction(x, GROW)
 power_at(sh, "GND", (xin, GROW), "down")
 sh.text("PDF notes: 'MORE CAPACITANCE TO BIAS VOLTAGE / BUFFER REF OUTPUT or add load 220R load resistor'.", xin, GROW + g(7))
-sh.text("+2V5_BIAS PWR_FLAG lives here (R110 from REF1); +3V3 is driven by V4 VOUT below.", xin, GROW + g(10))
+sh.text("+1V65_BIAS PWR_FLAG lives here (R110 from REF1); +3V3 is driven by V4 VOUT below.", xin, GROW + g(10))
 
 # --- V4: +3V3 regulator -------------------------------------------------------------------------
 VX, VY = g(60), g(90)
@@ -122,11 +122,11 @@ _, ct, cb = vert2(sh, "C", "C76", xv, VOUT[1] + g(3), "1u", top=1)           # p
 power_at(sh, "GND", cb, "down")
 sh.text("+3v3 (PDF) = +3V3.", VX - g(20), VY + g(16))
 
-# --- 20V measurement: R11 / R12 divider -> AUX_MEAS (one-sheet net, J2 pin 40) ------------------
+# --- 15V measurement: R11 / R12 divider -> AUX_MEAS (one-sheet net, J2 pin 40) ------------------
 MX, MY = g(24), g(140)
-_, rt, rb = vert2(sh, "R", "R11", MX, MY, "22k", top=1)                     # pin 1 = 20V
+_, rt, rb = vert2(sh, "R", "R11", MX, MY, "22k", top=1)                     # pin 1 = 15V
 sh.wire(rt, up(rt, 2))
-power_at(sh, "20V", up(rt, 2), "up")
+power_at(sh, "15V", up(rt, 2), "up")
 node = (MX, rb[1] + g(2))
 sh.wire(rb, node)
 _, rt2, rb2 = vert2(sh, "R", "R12", MX, node[1] + g(5), "4.7k", top=1)     # pin 1 = AUX_MEAS
@@ -142,7 +142,7 @@ grow = rb2[1] + g(2)
 sh.wire(rb2, (MX, grow), (xc, grow), cb)
 sh.junction(MX, grow)
 power_at(sh, "GND", (MX, grow), "down")
-sh.text("20V measurement (PDF: 18.7/3V3)", MX - g(8), MY - g(11))
+sh.text("15V measurement (PDF: 18.7/3V3)", MX - g(8), MY - g(11))
 
 # --- DC-link measurement: U6 TLV316 ---------------------------------------------------------------
 AX, AY = g(120), g(160)

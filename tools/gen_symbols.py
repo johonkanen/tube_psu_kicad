@@ -17,8 +17,8 @@ from p2k.symgen import *  # noqa: E402,F401,F403
 from p2k.symgen import _pin, run  # noqa: E402
 
 GROUNDS = ["GND", "ISO_GND", "HT_GND"]
-SUPPLIES = ["DC+", "420V", "20V", "20V_ISO_SEC", "6V3", "5V", "5V_ISOL", "+3V3", "AD2_3V3",
-            "+2V5_BIAS", "-5V_SEC", "-100V BIAS"]
+SUPPLIES = ["DC+", "420V", "15V", "15V_ISO_SEC", "6V3", "5V", "5V_ISOL", "+3V3", "AD2_3V3",
+            "+1V65_BIAS", "-5V_SEC", "-100V BIAS"]
 
 NC = "no_connect"
 

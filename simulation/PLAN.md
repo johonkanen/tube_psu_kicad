@@ -18,12 +18,12 @@ testbenches.
 | 5 | VAC_MEAS (J2-47) | AC2−AC1 → 3×1M / 15k diff amp U8 TLV316, bias | Vb + 0.005·Vac | none (op-amp + parasitic C only) | B: HV diff amp |
 | 6 | DC_LINK_MEAS (J2-41) | DC+ → 3×1M / 15k U6 TLV316, R2/C4 | 0.005·Vdc | 159 kHz | B |
 | 8 | AD2 Vin (isolated, ISO_GND) | 420V → 3×1M / 15k, C27 on + leg, U3 TLV316, R13/C5 | 0.005·V420 | 8.9 kHz (+ leg only), 159 kHz | B |
-| 7 | AUX_MEAS (J2-40) | 20V → 22k / 4.7k, C61 | 0.176 | 41 kHz | C: divider + RC |
+| 7 | AUX_MEAS (J2-40) | 15V → 22k / 4.7k, C61 | 0.176 | 41 kHz | C: divider + RC |
 | 9 | AD1 Vin (isolated, HT_GND) | 6V3 → 15k / 6.8k, U2 non-inverting 1.453, R18/C7 | 0.453 | 1.59 MHz | D: divider + non-inv amp |
 | (10) | IW1818 Vsense | AUX_FB → (39k‖15k) / (33k‖4.7k), C50, 1k | 0.275 | 2.4 MHz | not simulated (controller input) |
 | (11) | IW1818 I_sense | R8‖R9 1.245 Ω, no filter | 1.245 V/A | none | not simulated (controller input) |
 
-Shared: the "+2V5_BIAS" source (REF1 → R110 220 / R3 470, C48 100n: 150 Ω Thevenin
+Shared: the +1V65_BIAS source (Proteus name "+1V65_BIAS") (REF1 → R110 220 / R3 470, C48 100n: 150 Ω Thevenin
 resistance, about 10.6 kHz, loaded by about 2.7 kΩ of amplifier bias resistors) is part of
 circuits 1–5 and is simulated with them, not as an ideal source. The bias is **1.65 V** (user,
 2026-11-14: the fitted REF1 gives 1.65 V on the bias net); the REF1 source voltage in the
@@ -94,7 +94,7 @@ Status 2026-11-14: steps 0–4 and 6 (run_sim.py, STATUS.md) **done**, all 9 cir
 
 ## 4. Decisions (user, 2026-11-14)
 
-1. Bias: +2V5_BIAS = 1.65 V (fitted REF1; the schematic value ISL21010CFH315Z is a 1.5 V part,
+1. Bias: +1V65_BIAS = 1.65 V (fitted REF1; the schematic value ISL21010CFH315Z is a 1.5 V part,
    so the fitted part differs from the schematic value – noted, schematic not changed).
 2. Scope: the ADC paths 1–9; the IW1818 inputs 10/11 are not simulated.
 3. Op-amps: the same simple macromodel in ngspice and VHDL (vendor models optional, step 5).
@@ -105,7 +105,7 @@ Status 2026-11-14: steps 0–4 and 6 (run_sim.py, STATUS.md) **done**, all 9 cir
 
 ## 5. Design findings from the inventory (to check, not simulation work)
 
-- +2V5_BIAS is 1.65 V (fitted REF1), not 2.5 V as named, and the schematic value of REF1
+- +1V65_BIAS (Proteus name +2V5_BIAS, renamed 2026-11-16) is 1.65 V (fitted REF1), and the schematic value of REF1
   (ISL21010CFH315Z, 1.5 V) does not match the fitted part; the net is loaded ≈ 5 % by the
   amplifier bias resistors (the PDF note already asks for buffering).
 - U1 (LMH6658, circuits 3/4) has no local decoupling capacitor.

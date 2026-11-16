@@ -127,7 +127,7 @@ case("AUX (22k/4.7k + 1 n)", "c7", "n_AUX_MEAS")
 
 # --- candidate fixes ----------------------------------------------------------------------
 def vac_cf(net, rout=100, cout=None):
-    net = sub(net, "R80 n_2V5_BIAS n_Net__U8 15000", "R80 n_2V5_BIAS n_Net__U8 15000\nCF80 n_2V5_BIAS n_Net__U8 1n")
+    net = sub(net, "R80 n_1V65_BIAS n_Net__U8 15000", "R80 n_1V65_BIAS n_Net__U8 15000\nCF80 n_1V65_BIAS n_Net__U8 1n")
     net = sub(net, "R49 n_Net__R49_Pad1 n_Net__U8_1 15000", "R49 n_Net__R49_Pad1 n_Net__U8_1 15000\nCF49 n_Net__R49_Pad1 n_Net__U8_1 1n")
     net = sub(net, "R65 n_VAC_MEAS n_Net__R49_Pad1 100", f"R65 n_VAC_MEAS n_Net__R49_Pad1 {rout}" + (f"\nCOUT n_VAC_MEAS 0 {cout}" if cout else ""))
     return net

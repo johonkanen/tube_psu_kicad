@@ -27,13 +27,13 @@ REF1). The line voltage is modelled differentially (AC1 at ground).
 | 5 | AD2 (420 V) bandwidth 8.86 kHz, from C27 on the + leg only | −6.8° at 1 kHz; legs unbalanced | No hardware change; use 8.86 kHz in the control model | Info |
 | 6 | HEATER_I_MEAS gain 0.18 % low (LMH6658 finite gain at noise gain 101) | small gain error | Calibrate in firmware | Low |
 | 7 | U1 (LMH6658, DHB_I / HEATER_I) has no local decoupling | supply noise / possible oscillation | 100 nF (+ 1 µF) at U1 pin 8 | Medium |
-| 8 | REF1 schematic value ISL21010CFH315Z (1.5 V) ≠ fitted part (bias 1.65 V); net named +2V5_BIAS; the 15 V flyback rails are named 20V / 20V_ISO_SEC | documentation | Correct the value; rename the nets (+1V65_BIAS, 15V, 15V_ISO_SEC) | Low |
+| 8 | REF1 schematic value ISL21010CFH315Z (1.5 V) ≠ fitted part (bias 1.65 V) | documentation | Correct the value (the nets are already renamed to +1V65_BIAS / 15V / 15V_ISO_SEC, 2026-11-16) | Low |
 | 9 | ADC mux channel leakage: DC_LINK_MEAS (1 k + 1 nF) and AUX_MEAS (3.9 kΩ + 1 nF) recharge the mux node slowly | 254 / 505 LSB of the previous channel left after 1 µs; ≈ 10 µs / > 20 µs to settle | DC_LINK: fix 3; AUX_MEAS: C61 1 nF → 1 µF (0.7 LSB, any dwell) | High |
 | 10 | VAC_MEAS range: 1.65 V ± 0.005·Vline uses the whole 0–3.3 V at 325 V peak | clips above ≈ 330 V peak (230 V + 1.5 %) | R49 and R80 15 k → 12 k (gain 0.004: ±1.49 V at 264 V rms) | High |
 
 ## 1. The AC line couples into the bias and every current channel
 
-**Finding.** The "+2V5_BIAS" node (REF1 → R110 220 Ω / R3 470 Ω, C48 100 nF) has a source
+**Finding.** The +1V65_BIAS node (named "+2V5_BIAS" in Proteus) (REF1 → R110 220 Ω / R3 470 Ω, C48 100 nF) has a source
 resistance of ≈ 142 Ω with its loads. VAC_MEAS's + leg (R50–R52, 3 MΩ from AC2, R80 15 kΩ)
 returns to this node, so the line voltage is injected into the bias with 4.7·10⁻⁵ V/V
 (C48 is only 32 kΩ at 50 Hz, it does not help). All four current amplifiers are referenced
@@ -53,7 +53,7 @@ buffer ref output".
 
 **Fix.** Buffer the bias with a unity-gain follower (a TLV316-class rail-to-rail op-amp in
 SOT-23-5, supplied from +3V3). Keep the REF1 divider unloaded (add 100 nF on the divider
-node), drive +2V5_BIAS from the follower output through ≈ 22 Ω, keep C48 on the bias node
+node), drive +1V65_BIAS from the follower output through ≈ 22 Ω, keep C48 on the bias node
 after the 22 Ω and take the follower feedback from the bias node (or from the op-amp output
 if the stability check prefers it). The 22 Ω isolates the 100 nF from the op-amp output.
 
@@ -155,7 +155,9 @@ Not simulated (the macromodel has no supply pin).
 
 - REF1: the schematic value ISL21010CFH315Z-TK is the 1.5 V version (bias would be ≈ 1.02 V);
   the fitted part gives 1.65 V on the bias net. Correct the value to the fitted part.
-- The net is named +2V5_BIAS but is 1.65 V; rename it (e.g. +1V65_BIAS) in the next revision.
+- Net names: Proteus called the 1.65 V bias "+2V5_BIAS" and the 15 V flyback rails "20V" /
+  "20V_ISO_SEC". They are renamed in the KiCad design to +1V65_BIAS, 15V and 15V_ISO_SEC
+  (2026-11-16, `NET_ALIASES` in p2k_config.py maps the Proteus IPC names).
 - `kicad-cli sch export netlist` warns "schematic has annotation errors" – to be
   investigated (the netlist itself matches the inventory and the IPC netlist).
 
@@ -238,12 +240,11 @@ read whatever the previous channel left – do not use them, or tie them to GND.
   TLV316 output clips at the rails, and at 230 V + 10 % (358 V peak) it would need −0.14 V…
   3.44 V. **Fix:** R49 and R80 15 kΩ → 12 kΩ (gain 0.004: ±1.43 V at 253 V rms, ±1.49 V at
   264 V rms). With fix 2 the pole moves to 1/(2π·12 kΩ·1 nF) = 13.3 kHz.
-- **AUX_MEAS** = 0.176·V(20V). The "20V" rail is a **15 V** rail (user, 2026-11-16: the name is
-  left over from an old revision; the same holds for 20V_ISO_SEC), so AUX_MEAS ≈ 2.64 V and the
+- **AUX_MEAS** = 0.176·V(15V). The 15V rail (Proteus name "20V", left over from an old
+  revision; likewise 15V_ISO_SEC = "20V_ISO_SEC") is 15 V nominal, so AUX_MEAS ≈ 2.64 V and the
   divider's 18.7 V full scale (PDF note) leaves 3.7 V of headroom for the light-load rise of
   the flyback (cross regulation, see `flyback/`). No change needed unless the flyback study
-  shows the rail exceeding 18.7 V. Rename the nets 20V / 20V_ISO_SEC to 15V / 15V_ISO_SEC in
-  the next revision.
+  shows the rail exceeding 18.7 V.
 
 ## Next steps
 

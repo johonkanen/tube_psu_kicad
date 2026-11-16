@@ -423,7 +423,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "tube_psu:+2V5_BIAS"
+		(symbol "tube_psu:+1V65_BIAS"
 			(power global)
 			(pin_numbers
 				(hide yes)
@@ -448,7 +448,7 @@
 					)
 				)
 			)
-			(property "Value" "+2V5_BIAS"
+			(property "Value" "+1V65_BIAS"
 				(at 0 3.556 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -480,7 +480,7 @@
 					)
 				)
 			)
-			(property "Description" "Power symbol for net \"+2V5_BIAS\" (IPC net name)"
+			(property "Description" "Power symbol for net \"+1V65_BIAS\" (IPC net name)"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -502,7 +502,7 @@
 					)
 				)
 			)
-			(symbol "+2V5_BIAS_0_1"
+			(symbol "+1V65_BIAS_0_1"
 				(polyline
 					(pts
 						(xy -0.762 1.27) (xy 0 2.54)
@@ -540,7 +540,7 @@
 					)
 				)
 			)
-			(symbol "+2V5_BIAS_1_1"
+			(symbol "+1V65_BIAS_1_1"
 				(pin power_in line
 					(at 0 0 90)
 					(length 0)
@@ -1227,7 +1227,7 @@
 		(uuid "87bffd1e-ba49-5082-9d94-c98e5815a04f")
 	)
 	(symbol
-		(lib_id "tube_psu:+2V5_BIAS")
+		(lib_id "tube_psu:+1V65_BIAS")
 		(at 111.76 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1244,7 +1244,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+2V5_BIAS"
+		(property "Value" "+1V65_BIAS"
 			(at 111.76 49.784 0)
 			(effects
 				(font
@@ -1270,7 +1270,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"+2V5_BIAS\" (IPC net name)"
+		(property "Description" "Power symbol for net \"+1V65_BIAS\" (IPC net name)"
 			(at 111.76 53.34 0)
 			(effects
 				(font
@@ -2207,7 +2207,7 @@
 		(uuid "7d632dba-604e-5c63-b4b7-a4ce37530f4f")
 	)
 	(symbol
-		(lib_id "tube_psu:+2V5_BIAS")
+		(lib_id "tube_psu:+1V65_BIAS")
 		(at 111.76 129.54 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2224,7 +2224,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+2V5_BIAS"
+		(property "Value" "+1V65_BIAS"
 			(at 111.76 125.984 0)
 			(effects
 				(font
@@ -2250,7 +2250,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"+2V5_BIAS\" (IPC net name)"
+		(property "Description" "Power symbol for net \"+1V65_BIAS\" (IPC net name)"
 			(at 111.76 129.54 0)
 			(effects
 				(font

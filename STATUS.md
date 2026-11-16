@@ -1425,3 +1425,21 @@ part of `tools/check_all.sh`, and nothing in kicad/ was changed.
 
 Phase 5 is complete; the migration is done (all user decisions implemented, ALL CHECKS PASSED). Nothing
 is planned; see "Left open" above and `next_prompt.md`.
+
+## Net rename to the real voltages (2026-11-16)
+
+User decision: the Proteus net names "20V", "20V_ISO_SEC" (15 V aux-flyback rails, names left
+over from an old revision) and "+2V5_BIAS" (1.65 V with the fitted REF1) are renamed in the KiCad
+design to **15V**, **15V_ISO_SEC** and **+1V65_BIAS**.
+
+- `p2k_config.py` `NET_ALIASES` maps the IPC names (`20V` → `15V`, `20V_ISO_SEC` → `15V_ISO_SEC`,
+  `+2V5_BIAS` → `+1V65_BIAS`), so `reference/` (ipc356), check_symbols and compare_netlists use the
+  new names; ipc356_diff / gerber_roundtrip match nets by pad sets (names do not matter there).
+- `tools/gen_symbols.py` power symbols, the sheet scripts (sheets 1, 2, 4, 6, 8, 9, 10, 11 and
+  `_common.py`) and the regenerated `lib/`, `kicad/*.kicad_sch`, `kicad/tube_psu.kicad_pcb`.
+- No connectivity change: tools/check_all.sh passes as before (ERC 0 errors / 23 warnings, compare
+  315/315 parts, 0 wrong-net pins, 208/208 nets, make_pcb byte-identical rebuild, DRC 251 with 0
+  shorts / 0 unconnected, ipc356_diff 193 nets 1:1, round trip OK).
+- `simulation/` updated (circuits.py, extract.py, INVENTORY.md, docs; c7 operating point 15 V);
+  run_sim.py: all 9 circuits pass with unchanged results.
+- The PDF / Proteus names remain in the historical notes above.

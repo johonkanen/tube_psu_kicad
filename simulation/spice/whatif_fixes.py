@@ -81,22 +81,22 @@ def sub(net, old, new):
 
 
 def buffered_bias_iso(net, riso="22"):
-    """Follower -> Riso -> +2V5_BIAS with C48 kept on the bias node; 100n added on the divider."""
-    net = sub(net, "R110 n_2V5_BIAS n_Net__REF1_VOUT 220", "R110 n_BIAS_DIV n_Net__REF1_VOUT 220")
-    net = sub(net, "R3 n_2V5_BIAS 0 470", f"R3 n_BIAS_DIV 0 470\nCDIV n_BIAS_DIV 0 100n\nXBUF n_BIAS_DIV n_BUF_FB n_BUF_O opamp_TLV316IDBVR\nRISO n_BUF_O n_2V5_BIAS {riso}\nRFB n_2V5_BIAS n_BUF_FB 1k")
+    """Follower -> Riso -> +1V65_BIAS with C48 kept on the bias node; 100n added on the divider."""
+    net = sub(net, "R110 n_1V65_BIAS n_Net__REF1_VOUT 220", "R110 n_BIAS_DIV n_Net__REF1_VOUT 220")
+    net = sub(net, "R3 n_1V65_BIAS 0 470", f"R3 n_BIAS_DIV 0 470\nCDIV n_BIAS_DIV 0 100n\nXBUF n_BIAS_DIV n_BUF_FB n_BUF_O opamp_TLV316IDBVR\nRISO n_BUF_O n_1V65_BIAS {riso}\nRFB n_1V65_BIAS n_BUF_FB 1k")
     return re.sub(r"VREF1 (\S+) 0 DC \S+", rf"VREF1 \1 0 DC {1.65*690/470:.6f}", net)
 
 
 def buffered_bias(net):
-    """REF1 divider unloaded, TLV316-class follower drives +2V5_BIAS; C48 moved to the divider."""
-    net = sub(net, "R110 n_2V5_BIAS n_Net__REF1_VOUT 220", "R110 n_BIAS_DIV n_Net__REF1_VOUT 220")
-    net = sub(net, "R3 n_2V5_BIAS 0 470", "R3 n_BIAS_DIV 0 470")
-    net = sub(net, "C48 n_2V5_BIAS 0 1e-07", "C48 n_BIAS_DIV 0 1e-07\nXBUF n_BIAS_DIV n_2V5_BIAS n_2V5_BIAS opamp_TLV316IDBVR")
+    """REF1 divider unloaded, TLV316-class follower drives +1V65_BIAS; C48 moved to the divider."""
+    net = sub(net, "R110 n_1V65_BIAS n_Net__REF1_VOUT 220", "R110 n_BIAS_DIV n_Net__REF1_VOUT 220")
+    net = sub(net, "R3 n_1V65_BIAS 0 470", "R3 n_BIAS_DIV 0 470")
+    net = sub(net, "C48 n_1V65_BIAS 0 1e-07", "C48 n_BIAS_DIV 0 1e-07\nXBUF n_BIAS_DIV n_1V65_BIAS n_1V65_BIAS opamp_TLV316IDBVR")
     return re.sub(r"VREF1 (\S+) 0 DC \S+", rf"VREF1 \1 0 DC {1.65*690/470:.6f}", net)
 
 
 # 1. bias coupling: AC2 -> current-channel outputs and bias node
-cur = ["n_PFC_I1_MEAS", "n_DHB_I_MEAS", "n_HEATER_I_MEAS", "n_2V5_BIAS", "n_VAC_MEAS"]
+cur = ["n_PFC_I1_MEAS", "n_DHB_I_MEAS", "n_HEATER_I_MEAS", "n_1V65_BIAS", "n_VAC_MEAS"]
 base5 = body("c5")
 b0 = run("bias_base", base5, "V_c5", cur)
 b1 = run("bias_buf", buffered_bias(base5), "V_c5", cur)
@@ -106,7 +106,7 @@ for n in cur:
 
 # 2. VAC_MEAS filter
 def vac_fix(net, cf, cout, rout):
-    net = sub(net, "R80 n_2V5_BIAS n_Net__U8 15000", f"R80 n_2V5_BIAS n_Net__U8 15000\nCF80 n_2V5_BIAS n_Net__U8 {cf}")
+    net = sub(net, "R80 n_1V65_BIAS n_Net__U8 15000", f"R80 n_1V65_BIAS n_Net__U8 15000\nCF80 n_1V65_BIAS n_Net__U8 {cf}")
     net = sub(net, "R49 n_Net__R49_Pad1 n_Net__U8_1 15000", f"R49 n_Net__R49_Pad1 n_Net__U8_1 15000\nCF49 n_Net__R49_Pad1 n_Net__U8_1 {cf}")
     net = sub(net, "R65 n_VAC_MEAS n_Net__R49_Pad1 100", f"R65 n_VAC_MEAS n_Net__R49_Pad1 {rout}\nCOUT n_VAC_MEAS 0 {cout}")
     return net

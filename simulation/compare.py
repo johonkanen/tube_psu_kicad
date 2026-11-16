@@ -273,7 +273,7 @@ def report(results, path):
         lines.append(f"| {r['id']} | " + " | ".join(cells) + " |")
     bias = [r for r in results if r["bias_spice"] is not None]
     if bias:
-        lines += ["", "Bias node (+2V5_BIAS): " + ", ".join(
+        lines += ["", "Bias node (+1V65_BIAS): " + ", ".join(
             f"{r['id']} ngspice {r['bias_spice']:.4f} V / VHDL {r['bias_vhdl']:.4f} V" for r in bias) + "."]
     lines += ["", "Operating points (ngspice, output at the input DC level): " + ", ".join(
         f"{r['id']} {r['out_op']:.3f} V" for r in results) + ".", "",
