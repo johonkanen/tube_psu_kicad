@@ -3,7 +3,7 @@
   "designRequirements": {
    "name": "TR1 recommended",
    "magnetizingInductance": {
-    "nominal": 0.00011848119240310656
+    "nominal": 0.00011893609642869434
    },
    "turnsRatios": [
     {
@@ -16,10 +16,10 @@
      "nominal": 8.666666666666666
     },
     {
-     "nominal": 8.666666666666666
+     "nominal": 0.6190476190476191
     },
     {
-     "nominal": 0.6190476190476191
+     "nominal": 8.666666666666666
     },
     {
      "nominal": 3.25
@@ -59,12 +59,12 @@
       "area": 3.2205e-05,
       "coordinates": [
        0.0,
-       0.00014375,
+       0.0001545,
        0.0
       ],
-      "distanceClosestNormalSurface": 0.00705625,
+      "distanceClosestNormalSurface": 0.0070455,
       "distanceClosestParallelSurface": 0.00435,
-      "length": 0.0002875,
+      "length": 0.000309,
       "sectionDimensions": [
        0.0057,
        0.00565
@@ -1012,10 +1012,10 @@
       {
        "coordinates": [
         0.0,
-        0.00014375,
+        0.0001545,
         0.0
        ],
-       "length": 0.0002875
+       "length": 0.000309
       }
      ],
      "material": "N87",
@@ -1310,7 +1310,7 @@
      "numberParallels": 1,
      "wire": {
       "coating": {
-       "breakdownVoltage": 2110.0,
+       "breakdownVoltage": 1790.0,
        "grade": 2,
        "material": null,
        "numberLayers": null,
@@ -1323,9 +1323,9 @@
       "conductingDiameter": {
        "excludeMaximum": null,
        "excludeMinimum": null,
-       "maximum": 0.000257,
-       "minimum": 0.000251,
-       "nominal": 0.000254,
+       "maximum": 0.000206,
+       "minimum": 0.00020099999999900002,
+       "nominal": 0.000203,
        "unit": null
       },
       "conductingHeight": null,
@@ -1344,20 +1344,20 @@
        "status": null
       },
       "material": "copper",
-      "name": "Round 30.0 - Heavy Build",
+      "name": "Round 32.0 - Heavy Build",
       "numberConductors": 1,
       "outerDiameter": {
        "excludeMaximum": null,
        "excludeMinimum": null,
-       "maximum": 0.000301999999999,
-       "minimum": 0.000287,
-       "nominal": 0.000294999999999,
+       "maximum": 0.000249,
+       "minimum": 0.00023099999999900002,
+       "nominal": 0.00023999999999900002,
        "unit": null
       },
       "outerHeight": null,
       "outerWidth": null,
       "standard": "NEMA MW 1000 C",
-      "standardName": "30 AWG",
+      "standardName": "32 AWG",
       "strand": null,
       "twistPitch": null,
       "type": "round"
@@ -1370,22 +1370,22 @@
      "numberParallels": 3,
      "wire": {
       "coating": {
-       "breakdownVoltage": 6000.0,
-       "grade": null,
-       "material": "TCA",
-       "numberLayers": 3,
-       "temperatureRating": 155.0,
+       "breakdownVoltage": 1790.0,
+       "grade": 2,
+       "material": null,
+       "numberLayers": null,
+       "temperatureRating": null,
        "thickness": null,
-       "thicknessLayers": 7.62e-05,
-       "type": "insulated"
+       "thicknessLayers": null,
+       "type": "enamelled"
       },
       "conductingArea": null,
       "conductingDiameter": {
        "excludeMaximum": null,
        "excludeMinimum": null,
-       "maximum": null,
-       "minimum": null,
-       "nominal": 0.000254,
+       "maximum": 0.000206,
+       "minimum": 0.00020099999999900002,
+       "nominal": 0.000203,
        "unit": null
       },
       "conductingHeight": null,
@@ -1395,7 +1395,7 @@
        "datasheetUrl": null,
        "description": null,
        "family": null,
-       "name": "Rubadue",
+       "name": "Elektrisola",
        "orderCode": null,
        "provenance": null,
        "reference": null,
@@ -1404,20 +1404,20 @@
        "status": null
       },
       "material": "copper",
-      "name": "Round TCA3 30 AWG",
+      "name": "Round 32.0 - Heavy Build",
       "numberConductors": 1,
       "outerDiameter": {
        "excludeMaximum": null,
        "excludeMinimum": null,
-       "maximum": null,
-       "minimum": null,
-       "nominal": 0.000483,
+       "maximum": 0.000249,
+       "minimum": 0.00023099999999900002,
+       "nominal": 0.00023999999999900002,
        "unit": null
       },
       "outerHeight": null,
       "outerWidth": null,
       "standard": "NEMA MW 1000 C",
-      "standardName": "30 AWG",
+      "standardName": "32 AWG",
       "strand": null,
       "twistPitch": null,
       "type": "round"
@@ -1425,7 +1425,7 @@
      "isolationSide": "secondary"
     },
     {
-     "name": "A5",
+     "name": "S5",
      "numberTurns": 3,
      "numberParallels": 3,
      "wire": {
@@ -1472,66 +1472,6 @@
        "maximum": 0.000301999999999,
        "minimum": 0.000287,
        "nominal": 0.000294999999999,
-       "unit": null
-      },
-      "outerHeight": null,
-      "outerWidth": null,
-      "standard": "NEMA MW 1000 C",
-      "standardName": "30 AWG",
-      "strand": null,
-      "twistPitch": null,
-      "type": "round"
-     },
-     "isolationSide": "primary"
-    },
-    {
-     "name": "S5",
-     "numberTurns": 3,
-     "numberParallels": 3,
-     "wire": {
-      "coating": {
-       "breakdownVoltage": 6000.0,
-       "grade": null,
-       "material": "TCA",
-       "numberLayers": 3,
-       "temperatureRating": 155.0,
-       "thickness": null,
-       "thicknessLayers": 7.62e-05,
-       "type": "insulated"
-      },
-      "conductingArea": null,
-      "conductingDiameter": {
-       "excludeMaximum": null,
-       "excludeMinimum": null,
-       "maximum": null,
-       "minimum": null,
-       "nominal": 0.000254,
-       "unit": null
-      },
-      "conductingHeight": null,
-      "conductingWidth": null,
-      "edgeRadius": null,
-      "manufacturerInfo": {
-       "datasheetUrl": null,
-       "description": null,
-       "family": null,
-       "name": "Rubadue",
-       "orderCode": null,
-       "provenance": null,
-       "reference": null,
-       "series": null,
-       "spiceModel": null,
-       "status": null
-      },
-      "material": "copper",
-      "name": "Round TCA3 30 AWG",
-      "numberConductors": 1,
-      "outerDiameter": {
-       "excludeMaximum": null,
-       "excludeMinimum": null,
-       "maximum": null,
-       "minimum": null,
-       "nominal": 0.000483,
        "unit": null
       },
       "outerHeight": null,
@@ -1550,21 +1490,21 @@
      "numberParallels": 3,
      "wire": {
       "coating": {
-       "breakdownVoltage": 6000.0,
-       "grade": null,
-       "material": "TCA",
-       "numberLayers": 3,
-       "temperatureRating": 155.0,
+       "breakdownVoltage": 2110.0,
+       "grade": 2,
+       "material": null,
+       "numberLayers": null,
+       "temperatureRating": null,
        "thickness": null,
-       "thicknessLayers": 7.62e-05,
-       "type": "insulated"
+       "thicknessLayers": null,
+       "type": "enamelled"
       },
       "conductingArea": null,
       "conductingDiameter": {
        "excludeMaximum": null,
        "excludeMinimum": null,
-       "maximum": null,
-       "minimum": null,
+       "maximum": 0.000257,
+       "minimum": 0.000251,
        "nominal": 0.000254,
        "unit": null
       },
@@ -1575,7 +1515,7 @@
        "datasheetUrl": null,
        "description": null,
        "family": null,
-       "name": "Rubadue",
+       "name": "Elektrisola",
        "orderCode": null,
        "provenance": null,
        "reference": null,
@@ -1584,14 +1524,14 @@
        "status": null
       },
       "material": "copper",
-      "name": "Round TCA3 30 AWG",
+      "name": "Round 30.0 - Heavy Build",
       "numberConductors": 1,
       "outerDiameter": {
        "excludeMaximum": null,
        "excludeMinimum": null,
-       "maximum": null,
-       "minimum": null,
-       "nominal": 0.000483,
+       "maximum": 0.000301999999999,
+       "minimum": 0.000287,
+       "nominal": 0.000294999999999,
        "unit": null
       },
       "outerHeight": null,
@@ -1610,22 +1550,22 @@
      "numberParallels": 1,
      "wire": {
       "coating": {
-       "breakdownVoltage": 6000.0,
-       "grade": null,
-       "material": "TCA",
-       "numberLayers": 3,
-       "temperatureRating": 155.0,
+       "breakdownVoltage": 1460.0,
+       "grade": 2,
+       "material": null,
+       "numberLayers": null,
+       "temperatureRating": null,
        "thickness": null,
-       "thicknessLayers": 7.62e-05,
-       "type": "insulated"
+       "thicknessLayers": null,
+       "type": "enamelled"
       },
       "conductingArea": null,
       "conductingDiameter": {
        "excludeMaximum": null,
        "excludeMinimum": null,
-       "maximum": null,
-       "minimum": null,
-       "nominal": 0.000203,
+       "maximum": 0.000163,
+       "minimum": 0.000157,
+       "nominal": 0.00016,
        "unit": null
       },
       "conductingHeight": null,
@@ -1635,7 +1575,7 @@
        "datasheetUrl": null,
        "description": null,
        "family": null,
-       "name": "Rubadue",
+       "name": "Elektrisola",
        "orderCode": null,
        "provenance": null,
        "reference": null,
@@ -1644,20 +1584,20 @@
        "status": null
       },
       "material": "copper",
-      "name": "Round TCA3 32 AWG",
+      "name": "Round 34.0 - Heavy Build",
       "numberConductors": 1,
       "outerDiameter": {
        "excludeMaximum": null,
        "excludeMinimum": null,
-       "maximum": null,
-       "minimum": null,
-       "nominal": 0.000432,
+       "maximum": 0.00019800000000000002,
+       "minimum": 0.000183,
+       "nominal": 0.00019099999999900002,
        "unit": null
       },
       "outerHeight": null,
       "outerWidth": null,
       "standard": "NEMA MW 1000 C",
-      "standardName": "32 AWG",
+      "standardName": "34 AWG",
       "strand": null,
       "twistPitch": null,
       "type": "round"
@@ -1665,9 +1605,69 @@
      "isolationSide": "secondary"
     },
     {
+     "name": "A5",
+     "numberTurns": 3,
+     "numberParallels": 6,
+     "wire": {
+      "coating": {
+       "breakdownVoltage": 2110.0,
+       "grade": 2,
+       "material": null,
+       "numberLayers": null,
+       "temperatureRating": null,
+       "thickness": null,
+       "thicknessLayers": null,
+       "type": "enamelled"
+      },
+      "conductingArea": null,
+      "conductingDiameter": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": 0.000257,
+       "minimum": 0.000251,
+       "nominal": 0.000254,
+       "unit": null
+      },
+      "conductingHeight": null,
+      "conductingWidth": null,
+      "edgeRadius": null,
+      "manufacturerInfo": {
+       "datasheetUrl": null,
+       "description": null,
+       "family": null,
+       "name": "Elektrisola",
+       "orderCode": null,
+       "provenance": null,
+       "reference": null,
+       "series": null,
+       "spiceModel": null,
+       "status": null
+      },
+      "material": "copper",
+      "name": "Round 30.0 - Heavy Build",
+      "numberConductors": 1,
+      "outerDiameter": {
+       "excludeMaximum": null,
+       "excludeMinimum": null,
+       "maximum": 0.000301999999999,
+       "minimum": 0.000287,
+       "nominal": 0.000294999999999,
+       "unit": null
+      },
+      "outerHeight": null,
+      "outerWidth": null,
+      "standard": "NEMA MW 1000 C",
+      "standardName": "30 AWG",
+      "strand": null,
+      "twistPitch": null,
+      "type": "round"
+     },
+     "isolationSide": "primary"
+    },
+    {
      "name": "A15",
      "numberTurns": 8,
-     "numberParallels": 4,
+     "numberParallels": 2,
      "wire": {
       "coating": {
        "breakdownVoltage": 2110.0,
@@ -1730,7 +1730,7 @@
      "numberParallels": 1,
      "wire": {
       "coating": {
-       "breakdownVoltage": 2110.0,
+       "breakdownVoltage": 1790.0,
        "grade": 2,
        "material": null,
        "numberLayers": null,
@@ -1743,9 +1743,9 @@
       "conductingDiameter": {
        "excludeMaximum": null,
        "excludeMinimum": null,
-       "maximum": 0.000257,
-       "minimum": 0.000251,
-       "nominal": 0.000254,
+       "maximum": 0.000206,
+       "minimum": 0.00020099999999900002,
+       "nominal": 0.000203,
        "unit": null
       },
       "conductingHeight": null,
@@ -1764,20 +1764,20 @@
        "status": null
       },
       "material": "copper",
-      "name": "Round 30.0 - Heavy Build",
+      "name": "Round 32.0 - Heavy Build",
       "numberConductors": 1,
       "outerDiameter": {
        "excludeMaximum": null,
        "excludeMinimum": null,
-       "maximum": 0.000301999999999,
-       "minimum": 0.000287,
-       "nominal": 0.000294999999999,
+       "maximum": 0.000249,
+       "minimum": 0.00023099999999900002,
+       "nominal": 0.00023999999999900002,
        "unit": null
       },
       "outerHeight": null,
       "outerWidth": null,
       "standard": "NEMA MW 1000 C",
-      "standardName": "30 AWG",
+      "standardName": "32 AWG",
       "strand": null,
       "twistPitch": null,
       "type": "round"
@@ -1813,14 +1813,6 @@
        ]
       },
       {
-       "winding": "A5",
-       "parallelsProportion": [
-        1.0,
-        1.0,
-        1.0
-       ]
-      },
-      {
        "winding": "S5",
        "parallelsProportion": [
         1.0,
@@ -1843,10 +1835,19 @@
        ]
       },
       {
-       "winding": "A15",
+       "winding": "A5",
        "parallelsProportion": [
         1.0,
         1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "winding": "A15",
+       "parallelsProportion": [
         1.0,
         1.0
        ]
@@ -1866,20 +1867,20 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
+      0.0036699999999995,
       0.0,
       0.0
      ],
      "dimensions": [
-      0.00029499999999900006,
-      0.0126
+      0.00023999999999900013,
+      0.0066
      ],
      "fillingFactor": 1.0,
      "group": "Default group",
      "layersOrientation": "overlapping",
      "margin": [
-      0.0,
-      0.0
+      0.003,
+      0.003
      ],
      "name": "S0 P1",
      "partialWindings": [
@@ -1896,39 +1897,39 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.003872499999999,
+      0.0038999999999989998,
       0.0,
       0.0
      ],
      "dimensions": [
-      5.5e-05,
+      0.00022,
       0.0126
      ],
      "fillingFactor": 1.0,
      "group": "Default group",
      "layersOrientation": "overlapping",
      "margin": null,
-     "name": "I0 tape x1",
+     "name": "I0 tape x4",
      "partialWindings": [],
      "type": "insulation"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
+      0.0041299999999984995,
       0.0,
       0.0
      ],
      "dimensions": [
-      0.0004829999999999999,
-      0.0126
+      0.0002399999999989997,
+      0.0066
      ],
      "fillingFactor": 1.0,
      "group": "Default group",
      "layersOrientation": "overlapping",
      "margin": [
-      0.0,
-      0.0
+      0.003,
+      0.003
      ],
      "name": "S1 S15",
      "partialWindings": [
@@ -1947,31 +1948,42 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004624499999998999,
+      0.004277499999997999,
       0.0,
       0.0
      ],
      "dimensions": [
-      0.0004829999999999999,
+      5.5e-05,
       0.0126
      ],
      "fillingFactor": 1.0,
      "group": "Default group",
      "layersOrientation": "overlapping",
-     "margin": [
+     "margin": null,
+     "name": "I1 tape x1",
+     "partialWindings": [],
+     "type": "insulation"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0044524999999975,
       0.0,
       0.0
      ],
-     "name": "S2 A5+S5+SN5",
+     "dimensions": [
+      0.00029499999999900006,
+      0.0066
+     ],
+     "fillingFactor": 1.0,
+     "group": "Default group",
+     "layersOrientation": "overlapping",
+     "margin": [
+      0.003,
+      0.003
+     ],
+     "name": "S2 S5+SN5",
      "partialWindings": [
-      {
-       "winding": "A5",
-       "parallelsProportion": [
-        1.0,
-        1.0,
-        1.0
-       ]
-      },
       {
        "winding": "S5",
        "parallelsProportion": [
@@ -1995,20 +2007,39 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005297999999999,
+      0.0046274999999969995,
       0.0,
       0.0
      ],
      "dimensions": [
-      0.0008640000000000002,
+      5.5e-05,
       0.0126
      ],
      "fillingFactor": 1.0,
      "group": "Default group",
      "layersOrientation": "overlapping",
-     "margin": [
+     "margin": null,
+     "name": "I2 tape x1",
+     "partialWindings": [],
+     "type": "insulation"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004845999999996,
       0.0,
       0.0
+     ],
+     "dimensions": [
+      0.00038199999999800026,
+      0.0066
+     ],
+     "fillingFactor": 1.0,
+     "group": "Default group",
+     "layersOrientation": "overlapping",
+     "margin": [
+      0.003,
+      0.003
      ],
      "name": "S3 SHV",
      "partialWindings": [
@@ -2025,45 +2056,47 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0057574999999989995,
+      0.005146999999995,
       0.0,
       0.0
      ],
      "dimensions": [
-      5.5e-05,
+      0.00022,
       0.0126
      ],
      "fillingFactor": 1.0,
      "group": "Default group",
      "layersOrientation": "overlapping",
      "margin": null,
-     "name": "I3 tape x1",
+     "name": "I3 tape x4",
      "partialWindings": [],
      "type": "insulation"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0059324999999985,
+      0.0054044999999945005,
       0.0,
       0.0
      ],
      "dimensions": [
       0.00029499999999900006,
-      0.0126
+      0.0066
      ],
      "fillingFactor": 1.0,
      "group": "Default group",
      "layersOrientation": "overlapping",
      "margin": [
-      0.0,
-      0.0
+      0.003,
+      0.003
      ],
-     "name": "S4 A15",
+     "name": "S4 A5",
      "partialWindings": [
       {
-       "winding": "A15",
+       "winding": "A5",
        "parallelsProportion": [
+        1.0,
+        1.0,
         1.0,
         1.0,
         1.0,
@@ -2077,7 +2110,7 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.006107499999998,
+      0.005579499999994,
       0.0,
       0.0
      ],
@@ -2096,26 +2129,27 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
+      0.005754499999993501,
       0.0,
       0.0
      ],
      "dimensions": [
       0.00029499999999900006,
-      0.0126
+      0.0066
      ],
      "fillingFactor": 1.0,
      "group": "Default group",
      "layersOrientation": "overlapping",
      "margin": [
-      0.0,
-      0.0
+      0.003,
+      0.003
      ],
-     "name": "S5 P2",
+     "name": "S5 A15",
      "partialWindings": [
       {
-       "winding": "P2",
+       "winding": "A15",
        "parallelsProportion": [
+        1.0,
         1.0
        ]
       }
@@ -2126,7 +2160,7 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.006457499999997,
+      0.005929499999993,
       0.0,
       0.0
      ],
@@ -2141,21 +2175,70 @@
      "name": "I5 tape x1",
      "partialWindings": [],
      "type": "insulation"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.006076999999992501,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      0.0002399999999989997,
+      0.0066
+     ],
+     "fillingFactor": 1.0,
+     "group": "Default group",
+     "layersOrientation": "overlapping",
+     "margin": [
+      0.003,
+      0.003
+     ],
+     "name": "S6 P2",
+     "partialWindings": [
+      {
+       "winding": "P2",
+       "parallelsProportion": [
+        1.0
+       ]
+      }
+     ],
+     "type": "conduction",
+     "windingStyle": "windByConsecutiveParallels"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.006224499999992,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      5.5e-05,
+      0.0126
+     ],
+     "fillingFactor": 1.0,
+     "group": "Default group",
+     "layersOrientation": "overlapping",
+     "margin": null,
+     "name": "I6 tape x1",
+     "partialWindings": [],
+     "type": "insulation"
     }
    ],
    "layersDescription": [
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
+      0.0036699999999994996,
       0.0,
       0.0
      ],
      "dimensions": [
-      0.000294999999999,
-      0.0126
+      0.00023999999999900002,
+      0.0066
      ],
-     "fillingFactor": 0.6087301587280953,
+     "fillingFactor": 0.9454545454506059,
      "name": "S0 P1 layer 0",
      "orientation": "overlapping",
      "partialWindings": [
@@ -2167,41 +2250,41 @@
       }
      ],
      "section": "S0 P1",
-     "turnsAlignment": "spread",
+     "turnsAlignment": "centered",
      "type": "conduction",
      "windingStyle": "windByConsecutiveParallels"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.003872499999999,
+      0.0038999999999989998,
       0.0,
       0.0
      ],
      "dimensions": [
-      5.5e-05,
+      0.00022,
       0.0126
      ],
      "fillingFactor": 1.0,
-     "name": "I0 tape x1 layer 0",
+     "name": "I0 tape x4 layer 0",
      "orientation": "overlapping",
      "partialWindings": [],
-     "section": "I0 tape x1",
+     "section": "I0 tape x4",
      "turnsAlignment": "spread",
      "type": "insulation"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
+      0.0041299999999984995,
       0.0,
       0.0
      ],
      "dimensions": [
-      0.000483,
-      0.0126
+      0.00023999999999900002,
+      0.0066
      ],
-     "fillingFactor": 0.9200000000000004,
+     "fillingFactor": 0.8727272727236363,
      "name": "S1 S15 layer 0",
      "orientation": "overlapping",
      "partialWindings": [
@@ -2222,26 +2305,37 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004624499999999,
+      0.004277499999997999,
       0.0,
       0.0
      ],
      "dimensions": [
-      0.000483,
+      5.5e-05,
       0.0126
      ],
-     "fillingFactor": 0.9007142857135716,
-     "name": "S2 A5+S5+SN5 layer 0",
+     "fillingFactor": 1.0,
+     "name": "I1 tape x1 layer 0",
+     "orientation": "overlapping",
+     "partialWindings": [],
+     "section": "I1 tape x1",
+     "turnsAlignment": "spread",
+     "type": "insulation"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004452499999997499,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      0.000294999999999,
+      0.0066
+     ],
+     "fillingFactor": 0.8045454545427273,
+     "name": "S2 S5+SN5 layer 0",
      "orientation": "overlapping",
      "partialWindings": [
-      {
-       "winding": "A5",
-       "parallelsProportion": [
-        1.0,
-        1.0,
-        1.0
-       ]
-      },
       {
        "winding": "S5",
        "parallelsProportion": [
@@ -2259,7 +2353,7 @@
        ]
       }
      ],
-     "section": "S2 A5+S5+SN5",
+     "section": "S2 S5+SN5",
      "turnsAlignment": "spread",
      "type": "conduction",
      "windingStyle": "windByConsecutiveParallels"
@@ -2267,61 +2361,7 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      0.0,
-      0.0
-     ],
-     "dimensions": [
-      0.000432,
-      0.0126
-     ],
-     "fillingFactor": 0.9942857142857143,
-     "name": "S3 SHV layer 0",
-     "orientation": "overlapping",
-     "partialWindings": [
-      {
-       "winding": "SHV",
-       "parallelsProportion": [
-        0.6904761904761905
-       ]
-      }
-     ],
-     "section": "S3 SHV",
-     "turnsAlignment": "spread",
-     "type": "conduction",
-     "windingStyle": "windByConsecutiveParallels"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.005513999999999,
-      0.0,
-      0.0
-     ],
-     "dimensions": [
-      0.000432,
-      0.0126
-     ],
-     "fillingFactor": 0.44571428571428573,
-     "name": "S3 SHV layer 1",
-     "orientation": "overlapping",
-     "partialWindings": [
-      {
-       "winding": "SHV",
-       "parallelsProportion": [
-        0.30952380952380953
-       ]
-      }
-     ],
-     "section": "S3 SHV",
-     "turnsAlignment": "spread",
-     "type": "conduction",
-     "windingStyle": "windByConsecutiveParallels"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.0057574999999989995,
+      0.0046274999999969995,
       0.0,
       0.0
      ],
@@ -2330,39 +2370,36 @@
       0.0126
      ],
      "fillingFactor": 1.0,
-     "name": "I3 tape x1 layer 0",
+     "name": "I2 tape x1 layer 0",
      "orientation": "overlapping",
      "partialWindings": [],
-     "section": "I3 tape x1",
+     "section": "I2 tape x1",
      "turnsAlignment": "spread",
      "type": "insulation"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0059324999999985,
+      0.0047504999999965,
       0.0,
       0.0
      ],
      "dimensions": [
-      0.000294999999999,
-      0.0126
+      0.00019099999999900002,
+      0.0066
      ],
-     "fillingFactor": 0.7492063492038092,
-     "name": "S4 A15 layer 0",
+     "fillingFactor": 0.983939393934243,
+     "name": "S3 SHV layer 0",
      "orientation": "overlapping",
      "partialWindings": [
       {
-       "winding": "A15",
+       "winding": "SHV",
        "parallelsProportion": [
-        1.0,
-        1.0,
-        1.0,
-        1.0
+        0.8095238095238095
        ]
       }
      ],
-     "section": "S4 A15",
+     "section": "S3 SHV",
      "turnsAlignment": "spread",
      "type": "conduction",
      "windingStyle": "windByConsecutiveParallels"
@@ -2370,7 +2407,85 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.006107499999998,
+      0.0049414999999955,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      0.00019099999999900002,
+      0.0066
+     ],
+     "fillingFactor": 0.23151515151393942,
+     "name": "S3 SHV layer 1",
+     "orientation": "overlapping",
+     "partialWindings": [
+      {
+       "winding": "SHV",
+       "parallelsProportion": [
+        0.19047619047619047
+       ]
+      }
+     ],
+     "section": "S3 SHV",
+     "turnsAlignment": "spread",
+     "type": "conduction",
+     "windingStyle": "windByConsecutiveParallels"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005146999999995,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      0.00022,
+      0.0126
+     ],
+     "fillingFactor": 1.0,
+     "name": "I3 tape x4 layer 0",
+     "orientation": "overlapping",
+     "partialWindings": [],
+     "section": "I3 tape x4",
+     "turnsAlignment": "spread",
+     "type": "insulation"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0054044999999945,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      0.000294999999999,
+      0.0066
+     ],
+     "fillingFactor": 0.8045454545427273,
+     "name": "S4 A5 layer 0",
+     "orientation": "overlapping",
+     "partialWindings": [
+      {
+       "winding": "A5",
+       "parallelsProportion": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+       ]
+      }
+     ],
+     "section": "S4 A5",
+     "turnsAlignment": "spread",
+     "type": "conduction",
+     "windingStyle": "windByConsecutiveParallels"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.005579499999994,
       0.0,
       0.0
      ],
@@ -2389,26 +2504,27 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
+      0.0057544999999935,
       0.0,
       0.0
      ],
      "dimensions": [
       0.000294999999999,
-      0.0126
+      0.0066
      ],
-     "fillingFactor": 0.6087301587280953,
-     "name": "S5 P2 layer 0",
+     "fillingFactor": 0.7151515151490909,
+     "name": "S5 A15 layer 0",
      "orientation": "overlapping",
      "partialWindings": [
       {
-       "winding": "P2",
+       "winding": "A15",
        "parallelsProportion": [
+        1.0,
         1.0
        ]
       }
      ],
-     "section": "S5 P2",
+     "section": "S5 A15",
      "turnsAlignment": "spread",
      "type": "conduction",
      "windingStyle": "windByConsecutiveParallels"
@@ -2416,7 +2532,7 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.006457499999997,
+      0.005929499999993,
       0.0,
       0.0
      ],
@@ -2431,22 +2547,68 @@
      "section": "I5 tape x1",
      "turnsAlignment": "spread",
      "type": "insulation"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.006076999999992501,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      0.00023999999999900002,
+      0.0066
+     ],
+     "fillingFactor": 0.9454545454506059,
+     "name": "S6 P2 layer 0",
+     "orientation": "overlapping",
+     "partialWindings": [
+      {
+       "winding": "P2",
+       "parallelsProportion": [
+        1.0
+       ]
+      }
+     ],
+     "section": "S6 P2",
+     "turnsAlignment": "centered",
+     "type": "conduction",
+     "windingStyle": "windByConsecutiveParallels"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.006224499999992,
+      0.0,
+      0.0
+     ],
+     "dimensions": [
+      5.5e-05,
+      0.0126
+     ],
+     "fillingFactor": 1.0,
+     "name": "I6 tape x1 layer 0",
+     "orientation": "overlapping",
+     "partialWindings": [],
+     "section": "I6 tape x1",
+     "turnsAlignment": "spread",
+     "type": "insulation"
     }
    ],
    "turnsDescription": [
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      -0.0061525000000005005
+      0.0036699999999994996,
+      -0.0029999999999874996
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 0",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2457,16 +2619,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      -0.005660300000000461
+      0.0036699999999994996,
+      -0.0027599999999884995
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 1",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2477,16 +2639,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      -0.005168100000000421
+      0.0036699999999994996,
+      -0.0025199999999894994
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 2",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2497,16 +2659,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      -0.004675900000000381
+      0.0036699999999994996,
+      -0.0022799999999904993
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 3",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2517,16 +2679,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      -0.004183700000000341
+      0.0036699999999994996,
+      -0.002039999999991499
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 4",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2537,16 +2699,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      -0.003691500000000301
+      0.0036699999999994996,
+      -0.0017999999999924988
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 5",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2557,16 +2719,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      -0.003199300000000261
+      0.0036699999999994996,
+      -0.0015599999999934987
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 6",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2577,16 +2739,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      -0.0027071000000002212
+      0.0036699999999994996,
+      -0.0013199999999944985
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 7",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2597,16 +2759,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      -0.0022149000000001814
+      0.0036699999999994996,
+      -0.0010799999999954984
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 8",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2617,16 +2779,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      -0.0017227000000001413
+      0.0036699999999994996,
+      -0.0008399999999964985
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 9",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2637,16 +2799,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      -0.0012305000000001013
+      0.0036699999999994996,
+      -0.0005999999999974984
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 10",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2657,16 +2819,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      -0.0007383000000000613
+      0.0036699999999994996,
+      -0.0003599999999984984
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 11",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2677,16 +2839,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      -0.0002461000000000212
+      0.0036699999999994996,
+      -0.00011999999999949838
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 12",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2697,16 +2859,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      0.00024610000000001883
+      0.0036699999999994996,
+      0.00011999999999950164
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 13",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2717,16 +2879,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      0.0007383000000000589
+      0.0036699999999994996,
+      0.00035999999999850166
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 14",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2737,16 +2899,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      0.001230500000000099
+      0.0036699999999994996,
+      0.0005999999999975016
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 15",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2757,16 +2919,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      0.001722700000000139
+      0.0036699999999994996,
+      0.0008399999999965017
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 16",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2777,16 +2939,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      0.002214900000000179
+      0.0036699999999994996,
+      0.0010799999999955017
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 17",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2797,16 +2959,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      0.0027071000000002186
+      0.0036699999999994996,
+      0.0013199999999945018
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 18",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2817,16 +2979,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      0.0031993000000002584
+      0.0036699999999994996,
+      0.0015599999999935017
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 19",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2837,16 +2999,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      0.0036915000000002983
+      0.0036699999999994996,
+      0.0017999999999925018
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 20",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2857,16 +3019,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      0.004183700000000338
+      0.0036699999999994996,
+      0.0020399999999915017
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 21",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2877,16 +3039,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      0.0046759000000003775
+      0.0036699999999994996,
+      0.002279999999990502
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 22",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2897,16 +3059,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      0.005168100000000417
+      0.0036699999999994996,
+      0.002519999999989502
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 23",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2917,16 +3079,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      0.005660300000000457
+      0.0036699999999994996,
+      0.002759999999988502
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 24",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2937,16 +3099,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0036974999999995,
-      0.006152500000000497
+      0.0036699999999994996,
+      0.0029999999999875022
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S0 P1 layer 0",
-     "length": 0.029326769832805848,
+     "length": 0.029153982236858406,
      "name": "P1 parallel 0 turn 25",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2957,16 +3119,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      -0.0060585
+      0.0041299999999984995,
+      -0.0031800000000005
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 0 turn 0",
      "orientation": "clockwise",
      "parallel": 0,
@@ -2977,16 +3139,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      -0.0055316739130434785
+      0.0041299999999984995,
+      -0.002903478260870022
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 1 turn 0",
      "orientation": "clockwise",
      "parallel": 1,
@@ -2997,16 +3159,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      -0.005004847826086957
+      0.0041299999999984995,
+      -0.0026269565217395437
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 2 turn 0",
      "orientation": "clockwise",
      "parallel": 2,
@@ -3017,16 +3179,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      -0.004478021739130436
+      0.0041299999999984995,
+      -0.0023504347826090654
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 0 turn 1",
      "orientation": "clockwise",
      "parallel": 0,
@@ -3037,16 +3199,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      -0.003951195652173915
+      0.0041299999999984995,
+      -0.002073913043478587
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 1 turn 1",
      "orientation": "clockwise",
      "parallel": 1,
@@ -3057,16 +3219,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      -0.0034243695652173937
+      0.0041299999999984995,
+      -0.0017973913043481087
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 2 turn 1",
      "orientation": "clockwise",
      "parallel": 2,
@@ -3077,16 +3239,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      -0.002897543478260872
+      0.0041299999999984995,
+      -0.0015208695652176305
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 0 turn 2",
      "orientation": "clockwise",
      "parallel": 0,
@@ -3097,16 +3259,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      -0.0023707173913043505
+      0.0041299999999984995,
+      -0.0012443478260871523
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 1 turn 2",
      "orientation": "clockwise",
      "parallel": 1,
@@ -3117,16 +3279,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      -0.001843891304347829
+      0.0041299999999984995,
+      -0.000967826086956674
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 2 turn 2",
      "orientation": "clockwise",
      "parallel": 2,
@@ -3137,16 +3299,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      -0.0013170652173913073
+      0.0041299999999984995,
+      -0.0006913043478261958
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 0 turn 3",
      "orientation": "clockwise",
      "parallel": 0,
@@ -3157,16 +3319,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      -0.0007902391304347857
+      0.0041299999999984995,
+      -0.0004147826086957176
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 1 turn 3",
      "orientation": "clockwise",
      "parallel": 1,
@@ -3177,16 +3339,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      -0.00026341304347826417
+      0.0041299999999984995,
+      -0.00013826086956523933
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 2 turn 3",
      "orientation": "clockwise",
      "parallel": 2,
@@ -3197,16 +3359,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      0.00026341304347825734
+      0.0041299999999984995,
+      0.00013826086956523895
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 0 turn 4",
      "orientation": "clockwise",
      "parallel": 0,
@@ -3217,16 +3379,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      0.0007902391304347788
+      0.0041299999999984995,
+      0.00041478260869571724
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 1 turn 4",
      "orientation": "clockwise",
      "parallel": 1,
@@ -3237,16 +3399,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      0.0013170652173913003
+      0.0041299999999984995,
+      0.0006913043478261956
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 2 turn 4",
      "orientation": "clockwise",
      "parallel": 2,
@@ -3257,16 +3419,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      0.001843891304347822
+      0.0041299999999984995,
+      0.0009678260869566738
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 0 turn 5",
      "orientation": "clockwise",
      "parallel": 0,
@@ -3277,16 +3439,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      0.0023707173913043436
+      0.0041299999999984995,
+      0.001244347826087152
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 1 turn 5",
      "orientation": "clockwise",
      "parallel": 1,
@@ -3297,16 +3459,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      0.002897543478260865
+      0.0041299999999984995,
+      0.0015208695652176303
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 2 turn 5",
      "orientation": "clockwise",
      "parallel": 2,
@@ -3317,16 +3479,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      0.003424369565217387
+      0.0041299999999984995,
+      0.0017973913043481085
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 0 turn 6",
      "orientation": "clockwise",
      "parallel": 0,
@@ -3337,16 +3499,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      0.003951195652173909
+      0.0041299999999984995,
+      0.0020739130434785868
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 1 turn 6",
      "orientation": "clockwise",
      "parallel": 1,
@@ -3357,16 +3519,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      0.00447802173913043
+      0.0041299999999984995,
+      0.002350434782609065
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 2 turn 6",
      "orientation": "clockwise",
      "parallel": 2,
@@ -3377,16 +3539,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      0.005004847826086951
+      0.0041299999999984995,
+      0.0026269565217395432
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 0 turn 7",
      "orientation": "clockwise",
      "parallel": 0,
@@ -3397,16 +3559,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      0.005531673913043472
+      0.0041299999999984995,
+      0.0029034782608700215
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 1 turn 7",
      "orientation": "clockwise",
      "parallel": 1,
@@ -3417,16 +3579,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004141499999999,
-      0.006058499999999994
+      0.0041299999999984995,
+      0.0031800000000004997
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
      "layer": "S1 S15 layer 0",
-     "length": 0.032116504109190445,
+     "length": 0.032044247478154736,
      "name": "S15 parallel 2 turn 7",
      "orientation": "clockwise",
      "parallel": 2,
@@ -3437,556 +3599,376 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004624499999999,
-      -0.0061525000000005005
+      0.004452499999997499,
+      -0.0031525000000005
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
-     "name": "A5 parallel 0 turn 0",
-     "orientation": "clockwise",
-     "parallel": 0,
-     "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
-     "winding": "A5"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.004624499999999,
-      -0.005715384615385269
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000483,
-      0.000483
-     ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
+     "layer": "S2 S5+SN5 layer 0",
+     "length": 0.034070574739713866,
      "name": "S5 parallel 0 turn 0",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
+     "section": "S2 S5+SN5",
      "winding": "S5"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004624499999999,
-      -0.005184269230769539
+      0.004452499999997499,
+      -0.002781617647059265
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.000294999999999,
+      0.000294999999999
      ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
+     "layer": "S2 S5+SN5 layer 0",
+     "length": 0.034070574739713866,
      "name": "SN5 parallel 0 turn 0",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
+     "section": "S2 S5+SN5",
      "winding": "SN5"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004624499999999,
-      -0.004747153846154309
+      0.004452499999997499,
+      -0.0024107352941180296
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
-     "name": "A5 parallel 1 turn 0",
-     "orientation": "clockwise",
-     "parallel": 1,
-     "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
-     "winding": "A5"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.004624499999999,
-      -0.004310038461539078
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000483,
-      0.000483
-     ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
+     "layer": "S2 S5+SN5 layer 0",
+     "length": 0.034070574739713866,
      "name": "S5 parallel 1 turn 0",
      "orientation": "clockwise",
      "parallel": 1,
      "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
+     "section": "S2 S5+SN5",
      "winding": "S5"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004624499999999,
-      -0.0037789230769233483
+      0.004452499999997499,
+      -0.0020398529411767945
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.000294999999999,
+      0.000294999999999
      ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
+     "layer": "S2 S5+SN5 layer 0",
+     "length": 0.034070574739713866,
      "name": "SN5 parallel 1 turn 0",
      "orientation": "clockwise",
      "parallel": 1,
      "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
+     "section": "S2 S5+SN5",
      "winding": "SN5"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004624499999999,
-      -0.0033418076923081175
+      0.004452499999997499,
+      -0.0016689705882355593
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
-     "name": "A5 parallel 2 turn 0",
-     "orientation": "clockwise",
-     "parallel": 2,
-     "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
-     "winding": "A5"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.004624499999999,
-      -0.0029046923076928867
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000483,
-      0.000483
-     ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
+     "layer": "S2 S5+SN5 layer 0",
+     "length": 0.034070574739713866,
      "name": "S5 parallel 2 turn 0",
      "orientation": "clockwise",
      "parallel": 2,
      "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
+     "section": "S2 S5+SN5",
      "winding": "S5"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004624499999999,
-      -0.002373576923077156
+      0.004452499999997499,
+      -0.0012980882352943241
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.000294999999999,
+      0.000294999999999
      ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
+     "layer": "S2 S5+SN5 layer 0",
+     "length": 0.034070574739713866,
      "name": "SN5 parallel 2 turn 0",
      "orientation": "clockwise",
      "parallel": 2,
      "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
+     "section": "S2 S5+SN5",
      "winding": "SN5"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004624499999999,
-      -0.0019364615384619252
+      0.004452499999997499,
+      -0.000927205882353089
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
-     "name": "A5 parallel 0 turn 1",
-     "orientation": "clockwise",
-     "parallel": 0,
-     "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
-     "winding": "A5"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.004624499999999,
-      -0.0014993461538466946
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000483,
-      0.000483
-     ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
+     "layer": "S2 S5+SN5 layer 0",
+     "length": 0.034070574739713866,
      "name": "S5 parallel 0 turn 1",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
+     "section": "S2 S5+SN5",
      "winding": "S5"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004624499999999,
-      -0.0009682307692309639
+      0.004452499999997499,
+      -0.0005563235294118537
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.000294999999999,
+      0.000294999999999
      ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
+     "layer": "S2 S5+SN5 layer 0",
+     "length": 0.034070574739713866,
      "name": "SN5 parallel 0 turn 1",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
+     "section": "S2 S5+SN5",
      "winding": "SN5"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004624499999999,
-      -0.0005311153846157331
+      0.004452499999997499,
+      -0.00018544117647061848
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
-     "name": "A5 parallel 1 turn 1",
-     "orientation": "clockwise",
-     "parallel": 1,
-     "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
-     "winding": "A5"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.004624499999999,
-      -9.400000000050245e-05
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000483,
-      0.000483
-     ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
+     "layer": "S2 S5+SN5 layer 0",
+     "length": 0.034070574739713866,
      "name": "S5 parallel 1 turn 1",
      "orientation": "clockwise",
      "parallel": 1,
      "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
+     "section": "S2 S5+SN5",
      "winding": "S5"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004624499999999,
-      0.0004371153846152283
+      0.004452499999997499,
+      0.0001854411764706168
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.000294999999999,
+      0.000294999999999
      ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
+     "layer": "S2 S5+SN5 layer 0",
+     "length": 0.034070574739713866,
      "name": "SN5 parallel 1 turn 1",
      "orientation": "clockwise",
      "parallel": 1,
      "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
+     "section": "S2 S5+SN5",
      "winding": "SN5"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004624499999999,
-      0.000874230769230459
+      0.004452499999997499,
+      0.0005563235294118521
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
-     "name": "A5 parallel 2 turn 1",
-     "orientation": "clockwise",
-     "parallel": 2,
-     "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
-     "winding": "A5"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.004624499999999,
-      0.0013113461538456896
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000483,
-      0.000483
-     ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
+     "layer": "S2 S5+SN5 layer 0",
+     "length": 0.034070574739713866,
      "name": "S5 parallel 2 turn 1",
      "orientation": "clockwise",
      "parallel": 2,
      "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
+     "section": "S2 S5+SN5",
      "winding": "S5"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004624499999999,
-      0.0018424615384614203
+      0.004452499999997499,
+      0.0009272058823530874
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.000294999999999,
+      0.000294999999999
      ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
+     "layer": "S2 S5+SN5 layer 0",
+     "length": 0.034070574739713866,
      "name": "SN5 parallel 2 turn 1",
      "orientation": "clockwise",
      "parallel": 2,
      "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
+     "section": "S2 S5+SN5",
      "winding": "SN5"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004624499999999,
-      0.0022795769230766513
+      0.004452499999997499,
+      0.0012980882352943226
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
-     "name": "A5 parallel 0 turn 2",
-     "orientation": "clockwise",
-     "parallel": 0,
-     "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
-     "winding": "A5"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.004624499999999,
-      0.002716692307691882
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000483,
-      0.000483
-     ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
+     "layer": "S2 S5+SN5 layer 0",
+     "length": 0.034070574739713866,
      "name": "S5 parallel 0 turn 2",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
+     "section": "S2 S5+SN5",
      "winding": "S5"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004624499999999,
-      0.003247807692307613
+      0.004452499999997499,
+      0.001668970588235558
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000483,
-      0.000483
+      0.000294999999999,
+      0.000294999999999
      ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
+     "layer": "S2 S5+SN5 layer 0",
+     "length": 0.034070574739713866,
      "name": "SN5 parallel 0 turn 2",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
+     "section": "S2 S5+SN5",
      "winding": "SN5"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004624499999999,
-      0.0036849230769228436
+      0.004452499999997499,
+      0.002039852941176793
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
-     "name": "A5 parallel 1 turn 2",
-     "orientation": "clockwise",
-     "parallel": 1,
-     "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
-     "winding": "A5"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.004624499999999,
-      0.004122038461538075
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000483,
-      0.000483
-     ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
+     "layer": "S2 S5+SN5 layer 0",
+     "length": 0.034070574739713866,
      "name": "S5 parallel 1 turn 2",
      "orientation": "clockwise",
      "parallel": 1,
      "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
+     "section": "S2 S5+SN5",
      "winding": "S5"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.004624499999999,
-      0.004653153846153805
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000483,
-      0.000483
-     ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
-     "name": "SN5 parallel 1 turn 2",
-     "orientation": "clockwise",
-     "parallel": 1,
-     "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
-     "winding": "SN5"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.004624499999999,
-      0.005090269230769035
+      0.004452499999997499,
+      0.0024107352941180283
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
-     "name": "A5 parallel 2 turn 2",
+     "layer": "S2 S5+SN5 layer 0",
+     "length": 0.034070574739713866,
+     "name": "SN5 parallel 1 turn 2",
      "orientation": "clockwise",
-     "parallel": 2,
+     "parallel": 1,
      "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
-     "winding": "A5"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.004624499999999,
-      0.005527384615384266
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000483,
-      0.000483
-     ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
-     "name": "S5 parallel 2 turn 2",
-     "orientation": "clockwise",
-     "parallel": 2,
-     "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
-     "winding": "S5"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.004624499999999,
-      0.006058499999999996
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000483,
-      0.000483
-     ],
-     "layer": "S2 A5+S5+SN5 layer 0",
-     "length": 0.035151282612558184,
-     "name": "SN5 parallel 2 turn 2",
-     "orientation": "clockwise",
-     "parallel": 2,
-     "rotation": 0.0,
-     "section": "S2 A5+S5+SN5",
+     "section": "S2 S5+SN5",
      "winding": "SN5"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      -0.006084
+      0.004452499999997499,
+      0.0027816176470592635
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S2 S5+SN5 layer 0",
+     "length": 0.034070574739713866,
+     "name": "S5 parallel 2 turn 2",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S2 S5+SN5",
+     "winding": "S5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.004452499999997499,
+      0.0031525000000004987
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S2 S5+SN5 layer 0",
+     "length": 0.034070574739713866,
+     "name": "SN5 parallel 2 turn 2",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S2 S5+SN5",
+     "winding": "SN5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0047504999999965,
+      -0.0032045000000005
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 0",
      "orientation": "clockwise",
      "parallel": 0,
@@ -3997,16 +3979,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      -0.005649428571428572
+      0.0047504999999965,
+      -0.0030102878787883485
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 1",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4017,16 +3999,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      -0.0052148571428571435
+      0.0047504999999965,
+      -0.002816075757576197
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 2",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4037,16 +4019,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      -0.004780285714285715
+      0.0047504999999965,
+      -0.0026218636363640455
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 3",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4057,16 +4039,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      -0.004345714285714287
+      0.0047504999999965,
+      -0.002427651515151894
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 4",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4077,16 +4059,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      -0.003911142857142859
+      0.0047504999999965,
+      -0.0022334393939397426
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 5",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4097,16 +4079,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      -0.00347657142857143
+      0.0047504999999965,
+      -0.002039227272727591
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 6",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4117,16 +4099,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      -0.0030420000000000013
+      0.0047504999999965,
+      -0.0018450151515154397
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 7",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4137,16 +4119,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      -0.0026074285714285726
+      0.0047504999999965,
+      -0.0016508030303032883
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 8",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4157,16 +4139,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      -0.002172857142857144
+      0.0047504999999965,
+      -0.0014565909090911368
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 9",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4177,16 +4159,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      -0.0017382857142857152
+      0.0047504999999965,
+      -0.0012623787878789853
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 10",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4197,16 +4179,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      -0.0013037142857142867
+      0.0047504999999965,
+      -0.0010681666666668339
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 11",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4217,16 +4199,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      -0.0008691428571428583
+      0.0047504999999965,
+      -0.0008739545454546824
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 12",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4237,16 +4219,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      -0.00043457142857142983
+      0.0047504999999965,
+      -0.000679742424242531
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 13",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4257,16 +4239,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      -1.3010426069826053e-18
+      0.0047504999999965,
+      -0.00048553030303037957
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 14",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4277,16 +4259,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      0.00043457142857142723
+      0.0047504999999965,
+      -0.0002913181818182281
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 15",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4297,16 +4279,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      0.0008691428571428559
+      0.0047504999999965,
+      -9.710606060607668e-05
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 16",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4317,16 +4299,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      0.0013037142857142844
+      0.0047504999999965,
+      9.710606060607475e-05
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 17",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4337,16 +4319,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      0.0017382857142857128
+      0.0047504999999965,
+      0.0002913181818182262
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 18",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4357,16 +4339,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      0.0021728571428571413
+      0.0047504999999965,
+      0.0004855303030303776
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 19",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4377,16 +4359,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      0.00260742857142857
+      0.0047504999999965,
+      0.000679742424242529
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 20",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4397,16 +4379,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      0.0030419999999999987
+      0.0047504999999965,
+      0.0008739545454546805
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 21",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4417,16 +4399,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      0.0034765714285714274
+      0.0047504999999965,
+      0.001068166666666832
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 22",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4437,16 +4419,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      0.003911142857142856
+      0.0047504999999965,
+      0.0012623787878789834
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 23",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4457,16 +4439,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      0.004345714285714284
+      0.0047504999999965,
+      0.0014565909090911348
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 24",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4477,16 +4459,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      0.004780285714285713
+      0.0047504999999965,
+      0.0016508030303032863
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 25",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4497,16 +4479,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      0.005214857142857141
+      0.0047504999999965,
+      0.0018450151515154378
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 26",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4517,16 +4499,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      0.005649428571428569
+      0.0047504999999965,
+      0.002039227272727589
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 27",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4537,16 +4519,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005081999999999,
-      0.006083999999999997
+      0.0047504999999965,
+      0.0022334393939397405
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 0",
-     "length": 0.03802583989059284,
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 28",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4557,16 +4539,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005513999999999,
-      -0.006084
+      0.0047504999999965,
+      0.002427651515151892
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
-     "layer": "S3 SHV layer 1",
-     "length": 0.040740175943294425,
+     "layer": "S3 SHV layer 0",
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 29",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4577,16 +4559,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005513999999999,
-      -0.00507
+      0.0047504999999965,
+      0.0026218636363640434
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
-     "layer": "S3 SHV layer 1",
-     "length": 0.040740175943294425,
+     "layer": "S3 SHV layer 0",
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 30",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4597,16 +4579,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005513999999999,
-      -0.004056
+      0.0047504999999965,
+      0.002816075757576195
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
-     "layer": "S3 SHV layer 1",
-     "length": 0.040740175943294425,
+     "layer": "S3 SHV layer 0",
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 31",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4617,16 +4599,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005513999999999,
-      -0.0030419999999999996
+      0.0047504999999965,
+      0.0030102878787883463
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
-     "layer": "S3 SHV layer 1",
-     "length": 0.040740175943294425,
+     "layer": "S3 SHV layer 0",
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 32",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4637,16 +4619,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005513999999999,
-      -0.0020279999999999994
+      0.0047504999999965,
+      0.0032045000000004977
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
-     "layer": "S3 SHV layer 1",
-     "length": 0.040740175943294425,
+     "layer": "S3 SHV layer 0",
+     "length": 0.035942963961247104,
      "name": "SHV parallel 0 turn 33",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4657,16 +4639,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005513999999999,
-      -0.0010139999999999995
+      0.0049414999999955,
+      -0.0032045000000005
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 1",
-     "length": 0.040740175943294425,
+     "length": 0.03714305235491212,
      "name": "SHV parallel 0 turn 34",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4677,16 +4659,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005513999999999,
-      3.7947076036992655e-19
+      0.0049414999999955,
+      -0.0022889285714289285
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 1",
-     "length": 0.040740175943294425,
+     "length": 0.03714305235491212,
      "name": "SHV parallel 0 turn 35",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4697,16 +4679,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005513999999999,
-      0.0010140000000000004
+      0.0049414999999955,
+      -0.001373357142857357
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 1",
-     "length": 0.040740175943294425,
+     "length": 0.03714305235491212,
      "name": "SHV parallel 0 turn 36",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4717,16 +4699,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005513999999999,
-      0.0020280000000000003
+      0.0049414999999955,
+      -0.00045778571428578557
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 1",
-     "length": 0.040740175943294425,
+     "length": 0.03714305235491212,
      "name": "SHV parallel 0 turn 37",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4737,16 +4719,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005513999999999,
-      0.0030420000000000004
+      0.0049414999999955,
+      0.0004577857142857859
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 1",
-     "length": 0.040740175943294425,
+     "length": 0.03714305235491212,
      "name": "SHV parallel 0 turn 38",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4757,16 +4739,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005513999999999,
-      0.004056000000000001
+      0.0049414999999955,
+      0.0013733571428573574
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 1",
-     "length": 0.040740175943294425,
+     "length": 0.03714305235491212,
      "name": "SHV parallel 0 turn 39",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4777,16 +4759,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005513999999999,
-      0.005070000000000001
+      0.0049414999999955,
+      0.002288928571428929
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 1",
-     "length": 0.040740175943294425,
+     "length": 0.03714305235491212,
      "name": "SHV parallel 0 turn 40",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4797,16 +4779,16 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.005513999999999,
-      0.006084000000000001
+      0.0049414999999955,
+      0.0032045000000005004
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000432,
-      0.000432
+      0.00019099999999900002,
+      0.00019099999999900002
      ],
      "layer": "S3 SHV layer 1",
-     "length": 0.040740175943294425,
+     "length": 0.03714305235491212,
      "name": "SHV parallel 0 turn 41",
      "orientation": "clockwise",
      "parallel": 0,
@@ -4817,1161 +4799,1201 @@
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0059324999999985,
-      -0.0061525000000005005
+      0.0054044999999945,
+      -0.0031525000000005
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
+     "layer": "S4 A5 layer 0",
+     "length": 0.04005216715212998,
+     "name": "A5 parallel 0 turn 0",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S4 A5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0054044999999945,
+      -0.002781617647059265
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A5 layer 0",
+     "length": 0.04005216715212998,
+     "name": "A5 parallel 1 turn 0",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S4 A5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0054044999999945,
+      -0.0024107352941180296
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A5 layer 0",
+     "length": 0.04005216715212998,
+     "name": "A5 parallel 2 turn 0",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S4 A5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0054044999999945,
+      -0.0020398529411767945
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A5 layer 0",
+     "length": 0.04005216715212998,
+     "name": "A5 parallel 3 turn 0",
+     "orientation": "clockwise",
+     "parallel": 3,
+     "rotation": 0.0,
+     "section": "S4 A5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0054044999999945,
+      -0.0016689705882355593
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A5 layer 0",
+     "length": 0.04005216715212998,
+     "name": "A5 parallel 4 turn 0",
+     "orientation": "clockwise",
+     "parallel": 4,
+     "rotation": 0.0,
+     "section": "S4 A5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0054044999999945,
+      -0.0012980882352943241
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A5 layer 0",
+     "length": 0.04005216715212998,
+     "name": "A5 parallel 5 turn 0",
+     "orientation": "clockwise",
+     "parallel": 5,
+     "rotation": 0.0,
+     "section": "S4 A5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0054044999999945,
+      -0.000927205882353089
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A5 layer 0",
+     "length": 0.04005216715212998,
+     "name": "A5 parallel 0 turn 1",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S4 A5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0054044999999945,
+      -0.0005563235294118537
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A5 layer 0",
+     "length": 0.04005216715212998,
+     "name": "A5 parallel 1 turn 1",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S4 A5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0054044999999945,
+      -0.00018544117647061848
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A5 layer 0",
+     "length": 0.04005216715212998,
+     "name": "A5 parallel 2 turn 1",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S4 A5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0054044999999945,
+      0.0001854411764706168
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A5 layer 0",
+     "length": 0.04005216715212998,
+     "name": "A5 parallel 3 turn 1",
+     "orientation": "clockwise",
+     "parallel": 3,
+     "rotation": 0.0,
+     "section": "S4 A5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0054044999999945,
+      0.0005563235294118521
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A5 layer 0",
+     "length": 0.04005216715212998,
+     "name": "A5 parallel 4 turn 1",
+     "orientation": "clockwise",
+     "parallel": 4,
+     "rotation": 0.0,
+     "section": "S4 A5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0054044999999945,
+      0.0009272058823530874
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A5 layer 0",
+     "length": 0.04005216715212998,
+     "name": "A5 parallel 5 turn 1",
+     "orientation": "clockwise",
+     "parallel": 5,
+     "rotation": 0.0,
+     "section": "S4 A5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0054044999999945,
+      0.0012980882352943226
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A5 layer 0",
+     "length": 0.04005216715212998,
+     "name": "A5 parallel 0 turn 2",
+     "orientation": "clockwise",
+     "parallel": 0,
+     "rotation": 0.0,
+     "section": "S4 A5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0054044999999945,
+      0.001668970588235558
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A5 layer 0",
+     "length": 0.04005216715212998,
+     "name": "A5 parallel 1 turn 2",
+     "orientation": "clockwise",
+     "parallel": 1,
+     "rotation": 0.0,
+     "section": "S4 A5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0054044999999945,
+      0.002039852941176793
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A5 layer 0",
+     "length": 0.04005216715212998,
+     "name": "A5 parallel 2 turn 2",
+     "orientation": "clockwise",
+     "parallel": 2,
+     "rotation": 0.0,
+     "section": "S4 A5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0054044999999945,
+      0.0024107352941180283
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A5 layer 0",
+     "length": 0.04005216715212998,
+     "name": "A5 parallel 3 turn 2",
+     "orientation": "clockwise",
+     "parallel": 3,
+     "rotation": 0.0,
+     "section": "S4 A5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0054044999999945,
+      0.0027816176470592635
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A5 layer 0",
+     "length": 0.04005216715212998,
+     "name": "A5 parallel 4 turn 2",
+     "orientation": "clockwise",
+     "parallel": 4,
+     "rotation": 0.0,
+     "section": "S4 A5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0054044999999945,
+      0.0031525000000004987
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S4 A5 layer 0",
+     "length": 0.04005216715212998,
+     "name": "A5 parallel 5 turn 2",
+     "orientation": "clockwise",
+     "parallel": 5,
+     "rotation": 0.0,
+     "section": "S4 A5",
+     "winding": "A5"
+    },
+    {
+     "coordinateSystem": "cartesian",
+     "coordinates": [
+      0.0057544999999935,
+      -0.0031525000000005
+     ],
+     "crossSectionalShape": "round",
+     "dimensions": [
+      0.000294999999999,
+      0.000294999999999
+     ],
+     "layer": "S5 A15 layer 0",
+     "length": 0.04225128200963656,
      "name": "A15 parallel 0 turn 0",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S4 A15",
+     "section": "S5 A15",
      "winding": "A15"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0059324999999985,
-      -0.005755564516129501
+      0.0057544999999935,
+      -0.0027321666666671
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
+     "layer": "S5 A15 layer 0",
+     "length": 0.04225128200963656,
      "name": "A15 parallel 1 turn 0",
      "orientation": "clockwise",
      "parallel": 1,
      "rotation": 0.0,
-     "section": "S4 A15",
+     "section": "S5 A15",
      "winding": "A15"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0059324999999985,
-      -0.005358629032258501
+      0.0057544999999935,
+      -0.0023118333333336997
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
-     "name": "A15 parallel 2 turn 0",
-     "orientation": "clockwise",
-     "parallel": 2,
-     "rotation": 0.0,
-     "section": "S4 A15",
-     "winding": "A15"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.0059324999999985,
-      -0.004961693548387501
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000294999999999,
-      0.000294999999999
-     ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
-     "name": "A15 parallel 3 turn 0",
-     "orientation": "clockwise",
-     "parallel": 3,
-     "rotation": 0.0,
-     "section": "S4 A15",
-     "winding": "A15"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.0059324999999985,
-      -0.004564758064516501
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000294999999999,
-      0.000294999999999
-     ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
+     "layer": "S5 A15 layer 0",
+     "length": 0.04225128200963656,
      "name": "A15 parallel 0 turn 1",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S4 A15",
+     "section": "S5 A15",
      "winding": "A15"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0059324999999985,
-      -0.004167822580645501
+      0.0057544999999935,
+      -0.0018915000000002996
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
+     "layer": "S5 A15 layer 0",
+     "length": 0.04225128200963656,
      "name": "A15 parallel 1 turn 1",
      "orientation": "clockwise",
      "parallel": 1,
      "rotation": 0.0,
-     "section": "S4 A15",
+     "section": "S5 A15",
      "winding": "A15"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0059324999999985,
-      -0.003770887096774501
+      0.0057544999999935,
+      -0.0014711666666668995
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
-     "name": "A15 parallel 2 turn 1",
-     "orientation": "clockwise",
-     "parallel": 2,
-     "rotation": 0.0,
-     "section": "S4 A15",
-     "winding": "A15"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.0059324999999985,
-      -0.0033739516129035006
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000294999999999,
-      0.000294999999999
-     ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
-     "name": "A15 parallel 3 turn 1",
-     "orientation": "clockwise",
-     "parallel": 3,
-     "rotation": 0.0,
-     "section": "S4 A15",
-     "winding": "A15"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.0059324999999985,
-      -0.0029770161290325003
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000294999999999,
-      0.000294999999999
-     ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
+     "layer": "S5 A15 layer 0",
+     "length": 0.04225128200963656,
      "name": "A15 parallel 0 turn 2",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S4 A15",
+     "section": "S5 A15",
      "winding": "A15"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0059324999999985,
-      -0.0025800806451615
+      0.0057544999999935,
+      -0.0010508333333334994
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
+     "layer": "S5 A15 layer 0",
+     "length": 0.04225128200963656,
      "name": "A15 parallel 1 turn 2",
      "orientation": "clockwise",
      "parallel": 1,
      "rotation": 0.0,
-     "section": "S4 A15",
+     "section": "S5 A15",
      "winding": "A15"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0059324999999985,
-      -0.0021831451612904997
+      0.0057544999999935,
+      -0.0006305000000000994
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
-     "name": "A15 parallel 2 turn 2",
-     "orientation": "clockwise",
-     "parallel": 2,
-     "rotation": 0.0,
-     "section": "S4 A15",
-     "winding": "A15"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.0059324999999985,
-      -0.0017862096774194996
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000294999999999,
-      0.000294999999999
-     ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
-     "name": "A15 parallel 3 turn 2",
-     "orientation": "clockwise",
-     "parallel": 3,
-     "rotation": 0.0,
-     "section": "S4 A15",
-     "winding": "A15"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.0059324999999985,
-      -0.0013892741935484995
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000294999999999,
-      0.000294999999999
-     ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
+     "layer": "S5 A15 layer 0",
+     "length": 0.04225128200963656,
      "name": "A15 parallel 0 turn 3",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S4 A15",
+     "section": "S5 A15",
      "winding": "A15"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0059324999999985,
-      -0.0009923387096774994
+      0.0057544999999935,
+      -0.00021016666666669943
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
+     "layer": "S5 A15 layer 0",
+     "length": 0.04225128200963656,
      "name": "A15 parallel 1 turn 3",
      "orientation": "clockwise",
      "parallel": 1,
      "rotation": 0.0,
-     "section": "S4 A15",
+     "section": "S5 A15",
      "winding": "A15"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0059324999999985,
-      -0.0005954032258064994
+      0.0057544999999935,
+      0.00021016666666670057
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
-     "name": "A15 parallel 2 turn 3",
-     "orientation": "clockwise",
-     "parallel": 2,
-     "rotation": 0.0,
-     "section": "S4 A15",
-     "winding": "A15"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.0059324999999985,
-      -0.00019846774193549925
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000294999999999,
-      0.000294999999999
-     ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
-     "name": "A15 parallel 3 turn 3",
-     "orientation": "clockwise",
-     "parallel": 3,
-     "rotation": 0.0,
-     "section": "S4 A15",
-     "winding": "A15"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.0059324999999985,
-      0.00019846774193550088
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000294999999999,
-      0.000294999999999
-     ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
+     "layer": "S5 A15 layer 0",
+     "length": 0.04225128200963656,
      "name": "A15 parallel 0 turn 4",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S4 A15",
+     "section": "S5 A15",
      "winding": "A15"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0059324999999985,
-      0.000595403225806501
+      0.0057544999999935,
+      0.0006305000000001006
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
+     "layer": "S5 A15 layer 0",
+     "length": 0.04225128200963656,
      "name": "A15 parallel 1 turn 4",
      "orientation": "clockwise",
      "parallel": 1,
      "rotation": 0.0,
-     "section": "S4 A15",
+     "section": "S5 A15",
      "winding": "A15"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0059324999999985,
-      0.0009923387096775012
+      0.0057544999999935,
+      0.0010508333333335005
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
-     "name": "A15 parallel 2 turn 4",
-     "orientation": "clockwise",
-     "parallel": 2,
-     "rotation": 0.0,
-     "section": "S4 A15",
-     "winding": "A15"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.0059324999999985,
-      0.0013892741935485012
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000294999999999,
-      0.000294999999999
-     ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
-     "name": "A15 parallel 3 turn 4",
-     "orientation": "clockwise",
-     "parallel": 3,
-     "rotation": 0.0,
-     "section": "S4 A15",
-     "winding": "A15"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.0059324999999985,
-      0.0017862096774195013
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000294999999999,
-      0.000294999999999
-     ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
+     "layer": "S5 A15 layer 0",
+     "length": 0.04225128200963656,
      "name": "A15 parallel 0 turn 5",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S4 A15",
+     "section": "S5 A15",
      "winding": "A15"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0059324999999985,
-      0.0021831451612905014
+      0.0057544999999935,
+      0.0014711666666669006
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
+     "layer": "S5 A15 layer 0",
+     "length": 0.04225128200963656,
      "name": "A15 parallel 1 turn 5",
      "orientation": "clockwise",
      "parallel": 1,
      "rotation": 0.0,
-     "section": "S4 A15",
+     "section": "S5 A15",
      "winding": "A15"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0059324999999985,
-      0.0025800806451615017
+      0.0057544999999935,
+      0.0018915000000003005
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
-     "name": "A15 parallel 2 turn 5",
-     "orientation": "clockwise",
-     "parallel": 2,
-     "rotation": 0.0,
-     "section": "S4 A15",
-     "winding": "A15"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.0059324999999985,
-      0.002977016129032502
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000294999999999,
-      0.000294999999999
-     ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
-     "name": "A15 parallel 3 turn 5",
-     "orientation": "clockwise",
-     "parallel": 3,
-     "rotation": 0.0,
-     "section": "S4 A15",
-     "winding": "A15"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.0059324999999985,
-      0.0033739516129035023
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000294999999999,
-      0.000294999999999
-     ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
+     "layer": "S5 A15 layer 0",
+     "length": 0.04225128200963656,
      "name": "A15 parallel 0 turn 6",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S4 A15",
+     "section": "S5 A15",
      "winding": "A15"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0059324999999985,
-      0.0037708870967745026
+      0.0057544999999935,
+      0.0023118333333337006
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
+     "layer": "S5 A15 layer 0",
+     "length": 0.04225128200963656,
      "name": "A15 parallel 1 turn 6",
      "orientation": "clockwise",
      "parallel": 1,
      "rotation": 0.0,
-     "section": "S4 A15",
+     "section": "S5 A15",
      "winding": "A15"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0059324999999985,
-      0.004167822580645502
+      0.0057544999999935,
+      0.0027321666666671007
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
-     "name": "A15 parallel 2 turn 6",
-     "orientation": "clockwise",
-     "parallel": 2,
-     "rotation": 0.0,
-     "section": "S4 A15",
-     "winding": "A15"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.0059324999999985,
-      0.004564758064516502
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000294999999999,
-      0.000294999999999
-     ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
-     "name": "A15 parallel 3 turn 6",
-     "orientation": "clockwise",
-     "parallel": 3,
-     "rotation": 0.0,
-     "section": "S4 A15",
-     "winding": "A15"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.0059324999999985,
-      0.004961693548387502
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000294999999999,
-      0.000294999999999
-     ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
+     "layer": "S5 A15 layer 0",
+     "length": 0.04225128200963656,
      "name": "A15 parallel 0 turn 7",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S4 A15",
+     "section": "S5 A15",
      "winding": "A15"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0059324999999985,
-      0.005358629032258502
+      0.0057544999999935,
+      0.003152500000000501
      ],
      "crossSectionalShape": "round",
      "dimensions": [
       0.000294999999999,
       0.000294999999999
      ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
+     "layer": "S5 A15 layer 0",
+     "length": 0.04225128200963656,
      "name": "A15 parallel 1 turn 7",
      "orientation": "clockwise",
      "parallel": 1,
      "rotation": 0.0,
-     "section": "S4 A15",
+     "section": "S5 A15",
      "winding": "A15"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0059324999999985,
-      0.0057555645161295015
+      0.006076999999992501,
+      -0.0029999999999874996
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
-     "name": "A15 parallel 2 turn 7",
-     "orientation": "clockwise",
-     "parallel": 2,
-     "rotation": 0.0,
-     "section": "S4 A15",
-     "winding": "A15"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.0059324999999985,
-      0.006152500000000501
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000294999999999,
-      0.000294999999999
-     ],
-     "layer": "S4 A15 layer 0",
-     "length": 0.04336968899434594,
-     "name": "A15 parallel 3 turn 7",
-     "orientation": "clockwise",
-     "parallel": 3,
-     "rotation": 0.0,
-     "section": "S4 A15",
-     "winding": "A15"
-    },
-    {
-     "coordinateSystem": "cartesian",
-     "coordinates": [
-      0.0062824999999975,
-      -0.0061525000000005005
-     ],
-     "crossSectionalShape": "round",
-     "dimensions": [
-      0.000294999999999,
-      0.000294999999999
-     ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 0",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      -0.005660300000000461
+      0.006076999999992501,
+      -0.0027599999999884995
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 1",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      -0.005168100000000421
+      0.006076999999992501,
+      -0.0025199999999894994
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 2",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      -0.004675900000000381
+      0.006076999999992501,
+      -0.0022799999999904993
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 3",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      -0.004183700000000341
+      0.006076999999992501,
+      -0.002039999999991499
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 4",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      -0.003691500000000301
+      0.006076999999992501,
+      -0.0017999999999924988
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 5",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      -0.003199300000000261
+      0.006076999999992501,
+      -0.0015599999999934987
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 6",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      -0.0027071000000002212
+      0.006076999999992501,
+      -0.0013199999999944985
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 7",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      -0.0022149000000001814
+      0.006076999999992501,
+      -0.0010799999999954984
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 8",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      -0.0017227000000001413
+      0.006076999999992501,
+      -0.0008399999999964985
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 9",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      -0.0012305000000001013
+      0.006076999999992501,
+      -0.0005999999999974984
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 10",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      -0.0007383000000000613
+      0.006076999999992501,
+      -0.0003599999999984984
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 11",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      -0.0002461000000000212
+      0.006076999999992501,
+      -0.00011999999999949838
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 12",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      0.00024610000000001883
+      0.006076999999992501,
+      0.00011999999999950164
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 13",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      0.0007383000000000589
+      0.006076999999992501,
+      0.00035999999999850166
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 14",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      0.001230500000000099
+      0.006076999999992501,
+      0.0005999999999975016
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 15",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      0.001722700000000139
+      0.006076999999992501,
+      0.0008399999999965017
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 16",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      0.002214900000000179
+      0.006076999999992501,
+      0.0010799999999955017
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 17",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      0.0027071000000002186
+      0.006076999999992501,
+      0.0013199999999945018
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 18",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      0.0031993000000002584
+      0.006076999999992501,
+      0.0015599999999935017
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 19",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      0.0036915000000002983
+      0.006076999999992501,
+      0.0017999999999925018
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 20",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      0.004183700000000338
+      0.006076999999992501,
+      0.0020399999999915017
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 21",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      0.0046759000000003775
+      0.006076999999992501,
+      0.002279999999990502
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 22",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      0.005168100000000417
+      0.006076999999992501,
+      0.002519999999989502
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 23",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      0.005660300000000457
+      0.006076999999992501,
+      0.002759999999988502
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 24",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     },
     {
      "coordinateSystem": "cartesian",
      "coordinates": [
-      0.0062824999999975,
-      0.006152500000000497
+      0.006076999999992501,
+      0.0029999999999875022
      ],
      "crossSectionalShape": "round",
      "dimensions": [
-      0.000294999999999,
-      0.000294999999999
+      0.00023999999999900002,
+      0.00023999999999900002
      ],
-     "layer": "S5 P2 layer 0",
-     "length": 0.04556880385185251,
+     "layer": "S6 P2 layer 0",
+     "length": 0.0442776092711957,
      "name": "P2 parallel 0 turn 25",
      "orientation": "clockwise",
      "parallel": 0,
      "rotation": 0.0,
-     "section": "S5 P2",
+     "section": "S6 P2",
      "winding": "P2"
     }
    ]
@@ -5990,210 +6012,210 @@
       "magnitude": {
        "P1": {
         "P1": {
-         "nominal": 0.00011848119240310656
+         "nominal": 0.00011893609642869434
         },
         "S15": {
-         "nominal": 3.6261278960948854e-05
-        },
-        "A5": {
-         "nominal": 1.3549870248847592e-05
+         "nominal": 3.617773903182816e-05
         },
         "S5": {
-         "nominal": 1.3514865063718566e-05
+         "nominal": 1.3491979241736832e-05
         },
         "SN5": {
-         "nominal": 1.3463419730615945e-05
+         "nominal": 1.3450693714264294e-05
         },
         "SHV": {
-         "nominal": 0.0001873804198389134
+         "nominal": 0.00018722091286325676
+        },
+        "A5": {
+         "nominal": 1.3217047325998119e-05
         },
         "A15": {
-         "nominal": 3.532623139461963e-05
+         "nominal": 3.5009339096783784e-05
         },
         "P2": {
-         "nominal": 0.00011419342169071446
+         "nominal": 0.00011330526106914884
         }
        },
        "S15": {
         "P1": {
-         "nominal": 3.6261278960948854e-05
+         "nominal": 3.617773903182816e-05
         },
         "S15": {
-         "nominal": 1.116235120390102e-05
-        },
-        "A5": {
-         "nominal": 4.175489493355208e-06
+         "nominal": 1.1144888464761275e-05
         },
         "S5": {
-         "nominal": 4.164916543704508e-06
+         "nominal": 4.159663580804488e-06
         },
         "SN5": {
-         "nominal": 4.148932688740921e-06
+         "nominal": 4.1469631791249245e-06
         },
         "SHV": {
-         "nominal": 5.7738862622924895e-05
-        },
-        "A15": {
-         "nominal": 1.0884903754174861e-05
-        },
-        "P2": {
-         "nominal": 3.5185282839289976e-05
-        }
-       },
-       "A5": {
-        "P1": {
-         "nominal": 1.3549870248847592e-05
-        },
-        "S15": {
-         "nominal": 4.175489493355208e-06
+         "nominal": 5.770971990419404e-05
         },
         "A5": {
-         "nominal": 1.5796401269041187e-06
-        },
-        "S5": {
-         "nominal": 1.5667521992779868e-06
-        },
-        "SN5": {
-         "nominal": 1.5595636940243095e-06
-        },
-        "SHV": {
-         "nominal": 2.1763128916468532e-05
+         "nominal": 4.073161609347052e-06
         },
         "A15": {
-         "nominal": 4.102691643537857e-06
+         "nominal": 1.0788076054606076e-05
         },
         "P2": {
-         "nominal": 1.3261875449493745e-05
+         "nominal": 3.49139036613311e-05
         }
        },
        "S5": {
         "P1": {
-         "nominal": 1.3514865063718566e-05
+         "nominal": 1.3491979241736832e-05
         },
         "S15": {
-         "nominal": 4.164916543704508e-06
-        },
-        "A5": {
-         "nominal": 1.5667521992779868e-06
+         "nominal": 4.159663580804488e-06
         },
         "S5": {
-         "nominal": 1.5674729162735339e-06
+         "nominal": 1.5686577493619747e-06
         },
         "SN5": {
-         "nominal": 1.5557067179206618e-06
+         "nominal": 1.5580751028837777e-06
         },
         "SHV": {
-         "nominal": 2.1707847241394894e-05
+         "nominal": 2.1744605797933255e-05
+        },
+        "A5": {
+         "nominal": 1.5341514575958738e-06
         },
         "A15": {
-         "nominal": 4.0919766002472385e-06
+         "nominal": 4.062676629352365e-06
         },
         "P2": {
-         "nominal": 1.322691250321625e-05
+         "nominal": 1.3148064745482901e-05
         }
        },
        "SN5": {
         "P1": {
-         "nominal": 1.3463419730615945e-05
+         "nominal": 1.3450693714264294e-05
         },
         "S15": {
-         "nominal": 4.148932688740921e-06
-        },
-        "A5": {
-         "nominal": 1.5595636940243095e-06
+         "nominal": 4.1469631791249245e-06
         },
         "S5": {
-         "nominal": 1.5557067179206618e-06
+         "nominal": 1.5580751028837777e-06
         },
         "SN5": {
-         "nominal": 1.5560901579856634e-06
+         "nominal": 1.5591359918650517e-06
         },
         "SHV": {
-         "nominal": 2.1624299953366522e-05
+         "nominal": 2.1677984301281916e-05
+        },
+        "A5": {
+         "nominal": 1.5293986423527414e-06
         },
         "A15": {
-         "nominal": 4.076242903515887e-06
+         "nominal": 4.0500128412353825e-06
         },
         "P2": {
-         "nominal": 1.3175966391045648e-05
+         "nominal": 1.3106952450079253e-05
         }
        },
        "SHV": {
         "P1": {
-         "nominal": 0.0001873804198389134
+         "nominal": 0.00018722091286325676
         },
         "S15": {
-         "nominal": 5.7738862622924895e-05
-        },
-        "A5": {
-         "nominal": 2.1763128916468532e-05
+         "nominal": 5.770971990419404e-05
         },
         "S5": {
-         "nominal": 2.1707847241394894e-05
+         "nominal": 2.1744605797933255e-05
         },
         "SN5": {
-         "nominal": 2.1624299953366522e-05
+         "nominal": 2.1677984301281916e-05
         },
         "SHV": {
-         "nominal": 0.0003037402154748929
+         "nominal": 0.0003046970579694766
+        },
+        "A5": {
+         "nominal": 2.151912806519994e-05
         },
         "A15": {
-         "nominal": 5.739803773272609e-05
+         "nominal": 5.697327584812098e-05
         },
         "P2": {
-         "nominal": 0.00018552883127915734
+         "nominal": 0.0001843745505261626
+        }
+       },
+       "A5": {
+        "P1": {
+         "nominal": 1.3217047325998119e-05
+        },
+        "S15": {
+         "nominal": 4.073161609347052e-06
+        },
+        "S5": {
+         "nominal": 1.5341514575958738e-06
+        },
+        "SN5": {
+         "nominal": 1.5293986423527414e-06
+        },
+        "SHV": {
+         "nominal": 2.151912806519994e-05
+        },
+        "A5": {
+         "nominal": 1.550943086114912e-06
+        },
+        "A15": {
+         "nominal": 4.109414799380308e-06
+        },
+        "P2": {
+         "nominal": 1.3297029974173576e-05
         }
        },
        "A15": {
         "P1": {
-         "nominal": 3.532623139461963e-05
+         "nominal": 3.5009339096783784e-05
         },
         "S15": {
-         "nominal": 1.0884903754174861e-05
-        },
-        "A5": {
-         "nominal": 4.102691643537857e-06
+         "nominal": 1.0788076054606076e-05
         },
         "S5": {
-         "nominal": 4.0919766002472385e-06
+         "nominal": 4.062676629352365e-06
         },
         "SN5": {
-         "nominal": 4.076242903515887e-06
+         "nominal": 4.0500128412353825e-06
         },
         "SHV": {
-         "nominal": 5.739803773272609e-05
+         "nominal": 5.697327584812098e-05
+        },
+        "A5": {
+         "nominal": 4.109414799380308e-06
         },
         "A15": {
-         "nominal": 1.0984874364835894e-05
+         "nominal": 1.1015340027459757e-05
         },
         "P2": {
-         "nominal": 3.553247676533973e-05
+         "nominal": 3.5692257204048664e-05
         }
        },
        "P2": {
         "P1": {
-         "nominal": 0.00011419342169071446
+         "nominal": 0.00011330526106914884
         },
         "S15": {
-         "nominal": 3.5185282839289976e-05
-        },
-        "A5": {
-         "nominal": 1.3261875449493745e-05
+         "nominal": 3.49139036613311e-05
         },
         "S5": {
-         "nominal": 1.322691250321625e-05
+         "nominal": 1.3148064745482901e-05
         },
         "SN5": {
-         "nominal": 1.3175966391045648e-05
+         "nominal": 1.3106952450079253e-05
         },
         "SHV": {
-         "nominal": 0.00018552883127915734
+         "nominal": 0.0001843745505261626
+        },
+        "A5": {
+         "nominal": 1.3297029974173576e-05
         },
         "A15": {
-         "nominal": 3.553247676533973e-05
+         "nominal": 3.5692257204048664e-05
         },
         "P2": {
-         "nominal": 0.00011574773938503836
+         "nominal": 0.00011704763944299165
         }
        }
       }
@@ -6202,5 +6224,5 @@
    }
   }
  ],
- "_note": "TIW sandwich, S15 8 T: P1 | S15 | A5+S5+SN5 trifilar | SHV | A15 | P2 | written by simulation/flyback/run_flyback.py"
+ "_note": "RECOMMENDED (= margin_sandwich_8_pre): enamel + 3 mm margins, P1 || S15 8T | S5+SN5 | SHV || A5 | A15 | P2, preloads 3.3k on 15V, 1k on 5V | written by simulation/flyback/run_flyback.py"
 }

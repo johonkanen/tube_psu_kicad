@@ -59,6 +59,9 @@ def analyse(name, case="nom", temperature=60.0, vin=400.0):
     rms = {n: float(np.sqrt(np.mean(cur[n] ** 2))) for n in names}
     out = {"option": name, "case": case, "frequency": f, "rms": rms}
     try:
+        # same harmonic set for every winding: with trimming on, MKF (1.7.41) keeps a
+        # different number of harmonics per winding and then fails combining them
+        P.set_settings({"inputsTrimHarmonics": False, "harmonicAmplitudeThresholdQuickMode": False})
         wl = P.calculate_winding_losses(mag, op, temperature)
         out["winding_losses_W"] = wl.get("windingLosses")
         per = {}

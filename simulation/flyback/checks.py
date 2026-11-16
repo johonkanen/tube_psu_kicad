@@ -2,7 +2,8 @@
 """Single-run checks (one ngspice at a time), results in out/checks/<name>.json:
 
     python3 simulation/flyback/checks.py cscale     # current nom with unscaled capacitors (cscale = 1, 30 ms)
-    python3 simulation/flyback/checks.py d8bv200    # current nom with D8 breaking down at 200 V (ES1D rating)
+    python3 simulation/flyback/checks.py d8bv200    # current nom with D8 breaking down at 200 V (ES1D rating);
+                                                    # ngspice cannot follow it (timestep too small at ~8.8 ms)
 """
 from __future__ import annotations
 

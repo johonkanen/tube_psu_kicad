@@ -158,7 +158,9 @@ def netlist(res: dict, spice_map: dict, case: dict, cscale=0.1, tstop=16e-3, twi
         end, g = RECT[rail], GROUND[rail]
         bv = (case.get("bv") or {}).get(rail, BV_DEFAULT)
         # ES1D class: Vf 0.92 V at 1 A, trr ~15-25 ns, Cj ~10 pF (ES1A-D datasheet class)
-        out.append(f".model DES1_{node} D(IS=2n N=1.7 RS=0.06 CJO=10p M=0.33 TT=20n BV={bv} IBV=10u)")
+        # a modelled breakdown (case["bv"]) gets a soft knee (NBV) so the solver can follow it
+        soft = " NBV=5" if bv < BV_DEFAULT else ""
+        out.append(f".model DES1_{node} D(IS=2n N=1.7 RS=0.06 CJO=10p M=0.33 TT=20n BV={bv} IBV=10u{soft})")
         if sign > 0:
             out.append(f"D_{node} {end} {node} DES1_{node}")
         else:

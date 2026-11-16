@@ -11,32 +11,36 @@ scripts still label them `20V` / `20V_ISO_SEC` / `S15` internally (`flyback_sim.
 
 ## Summary
 
-**TODO / in progress – the study was stopped part-way (2026-11-16); see [NEXT.md](NEXT.md).**
-Results so far (OpenMagnetics leakage, ngspice rail voltages; full tables in
-[results.md](results.md)):
+Status 2026-11-16 (session 2): model calibrated to the bench, all options simulated on the
+calibrated model (15 load cases at 400 V + nominal at 325 V), recommendation made. The user has no
+triple-insulated wire (TIW), so **the recommendation uses enamelled wire with 3 mm margin
+tape like today's build**; the TIW options stay in the tables as reference only.
 
-- **Current V2 build** (separate windings on top of each other, 3 mm margins): leakage
-  referred to the 52 T primary is 24–52 µH from the primary to the isolated windings
-  (5–11 % of Lp) and 20–43 µH between the feedback winding A5 and the isolated windings.
-  The 3-turn windings, bunched in 1.7 mm of the 6.6 mm margin-limited width, couple worst.
-- Over 15 load cases at 400 V the isolated 5 V / −5 V rails stay within 4.85–5.36 V and
-  −80 V within 77.9–81.1 V, but **the primary-side 15V rail rises to 20.6 V when only the
-  IW1818 Vcc (5 mA assumed) loads it, above the 18.7 V AUX_MEAS ADC limit**, and the 5V rail
-  peak-charges to 6.1–6.5 V unloaded. **15V_ISO_SEC sits at 12.6–14.4 V** (7 T), not 15 V.
-- **Triple-insulated wire on the isolated windings (no margin tape)** roughly halves the
-  primary–secondary leakage and cuts A5–secondary leakage 3–10× (tiw_simple); 15V max
-  drops to 17.1 V (within the limit), all isolated rails within ±0.3 V over the load cases
-  except light load.
-- Tapping (AC-stacking) the windings with the current build (stacked) also brings 15V
-  below 18.7 V (17.95 V) but makes −5V worse at its own min load (5.59 V).
-- The split-primary sandwich with a trifilar A5/S5/SN5 layer (tiw_sandwich) is only
-  partly simulated (6 of 15 cases) and its A5–S5 leakage from MKF (15.8 µH) is
-  suspiciously higher than tiw_simple's (11.1 µH); MKF's field-grid resolution for
-  windings sharing one layer has to be checked before this option is trusted.
-- **No recommendation is made yet.** Leading candidate: TIW secondaries without margins
-  (tiw_simple or the sandwich once checked), isolated 15 V winding 8 T, plus preloads on
-  15V / 5V if the light-load peak charging stays high (options `recommended`,
-  `recommended_pre` are defined but not simulated).
+- **Calibration (2.1):** the calibrated model gives 15V = 15.95 V at board idle against the
+  measured ≈ 15.5 V (+0.45 V). The first model's 20.6 V came from a different case
+  (*min_15V*: isolated rails loaded, 15V nearly unloaded) and from a light-load controller
+  model that limit-cycled; the AUX_MEAS divider was missing and the fixed 15V load was low.
+- **Current V2 build on the calibrated model:** 15V 14.94–**19.92 V** (the 18.7 V AUX_MEAS
+  limit is exceeded in *min_15V*, i.e. isolated outputs loaded while the primary gate
+  drivers idle – possible, the isolated rails go off-board), 5V 4.87–6.14 V,
+  **15V_ISO_SEC 12.6–13.8 V** (7 T, target 15 V), 5V_ISOL 4.89–5.41, −5V 4.99–5.39,
+  −80 V 78.6–81.8 V.
+- **D8 finding (section 6):** D8 sees **389–403 V reverse at DC+ = 400 V** (0.808·DC+ +
+  80 V; 341 V at 325 V). A 200 V ES1D there is overstressed by 2×: fit a ≥ 600 V part
+  (ES1J / US1J, same SMA footprint).
+- **Recommended rewind (section 5): `margin_sandwich_8_pre`** – enamel wire, 3 mm margins,
+  split primary with two 4-layer barriers: **P1 26 T ‖ S15 8 T | S5+SN5 bifilar | SHV 42 T ‖
+  A5 3 T | A15 8 T | P2 26 T**, low-turn windings spread over the full 6.6 mm with parallel
+  strands, plus preloads **3.3 kΩ on 15V and 1 kΩ on 5V** (accepted by the user). Same
+  pinout and footprint. Predicted: 15V 14.40–15.78 V (max −4.1 V, 2.9 V below the limit),
+  5V 4.85–5.22 V, **15V_ISO_SEC 14.75 V nominal** (14.75–17.07 V; the top only with the rail
+  at its bleeder – an optional 3.3 kΩ preload on 15V_ISO_SEC makes it 14.78–15.87 V),
+  5V_ISOL 4.88–5.36, −5V 4.97–5.53, −80 V 78.5–82.8 V. Leakage to the isolated windings
+  falls from 24–52 µH to 9–10 µH; winding losses 0.139 W (0.152 W today).
+- The split primary needs its P1–P2 crossover routed across both barriers in a sleeve
+  (all 10 pins are used); it fits the window (2.70 of 3.40 mm radial build). If that is not
+  acceptable, `stacked` (same build, tapped windings) is the no-split fallback (15V max
+  17.7 V, 15V_ISO_SEC still 7 T-low).
 
 ## 1. The current transformer (V2, confirmed wound)
 
@@ -58,7 +62,7 @@ wound** and that **every secondary is a separate winding** (none stacked). Mappi
 | 42 | SHV | 6 → 9 (dot at 6) | D8 (cathode at 6) → −100V BIAS (−80V OUT) | −(78.1 V − Vf) |
 
 - "||" is read as the barrier between the primary-side and the isolated windings, and the
-  list as the winding order from the bobbin outwards (assumed; the order is not documented).
+  list as the winding order from the bobbin outwards (confirmed by the user 2026-11-16).
 - 5.58 V at the aux winding knee follows from the Vsense divider (R64 39k ‖ R81 15k over
   R84 33k ‖ R85 4.7k = 0.2753) and Vsense = 1.536 V. The PDF note "Vsense @ 1.536V =
   5.8368Vaux" does not match the fitted divider (it needs a 11.5 kΩ upper leg); it probably
@@ -67,7 +71,7 @@ wound** and that **every secondary is a separate winding** (none stacked). Mappi
   **15V_ISO_SEC sits at ≈ 12.7 V, not 15 V** (simulated, nominal load).
 - Build (design doc ch. 2.1, user): 3 × AWG34 in parallel on every winding, 3 mm margin
   tape on both sides (6 mm creepage), windings on top of each other, 4 layers of tape
-  between primary and secondary side; one tape layer between the other windings (assumed).
+  between primary and secondary side; one tape layer between the other windings (user).
 - Gap: fitted so that the primary self-inductance is 171 nH × 52² = **462 µH**
   ("TR1 : core 171nh" read as the AL of the gapped core; 0.319 mm in the centre leg in
   MKF's model). The design doc's table 2.1 (Lp 614 µH, AL 175 nH, 52 T) is inconsistent
@@ -130,7 +134,7 @@ others nominal; *max_X* = rail X at the table maximum; *light* = every rail blee
 *idle* = the board idling, the calibration point (5V 50 mA for the MCU board on J2 and the
 Si827x input sides, 15V_ISO_SEC 2 mA, 5V_ISOL 5 mA, the rest bleeders; estimated);
 *nom325* = nominal at DC+ = 325 V (PFC not running). All 400 V cases together are "the
-16 load cases".
+15 load cases".
 
 ### 2.1 Calibration against the bench (2026-11-16)
 
@@ -177,39 +181,146 @@ drivers idle) to confirm.
 
 ## 3. Results
 
-See [results.md](results.md) (generated; tiw_sandwich only 6 of 15 cases) and
-[crossreg.png](crossreg.png).
+Full tables: [results.md](results.md) (generated), per-case tables in `out/report.md`
+(not committed), rail ranges in [crossreg.png](crossreg.png) (grey = TIW, not buildable).
 
 ![rail ranges](crossreg.png)
 
-**TODO / in progress:** per-case discussion, the capacitor-scaling check (one run of
-`current` nom with `cscale = 1`), losses per option (`losses.py`; done only for `current`
-nom: winding losses 0.148 W, of which primary 0.091 W; primary RMS 0.089 A; core losses see
-section 2).
+Rail voltages, nominal and min–max over the 15 load cases at 400 V (V, magnitude):
+
+| option | buildable | 15V (limit 18.7) | 5V | 15V_ISO_SEC (target 15) | 5V_ISOL | −5V_SEC | −80 V |
+|---|---|---|---|---|---|---|---|
+| current (V2) | yes | 15.44 (14.94–**19.92**) | 5.16 (4.87–6.14) | 12.94 (12.63–13.76) | 5.05 (4.89–5.41) | 5.05 (4.99–5.39) | 80.7 (78.6–81.8) |
+| stacked | yes | 14.85 (14.45–17.71) | 5.08 (4.81–5.73) | 12.75 (12.39–13.61) | 5.03 (4.91–5.41) | 5.00 (4.94–5.62) | 80.1 (77.1–83.1) |
+| margin_sandwich (7 T) | yes | 14.57 (14.47–16.08) | 4.94 (4.83–6.45) | 12.73 (12.73–15.06) | 4.92 (4.86–5.31) | 4.94 (4.94–5.53) | 80.9 (78.1–82.9) |
+| margin_sandwich_8 | yes | 14.65 (14.48–16.16) | 4.97 (4.84–6.44) | 14.74 (14.74–17.02) | 4.95 (4.88–5.31) | 4.97 (4.97–5.50) | 81.3 (78.2–82.9) |
+| **margin_sandwich_8_pre (recommended)** | yes | 14.65 (14.40–15.78) | 4.96 (4.85–5.22) | 14.75 (14.75–17.07) | 4.96 (4.88–5.36) | 4.97 (4.97–5.53) | 81.3 (78.5–82.8) |
+| margin_sandwich_8_pre3 (+3.3k on 15V_ISO_SEC) | yes | 14.69 (14.49–15.80) | 4.98 (4.86–5.23) | 14.78 (14.78–15.87) | 4.97 (4.88–5.30) | 4.99 (4.97–5.49) | 81.5 (78.7–82.8) |
+| margin_sandwich_8b_pre (5 V pair at the barrier) | yes | 14.70 (14.41–15.77) | 4.98 (4.85–5.22) | 14.76 (14.76–16.55) | 4.97 (4.88–5.84) | 5.00 (4.97–5.94) | 81.5 (78.5–82.5) |
+| margin_order_8 (one barrier, A5 next to P) | yes | 15.22 (14.95–16.65) | 5.48 (5.16–7.32) | 14.95 (14.75–15.89) | 5.00 (4.87–5.34) | 5.01 (4.95–5.32) | 81.5 (80.3–82.0) |
+| margin_order_8_pre | yes | 15.22 (14.99–16.74) | 5.47 (5.15–6.81) | 14.97 (14.74–16.05) | 5.01 (4.87–5.45) | 5.02 (4.95–5.41) | 81.6 (80.9–82.5) |
+| tiw_simple | no (TIW) | 15.05 (14.84–16.72) | 5.06 (4.98–5.81) | 12.84 (12.70–13.64) | 4.94 (4.81–5.29) | 4.96 (4.89–5.27) | 80.6 (79.8–81.0) |
+| tiw_sandwich | no (TIW) | 14.45 (14.06–15.79) | 4.93 (4.82–6.41) | 12.64 (12.64–14.80) | 4.88 (4.79–5.25) | 4.90 (4.86–5.44) | 80.3 (77.2–81.5) |
+| tiw_sandwich_stacked | no (TIW) | 14.50 (14.13–15.48) | 4.93 (4.83–6.39) | 12.63 (12.63–14.24) | 4.88 (4.79–5.25) | 4.90 (4.88–5.39) | 80.4 (77.2–81.4) |
+| tiw_recommended (S15 8 T) | no (TIW) | 14.49 (14.08–15.84) | 4.95 (4.81–6.38) | 14.61 (14.61–16.86) | 4.89 (4.79–5.24) | 4.91 (4.87–5.42) | 80.5 (77.3–81.4) |
+| tiw_recommended_pre | no (TIW) | 14.50 (14.13–15.47) | 4.95 (4.85–5.16) | 14.63 (14.61–16.88) | 4.90 (4.79–5.25) | 4.92 (4.87–5.42) | 80.6 (77.7–81.4) |
+| sandwich_paired_b | no (TIW) | 14.71 (14.39–14.99) | 4.96 (4.82–7.13) | 14.65 (14.62–16.28) | 4.90 (4.79–5.80) | 4.91 (4.86–6.04) | 82.3 (78.8–83.2) |
+| sandwich_paired_c | no (TIW) | 14.62 (14.27–14.88) | 4.97 (4.81–6.85) | 14.57 (14.51–16.16) | 4.91 (4.80–5.50) | 4.93 (4.87–5.79) | 81.4 (77.4–82.3) |
+| sandwich_paired_c_pre | no (TIW) | 14.63 (14.30–14.85) | 4.97 (4.82–5.15) | 14.59 (14.51–16.16) | 4.92 (4.80–5.36) | 4.93 (4.87–5.67) | 81.5 (77.8–82.4) |
+
+Observations:
+
+- **The light-load excursions are peak charging.** A lightly loaded winding charges its
+  capacitor to the peak of its winding voltage during the current transfer at the start of
+  the flyback interval, so the excursion follows how closely the winding sits to the
+  primary versus to the loaded windings. In the current build A15 sits between P and A5
+  (15V up to 19.9 V); in the sandwich designs A15 lies outside A5 next to P2 and the 15V
+  rail stays within 14.4–16.2 V. The same mechanism lifts 15V_ISO_SEC (next to P1 in the
+  margin sandwich) to 17.1 V when it carries only its bleeder, and the 5V rail (only the
+  Vsense divider as minimum load) to 6.1–7.3 V – the 1 kΩ preload removes the latter.
+- **margin_order_8** (no split primary, A5 directly on the primary) regulates the
+  isolated rails well but its 5V rail runs high (5.5 V nominal): A5 couples to the primary
+  much better than to the loads it should represent. Not recommended.
+- **Capacitor-scaling check** (`checks.py cscale`, current nom with the real capacitors,
+  30 ms): 15V 15.64 / 5V 5.24 / 15V_ISO_SEC 13.08 / 5V_ISOL 5.12 / −5V 5.08 / −80 V 81.7 V
+  against 15.44 / 5.16 / 12.94 / 5.05 / 5.05 / 80.7 V with the scaled capacitors: the
+  scaling biases the levels by +0.03…+0.2 V (+1 V on −80 V) in the same direction for every
+  option, which does not change the comparison.
+- *idle* and *light* hunt slowly between the light-load modes (±0.3–0.5 V on 15V over
+  10 ms); their values are 10 ms / 5 ms averages, drift in the result JSONs.
 
 ## 4. Options
 
-Defined in `options.py` (geometry PNGs `geometry_<option>.png`):
+Defined in `options.py` (geometry PNGs `geometry_<option>.png`; `_pre` = same winding +
+preloads 3.3 kΩ on 15V, 1 kΩ on 5V; `_pre3` also 3.3 kΩ on 15V_ISO_SEC).
 
-| option | build | status |
+| option | build | buildable |
 |---|---|---|
-| current | P \| A15 \| A5 ‖ S15 \| S5 \| SN5 \| SHV, 3 × AWG34, 3 mm margins | 15/15 cases |
-| stacked | same, tapped: 15V = A5 + 5 T, 15V_ISO = S5 + 4 T, −80 V = SN5 + 39 T (same pins) | 15/15 |
-| tiw_simple | TIW (TCA3 30/32 AWG) isolated windings, no margins, AWG30 primary in 2 layers, spread low-turn windings, S5/SN5 bifilar | 15/15 |
-| tiw_sandwich | TIW, no margins, P1 26 T \| S15 \| A5+S5+SN5 trifilar \| SHV \| A15 \| P2 26 T | 6/15 (stopped) |
-| tiw_sandwich_stacked | tiw_sandwich with tapped windings | not run |
-| margin_sandwich | enamel + 3 mm margins, split primary with two 4-layer barriers, spread strands | not run |
-| recommended / recommended_pre | tiw_sandwich with S15 8 T; _pre adds what-if preloads 3.3 k on 15V, 1 k on 5V | not run |
+| current | P \| A15 \| A5 ‖ S15 \| S5 \| SN5 \| SHV, 3 × AWG34, 3 mm margins, windings bunched | yes (today) |
+| stacked | same, tapped: 15V = A5 + 5 T, 15V_ISO = S5 + 4 T, −80 V = SN5 + 39 T (same pins) | yes |
+| margin_sandwich | P1 26 T ‖ S15 7 T \| S5+SN5 \| SHV ‖ A5 \| A15 \| P2 26 T, enamel, 3 mm margins, two 4-layer barriers, spread strands | yes (split primary) |
+| margin_sandwich_8 / _pre / _pre3 | margin_sandwich with S15 8 T (3 × AWG32) | yes (split primary) |
+| margin_sandwich_8b_pre | P1 ‖ S5+SN5 \| S15 8 T \| SHV ‖ A5 \| A15 \| P2 | yes (split primary) |
+| margin_order_8 / _pre | P \| A5 \| A15 ‖ S15 8 T \| S5+SN5 \| SHV, one barrier, spread | yes |
+| tiw_simple, tiw_sandwich, tiw_sandwich_stacked, tiw_recommended(_pre) | triple-insulated wire on the isolated windings, no margins | **no** (no TIW) |
+| sandwich_paired_b / _c / _c_pre | TIW, the two 15 V windings and the three 5 V windings each in one multifilar layer | **no** (no TIW) |
 
-**TODO / in progress:** isolation / fill / Bpk / losses / Vpeak check per option, pin
-notes (all options keep the pinout; the sandwich needs the P1–P2 crossover sleeved across
-the secondaries because all 10 pins are used).
+Losses, flux, build, rectifier stress (nominal case unless noted; results.md has all):
+
+| option | winding losses W | Bpk nom T | radial build mm (of 3.40) | Vcol max V | R45 W | D8 V_R max V |
+|---|---|---|---|---|---|---|
+| current | 0.152 | 0.136 | 3.22 | 587 | 0.011 | 402 |
+| stacked | 0.154 | 0.136 | 2.49 | 577 | 0.011 | 397 |
+| margin_sandwich_8_pre (rec.) | 0.139 | 0.144 | 2.70 | 556 | 0.010 | 403 |
+| margin_order_8_pre | 0.231 | 0.141 | 2.89 | 595 | 0.013 | 399 |
+| tiw_sandwich (ref.) | 0.136 | 0.146 | 2.93 | 546 | 0.009 | 403 |
+
+Core losses: MKF gives 0.01–0.41 W depending on the model (iGSE / Steinmetz / Roshen) and
+the option, without a consistent pattern although Lp, Ipk and f are the same – not used for
+the decision; Bpk 0.14 T nominal, 0.21 T at the 1 V current limit (N87 assumed). Every
+option keeps the pinout and footprint (the windings keep their pins).
+
+**Isolation.** Margin-tape options: 3 mm margins on both sides of every section give 6 mm
+creepage around each barrier edge (MKF's coordination for reinforced insulation, PD2,
+OVC II, 264 V mains: 3.2–4.4 mm creepage, 1 mm clearance), 4 tape layers per barrier (3
+layers of a tape that passes the electric strength test are enough for reinforced
+insulation in thin layers). **The split primary needs the barrier twice**
+(P1 ‖ secondaries ‖ P2) and its P1–P2 crossover passes the secondary sections: it has to
+run in the margin zone inside a sleeve rated for reinforced insulation (e.g. PTFE / FEP
+tubing ≥ 0.3–0.4 mm wall), entering and leaving at the primary pin side, since all 10 pins
+are used. The radial build (2.70 mm of 3.40 mm) leaves room for that.
 
 ## 5. Recommended design
 
-**TODO / in progress** – not decided yet (see Summary and NEXT.md). The winding spec,
-predicted leakage and cross-regulation improvement and `mas/tr1_recommended.json` will be
-written once `recommended` has been simulated.
+**`margin_sandwich_8_pre`** – buildable with enamelled wire and margin tape, same bobbin
+(Norwe 09987-106 EF20 10-pin), same core and gap (AL 171 nH, Lp 462 µH; gap 0.309 mm in
+MKF's model), same pinout. MAS document: [mas/tr1_recommended.json](mas/tr1_recommended.json)
+(option `recommended` in options.py writes it).
+
+Winding spec, from the bobbin outwards (all sections: 3 mm margin tape both sides, i.e.
+6.6 mm winding width; tape 0.055 mm per layer; all windings same direction, start at the
+pin listed first):
+
+| # | winding | turns | wire | layers | pins | notes |
+|---|---|---|---|---|---|---|
+| 1 | P1 (primary half 1) | 26 | 1 × AWG32 heavy | 1 | 4 (DC+, start) → crossover | close-wound |
+| – | barrier | | 4 layers tape | | | reinforced |
+| 2 | S15 → 15V_ISO_SEC | **8** | 3 × AWG32 heavy in parallel | 1 | 9 → 10 | strands side by side, spread over the width |
+| – | tape | | 1 layer | | | |
+| 3 | S5 + SN5 (5V_ISOL, −5V_SEC) | 3 + 3 | 3 × AWG30 each, bifilar (strands alternate S5/SN5) | 1 | S5 9 → 7, SN5 8 → 9 | spread over the width |
+| – | tape | | 1 layer | | | |
+| 4 | SHV → −80 V | 42 | 1 × AWG34 heavy | 2 | 6 → 9 | spread |
+| – | barrier | | 4 layers tape | | | reinforced |
+| 5 | A5 (5V + AUX_FB) | 3 | 6 × AWG30 in parallel | 1 | 2 → 3 | spread |
+| – | tape | | 1 layer | | | |
+| 6 | A15 → 15V | 8 | 2 × AWG30 in parallel | 1 | 2 → 1 | spread |
+| – | tape | | 1 layer | | | |
+| 7 | P2 (primary half 2) | 26 | 1 × AWG32 heavy | 1 | crossover → 5 (collector) | P1 + P2 in series aiding |
+| – | outer wrap | | 1 layer tape (more as needed) | | | |
+
+Plus on the board (user accepted): **preload 3.3 kΩ on 15V** (68 mW at 15 V, 0805/1206) and
+**1 kΩ on 5V** (25 mW). Optional (not yet agreed): 3.3 kΩ more on 15V_ISO_SEC (or R124
+12.1 kΩ → 2.7 kΩ, 83 mW) – keeps 15V_ISO_SEC within 14.78–15.87 V instead of 14.75–17.07 V.
+
+Predicted (MKF leakage referred to 52 T: P–isolated windings 9.3–10.4 µH, A5–S15 19 µH,
+A5–S5/SN5 15 µH, A5–SHV 9.4 µH; current build 24–52 µH and 20–43 µH):
+
+| rail | current build, nominal (range) | recommended, nominal (range) |
+|---|---|---|
+| 15V (limit 18.7 V) | 15.44 (14.94–19.92) | 14.65 (14.40–15.78) |
+| 5V | 5.16 (4.87–6.14) | 4.96 (4.85–5.22) |
+| 15V_ISO_SEC | 12.94 (12.63–13.76) | 14.75 (14.75–17.07); with the optional preload 14.78 (14.78–15.87) |
+| 5V_ISOL | 5.05 (4.89–5.41) | 4.96 (4.88–5.36) |
+| −5V_SEC | 5.05 (4.99–5.39) | 4.97 (4.97–5.53) |
+| −80 V | 80.7 (78.6–81.8) | 81.3 (78.5–82.8) |
+| collector peak | 587 V | 556 V |
+| winding losses (nom) | 0.152 W | 0.139 W |
+
+15V spread 4.98 → 1.37 V, 5V 1.27 → 0.37 V; 15V_ISO_SEC moves to its 15 V target. The
+idle 15V reading should drop from ≈ 15.5 V (measured) to ≈ 14.3 V (model offset −0.45 V
+applied to 14.64 V). Build notes: wind each low-turn layer with its strands side by side
+across the full width (not bunched); keep the margins exactly 3 mm; the crossover sleeve
+goes in the margin zone at the pin-row side of the primary.
 
 ## 6. Other findings on sheet 1
 
@@ -217,44 +328,48 @@ written once `recommended` has been simulated.
   versions of ES1A (ES1D class, user). D8 blocks while the switch is on: the 42 T winding
   (pin 6 dot, D8 cathode at pin 6) then sits at +Vin × 42/52 against ISO_GND while the
   anode is at −80 V, so **V_R(D8) = 0.808 × DC+ + 80 V + Vf** – 403 V at DC+ = 400 V
-  (simulated 389–402 V over all load cases, 50 ns filtered), 419 V at 420 V and still
-  341 V at 325 V before the PFC runs. A 200 V part would only be within its rating below
-  DC+ ≈ 150 V. The polarity is checked against the schematic (dots at pins 2, 4, 6, 8, 9):
-  the −80 V rail can only be made in the flyback interval, so the reverse voltage cannot be
-  avoided by the winding. On top comes the ringing at switch-on (the model's hard turn-on
-  gives raw spikes to ~940 V; with the IW1818's valley switching the real spike is smaller,
-  but measure it). **D8 needs a ≥ 600 V part** (ES1J / US1J / RS1J, SMA, same footprint;
-  1000 V US1M / RS1M for margin against the turn-on ringing). If a 200 V ES1D is really
-  fitted at D8 today it runs in reverse breakdown every cycle – see the `d8bv200` check
-  below for what the model predicts then. D4 / D5 (7 T / 8 T) see 67–81 V and D6 / D14 / D29
-  (3 T) 28–29 V: ES1D (200 V) is fine there.
-- **15V_ISO_SEC = 12.6–14.4 V** with the 7 T winding (target 15 V): check the Si8274 UVLO
-  grade; an 8 T winding gives ≈ 15 V.
-- **15V rail at light load exceeds the AUX_MEAS range** (current build, 20.6 V vs 18.7 V).
-  AUX_MEAS divider R11/R12 (26.7 kΩ) loads the rail with only 0.56 mA (not modelled; the
-  model assumes 5 mA Vcc).
+  (simulated 389–403 V over all load cases and options, 50 ns filtered), 419 V at 420 V and
+  still 341 V at 325 V before the PFC runs. A 200 V part would only be within its rating
+  below DC+ ≈ 150 V. The polarity is checked against the schematic (dots at pins 2, 4, 6, 8,
+  9): the −80 V rail can only be made in the flyback interval, so no winding arrangement
+  avoids this reverse voltage. On top comes the ringing at switch-on (the model's hard
+  turn-on gives raw spikes to ~940 V; with the IW1818's valley switching the real spike is
+  smaller, but measure it). **D8 needs a ≥ 600 V part** (ES1J / US1J / RS1J, SMA, same
+  footprint; 1000 V US1M / RS1M for margin against the turn-on ringing). If a 200 V ES1D is
+  really fitted at D8 it is driven into reverse breakdown every cycle at ~2× its rating
+  (ngspice cannot follow a 200 V breakdown there – `checks.py d8bv200` stops with "timestep
+  too small"); check the part on the board. D4 / D5 (7–8 T) see 67–81 V and D6 / D14 / D29
+  (3 T) 28–30 V: ES1D (200 V) is fine there.
+- **15V_ISO_SEC = 12.6–13.8 V** with today's 7 T winding (target 15 V): check the Si8274
+  VDDB UVLO grade; 8 T gives ≈ 14.7–14.8 V.
+- **15V and the AUX_MEAS range:** the current build exceeds 18.7 V only in *min_15V*
+  (19.9 V; isolated outputs loaded, primary gate drivers idle); at idle it is ≈ 16 V in the
+  model, 15.5 V measured.
+- **Light-load 5V regulation:** at board idle the model has the 5V rail at 4.66–4.87 V
+  (the IW1818 knee sample carries some of D6's drop when the 5 V rail takes most of a short
+  pulse). Measure 5V at idle to check.
 - PDF note "Vsense @ 1.536V = 5.8368Vaux" does not match R64 = 39k (gives 5.58 V).
-- Simulated collector peak 539–589 V (the PDF note says 640 V with V2); the 800 V BJT has margin.
-- **TODO:** snubber dissipation and Vpeak per option.
+- Collector peak 546–595 V over all options and cases (PDF note: 640 V with V2), snubber
+  R45 9–13 mW: the 800 V BJT and the RCD snubber have margin.
 
 ## 7. Assumptions and their sources
 
 | item | value | source |
 |---|---|---|
 | turns, wire, margins, barrier | 52/8/3‖7/3/3/42, 3 × AWG34, 3 mm, 4 tape layers | PDF note V2 (user: wound), design doc ch. 2.1, user |
-| winding order | as listed in V2, primary innermost | assumption |
+| winding order | P, 8 T, 3 T, 4 tape layers, 7 T, 3 T, 3 T, 42 T, 1 tape layer between windings | user (confirmed 2026-11-16) |
 | tape | 0.055 mm per layer (25 µm film + adhesive), 1 layer between windings | assumption |
 | Lp | 462 µH = 171 nH × 52² | PDF note "TR1 : core 171nh" |
 | core material | N87 | assumption (not documented) |
 | bobbin | Norwe 09987-106 (EE20 vertical 10-pin 3.81 mm) | MKF database; matches the footprint |
 | Vsense regulation / OVP | 1.536 V / 1.838 V | PDF notes (same values in the iW1819 datasheet) |
 | Ipk max | 0.803 A (1 V / R8 ‖ R9) | PDF note "Isense pk = 1V", schematic |
-| f max, PWM/PFM | 72 kHz; PFM below u = 0.12 with 0.28 A | iW1818 product summary; PFM law assumed |
+| f max, light-load modes | 72 kHz; PFM below u = 0.12 (0.28 A) → DPWM 25 kHz → Ipk min 0.185 A (VIPK(LOW) 0.23 V) → DDPWM 2.1 kHz | iW1818 summary, iW1819 datasheet (same family); u = 0.12 assumed |
 | DC+ | 400 V (325 V before the PFC runs) | design doc |
-| Vcc load | 5 mA on 15V | assumption |
+| fixed 15V load | 9.5 mA (IW1818 + Si827x supplies) + AUX_MEAS 26.7 kΩ | estimate (iW1819 ICCQ 2.7 mA, base drive, Si827x ~1.6 mA each); calibrated: idle 15.95 V vs 15.5 V measured |
 | AUX_MEAS | 0.176 × V(15V), limit 18.7 V | schematic R11/R12, user |
-| loads | see section 2 | design doc table 1.1 (maxima), nominal = assumption |
-| rectifiers | generic ES1-class model, breakdown not modelled | assumption |
+| loads | see section 2; *idle* loads estimated (5V 50 mA MCU board) | design doc table 1.1 (maxima), nominal / idle = assumption |
+| rectifiers | ES1D class (200 V fitted, user); breakdown not modelled, reverse voltage measured | user, ES1A–D datasheet class |
 | collector node | 30 pF | assumption |
 | winding temperature | 60 °C for resistances / losses | assumption |
 
@@ -263,23 +378,27 @@ written once `recommended` has been simulated.
 ```
 pip install --user PyOpenMagnetics            # 1.7.41 used
 python3 simulation/flyback/om_model.py        # check of the hand layout against MKF wind()
-python3 simulation/flyback/run_flyback.py --om-only            # magnetics of all options (~1 min)
-python3 simulation/flyback/run_flyback.py                      # all options x 15 cases, one ngspice at a time
-python3 simulation/flyback/run_flyback.py recommended --cases nom light
-python3 simulation/flyback/run_flyback.py --report             # results.md, PNGs, out/report.md
-python3 simulation/flyback/losses.py current recommended       # winding / core losses (needs the nom runs)
+python3 simulation/flyback/run_flyback.py --om-only            # magnetics of all options (~1 min each for the sandwiches)
+python3 simulation/flyback/run_flyback.py margin_sandwich_8_pre --jobs 8   # 16 cases in a pool of 8 ngspice runs
+python3 simulation/flyback/run_flyback.py margin_sandwich_8_pre --cases nom idle
+python3 simulation/flyback/run_flyback.py --report current stacked margin_sandwich_8_pre ...   # results.md, PNGs, out/report.md
+python3 simulation/flyback/losses.py current margin_sandwich_8_pre   # winding / core losses (needs the nom runs)
+python3 simulation/flyback/checks.py cscale                     # capacitor-scaling check
 ```
 
-One ngspice run takes 35–70 s and ≈ 150 MB; a full option (16 runs) ≈ 13 min. Cached
-results are in `out/results/` (git-ignored; delete a file to rerun that case).
+One ngspice run takes 40–180 s (idle 10 ms window) and 40–260 MB. The pool runs up to
+`--jobs` (default 8) at once within a 3 GB ngspice memory budget (measured from /proc):
+96 cases (6 options) took 747 s with a peak of 2.1 GB; one option (16 cases) ≈ 4–6 min.
+Cached results are in `out/results/` (git-ignored; delete a file to rerun that case).
 
 | file | what |
 |---|---|
 | `om_model.py` | EF20 core, bobbin, hand-placed coil in MKF format, inductance matrix, leakage, Rdc, gap fit |
-| `options.py` | the winding options (current, stacked, margin_sandwich, tiw_simple, tiw_sandwich, tiw_sandwich_stacked, recommended, recommended_pre) |
+| `options.py` | the winding options (section 4); `recommended` = margin_sandwich_8_pre, writes the MAS file |
 | `flyback_sim.py` | ngspice netlist (coupled inductors + IW1818 behavioural controller), run, parse |
-| `run_flyback.py` | load cases, runs, cache, MAS JSON export |
+| `run_flyback.py` | load cases, parallel runs (pool), cache, MAS JSON export |
 | `losses.py` | winding / core losses from the simulated waveforms (MKF) |
 | `report.py` | `results.md`, `crossreg.png`, `geometry_<option>.png`, `out/report.md` |
-| `mas/tr1_current.json` | MAS document of the current build (inputs, magnetic with full turn geometry, inductance matrix); `mas/tr1_recommended.json`: TODO (written when `recommended` runs) |
+| `mas/tr1_current.json`, `mas/tr1_recommended.json` | MAS documents of the current build and of the recommended margin-tape design (inputs, magnetic with full turn geometry, inductance matrix); written by `run_flyback.py --om-only current recommended` |
+| `checks.py` | single-run checks: capacitor scaling (`cscale`), D8 breakdown (`d8bv200`, does not converge) |
 

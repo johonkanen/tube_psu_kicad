@@ -171,10 +171,10 @@ def recommended(preload=None):
     """tiw_sandwich with the isolated 15 V winding at 8 T (same as the primary-side 15 V
     winding, so 20V_ISO_SEC comes out at ~15 V like 20V instead of ~13 V)."""
     o = tiw_sandwich()
-    o["name"] = "recommended" + ("_pre" if preload else "")
+    o["name"] = "tiw_recommended" + ("_pre" if preload else "")
     o["title"] = "TIW sandwich, S15 8 T: P1 | S15 | A5+S5+SN5 trifilar | SHV | A15 | P2" + (" + preloads" if preload else "")
     o["sections"][1] = {"windings": [("S15", 8, 3, TIW30, SEC)], "align": "spread"}
-    o["write_mas"] = not preload
+    o["write_mas"] = False     # the TIW design is not buildable (no TIW); reference only
     if preload:
         o["preload"] = preload
     return o
@@ -199,14 +199,71 @@ def sandwich_paired(order="b"):
             "sections": secs}
 
 
+def margin_sandwich_8(preload=None):
+    """margin_sandwich with the isolated 15 V winding at 8 T (3 x AWG32 to fit one layer of
+    the 6.6 mm margin-limited width). Enamel wire + 3 mm margins, split primary with two
+    4-layer barriers: P1 || S15 | S5+SN5 | SHV || A5 | A15 | P2."""
+    o = margin_sandwich()
+    o["name"] = "margin_sandwich_8" + ("_pre" if preload else "")
+    o["title"] = "Enamel + margins: P1 || S15 8T | S5+SN5 | SHV || A5 | A15 | P2" + (" + preloads" if preload else "")
+    o["sections"][1] = {"windings": [("S15", 8, 3, W32, SEC)], "margin": M3, "align": "spread", "tape_after": 1}
+    if preload:
+        o["preload"] = preload
+    return o
+
+
+def margin_sandwich_8b(preload=None):
+    """margin_sandwich_8 with the isolated 5 V pair next to the P1 barrier and S15 between
+    it and SHV: P1 || S5+SN5 | S15 8T | SHV || A5 | A15 | P2."""
+    o = margin_sandwich_8(preload)
+    o["name"] = "margin_sandwich_8b" + ("_pre" if preload else "")
+    o["title"] = "Enamel + margins: P1 || S5+SN5 | S15 8T | SHV || A5 | A15 | P2" + (" + preloads" if preload else "")
+    o["sections"][1], o["sections"][2] = o["sections"][2], o["sections"][1]
+    return o
+
+
+def margin_order_8(preload=None):
+    """No split primary (one barrier, as built today), enamel + 3 mm margins, new order and
+    spread windings: P | A5 (feedback, next to the primary) | A15 || S15 8T | S5+SN5 | SHV.
+    Every low-turn winding is spread over the full 6.6 mm between the margins with parallel
+    strands; 5V_ISOL / -5V multifilar; the critical isolated 15 V winding next to the barrier."""
+    return {
+        "name": "margin_order_8" + ("_pre" if preload else ""),
+        "title": "Enamel + margins, one barrier: P | A5 | A15 || S15 8T | S5+SN5 | SHV, spread" + (" + preloads" if preload else ""),
+        "sections": [
+            {"windings": [("P", 52, 1, W30, PRI)], "margin": M3, "tape_after": 1},
+            {"windings": [("A5", 3, 6, W30, PRI)], "margin": M3, "align": "spread", "tape_after": 1},
+            {"windings": [("A15", 8, 2, W30, PRI)], "margin": M3, "align": "spread", "tape_after": 4},
+            {"windings": [("S15", 8, 3, W32, SEC)], "margin": M3, "align": "spread", "tape_after": 1},
+            {"windings": [("S5", 3, 3, W30, SEC), ("SN5", 3, 3, W30, SEC)], "mode": "multifilar",
+             "margin": M3, "align": "spread", "tape_after": 1},
+            {"windings": [("SHV", 42, 1, W34, SEC)], "margin": M3, "align": "spread", "tape_after": 1},
+        ],
+        **({"preload": preload} if preload else {}),
+    }
+
+
 PRELOAD = {"20V": 3300.0, "5V": 1000.0}      # what-if preload resistors (not in the schematic)
+PRELOAD_ISO = {**PRELOAD, "20V_ISO_SEC": 3300.0}   # + 3.3 k on 15V_ISO_SEC (e.g. R124 12.1k -> 2.6k)
 
 
 OPTIONS = {"current": current, "stacked": stacked, "margin_sandwich": margin_sandwich,
            "tiw_simple": tiw_simple, "tiw_sandwich": tiw_sandwich,
            "tiw_sandwich_stacked": tiw_sandwich_stacked,
-           "recommended": recommended, "recommended_pre": lambda: recommended(PRELOAD),
-           "sandwich_paired_b": lambda: sandwich_paired("b"), "sandwich_paired_c": lambda: sandwich_paired("c")}
+           "tiw_recommended": recommended, "tiw_recommended_pre": lambda: recommended(PRELOAD),
+           "sandwich_paired_b": lambda: sandwich_paired("b"), "sandwich_paired_c": lambda: sandwich_paired("c"),
+           "margin_sandwich_8": margin_sandwich_8, "margin_sandwich_8_pre": lambda: margin_sandwich_8(PRELOAD),
+           "margin_sandwich_8b_pre": lambda: margin_sandwich_8b(PRELOAD),
+           "margin_sandwich_8_pre3": lambda: dict(margin_sandwich_8(PRELOAD_ISO), name="margin_sandwich_8_pre3",
+                                                  title="Enamel + margins: P1 || S15 8T | S5+SN5 | SHV || A5 | A15 | P2 + preloads incl. 15V_ISO_SEC"),
+           # the recommended (buildable, enamel + margin tape) design = margin_sandwich_8_pre;
+           # this entry only writes mas/tr1_recommended.json (run_flyback.py --om-only recommended)
+           "recommended": lambda: dict(margin_sandwich_8(PRELOAD), name="recommended", write_mas=True,
+                                       title="RECOMMENDED (= margin_sandwich_8_pre): enamel + 3 mm margins, "
+                                             "P1 || S15 8T | S5+SN5 | SHV || A5 | A15 | P2, preloads 3.3k on 15V, 1k on 5V"),
+           "margin_order_8": margin_order_8, "margin_order_8_pre": lambda: margin_order_8(PRELOAD),
+           "sandwich_paired_c_pre": lambda: dict(sandwich_paired("c"), name="sandwich_paired_c_pre",
+                                                 title=sandwich_paired("c")["title"] + " + preloads", preload=PRELOAD)}
 
 
 def get(name):
