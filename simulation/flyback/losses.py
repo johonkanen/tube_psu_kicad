@@ -97,5 +97,11 @@ def analyse(name, case="nom", temperature=60.0, vin=400.0):
 
 
 if __name__ == "__main__":
+    os.makedirs(os.path.join(OUT, "losses"), exist_ok=True)
     for n in sys.argv[1:] or ["current"]:
-        print(json.dumps(analyse(n), indent=1))
+        r = analyse(n)
+        with open(os.path.join(OUT, "losses", f"{n}.json"), "w") as f:
+            json.dump(r, f, indent=1)
+        print(f"{n}: winding {r.get('winding_losses_W')} W, core iGSE {r.get('core_losses_W_IGSE')} / "
+              f"Steinmetz {r.get('core_losses_W_STEINMETZ')} / Roshen {r.get('core_losses_W_ROSHEN')} W, "
+              f"Bpk {r.get('B_peak_T')} T, errors: {r.get('winding_losses_error', '')} {r.get('core_losses_error', '')}", flush=True)

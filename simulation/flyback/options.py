@@ -23,6 +23,12 @@ regulated knee, 5.58 V / 3 T from the Vsense divider):
   All windings 3 x AWG34 in parallel (design doc), 3 mm margin tape both sides (design doc,
   user), windings on top of each other (user), one tape layer between windings (assumed).
 
+Bifilar / trifilar sections use om_model mode "multifilar": the strands of the windings
+alternate one by one across the layer, as when the wires are wound together as one bundle.
+(Until 2026-11-16 the mode "bifilar" alternated whole turns, i.e. groups of 3-4 parallel
+strands per winding side by side, which gave 3-5x the leakage between the windings sharing
+the layer; the MKF field grid was checked and is converged, the layout was the cause.)
+
 Spice connection: every winding is (dot, other). All windings are wound in the same
 direction; the primary dot is DC+, so during the flyback interval every dot is negative
 with respect to its other end. Positive outputs: dot on the return, diode anode on the
@@ -97,7 +103,7 @@ def margin_sandwich():
         "sections": [
             {"windings": [("P1", 26, 1, W32, PRI)], "margin": M3, "tape_after": 4},
             {"windings": [("S15", 7, 3, W30, SEC)], "margin": M3, "align": "spread", "tape_after": 1},
-            {"windings": [("S5", 3, 3, W30, SEC), ("SN5", 3, 3, W30, SEC)], "mode": "bifilar",
+            {"windings": [("S5", 3, 3, W30, SEC), ("SN5", 3, 3, W30, SEC)], "mode": "multifilar",
              "margin": M3, "align": "spread", "tape_after": 1},
             {"windings": [("SHV", 42, 1, W34, SEC)], "margin": M3, "align": "spread", "tape_after": 4},
             {"windings": [("A5", 3, 6, W30, PRI)], "margin": M3, "align": "spread", "tape_after": 1},
@@ -118,7 +124,7 @@ def tiw_simple():
             {"windings": [("A15", 8, 4, W30, PRI)], "align": "spread", "tape_after": 0},
             {"windings": [("A5", 3, 12, W30, PRI)], "align": "spread", "tape_after": 1},
             {"windings": [("S15", 7, 3, TIW30, SEC)], "align": "spread"},
-            {"windings": [("S5", 3, 4, TIW30, SEC), ("SN5", 3, 4, TIW30, SEC)], "mode": "bifilar", "align": "spread"},
+            {"windings": [("S5", 3, 4, TIW30, SEC), ("SN5", 3, 4, TIW30, SEC)], "mode": "multifilar", "align": "spread"},
             {"windings": [("SHV", 42, 1, TIW32, SEC)], "align": "spread", "tape_after": 1},
         ],
     }
@@ -135,7 +141,7 @@ def tiw_sandwich():
             {"windings": [("P1", 26, 1, W30, PRI)], "align": "spread", "tape_after": 1},
             {"windings": [("S15", 7, 3, TIW30, SEC)], "align": "spread"},
             {"windings": [("A5", 3, 3, W30, PRI), ("S5", 3, 3, TIW30, SEC), ("SN5", 3, 3, TIW30, SEC)],
-             "mode": "bifilar", "align": "spread"},
+             "mode": "multifilar", "align": "spread"},
             {"windings": [("SHV", 42, 1, TIW32, SEC)], "align": "spread", "tape_after": 1},
             {"windings": [("A15", 8, 4, W30, PRI)], "align": "spread", "tape_after": 1},
             {"windings": [("P2", 26, 1, W30, PRI)], "align": "spread", "tape_after": 1},
@@ -153,7 +159,7 @@ def tiw_sandwich_stacked():
             {"windings": [("P1", 26, 1, W30, PRI)], "align": "spread", "tape_after": 1},
             {"windings": [("S15x", 4, 5, TIW30, SEC)], "align": "spread"},
             {"windings": [("A5", 3, 3, W30, PRI), ("S5", 3, 3, TIW30, SEC), ("SN5", 3, 3, TIW30, SEC)],
-             "mode": "bifilar", "align": "spread"},
+             "mode": "multifilar", "align": "spread"},
             {"windings": [("SHVx", 39, 1, TIW32, SEC)], "align": "spread", "tape_after": 1},
             {"windings": [("A15x", 5, 6, W30, PRI)], "align": "spread", "tape_after": 1},
             {"windings": [("P2", 26, 1, W30, PRI)], "align": "spread", "tape_after": 1},

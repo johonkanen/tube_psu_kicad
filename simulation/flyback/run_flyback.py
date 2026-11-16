@@ -45,7 +45,12 @@ def cases():
         ld = dict(NOM)
         ld[r] = TABLE_MAX[r]
         c.append({"name": f"max_{SHORT[r]}", "loads": ld, "title": f"{r} at table 1.1 maximum, others nominal"})
-    c.append({"name": "light", "loads": {r: 0.0 for r in NOM}, "title": "all rails bleeder only (+ IW1818 Vcc)"})
+    c.append({"name": "light", "loads": {r: 0.0 for r in NOM}, "title": "all rails bleeder only (+ 15V fixed load, AUX_MEAS)"})
+    # calibration point: the board idling (measured 15V = 15.5 V, user 2026-11-16). Estimated
+    # idle loads: 5V = MCU board on J2 + Si827x input sides (0.02-0.1 A, 0.05 A used),
+    # 15V_ISO_SEC = DRV6 VDDB 2 mA, 5V_ISOL = DRV6 VDDI + AD2 LDO/ADC/op-amps 5 mA
+    c.append({"name": "idle", "loads": {**{r: 0.0 for r in NOM}, "5V": 0.05, "20V_ISO_SEC": 0.002, "5V_ISOL": 0.005},
+              "title": "board idle (calibration point, measured 15V 15.5 V)"})
     c.append({"name": "nom325", "loads": dict(NOM), "vin": 325.0, "title": "nominal at DC+ = 325 V (PFC not running)"})
     return c
 
@@ -97,14 +102,18 @@ def run_case(name: str, res: dict, case: dict, force=False, ic=None) -> dict:
     opt = opts.get(name)
     vin = case.get("vin", 400.0)
     # initial integrator state from the expected power (speeds up settling)
-    pout = sum(case["loads"][r] * fs.NOMINAL_V[r] for r in case["loads"]) + 0.075 + 4 * 0.4e-3 * 5 + 80 ** 2 / 12.1e3
-    pmax = 0.5 * res["L"][0][0] * fs.IMAX ** 2 * fs.FMAX
     case = dict(case)
     if opt.get("preload"):
         case["preload"] = opt["preload"]
-    case["u0"] = min(1.0, max(0.02, pout / 0.75 / pmax))
+    pout = fs.expected_pout(case)
+    pmax = 0.5 * res["L"][0][0] * fs.IMAX ** 2 * fs.FMAX
+    case["u0"] = min(1.0, max(0.01, pout / 0.75 / pmax))
+    case["kp"], case["ki"] = fs.pi_gains(case)
     wave = os.path.join(OUT, "spice", f"{name}__{case['name']}_wave.txt") if case["name"] in ("nom", "max_S15") else None
-    net = fs.netlist(res, opt["spice"], case, vin=vin, tstop=case.get("tstop", 12e-3 if case["name"].startswith(("min", "light")) else 9e-3), twin=1.5e-3,
+    net = fs.netlist(res, opt["spice"], case, vin=vin, tstop=case.get("tstop", 40e-3 if case["name"] == "idle" else 20e-3 if case["name"] == "light" else 12e-3 if case["name"].startswith("min") else 9e-3),
+                     # idle / light hunt slowly between the light-load modes (limit cycle of
+                     # +-0.5 V on 15V at idle): average over a long window, as a DMM would
+                     twin=case.get("twin", 10e-3 if case["name"] == "idle" else 5e-3 if case["name"] == "light" else 1.5e-3),
                      wave_file=wave, ic=ic)
     t = time.time()
     vals = fs.run(net, f"{name}__{case['name']}")
@@ -143,7 +152,7 @@ def main(argv=None):
             if c["name"] == "nom":
                 ic = {k: r[k] for k in fs.RAILS if r.get(k)}
             print(f"  {n:>12} {c['name']:>8}: " + " ".join(f"{SHORT[k]}={r[k]:.3f}" for k in fs.RAILS if r.get(k) is not None)
-                  + f" Vcol={r['vcol']:.0f} u={r['u']:.3f} drift5={r['5V drift'] * 1e3:.0f}mV ({r['seconds']:.0f}s)", flush=True)
+                  + f" Vcol={r['vcol']:.0f} VrD8={r['-100V BIAS vrev']:.0f} u={r['u']:.3f} drift20={r['20V drift'] * 1e3:.0f}mV ({r['seconds']:.0f}s)", flush=True)
     return 0
 
 

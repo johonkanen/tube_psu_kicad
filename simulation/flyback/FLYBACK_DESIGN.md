@@ -106,21 +106,74 @@ PyMKF was not needed):
 **ngspice transient** (`flyback_sim.py`): every winding (or winding section) is an L with
 MKF's self-inductance and all pairs are coupled with K = M/√(LiLj) from MKF's matrix, plus
 MKF's DC resistance. DC+ = 400 V (design doc), switch + 1.245 Ω sense, 30 pF collector
-node (assumed), RCD snubber D7 S1M / R72 100R / R45 1M ‖ C12 470p, ES1-class rectifiers,
-schematic output capacitors, 12.1k bleeders, loads as constant-current sinks, IW1818 Vcc
-5 mA on 15V (assumed). The IW1818 is modelled behaviourally: the AUX_FB divider is sampled
-at the knee (when the magnetising ampere-turns reach zero) and regulated to 1.536 V by a
-PI controller; PWM at 72 kHz with Ipk ∝ √u above u = 0.12, PFM below (fixed 0.28 A, falling
-frequency; assumed – the public product summary only says "adaptive multi-mode PWM/PFM").
+node (assumed), RCD snubber D7 S1M / R72 100R / R45 1M ‖ C12 470p, ES1D-class rectifiers
+(200 V, user), schematic output capacitors, 12.1k bleeders, loads as constant-current sinks,
+a fixed 9.5 mA on 15V (IW1818 Vcc and the Si827x supplies, see 2.1) and the AUX_MEAS
+divider R11 + R12 (26.7 kΩ). The IW1818 is modelled behaviourally: the AUX_FB divider is
+sampled at the knee (magnetising ampere-turns below 0.2 At, 80 ns tracking) and regulated to
+1.536 V by a PI controller whose gains scale with the output power; PWM at 72 kHz with
+Ipk ∝ √u above u = 0.12, then the multi-mode light-load law of the iW1819 datasheet (same
+family, same 1.536 V / 1.838 V / 72 kHz): PFM (Ipk 0.28 A, f falls to 25 kHz), DPWM
+(25 kHz, Ipk falls to VIPK(LOW) = 0.23 V → 0.185 A), DPFM, DDPWM (2.1 kHz floor).
 Details and all assumptions: docstring of `flyback_sim.py`. Bulk capacitors are scaled down
-(to 10 %, 3 % on rails loaded only by their bleeder) so each case settles in 9–12 ms; each
-result carries its residual drift over the last 0.75 ms.
+(to 10 %, 3 % on rails loaded only by their bleeder) so each case settles in 9–40 ms; each
+result carries its residual drift (difference between the two halves of the averaging
+window: 1.5 ms, 5 ms for *light*, 10 ms for *idle*). The reverse voltage of every rectifier
+is measured through a 50 ns RC (the model turns the switch on in ~10 ns from wherever the
+DCM ring is, without valley switching or winding capacitance, so the raw peak overstates
+the turn-on ringing: raw 890–940 V on D8, filtered 390–400 V).
 
 **Load cases** (A, on top of the bleeders; assumed from design doc table 1.1, maxima 0.2 A
 on each 5 V / 15 V rail and −80 V 10 mA): *nom* = 0.1 A on each 5 V / 15 V rail and 3.4 mA
-extra on −80 V (5.1 W out); *min_X* = rail X bleeder only, others nominal; *max_X* = rail X
-at the table maximum; *light* = every rail bleeder only (+ Vcc); *nom325* = nominal at
-DC+ = 325 V (PFC not running). All 400 V cases together are "the 15 load cases".
+extra on −80 V (5.1 W out); *min_X* = rail X bleeder only (15V: its fixed 9.5 mA + AUX_MEAS),
+others nominal; *max_X* = rail X at the table maximum; *light* = every rail bleeder only;
+*idle* = the board idling, the calibration point (5V 50 mA for the MCU board on J2 and the
+Si827x input sides, 15V_ISO_SEC 2 mA, 5V_ISOL 5 mA, the rest bleeders; estimated);
+*nom325* = nominal at DC+ = 325 V (PFC not running). All 400 V cases together are "the
+16 load cases".
+
+### 2.1 Calibration against the bench (2026-11-16)
+
+The user measured **15V ≈ 15.5 V at light load** on the real board (V2 transformer), where
+the first model had reported 20.6 V. What was wrong, in order of size:
+
+1. **The 20.6 V was not a light-load result.** It came from *min_15V* – the 15V rail with
+   only 5 mA while every other rail carries 0.1 A (Ipk 0.46 A at 72 kHz). The first model's
+   *light* case was 18.0 V and had not settled (15V drifting −0.3 V per 0.75 ms).
+2. **Light-load controller model.** Below u = 0.12 the first model kept Ipk at 0.28 A and
+   only lowered the frequency, with a floor at 2.4 kHz (u = 0.004) and fixed PI gains. At
+   light load the loop gain is ~10× higher (the rails are lightly loaded), the PI limit-cycled
+   between the floor and PWM and the light case never settled. Fixed: iW1819-type multi-mode
+   law (above), PI gains ∝ output power, sampling tracking 150 → 80 ns and knee threshold
+   0.5 → 0.2 At (the sample had carried ~0.85 V of D6 drop at ~1 A when the 5 V rail takes
+   most of a short light-load pulse).
+3. **Loads on the 15V rail.** Added the AUX_MEAS divider (0.56 mA, was missing). The 5 mA
+   "IW1818 Vcc" was replaced by 9.5 mA for everything the 15V rail always supplies: IW1818
+   (iW1819 data: ICCQ 2.7 mA typ / 4 mA max + BJT base drive 16–50 mA during the on-time,
+   ~0.5 mA average), Si8274 DRV5 VDDA (pin 16), the bootstrapped DRV5 VDDB (D19) and the
+   DRV3 Si8271 output side (D11), ~1.6 mA each, IXDD609 ×3 idle ≈ 0, plus ~20 %.
+4. **What sets the light-load 15V level.** The 8 T winding A15 sits between the primary
+   and the 3 T feedback winding A5. During the first ~400 ns of each flyback interval, while
+   the primary current transfers through the leakage to the loaded windings, A15 follows the
+   primary's clamp voltage and the 5 V rectifier's drop at its peak current (5 A peak in A5
+   at Ipk 0.28 A), so a 15V rail with only a few mA peak-charges to 8/3 × (5.6 V + ~0.9 V)
+   + leakage spike instead of 8/3 × 5.58 V − Vf = 14.3 V. It is therefore very sensitive to
+   its own load: at *idle* (5V 20 mA) the model gives 17.7 V with 6 mA, 16.1 V with 10 mA,
+   15.8 V with 15 mA total on 15V (scratch runs; 5V 0.1 A instead: 16.6 V at 10 mA).
+5. **ES1D rectifiers** (200 V): same forward model as before (the ES1A–D family shares it),
+   breakdown not modelled by default, reverse voltage measured (D8 finding in section 6).
+6. **Winding order**: confirmed by the user as modelled (primary, 8 T, 3 T, 4 tape layers,
+   7 T, 3 T, 3 T, 42 T, one tape layer between windings). No change.
+
+**Result:** the calibrated model gives **15V = CURRENT_IDLE V at *idle*** (measured ≈ 15.5 V)
+and CURRENT_LIGHT V at *light*; nominal-load results moved by < 0.1 V. The remaining
+difference is within what the unknowns allow (the real idle loads on 5V and 15V, the IW1818
+knee sampling, and HF damping of the leakage ringing by winding capacitance / proximity
+losses, which the model does not have). **The worst case for the AUX_MEAS limit is not light
+load but *min_15V* (isolated rails loaded, primary gate drivers idle): CURRENT_MIN15 V on the
+current transformer** – possible on this board because +15V OUT / +5V OUT / −5V OUT / −80V OUT
+go off-board. Measure 15V in that condition (isolated outputs loaded, DHB / PFC / heater
+drivers idle) to confirm.
 
 ## 3. Results
 

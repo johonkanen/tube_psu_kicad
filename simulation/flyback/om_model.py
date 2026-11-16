@@ -116,7 +116,17 @@ def _wire_sequence(sec):
     """List of (winding, parallel, turn, od) in winding order along the layers."""
     seq = []
     ws = sec["windings"]
-    if sec.get("mode", "consecutive") == "bifilar":
+    if sec.get("mode") == "multifilar":
+        # strands of all windings alternate (A5 p0, S5 p0, SN5 p0, A5 p1, ...): the windings
+        # are wound together as one bundle, every strand of one winding beside one of the others
+        nmax = max(w[1] for w in ws)
+        for t in range(nmax):
+            pmax = max(w[2] for w in ws)
+            for p in range(pmax):
+                for (name, n, par, wn, side) in ws:
+                    if t < n and p < par:
+                        seq.append((name, p, t, wire_od(wn)))
+    elif sec.get("mode", "consecutive") == "bifilar":
         nmax = max(w[1] for w in ws)
         for t in range(nmax):
             for (name, n, par, wn, side) in ws:

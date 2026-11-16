@@ -1,4 +1,20 @@
-# TR1 flyback study – where it stands (stopped 2026-11-16)
+# TR1 flyback study – where it stands (session 2, 2026-11-16, in progress)
+
+**Session 2 status (update at each commit):**
+- Step 0 (calibration) – model changes done (flyback_sim.py: 15V fixed load 9.5 mA +
+  AUX_MEAS divider, iW1819-type multi-mode light-load law, load-scaled PI gains, knee
+  0.2 At / 80 ns tracking, ES1D rectifiers with reverse-voltage measurement; run_flyback.py:
+  new `idle` case = calibration point, long averaging for idle/light). See
+  FLYBACK_DESIGN.md 2.1. All cached results were deleted (old model); old results copied to
+  the session scratchpad only.
+- Step 1 (MKF leakage grid) – done: grid converged (default vs fine vs mirroring 3 within
+  1 %); the high A5–S5 leakage of tiw_sandwich came from the layout mode "bifilar"
+  (alternating whole 3-strand turns). New om_model mode "multifilar" (strand by strand);
+  all bifilar/trifilar sections in options.py use it (tiw_sandwich A5–S5 15.8 → 4.1 µH).
+- Step 2 – batch running: `--om-only --force` for all options, then current, tiw_sandwich,
+  tiw_simple, recommended, recommended_pre, stacked, tiw_sandwich_stacked, margin_sandwich
+  (one ngspice at a time). If stopped: rerun the same commands; cached cases are skipped.
+- Steps 3–5 not started.
 
 Task: improve the cross regulation of the auxiliary flyback (sheet 1, IW1818 + TR1 EF20)
 with an OpenMagnetics-designed rewind; design study only (schematic / board unchanged).
