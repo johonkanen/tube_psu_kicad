@@ -164,3 +164,10 @@ The findings with recommended fixes and what-if simulations are in [FINDINGS.md]
 7. `kicad-cli sch export netlist` warns "schematic has annotation errors". This was not
    investigated here: the netlist used matches INVENTORY.md and the existing ERC /
    netlist checks are in tools/check_all.sh.
+
+## Auxiliary flyback (TR1) cross regulation – in progress
+
+`flyback/`: OpenMagnetics (PyOpenMagnetics) models of the EF20 flyback transformer TR1
+(current V2 build and rewind options) and an ngspice transient model of the IW1818
+flyback with the full coupled-inductor matrix; findings in
+[flyback/FLYBACK_DESIGN.md](flyback/FLYBACK_DESIGN.md), status in [flyback/NEXT.md](flyback/NEXT.md).

@@ -100,9 +100,11 @@ def run_case(name: str, res: dict, case: dict, force=False, ic=None) -> dict:
     pout = sum(case["loads"][r] * fs.NOMINAL_V[r] for r in case["loads"]) + 0.075 + 4 * 0.4e-3 * 5 + 80 ** 2 / 12.1e3
     pmax = 0.5 * res["L"][0][0] * fs.IMAX ** 2 * fs.FMAX
     case = dict(case)
+    if opt.get("preload"):
+        case["preload"] = opt["preload"]
     case["u0"] = min(1.0, max(0.02, pout / 0.75 / pmax))
     wave = os.path.join(OUT, "spice", f"{name}__{case['name']}_wave.txt") if case["name"] in ("nom", "max_S15") else None
-    net = fs.netlist(res, opt["spice"], case, vin=vin, tstop=case.get("tstop", 9e-3), twin=1.5e-3,
+    net = fs.netlist(res, opt["spice"], case, vin=vin, tstop=case.get("tstop", 12e-3 if case["name"].startswith(("min", "light")) else 9e-3), twin=1.5e-3,
                      wave_file=wave, ic=ic)
     t = time.time()
     vals = fs.run(net, f"{name}__{case['name']}")

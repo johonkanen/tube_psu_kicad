@@ -8,28 +8,33 @@ geometry. Each winding has its DC resistance (MKF, 60 degC) in series.
 
 Circuit (schematic values unless marked):
 - DC+ = 400 V (design doc: nominal DC link 400 V; 325 V before the PFC runs).
-- IW1818: ideal switch (Ron 0.5 ohm, assumed), emitter to R8 || R9 = 1.245 ohm, collector
-  node capacitance 30 pF (BJT + winding, assumed). Peak current: on-time = Lp * Ipk / Vin
-  (exact for DCM, which the converter is in at every load case here).
+- IW1818: switch as a smooth conductance (Ron 0.5 ohm, assumed; gate through a 10 ns RC),
+  emitter to R8 || R9 = 1.245 ohm, collector node capacitance 30 pF (BJT + winding, assumed).
+  Peak current: on-time = Lp * Ipk / Vin from an on-time timer (exact for DCM, which the
+  converter is in at every load case here; the BJT storage time is not modelled).
 - Snubber D7 (S1M, slow recovery modelled with TT = 2 us) -> R72 100R -> R45 1M || C12 470p -> DC+.
 - Rectifiers D4, D5, D6, D8, D14, D29: one generic ES1-class model (Vf 0.94 V at 1 A,
   0.58 V at 1 mA, TT 20 ns, Cj 10 pF; assumed from the ES1 datasheet class). The
   breakdown voltage is set high on purpose, see FLYBACK_DESIGN.md (ES1A is a 50 V part).
 - Output capacitors: schematic values, electrolytic ESR 0.15 ohm (C1, C2), 1 ohm (C102),
-  ceramics 5 mohm (assumed). Capacitors >= 10 uF scaled by `cscale` (default 0.1) so the
-  rails settle in a few ms; the DC voltages do not depend on it (checked, see the report).
+  ceramics 5 mohm (assumed). Capacitors >= 10 uF are scaled by `cscale` (0.1) so the rails
+  settle within the 9-12 ms runs, and further (down to 3 %) on a rail whose load is only
+  its bleeder (settling goes with C / I). The DC levels do not depend on the capacitance;
+  the residual drift over the last 0.75 ms is reported with every result.
 - Loads: constant-current sinks per case + the 12.1k bleeders R124/R123/R68/R67 on the
   isolated rails + IW1818 Vcc 5 mA (assumed) on the 20V rail.
 - Controller (behavioural model of the IW1818 primary-side regulation): the AUX_FB node
   (D6 anode) through the divider R64 || R81 (10.83k) / R84 || R85 (4.11k) || C50 22p is
-  tracked during the flyback interval and held when the magnetising ampere-turns
-  sum(N_k * i_k) fall below 0.5 At (the knee, i.e. when all rectifier currents have
-  ended); the held Vsense is regulated to 1.536 V (PDF note "vsense nominal = 1.536 V")
-  by a PI controller. Control u in [0, 1] is the power demand: u >= 0.12 -> f = 72 kHz,
-  Ipk = 0.803 A * sqrt(u) (1 V / 1.245 ohm = "Isense pk = 1V"); u < 0.12 -> Ipk fixed at
-  0.28 A and the frequency falls in proportion (PFM, assumed, datasheet: "adaptive
-  multi-mode PWM/PFM control"). Valley switching (QR) is not modelled; it only moves the
-  start of the next cycle.
+  tracked during the flyback interval (sample-and-hold, tracking time constant 150 ns so the
+  leakage ringing is averaged) and held when the magnetising ampere-turns sum(N_k * i_k)
+  fall below 0.5 At (the knee: all rectifier currents have ended). The held Vsense is
+  regulated to 1.536 V (PDF note "vsense nominal = 1.536 V") by a PI controller with
+  anti-windup, whose output u is latched once per switching cycle (digital controller).
+  u in [0, 1] is the power demand: u >= 0.12 -> f = 72 kHz, Ipk = 0.803 A * sqrt(u)
+  (1 V / 1.245 ohm = "Isense pk = 1V"); u < 0.12 -> Ipk fixed at 0.28 A and the frequency
+  falls in proportion (PFM). The 0.12 boundary and the PFM law are assumptions (datasheet
+  product summary only says "adaptive multi-mode PWM/PFM control"). Valley switching (QR)
+  is not modelled; it only moves the start of the next cycle.
 """
 from __future__ import annotations
 
@@ -104,13 +109,24 @@ def netlist(res: dict, spice_map: dict, case: dict, cscale=0.1, tstop=16e-3, twi
             out.append(f"D_{node} {end} {node} DES1")
         else:
             out.append(f"D_{node} {node} {end} DES1")
+        # electrolytic/bulk caps scaled for fast settling; a rail with a small load settles
+        # with C/I, so its caps are scaled further in proportion to its load (min 3 %)
+        pre = (case.get("preload") or {}).get(rail)
+        il_tot = case["loads"].get(rail, 0.0) + (NOMINAL_V[rail] / bleed if bleed else 0.0) + (5e-3 if rail == "20V" else 0.0) \
+            + (NOMINAL_V[rail] / pre if pre else 0.0) \
+            + (5.6 / (R_TOP + R_BOT) if rail == "5V" else 0.0)
+        cs_rail = min(cscale, max(0.03, cscale * il_tot / 0.1)) if NOMINAL_V[rail] < 50 else \
+            min(cscale, max(0.03, cscale * il_tot / 0.01))
         for ci, (c, esr) in enumerate(caps):
-            cv = c * (cscale if c >= 10e-6 else 1.0)
+            cv = c * (cs_rail if c >= 10e-6 else 1.0)
             v0 = (ic or {}).get(rail, NOMINAL_V[rail]) * sign
             out.append(f"C_{node}{ci} {node} e_{node}{ci} {cv:.4e} IC={v0:.3f}")
             out.append(f"R_{node}{ci} e_{node}{ci} {g} {esr}")
         if bleed:
             out.append(f"Rb_{node} {node} {g} {bleed}")
+        pre = (case.get("preload") or {}).get(rail)
+        if pre:                                # what-if preload resistor (not in the schematic)
+            out.append(f"Rpre_{node} {node} {g} {pre}")
         il = case["loads"].get(rail, 0.0)
         if rail == "20V":
             il += 5e-3                     # IW1818 Vcc (assumed)
@@ -134,12 +150,13 @@ def netlist(res: dict, spice_map: dict, case: dict, cscale=0.1, tstop=16e-3, twi
             " - stp(0.5 - v(gf), 0.05) * stp(0.5 - v(mmf), 0.05) * v(flag))",
             "Cflag flag 0 10p IC=0",
             "Btrk trk 0 V = stp(v(flag) - 0.5, 0.01) * stp(0.2 - v(gf), 0.01)",
-            "Bsh 0 hold I = 1e-2 * v(trk) * (v(vsd) - v(hold))",
+            "Bsh 0 hold I = 6.7e-4 * v(trk) * (v(vsd) - v(hold))",   # S/H tracking tau 150 ns: averages the leakage ringing before the knee,
             f"Chold hold 0 100p IC={VSENSE_REF}"]
     # PI controller (time constants chosen for a stable loop with the scaled caps)
     kp, ki = case.get("kp", 2.0), case.get("ki", 2000.0)
     u0 = case.get("u0", 0.4)
-    out += [f"Bint 0 ui I = 1e-6 * {ki} * ({VSENSE_REF} - v(hold))",
+    out += [f"Bint 0 ui I = 1e-6 * {ki} * ({VSENSE_REF} - v(hold))"   # PI integrator with anti-windup
+            f" * ((v(ui) < 0 && v(hold) > {VSENSE_REF}) || (v(ui) > 1.05 && v(hold) < {VSENSE_REF}) ? 0 : 1)",
             f"Cint ui 0 1e-6 IC={u0:.4f}", "Rint ui 0 1e9",
             f"Bu u 0 V = min(1, max(0.004, v(ui) + {kp} * ({VSENSE_REF} - v(hold))))",
             # u is latched once per cycle (during the oscillator reset pulse), as a digital
@@ -147,12 +164,15 @@ def netlist(res: dict, spice_map: dict, case: dict, cscale=0.1, tstop=16e-3, twi
             "Bul 0 ul I = 1.0 * stp(v(q) - 0.5, 0.005) * (v(u) - v(ul))", f"Cul ul 0 1n IC={u0:.4f}",
             f"Bf fsw 0 V = v(ul) >= {U0} ? {FMAX} : {FMAX} * v(ul) / {U0}",
             f"Bipk ipk 0 V = v(ul) >= {U0} ? {IMAX} * sqrt(v(ul)) : {IMAX * math.sqrt(U0)}",
-            f"Bd duty 0 V = min(0.6, {lp:.6e} * v(ipk) / {vin} * v(fsw))",
+            # on-time in us for the commanded peak current (DCM: ton = Lp * Ipk / Vin), max 0.6 / f
+            f"Bton ton 0 V = 1e6 * min({lp:.6e} * v(ipk) / {vin}, 0.6 / v(fsw))",
             # oscillator: ramp 0.01 -> 0.99 at 0.98 V per period, reset (q = 1) with hysteresis
             "Bph 0 ph I = 0.98e-9 * v(fsw) - 0.1 * stp(v(q) - 0.5, 0.005) * v(ph)", "Cph ph 0 1n IC=0.5",
             "Bqr qr 0 V = stp(v(ph) - 0.99 + 0.98 * min(1, max(0, v(q))), 1m)",   # Schmitt: threshold falls as q rises
             "Rq qr q 1k", "Cq q 0 2p IC=0",
-            "Bgate gate 0 V = stp(v(ph) - 0.012, 1m) * stp(0.98 * v(duty) - (v(ph) - 0.01), 1m) * stp(0.5 - v(q), 0.005)"]
+            # on-time timer: 1 V/us from the end of the reset pulse
+            "Btr 0 tr I = 1e-3 * stp(100 - v(tr), 1) - 1.0 * stp(v(q) - 0.5, 0.005) * v(tr)", "Ctr tr 0 1n IC=50",
+            "Bgate gate 0 V = stp(v(ton) - v(tr), 2m) * stp(v(tr) - 0.005, 1m) * stp(0.5 - v(q), 0.005)"]
     t0 = tstop - twin
     tstep = 10e-9
     meas = []
