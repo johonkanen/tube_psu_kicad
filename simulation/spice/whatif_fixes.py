@@ -129,7 +129,10 @@ def dcl_fix(net, cf):
     net = sub(net, "R17 n_Net__U6 0 15000", f"R17 n_Net__U6 0 15000\nCF17 n_Net__U6 0 {cf}")
     return sub(net, "R82 n_Net__U6_1 n_Net__R2_Pad2 15000", f"R82 n_Net__U6_1 n_Net__R2_Pad2 15000\nCF82 n_Net__U6_1 n_Net__R2_Pad2 {cf}")
 d = [("as built", run("dcl_base", base6, "V_c6", ["n_DC_LINK_MEAS"])),
-     ("Cf 1n across R17+R82", run("dcl_cf", dcl_fix(base6, "1n"), "V_c6", ["n_DC_LINK_MEAS"]))]
+     ("Cf 1n across R17+R82", run("dcl_cf", dcl_fix(base6, "1n"), "V_c6", ["n_DC_LINK_MEAS"])),
+     ("Cf 1n, R2 100 R, C4 removed (mux-friendly)", run("dcl_cf_lowz", sub(sub(dcl_fix(base6, "1n"),
+        "R2 n_DC_LINK_MEAS n_Net__R2_Pad2 1000", "R2 n_DC_LINK_MEAS n_Net__R2_Pad2 100"),
+        "C4 0 n_DC_LINK_MEAS 1e-09", "* C4 removed"), "V_c6", ["n_DC_LINK_MEAS"]))]
 table("DC_LINK_MEAS", d, "n_DC_LINK_MEAS")
 
 # 4. AD2 balance
