@@ -134,6 +134,8 @@ the −3 dB frequencies agree within 1.0 %. See [out/report.md](out/report.md).
 
 ## Design findings (documented, schematic not changed)
 
+The findings with recommended fixes and what-if simulations are in [FINDINGS.md](FINDINGS.md).
+
 1. **VAC_MEAS couples into the bias and the current channels.** The +2V5_BIAS source has
    a Thevenin resistance of 142 Ω (R110 ‖ R3 ‖ loads). Circuit 5's + leg (3 MΩ from AC2)
    feeds the line voltage into it, so the bias moves by 4.7·10⁻⁵ × V(AC2), ±15 mV at
