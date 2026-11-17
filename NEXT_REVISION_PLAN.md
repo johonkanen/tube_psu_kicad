@@ -22,14 +22,16 @@ changes of NEXT_REVISION.md, JLC assembly (part numbers: `lib/jlc_parts.csv`, be
 
 Open decisions (answer before or during phase 1; defaults in brackets):
 
-| # | Decision | Default |
+Decided by the user 2026-11-17:
+
+| # | Decision | Result |
 |---|---|---|
-| D1 | DAB transformer option A 25:26 (≈ 63 µH, replaces L3 70 µH) or B 20:21 (≈ 41 µH) – NR 2.1 | measure L3 + old leakage first |
-| D2 | Current amplifiers INA241A (space, accuracy, ≈ $12) or LMH6643 (≈ $2) – NR 4.10 / 4.10b | INA241A |
-| D3 | Board outline, mounting holes, J2 (control-card mezzanine) position, heatsink / TO-220 rows and enclosure height | **unchanged** from 5.1 |
-| D4 | Flyback controller iW1819-00 (18 W) or keep IW1818 (12 W) – NR 1.5 | iW1819-00 |
-| D5 | Copper: outer 1 oz / inner 0.5 oz (JLC standard) or 2 oz outer | 1 oz outer, check PFC / DAB current paths in phase 6 |
-| D6 | Isolation class per barrier (table below) | as in the table |
+| D1 | DAB transformer | **Option B, 20:21** (leakage ≈ 41 µH, φ ≈ 24° at 400 W, gap 0.35 mm / Lm ≈ 300 µH), L3 removed – NR 2.1 |
+| D2 | Current amplifiers | **LMH6643** difference amplifiers (NR 4.10b), INA241A not used; shunt-ESL compensation via balanced feedback caps (NR 4.11) |
+| D3 | Mechanics | **Board outline and mounting holes unchanged.** J2 (control-card mezzanine) and the heatsink / TO-220 rows: keep unless placement needs to move them (to confirm) |
+| D4 | Flyback controller | **iW1819-00** – NR 1.5 |
+| D5 | Copper | **1 oz top and bottom, 0.5 oz inner** |
+| D6 | Isolation | **Primary to secondary reinforced** (all isolated domains below) |
 
 Isolation domains and barriers (fill the spacing column from IEC 62368-1 for the final working
 voltages, PD2, material group IIIa; inner layers count as solid insulation):
@@ -37,10 +39,27 @@ voltages, PD2, material group IIIa; inner layers count as solid insulation):
 | Domain | Nets | Barrier to primary | Spacing target |
 |---|---|---|---|
 | Primary | GND (mains-referenced), DC+ 400 V, AC1/AC2, 15V, 5V, +3V3 | – | functional between nets by voltage |
-| DAB secondary | ISO_GND, 420V, 15V_ISO_SEC, 5V_ISOL, −80 V | TR3, TR1, DRV6, ISO2 | as 5.1 (≥ 6.4 mm), confirm class |
-| Heater | HT_GND, 6V3 | TR2, DRV4, ISO1 | as 5.1, confirm class |
+| DAB secondary | ISO_GND, 420V, 15V_ISO_SEC, 5V_ISOL, −80 V | TR3, TR1, ISO2 | **reinforced** (D6) |
+| Heater | HT_GND, 6V3 | TR2, ISO1 | **reinforced** (D6) |
 | UART island (new) | ISO_UART_GND, cable 5 V / 3.3 V | Si8621BD | **reinforced, ≥ 8 mm** (user-touchable) |
-| AD1 / AD2 isolated measurements | HT_GND / ISO_GND side | ISO1 / ISO2 | as 5.1 |
+| AD1 / AD2 isolated measurements | HT_GND / ISO_GND side | ISO1 / ISO2 | reinforced (part of the domains above) |
+
+**Consequences of D6 (reinforced primary ↔ secondary), to work through in phases 1–3:**
+- Spacing: the working voltage across the primary ↔ ISO_GND barrier is up to ≈ DC+ + 420 V peak
+  (the DAB bridges swing both sides); take the reinforced creepage / clearance for that working
+  voltage, PD2, MG IIIa from IEC 62368-1 (expect well above 5.1's ≈ 6.4 mm) and use it for every
+  barrier on L1 / L6, the slots if needed, and the minimum distance through insulation (prepreg) for
+  the inner-layer plane splits (reinforced: ≥ 0.4 mm solid insulation or a rated thin-sheet build).
+- Isolator parts must carry a reinforced rating: ISO1 / ISO2 Si8661 – confirm the fitted grade
+  (Si8661**BD** = 5 kVrms reinforced, SOIC-16W); the UART Si8621BD is reinforced; DRV5 / DRV6
+  (Si8275BB, 2.5 kVrms basic) do not cross the primary ↔ secondary barrier (both sides of each are
+  in one domain) – keep it that way.
+- Transformers: TR3 (two-chamber EC42: divider + 3 tape layers over each winding, core counted as
+  primary) and TR1 (EEL19 margin-tape design: 3 + 3 mm margins, 4-layer barriers) must be checked
+  against the reinforced creepage / distance-through-insulation for that working voltage – the
+  EEL19 6 mm margin creepage was sized for 264 Vac mains, possibly not enough for the DC+-referenced
+  primary; **TR2 (heater, EF25) has not been studied at all** – it needs a reinforced construction
+  too (new item).
 
 Tasks:
 1. Fork: `kicad_next/` with a new project file, `tools/next/` (copies of the sheet scripts,
@@ -64,8 +83,8 @@ Sheet by sheet (NR items):
 | 2 DHB gate drive | DRV5/DRV6 Si8275BB (done in 5.1 KiCad); R40/R25 DNP (3.2); optional EN to FPGA (3.3) |
 | 4 MCU connector | J2 channel map: PFC_I1 → J2-42, DHB_I → J2-38, AUX → J2-43, 5V_MEAS → J2-49, spares to GND (NR 4b); serial: Si8621BD + LDO + FTDI 6-pin header on the UART island (NR 3b) |
 | 4 / 9 measurements | bias buffer (4.1); VAC Cf + R49/R80 12 k (4.2/4.3); DC_LINK Cf, R2 100 Ω, no C4 (4.4); AUX + 5V_MEAS TLV9062 followers (4c, 4b); C61 per the buffer decision |
-| 7 DHB | TR3 → EC42/15 two-chamber (2.1/2.2); L3 removed / jumper option (2.4); C47/C54 near the primary pins (layout) |
-| 8 / 10 current measurement | INA241A ×4 with REF1 = REF2 = +1V65_BIAS, 2 × 10 Ω + 10 nF shunt-ESL compensation (4.10/4.11) – or LMH6643 + matching + leg caps (4.10b); U1 decoupling (4.6) |
+| 7 DHB | TR3 → EC42/15 two-chamber, **option B 20:21** (2.1/2.2); L3 removed / jumper option (2.4); C47/C54 near the primary pins (layout) |
+| 8 / 10 current measurement | **LMH6643** (D2) in place of the LMH6658; feedback caps on **both** legs (matching cap from the + input to +1V65_BIAS) with τ = Rfb·C ≈ L/R of the shunt (≈ 125–200 ns, bench-tuned) for the ESL compensation (4.11); zero-offset calibration (Vos 5 mV = 1.25 A); U1 decoupling (4.6) |
 | 5 PFC | L1/L2 → toroid symbol/value (measured L) and footprint (5.2) |
 | all | LCSC field on every symbol (`lib/jlc_parts.csv`), electrolytic replacements (5.2b), REF1 value (4.8) |
 
