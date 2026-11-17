@@ -104,7 +104,8 @@ Today the critical channels are split: PFC_I2 on A, PFC_I1 and DHB_I on B, AUX o
 | VAC_MEAS | J2-47 → ADB1 | unchanged | B |
 | DC_LINK_MEAS | J2-41 → ADB4 | unchanged | B |
 | AUX_MEAS | J2-40 → ADA5 | **J2-43 → ADB3** (freed by PFC_I1) | B |
-| spare | – | A: ADA0–2, ADA5 (J2-50/48/46/40); B: ADB0, ADB5, ADB6 (J2-49/39/37) | – |
+| **5V_MEAS (new)** | – | **J2-49 → ADB0** (free today) | B |
+| spare | – | A: ADA0–2, ADA5 (J2-50/48/46/40); B: ADB5, ADB6 (J2-39/37) | – |
 
 - ADC A then holds only the three low-impedance current outputs (100 Ω/100 pF, 33 Ω): at 140 kHz
   (7.14 µs) each gets ≥ 2.3 µs, the mux settles to < 1 LSB in ≈ 1 µs (FINDINGS.md 9), so every
@@ -114,7 +115,14 @@ Today the critical channels are split: PFC_I2 on A, PFC_I1 and DHB_I on B, AUX o
   mux-leakage fixes 4.4 (DC_LINK) and 4.5 (AUX, C61 1 µF) – both already in the list.
 - Equivalent alternative: keep the power-board pins and swap the mux inputs on the control card
   (its mux table is still open there). Doing it on the power board needs no control-card change.
-- Firmware: update the channel map (ADA4 = PFC_I1, ADA6 = DHB_I, ADB3 = AUX).
+- Firmware: update the channel map (ADA4 = PFC_I1, ADA6 = DHB_I, ADB3 = AUX, ADB0 = 5V).
+- **5V_MEAS (new, user 2026-11-17):** the primary-side 5V rail (flyback feedback winding, MCU/control
+  card supply; same GND as the ADC). Divider 15 kΩ / 10 kΩ 0.1 % (gain 0.4: 5.0 V → 2.0 V, full scale
+  8.25 V, so a light-load rise is still visible; 1 LSB = 0.5 mV), 100 nF across the 10 kΩ (6 kΩ ·
+  100 nF → 1.6 ms), then a **follower + 100 Ω** to J2-49. Use a dual op-amp for both slow rails:
+  **TLV9062IDGKR** C398356 (10 MHz RRIO, 2.5–5.5 V, 48 k pcs, ≈ $0.23) on +3V3 – channel A buffers
+  AUX_MEAS (rule 4c.2), channel B buffers 5V_MEAS. The isolated 5V_ISOL cannot go to this ADC
+  directly (it would need an isolated measurement like AD1/AD2).
 
 ## 4c. Interface to the control-card ADC mux – no channel-to-channel leakage
 
@@ -134,7 +142,7 @@ Rules for every J2 analog output:
    0.9 LSB offset from the 45 nA mux leakage through 3.9 kΩ). For zero leakage: **buffer AUX_MEAS**
    (TLV316 follower + 100 Ω like U6/U8) – recommended (M), else item 4.5.
 3. No floating mux inputs: tie every spare J2 analog pin to GND on the power board (spares after
-   4b: J2-50/48/46/40 on ADC A, J2-49/39/37 on ADC B). A grounded input can also serve as a reset
+   4b: J2-50/48/46/40 on ADC A, J2-39/37 on ADC B). A grounded input can also serve as a reset
    step before a channel if ever needed.
 4. Dwell (switch → sample), firmware: ADC A ≥ 1 µs with the LMH6658 outputs (PFC ≤ 0.02 LSB,
    DHB 0.18 LSB), **≥ 1.5 µs with the INA296 option** (≤ 0.02 LSB; 0.2–1 LSB at 1 µs); ADC B
@@ -153,6 +161,7 @@ Resulting per-channel status (next revision, with items 4.2, 4.4, 4.5 / AUX buff
 | VAC | B | TLV316 + 100 Ω, Cf 1 nF in the feedback, no output C | < 0.01 LSB |
 | DC_LINK | B | TLV316 + 100 Ω, Cf 1 nF, C4 removed | < 0.01 LSB |
 | AUX | B | follower + 100 Ω (recommended) / C61 1 µF | ≈ 0 / 0.67 LSB + 0.9 LSB offset |
+| 5V (new) | B | TLV9062 follower + 100 Ω | ≈ 0 (low-impedance output) |
 
 Do not put a capacitor larger than ≈ 100 pF on an INA296 output: 100 Ω + 1 nF rings with the mux
 load (up to 99 LSB at 0.7 µs in the model).
