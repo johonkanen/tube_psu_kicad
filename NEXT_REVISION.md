@@ -72,7 +72,7 @@ Source: [simulation/FINDINGS.md](simulation/FINDINGS.md) (ngspice + hVHDL_ode, A
 | # | Item | Change | Prio |
 |---|---|---|---|
 | 5.1 | Net names | 15V / 15V_ISO_SEC / +1V65_BIAS – done in the KiCad design (`46a60f9`) | done |
-| 5.2 | L1, L2 (PFC) | The board in use has large **toroidal** PFC inductors, not the RM8 of the schematic – give them matching symbol values / footprints (or confirm RM8) and use the real inductance in any PFC simulation | M – to confirm |
+| 5.2 | L1, L2 (PFC) | Confirmed (user): **toroids**, not the RM8 of the schematic. Part: iron-silicon-aluminium (sendust) ring inductor, OD 31.5 × H 16.7 mm (±0.3), leads 8 mm, listing "3 mH, 0.8 mm wire, 6 A". New footprint: 2 pads (lead spacing ≈ 16.7 mm from the drawing – measure), courtyard ≈ Ø 32.5 mm, flat mounting with a hold-down (tie / glue). Set the schematic value to the measured inductance: the 3 mH is the zero-bias listing value (schematic says 200 µH) and sendust loses a large part of it at DC bias – measure L at 0 A and at the PFC peak current before any PFC simulation | M |
 | 5.3 | Fitted-value overrides | Keep `FITTED_VALUES` in `tools/make_part_map.py` in step with the BOM (DRV5/DRV6 today; REF1, D8 candidates) | L |
 
 ## 6. Before the layout work starts
@@ -81,7 +81,7 @@ Source: [simulation/FINDINGS.md](simulation/FINDINGS.md) (ngspice + hVHDL_ode, A
    and on the EC42/15 set (core outline, pin pitch / row spacing as in the drawing).
 2. Choose DAB option A or B (item 2.1).
 3. iW1819-00 datasheet: pinout, Rsense, Vcc and Vsense networks (item 1.5).
-4. Confirm the PFC inductor type (item 5.2).
+4. Measure the PFC toroids: lead spacing / diameter, and L at 0 A and at peak current (item 5.2).
 5. Decide how the KiCad design leaves the migration baseline: once the board is edited by hand,
    drop `make_pcb.sh --check` and the Proteus comparisons from `tools/check_all.sh` (STATUS.md,
    Phase 5 notes), keeping ERC / DRC.
