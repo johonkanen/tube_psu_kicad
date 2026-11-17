@@ -16,7 +16,7 @@ continuous.
 | # | Ref | Change | Why | Prio |
 |---|---|---|---|---|
 | 1.1 | TR1 | EF20 → **EEL19 vertical 4+6** (PC40), P 52+52 T split primary on fly leads, S15 16 / SHV 84 / S5+SN5 6+6 ‖ A5 6 / A15 16 T, Lp 600 µH ± 5 %, spacer gap (≈ 0.37–0.46 mm, set by measurement) | 12–15 W, better cross regulation | H |
-| 1.2 | TR1 footprint | New: primary row 4 × 3.5 mm (pin 4 = crossover post, **no pad**), isolated row 6 × 2.7 mm (pin 2 spare, no pad), rows 12.5 mm apart, **+2 fly-lead holes** FL_DC / FL_C (1.2 mm drill) | new bobbin | H |
+| 1.2 | TR1 footprint | **Done:** `lib/tube_psu_next.pretty/Transformer_EEL19_V_4+6_FlyLeads` (`tools/next/gen_next_footprints.py`). Primary row 4 × 3.5 mm (pin 4 = crossover post, **no pad**), isolated row 6 × 2.7 mm (pin 2 spare, no pad), rows 12.5 mm apart, **+2 fly-lead holes** FL_DC / FL_C (1.2 mm drill) | new bobbin | H |
 | 1.3 | TR1 placement | Move TR1 ≈ +0.93 mm in x (recheck with the 4+6 footprint: up to +0.5 mm more); move D8, D14, C45, C40, C44 (+1.5…2 mm x), C114/C115 (+1.5 mm), C102 (≈ 1.4 mm down), new place for C3; re-route all TR1 pads, DC+ / collector to the fly-lead holes | fit | H |
 | 1.4 | ISO_GND pour (F.Cu) | Pull the edge back to x ≥ 69.8 for y 2…14 | FL_DC hole clearance; also fixes the **existing 5.08 mm DC+ to ISO_GND creepage** spot | H |
 | 1.5 | PWM2 | IW1818 → **iW1819-00** (SO-10 batwing, 18 W, 0 mV cable comp; in stock at DigiKey/Mouser; not -01/-11) – new symbol, footprint and pinout; recheck Rsense, Vsense divider and Vcc network against the iW1819 datasheet | IW1818 is rated 10–12 W only | M (decided if stocked) |
@@ -36,7 +36,7 @@ EC42/15 PC40 + 2-chamber bobbin 8+8 pins.
 | # | Ref | Change | Why | Prio |
 |---|---|---|---|---|
 | 2.1 | TR3 | ETD34 → **EC42/15 PC40, 2-chamber bobbin**: primary in the 10.4 mm chamber, secondary in the 12.4 mm chamber, litz 135×0.071, centre-leg gap for no-load ZVS. Option **A 25:26** (leakage ≈ 63 µH, replaces L3 = 70 µH, φ ≈ 41° at 400 W) or **B 20:21** (≈ 41 µH, φ ≈ 24°) | leakage = series L, ≈ 2 W loss instead of ≈ 6.7 W | H – **to confirm A/B** (real phase shift at 400 W, or measure L3 + old leakage) |
-| 2.2 | TR3 footprint | New: 2 × 8 pins, 5.0 mm pitch, rows 40 mm apart, body ≈ 46 × 42 mm, seated height ≈ 31.5 mm; pads only on the used pins (2 per winding end: 1+2, 7+8, 9+10, 15+16) | new core | H |
+| 2.2 | TR3 footprint | **Done:** `lib/tube_psu_next.pretty/Transformer_EC42x15_2Slot_2x8_P5mm`. 2 × 8 pins, 5.0 mm pitch, rows 40 mm apart, body ≈ 46 × 42 mm, seated height ≈ 31.5 mm; pads only on the used pins (2 per winding end: 1+2, 7+8, 9+10, 15+16) | new core | H |
 | 2.3 | TR3 placement | Over the old TR3 + L3 area, centred ≈ (43.5, −69.8), axis along x, primary row on the half-bridge side (x ≈ 23.5), secondary row next to C16/C55; ≥ 1.4 mm from the top board edge | fit | H |
 | 2.4 | L3 | **Remove**; connect DHB_CAP directly to the primary (or keep the RM8 pads with a jumper as a fallback for a small residual L) | leakage replaces it | H |
 | 2.5 | C47, C54 | Move into the freed L3 corner (x ≈ 10–20) next to the primary pins | they sit under the new primary row | H |
@@ -66,6 +66,7 @@ Source: [simulation/FINDINGS.md](simulation/FINDINGS.md) (ngspice + hVHDL_ode, A
 | 4.7 | C10, C26 | Keep unfitted | mux settling is better without | – |
 | 4.8 | REF1 | Correct the schematic value to the fitted 1.65 V reference (ISL21010CFH315Z is the 1.5 V part) | documentation | L |
 | 4.9 | Firmware | HEATER_I gain −0.18 % calibration; AD2 (420 V) bandwidth 8.86 kHz in the control model | – | L |
+| 4.10 | U1, U4 + 18 resistors / 6 caps | Optional: replace the four LMH6658 difference amplifiers by **INA296B current-sense amplifiers** (SOT-23-8 2.9 × 2.8 mm, 1.1 MHz at every gain, CM −5…110 V, gain error ±0.1 %, 2.5 mA each from +3V3): PFC_I1/I2 INA296B2 (20 V/V, 80 mV/A, was 82.5), DHB_I INA296B3 (50 V/V, 0.2 V/A, ±8.25 A, was 0.182 V/A), HEATER_I INA296B4 (100 V/V, 0.4 V/A, same). Bidirectional mid-scale with **REF1 = +3V3, REF2 = GND** (output = 1.65 V at 0 A, no bias net needed; offset follows +3V3, calibrate at zero current) or REF1 = REF2 = buffered +1V65_BIAS. Keep the output 100 Ω / 100 pF (≤ 1 nF allowed). Saves ≈ 70 mm² of B.Cu courtyard (141 → 70 mm², 24 → 8 parts), gives ≥ the present bandwidth (DHB 452 kHz → 1.1 MHz, HEATER 241 kHz → 1.1 MHz), removes the resistor-ratio gain errors, and takes the current channels off the bias node (finding 1). INA181/INA2181 are smaller/cheaper but only 105–350 kHz (too slow for the 140 kHz DHB current) | space, accuracy | M – to decide |
 
 ## 5. General / documentation
 
