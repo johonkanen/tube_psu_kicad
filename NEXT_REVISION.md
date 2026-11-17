@@ -51,6 +51,21 @@ EC42/15 PC40 + 2-chamber bobbin 8+8 pins.
 | 3.2 | R40, R25 | Remove (DNP): they sit on pin 6 = NC of the Si8275 | dead-time resistors of the Si8274 | L |
 | 3.3 | DRV5/DRV6 EN (pin 5) | Optional: route EN to an FPGA pin (today tied to VDDI) for a hardware disable | Si8275 has no overlap protection; dead time only from firmware | L |
 
+## 3b. Serial port J4 – isolated (user 2026-11-17)
+
+Today J4 (66226-003, 3 pins) carries RX (J2-24, FPGA input), TX (J2-26, FPGA output) and **GND –
+the mains-referenced primary ground** (the PFC shunts and bridge sit on it). A USB-UART cable on J4
+ties the PC to line potential, so it only works with an external isolator. Next revision: isolate it
+on the board; the cable side is powered by the cable itself, so no isolated DC/DC is needed.
+
+| # | Ref | Change | Why | Prio |
+|---|---|---|---|---|
+| 3b.1 | new U (isolator) | 2-channel digital isolator, 1 forward + 1 reverse, **reinforced, wide body (8 mm creepage)**, **default-high outputs** (UART idle; with no cable the FPGA RX stays high): **Si8621BD-B-IS** C7315709 (SOIC-16W, 5 kV, 709 pcs, ≈ $1.84; same Si86xx family as ISO1/ISO2 and the Si8275 drivers) – alternative NSi8221W1-DSWR C2987925 (SOW-16, 965 pcs, ≈ $1.34). Not the narrow SOIC-8 parts (ADuM1201, ISO7721D, CA-IS372xS: basic, 4 mm). Side 1: +3V3, GND, 100 nF; side 2: cable 3.3 V, ISO_UART_GND, 100 nF. Check the default-output letter in the datasheet before ordering | safety, convenience | H |
+| 3b.2 | J4 | → **6-pin 2.54 mm FTDI header** (TTL-232R-3V3 pinout: 1 GND, 2 CTS n.c., 3 VCC 5 V in, 4 TXD → isolator → J2-24 RX, 5 RXD ← isolator ← J2-26 TX, 6 RTS n.c.) on its own isolated copper island (ISO_UART_GND) | standard cable plugs straight in | H |
+| 3b.3 | new LDO | 5 V (cable VCC) → 3.3 V for isolator side 2 (SOT-23 LDO, ≤ 5 mA load, 1 µF in/out), so the outputs match the 3.3 V cable I/O | 3.3 V logic on the cable side | H |
+| 3b.4 | Layout | Isolator straddles the barrier; keep ≥ 8 mm creepage / clearance between the J4 island and any primary copper on all layers (no planes or pours under the island), like the existing Si8661 barrier. 22–100 Ω series resistors on the cable-side TXD/RXD optional (ESD / ringing) | reinforced isolation | H |
+| 3b.5 | Docs | Until then: **never connect a non-isolated USB-UART to J4 while the board is on mains** | safety | H (now) |
+
 ## 4. Measurement circuits (sheets 4, 8, 9)
 
 Source: [simulation/FINDINGS.md](simulation/FINDINGS.md) (ngspice + hVHDL_ode, ADC mux transient).
