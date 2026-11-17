@@ -1,5 +1,9 @@
 # Measurement-circuit simulations
 
+(Other studies in this folder: `flyback/` — aux flyback TR1, see flyback/FLYBACK_DESIGN.md;
+`dab/` — DAB transformer TR3 on EC42x15, rerun with `python3 simulation/dab/run_dab.py`,
+see dab/DAB_TRANSFORMER.md.)
+
 The 9 ADC measurement paths of tube_power_5_1, simulated twice and compared:
 
 - **ngspice** `.ac` 1 Hz – 50 MHz: the reference (`spice/run_ac.py`), netlists cut out of
