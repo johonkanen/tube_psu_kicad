@@ -357,12 +357,40 @@ start of each winding is its dot.
   - Vertical bobbin, primary row on one side and isolated row on the other: row-to-row pad gap
     10.2 mm on the PCB.
 
+### 6a. Bobbin actually bought: EEL19 vertical 4+6 (user, 2026-11-17)
+
+Seller data: 4-pin row pitch 3.5 mm, 6-pin row pitch 2.7 mm, row spacing ("array pitch")
+12.5 mm. It replaces the 5+5 / 4.0 mm / 12 mm assumption above; the winding build is unchanged.
+The pin count is exactly enough (the 5+5 pin 4 spacer is dropped, the 6-pin row has a spare):
+
+| pin | row | connection |
+|---|---|---|
+| P1 | primary (4 × 3.5 mm) | A15 finish → D5 anode (15V) |
+| P2 | primary | GND (A5 and A15 start) |
+| P3 | primary | A5 finish → AUX_FB / D6 anode |
+| P4 | primary (end pin, at the fly-lead end) | **P1–P2 crossover post: no PCB pad, no net.** Terminate the crossover on the pin, then clip the pin flush with the bobbin base (it swings to ≈ DC+ + Vor/2; a pad at 3.5 mm pitch would leave only ≈ 1.7 mm copper gap to the AUX_FB pad) |
+| S1 | isolated (6 × 2.7 mm) | SHV dot → D8 cathode (−80 V) |
+| S2 | isolated | spare – clip, no pad (spacing between −80 V and the 5 V pins) |
+| S3 | isolated | S5 finish → D29 anode (5V_ISOL) |
+| S4 | isolated | SN5 dot → D14 cathode (−5V_SEC) |
+| S5 | isolated | ISO_GND (S15 / S5 start, SN5 / SHV finish) |
+| S6 | isolated | S15 finish → D4 anode (15V_ISO_SEC) |
+| FL_DC, FL_C | primary, fly leads | as above (P1 start → DC+, P2 finish → collector) |
+
+- Footprint: 4 pads at 3.5 mm pitch (only P1–P3 get pads) and 6 at 2.7 mm (S2 without pad),
+  rows 12.5 mm apart, plus the two fly-lead holes; confirm pin diameter (drill ≈ pin + 0.3 mm)
+  and the base outline with calipers. 2.7 mm pitch needs ≤ 1.7 mm pads (≥ 1.0 mm gap; the
+  largest isolated pin-to-pin voltage is ≈ 100 V, S1 −80 V next to the spare).
+- Rows 12.5 mm apart (was 12.0) add 0.5 mm row-to-row creepage on the PCB (≈ 10.7 mm); the rows
+  are shorter (10.5 / 13.5 mm instead of 16 mm), so the board fit (section 8) needs at most
+  0.5 mm more in x and less in y – recheck when the footprint is drawn.
+
 ## 7. Schematic / BOM changes (for the next board revision; nothing edited here)
 
 | ref | today | new | why |
 |---|---|---|---|
-| TR1 | EF20 10-pin, V2 52/8/3‖7/3/3/42 | **EEL19 vertical 5+5, PC40, 104(52+52)/16/6 ‖ 16/6/6/84, Lp 600 µH, spacer gap** | 15 W, better cross regulation |
-| TR1 footprint | Transformer_EF20_2x5_P3.81mm (3.81 × 10.16 mm) | new EEL19 5+5: pitch 4.0, rows 12.0 mm (confirm), pins 4/5 without net, **+2 holes FL_DC / FL_C** (1.2 mm drill, 2.2 mm pad) | new bobbin, fly leads |
+| TR1 | EF20 10-pin, V2 52/8/3‖7/3/3/42 | **EEL19 vertical 4+6 (bought; 5+5 also works), PC40, 104(52+52)/16/6 ‖ 16/6/6/84, Lp 600 µH, spacer gap** | 15 W, better cross regulation |
+| TR1 footprint | Transformer_EF20_2x5_P3.81mm (3.81 × 10.16 mm) | new EEL19 4+6: pitch 3.5 / 2.7 mm, rows 12.5 mm (section 6a), crossover and spare pins without pad, **+2 holes FL_DC / FL_C** (1.2 mm drill, 2.2 mm pad) | new bobbin, fly leads |
 | R8, R9 | 2.49 Ω 1206 | **2.0 Ω 1206 1 %** (Rsense 1.0 Ω; 32 mW total at 15 W) | Ipk max 1.0 A, OCP 1.15 A |
 | R64, R81, R84, R85 | 39k / 15k / 33k / 4.7k | **unchanged** | aux knee voltage unchanged (6 T at 0.93 V/T) |
 | new | – | **2.2 kΩ preload on 15V** (102 mW → 1206 0.25 W), **1 kΩ on 5V** (25 mW) | light-load excursions |
