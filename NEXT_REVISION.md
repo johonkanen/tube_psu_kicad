@@ -68,6 +68,37 @@ Source: [simulation/FINDINGS.md](simulation/FINDINGS.md) (ngspice + hVHDL_ode, A
 | 4.9 | Firmware | HEATER_I gain −0.18 % calibration; AD2 (420 V) bandwidth 8.86 kHz in the control model | – | L |
 | 4.10 | U1, U4 + 18 resistors / 6 caps | Optional: replace the four LMH6658 difference amplifiers by **INA296B current-sense amplifiers** (SOT-23-8 2.9 × 2.8 mm, 1.1 MHz at every gain, CM −5…110 V, gain error ±0.1 %, 2.5 mA each from +3V3): PFC_I1/I2 INA296B2 (20 V/V, 80 mV/A, was 82.5), DHB_I INA296B3 (50 V/V, 0.2 V/A, ±8.25 A, was 0.182 V/A), HEATER_I INA296B4 (100 V/V, 0.4 V/A, same). All channels stay **bidirectional around +1V65_BIAS** (user 2026-11-17: reverse currents are measured, the DAB is bidirectional): **REF1 = REF2 = +1V65_BIAS**, which needs the bias buffer of item 4.1 (the REF pins drive an internal resistor network). (REF1 = +3V3 / REF2 = GND would also give a 1.65 V mid-scale, but ratiometric to the power-board +3V3 instead of the reference.) Keep the output 100 Ω / 100 pF (≤ 1 nF allowed). Saves ≈ 70 mm² of B.Cu courtyard (141 → 70 mm², 24 → 8 parts), gives ≥ the present bandwidth (DHB 452 kHz → 1.1 MHz, HEATER 241 kHz → 1.1 MHz), removes the resistor-ratio gain errors and the amplifier bias resistors that load the bias today (≈ 2.7 kΩ in total). INA181/INA2181 are smaller/cheaper but only 105–350 kHz (too slow for the 140 kHz DHB current) | space, accuracy | M – to decide |
 
+## 4b. ADC channel allocation (J2 analog pins)
+
+User decision (2026-11-17): the PFC currents and the DAB current go on **one** muxed ADC, sampled
+synchronously with the 140 kHz PWM at fixed sample positions; the LLC (heater supply) runs at a
+variable frequency, so its ADC carries the LLC current plus the non-critical, slow channels.
+
+Control card (`~/dev/ti60f225_tube_psu_control_card`, `reference/mux_assignment.csv`,
+`reference/power_board_header.csv`): ADC A = U10 → OPA365 → ADS7056 (ADA0–6), ADC B = U13 → … (ADB0–6).
+Today the critical channels are split: PFC_I2 on A, PFC_I1 and DHB_I on B, AUX on A.
+
+| Signal | Today (power-board J2 pin → card net) | Next revision | ADC |
+|---|---|---|---|
+| PFC_I1_MEAS | J2-43 → ADB3 | **J2-42 → ADA4** (free today) | A |
+| PFC_I2_MEAS | J2-44 → ADA3 | unchanged | A |
+| DHB_I_MEAS | J2-37 → ADB6 | **J2-38 → ADA6** (was the unconnected CUK_CAP_MEAS_RAW) | A |
+| HEATER_I_MEAS (LLC) | J2-45 → ADB2 | unchanged | B |
+| VAC_MEAS | J2-47 → ADB1 | unchanged | B |
+| DC_LINK_MEAS | J2-41 → ADB4 | unchanged | B |
+| AUX_MEAS | J2-40 → ADA5 | **J2-43 → ADB3** (freed by PFC_I1) | B |
+| spare | – | A: ADA0–2, ADA5 (J2-50/48/46/40); B: ADB0, ADB5, ADB6 (J2-49/39/37) | – |
+
+- ADC A then holds only the three low-impedance current outputs (100 Ω/100 pF, 33 Ω): at 140 kHz
+  (7.14 µs) each gets ≥ 2.3 µs, the mux settles to < 1 LSB in ≈ 1 µs (FINDINGS.md 9), so every
+  channel can be sampled at the same PWM-locked position every period (or twice, e.g. at the
+  PWM centre for the PFC average current).
+- ADC B sees a varying channel order (LLC timing), so its slow, high-impedance channels need the
+  mux-leakage fixes 4.4 (DC_LINK) and 4.5 (AUX, C61 1 µF) – both already in the list.
+- Equivalent alternative: keep the power-board pins and swap the mux inputs on the control card
+  (its mux table is still open there). Doing it on the power board needs no control-card change.
+- Firmware: update the channel map (ADA4 = PFC_I1, ADA6 = DHB_I, ADB3 = AUX).
+
 ## 5. General / documentation
 
 | # | Item | Change | Prio |
