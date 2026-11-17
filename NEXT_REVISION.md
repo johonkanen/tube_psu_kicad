@@ -1,0 +1,87 @@
+# Next board revision (tube_power 5.2) – list of changes
+
+Status 2026-11-17. The KiCad design in `kicad/` is still the 1:1 migration of the built
+tube_power_5_1 board (verified against the Proteus CADCAM files by `tools/check_all.sh`); none of
+the changes below is in it yet. Each item points to the study that backs it.
+
+Priority: **H** = fix / required for the new parts, **M** = should do, **L** = documentation or
+optional. "Decided" = the user has agreed; "to confirm" = needs an answer or a measurement first.
+
+## 1. Auxiliary flyback (sheet 1) – new TR1 on EEL19, 12 W continuous
+
+Source: [simulation/flyback/EEL19_DESIGN.md](simulation/flyback/EEL19_DESIGN.md) (sections 6, 6a,
+7, 8). Decided: EEL19, fly-lead primary, margin tape (no TIW), board move, preloads, 12 W
+continuous.
+
+| # | Ref | Change | Why | Prio |
+|---|---|---|---|---|
+| 1.1 | TR1 | EF20 → **EEL19 vertical 4+6** (PC40), P 52+52 T split primary on fly leads, S15 16 / SHV 84 / S5+SN5 6+6 ‖ A5 6 / A15 16 T, Lp 600 µH ± 5 %, spacer gap (≈ 0.37–0.46 mm, set by measurement) | 12–15 W, better cross regulation | H |
+| 1.2 | TR1 footprint | New: primary row 4 × 3.5 mm (pin 4 = crossover post, **no pad**), isolated row 6 × 2.7 mm (pin 2 spare, no pad), rows 12.5 mm apart, **+2 fly-lead holes** FL_DC / FL_C (1.2 mm drill) | new bobbin | H |
+| 1.3 | TR1 placement | Move TR1 ≈ +0.93 mm in x (recheck with the 4+6 footprint: up to +0.5 mm more); move D8, D14, C45, C40, C44 (+1.5…2 mm x), C114/C115 (+1.5 mm), C102 (≈ 1.4 mm down), new place for C3; re-route all TR1 pads, DC+ / collector to the fly-lead holes | fit | H |
+| 1.4 | ISO_GND pour (F.Cu) | Pull the edge back to x ≥ 69.8 for y 2…14 | FL_DC hole clearance; also fixes the **existing 5.08 mm DC+ to ISO_GND creepage** spot | H |
+| 1.5 | PWM2 | IW1818 → **iW1819-00** (SO-10 batwing, 18 W, 0 mV cable comp; in stock at DigiKey/Mouser; not -01/-11) – new symbol, footprint and pinout; recheck Rsense, Vsense divider and Vcc network against the iW1819 datasheet | IW1818 is rated 10–12 W only | M (decided if stocked) |
+| 1.6 | R8, R9 | 2.49 Ω → **2.0 Ω** 1206 1 % (Rsense 1.0 Ω, OCP 1.15 A) – value for the IW1818; confirm for the iW1819 | power capability | H |
+| 1.7 | new | **Preloads 2.2 kΩ on 15V** (1206, 0.25 W) and **1 kΩ on 5V** | light-load excursions | H |
+| 1.8 | R124 | 12.1 kΩ → **2.61 kΩ** 1206 (15V_ISO_SEC bleeder) | light-load excursion | H |
+| 1.9 | D8 | Keep a **≥ 600 V** diode in the BOM (US1M 1000 V; the fitted part is 1000 V); the schematic's ES1A-family 200 V is wrong | V_R 395–420 V | H |
+| 1.10 | D4, D5 | ES1B / ES1D (≥ 100 V) | V_R ≈ 77 V | M |
+| 1.11 | C1, C2, C6, C36, C71, C114, C115 | Check ripple-current rating at 15 W (winding rms 0.6–0.8 A) | not simulated with real ESR | M |
+| 1.12 | R64, R81, R84, R85 | **Unchanged** (aux turns ratio kept) | – | – |
+
+## 2. DAB / DHB transformer (sheet 7) – TR3 + L3 → one two-chamber transformer
+
+Source: [simulation/dab/DAB_TRANSFORMER.md](simulation/dab/DAB_TRANSFORMER.md). Core set bought:
+EC42/15 PC40 + 2-chamber bobbin 8+8 pins.
+
+| # | Ref | Change | Why | Prio |
+|---|---|---|---|---|
+| 2.1 | TR3 | ETD34 → **EC42/15 PC40, 2-chamber bobbin**: primary in the 10.4 mm chamber, secondary in the 12.4 mm chamber, litz 135×0.071, centre-leg gap for no-load ZVS. Option **A 25:26** (leakage ≈ 63 µH, replaces L3 = 70 µH, φ ≈ 41° at 400 W) or **B 20:21** (≈ 41 µH, φ ≈ 24°) | leakage = series L, ≈ 2 W loss instead of ≈ 6.7 W | H – **to confirm A/B** (real phase shift at 400 W, or measure L3 + old leakage) |
+| 2.2 | TR3 footprint | New: 2 × 8 pins, 5.0 mm pitch, rows 40 mm apart, body ≈ 46 × 42 mm, seated height ≈ 31.5 mm; pads only on the used pins (2 per winding end: 1+2, 7+8, 9+10, 15+16) | new core | H |
+| 2.3 | TR3 placement | Over the old TR3 + L3 area, centred ≈ (43.5, −69.8), axis along x, primary row on the half-bridge side (x ≈ 23.5), secondary row next to C16/C55; ≥ 1.4 mm from the top board edge | fit | H |
+| 2.4 | L3 | **Remove**; connect DHB_CAP directly to the primary (or keep the RM8 pads with a jumper as a fallback for a small residual L) | leakage replaces it | H |
+| 2.5 | C47, C54 | Move into the freed L3 corner (x ≈ 10–20) next to the primary pins | they sit under the new primary row | H |
+| 2.6 | DRV5, C46 (B.Cu) | Keep clear of the new pin rows (or omit the pads of the unused bobbin pins and clip those pins) | pin collisions | H |
+| 2.7 | Firmware | Dead time 150–200 ns (the gap is sized for 150 ns, 181 pF per switch node) | ZVS at no load | M |
+
+## 3. DHB gate drivers (sheet 2)
+
+| # | Ref | Change | Why | Prio |
+|---|---|---|---|---|
+| 3.1 | DRV5, DRV6 | Schematic / BOM: **Si8275BB** (dual input, 8 V UVLO) – already corrected in the KiCad design (`5ef2e7f`) | wrong part number (Si8274) | done in KiCad |
+| 3.2 | R40, R25 | Remove (DNP): they sit on pin 6 = NC of the Si8275 | dead-time resistors of the Si8274 | L |
+| 3.3 | DRV5/DRV6 EN (pin 5) | Optional: route EN to an FPGA pin (today tied to VDDI) for a hardware disable | Si8275 has no overlap protection; dead time only from firmware | L |
+
+## 4. Measurement circuits (sheets 4, 8, 9)
+
+Source: [simulation/FINDINGS.md](simulation/FINDINGS.md) (ngspice + hVHDL_ode, ADC mux transient).
+
+| # | Ref | Change | Why | Prio |
+|---|---|---|---|---|
+| 4.1 | +1V65_BIAS | **Buffer the bias**: TLV316-class follower from +3V3, 100 nF on the REF1 divider node, 22 Ω to the bias net, C48 after the 22 Ω | AC line couples into every current channel (±15 mV, ≈ 0.19 A on PFC_I) | H |
+| 4.2 | VAC_MEAS (U8) | 1 nF C0G across R80 and across R49; keep R65 100 Ω, no output capacitor | no filter, +22 dB at 20–50 MHz | H |
+| 4.3 | VAC_MEAS range | R49, R80 15 kΩ → **12 kΩ** (and the 1 nF of 4.2 with them) | clips above ≈ 330 V peak | H |
+| 4.4 | DC_LINK_MEAS (U6) | 1 nF C0G across R17 and across R82; R2 1 kΩ → **100 Ω**; **remove C4** | HF feedthrough; ADC mux leakage 254 LSB at 1 µs | H |
+| 4.5 | AUX_MEAS | C61 1 nF → **1 µF** | ADC mux leakage 505 LSB at 1 µs → 0.7 LSB | H |
+| 4.6 | U1 (LMH6658) | Add 100 nF (+ 1 µF) at pin 8 | no local decoupling | M |
+| 4.7 | C10, C26 | Keep unfitted | mux settling is better without | – |
+| 4.8 | REF1 | Correct the schematic value to the fitted 1.65 V reference (ISL21010CFH315Z is the 1.5 V part) | documentation | L |
+| 4.9 | Firmware | HEATER_I gain −0.18 % calibration; AD2 (420 V) bandwidth 8.86 kHz in the control model | – | L |
+
+## 5. General / documentation
+
+| # | Item | Change | Prio |
+|---|---|---|---|
+| 5.1 | Net names | 15V / 15V_ISO_SEC / +1V65_BIAS – done in the KiCad design (`46a60f9`) | done |
+| 5.2 | L1, L2 (PFC) | The board in use has large **toroidal** PFC inductors, not the RM8 of the schematic – give them matching symbol values / footprints (or confirm RM8) and use the real inductance in any PFC simulation | M – to confirm |
+| 5.3 | Fitted-value overrides | Keep `FITTED_VALUES` in `tools/make_part_map.py` in step with the BOM (DRV5/DRV6 today; REF1, D8 candidates) | L |
+
+## 6. Before the layout work starts
+
+1. Calipers on the EEL19 core and 4+6 bobbin (pin diameter, base outline, inner winding length)
+   and on the EC42/15 set (core outline, pin pitch / row spacing as in the drawing).
+2. Choose DAB option A or B (item 2.1).
+3. iW1819-00 datasheet: pinout, Rsense, Vcc and Vsense networks (item 1.5).
+4. Confirm the PFC inductor type (item 5.2).
+5. Decide how the KiCad design leaves the migration baseline: once the board is edited by hand,
+   drop `make_pcb.sh --check` and the Proteus comparisons from `tools/check_all.sh` (STATUS.md,
+   Phase 5 notes), keeping ERC / DRC.
