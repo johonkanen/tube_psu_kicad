@@ -28,7 +28,7 @@ Decided by the user 2026-11-17:
 |---|---|---|
 | D1 | DAB transformer | **Option B, 20:21** (leakage ≈ 41 µH, φ ≈ 24° at 400 W, gap 0.35 mm / Lm ≈ 300 µH), L3 removed – NR 2.1 |
 | D2 | Current amplifiers | **LMH6643** difference amplifiers (NR 4.10b), INA241A not used; shunt-ESL compensation via balanced feedback caps (NR 4.11) |
-| D3 | Mechanics | **Board outline and mounting holes unchanged.** J2 (control-card mezzanine) and the heatsink / TO-220 rows: keep unless placement needs to move them (to confirm) |
+| D3 | Mechanics | **Board outline and mounting holes unchanged.** The DAB TO-220 row (Q7/Q8/Q19/Q21) sits on a bent aluminium plate that is rebuilt to match, so the row may move; the control card next to it is tightly packed (keep J2 and give the card more room, not less). The heater LLC TO-220s (Q10/Q11) have no heatsink: free to move or become SMD. PFC heatsink (Q5/Q6 TO-247, SICD1/2): to confirm |
 | D4 | Flyback controller | **iW1819-00** – NR 1.5 |
 | D5 | Copper | **1 oz top and bottom, 0.5 oz inner** |
 | D6 | Isolation | **Primary to secondary reinforced** (all isolated domains below) |
@@ -126,8 +126,10 @@ placement constraints:
 4. Shunts with Kelvin sense pairs to the current amplifiers; the ESL RC at the amplifier; amplifiers
    close to J2; each J2 analog output's 100 Ω / 100 pF at the J2 pin; measurement section away from
    the switch nodes and transformers.
-5. Thermal: TO-220 rows on the heatsink as in 5.1; tall parts (electrolytics, transformers 29–32 mm)
-   checked against the enclosure height.
+5. Thermal: the DAB TO-220 row on one straight line along a new bent-plate heatsink (its hole
+   positions come out of the placement – deliver a bracket drawing), clear of the control card;
+   Q10/Q11 (LLC) anywhere / SMD (NR 5.4); tall parts (electrolytics, transformers 29–32 mm) checked
+   against the enclosure height.
 6. TR3 over the old TR3 + L3 area, axis along x (NR 2.3); TR1 near its 5.1 position (NR 1.3);
    UART header at the board edge on its island; fly-lead holes per the EEL19 footprint.
 7. Assembly: SMD on L1 where possible (JLC single-side assembly is cheaper), bottom side only for

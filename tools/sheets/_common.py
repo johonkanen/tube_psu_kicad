@@ -14,6 +14,40 @@ from p2k.sch_builder import Sheet  # noqa: E402,F401
 from p2k.sheetkit import *  # noqa: E402,F401,F403
 
 
+# --- LCSC field --------------------------------------------------------------------------------------
+# Every placed part gets a hidden "LCSC" property (JLCPCB/LCSC part number, empty for consigned /
+# missing / DNP parts) from lib/jlc_parts.csv. Done here by wrapping Sheet.place so the shared p2k
+# submodule stays unchanged; power symbols and flags (#PWR, #FLG) and parts not in the CSV get no field.
+_LCSC = None
+
+
+def lcsc(ref):
+    """LCSC part number of a refdes from lib/jlc_parts.csv ('' if none, None if not listed)."""
+    import csv
+    global _LCSC
+    if _LCSC is None:
+        path = os.path.join(os.path.dirname(TOOLS), "lib", "jlc_parts.csv")
+        _LCSC = {}
+        if os.path.exists(path):
+            with open(path, newline="", encoding="utf-8") as f:
+                _LCSC = {r["refdes"]: r["lcsc"] for r in csv.DictReader(l for l in f if not l.startswith("#"))}
+    return _LCSC.get(ref)
+
+
+_sheet_place = Sheet.place
+
+
+def _place_with_lcsc(self, name, ref, *args, **kw):
+    code = lcsc(ref)
+    if code is not None and len(args) < 6:  # fields not passed positionally
+        kw["fields"] = dict(kw.get("fields") or {})
+        kw["fields"].setdefault("LCSC", code)
+    return _sheet_place(self, name, ref, *args, **kw)
+
+
+Sheet.place = _place_with_lcsc
+
+
 def si8275_cell(sh, ref, UX, UY, vdd, gnd, pwm, nc1, dt, cdec, boot, rail, railcaps, boot_side,
                 vo_hi, src_hi, vo_lo):
     """Si8275 isolated dual driver cell as on sheet 2 (DRV5 / DRV6), IC at (UX, UY). The Proteus
