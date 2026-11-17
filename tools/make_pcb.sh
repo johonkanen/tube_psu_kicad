@@ -7,6 +7,7 @@
 #   3 assign_nets       nets of tracks/vias/pours by copper connectivity -> reports/pour_nets.json
 #   4 pours_to_zones    pours -> filled zones
 #   5 place_refdes      references clear of pads / silk / edge (else smaller, else Fab only; Phase 5)
+#   6 tools/pcb_lcsc.py LCSC field (lib/jlc_parts.csv) on the footprints, hidden (schematic parity)
 # Board-only footprints (holes, wire pads) and the footprint fit come from tools/gen_footprints.py
 # and p2k.check_footprints (reports/footprint_fit.csv) - run those first after footprint changes.
 #
@@ -22,6 +23,7 @@ run() {
     $K -m p2k.assign_nets
     $K -m p2k.pours_to_zones
     $K -m p2k.place_refdes
+    $K tools/pcb_lcsc.py
 }
 if [ "${1:-}" = "--check" ]; then
     tmp="$(mktemp -d)"; trap 'rm -rf "$tmp"' EXIT
@@ -33,7 +35,7 @@ if [ "${1:-}" = "--check" ]; then
     ok=1
     cmp -s "$P2K_PCB" kicad/tube_psu.kicad_pcb || { echo "make_pcb: kicad/tube_psu.kicad_pcb is not up to date (run tools/make_pcb.sh)"; ok=0; }
     cmp -s "$tmp/reports/pour_nets.json" reports/pour_nets.json || { echo "make_pcb: reports/pour_nets.json is not up to date"; ok=0; }
-    grep -E "^(build_pcb|gerber_to_tracks: [0-9]|assign_nets: stage|pours_to_zones|place_refdes)" "$tmp/log" | sed "/^build_pcb/s/ -> .*//"
+    grep -E "^(build_pcb|gerber_to_tracks: [0-9]|assign_nets: stage|pours_to_zones|place_refdes|pcb_lcsc)" "$tmp/log" | sed "/^build_pcb/s/ -> .*//"
     [ $ok -eq 1 ] && echo "make_pcb: board rebuilt from scratch, byte-identical" || exit 1
 else
     run

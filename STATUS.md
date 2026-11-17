@@ -1462,3 +1462,51 @@ firmware; R40 / R25 (82k, the Proteus DT resistors) sit on pin 6, which is NC on
 - No connectivity change: check_all passes (see the commit). Note: an in-place `tools/make_pcb.sh`
   gave the same board content with a different UUID sequence than `--check`; the board was taken
   from a temporary-directory build (the `--check` flow), which is byte-identical to the check.
+
+## JLC part numbers (2026-11-17)
+
+Every refdes has a JLCPCB/LCSC assignment in **`lib/jlc_parts.csv`** (refdes, value, footprint,
+lcsc, mpn, manufacturer, library_type, stock_at_check, unit_price, check_date, status, review,
+note), checked against the JLC parts API on 2026-11-17 (responses cached in the git-ignored
+`build/jlc_cache/`). The CSV is hand-maintained (the selection was done once, not by a tool).
+
+- **Status:** 33 exact, 216 equivalent, 23 changed, 23 missing, 18 consigned, 2 dnp (C10 / C26,
+  value "na"). JLC-supplied: 272 placements (246 SMD + 26 THT) in 77 unique parts:
+  **33 basic** (149 placements) and **44 extended** (123 placements, $3 loading fee each per order).
+- **Cost** (1+ prices): ≈ **$55.7 per board** for the 272 JLC parts (SMD $29.3, THT $26.5), without
+  the 23 missing and 18 consigned parts, assembly and extended-part fees. 170 parts sit on the
+  bottom side, so the board needs double-sided assembly.
+- **Rules applied:** exact MPN if stocked (≥ 100), else same footprint and ≥ ratings, basic first;
+  resistors 1 %; C0G for ≤ 1.2 nF; MLCC voltage from `reference/pins_by_net.md` (15 V rails ≥ 25 V,
+  3V3/5V/6V3 ≥ 10 V, DC+/420V ≥ 630 V where possible); X2/Y2 caps keep their safety class.
+- **Missing (no LCSC, need consignment / global sourcing / a decision):** DRV1/DRV2/DRV9
+  IXDD609D2TR and DRV4 IXDD604D2TR (DFN-8, 0 stock; only SOIC/DIP versions), DRV5/DRV6 Si8275BB
+  (0), ISO1/ISO2 Si8661BD (2; candidate CA-IS3761LW C528659, pinout not verified), PWM2 IW1818 (0),
+  Q5/Q6 C2M0160120D (0), Q7/Q8/Q19/Q21 STF7N60M2 (2), SICD1/SICD2 C3D02060A (0; candidate Vishay
+  VS-C04ET07T-M3 C5208854, 650 V 4 A), DB1 TBS22K (0), R27 TWW10 47 Ω 10 W radial (0),
+  R21/R30/R83/R93 4 mΩ KRL2012 (0; same footprint only 5 mΩ KRL2012E-M-R005 C2073455 = +25 % sense gain).
+- **Consigned:** L1/L2/L3 (RM8, wound by the user), TR1/TR2/TR3, the 12 blade terminals.
+- **Flagged (review column):** C15/C20/C67/C70/C89–C91/C99–C101/C45 100 nF 1206 at **500 V**
+  (no 1206 100 nF ≥ 630 V at JLC; 1210 would need a footprint change); C73 2.2 µF X6S 450 V on DC+
+  as designed; C19/C30 39 → 68 µF (user choice C913388, stock 103); D4/D5/D6/D14/D29 ES1A → ES1D and
+  D8 ES1A → US1M 1000 V (stale schematic values); DRV3 Si8271 grade not in the schematic →
+  SI8271DB-ISR (only stocked grade, check UVLO); Q9 value 2n7000 → BSS138 (layout device);
+  U1/U4 LMH6658 → LMH6643 (agreed); REF1 ISL21010CFH315Z-TK kept (fitted part is a 1.65 V-bias
+  reference); R1/R14/R19/R20 5 Ω → 4.99 Ω, R26/R57/R87/R90 40 Ω → 40.2 Ω (E96); low stock CM1/CM4
+  SCF20-05-550 (20) and Q10/Q11 IPA60R280CFD7 (15); AD1/AD2 (276); body sizes of the X2 caps
+  C38 (6 mm outline) and C86/C117; J2 generic 2×25 1.27 mm header (gender / height).
+- **Schematic field:** every symbol carries a hidden **LCSC** property. `tools/sheets/_common.py`
+  wraps `Sheet.place` (no p2k change) and reads `lib/jlc_parts.csv`; a new board step
+  `tools/pcb_lcsc.py` (step 6 of `tools/make_pcb.sh`, KIID seed 3006) copies it onto the
+  footprints, since p2k.build_pcb copies only Value/Datasheet/Description and the DRC schematic
+  parity check otherwise reports "Missing symbol field 'LCSC'". No other board change.
+- **JLC files:** `python3 tools/jlc_bom.py` writes `build/jlc/tube_psu_bom.csv` (Comment,
+  Designator, Footprint, LCSC Part #; 87 lines; Comment = MPN where the schematic value is stale)
+  and `build/jlc/tube_psu_cpl.csv` (footprint anchors, X = x, Y = −y as in the Gerbers, Top/Bottom,
+  KiCad rotation). `ROTATION_FIX` in the script is empty: fill it after checking JLC's placement
+  preview (candidates listed in the docstring: SOT-23 incl. the Proteus-numbered SOT-23, SOIC/TSSOP,
+  SOD-323/SMA, CP_Elec, DFN/LFPAK). THT anchors are pin 1, not the body centre.
+- **Regenerate** after editing `lib/jlc_parts.csv`: run the sheet scripts
+  (`for s in tools/sheets/sheet*.py; do python3 $s; done`), then rebuild the board with the
+  temporary-directory flow of `tools/make_pcb.sh --check` (copy its board over
+  `kicad/tube_psu.kicad_pcb`), then `tools/check_all.sh` and `python3 tools/jlc_bom.py`.

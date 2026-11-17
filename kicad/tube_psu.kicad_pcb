@@ -235,6 +235,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C5448934"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "33d1bccc-9904-4abc-b92a-978d418af470")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/fe5bad69-6aa6-5acb-8315-5874370220e9")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -381,6 +392,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C22809"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6f144448-1e9e-4a2e-8806-3ff0de12563c")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -533,6 +555,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C784102"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2898d507-7b69-43f9-b393-bf929ae9f825")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/b2242005-64e6-5d42-9fcf-728aa8b93c42")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -663,6 +696,17 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "4c5bdce5-31ee-4356-b50d-b802fbb83662")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ccdee1c1-edb5-42ea-b4e7-9cc996d20ac3")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -986,6 +1030,17 @@
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C412437"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a9d967d9-ee79-442e-bc66-0d04fe0ead1b")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -1350,6 +1405,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C96522"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "27680cb3-7994-4763-bbbd-0027fd24c215")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/e40f778b-4e02-442f-91ba-cfe25cfad6e5/38cb9e1f-1032-5ea7-8550-35bdf4a4ca41")
 		(sheetname "05 PFC")
 		(sheetfile "05_pfc.kicad_sch")
@@ -1518,6 +1584,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C51890374"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "dab24880-c09f-466e-85b4-a67439d6c9bc")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -4024,6 +4101,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C17997"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2fdc1d8f-3b85-4706-994b-a1f10b83bd69")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/e40f778b-4e02-442f-91ba-cfe25cfad6e5/01286426-ed9d-5ac3-a52a-373477d4b284")
 		(sheetname "05 PFC")
 		(sheetfile "05_pfc.kicad_sch")
@@ -4170,6 +4258,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C23140"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6befcd2c-5d50-4665-b1e3-c72d7f7de31f")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -4322,6 +4421,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C23162"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2edcb37c-9653-48b3-812a-b872beacf3ea")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/dde82e47-43a4-5c2c-b078-8363ee696962")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -4452,6 +4562,17 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "dfb320f8-c53b-4641-91fa-958dd47a4d29")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C1534140"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "11e7f0c6-99be-4191-bb79-3bf2b74fd6d4")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4639,6 +4760,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C342746"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "31eb6bfd-d542-499f-816e-d0ccde3c5586")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/5e32edb7-95f8-55fc-af2b-61bdce962b0b")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -4788,6 +4920,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "26300c38-6878-4a7d-b050-8c5ea091a549")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/857ac577-2168-5de5-9ab6-5522524e521f")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -4934,6 +5077,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C13585"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f04ca1dc-a68c-4e70-b416-f13860c4c7b4")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -5149,6 +5303,17 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "22bb9c17-1346-4c4a-b42c-98aa7e2e99e8")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6d027994-c006-4154-9dfd-cef09a7e95e9")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5405,6 +5570,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "07165ab6-7c4e-4386-9635-efd7caaffbe6")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -5828,6 +6004,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C22464691"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f6d57231-44a9-42aa-9003-3eaa23abe407")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -7914,6 +8101,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C13585"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bd9274cd-0e7a-454b-9ca4-65dc0f860858")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/e467168f-2877-5eab-ae7d-6c6388fdfa40")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -8063,6 +8261,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C5448934"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0a20eebe-4113-4b82-a9f4-aa8a070c2a10")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/b462b56a-8428-5b79-a1d4-06f07c971cd8")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -8193,6 +8402,17 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "c85b2dfd-1331-478c-937b-ea9beb957091")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ab9a3397-2162-4110-b95d-4661ae94e342")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8416,6 +8636,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C4216"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e904f8fd-80d9-45fb-9031-bf289f7d8711")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/85b433c5-6a7a-58e8-9a68-370649daa962")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -8565,6 +8796,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C23162"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e472be78-87a7-4f2b-a555-db822c553216")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/50ce8637-beca-4745-9ce6-9d1bd3bb08df/b10ff8e8-62c9-557b-9b19-000f1207c65c")
 		(sheetname "04 MCU connector")
 		(sheetfile "04_mcu_connector.kicad_sch")
@@ -8701,6 +8943,17 @@
 				)
 			)
 		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3ce2a38b-7485-4316-a4df-793c773d0a88")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/42cf54bd-bf82-589e-982d-6caba94b5dfb")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -8813,6 +9066,17 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "a2e7f673-ab05-4cc6-a974-8f1c0204a195")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f6784ccc-c8a9-47bc-8da7-779682e98fdc")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8947,6 +9211,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C106246"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7c84f2c8-59ed-4b65-94e0-5b793b579ec7")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -9099,6 +9374,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C784102"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3f444086-04fd-4c4c-aa96-e42b66ebc01e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/0d961cee-716f-54bd-a775-1622c123e52e")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -9245,6 +9531,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0ce350ab-45db-40f2-9f54-699fa54b7fd3")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -9488,6 +9785,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C22809"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1a8c3ebf-cd35-4ccf-a18b-3de75ca38f45")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/6eb35f48-6b08-4c9b-99f9-370c4b4c9404/9201e99c-51da-5b74-83ab-9305ef805071")
 		(sheetname "09 AC measurement")
 		(sheetfile "09_ac_measurement.kicad_sch")
@@ -9626,6 +9934,17 @@
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C116492"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bb0f31c7-3176-4bc3-af9a-b405f3c4b44e")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -9903,6 +10222,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C913388"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "cf443b44-1084-4d08-9c07-ee54af8fc42c")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -11989,6 +12319,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C6119961"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5a07965b-29fe-4efc-a019-3322a8d7d114")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/b4c3461a-58f7-5bed-a878-87da874a52d4")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -12222,6 +12563,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C342746"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "91aa2c4a-1c43-41a8-9fb4-da1d6db191d3")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/a18bbc9b-6a25-526b-9651-247561bd4044")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -12371,6 +12723,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C784102"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d4436c1b-5f04-4fbb-b55e-1aadfb1c5e71")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/768623ef-9bc0-5702-90ab-59231153320b")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -12517,6 +12880,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C49257"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "caa1f9f8-3c0f-497f-80f1-557d633ca5cb")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -12756,6 +13130,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8132034b-c5e9-4502-ba50-2299deb1e526")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -13009,6 +13394,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C342746"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "93d13d32-2e40-49ab-9f61-3be1f4253d6d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/4574a416-0ca9-5546-a004-7b6fd3459ece")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -13155,6 +13551,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C51890374"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "02d5f3a3-4cd4-403e-a6a9-e2276832ef51")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -15661,6 +16068,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C23212"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9a82179e-b6ed-47d9-8b51-54e34f374152")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/fe442bbb-6949-4e80-b157-a7b285488541/12bb2fbf-e1f5-5181-b6a8-f3f3541ea6ac")
 		(sheetname "03 Isolated measurements")
 		(sheetfile "03_isolated_measurements.kicad_sch")
@@ -15799,6 +16217,17 @@
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C64915"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0a7f7056-37a1-48df-b81e-a347af4cb23a")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -16066,6 +16495,17 @@
 				)
 			)
 		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6e5e9784-9f62-4e09-8978-e91fc72859ac")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/ec00451b-a0e1-51ca-b546-1e2bed01126e")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -16312,6 +16752,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C13585"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a57fc141-7f8a-411a-aa03-f54f7cb220c6")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/f3d02cff-b894-543d-8184-7d30aa2fa9fd")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -16450,6 +16901,17 @@
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C116492"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8fc59813-e7c2-4624-a73d-884e66415478")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -16730,6 +17192,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C106246"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b443b521-7d02-45f0-9fae-8a425bb94153")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/fe442bbb-6949-4e80-b157-a7b285488541/cf46de3c-938c-51b3-8a5c-d80cf317b772")
 		(sheetname "03 Isolated measurements")
 		(sheetfile "03_isolated_measurements.kicad_sch")
@@ -16876,6 +17349,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C536369"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bbab74df-c3ea-438e-9b10-97b2364d187c")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -17119,6 +17603,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C106246"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "10217d82-b333-4b76-b2c9-c682ef932832")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/fe442bbb-6949-4e80-b157-a7b285488541/e6551188-1cd3-5fe4-b7a5-df2c7f9ba21c")
 		(sheetname "03 Isolated measurements")
 		(sheetfile "03_isolated_measurements.kicad_sch")
@@ -17265,6 +17760,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00561cc7-5691-4be2-b3da-2438e08edfc6")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -17417,6 +17923,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C14663"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f69a2815-6936-4278-9e01-efd277974a84")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/fe442bbb-6949-4e80-b157-a7b285488541/bceea19d-064b-5628-ad7f-87a373890811")
 		(sheetname "03 Isolated measurements")
 		(sheetfile "03_isolated_measurements.kicad_sch")
@@ -17563,6 +18080,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "505dc3fb-c598-4caf-a219-831bc1ac7774")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -17797,6 +18325,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b6a7dabf-e8b4-4863-a3bf-e0a4d9745f93")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/6eb35f48-6b08-4c9b-99f9-370c4b4c9404/c1d6b895-e022-507f-8c34-67d65cb232f0")
 		(sheetname "09 AC measurement")
 		(sheetfile "09_ac_measurement.kicad_sch")
@@ -17933,6 +18472,17 @@
 				)
 			)
 		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7922cfc7-be19-4e64-9c4d-a79766f7696b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/e40f778b-4e02-442f-91ba-cfe25cfad6e5/6390b21a-12b1-5cdf-9fa8-adee07f7487f")
 		(sheetname "05 PFC")
 		(sheetfile "05_pfc.kicad_sch")
@@ -18061,6 +18611,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ed18c6bb-71be-45cd-96eb-b5fc8fdaf7c5")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -18210,6 +18771,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C96522"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c105a2e9-61e9-467b-b7aa-9b3d70354db7")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -18371,6 +18943,17 @@
 				)
 			)
 		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a4f27664-6442-40ab-b626-b08008beb5a0")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/e40f778b-4e02-442f-91ba-cfe25cfad6e5/8613eb23-d6e5-58dd-928d-5887a547821e")
 		(sheetname "05 PFC")
 		(sheetfile "05_pfc.kicad_sch")
@@ -18499,6 +19082,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "128e07ee-5561-458d-a5e4-ee2328744f80")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -18752,6 +19346,17 @@
 				)
 			)
 		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a7a93de1-8458-418d-9ef1-82196f5fc1e4")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/41091289-a0b0-4a3b-96be-33eb8bb03585/a354a193-8825-5089-b1fa-5c01f8dc3764")
 		(sheetname "08 Current measurement")
 		(sheetfile "08_current_measurement.kicad_sch")
@@ -18980,6 +19585,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C536369"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d6df59e7-1bfa-404d-880f-110a1c40a4a0")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -19220,6 +19836,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C51890374"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f603af7a-5fbb-4823-9ca6-604c03cd3ef3")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -21718,6 +22345,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C458196"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9b724187-10b5-4eff-b7b1-9e2e6f796715")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/f33e9eab-1edf-5d67-ad18-d6b84f9006ba")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -22217,6 +22855,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C17997"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "89e8f674-1ae2-4256-993c-6e8c34adc157")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/e40f778b-4e02-442f-91ba-cfe25cfad6e5/8d4f2233-04f7-5366-9adf-8dfcd7f2f4ff")
 		(sheetname "05 PFC")
 		(sheetfile "05_pfc.kicad_sch")
@@ -22363,6 +23012,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C21190"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "26c8b59b-52a6-4e3d-b8d1-083ee98eb685")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -22594,6 +23254,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C69941"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00399962-dda0-443d-a1d4-b392bdd36c0e")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -23289,6 +23960,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1a882878-46ac-4913-906f-dfe23205e5f3")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/1b4032e7-a8f0-5f48-bdf7-e26e3c41e26f")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -23435,6 +24117,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C6119856"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "cab2b098-3e6f-49a2-a027-ca4335d5a697")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -23587,6 +24280,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C5448934"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "90d8109a-02db-4c4f-8d32-6f3ed2022880")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/4a2f40d4-73d2-55cb-8bea-ca9bf6041f85")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -23717,6 +24421,17 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "459e7234-f467-4347-b81f-0babbfb80b03")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bf4d7896-6b89-4463-bd69-a3387895dda3")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23958,6 +24673,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C576816"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9711a8db-7ac3-4171-a721-a3397178e6f4")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/1fadd251-1763-5763-b761-18371692a2e1")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -24104,6 +24830,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C784102"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a68b9039-4f2b-45f6-accf-4f26cbd2a022")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -24256,6 +24993,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C29823"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "80395a91-8fe0-4688-8149-dd4dfcc70615")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/2fb8c8cd-bce3-54ee-ad48-7c0748c7efdc")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -24402,6 +25150,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ea09a418-5b3d-45ee-8679-e96ba642b56f")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -24815,6 +25574,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C35449"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9ce84ea9-2458-4fde-b492-9864994989db")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/e40f778b-4e02-442f-91ba-cfe25cfad6e5/89941544-3643-5eba-8cc2-8ae254aeb451")
 		(sheetname "05 PFC")
 		(sheetfile "05_pfc.kicad_sch")
@@ -25006,6 +25776,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C22809"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3eb26751-46fc-4f54-8052-ba6b69e6901b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/4bfd223d-829b-575d-b27e-7fdd390ac611")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -25152,6 +25933,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C190724"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "96a46ed6-2745-4111-90e7-35719e4b8fe5")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -25593,6 +26385,17 @@
 				)
 			)
 		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "13726bdd-e14d-4454-b45f-cc1478410c35")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/7ec09136-c30f-5d2e-b209-d289b11417d2")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -25833,6 +26636,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C96522"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7351ee1c-c107-45f1-ad2d-33ff993636f0")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/e40f778b-4e02-442f-91ba-cfe25cfad6e5/65f24314-dbc1-54d3-8d75-7ccfdbd9d799")
 		(sheetname "05 PFC")
 		(sheetfile "05_pfc.kicad_sch")
@@ -26004,6 +26818,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C5448934"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "073363e5-2f5d-4488-83ba-95b1f3bf7197")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/366b5e05-f5e9-5a9b-b95f-02a0e980bab1")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -26150,6 +26975,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C15849"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e2c957f9-ea63-4376-a9b6-78c2a1749c95")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -26303,6 +27139,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C17675"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4b28a333-809c-48fb-a5ff-1b8db71769fa")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/f366daed-d8e1-5efe-8be7-6028b49b3eba")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -26452,6 +27299,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C14663"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6385f3ed-83b9-43b9-950b-256dc0ab883c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/fe442bbb-6949-4e80-b157-a7b285488541/e10c2d9e-e1ea-589b-91be-26cda869398d")
 		(sheetname "03 Isolated measurements")
 		(sheetfile "03_isolated_measurements.kicad_sch")
@@ -26598,6 +27456,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C96522"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1a87764c-dafa-4fb7-811f-d2fbf2f77dd2")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -26772,6 +27641,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C23140"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "95374d90-5afa-4883-8240-cac0c936809c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/41091289-a0b0-4a3b-96be-33eb8bb03585/f613b358-e4a8-5f70-80c8-0dbb64996d56")
 		(sheetname "08 Current measurement")
 		(sheetfile "08_current_measurement.kicad_sch")
@@ -26921,6 +27801,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C21190"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0154a2da-0ba3-45dc-a2a2-ab8bde5f38a8")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/fe442bbb-6949-4e80-b157-a7b285488541/4ec4d915-26fc-5ba2-a63e-178290c2ca9f")
 		(sheetname "03 Isolated measurements")
 		(sheetfile "03_isolated_measurements.kicad_sch")
@@ -27051,6 +27942,17 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "2697ae13-39be-4fb4-8da7-24100eb2f62c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4ef4f98b-9769-4878-a1d8-24dc82688111")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27303,6 +28205,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C17927"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3ca5090d-cfa6-474e-bff8-eab6cefa0c37")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/dbf565c5-9b68-50b5-8f30-77c13d15a8ea")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -27452,6 +28365,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C107177"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ae428caf-97b1-4b24-aab3-f6c6dcde5e1a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/ca4f6e0a-0396-5cec-b837-9349b2902ce9")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -27598,6 +28522,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C29823"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "fbd84a24-ec06-45b0-86e1-4aaed1c1bb57")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -27834,6 +28769,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C13585"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4a98f0d1-d5fe-4306-9fe3-942e119d07b8")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/19d781a1-7322-529a-99ae-e24bd190bfe8")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -27983,6 +28929,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C247391"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "32676c98-e69b-4474-9b5a-1baaacf6476c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/10be3c83-e91c-505f-84df-ecf42624bc76")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -28129,6 +29086,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C432399"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c2d550f9-423e-4377-a91d-ae6f37334434")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -29865,6 +30833,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "36baf9c4-7feb-4697-812a-68372f5805fb")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/7fa845fd-5c27-56a4-ab72-99c8d7db9f25")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -30001,6 +30980,17 @@
 				)
 			)
 		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1ffed41e-bf61-4305-a9e8-dbbbc9fbd17e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/b3ba38f8-5326-522e-8116-dae9523baf1c")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -30129,6 +31119,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C21190"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6f069166-badd-442b-9006-2fb48a8da1a9")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -30268,6 +31269,17 @@
 				)
 			)
 		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c9d7349e-c94b-4ea3-9095-51a894f2fa22")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/e40f778b-4e02-442f-91ba-cfe25cfad6e5/5d8a4d26-32c5-5185-9451-8745c780ddca")
 		(sheetname "05 PFC")
 		(sheetfile "05_pfc.kicad_sch")
@@ -30396,6 +31408,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7156e46b-a26d-4a77-a964-d7e8fc287d2b")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -30545,6 +31568,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C14663"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "94d74758-6d6f-4c9b-ad9c-287735fbea02")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -30858,6 +31892,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C432399"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "89eb72c5-33c8-4844-ab32-ce580419560b")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -32663,6 +33708,17 @@
 				)
 			)
 		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "70d9da01-9424-42b8-961a-f9d33b3cc3d6")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/242a8ce9-3d46-58f0-888d-912441906f9d")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -32791,6 +33847,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C2888216"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c78ae0bc-73c2-4a79-89b1-c42c9f4763a5")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -32952,6 +34019,17 @@
 				)
 			)
 		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1b84de8c-57b2-40b3-9229-8f4bbed69a5e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/9db24b39-4e5e-53de-b17a-00434df2c859")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -33064,6 +34142,17 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "1661ef53-8dcd-43e4-8451-f0f10d5e9462")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C1534140"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "307c7e49-f7e1-4801-a7de-9e904649e209")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33240,6 +34329,17 @@
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C116492"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b1ca1e80-cde4-4733-8e2d-52b11742a126")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -33520,6 +34620,17 @@
 				)
 			)
 		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "adf23574-a3ca-43f6-8a6a-a635bca799b0")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/762cf5b7-60ca-5cf1-999d-5f9ad1c9b806")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -33760,6 +34871,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C29823"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ce642151-10a6-4daa-9c73-356ab4bbcbe8")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/182199f8-2f00-5bba-9e6d-eb9a77631e7f")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -33898,6 +35020,17 @@
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C460267"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "806cb1c0-0507-49fc-81d8-b5128ec8c0a6")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -34178,6 +35311,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C22775"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9ec5caf2-ff93-4dda-a33b-650f5bfa97a4")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/fe442bbb-6949-4e80-b157-a7b285488541/96708568-35a1-54bf-aafa-deb07b062212")
 		(sheetname "03 Isolated measurements")
 		(sheetfile "03_isolated_measurements.kicad_sch")
@@ -34324,6 +35468,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C17997"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ac129445-7423-4081-950c-f25a1f0dbb45")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -34476,6 +35631,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C1653"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2b3ccad3-06c6-4432-a8cf-f4e7c1544160")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/200debdc-0ecd-5ce1-b9e5-1cc2ed2fcfe7")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -34606,6 +35772,17 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "730912ed-c2c1-4f92-a3bf-a3e653041d69")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7ee1c8a6-2ee9-4feb-b125-98b5cb00c9ec")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34772,6 +35949,17 @@
 				)
 			)
 		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "390675b1-694f-45ab-b815-37541efb56d1")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/9cbc3541-cd74-5e29-99fe-b333c3506c10")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -34892,6 +36080,17 @@
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ba90428c-31e8-413c-b724-5752effe5a6a")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -35200,6 +36399,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C3298405"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bcec9b3b-e604-4439-8cfe-595f62b00acd")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/e40f778b-4e02-442f-91ba-cfe25cfad6e5/7999a8c3-564b-5151-991a-52a53c11e0d9")
 		(sheetname "05 PFC")
 		(sheetfile "05_pfc.kicad_sch")
@@ -35371,6 +36581,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C342746"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7561f813-bb67-4dc3-ac90-407030f46cd5")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/f31b7ed3-6e34-5ddc-bf9d-9fc36b23a528")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -35509,6 +36730,17 @@
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C458196"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f1f85f6f-e395-4fc6-9583-039ab358eff9")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -35998,6 +37230,17 @@
 				)
 			)
 		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "95ec2504-d105-4963-a52a-4cfe40fc71d5")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/9227d323-d1bd-5bdf-8bbf-955dd55ba937")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -36161,6 +37404,17 @@
 				)
 			)
 		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d77337f6-5c67-43d4-9498-4cc27e616060")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/f2303aef-2434-5e16-8a6f-ad41cd371aeb")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -36289,6 +37543,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C2933666"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "36b6a054-a0e8-4bf3-b949-a9c8261a2d0e")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -36441,6 +37706,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C5448934"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "31261e34-ffab-47b6-aeb4-21c81f9e6468")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/c6872296-f7df-5e91-89f7-e1937f77d8fa")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -36587,6 +37863,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "540291ab-ee6c-4081-b31d-04f000631248")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -36739,6 +38026,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C5448934"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "09fdf25e-1379-4568-b9ff-40ee0af48a9c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/57ffc9fa-d26e-579e-89ec-77178839ff4b")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -36888,6 +38186,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C23212"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "302a1edd-2320-4766-a091-d34fad4c1852")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/8f82a20a-563a-5a06-b48a-41100f931a07")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -37034,6 +38343,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "defbc084-560b-4db7-b9d8-f2cd2c59e697")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -37248,6 +38568,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C17901"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6fd10522-c960-48be-a37e-f99e9422dd6f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/69426b02-bb19-5b4e-a6d2-eef36e652ac8")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -37394,6 +38725,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5d4a19d6-d430-4d36-a3d1-d6eaeff9102a")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -37719,6 +39061,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C31850"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c7c2513d-4e6d-4be1-99d2-e58fcad4478d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/50ce8637-beca-4745-9ce6-9d1bd3bb08df/107e271f-5adc-5730-a930-f1f51f4dcbbf")
 		(sheetname "04 MCU connector")
 		(sheetfile "04_mcu_connector.kicad_sch")
@@ -37868,6 +39221,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C29823"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1a210a1b-9c22-4608-a888-af3294e26e36")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/3020f7dc-c4e3-40e5-8c14-fc10c4f3df1f/fd66fde6-6367-5b1d-809a-6d81dfc67f26")
 		(sheetname "11 Startup")
 		(sheetfile "11_startup.kicad_sch")
@@ -38014,6 +39378,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C96522"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7d22cd05-c73b-4898-ba9e-2ebfbd6e354e")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -38188,6 +39563,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C22809"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3de41ccf-9acd-48ca-9f20-2777f5745865")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/fe442bbb-6949-4e80-b157-a7b285488541/7ce5f2e8-1b6f-5e7b-879d-66b9aabc16e5")
 		(sheetname "03 Isolated measurements")
 		(sheetfile "03_isolated_measurements.kicad_sch")
@@ -38324,6 +39710,17 @@
 				)
 			)
 		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3dc0dfea-8111-4c2d-89bb-5862c6d44446")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/aedd430b-5c61-57f7-aba8-6bea082c3a00")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -38452,6 +39849,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C3297747"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "89d2ed10-07ac-4a60-a4fa-781cf5c9bfc3")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -38626,6 +40034,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C3298405"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "02933699-894f-40f4-b740-ff84cdeeab8a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/e40f778b-4e02-442f-91ba-cfe25cfad6e5/e2b228aa-3e83-56d7-a483-9dc1534e1fea")
 		(sheetname "05 PFC")
 		(sheetfile "05_pfc.kicad_sch")
@@ -38784,6 +40203,17 @@
 				)
 			)
 		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e0c449d4-7cda-46c7-a7f7-af0edf90040b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/99526a91-410b-5afd-a7a5-eba2b428d11f")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -38912,6 +40342,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C21190"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "156b4f29-d20c-4146-8884-b6c189ef65b5")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -39061,6 +40502,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c54607a7-1bfd-4aa0-814b-fdcc0b09a01f")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -39292,6 +40744,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C190724"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "696fca7e-597d-49de-82ca-2001fe1731b2")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -39733,6 +41196,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C5448934"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6c65eb53-0aba-4367-aeea-f611b47bb59d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/112a7826-3291-5d1b-b1d8-5ad265f2070e")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -39879,6 +41353,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C2888216"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3ca047f3-7cc7-4b99-bc83-b38dc873d15c")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -40053,6 +41538,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2b6e60d3-e893-42a0-a900-da7ea5c90783")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/50ce8637-beca-4745-9ce6-9d1bd3bb08df/0d7db796-c84f-52fa-8ac3-b1db541d600a")
 		(sheetname "04 MCU connector")
 		(sheetfile "04_mcu_connector.kicad_sch")
@@ -40199,6 +41695,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C51890374"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "69c574bc-a44d-4308-a579-ec6c2c3d5167")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -42705,6 +44212,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C2933666"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9a502fb5-252b-410c-b1b1-252c29677aed")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/9abefae3-65aa-5923-a5cb-c331c88e7bd7")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -42851,6 +44369,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C22809"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8ff37fe6-da76-4247-b529-53b975d55aa0")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -43003,6 +44532,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6951c563-1148-4bbf-9db0-e38b260d68f7")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/8062bd6f-3f5b-5845-8d46-5255f7c4e062")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -43149,6 +44689,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C13585"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "fa536346-7cf2-459f-b6e9-c589c56195ed")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -43301,6 +44852,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C445674"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f384f262-0c49-44a1-9149-7eb788157632")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/3020f7dc-c4e3-40e5-8c14-fc10c4f3df1f/e708b398-8e52-5c64-9dcb-23be93e01b2a")
 		(sheetname "11 Startup")
 		(sheetfile "11_startup.kicad_sch")
@@ -43447,6 +45009,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C23153"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "770aa5d9-351c-470f-80f5-f1228eacb24d")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -43599,6 +45172,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C14663"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2fd034d3-b3d3-4e03-aedf-275b94b1b8fd")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/fe442bbb-6949-4e80-b157-a7b285488541/7e955605-989d-52ee-8867-66ee8d6f15ed")
 		(sheetname "03 Isolated measurements")
 		(sheetfile "03_isolated_measurements.kicad_sch")
@@ -43745,6 +45329,17 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C913388"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a0ac346b-7e06-4a8e-9eb7-c8f87e8e4801")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -45827,6 +47422,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C116492"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "ab3b00a9-3d9f-4af8-951a-5572fd80b9e2")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/9fd879b3-5d6e-5caa-9638-645301ffcae4")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -46110,6 +47717,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C15849"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "dd6b887d-20eb-4adf-8367-8b4818e2baa5")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/50ce8637-beca-4745-9ce6-9d1bd3bb08df/a1e96f4b-5593-5b11-aed8-bfb877decea3")
 		(sheetname "04 MCU connector")
 		(sheetfile "04_mcu_connector.kicad_sch")
@@ -46261,6 +47880,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "3a042be2-ca0c-49d1-a427-8dd2870f6274")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -46420,6 +48051,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C25804"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "642686e8-7343-4ec1-a67b-c60fdf640653")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/64b707d5-f32f-5e7b-9e53-60b64dc8fdbc")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -46571,6 +48214,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C4190"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "d9e89638-6560-4c28-9c50-5912bad92e0d")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -46730,6 +48385,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C23630"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "8cb18df8-90c7-413d-b199-726b1fc52178")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/fe442bbb-6949-4e80-b157-a7b285488541/7c6861a2-60f5-5f43-a81e-c3f2e5fce784")
 		(sheetname "03 Isolated measurements")
 		(sheetfile "03_isolated_measurements.kicad_sch")
@@ -46885,6 +48552,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C22809"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "9fcafa9f-1c1a-4930-9a90-1c2be2c42182")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/50ce8637-beca-4745-9ce6-9d1bd3bb08df/5212416d-1953-55af-a98a-ade01e30aa7a")
 		(sheetname "04 MCU connector")
 		(sheetfile "04_mcu_connector.kicad_sch")
@@ -47027,6 +48706,18 @@
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C460267"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "d0818628-512d-4fd0-a702-2e85805e016a")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -47314,6 +49005,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C14663"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "5e3cd0a9-a2f6-453f-9bcf-3f357fd7b130")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/fe442bbb-6949-4e80-b157-a7b285488541/b3e3f025-7112-5d61-8de5-0c2accfbb14f")
 		(sheetname "03 Isolated measurements")
 		(sheetfile "03_isolated_measurements.kicad_sch")
@@ -47465,6 +49168,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C2933439"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "1e9a2c57-790e-41bf-87d9-4a05bb1e36ba")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -47624,6 +49339,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C25804"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "60006532-c453-4342-ba20-4297a7fafdff")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/0c2e046b-528e-5548-8219-34011426559b")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -47775,6 +49502,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C25804"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "9bde0482-a7be-486e-a017-c0c658359cad")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -47934,6 +49673,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C2907381"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "2e8a053f-2e5e-46d1-a279-e07bc5a30309")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/8037fda7-c30a-4858-8ec9-bdfcbfc7d405/0de8db6d-5f2e-5996-b71e-3491eb8eae82")
 		(sheetname "02 DHB gate drive")
 		(sheetfile "02_dhb_gate_drive.kicad_sch")
@@ -48076,6 +49827,18 @@
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C64915"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "abcdb6a7-6016-4a45-a4d7-d84b5acd715b")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -48363,6 +50126,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C15849"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "38f6e365-5865-4a65-aa12-0127e7923bc9")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/fe442bbb-6949-4e80-b157-a7b285488541/f56f09bb-710d-525e-94c2-6625dc45531c")
 		(sheetname "03 Isolated measurements")
 		(sheetfile "03_isolated_measurements.kicad_sch")
@@ -48514,6 +50289,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C25804"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "71c82c6d-8420-46e8-8acb-6f80e2fd7e58")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -48673,6 +50460,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C22809"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "b9d351ec-fdc5-49f3-9dc1-ce92f536af8b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/fe442bbb-6949-4e80-b157-a7b285488541/efe84ab9-7acb-5beb-81c4-ff4811e56d86")
 		(sheetname "03 Isolated measurements")
 		(sheetfile "03_isolated_measurements.kicad_sch")
@@ -48824,6 +50623,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C1648"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "931756e4-b8d3-46e5-83ba-22804eb82b0a")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -48983,6 +50794,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "ddebeadc-4a35-46a1-ad7b-145ccd46a00a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/6eb35f48-6b08-4c9b-99f9-370c4b4c9404/139403e2-4322-523a-b8c8-95bd67cdb2fb")
 		(sheetname "09 AC measurement")
 		(sheetfile "09_ac_measurement.kicad_sch")
@@ -49134,6 +50957,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C23138"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "003629c6-96e6-4e66-91e5-f7781d44e891")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -49293,6 +51128,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "15791fe8-cd1c-4b69-a611-f41f28f3af29")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/7e59996d-9e84-5d50-9aab-84794cda0d8c")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -49444,6 +51291,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C29823"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "9287ec07-7261-4b0c-b1bb-e6a4fcbc99b4")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -49603,6 +51462,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C4190"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "c7bcca5d-276f-4fba-ac06-701fd3964dd4")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/e40f778b-4e02-442f-91ba-cfe25cfad6e5/4d970edb-3156-583a-8b8b-4b563f66d095")
 		(sheetname "05 PFC")
 		(sheetfile "05_pfc.kicad_sch")
@@ -49754,6 +51625,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C29823"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "ab4de130-1f85-4ab2-8574-b933a24dd6e8")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -49913,6 +51796,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C25981"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "38b35f60-ef7c-4a53-8f52-08b214315f15")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/053c7c06-a730-55fa-97e1-630f75455652")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -50064,6 +51959,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C13585"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "fd70667e-57be-48d7-bc93-7b63854e8fe9")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -50223,6 +52130,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C23212"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "2805793f-4065-4905-9a00-9b1f11c6679a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/553ab6bc-8d29-430e-9326-7f1259a8c57d/0512e78b-bd3f-5151-bc9c-4db6d7cf427e")
 		(sheetname "10 PFC current measurement")
 		(sheetfile "10_pfc_current_measurement.kicad_sch")
@@ -50378,6 +52297,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C1648"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "54fd6205-b1fd-463c-9477-05e4e0fdc1f7")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/553ab6bc-8d29-430e-9326-7f1259a8c57d/bd44f1c0-213c-511b-a576-6e2badad1616")
 		(sheetname "10 PFC current measurement")
 		(sheetfile "10_pfc_current_measurement.kicad_sch")
@@ -50520,6 +52451,18 @@
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C64915"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "7a56084d-9e2b-4fc5-b2ae-ea1e56e35d37")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -50803,6 +52746,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C461855"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "c426a1f3-aaf5-466d-9d8d-34c0f184857a")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -51172,6 +53127,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C1648"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "285d76f5-77e1-4f54-8b2c-b79c851252f6")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/41091289-a0b0-4a3b-96be-33eb8bb03585/2dabf638-842a-56dc-a85e-56146dfa14b9")
 		(sheetname "08 Current measurement")
 		(sheetfile "08_current_measurement.kicad_sch")
@@ -51323,6 +53290,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C57424"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "f2ee1f85-017d-4e76-9a14-645078eb1c3b")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -51709,6 +53688,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C64915"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "f6a46ca4-b251-4647-8992-f61bd748930c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/8037fda7-c30a-4858-8ec9-bdfcbfc7d405/6d935ad5-8066-5316-bb2f-43368249bbd6")
 		(sheetname "02 DHB gate drive")
 		(sheetfile "02_dhb_gate_drive.kicad_sch")
@@ -51992,6 +53983,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C25804"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "66e12351-0369-4671-953f-15fbed9b6fa5")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/8037fda7-c30a-4858-8ec9-bdfcbfc7d405/5c1aa1c7-ff0b-5bf1-99ee-ff7966a4e253")
 		(sheetname "02 DHB gate drive")
 		(sheetfile "02_dhb_gate_drive.kicad_sch")
@@ -52143,6 +54146,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "a7827a1c-9551-4be0-8c7c-0cd398a72b77")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -52302,6 +54317,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C23179"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "9b72c88e-cf76-4834-8d76-badce5cbd506")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/50ce8637-beca-4745-9ce6-9d1bd3bb08df/338d7b3b-5c99-58b6-ad13-64300118e8a1")
 		(sheetname "04 MCU connector")
 		(sheetfile "04_mcu_connector.kicad_sch")
@@ -52457,6 +54484,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C23138"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "f8b5dd03-9bf6-4cc7-a513-8e91c581a857")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/553ab6bc-8d29-430e-9326-7f1259a8c57d/b7711699-a2aa-5024-a99d-498dc3607b9a")
 		(sheetname "10 PFC current measurement")
 		(sheetfile "10_pfc_current_measurement.kicad_sch")
@@ -52599,6 +54638,18 @@
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C478382"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "84890d01-ccdd-4a1f-a132-40beb7342f3c")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -52910,6 +54961,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C460267"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "2ebf696b-da11-4d8e-91d9-c8b9d6855986")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/fe442bbb-6949-4e80-b157-a7b285488541/ca3a384f-f6b4-5506-9e14-aa73d3d28b15")
 		(sheetname "03 Isolated measurements")
 		(sheetfile "03_isolated_measurements.kicad_sch")
@@ -53193,6 +55256,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C12891"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "c76cf5af-60d6-4712-9aaf-af9da2dc1fd1")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/e372ba37-35a4-5081-8bd3-13d89b017608")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -53335,6 +55410,18 @@
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C460267"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "c9f5ebcf-bbcf-47ef-9bd7-ae92ab41f1bf")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -53622,6 +55709,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C247391"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "ac77941d-1815-40d2-9904-5ef7e14da9c9")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/cf3e3a0b-daaf-5023-97c4-9bb3ea49cd85")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -53773,6 +55872,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "e89ac841-67a4-4088-b864-b2b09444645e")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -53932,6 +56043,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C247391"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "8c27fb01-25aa-41c9-8a2c-3901465f0958")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/ffc8d7f9-3457-5866-8119-6bce55a059f3")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -54083,6 +56206,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C2999547"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "e4e4e4ee-8d02-41f2-8f99-19d958848a7b")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -54242,6 +56377,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C5448934"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "d8ede7aa-e8ce-45ac-bcf8-58a136d5a520")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/aa9cafc3-ebd5-5805-9e91-ecec8febb1cf")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -54393,6 +56540,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C1648"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "d184288e-59f2-473d-87cb-5668e43b1539")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -54552,6 +56711,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C15849"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "ea920eb0-940d-4461-887a-084449c288a7")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/8037fda7-c30a-4858-8ec9-bdfcbfc7d405/3e679a14-af7f-5871-a474-ac1f505e2ef5")
 		(sheetname "02 DHB gate drive")
 		(sheetfile "02_dhb_gate_drive.kicad_sch")
@@ -54703,6 +56874,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C4216"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "737e081c-bfb5-44d8-b1bc-e7e54b15c447")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -54862,6 +57045,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C22356719"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "36ee82bc-0187-477d-8f3c-ed86b36d149e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/2e329775-902d-5ec8-8120-c301ea309fec")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -55013,6 +57208,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C25804"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "d608ea66-b420-4d9d-8c65-ffe60a23fc0f")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -55172,6 +57379,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C6119961"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "1009bc2d-ce87-46b0-9066-c986d47614ab")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/8afbb538-1616-5efb-9d80-dfbb48def8ae")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -55323,6 +57542,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C21190"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "741e7f71-271a-48b8-9176-ca5fb1d74d08")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -55482,6 +57713,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C1848"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "efa377cd-9faf-4a07-8752-c56bfb90a527")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/8037fda7-c30a-4858-8ec9-bdfcbfc7d405/2f336876-4da5-5e7f-9f59-9a00615467ea")
 		(sheetname "02 DHB gate drive")
 		(sheetfile "02_dhb_gate_drive.kicad_sch")
@@ -55633,6 +57876,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C2930397"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "93f6df29-5fdc-48f5-bc4d-98402476867e")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -55792,6 +58047,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C22356719"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "9fd50ae6-b514-41ca-bb43-6fe36efd3113")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/e44194bb-e43b-56b0-9ae8-2cfc5c87bb40")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -55947,6 +58214,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "d0870e95-d9ed-4370-8a51-a46e5b615550")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/e40f778b-4e02-442f-91ba-cfe25cfad6e5/81c76437-1d02-5b78-886a-07488dda5f12")
 		(sheetname "05 PFC")
 		(sheetfile "05_pfc.kicad_sch")
@@ -56078,6 +58357,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "d0d2acf3-f8ad-4c87-9660-cec24b1a4c4d")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -56224,6 +58515,18 @@
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C460267"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "65a963a6-4e5a-4cec-a799-f6ae2e669fc8")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -56511,6 +58814,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C1848"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "796670fa-7ff8-4a2e-9d07-105f7d08f0e3")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/475163c3-0c10-5d7c-ab3a-db2b3d577bfe")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -56662,6 +58977,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C22356719"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "f3b2967c-47b0-4a5e-a677-b1e6f9b53c30")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -56822,6 +59149,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "50288579-c00e-44b0-bc8c-1b791273111d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/50ce8637-beca-4745-9ce6-9d1bd3bb08df/5cc3803c-13d1-5bc7-95de-f57aa2b54af8")
 		(sheetname "04 MCU connector")
 		(sheetfile "04_mcu_connector.kicad_sch")
@@ -56973,6 +59312,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C2157117"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "b9b0a8e8-3cd5-46bc-8305-3737565712dd")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -57352,6 +59703,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C25804"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "a9525803-a6dd-47cb-99f2-6031f38c299b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/8037fda7-c30a-4858-8ec9-bdfcbfc7d405/1cea73f5-4e1d-524f-9629-29a0a65363c2")
 		(sheetname "02 DHB gate drive")
 		(sheetfile "02_dhb_gate_drive.kicad_sch")
@@ -57503,6 +59866,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C23138"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "ff1a1011-6f38-426a-9122-80b539352e46")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -57662,6 +60037,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C14663"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "ff2a502f-1bfd-44ca-ae7f-d1ffc78dbd58")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/50ce8637-beca-4745-9ce6-9d1bd3bb08df/73153235-9977-5baf-80cd-6983df8c2f3b")
 		(sheetname "04 MCU connector")
 		(sheetfile "04_mcu_connector.kicad_sch")
@@ -57817,6 +60204,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "67eab8ff-bd8c-44c0-b7f7-3b49e73c8b61")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/a97adcc6-8fb0-5e1b-b297-a142c21d1763")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -57948,6 +60347,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C25804"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "b540cac4-90cd-42cc-93c9-e7e6c25930ba")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -58107,6 +60518,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C22775"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "54f8eb61-40c6-4695-a52e-43d17530aa1d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/6eb35f48-6b08-4c9b-99f9-370c4b4c9404/23c958ab-75f9-517b-8cac-b8dd0d51aeee")
 		(sheetname "09 AC measurement")
 		(sheetfile "09_ac_measurement.kicad_sch")
@@ -58241,6 +60664,18 @@
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "06b79db5-8f1b-475d-b569-b53a6a71b6be")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "fe4ce06a-f94e-4645-8237-870f60c8394d")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -58430,6 +60865,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C17675"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "b340dc9c-9224-4070-9433-b63d1c46912d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/0e4f2ffc-01a1-59d2-9262-93eab80fbf94")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -58581,6 +61028,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C23138"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "c11532d0-1cf4-4cf6-91b8-a90d75cde81c")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -58740,6 +61199,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C106246"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "146c9639-f135-4ac7-8396-6953f099aafa")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/50ce8637-beca-4745-9ce6-9d1bd3bb08df/79fbcae8-b6e5-526c-887f-4f35b10e2a49")
 		(sheetname "04 MCU connector")
 		(sheetfile "04_mcu_connector.kicad_sch")
@@ -58895,6 +61366,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C12891"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "b843da8b-1bd6-40ba-8b52-51fdbfd2681d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/bb82ee51-21f6-5169-a055-cc8fd566ccf8")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -59046,6 +61529,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C82045"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "a95cd223-76e0-4f74-a159-85dd7c807387")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -59425,6 +61920,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C25804"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "a12b5d8b-5dab-497d-9ea5-107fa1f8abff")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/6eb35f48-6b08-4c9b-99f9-370c4b4c9404/9e7f6c00-32d6-5acc-b6ab-56a304105948")
 		(sheetname "09 AC measurement")
 		(sheetfile "09_ac_measurement.kicad_sch")
@@ -59576,6 +62083,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "c7166828-52cb-48cd-a111-0c4798ecd9ce")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -59735,6 +62254,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C15849"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "ce91bf0e-2afe-4b90-8359-c7c6b0f57b48")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/50ce8637-beca-4745-9ce6-9d1bd3bb08df/82765545-1df7-58f1-9143-a6693a8678cc")
 		(sheetname "04 MCU connector")
 		(sheetfile "04_mcu_connector.kicad_sch")
@@ -59886,6 +62417,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C29823"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "d53f1d0c-fb7b-46c3-b25e-bb54d7b1f7ec")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -60045,6 +62588,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C22356719"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "fa6dc2e4-b045-4b9e-acde-fd87250e6a14")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/22d23b39-afb1-5fdc-a066-ea21dc922d43")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -60187,6 +62742,18 @@
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C460267"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "64c640c0-444c-470c-9213-df7bba724a7a")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -60474,6 +63041,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C14663"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "0d8893db-f20d-4477-a1d3-362fff80a197")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/8037fda7-c30a-4858-8ec9-bdfcbfc7d405/92519bbb-345b-517d-8698-d0922dd3966e")
 		(sheetname "02 DHB gate drive")
 		(sheetfile "02_dhb_gate_drive.kicad_sch")
@@ -60625,6 +63204,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C5448934"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "fa38d03a-5bf9-486b-8511-03613157d087")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -60784,6 +63375,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C22775"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "14f4330c-02a9-4f52-ac74-272fb2c44dce")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/553ab6bc-8d29-430e-9326-7f1259a8c57d/65f52a4d-b76a-52a0-bb39-837313863862")
 		(sheetname "10 PFC current measurement")
 		(sheetfile "10_pfc_current_measurement.kicad_sch")
@@ -60935,6 +63538,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C23630"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "0fed1bbf-d4a3-4411-87a7-d1694dc77ee1")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -61094,6 +63709,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C25804"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "0bedea4d-7d8a-4157-94f0-2dc3d4cff60e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/06a0f167-7a12-5e3e-8fd5-492ab7ee2762")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -61245,6 +63872,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C14663"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "403da0bc-ef94-43a4-82f8-f34c84b90b68")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -61404,6 +64043,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C1848"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "8f2c8c3a-cbb6-4266-9221-f0a15b12235f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/8037fda7-c30a-4858-8ec9-bdfcbfc7d405/cf3f4bc8-c02c-5a12-ae4b-abfa065383c2")
 		(sheetname "02 DHB gate drive")
 		(sheetfile "02_dhb_gate_drive.kicad_sch")
@@ -61555,6 +64206,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "91446778-594e-4ea6-9237-0e810ef9579d")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -61988,6 +64651,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C14858"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "5fa72cfc-3cab-4ba2-84fd-de31c80130ed")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/553ab6bc-8d29-430e-9326-7f1259a8c57d/9a3bd817-c67b-5832-8584-ed89d0da137d")
 		(sheetname "10 PFC current measurement")
 		(sheetfile "10_pfc_current_measurement.kicad_sch")
@@ -62139,6 +64814,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C247391"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "e8f0beed-750f-45f6-b7bf-e075d7346383")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -62298,6 +64985,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C23254"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "07b11a2e-10f6-45ef-a2ad-93fb759e2c8b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/8037fda7-c30a-4858-8ec9-bdfcbfc7d405/566b4c5e-b88b-5f0f-a38d-f01ad78e33f1")
 		(sheetname "02 DHB gate drive")
 		(sheetfile "02_dhb_gate_drive.kicad_sch")
@@ -62449,6 +65148,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C12891"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "5108fd23-f94d-4737-96aa-847acef434be")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -62608,6 +65319,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C23630"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "dd8bf150-441b-42e9-9ee9-61355042578f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/6eb35f48-6b08-4c9b-99f9-370c4b4c9404/769edd79-aeb6-5849-88e8-aa9b7e454d0d")
 		(sheetname "09 AC measurement")
 		(sheetfile "09_ac_measurement.kicad_sch")
@@ -62759,6 +65482,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C37970"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "ea67d340-4804-4ed2-8ab4-9f51232d15c4")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -63154,6 +65889,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C17903"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "44d4a276-7051-4d62-8341-785b61e79f3b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/4f29c28b-10c5-50d6-98c3-c23856fd92a5")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -63309,6 +66056,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C2999547"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "2bedd2ac-b1b8-4fac-a2c0-2f087bcd7aae")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/6eb35f48-6b08-4c9b-99f9-370c4b4c9404/4c35dc53-c1aa-5020-85a0-5d3da3c9b226")
 		(sheetname "09 AC measurement")
 		(sheetfile "09_ac_measurement.kicad_sch")
@@ -63460,6 +66219,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C23138"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "39ecd37e-f100-4029-bfc6-57db6ea6a60c")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -63620,6 +66391,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C23212"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "955bf01b-edbe-4637-89b9-d0c6bb84b679")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/553ab6bc-8d29-430e-9326-7f1259a8c57d/1bb6b3dc-dcd9-5204-b9f2-78ab506890ad")
 		(sheetname "10 PFC current measurement")
 		(sheetfile "10_pfc_current_measurement.kicad_sch")
@@ -63762,6 +66545,18 @@
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C460267"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "3348d652-8aae-4ba5-aa19-9e88e52d1f92")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -64036,6 +66831,18 @@
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C116492"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "917c645a-77f8-4009-bf8e-476b1eddf06c")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -64323,6 +67130,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C6119856"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "2d43af45-e422-4f83-8ac2-af74a769be56")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/6eb35f48-6b08-4c9b-99f9-370c4b4c9404/12ee8723-7c35-5e5a-8a38-27b5c26449a2")
 		(sheetname "09 AC measurement")
 		(sheetfile "09_ac_measurement.kicad_sch")
@@ -64478,6 +67297,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C12891"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "815d67a3-6cfe-4d82-8a1c-c2c1a56f5c63")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/415f4607-59f6-4888-a9c9-16076e86f54c/6753d7e0-cf67-54b3-a63e-1fb757317745")
 		(sheetname "01 AUX supply")
 		(sheetfile "01_aux_supply.kicad_sch")
@@ -64629,6 +67460,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C74860"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "3619c92a-28f4-41d6-b531-5d67d038c299")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -64982,6 +67825,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C23212"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "53340a98-df6e-499d-97d0-def293b6e4c9")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/553ab6bc-8d29-430e-9326-7f1259a8c57d/9321e44e-8851-5aee-962e-71c81b6a9836")
 		(sheetname "10 PFC current measurement")
 		(sheetfile "10_pfc_current_measurement.kicad_sch")
@@ -65137,6 +67992,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "8cb1f0f1-e043-4b07-afec-236bba43359f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/e40f778b-4e02-442f-91ba-cfe25cfad6e5/9712b183-9595-51ca-b878-70d0ddd2ba2b")
 		(sheetname "05 PFC")
 		(sheetfile "05_pfc.kicad_sch")
@@ -65268,6 +68135,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C23212"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "1d5d0847-2b9f-47f4-9b74-edae1788fdf2")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -65427,6 +68306,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C22809"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "694e7d8e-5b8e-4720-9da5-146039968b97")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/50ce8637-beca-4745-9ce6-9d1bd3bb08df/7d86f1bc-79f1-5f57-8ae3-e9e6d67fe638")
 		(sheetname "04 MCU connector")
 		(sheetfile "04_mcu_connector.kicad_sch")
@@ -65569,6 +68460,18 @@
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C478382"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "74c328c4-2dda-4a52-8d7b-57832f77c647")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -65889,6 +68792,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C22809"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "72c3a362-627b-4e84-9b2c-10d896e71f4f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/41091289-a0b0-4a3b-96be-33eb8bb03585/c296972e-e573-56fc-b608-0dd6e7ff780b")
 		(sheetname "08 Current measurement")
 		(sheetfile "08_current_measurement.kicad_sch")
@@ -66031,6 +68946,18 @@
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C460267"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "06d2ad1a-496e-4e12-b235-f2b1e62826d4")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -66314,6 +69241,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C575578"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "1510968e-9eb0-4506-b097-6328f017193e")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -66709,6 +69648,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C575578"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "9ea07091-2079-4461-8db3-22a94e41cb36")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/6eb35f48-6b08-4c9b-99f9-370c4b4c9404/070a6917-c008-521f-a42f-b815bb259272")
 		(sheetname "09 AC measurement")
 		(sheetfile "09_ac_measurement.kicad_sch")
@@ -67100,6 +70051,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C14663"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "f53b64f6-5d72-4065-b560-b94e4d2f7ef5")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/e2979868-9ea4-55aa-a995-9af3399aee0d")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -67251,6 +70214,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C14663"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "a3af73e5-3356-4712-b28f-cced839f1a23")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -67410,6 +70385,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C2933439"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "be4aedd5-d7cd-4994-b492-9b88e4e2753c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/0a29a74b-865c-573b-9479-cbeca87f6035")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -67561,6 +70548,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C22356719"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "162b3453-f36a-4536-81d1-98d4877b700b")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -67720,6 +70719,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C22809"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "60ab73bb-bccf-454e-a9f2-630e195e3bb0")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/41091289-a0b0-4a3b-96be-33eb8bb03585/3469fc4b-487d-5d61-919e-608dc37beae4")
 		(sheetname "08 Current measurement")
 		(sheetfile "08_current_measurement.kicad_sch")
@@ -67871,6 +70882,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C1848"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "915f9da0-9ca6-4cf2-96ce-27df043b003a")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -68030,6 +71053,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "3c97a9b6-fd2a-40f0-b590-69d978a31aef")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/1668a02d-d078-55bc-92ee-bf6f5a20644f")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -68161,6 +71196,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C14663"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "74730311-37de-4db3-991b-cdbbfdb7c788")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -68320,6 +71367,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C23138"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "dccfbec1-3b03-406b-8889-4165971d57a9")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/41091289-a0b0-4a3b-96be-33eb8bb03585/3d534f70-c929-5eb2-9d48-3fdebb54488f")
 		(sheetname "08 Current measurement")
 		(sheetfile "08_current_measurement.kicad_sch")
@@ -68471,6 +71530,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C22809"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "d1a8a49c-498b-422d-bd21-9be6b6f9e80e")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -68630,6 +71701,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "57dd180f-652c-4fb4-84b5-bc9bfa07cae2")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/50ce8637-beca-4745-9ce6-9d1bd3bb08df/a62fa231-ede0-5757-bb8c-7ffa19209eb4")
 		(sheetname "04 MCU connector")
 		(sheetfile "04_mcu_connector.kicad_sch")
@@ -68781,6 +71864,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C2933439"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "336e5ca3-c42f-4a0d-bcd6-6113002ff25e")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -68940,6 +72035,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C23138"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "eae24cc4-e64c-4e76-ad41-48952a36954a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/553ab6bc-8d29-430e-9326-7f1259a8c57d/c05f8f88-ae07-5b8e-a709-22b5e96f5c47")
 		(sheetname "10 PFC current measurement")
 		(sheetfile "10_pfc_current_measurement.kicad_sch")
@@ -69091,6 +72198,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C575578"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "9768d4e6-f17a-46a0-8958-d548dd0554d4")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -69486,6 +72605,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C22962"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "edc77645-b704-464f-8480-ee08bde99b77")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/50ce8637-beca-4745-9ce6-9d1bd3bb08df/8c4dd106-88ae-56c0-9a12-895bc3179b53")
 		(sheetname "04 MCU connector")
 		(sheetfile "04_mcu_connector.kicad_sch")
@@ -69637,6 +72768,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C14663"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "af822042-875f-4a54-9aef-970fcd21861d")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -69796,6 +72939,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C29823"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "d4ca14ec-52cc-4c14-8c5b-a36d13718b57")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/8037fda7-c30a-4858-8ec9-bdfcbfc7d405/84690e03-2331-5edb-899f-f5c38326d6ce")
 		(sheetname "02 DHB gate drive")
 		(sheetfile "02_dhb_gate_drive.kicad_sch")
@@ -69947,6 +73102,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C23254"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "c6f84da7-b656-4bef-a672-cf91b377a422")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -70106,6 +73273,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C14858"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "a3184290-2b15-483e-a4e6-eaf7103c464f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/553ab6bc-8d29-430e-9326-7f1259a8c57d/b750ffec-cd58-5a71-8ed5-e1fd41b35995")
 		(sheetname "10 PFC current measurement")
 		(sheetfile "10_pfc_current_measurement.kicad_sch")
@@ -70257,6 +73436,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "363dbabe-79a1-433c-ba82-e4380dc48705")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -70416,6 +73607,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C2907381"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "b38dcb2e-2de4-4089-9d67-72b72418c789")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/4685a408-fe1a-52aa-959d-3d1d30074b71")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -70567,6 +73770,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C25981"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "ed720008-4837-4eba-bf45-cfa41ec7b88c")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -70726,6 +73941,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C1648"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "5518d629-8059-458b-b5d7-0dca60d7e2ad")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/553ab6bc-8d29-430e-9326-7f1259a8c57d/8bda7d5b-ed20-5f8d-bd54-75de40b1f715")
 		(sheetname "10 PFC current measurement")
 		(sheetfile "10_pfc_current_measurement.kicad_sch")
@@ -70881,6 +74108,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C17415"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "333efb94-8ab8-46b8-98bf-03eb1c4fec58")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/57b8f3c1-4542-57a1-b32d-765cf447e439")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -71023,6 +74262,18 @@
 				(font
 					(size 1.27 1.27)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C460267"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "a31bad4d-9b4e-432a-bf19-041d472f288f")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -71310,6 +74561,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C25804"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "df666cb0-fe2a-43ae-8aa6-3a6e5c1dbbd2")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/fb072994-af06-5902-b848-a1fecb29968f")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -71461,6 +74724,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C22775"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "f5935d5c-3470-46cc-91ff-6078f280d0dd")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -71621,6 +74896,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "ec5c9ad8-a258-4b35-8527-f6cd9891dff1")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/50ce8637-beca-4745-9ce6-9d1bd3bb08df/1cf4b300-acbc-53f4-8424-2452c57a783a")
 		(sheetname "04 MCU connector")
 		(sheetfile "04_mcu_connector.kicad_sch")
@@ -71772,6 +75059,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C37970"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "f76ef6f2-da7f-4a07-8bc1-671ff5bf6fce")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -72158,6 +75457,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C460267"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "b1f89994-3fc7-4437-ac5e-a045f19bfac3")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/218e5406-10d6-5709-adad-80f0034bcd71")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -72441,6 +75752,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C1648"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "8e174c54-7bcd-4f74-a491-9d5aceba6a91")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/553ab6bc-8d29-430e-9326-7f1259a8c57d/2ac41d29-24e5-5583-b904-63c5d2c3ec1b")
 		(sheetname "10 PFC current measurement")
 		(sheetfile "10_pfc_current_measurement.kicad_sch")
@@ -72592,6 +75915,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C23630"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "4dc28a90-7ec8-4b69-999a-e123368285fa")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -72751,6 +76086,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C23138"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "9bfaf536-364e-400b-ac07-1b58874f6e35")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/41091289-a0b0-4a3b-96be-33eb8bb03585/0dd743fe-37f5-56a9-8af1-39d9b2b61951")
 		(sheetname "08 Current measurement")
 		(sheetfile "08_current_measurement.kicad_sch")
@@ -72902,6 +76249,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C106211"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "ac0bf6dd-c7be-4a7e-bae8-f824ab9be0a0")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -73061,6 +76420,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C2933439"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "67440950-4277-47d5-8eee-a0b735b30c70")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/09919b91-b64b-504f-80d0-e293d047e7aa")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -73212,6 +76583,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C15849"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "11d64b08-6d11-40b2-bbba-4b722f1c1bd0")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -73371,6 +76754,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C14663"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "515cb7ae-1048-4690-a79d-89a550465aba")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/8037fda7-c30a-4858-8ec9-bdfcbfc7d405/c72d245b-ac9f-56e6-9bcf-c14e06ed6609")
 		(sheetname "02 DHB gate drive")
 		(sheetfile "02_dhb_gate_drive.kicad_sch")
@@ -73505,6 +76900,18 @@
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "076e15d3-a103-4c2c-9817-28c4ff5c3d03")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "39ed48b9-c3a6-4bd9-b58d-cbc00d203fe6")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -73690,6 +77097,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "3739bbdb-cbed-41a8-aafe-795b47b1dddd")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -74123,6 +77542,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C74860"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "a10fbe29-d227-4dd1-983c-a96d67243a0c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/fe442bbb-6949-4e80-b157-a7b285488541/9f64445e-2cde-55bb-aa9a-51a5b55d179a")
 		(sheetname "03 Isolated measurements")
 		(sheetfile "03_isolated_measurements.kicad_sch")
@@ -74472,6 +77903,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C106211"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "b6f135dc-f633-4eeb-a4b0-473ceafd31a8")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/fe442bbb-6949-4e80-b157-a7b285488541/c3e6f2fc-b175-5322-8218-83fd064df031")
 		(sheetname "03 Isolated measurements")
 		(sheetfile "03_isolated_measurements.kicad_sch")
@@ -74627,6 +78070,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C5448934"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "caa8e1aa-832c-4c26-940b-124a4d5f928f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/2ab53fa3-85ee-5de3-bf18-ac29d8e3fa7f")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -74778,6 +78233,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C575578"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "346d138b-0c71-488d-bfcb-2cb12a0f9cfe")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -75173,6 +78640,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C25804"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "648d41f9-02b9-4c45-af4b-bb030c5ad952")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/8037fda7-c30a-4858-8ec9-bdfcbfc7d405/ac2646b6-926b-5945-9e1f-d4c0c3281a1f")
 		(sheetname "02 DHB gate drive")
 		(sheetfile "02_dhb_gate_drive.kicad_sch")
@@ -75324,6 +78803,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C4216"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "80e6a57f-7b42-4c3d-b856-c3c7ae2d0ca8")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -75483,6 +78974,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C6119856"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "915181e3-0fcf-461c-aa80-c5ec078b2987")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/4416e662-eba0-45a4-b6fd-17fcd8a13965/d398de9c-06db-5cf8-a304-ff75c2660c33")
 		(sheetname "06 Heaters")
 		(sheetfile "06_heaters.kicad_sch")
@@ -75617,6 +79120,18 @@
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "1cdab04f-9458-4d93-bf5a-4c1f5fe04a14")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "f557716e-78e1-4190-8a3b-6c034a53012a")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -75806,6 +79321,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C2999547"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "642ea7b4-0e8e-4ebf-a27b-23a5c1685d97")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/6eb35f48-6b08-4c9b-99f9-370c4b4c9404/cbd71ab6-b0d8-5d4e-a1fb-aac970e9d7f7")
 		(sheetname "09 AC measurement")
 		(sheetfile "09_ac_measurement.kicad_sch")
@@ -75957,6 +79484,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C6119856"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "64778967-009e-462e-9c2b-d1b050cb97e6")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -76116,6 +79655,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C25804"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "eefb7ae7-a2a4-4226-9628-1ede4494fa74")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/8037fda7-c30a-4858-8ec9-bdfcbfc7d405/34ef950b-2faa-5c22-8ca0-952ea0c79da2")
 		(sheetname "02 DHB gate drive")
 		(sheetfile "02_dhb_gate_drive.kicad_sch")
@@ -76267,6 +79818,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C15849"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "607a3153-a07c-4e35-a499-31b178ad276f")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -76426,6 +79989,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C5448934"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "cbbb6d12-6593-4ddc-b768-29f113059d0b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/75114165-edbc-4990-a42e-1d9c53861b3e/80a5ce76-292f-5ffe-be56-153beddb6029")
 		(sheetname "07 DHB")
 		(sheetfile "07_dhb.kicad_sch")
@@ -76577,6 +80152,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C2999547"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "b29ffd97-e0d5-4fb1-905b-4879ad51e11c")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -76736,6 +80323,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C17514"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "989022b0-8711-4185-991a-9493aad92e22")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/50ce8637-beca-4745-9ce6-9d1bd3bb08df/4efecc6a-442f-51dd-82c1-978ceb2be933")
 		(sheetname "04 MCU connector")
 		(sheetfile "04_mcu_connector.kicad_sch")
@@ -76887,6 +80486,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C25804"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "9ac2c12a-b890-4409-a490-d19c89c643bc")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
@@ -77046,6 +80657,18 @@
 				(justify mirror)
 			)
 		)
+		(property "LCSC" "C25804"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "b69ca5c8-0d08-4b54-b7e2-b9cc1bb90ced")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
 		(path "/6eb35f48-6b08-4c9b-99f9-370c4b4c9404/053c1daf-1233-5229-8c1c-a623d1840d00")
 		(sheetname "09 AC measurement")
 		(sheetfile "09_ac_measurement.kicad_sch")
@@ -77197,6 +80820,18 @@
 				(font
 					(size 1 1)
 					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C2907381"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "94cdf5f8-4329-4b20-902f-aa077a43513a")
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(justify mirror)
 			)
