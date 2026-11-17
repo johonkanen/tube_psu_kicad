@@ -21,6 +21,15 @@ The method follows `tools/p2k/CONVERSION_PLAYBOOK.md`. The tools are the shared
 - `next_prompt.md`: the prompt for the next work session, replaced at the end of every
   phase.
 
+## Board
+
+3D renders and copper layers of `kicad/tube_psu.kicad_pcb`, made by GitHub Actions on every board change
+([kicad-board-plots](https://github.com/johonkanen/kicad-board-plots), `.github/workflows/board-plots.yml`;
+the images live on the `renders` branch).
+
+<!-- board-plots:start -->
+<!-- board-plots:end -->
+
 ## Layout
 
 ```
