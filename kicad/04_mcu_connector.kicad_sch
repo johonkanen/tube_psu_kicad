@@ -2920,6 +2920,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C69941"
+			(at 342.9 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "3ca14a0d-d368-58c2-bba1-914bd0d1b865")
 		)
@@ -4995,6 +5004,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C2157117"
+			(at 76.2 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "63c08ca0-42df-5b41-b75f-3bf2a0c83c48")
 		)
@@ -5140,6 +5158,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C15849"
+			(at 58.42 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "248c87a8-765d-50fb-a941-cefd0a8bc68a")
 		)
@@ -5233,6 +5260,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C14663"
+			(at 93.98 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "c6d6b99c-cd78-55b7-bd3d-696532a06f71")
 		)
@@ -5308,6 +5344,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 104.14 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22962"
 			(at 104.14 50.8 0)
 			(effects
 				(font
@@ -5559,6 +5604,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C23179"
+			(at 114.3 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "658a8e21-a8d1-51ab-8a60-f15e236c839d")
 		)
@@ -5648,6 +5702,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 124.46 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C14663"
 			(at 124.46 54.61 0)
 			(effects
 				(font
@@ -5886,6 +5949,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C57424"
+			(at 76.2 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "3d14c1e1-0153-5931-be57-d2d3419ffd6d")
 		)
@@ -6065,6 +6137,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 40.64 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C15849"
 			(at 40.64 113.03 0)
 			(effects
 				(font
@@ -6317,6 +6398,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C14663"
+			(at 93.98 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "abdfff76-8077-56cc-bf98-0dc37e5b87b1")
 		)
@@ -6540,6 +6630,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C15849"
+			(at 104.14 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "d494be36-dba3-504e-87e3-37f469ad731d")
 		)
@@ -6675,6 +6774,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 30.48 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C31850"
 			(at 30.48 177.8 0)
 			(effects
 				(font
@@ -6835,6 +6943,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C23162"
+			(at 30.48 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "9d890558-3146-5201-87c3-29c37c9c66c5")
 		)
@@ -6910,6 +7027,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 40.64 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C106246"
 			(at 40.64 190.5 0)
 			(effects
 				(font
@@ -7146,6 +7272,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C575578"
+			(at 152.4 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "af576a5c-4f00-58ca-b564-5622ebb47d6d")
 		)
@@ -7214,6 +7349,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 127 173.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C17514"
 			(at 127 173.99 0)
 			(effects
 				(font
@@ -7364,6 +7508,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C17514"
+			(at 127 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "98e3c0e4-5e80-57f7-982d-7136327755f4")
 		)
@@ -7433,6 +7586,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 127 194.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C17514"
 			(at 127 194.31 0)
 			(effects
 				(font
@@ -7536,6 +7698,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 119.38 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22809"
 			(at 119.38 200.66 0)
 			(effects
 				(font
@@ -7707,6 +7878,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C17514"
+			(at 134.62 212.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "c7b760fd-c28e-5f00-a4a2-315eba0769b4")
 		)
@@ -7784,6 +7964,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C17514"
+			(at 134.62 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "5a098bf4-73d3-5c8b-85d5-2a14840aa799")
 		)
@@ -7853,6 +8042,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 134.62 232.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C17514"
 			(at 134.62 232.41 0)
 			(effects
 				(font
@@ -8019,6 +8217,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22809"
+			(at 152.4 218.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "7fc04e1d-9077-5435-bbfc-d05e26324744")
 		)
@@ -8142,6 +8349,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C21190"
+			(at 172.72 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "3b3a514d-e613-5cc2-8e88-f445415d875c")
 		)
@@ -8241,6 +8457,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 182.88 207.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C106246"
 			(at 182.88 207.01 0)
 			(effects
 				(font
@@ -8454,6 +8679,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 157.48 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C23630"
 			(at 157.48 190.5 0)
 			(effects
 				(font
@@ -8689,6 +8923,15 @@
 			)
 		)
 		(property "Description" "3-pin connector (66226-003)"
+			(at 266.7 215.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C49257"
 			(at 266.7 215.9 0)
 			(effects
 				(font

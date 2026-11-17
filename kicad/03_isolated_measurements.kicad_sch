@@ -2431,6 +2431,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 58.42 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "fe16502d-1859-5977-b346-8e56d85f9759")
 		)
@@ -2936,6 +2945,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C14663"
+			(at 25.4 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "24fa1d5e-5c01-5fdc-b735-a3c7b0d0d5e7")
 		)
@@ -3379,6 +3397,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C74860"
+			(at 93.98 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "a3388227-698a-5039-9daa-03fae8c72eff")
 		)
@@ -3636,6 +3663,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C106246"
+			(at 124.46 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "7497295b-dd31-52d1-9eb5-2a54a05448c4")
 		)
@@ -3768,6 +3804,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C21190"
+			(at 132.08 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "56860ce5-8c70-5ca3-ad20-b24fd7bcbde3")
 		)
@@ -3850,6 +3895,15 @@
 			)
 		)
 		(property "Description" "Op-amp SOT-23-5, Proteus 1=OP 2=V- 3=+IN 4=-IN 5=V+"
+			(at 129.54 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C575578"
 			(at 129.54 48.26 0)
 			(effects
 				(font
@@ -4121,6 +4175,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22809"
+			(at 132.08 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "274ed777-0d17-5eeb-b40c-52dcefab1bea")
 		)
@@ -4246,6 +4309,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C37970"
+			(at 193.04 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "8a0b747e-eee0-557b-a7f1-cf538e842bc9")
 		)
@@ -4332,6 +4404,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C14663"
+			(at 147.32 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "bbec6ce6-0451-549a-8fca-b1d7fde57448")
 		)
@@ -4397,6 +4478,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 154.94 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C14663"
 			(at 154.94 39.37 0)
 			(effects
 				(font
@@ -4486,6 +4576,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 162.56 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C23630"
 			(at 162.56 39.37 0)
 			(effects
 				(font
@@ -4644,6 +4743,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 177.8 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C106211"
 			(at 177.8 41.91 0)
 			(effects
 				(font
@@ -4886,6 +4994,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C15849"
+			(at 220.98 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "a97bb22a-7ad2-5c1e-98aa-87ed61c975d2")
 		)
@@ -5087,6 +5204,15 @@
 			)
 		)
 		(property "Description" "6-channel digital isolator SOIC-16 wide (5 fwd A-E / 1 rev F; SO16W pinout of the DSN)"
+			(at 58.42 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 58.42 160.02 0)
 			(effects
 				(font
@@ -5600,6 +5726,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C14663"
+			(at 25.4 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "a935ca05-6e72-507b-98c7-2b519bd556b3")
 		)
@@ -5972,6 +6107,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C74860"
+			(at 93.98 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "8706ee22-2467-5482-9d55-02153718a7bf")
 		)
@@ -6229,6 +6373,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C106246"
+			(at 124.46 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "1e1493de-d4fb-5fd7-b49b-18d5e041cd0f")
 		)
@@ -6361,6 +6514,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22775"
+			(at 132.08 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "457afda2-6320-54af-bd27-65a42538b9e2")
 		)
@@ -6443,6 +6605,15 @@
 			)
 		)
 		(property "Description" "Op-amp SOT-23-5, Proteus 1=OP 2=V- 3=+IN 4=-IN 5=V+"
+			(at 129.54 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C575578"
 			(at 129.54 137.16 0)
 			(effects
 				(font
@@ -6682,6 +6853,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22809"
+			(at 110.49 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "79a69f44-f9ef-5196-9702-2cda0b1764b2")
 		)
@@ -6835,6 +7015,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C23212"
+			(at 132.08 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "e80896f1-3dad-5355-bc01-ee608ac2c1bb")
 		)
@@ -6960,6 +7149,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C37970"
+			(at 193.04 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "0c11d16f-b0e1-589b-9314-b70c0269c051")
 		)
@@ -7056,6 +7254,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C14663"
+			(at 147.32 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "253b8e4a-f2d4-58ad-ab2c-f0fdd31cf80e")
 		)
@@ -7121,6 +7328,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 154.94 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C14663"
 			(at 154.94 128.27 0)
 			(effects
 				(font
@@ -7210,6 +7426,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 162.56 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C23630"
 			(at 162.56 128.27 0)
 			(effects
 				(font
@@ -7368,6 +7593,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 177.8 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C106211"
 			(at 177.8 130.81 0)
 			(effects
 				(font
@@ -7610,6 +7844,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C15849"
+			(at 220.98 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "c37caf31-8046-5758-a72d-6e6dc0b486e2")
 		)
@@ -7823,6 +8066,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C460267"
+			(at 214.63 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "C"
 			(uuid "a8d4892f-fdaf-56e7-9773-31369946e339")
 		)
@@ -7892,6 +8144,15 @@
 			)
 		)
 		(property "Description" "Schottky diode, pins A/C"
+			(at 201.93 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C460267"
 			(at 201.93 106.68 0)
 			(effects
 				(font

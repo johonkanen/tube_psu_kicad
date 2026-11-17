@@ -1026,6 +1026,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C478382"
+			(at 127 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "5"
 			(uuid "b6444ae2-f6de-592d-b585-6d8c3a01b484")
 		)
@@ -1088,6 +1097,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 99.06 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C23138"
 			(at 99.06 60.96 0)
 			(effects
 				(font
@@ -1197,6 +1215,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 111.76 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22809"
 			(at 111.76 57.15 0)
 			(effects
 				(font
@@ -1363,6 +1390,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C23138"
+			(at 104.14 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "52d47919-23cd-58d0-a8c2-ca016fab71ce")
 		)
@@ -1515,6 +1551,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22809"
+			(at 121.92 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "faed800f-590b-55ba-920f-e4abd062f27a")
 		)
@@ -1604,6 +1649,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 121.92 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C1648"
 			(at 121.92 86.36 0)
 			(effects
 				(font
@@ -1747,6 +1801,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C23140"
+			(at 147.32 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "0de4dba0-0f85-57be-b351-53161f4691c3")
 		)
@@ -1858,6 +1921,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 157.48 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 157.48 67.31 0)
 			(effects
 				(font
@@ -2006,6 +2078,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C478382"
+			(at 127 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "2c30d574-6721-5c81-aa20-13a4b661cbc3")
 		)
@@ -2068,6 +2149,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 99.06 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C23138"
 			(at 99.06 137.16 0)
 			(effects
 				(font
@@ -2177,6 +2267,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 111.76 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C4216"
 			(at 111.76 133.35 0)
 			(effects
 				(font
@@ -2335,6 +2434,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 104.14 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C23138"
 			(at 104.14 152.4 0)
 			(effects
 				(font
@@ -2505,6 +2613,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C4216"
+			(at 121.92 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "e67ef251-6f2a-555a-861d-74d909dc960c")
 		)
@@ -2614,6 +2731,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 121.92 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C1648"
 			(at 121.92 162.56 0)
 			(effects
 				(font
@@ -2777,6 +2903,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C23140"
+			(at 147.32 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "5add42f3-ffda-548c-852b-5b2a7c4a6759")
 		)
@@ -2888,6 +3023,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 157.48 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 157.48 143.51 0)
 			(effects
 				(font
@@ -3026,6 +3170,15 @@
 			)
 		)
 		(property "Description" "Dual op-amp TSSOP-8 (Proteus device OPA2353UA), standard dual pinout"
+			(at 228.6 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C478382"
 			(at 228.6 101.6 0)
 			(effects
 				(font

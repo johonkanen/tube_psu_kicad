@@ -28,7 +28,7 @@ Decided by the user 2026-11-17:
 |---|---|---|
 | D1 | DAB transformer | **Option B, 20:21** (leakage ≈ 41 µH, φ ≈ 24° at 400 W, gap 0.35 mm / Lm ≈ 300 µH), L3 removed – NR 2.1 |
 | D2 | Current amplifiers | **LMH6643** difference amplifiers (NR 4.10b), INA241A not used; shunt-ESL compensation via balanced feedback caps (NR 4.11) |
-| D3 | Mechanics | **Board outline and mounting holes unchanged.** The DAB TO-220 row (Q7/Q8/Q19/Q21) sits on a bent aluminium plate that is rebuilt to match, so the row may move; the control card next to it is tightly packed (keep J2 and give the card more room, not less). The heater LLC TO-220s (Q10/Q11) have no heatsink: free to move or become SMD. PFC heatsink (Q5/Q6 TO-247, SICD1/2): to confirm |
+| D3 | Mechanics | **Board outline and mounting holes unchanged.** The DAB TO-220 row (Q7/Q8/Q19/Q21) sits on a bent aluminium plate that is rebuilt to match, so the row may move; the control card next to it is tightly packed (keep J2 and give the card more room, not less). The PFC parts (Q5/Q6 TO-247, SICD1/2 TO-220-2) are on the **same** plate (its left part), so the whole power row may move with the new bracket. The heater LLC TO-220s (Q10/Q11) have no heatsink: free to move or become SMD |
 | D4 | Flyback controller | **iW1819-00** – NR 1.5 |
 | D5 | Copper | **1 oz top and bottom, 0.5 oz inner** |
 | D6 | Isolation | **Primary to secondary reinforced** (all isolated domains below) |
@@ -50,8 +50,8 @@ voltages, PD2, material group IIIa; inner layers count as solid insulation):
   voltage, PD2, MG IIIa from IEC 62368-1 (expect well above 5.1's ≈ 6.4 mm) and use it for every
   barrier on L1 / L6, the slots if needed, and the minimum distance through insulation (prepreg) for
   the inner-layer plane splits (reinforced: ≥ 0.4 mm solid insulation or a rated thin-sheet build).
-- Isolator parts must carry a reinforced rating: ISO1 / ISO2 Si8661 – confirm the fitted grade
-  (Si8661**BD** = 5 kVrms reinforced, SOIC-16W); the UART Si8621BD is reinforced; DRV5 / DRV6
+- Isolator parts must carry a reinforced rating: ISO1 / ISO2 are **Si8661BD** (user: 5 kVrms reinforced,
+  SOIC-16W) – OK; the UART Si8621BD is reinforced; DRV5 / DRV6
   (Si8275BB, 2.5 kVrms basic) do not cross the primary ↔ secondary barrier (both sides of each are
   in one domain) – keep it that way.
 - Transformers: TR3 (two-chamber EC42: divider + 3 tape layers over each winding, core counted as
@@ -60,6 +60,14 @@ voltages, PD2, material group IIIa; inner layers count as solid insulation):
   EEL19 6 mm margin creepage was sized for 264 Vac mains, possibly not enough for the DC+-referenced
   primary; **TR2 (heater, EF25) has not been studied at all** – it needs a reinforced construction
   too (new item).
+- **The common heatsink is part of the barrier:** the plate carries primary devices (Q5/Q6 TO-247 with
+  bare drain tabs at the PFC switch nodes, SICD1/2 tabs at DC+, Q7/Q19 primary bridge) **and**
+  secondary devices (Q8/Q21, the secondary bridge on ISO_GND / 420V). Primary tab → pad → plate →
+  pad → secondary tab must be reinforced in total: e.g. the STF7N60M2 FullPAK body (insulated
+  package) plus a rated pad on Q8/Q21, rated insulating pads + shoulder washers under the bare tabs,
+  and the plate itself treated as primary (or earthed) with reinforced spacing to every secondary
+  part and trace near the bracket feet. Alternative: split the bracket into a primary and a
+  secondary plate.
 
 Tasks:
 1. Fork: `kicad_next/` with a new project file, `tools/next/` (copies of the sheet scripts,
@@ -126,7 +134,7 @@ placement constraints:
 4. Shunts with Kelvin sense pairs to the current amplifiers; the ESL RC at the amplifier; amplifiers
    close to J2; each J2 analog output's 100 Ω / 100 pF at the J2 pin; measurement section away from
    the switch nodes and transformers.
-5. Thermal: the DAB TO-220 row on one straight line along a new bent-plate heatsink (its hole
+5. Thermal: the PFC (Q5/Q6, SICD1/2) and DAB TO-220/TO-247 parts on one straight line along a new bent-plate heatsink (its hole
    positions come out of the placement – deliver a bracket drawing), clear of the control card;
    Q10/Q11 (LLC) anywhere / SMD (NR 5.4); tall parts (electrolytics, transformers 29–32 mm) checked
    against the enclosure height.
