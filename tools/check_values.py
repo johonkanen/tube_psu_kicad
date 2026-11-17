@@ -38,7 +38,9 @@ def main():
             errors.append(f"{ref}: board value {on_board[ref]!r}, schematic {row['value']!r}")
     proteus = {row["proteus_refdes"] or ref: ref for ref, row in pm.items()}
     lyt = pdsprj.lyt_parts(board.path("source", "tube_power_5_1.pdsprj"), set(proteus))
-    stale = sorted((proteus[p], rec["value"]) for p, rec in lyt.items() if rec["value"] != pm[proteus[p]]["value"])
+    from make_part_map import FITTED_VALUES  # fitted part != schematic: not a stale layout value
+    stale = sorted((proteus[p], rec["value"]) for p, rec in lyt.items()
+                   if rec["value"] != pm[proteus[p]]["value"] and proteus[p] not in FITTED_VALUES)
     if len(stale) != STALE_LAYOUT_VALUES:
         errors.append(f"{len(stale)} parts with a stale Proteus layout value, expected {STALE_LAYOUT_VALUES}")
     print(f"check_values: {len(pm)} parts, board value = schematic value for "

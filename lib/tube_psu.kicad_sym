@@ -5264,7 +5264,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(symbol "SI8274"
+	(symbol "SI8275"
 		(pin_names
 			(offset 1.016)
 		)
@@ -5280,7 +5280,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "SI8274"
+		(property "Value" "SI8275"
 			(at -7.62 -11.43 0)
 			(effects
 				(font
@@ -5307,7 +5307,7 @@
 				)
 			)
 		)
-		(property "Description" "Isolated half-bridge gate driver SOIC-16"
+		(property "Description" "Isolated dual gate driver with enable, SOIC-16 (Si8275, no overlap protection)"
 			(at 0 0 0)
 			(hide yes)
 			(effects
@@ -5316,7 +5316,7 @@
 				)
 			)
 		)
-		(symbol "SI8274_0_1"
+		(symbol "SI8275_0_1"
 			(rectangle
 				(start -7.62 12.7)
 				(end 7.62 -10.16)
@@ -5329,11 +5329,11 @@
 				)
 			)
 		)
-		(symbol "SI8274_1_1"
+		(symbol "SI8275_1_1"
 			(pin power_in line
 				(at -10.16 10.16 0)
 				(length 2.54)
-				(name "VDD1"
+				(name "VDDI"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -5351,7 +5351,7 @@
 			(pin power_in line
 				(at -10.16 7.62 0)
 				(length 2.54)
-				(name "VDD1"
+				(name "VDDI"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -5369,7 +5369,7 @@
 			(pin input line
 				(at -10.16 5.08 0)
 				(length 2.54)
-				(name "PWM"
+				(name "VIA"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -5402,10 +5402,10 @@
 					)
 				)
 			)
-			(pin input line
+			(pin passive line
 				(at -10.16 0 0)
 				(length 2.54)
-				(name "DT"
+				(name "NC6"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -5423,7 +5423,7 @@
 			(pin power_in line
 				(at -10.16 -2.54 0)
 				(length 2.54)
-				(name "GND1"
+				(name "GNDI"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -5438,10 +5438,10 @@
 					)
 				)
 			)
-			(pin passive line
+			(pin input line
 				(at -10.16 -5.08 0)
 				(length 2.54)
-				(name "NC1"
+				(name "VIB"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -5459,7 +5459,7 @@
 			(pin no_connect line
 				(at -10.16 -7.62 0)
 				(length 2.54)
-				(name "NC2"
+				(name "NC7"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -5531,7 +5531,7 @@
 			(pin no_connect line
 				(at 10.16 2.54 180)
 				(length 2.54)
-				(name "NC3"
+				(name "NC13"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -5549,7 +5549,7 @@
 			(pin no_connect line
 				(at 10.16 0 180)
 				(length 2.54)
-				(name "NC4"
+				(name "NC12"
 					(effects
 						(font
 							(size 1.27 1.27)

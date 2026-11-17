@@ -1443,3 +1443,22 @@ design to **15V**, **15V_ISO_SEC** and **+1V65_BIAS**.
 - `simulation/` updated (circuits.py, extract.py, INVENTORY.md, docs; c7 operating point 15 V);
   run_sim.py: all 9 circuits pass with unchanged results.
 - The PDF / Proteus names remain in the historical notes above.
+
+## DRV5 / DRV6 = Si8275, not Si8274 (2026-11-17)
+
+User: the populated DHB gate drivers are **Si8275** (dual inputs VIA/VIB + EN, no overlap
+protection, no dead-time pin), not the Si8274 (single PWM input + DT resistor) of the Proteus
+schematic. The board matches the Si8275: pin 1 carries B12 / ISO_SEC_DHB_HI and pin 2 (NC on the
+Si8274) PRI_DHB_HI / ISO_SEC_DHB_LO, i.e. the two inputs. So the dead time is set by the FPGA
+firmware; R40 / R25 (82k, the Proteus DT resistors) sit on pin 6, which is NC on the Si8275.
+
+- `tools/gen_symbols.py`: symbol SI8274 → **SI8275** (value SI8275BB) (pins VIA 1, VIB 2 input, VDDI 3/8, GNDI 4,
+  EN 5, NC6 passive (keeps R40 / R25), NC7/12/13 no_connect; outputs unchanged; pin positions kept).
+- `tools/make_part_map.py`: Proteus device SI8274 → symbol SI8275 and new `FITTED_VALUES`
+  (fitted part ≠ schematic value) `DRV5`/`DRV6` → `SI8275BB`; `tools/check_values.py` does not count
+  those as stale layout values. `tools/gen_footprints.py` rules keyed on SI8275;
+  `tools/sheets/_common.py` `si8275_cell`, sheet 2 note. Regenerated lib/, sheet 2, board.
+- Fitted grade (user): **Si8275BB** = 8 V UVLO, no input deglitch, 2.5 kVRMS SOIC-16 NB.
+- No connectivity change: check_all passes (see the commit). Note: an in-place `tools/make_pcb.sh`
+  gave the same board content with a different UUID sequence than `--check`; the board was taken
+  from a temporary-directory build (the `--check` flow), which is byte-identical to the check.

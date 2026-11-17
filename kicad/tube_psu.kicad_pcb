@@ -61510,7 +61510,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "SI8274"
+		(property "Value" "SI8275BB"
 			(at 0 -5.9 180)
 			(layer "B.Fab")
 			(uuid "058fb04b-5158-4abb-bd63-7d7a06482136")
@@ -61534,7 +61534,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Description" "Isolated half-bridge gate driver SOIC-16"
+		(property "Description" "Isolated dual gate driver with enable, SOIC-16 (Si8275, no overlap protection)"
 			(at 0 0 180)
 			(layer "B.Fab")
 			(hide yes)
@@ -61825,7 +61825,7 @@
 			(size 0.609 1.549)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "Net-(DRV5-DT)")
+			(net "Net-(DRV5-NC6)")
 			(uuid "54842fd1-e574-4f0d-8247-8b1cf8bfbfba")
 		)
 		(pad "7" smd roundrect
@@ -61833,7 +61833,7 @@
 			(size 0.609 1.549)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(DRV5-NC2-Pad7)")
+			(net "unconnected-(DRV5-NC7-Pad7)")
 			(uuid "88f3e3e5-dfa5-4557-9321-29d172af39c7")
 		)
 		(pad "8" smd roundrect
@@ -61873,7 +61873,7 @@
 			(size 0.609 1.549)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(DRV5-NC4-Pad12)")
+			(net "unconnected-(DRV5-NC12-Pad12)")
 			(uuid "1c18a87d-16ea-4818-b59f-7e15ed6226f5")
 		)
 		(pad "13" smd roundrect
@@ -61881,7 +61881,7 @@
 			(size 0.609 1.549)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(DRV5-NC3-Pad13)")
+			(net "unconnected-(DRV5-NC13-Pad13)")
 			(uuid "9ca8a03a-2ec4-4b68-a003-393099869baa")
 		)
 		(pad "14" smd roundrect
@@ -62362,7 +62362,7 @@
 			(size 0.889 0.889)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "Net-(DRV5-DT)")
+			(net "Net-(DRV5-NC6)")
 			(uuid "510734cb-ae3a-4503-9bc3-693fe3afa2d1")
 		)
 		(pad "2" smd roundrect
@@ -70015,7 +70015,7 @@
 			(size 0.8 0.95)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "Net-(DRV6-DT)")
+			(net "Net-(DRV6-NC6)")
 			(uuid "346c6aff-7ac8-4635-993d-0ce772fe4184")
 		)
 		(pad "2" smd roundrect
@@ -73645,7 +73645,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "SI8274"
+		(property "Value" "SI8275BB"
 			(at 0 -5.9 0)
 			(layer "B.Fab")
 			(uuid "7360d1e5-45d8-4909-a73c-ddc74b9cc878")
@@ -73669,7 +73669,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Description" "Isolated half-bridge gate driver SOIC-16"
+		(property "Description" "Isolated dual gate driver with enable, SOIC-16 (Si8275, no overlap protection)"
 			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
@@ -73960,7 +73960,7 @@
 			(size 1.95 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "Net-(DRV6-DT)")
+			(net "Net-(DRV6-NC6)")
 			(uuid "e42eaec7-66ac-41f9-af87-760f6d417a94")
 		)
 		(pad "7" smd roundrect
@@ -73968,7 +73968,7 @@
 			(size 1.95 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(DRV6-NC2-Pad7)")
+			(net "unconnected-(DRV6-NC7-Pad7)")
 			(uuid "38f65528-c630-4f36-8ebb-3dc303dbd358")
 		)
 		(pad "8" smd roundrect
@@ -74008,7 +74008,7 @@
 			(size 1.95 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(DRV6-NC4-Pad12)")
+			(net "unconnected-(DRV6-NC12-Pad12)")
 			(uuid "9c2575a8-1b17-4b32-a0ad-e347bfb4baa6")
 		)
 		(pad "13" smd roundrect
@@ -74016,7 +74016,7 @@
 			(size 1.95 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(DRV6-NC3-Pad13)")
+			(net "unconnected-(DRV6-NC13-Pad13)")
 			(uuid "ad6264b3-5fcc-47a0-99b0-85d662fe08f1")
 		)
 		(pad "14" smd roundrect
@@ -108179,7 +108179,7 @@
 		(end 24 -47)
 		(width 0.1524)
 		(layer "B.Cu")
-		(net "Net-(DRV5-DT)")
+		(net "Net-(DRV5-NC6)")
 		(uuid "1c4ce52b-9409-48e0-8df3-9ff8020b7480")
 	)
 	(segment
@@ -108187,7 +108187,7 @@
 		(end 23.373 -46.373)
 		(width 0.1524)
 		(layer "B.Cu")
-		(net "Net-(DRV5-DT)")
+		(net "Net-(DRV5-NC6)")
 		(uuid "3ddfcb05-ec41-496a-869c-bc626c099617")
 	)
 	(segment
@@ -108195,7 +108195,7 @@
 		(end 23.373 -45.803)
 		(width 0.1524)
 		(layer "B.Cu")
-		(net "Net-(DRV5-DT)")
+		(net "Net-(DRV5-NC6)")
 		(uuid "5e7b59f9-dca2-4f2b-a192-8e2c92ef6493")
 	)
 	(segment
@@ -108203,7 +108203,7 @@
 		(end 24 -54.8)
 		(width 0.1524)
 		(layer "B.Cu")
-		(net "Net-(DRV5-DT)")
+		(net "Net-(DRV5-NC6)")
 		(uuid "a78f34d4-0a45-4875-8482-77dd5d7269b9")
 	)
 	(segment
@@ -108211,7 +108211,7 @@
 		(end 23 -55.8)
 		(width 0.1524)
 		(layer "B.Cu")
-		(net "Net-(DRV5-DT)")
+		(net "Net-(DRV5-NC6)")
 		(uuid "bb444b45-da32-4c3b-a2b1-e0cc8369e1d9")
 	)
 	(segment
@@ -108491,7 +108491,7 @@
 		(end 72.207 -50.502)
 		(width 0.635)
 		(layer "B.Cu")
-		(net "Net-(DRV6-DT)")
+		(net "Net-(DRV6-NC6)")
 		(uuid "fd06b50b-e4d0-4000-932a-3a775075b799")
 	)
 	(segment

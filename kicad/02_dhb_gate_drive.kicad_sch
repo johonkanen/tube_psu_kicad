@@ -11,7 +11,7 @@
 		(comment 1 "Redrawn from Proteus tube_power_5_1")
 	)
 	(lib_symbols
-		(symbol "tube_psu:SI8274"
+		(symbol "tube_psu:SI8275"
 			(pin_names
 				(offset 1.016)
 			)
@@ -27,7 +27,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "SI8274"
+			(property "Value" "SI8275"
 				(at -7.62 -11.43 0)
 				(effects
 					(font
@@ -54,7 +54,7 @@
 					)
 				)
 			)
-			(property "Description" "Isolated half-bridge gate driver SOIC-16"
+			(property "Description" "Isolated dual gate driver with enable, SOIC-16 (Si8275, no overlap protection)"
 				(at 0 0 0)
 				(hide yes)
 				(effects
@@ -63,7 +63,7 @@
 					)
 				)
 			)
-			(symbol "SI8274_0_1"
+			(symbol "SI8275_0_1"
 				(rectangle
 					(start -7.62 12.7)
 					(end 7.62 -10.16)
@@ -76,11 +76,11 @@
 					)
 				)
 			)
-			(symbol "SI8274_1_1"
+			(symbol "SI8275_1_1"
 				(pin power_in line
 					(at -10.16 10.16 0)
 					(length 2.54)
-					(name "VDD1"
+					(name "VDDI"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -98,7 +98,7 @@
 				(pin power_in line
 					(at -10.16 7.62 0)
 					(length 2.54)
-					(name "VDD1"
+					(name "VDDI"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -116,7 +116,7 @@
 				(pin input line
 					(at -10.16 5.08 0)
 					(length 2.54)
-					(name "PWM"
+					(name "VIA"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -149,10 +149,10 @@
 						)
 					)
 				)
-				(pin input line
+				(pin passive line
 					(at -10.16 0 0)
 					(length 2.54)
-					(name "DT"
+					(name "NC6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -170,7 +170,7 @@
 				(pin power_in line
 					(at -10.16 -2.54 0)
 					(length 2.54)
-					(name "GND1"
+					(name "GNDI"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -185,10 +185,10 @@
 						)
 					)
 				)
-				(pin passive line
+				(pin input line
 					(at -10.16 -5.08 0)
 					(length 2.54)
-					(name "NC1"
+					(name "VIB"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -206,7 +206,7 @@
 				(pin no_connect line
 					(at -10.16 -7.62 0)
 					(length 2.54)
-					(name "NC2"
+					(name "NC7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -278,7 +278,7 @@
 				(pin no_connect line
 					(at 10.16 2.54 180)
 					(length 2.54)
-					(name "NC3"
+					(name "NC13"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -296,7 +296,7 @@
 				(pin no_connect line
 					(at 10.16 0 180)
 					(length 2.54)
-					(name "NC4"
+					(name "NC12"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1732,7 +1732,7 @@
 		)
 	)
 	(symbol
-		(lib_id "tube_psu:SI8274")
+		(lib_id "tube_psu:SI8275")
 		(at 127 55.88 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1749,7 +1749,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "SI8274"
+		(property "Value" "SI8275BB"
 			(at 119.38 67.31 0)
 			(effects
 				(font
@@ -1776,7 +1776,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Isolated half-bridge gate driver SOIC-16"
+		(property "Description" "Isolated dual gate driver with enable, SOIC-16 (Si8275, no overlap protection)"
 			(at 127 55.88 0)
 			(effects
 				(font
@@ -3725,7 +3725,7 @@
 		(uuid "35d23528-a4ac-5b63-ba01-048ae1c377c4")
 	)
 	(symbol
-		(lib_id "tube_psu:SI8274")
+		(lib_id "tube_psu:SI8275")
 		(at 127 165.1 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3742,7 +3742,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "SI8274"
+		(property "Value" "SI8275BB"
 			(at 119.38 176.53 0)
 			(effects
 				(font
@@ -3769,7 +3769,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Isolated half-bridge gate driver SOIC-16"
+		(property "Description" "Isolated dual gate driver with enable, SOIC-16 (Si8275, no overlap protection)"
 			(at 127 165.1 0)
 			(effects
 				(font
@@ -5732,7 +5732,7 @@
 		(color 0 0 0 0)
 		(uuid "f6f02ece-0d21-50bb-a217-d9f94cf12af4")
 	)
-	(text "Pin 2 (NC1) of both drivers carries a signal in Proteus (PRI_DHB_HI / ISO_SEC_DHB_LO); on the Si8274 it is a no-connect pin."
+	(text "Fitted DRV5 / DRV6 = Si8275 (dual inputs VIA pin 1 / VIB pin 2, no overlap protection: dead time from the FPGA); the Proteus schematic says Si8274. R40 / R25 sit on pin 6 = NC."
 		(exclude_from_sim no)
 		(at 60.96 203.2 0)
 		(effects

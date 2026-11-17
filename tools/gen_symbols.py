@@ -89,14 +89,15 @@ def build():
         box("SI8271", "DRV", [(2, "VDD1", PI), (1, "Vin", IN), (4, "EN", IN), (3, "GND1", PI)],
             [(8, "VDD2", PI), (7, "OUT+", OUT), (6, "OUT-", OUT), (5, "GND2", PI)],
             desc="Isolated single gate driver SOIC-8"),
-        # Pin 2 (NC1) carries a signal in the Proteus design (DRV5-2 PRI_DHB_HI, DRV6-2
-        # ISO_SEC_DHB_LO; sheet 2). A KiCad no_connect-type pin is left out of the netlist,
-        # so it is passive here (STATUS.md, Phase 1 transcription).
-        box("SI8274", "DRV", [(3, "VDD1", PI), (8, "VDD1", PI), (1, "PWM", IN), (5, "EN", IN), (6, "DT", IN),
-                              (4, "GND1", PI), (2, "NC1", PAS), (7, "NC2", NC)],
-            [(16, "VDDA", PI), (15, "VOA", OUT), (14, "GNDA", PI), (13, "NC3", NC), (12, "NC4", NC),
+        # The schematic says SI8274 (PWM input, DT resistor pin 6) but the fitted part is the
+        # dual-input Si8275 (user, 2026-11-17): pin 1 VIA, pin 2 VIB (the Proteus wires to pin 2,
+        # DRV5-2 PRI_DHB_HI / DRV6-2 ISO_SEC_DHB_LO, are its B input), pin 6 NC. Pin 6 keeps the
+        # Proteus dead-time resistor (R40 / R25), harmless on the Si8275, so it is passive.
+        box("SI8275", "DRV", [(3, "VDDI", PI), (8, "VDDI", PI), (1, "VIA", IN), (5, "EN", IN), (6, "NC6", PAS),
+                              (4, "GNDI", PI), (2, "VIB", IN), (7, "NC7", NC)],
+            [(16, "VDDA", PI), (15, "VOA", OUT), (14, "GNDA", PI), (13, "NC13", NC), (12, "NC12", NC),
              (11, "VDDB", PI), (10, "VOB", OUT), (9, "GNDB", PI)],
-            desc="Isolated half-bridge gate driver SOIC-16"),
+            desc="Isolated dual gate driver with enable, SOIC-16 (Si8275, no overlap protection)"),
         box("SI8661", "ISO",
             [(1, "VDD1", PI), (2, "VI_A", IN), (3, "VI_B", IN), (4, "VI_C", IN), (5, "VI_D", IN),
              (6, "VI_E", IN), (7, "VO_F", OUT), (8, "GND1", PI)],

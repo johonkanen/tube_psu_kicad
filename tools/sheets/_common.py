@@ -14,13 +14,14 @@ from p2k.sch_builder import Sheet  # noqa: E402,F401
 from p2k.sheetkit import *  # noqa: E402,F401,F403
 
 
-def si8274_cell(sh, ref, UX, UY, vdd, gnd, pwm, nc1, dt, cdec, boot, rail, railcaps, boot_side,
+def si8275_cell(sh, ref, UX, UY, vdd, gnd, pwm, nc1, dt, cdec, boot, rail, railcaps, boot_side,
                 vo_hi, src_hi, vo_lo):
-    """Si8274 isolated half-bridge driver cell as on sheet 2 (DRV5 / DRV6), IC at (UX, UY).
+    """Si8275 isolated dual driver cell as on sheet 2 (DRV5 / DRV6), IC at (UX, UY). The Proteus
+    schematic says Si8274; the fitted part is the dual-input Si8275 (pin 1 VIA, pin 2 VIB, pin 6 NC).
 
     Input side (left): vdd/gnd = power nets of VDD1 (3, 5, 8) / GND1 (4); pwm = (label, (rref,
-    rval)) on pin 1 PWM with its pull-down to gnd, nc1 = the same for pin 2 NC1 (Proteus wires a
-    signal to it); dt = (rref, rval) dead-time resistor pin 6 to gnd; cdec = (cref, cval, top)
+    rval)) on pin 1 VIA with its pull-down to gnd, nc1 = the same for pin 2 VIB; dt = (rref,
+    rval) the Proteus dead-time resistor pin 6 to gnd (pin 6 is NC on the Si8275, resistor harmless); cdec = (cref, cval, top)
     decoupling cap vdd-gnd (`top` = pin on the vdd side).
     Output side (right): `rail` = power net of the driver supply; railcaps = [(cref, cval, top)]
     decoupling caps rail-gnd (`top` = pin on the rail side); boot = ((dref, dval), (rref, rval),
@@ -28,7 +29,7 @@ def si8274_cell(sh, ref, UX, UY, vdd, gnd, pwm, nc1, dt, cdec, boot, rail, railc
     bootstrap cap (`top` = pin on the VDD side). boot_side 'B' = bootstrap feeds VDDB/GNDB (pins
     11/9, outputs VOB high side), 'A' = VDDA/GNDA (16/14). vo_hi / src_hi / vo_lo = global labels
     of the high-side gate, high-side source and low-side gate."""
-    u = sh.place("SI8274", ref, UX, UY, value="SI8274")
+    u = sh.place("SI8275", ref, UX, UY, value="SI8275BB")
     VDD1a, VDD1b, PWM, EN, DT, GND1, NC1, NC2 = (u.pin(n) for n in (3, 8, 1, 5, 6, 4, 2, 7))
     VDDA, VOA, GNDA, NC3, NC4, VDDB, VOB, GNDB = (u.pin(n) for n in (16, 15, 14, 13, 12, 11, 10, 9))
     sh.no_connect(*NC2)
@@ -52,7 +53,7 @@ def si8274_cell(sh, ref, UX, UY, vdd, gnd, pwm, nc1, dt, cdec, boot, rail, railc
     q = left(EN, 2)                       # EN tied to VDD1: own power symbol (the bus would cross PWM)
     sh.wire(EN, q)
     power_at(sh, vdd, q, "left")
-    # PWM (pin 1): label at the far left, pull-down beside it
+    # VIA (pin 1): label at the far left, pull-down beside it
     lab, (rref, rval) = pwm
     xl, xr = UX - g(40), UX - g(36)
     sh.wire(PWM, (xl, PWM[1]))
@@ -60,7 +61,7 @@ def si8274_cell(sh, ref, UX, UY, vdd, gnd, pwm, nc1, dt, cdec, boot, rail, railc
     _, rt, rb = vert2(sh, "R", rref, xr, PWM[1] + g(3), rval, top=2)
     sh.junction(*rt)
     power_at(sh, gnd, rb, "down")
-    # NC1 (pin 2): leaves downwards (under the GND1 / DT wiring), label at the far left
+    # VIB (pin 2): leaves downwards (under the GND1 / DT wiring), label at the far left
     lab, (rref, rval) = nc1
     row = UY + g(14)
     sh.wire(NC1, (UX - g(10), NC1[1]), (UX - g(10), row), (xl, row))
