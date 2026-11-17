@@ -36,6 +36,45 @@ import PyOpenMagnetics as P
 BOBBIN_NAME = "Bobbin EE 20 vertical 10-pin 3.81mm (Norwe 09987-106)"
 SHAPE = "E 20/10/6"
 MATERIAL = "N87"          # assumption
+
+# ---------------------------------------------------------------------------------------
+# Selectable core / bobbin (2026-11-17). "EF20" is the original configuration and stays the
+# default (every EF20 option reproduces exactly). "EEL19" is the new transformer:
+# long-leg E19 ("EEL19", e.g. AliExpress "EEL19 vertical 5+5 PC40"), not in MKF's database,
+# so the shape is defined here from a Chinese ferrite catalogue table (globalsources
+# K1067465674.pdf, "EEL19 19.0 / 13.65 / 4.85 / 4.85 / 14.0 / 11.4", Ae 23.4 mm2,
+# le 62.1 mm, Ve 1450 mm3; MKF computes Ae 23.4 mm2, le 59.9 mm from these dimensions).
+# MKF E-shape letters: A width, B half height, C depth, D half window height, E window
+# width, F centre-leg width. Material PC40 (TDK, in MKF). The bobbin is MKF's simple bobbin
+# for that core with 0.8 mm flanges and 0.6 mm column wall: winding window 21.2 mm axial x
+# 3.975 mm radial (confirm with calipers on the real bobbin).
+# ---------------------------------------------------------------------------------------
+def _nom(v):
+    return {"nominal": v}
+
+
+EEL19_SHAPE = {"name": "EEL 19/27.3/4.85 (custom)", "family": "e", "type": "custom",
+               "magneticCircuit": "open", "aliases": ["EEL19"],
+               "dimensions": {"A": _nom(19.0e-3), "B": _nom(13.65e-3), "C": _nom(4.85e-3),
+                              "D": _nom(11.4e-3), "E": _nom(14.0e-3), "F": _nom(4.85e-3)}}
+CORES = {
+    "EF20": {"shape": SHAPE, "material": MATERIAL, "bobbin": BOBBIN_NAME,
+             "gap_guess": (0.25e-3, 0.40e-3)},
+    "EEL19": {"shape": EEL19_SHAPE, "material": "PC40", "bobbin": None,
+              "bobbin_wall": 0.8e-3, "bobbin_column": 0.6e-3, "gap_guess": (0.40e-3, 0.70e-3)},
+}
+_active = "EF20"
+
+
+def use_core(name: str | None):
+    """Select the core / bobbin used by bobbin(), window(), make_core() and turn_length()."""
+    global _active
+    _active = name or "EF20"
+    return CORES[_active]
+
+
+def active_core() -> str:
+    return _active
 AL_TARGET = 171e-9        # PDF note "TR1 : core 171nh"
 LP_TARGET = AL_TARGET * 52 ** 2   # 462 uH primary self-inductance (secondaries open)
 TAPE = 0.055e-3           # polyester tape 25 um film + adhesive, per layer (3M 1350F-1 class), assumption
@@ -63,9 +102,19 @@ def wire_od(name: str) -> float:
 
 
 @functools.lru_cache(maxsize=None)
-def bobbin() -> dict:
+def _bobbin(core_name: str) -> dict:
     load()
-    return P.find_bobbin_by_name(BOBBIN_NAME)
+    cfg = CORES[core_name]
+    if cfg["bobbin"]:
+        return P.find_bobbin_by_name(cfg["bobbin"])
+    c = _core_data(core_name, 0.5e-3, "subtractive")
+    b = P.create_simple_bobbin_from_core_with_custom_thicknesses(c, cfg["bobbin_wall"], cfg["bobbin_column"])
+    b["name"] = f"Bobbin {core_name} vertical 5+5 (simple, {cfg['bobbin_wall'] * 1e3:.1f} mm flanges)"
+    return b
+
+
+def bobbin() -> dict:
+    return _bobbin(_active)
 
 
 def window():
@@ -81,17 +130,37 @@ _L0, _X0 = 29.00004419683565e-3, 3.6455e-3
 
 
 def turn_length(x: float) -> float:
-    return _L0 + 2 * math.pi * (x - _X0)
+    if _active == "EF20":
+        return _L0 + 2 * math.pi * (x - _X0)
+    # square bobbin column of half-width w (incl. its wall): 4 straight sides 2w + quarter
+    # circles of radius x - w (the EF20 constants above follow the same law with w = 3.55 mm)
+    w = bobbin()["processedDescription"]["columnWidth"]
+    return 8 * w + 2 * math.pi * (x - w)
 
 
-def make_core(gap: float) -> dict:
-    load()
+def _gapping(gap: float, kind: str) -> list:
+    if kind == "spacer":
+        # spacer (tape / foil) between the halves: the same gap in all three legs
+        return [{"type": "additive", "length": gap}, {"type": "additive", "length": gap},
+                {"type": "additive", "length": gap}]
+    return [{"type": "subtractive", "length": gap},          # ground centre leg
+            {"type": "residual", "length": 1e-5},
+            {"type": "residual", "length": 1e-5}]
+
+
+def _core_data(core_name: str, gap: float, kind: str) -> dict:
+    cfg = CORES[core_name]
     core = {"functionalDescription": {
-        "type": "two-piece set", "shape": SHAPE, "material": MATERIAL, "numberStacks": 1,
-        "gapping": [{"type": "subtractive", "length": gap},
-                    {"type": "residual", "length": 1e-5},
-                    {"type": "residual", "length": 1e-5}]}}
+        "type": "two-piece set", "shape": cfg["shape"], "material": cfg["material"], "numberStacks": 1,
+        "gapping": _gapping(gap, kind)}}
     return P.calculate_core_data(core, False)
+
+
+def make_core(gap: float, kind: str = "subtractive") -> dict:
+    """Core with a ground centre-leg gap (kind "subtractive", default) or a spacer of
+    thickness `gap` between the halves (kind "spacer": gap in all three legs)."""
+    load()
+    return _core_data(_active, gap, kind)
 
 
 # ---------------------------------------------------------------------------------------
@@ -257,15 +326,15 @@ def build_coil(option: dict) -> tuple[dict, dict]:
     return coil, rep
 
 
-def lp_matrix(coil: dict, gap: float) -> float:
+def lp_matrix(coil: dict, gap: float, kind: str = "subtractive") -> float:
     """Primary self-inductance (secondaries open, what an LCR meter reads) from MKF's
     inductance matrix for the full coil."""
-    mag = {"core": make_core(gap), "coil": coil}
+    mag = {"core": make_core(gap, kind), "coil": coil}
     n0 = coil["functionalDescription"][0]["name"]
     return P.calculate_inductance_matrix(mag, FREQ, {})["magnitude"][n0][n0]["nominal"]
 
 
-def fit_gap(coil: dict, lp_target: float) -> float:
+def fit_gap(coil: dict, lp_target: float, kind: str = "subtractive") -> float:
     """Gap length (m) for which the primary self-inductance (sum of the primary sections in
     series when the primary is split) equals lp_target. Secant on 1/L, which is close to
     linear in the gap length."""
@@ -275,13 +344,13 @@ def fit_gap(coil: dict, lp_target: float) -> float:
 
     def lp(g):
         if len(prim) == 1:
-            return lp_matrix(coil, g)
-        mag = {"core": make_core(g), "coil": coil}
+            return lp_matrix(coil, g, kind)
+        mag = {"core": make_core(g, kind), "coil": coil}
         m = P.calculate_inductance_matrix(mag, FREQ, {})["magnitude"]
         pn = [names[i] for i in prim]
         return sum(m[a][b]["nominal"] for a in pn for b in pn)
 
-    g0, g1 = 0.25e-3, 0.40e-3
+    g0, g1 = CORES[_active]["gap_guess"]
     y0, y1 = 1 / lp(g0), 1 / lp(g1)
     for _ in range(8):
         g2 = g0 + (1 / lp_target - y0) * (g1 - g0) / (y1 - y0)
@@ -295,10 +364,11 @@ def fit_gap(coil: dict, lp_target: float) -> float:
 def analyse(option: dict, gap: float | None = None, temperature=60.0) -> dict:
     """Inductance matrix, leakage, coupling, DC resistances, geometry report."""
     load()
+    use_core(option.get("core"))
     coil, rep = build_coil(option)
     if gap is None:
-        gap = option.get("gap") or fit_gap(coil, option.get("lp", LP_TARGET))
-    core = make_core(gap)
+        gap = option.get("gap") or fit_gap(coil, option.get("lp", LP_TARGET), option.get("gap_kind", "subtractive"))
+    core = make_core(gap, option.get("gap_kind", "subtractive"))
     mag = {"core": core, "coil": coil}
     names = rep["order"]
     lm = P.calculate_inductance_matrix(mag, FREQ, {})["magnitude"]

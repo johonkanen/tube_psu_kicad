@@ -55,6 +55,31 @@ def cases():
     return c
 
 
+# Full-load cases for the EEL19 transformer (2026-11-17), run only for options with
+# "full_cases" (or when named with --cases). full10 = every rail at its table 1.1 maximum at
+# once (10.9 W incl. bleeders / fixed loads); full15 = the 15 W rating proposed in
+# EEL19_DESIGN.md (15 V rails 0.3 A, 5 V rails 0.3 A, -5 V 0.2 A, -80 V 20 mA total);
+# full15_325 = the same before the PFC runs.
+FULL10 = dict(TABLE_MAX)
+FULL15 = {"20V": 0.3, "5V": 0.3, "20V_ISO_SEC": 0.3, "5V_ISOL": 0.3, "-5V_SEC": 0.2, "-100V BIAS": 0.0134}
+FULL_CASES = [
+    {"name": "full10", "loads": dict(FULL10), "title": "every rail at its table 1.1 maximum (about 10.9 W)"},
+    {"name": "full15", "loads": dict(FULL15), "title": "15 W rating: 15 V rails 0.3 A, 5 V rails 0.3 A, -5 V 0.2 A, -80 V 20 mA"},
+    {"name": "full15_325", "loads": dict(FULL15), "vin": 325.0, "title": "full15 at DC+ = 325 V"},
+]
+
+
+def all_cases():
+    return cases() + FULL_CASES
+
+
+def option_cases(opt, names=None):
+    """Load cases of one option: the 16 standard cases, plus FULL_CASES when the option asks
+    for them; `names` (from --cases) selects from all of them."""
+    pool = all_cases() if (opt.get("full_cases") or names) else cases()
+    return [c for c in pool if not names or c["name"] in names]
+
+
 def om_analysis(name: str, force=False) -> dict:
     import om_model as m
     os.makedirs(os.path.join(OUT, "om"), exist_ok=True)
@@ -71,9 +96,13 @@ def om_analysis(name: str, force=False) -> dict:
         json.dump(res, f, indent=1)
     if opt.get("write_mas"):
         os.makedirs(MAS_DIR, exist_ok=True)
+        lmag = res["L"][0][0]
+        if opt.get("core"):        # EEL19: the whole (split) primary, as the LCR meter reads it
+            pn = [i for i, a in enumerate(res["names"]) if a in ("P", "P1", "P2")]
+            lmag = sum(res["L"][i][j] for i in pn for j in pn)
         doc = {"inputs": {"designRequirements": {
                    "name": f"TR1 {name}",
-                   "magnetizingInductance": {"nominal": res["L"][0][0]},
+                   "magnetizingInductance": {"nominal": lmag},
                    "turnsRatios": [{"nominal": res["turns"][0] / n} for n in res["turns"][1:]],
                    "isolationSides": sorted({w["isolationSide"] for w in mag["coil"]["functionalDescription"]}),
                    "insulation": {"insulationType": "Reinforced", "pollutionDegree": "P2",
@@ -106,10 +135,24 @@ def run_case(name: str, res: dict, case: dict, force=False, ic=None) -> dict:
     if opt.get("preload"):
         case["preload"] = opt["preload"]
     pout = fs.expected_pout(case)
-    pmax = 0.5 * res["L"][0][0] * fs.IMAX ** 2 * fs.FMAX
-    case["u0"] = min(1.0, max(0.01, pout / 0.75 / pmax))
-    case["kp"], case["ki"] = fs.pi_gains(case)
-    wave = os.path.join(OUT, "spice", f"{name}__{case['name']}_wave.txt") if case["name"] in ("nom", "max_S15") else None
+    if opt.get("rsense"):
+        # EEL19 options: own sense resistor and knee threshold; u0 from the total primary
+        # inductance, PI gain scaled so the loop gain (kp * Pmax / P) matches the EF20 model
+        case["rsense"] = opt["rsense"]
+        case["knee_at"] = opt.get("knee_at", fs.KNEE_AT)
+        names_ = res["names"]
+        lp = sum(res["L"][i][j] for i, a in enumerate(names_) for j, b in enumerate(names_)
+                 if a in ("P", "P1", "P2") and b in ("P", "P1", "P2"))
+        pmax = 0.5 * lp * (1.0 / opt["rsense"]) ** 2 * fs.FMAX
+        pref = 0.5 * 462e-6 * fs.IMAX ** 2 * fs.FMAX          # EF20 model: 10.7 W
+        case["u0"] = min(1.0, max(0.01, pout / 0.85 / pmax))
+        kp = 2.0 * min(3.0, max(0.05, pout / 5.0)) * pref / pmax
+        case["kp"], case["ki"] = kp, 1000.0 * kp
+    else:
+        pmax = 0.5 * res["L"][0][0] * fs.IMAX ** 2 * fs.FMAX
+        case["u0"] = min(1.0, max(0.01, pout / 0.75 / pmax))
+        case["kp"], case["ki"] = fs.pi_gains(case)
+    wave = os.path.join(OUT, "spice", f"{name}__{case['name']}_wave.txt") if case["name"] in ("nom", "max_S15", "full10", "full15") else None
     net = fs.netlist(res, opt["spice"], case, vin=vin, tstop=case.get("tstop", 40e-3 if case["name"] == "idle" else 20e-3 if case["name"] == "light" else 12e-3 if case["name"].startswith("min") else 9e-3),
                      # idle / light hunt slowly between the light-load modes (limit cycle of
                      # +-0.5 V on 15V at idle): average over a long window, as a DMM would
@@ -220,13 +263,13 @@ def main(argv=None):
               f"build {res['geometry']['radial_build_mm']:.2f}/{res['geometry']['window_radial_mm']:.2f} mm", flush=True)
     if a.om_only:
         return 0
-    sel = [c for c in cases() if not a.cases or c["name"] in a.cases]
+    sel_of = {n: option_cases(opts.get(n), a.cases) for n in names}
     pool = Pool(a.jobs)
     t0 = time.time()
     try:
         # pass 1: the nominal case of every option (its rail voltages are the initial
         # conditions of that option's other cases); pass 2: all other cases, longest first
-        noms = [(n, om[n], c, a.force, None) for n in names for c in sel if c["name"] == "nom"]
+        noms = [(n, om[n], c, a.force, None) for n in names for c in sel_of[n] if c["name"] == "nom"]
         for (n, _, c, _, _), r in zip(noms, pool.map(run_case, noms)):
             show(n, c["name"], r)
         ics = {}
@@ -236,7 +279,7 @@ def main(argv=None):
                 with open(p) as f:
                     r = json.load(f)
                 ics[n] = {k: r[k] for k in fs.RAILS if r.get(k)}
-        rest = [(n, om[n], c, a.force, ics.get(n)) for n in names for c in sel if c["name"] != "nom"]
+        rest = [(n, om[n], c, a.force, ics.get(n)) for n in names for c in sel_of[n] if c["name"] != "nom"]
         weight = {"idle": 0, "light": 1}
         order = sorted(range(len(rest)), key=lambda i: (weight.get(rest[i][2]["name"], 2 if rest[i][2]["name"].startswith("min") else 3), i))
         out = pool.map(run_case, [rest[i] for i in order])

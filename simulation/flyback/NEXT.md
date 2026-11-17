@@ -1,4 +1,41 @@
-# TR1 flyback study – where it stands (session 2 finished, 2026-11-16)
+# TR1 flyback study – where it stands (session 3, 2026-11-17: new EEL19 transformer)
+
+**Session 3 (2026-11-17): the user chose a NEW transformer on an EEL19 core** (vertical 5+5
+bobbin, PC40, primary on fly leads, enamel + 3 mm margins, 10–15 W). Design:
+[EEL19_DESIGN.md](EEL19_DESIGN.md), tables [eel19_results.md](eel19_results.md), MAS
+[mas/tr1_eel19_recommended.json](mas/tr1_eel19_recommended.json). The EF20 study below stays as
+it was (its results reproduce; EF20 netlists / matrices unchanged).
+
+- Recommended: **`eel19_sandwich_b_pre3`, spacer gap**.
+  - Turns: P1 52 ‖ S15 16 | SHV 84 | S5+SN5 6+6 ‖ A5 6 | A15 16 | P2 52, i.e. every EF20 turn
+    count × 2. The Vsense divider and Vor stay the same.
+  - Lp 600 µH; spacer about 0.4 mm, set by measurement (30 T test coil → 50 µH).
+  - **R8 = R9 = 2.0 Ω** (Rsense 1.0 Ω).
+  - Preloads 2.2k on 15V, 1k on 5V, 3.3k on 15V_ISO_SEC (R124 → 2.61k).
+  - Pin 5 is the P1–P2 crossover post; pins 4/5 have no net; 2 fly-lead holes.
+- Results over the 15 standard cases:
+
+  | rail | EEL19 recommended | EF20 recommendation |
+  |---|---|---|
+  | 15V | 14.59–15.97 V | 14.40–15.78 V |
+  | 5V | 4.83–5.22 V | 4.85–5.22 V |
+  | 15V_ISO_SEC | 14.91–16.75 V | 14.75–17.07 V |
+
+  The other rails are better. 15 W out: Pin 17.1 W, Ipk 0.84 A of 1.0 A, Vcol 603 V,
+  Bpk 0.21 T (0.284 T at OCP).
+- IW1818 is rated 10–12 W, so 15 W continuous is above the IC rating. Measure the pin-3
+  temperature, or use the iW1819 (board change).
+- Board: no drop-in. TR1 +0.93 mm in x, about 9 parts move, and the ISO_GND F.Cu pour is pulled
+  back (this also fixes an existing 5.08 mm DC+ creepage spot).
+- Si8275BB (UVLO 8 V) replaces the "Si8274 UVLO grade" question: every 15 V rail stays ≥ 14.45 V
+  and ≤ 16.75 V.
+- Open: real core / bobbin dims (calipers), 12 W vs 15 W continuous, height (29.2 mm), board
+  move, preload power, D8 part (≥ 600 V). See EEL19_DESIGN.md 9–10.
+- Commands: EEL19_DESIGN.md 11. Use `--jobs 4` while other simulations run (3 GB total budget).
+
+---
+
+# Session 2 status (EF20 rewind, 2026-11-16)
 
 Task: improve the cross regulation of the auxiliary flyback (sheet 1, IW1818 + TR1 EF20)
 with an OpenMagnetics-designed rewind; design study only (schematic / board unchanged).
@@ -85,7 +122,9 @@ run_flyback.py processes on top of the pool). Cached results: `out/results/<opti
 ## Prompt for the next session
 
 > Continue the TR1 flyback study in /home/jari/dev/tube_psu_kicad (simulation/flyback/,
-> read NEXT.md and FLYBACK_DESIGN.md first). Rules: up to 8 parallel simulations within
+> read NEXT.md, EEL19_DESIGN.md and FLYBACK_DESIGN.md first; the current design is the EEL19
+> transformer `eel19_sandwich_b_pre3`; apply the user's caliper data / first-sample
+> measurements from EEL19_DESIGN.md section 9 and recalibrate). Rules: up to 8 parallel simulations within
 > 3 GB total (run_flyback.py --jobs), scratchpad for temp files, do not change the
 > schematic/board, commit after each step (trailer Co-Authored-By: Claude Opus 5.5
 > <noreply@anthropic.com>), do not push. Apply the user's answers to the open questions in

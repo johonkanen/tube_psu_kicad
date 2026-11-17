@@ -129,6 +129,12 @@ def pi_gains(case: dict) -> tuple[float, float]:
 def netlist(res: dict, spice_map: dict, case: dict, cscale=0.1, tstop=16e-3, twin=2e-3,
             vin=400.0, wave_file: str | None = None, ic: dict | None = None) -> str:
     names, L, N, R = res["names"], np.array(res["L"]), res["turns"], res["Rdc"]
+    # per-option sense resistor and knee threshold (EEL19 options, 2026-11-17); the defaults
+    # are the EF20 board values, so the EF20 netlists are unchanged
+    rsense = case.get("rsense", RSENSE)
+    IMAX = 1.0 / rsense                      # VIPK(HIGH) = 1.00 V
+    IMIN = 0.23 / rsense                     # VIPK(LOW) = 0.23 V
+    KNEE_AT = case.get("knee_at", globals()["KNEE_AT"])
     lp = sum(L[i][j] for i, a in enumerate(names) for j, b in enumerate(names)
              if a in ("P", "P1", "P2") and b in ("P", "P1", "P2"))
     out = [f"* flyback {res['name']} case {case['name']}"]
@@ -149,7 +155,7 @@ def netlist(res: dict, spice_map: dict, case: dict, cscale=0.1, tstop=16e-3, twi
             # switch: conductance follows the gate through a 10 ns RC (smooth for the solver)
             "Rgf gate gf 1k", "Cgf gf 0 10p",
             "Bsw col es I = v(col,es) * (2 * min(1, max(0, v(gf))) + 1e-8)",
-            f"Rsense es 0 {RSENSE}",
+            f"Rsense es 0 {rsense}",
             "D7 col sn1 DS1M", ".model DS1M D(IS=5n N=1.8 RS=0.04 CJO=15p TT=2u BV=1200)",
             "R72 sn1 sn2 100", "R45 sn2 dcp 1Meg", "C12 sn2 dcp 470p",
             ]

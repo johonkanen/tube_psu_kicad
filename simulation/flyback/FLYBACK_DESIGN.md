@@ -5,6 +5,9 @@ flyback, integrated 800 V BJT) with TR1 (EF20, 10-pin vertical bobbin). This is 
 study for the next rewind / board revision. **The schematic, symbols, footprint and board
 are not changed.** Status 2026-11-16.
 
+**2026-11-17: superseded by a new transformer on an EEL19 core – see [EEL19_DESIGN.md](EEL19_DESIGN.md).**
+This EF20 study stays as reference (results reproducible).
+
 Net names: this document uses the KiCad names after commit 46a60f9: **15V** (Proteus `20V`)
 and **15V_ISO_SEC** (Proteus `20V_ISO_SEC`); both are 15 V gate-drive rails (user). The
 scripts still label them `20V` / `20V_ISO_SEC` / `S15` internally (`flyback_sim.RAILS`).

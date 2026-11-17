@@ -243,8 +243,73 @@ def margin_order_8(preload=None):
     }
 
 
+# ---------------------------------------------------------------------------------------
+# EEL19 (new transformer, 2026-11-17, EEL19_DESIGN.md): long-leg E19, PC40, vertical 5+5
+# bobbin (window 21.2 x 3.975 mm in the model), primary on fly leads. Every turn count is
+# twice the EF20 margin_sandwich_8_pre design (104 / 16 / 6 || 16 / 6 / 6 / 84), so all turns
+# ratios, the 5.58 V aux knee (Vsense divider unchanged), Vor 96.7 V and the D8 stress stay
+# the same; Lp 600 uH and Rsense 1.0 ohm (R8 = R9 = 2.0 ohm) for 15 W at 72 kHz.
+# Margins 3 mm both sides (15.2 mm winding width), 4 tape layers per barrier.
+# ---------------------------------------------------------------------------------------
+EEL19_LP = 600e-6
+EEL19_RSENSE = 1.0
+EEL19_COMMON = {"core": "EEL19", "lp": EEL19_LP, "rsense": EEL19_RSENSE, "full_cases": True,
+                # same knee as the EF20 model in amps of the 5 V aux winding (0.2 At / 3 T)
+                "knee_at": 0.4}
+
+
+def _eel(name, title, sections, preload=None, **kw):
+    o = {"name": name, "title": "EEL19: " + title + (" + preloads" if preload else ""),
+         "sections": sections, **EEL19_COMMON, **kw}
+    if preload:
+        o["preload"] = preload
+    return o
+
+
+def eel19_sandwich(preload=None, name="eel19_sandwich"):
+    """margin_sandwich_8_pre at twice the turns on the EEL19: P1 52 || S15 16 | S5+SN5 6+6 |
+    SHV 84 || A5 6 | A15 16 | P2 52. P1-P2 crossover on a spare primary-side pin."""
+    return _eel(name + ("_pre" if preload else ""),
+                "P1 52 || S15 16 | S5+SN5 | SHV 84 || A5 6 | A15 16 | P2 52, 3 mm margins", [
+                    {"windings": [("P1", 52, 1, W32, PRI)], "margin": M3, "tape_after": 4},
+                    {"windings": [("S15", 16, 3, W30, SEC)], "margin": M3, "align": "spread", "tape_after": 1},
+                    {"windings": [("S5", 6, 4, W30, SEC), ("SN5", 6, 4, W30, SEC)], "mode": "multifilar",
+                     "margin": M3, "align": "spread", "tape_after": 1},
+                    {"windings": [("SHV", 84, 1, W34, SEC)], "margin": M3, "align": "spread", "tape_after": 4},
+                    {"windings": [("A5", 6, 8, W30, PRI)], "margin": M3, "align": "spread", "tape_after": 1},
+                    {"windings": [("A15", 16, 3, W30, PRI)], "margin": M3, "align": "spread", "tape_after": 1},
+                    {"windings": [("P2", 52, 1, W32, PRI)], "margin": M3, "tape_after": 1},
+                ], preload)
+
+
+def eel19_sandwich_b(preload=None):
+    """Sandwich with the isolated 5 V pair next to the outer barrier, i.e. directly across it
+    from the feedback winding A5: P1 || S15 | SHV | S5+SN5 || A5 | A15 | P2."""
+    o = eel19_sandwich(preload, name="eel19_sandwich_b")
+    s = o["sections"]
+    s[2], s[3] = dict(s[3], tape_after=1), dict(s[2], tape_after=4)
+    o["title"] = "EEL19: P1 52 || S15 16 | SHV 84 | S5+SN5 || A5 6 | A15 16 | P2 52, 3 mm margins" + (" + preloads" if preload else "")
+    return o
+
+
+def eel19_simple(preload=None):
+    """No split primary (simplest build, one barrier): P 104 (2 layers) | A15 | A5 ||
+    S15 | S5+SN5 | SHV, low-turn windings spread over the width."""
+    return _eel("eel19_simple" + ("_pre" if preload else ""),
+                "P 104 | A15 16 | A5 6 || S15 16 | S5+SN5 | SHV 84 (one barrier), 3 mm margins", [
+                    {"windings": [("P", 104, 1, W32, PRI)], "margin": M3, "tape_after": 1},
+                    {"windings": [("A15", 16, 3, W30, PRI)], "margin": M3, "align": "spread", "tape_after": 1},
+                    {"windings": [("A5", 6, 8, W30, PRI)], "margin": M3, "align": "spread", "tape_after": 4},
+                    {"windings": [("S15", 16, 3, W30, SEC)], "margin": M3, "align": "spread", "tape_after": 1},
+                    {"windings": [("S5", 6, 4, W30, SEC), ("SN5", 6, 4, W30, SEC)], "mode": "multifilar",
+                     "margin": M3, "align": "spread", "tape_after": 1},
+                    {"windings": [("SHV", 84, 1, W34, SEC)], "margin": M3, "align": "spread", "tape_after": 1},
+                ], preload)
+
+
 PRELOAD = {"20V": 3300.0, "5V": 1000.0}      # what-if preload resistors (not in the schematic)
 PRELOAD_ISO = {**PRELOAD, "20V_ISO_SEC": 3300.0}   # + 3.3 k on 15V_ISO_SEC (e.g. R124 12.1k -> 2.6k)
+PRELOAD_EEL = {"20V": 2200.0, "5V": 1000.0, "20V_ISO_SEC": 3300.0}   # EEL19 recommendation
 
 
 OPTIONS = {"current": current, "stacked": stacked, "margin_sandwich": margin_sandwich,
@@ -263,7 +328,31 @@ OPTIONS = {"current": current, "stacked": stacked, "margin_sandwich": margin_san
                                              "P1 || S15 8T | S5+SN5 | SHV || A5 | A15 | P2, preloads 3.3k on 15V, 1k on 5V"),
            "margin_order_8": margin_order_8, "margin_order_8_pre": lambda: margin_order_8(PRELOAD),
            "sandwich_paired_c_pre": lambda: dict(sandwich_paired("c"), name="sandwich_paired_c_pre",
-                                                 title=sandwich_paired("c")["title"] + " + preloads", preload=PRELOAD)}
+                                                 title=sandwich_paired("c")["title"] + " + preloads", preload=PRELOAD),
+           # EEL19 (new transformer, EEL19_DESIGN.md)
+           "eel19_sandwich_pre": lambda: eel19_sandwich(PRELOAD),
+           "eel19_sandwich_b_pre": lambda: eel19_sandwich_b(PRELOAD),
+           "eel19_simple_pre": lambda: eel19_simple(PRELOAD),
+           "eel19_sandwich_pre3": lambda: dict(eel19_sandwich(PRELOAD_ISO), name="eel19_sandwich_pre3",
+                                               title="EEL19: eel19_sandwich_pre + 3.3k preload on 15V_ISO_SEC"),
+           # 15V preload 2.2k (instead of 3.3k) and 3.3k on 15V_ISO_SEC: removes the bleeder-only
+           # excursions of the two 15 V rails (min_15V, min_S15)
+           "eel19_sandwich_b_pre3": lambda: dict(eel19_sandwich_b(PRELOAD_EEL), name="eel19_sandwich_b_pre3",
+                                                 title="EEL19: P1 52 || S15 16 | SHV 84 | S5+SN5 || A5 6 | A15 16 | P2 52, "
+                                                       "preloads 2.2k on 15V, 1k on 5V, 3.3k on 15V_ISO_SEC"),
+           # the EEL19 recommendation: eel19_sandwich_b_pre3 with the spacer gap; this entry only
+           # writes mas/tr1_eel19_recommended.json (run_flyback.py --om-only eel19_recommended)
+           "eel19_recommended": lambda: dict(eel19_sandwich_b(PRELOAD_EEL), name="eel19_recommended", write_mas=True,
+                                             gap_kind="spacer",
+                                             title="EEL19 RECOMMENDED (= eel19_sandwich_b_pre3, spacer gap): enamel + 3 mm margins, "
+                                                   "P1 52 || S15 16 | SHV 84 | S5+SN5 6+6 || A5 6 | A15 16 | P2 52, Lp 600 uH, "
+                                                   "preloads 2.2k on 15V, 1k on 5V, 3.3k on 15V_ISO_SEC"),
+           "eel19_spacer_pre": lambda: dict(eel19_sandwich(PRELOAD), name="eel19_spacer_pre", gap_kind="spacer",
+                                            title="EEL19: eel19_sandwich_pre with a spacer gap (all legs) instead of a ground centre leg")}
+
+EEL19_OPTIONS = ["eel19_sandwich_pre", "eel19_sandwich_pre3", "eel19_sandwich_b_pre", "eel19_sandwich_b_pre3",
+                 "eel19_simple_pre",
+                 "eel19_spacer_pre"]
 
 
 def get(name):

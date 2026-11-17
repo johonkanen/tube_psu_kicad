@@ -40,8 +40,9 @@ def last_period(name, case="nom", npts=400):
 def analyse(name, case="nom", temperature=60.0, vin=400.0):
     om, tt, cur, vcol = last_period(name, case)
     opt = opts.get(name)
+    m.use_core(opt.get("core"))             # EF20 (default) or EEL19
     coil, _ = m.build_coil(opt)
-    core = m.make_core(om["gap"])
+    core = m.make_core(om["gap"], opt.get("gap_kind", "subtractive"))
     mag = {"core": core, "coil": coil}
     f = 1.0 / tt[-1]
     exc = []
@@ -100,10 +101,18 @@ def analyse(name, case="nom", temperature=60.0, vin=400.0):
 
 
 if __name__ == "__main__":
+    # python3 losses.py <option> [...] [--case full15]   (default case nom; the result file of
+    # a case other than nom is out/losses/<option>__<case>.json)
     os.makedirs(os.path.join(OUT, "losses"), exist_ok=True)
-    for n in sys.argv[1:] or ["current"]:
-        r = analyse(n)
-        with open(os.path.join(OUT, "losses", f"{n}.json"), "w") as f:
+    args = sys.argv[1:]
+    case = "nom"
+    if "--case" in args:
+        i = args.index("--case")
+        case = args[i + 1]
+        del args[i:i + 2]
+    for n in args or ["current"]:
+        r = analyse(n, case)
+        with open(os.path.join(OUT, "losses", f"{n}.json" if case == "nom" else f"{n}__{case}.json"), "w") as f:
             json.dump(r, f, indent=1)
         print(f"{n}: winding {r.get('winding_losses_W')} W, core iGSE {r.get('core_losses_W_IGSE')} / "
               f"Steinmetz {r.get('core_losses_W_STEINMETZ')} / Roshen {r.get('core_losses_W_ROSHEN')} W, "
