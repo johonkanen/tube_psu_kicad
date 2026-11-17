@@ -1510,3 +1510,48 @@ note), checked against the JLC parts API on 2026-11-17 (responses cached in the 
   (`for s in tools/sheets/sheet*.py; do python3 $s; done`), then rebuild the board with the
   temporary-directory flow of `tools/make_pcb.sh --check` (copy its board over
   `kicad/tube_psu.kicad_pcb`), then `tools/check_all.sh` and `python3 tools/jlc_bom.py`.
+
+## Phase 1 of 5.2 (2026-11-17)
+
+Start of the next board revision (tube_power 5.2, NEXT_REVISION_PLAN.md phase 1). Everything lives in
+`kicad_next/`, `tools/next/` and new `lib/*_next*` files; the 5.1 migration is unchanged
+(tools/check_all.sh ALL CHECKS PASSED afterwards). Details, tables and the derivation: `kicad_next/README.md`.
+
+- **Fork:** project `kicad_next/tube_psu_5_2.kicad_pro` (5.1 settings, project name changed);
+  `tools/next/gen_schematic.py` writes the root + 11 sheets from `tools/next/sheets/` (copies of the 5.1
+  sheet scripts; `_common.py` redirects output, symbol library and CSVs without touching tools/p2k:
+  own `sheet()`, replaced `sch_builder.lib` / `footprint`, `Sheet.save` renames the nickname to
+  `tube_psu_next`). Symbols `lib/tube_psu_next.kicad_sym` from `tools/next/gen_symbols.py` (identical to
+  the 5.1 library at the fork); hand-edited forks `lib/part_map_next.csv`, `lib/footprint_map_next.csv`,
+  `lib/jlc_parts_next.csv`. The generated schematic equals 5.1 apart from the project / library names
+  (incl. LCSC fields and UUIDs; `gen_schematic.py --diff51`); ERC 0 errors / 23 warnings as 5.1.
+- **Board skeleton** `kicad_next/tube_psu_5_2.kicad_pcb` (`tools/p2k/bin/kipy tools/next/make_board.py`):
+  5.1 outline (163 × 110 mm) and H1–H8 (3.0 mm NPTH, 3.5 mm ring) copied and locked; 6 copper layers
+  F.Cu / In1.GND (power) / In2.Signal_HV / In3.Power (mixed) / In4.GND (power) / B.Cu; stackup
+  **JLC06161H-3313** (jlcpcb.com/impedance): 35 µm – 3313 0.0994 mm Dk 4.1 – 15.2 µm – core 0.55 mm Dk 4.6 –
+  15.2 µm – 2116 0.1088 mm Dk 4.16 – 15.2 µm – core 0.55 – 15.2 µm – 3313 0.0994 – 35 µm, mask 15 µm Dk 3.8,
+  ENIG. No footprints (phase 5).
+- **Rules:** board minimums from JLC's multilayer capabilities (0.1/0.1 mm track/space, via 0.15/0.25,
+  edge 0.3, silk 0.15/1.0) in the project; `kicad_next/tube_psu_5_2.kicad_dru`: PTH annular 0.15, pad
+  hole-to-hole 0.45, NPTH ≥ 0.5, HV functional 1.2 mm outer, creepage / clearance per barrier.
+  **Net classes per domain** by `tools/next/setup_project.py` from the schematic netlist (flood fill from
+  GND / ISO_GND / HT_GND, barriers TR1/TR2/TR3/ISO1/ISO2; no other part bridges a barrier): 208 nets =
+  HV_PRIMARY 40, PRIMARY_LV 5, SIGNAL 100, HV_SECONDARY 12, SECONDARY_LV 28, HEATER 22, PE_EARTH 1
+  (UART_ISO defined, no nets until phase 2).
+- **Creepage / clearance** (IEC 62368-1 / IEC 60664-1 Table F.5 + F.2, PD2, MG III, OVC II 2500 V,
+  ≤ 2000 m; reinforced = 2 × basic creepage, clearance one impulse step up): primary ↔ DAB secondary
+  552 Vrms / 778 Vpk (ISO_GND earthed via the amplifier) → **11.1 mm creepage, 4.0 mm clearance**;
+  primary ↔ heater and ↔ UART 318 Vrms → 6.4 mm, **8.0 mm** used, 4.0 mm; secondary ↔ UART reinforced
+  **8.4 mm** / 3.0 mm; secondary ↔ heater basic 4.2 / 1.5 mm; PE basic 3.2 / 4.2 mm; mounting holes as
+  accessible parts 6.4 / 8.4 mm. Inner layers: same spacing as the outer creepage (no cemented-joint
+  claim); no domain overlap between layers (prepregs 0.1 mm < 0.4 mm). If ISO_GND may float: 900 Vpk /
+  ≈ 800 Vrms → 16 mm.
+- **Checks:** `tools/next/check_next.sh` – symbols and schematic up to date, ERC 0 errors, one domain
+  per net, board skeleton (layers, stackup, outline, holes = 5.1), DRC 0 violations, and
+  `tools/next/check_rules.py`: kicad-cli silently ignores a broken `.kicad_dru` rule (tested), so 13 test
+  track pairs on a temporary board must give exactly the expected violations – 13/13 pass.
+- **Found / open:** SOIC-16W isolators (≈ 7–8 mm pad rows) and the EEL19 footprint (10.8 mm pad edge to
+  pad edge) are below their barrier creepage → slots or footprint changes in phases 3/5; Si8661BD
+  reinforced working-voltage rating vs 552 Vrms to check; user questions: ISO_GND always earthed?
+  mounting screws earthed? heater elevation? IEC clause / table numbers to be checked against the
+  standard edition (see the README's "Uncertain" note).

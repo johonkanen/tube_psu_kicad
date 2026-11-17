@@ -1,0 +1,5 @@
+(sym_lib_table
+	(version 7)
+	(lib (name "tube_psu_next")(type "KiCad")(uri "${KIPRJMOD}/../lib/tube_psu_next.kicad_sym")(options "")(descr "5.2 project symbols (tools/next/gen_symbols.py), used by the 5.2 sheets"))
+	(lib (name "tube_psu")(type "KiCad")(uri "${KIPRJMOD}/../lib/tube_psu.kicad_sym")(options "")(descr "5.1 migration symbols (frozen, reference only)"))
+)

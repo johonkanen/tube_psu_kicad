@@ -1,6 +1,7 @@
 # Next revision (tube_power 5.2) – implementation plan
 
-Status 2026-11-17, plan only (nothing of it is built yet). **What** changes is in
+Status 2026-11-17: **phase 1 done** (kicad_next/ fork, 6-layer skeleton, stackup, rules – see
+[kicad_next/README.md](kicad_next/README.md)); phases 2–7 not started. **What** changes is in
 [NEXT_REVISION.md](NEXT_REVISION.md) (items referenced as NR x.y); this file is **how** and in
 which order. User decisions so far: **6-layer board**, **Fable does the parts placement**, the
 changes of NEXT_REVISION.md, JLC assembly (part numbers: `lib/jlc_parts.csv`, being filled).
@@ -33,15 +34,17 @@ Decided by the user 2026-11-17:
 | D5 | Copper | **1 oz top and bottom, 0.5 oz inner** |
 | D6 | Isolation | **Primary to secondary reinforced** (all isolated domains below) |
 
-Isolation domains and barriers (fill the spacing column from IEC 62368-1 for the final working
-voltages, PD2, material group IIIa; inner layers count as solid insulation):
+Isolation domains and barriers (spacing from IEC 62368-1 / IEC 60664-1, PD2, material group III,
+OVC II, ≤ 2000 m – derivation and assumptions in kicad_next/README.md; rules in
+kicad_next/tube_psu_5_2.kicad_dru; inner layers use the outer creepage value, no domain overlap
+between layers):
 
 | Domain | Nets | Barrier to primary | Spacing target |
 |---|---|---|---|
-| Primary | GND (mains-referenced), DC+ 400 V, AC1/AC2, 15V, 5V, +3V3 | – | functional between nets by voltage |
-| DAB secondary | ISO_GND, 420V, 15V_ISO_SEC, 5V_ISOL, −80 V | TR3, TR1, ISO2 | **reinforced** (D6) |
-| Heater | HT_GND, 6V3 | TR2, ISO1 | **reinforced** (D6) |
-| UART island (new) | ISO_UART_GND, cable 5 V / 3.3 V | Si8621BD | **reinforced, ≥ 8 mm** (user-touchable) |
+| Primary | GND (mains-referenced), DC+ 400 V, AC1/AC2, 15V, 5V, +3V3 | – | functional: HV nets 1.2 mm outer / 0.5 mm inner |
+| DAB secondary | ISO_GND, 420V, 15V_ISO_SEC, 5V_ISOL, −80 V | TR3, TR1, ISO2 | **reinforced** (D6): 552 Vrms / 778 Vpk → creepage **11.1 mm**, clearance **4.0 mm**, inner layers 11.1 mm (16 mm if ISO_GND may float) |
+| Heater | HT_GND, 6V3 | TR2, ISO1 | **reinforced** (D6): 318 Vrms / 400 Vpk → 6.4 mm, **8.0 mm** used; clearance **4.0 mm**; to the DAB secondary basic 4.2 mm |
+| UART island (new) | ISO_UART_GND, cable 5 V / 3.3 V | Si8621BD | **reinforced, ≥ 8 mm** (user-touchable): creepage **8.0 mm**, clearance 4.0 mm; to the DAB secondary reinforced 8.4 mm |
 | AD1 / AD2 isolated measurements | HT_GND / ISO_GND side | ISO1 / ISO2 | reinforced (part of the domains above) |
 
 **Consequences of D6 (reinforced primary ↔ secondary), to work through in phases 1–3:**
@@ -70,14 +73,15 @@ voltages, PD2, material group IIIa; inner layers count as solid insulation):
   secondary plate.
 
 Tasks:
-1. Fork: `kicad_next/` with a new project file, `tools/next/` (copies of the sheet scripts,
+1. **Done** (2026-11-17, STATUS.md "Phase 1 of 5.2"). Fork: `kicad_next/` with a new project file, `tools/next/` (copies of the sheet scripts,
    `gen_symbols.py`, the footprint map) and `lib/tube_psu_next.pretty` (already holds the EEL19 and
    EC42 footprints) in its fp-lib-table.
-2. **Stackup (6 layers, JLC 1.6 mm, e.g. JLC06161H-3313 as on the control card):**
+2. **Done:** JLC06161H-3313 in `kicad_next/tube_psu_5_2.kicad_pcb` (outline + H1–H8 from 5.1, no footprints).
+   **Stackup (6 layers, JLC 1.6 mm, e.g. JLC06161H-3313 as on the control card):**
    L1 components + power copper, L2 GND planes (one per domain), L3 signals / HV routing,
    L4 power distribution (DC+, 15V, +3V3 pours), L5 GND planes, L6 bottom components + signals.
    Planes split at every isolation barrier on all six layers; no plane crosses a barrier.
-3. Design rules: JLC 6-layer capabilities in a `.kicad_dru` (track / space / via / annular ring),
+3. **Done** (keep-outs under transformers / at the barriers: phase 5). Design rules: JLC 6-layer capabilities in a `.kicad_dru` (track / space / via / annular ring),
    net classes per domain and voltage (HV, primary, secondary, signal), KiCad creepage and clearance
    rules between domains from the table above, keep-outs under transformers and at the barriers.
 

@@ -1,0 +1,892 @@
+(kicad_pcb
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(general
+		(thickness 1.6)
+		(legacy_teardrops no)
+	)
+	(paper "A4")
+	(layers
+		(0 "F.Cu" signal)
+		(4 "In1.Cu" power "In1.GND")
+		(6 "In2.Cu" signal "In2.Signal_HV")
+		(8 "In3.Cu" mixed "In3.Power")
+		(10 "In4.Cu" power "In4.GND")
+		(2 "B.Cu" signal)
+		(9 "F.Adhes" user "F.Adhesive")
+		(11 "B.Adhes" user "B.Adhesive")
+		(13 "F.Paste" user)
+		(15 "B.Paste" user)
+		(5 "F.SilkS" user "F.Silkscreen")
+		(7 "B.SilkS" user "B.Silkscreen")
+		(1 "F.Mask" user)
+		(3 "B.Mask" user)
+		(17 "Dwgs.User" user "User.Drawings")
+		(19 "Cmts.User" user "User.Comments")
+		(21 "Eco1.User" user "User.Eco1")
+		(23 "Eco2.User" user "User.Eco2")
+		(25 "Edge.Cuts" user)
+		(27 "Margin" user)
+		(31 "F.CrtYd" user "F.Courtyard")
+		(29 "B.CrtYd" user "B.Courtyard")
+		(35 "F.Fab" user)
+		(33 "B.Fab" user)
+		(39 "User.1" user)
+		(41 "User.2" user)
+		(43 "User.3" user)
+		(45 "User.4" user)
+	)
+	(setup
+		(stackup
+			(layer "F.SilkS"
+				(type "Top Silk Screen")
+			)
+			(layer "F.Paste"
+				(type "Top Solder Paste")
+			)
+			(layer "F.Mask"
+				(type "Top Solder Mask")
+				(thickness 0.015)
+				(material "LPI")
+				(epsilon_r 3.8)
+				(loss_tangent 0)
+			)
+			(layer "F.Cu"
+				(type "copper")
+				(thickness 0.035)
+			)
+			(layer "dielectric 1"
+				(type "prepreg")
+				(thickness 0.0994)
+				(material "3313 RC57%")
+				(epsilon_r 4.1)
+				(loss_tangent 0.02)
+			)
+			(layer "In1.Cu"
+				(type "copper")
+				(thickness 0.0152)
+			)
+			(layer "dielectric 2"
+				(type "core")
+				(thickness 0.55)
+				(material "NP-155F core")
+				(epsilon_r 4.6)
+				(loss_tangent 0.02)
+			)
+			(layer "In2.Cu"
+				(type "copper")
+				(thickness 0.0152)
+			)
+			(layer "dielectric 3"
+				(type "prepreg")
+				(thickness 0.1088)
+				(material "2116 RC54%")
+				(epsilon_r 4.16)
+				(loss_tangent 0.02)
+			)
+			(layer "In3.Cu"
+				(type "copper")
+				(thickness 0.0152)
+			)
+			(layer "dielectric 4"
+				(type "core")
+				(thickness 0.55)
+				(material "NP-155F core")
+				(epsilon_r 4.6)
+				(loss_tangent 0.02)
+			)
+			(layer "In4.Cu"
+				(type "copper")
+				(thickness 0.0152)
+			)
+			(layer "dielectric 5"
+				(type "prepreg")
+				(thickness 0.0994)
+				(material "3313 RC57%")
+				(epsilon_r 4.1)
+				(loss_tangent 0.02)
+			)
+			(layer "B.Cu"
+				(type "copper")
+				(thickness 0.035)
+			)
+			(layer "B.Mask"
+				(type "Bottom Solder Mask")
+				(thickness 0.015)
+				(material "LPI")
+				(epsilon_r 3.8)
+				(loss_tangent 0)
+			)
+			(layer "B.Paste"
+				(type "Bottom Solder Paste")
+			)
+			(layer "B.SilkS"
+				(type "Bottom Silk Screen")
+			)
+			(copper_finish "ENIG")
+			(dielectric_constraints no)
+		)
+		(pad_to_mask_clearance 0)
+		(allow_soldermask_bridges_in_footprints no)
+		(tenting
+			(front yes)
+			(back yes)
+		)
+		(covering
+			(front no)
+			(back no)
+		)
+		(plugging
+			(front no)
+			(back no)
+		)
+		(capping no)
+		(filling no)
+		(pcbplotparams
+			(layerselection 0x00000000_00000000_55555555_5755f5ff)
+			(plot_on_all_layers_selection 0x00000000_00000000_00000000_00000000)
+			(disableapertmacros no)
+			(usegerberextensions no)
+			(usegerberattributes yes)
+			(usegerberadvancedattributes yes)
+			(creategerberjobfile yes)
+			(dashed_line_dash_ratio 12)
+			(dashed_line_gap_ratio 3)
+			(svgprecision 4)
+			(plotframeref no)
+			(mode 1)
+			(useauxorigin no)
+			(pdf_front_fp_property_popups yes)
+			(pdf_back_fp_property_popups yes)
+			(pdf_metadata yes)
+			(pdf_single_document no)
+			(dxfpolygonmode yes)
+			(dxfimperialunits yes)
+			(dxfusepcbnewfont yes)
+			(psnegative no)
+			(psa4output no)
+			(plot_black_and_white yes)
+			(sketchpadsonfab no)
+			(plotpadnumbers no)
+			(hidednponfab no)
+			(sketchdnponfab yes)
+			(crossoutdnponfab yes)
+			(subtractmaskfromsilk no)
+			(outputformat 1)
+			(mirror no)
+			(drillshape 1)
+			(scaleselection 1)
+			(outputdirectory "")
+		)
+	)
+	(footprint "tube_psu:MountingHole_3.0mm_NPTH_Ring3.5mm"
+		(locked yes)
+		(layer "F.Cu")
+		(uuid "038298f3-7169-414b-a21e-62542ebf1af2")
+		(at 6.922 -87.522)
+		(descr "Unplated 3.0 mm hole with a 3.5 mm copper ring on every layer, no net (tube_psu, board-only)")
+		(property "Reference" "H2"
+			(at 0.001273 2.767452 0)
+			(layer "F.SilkS")
+			(uuid "25ba7505-4395-45ac-b1af-93c28460fb56")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "MountingHole_3.0mm"
+			(at 0 2.95 0)
+			(layer "F.Fab")
+			(uuid "ce9c319b-ad1f-494c-bde0-870cd0c6de5b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "12952475-bc28-4a1d-b551-b2348e58cc58")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "cfec3b4b-b5da-4482-9f99-9b0c84082f9c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(attr board_only exclude_from_pos_files exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_circle
+			(center 0 0)
+			(end 2 0)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.CrtYd")
+			(uuid "6b50416c-946d-490a-bd2b-afdea41d1515")
+		)
+		(fp_circle
+			(center 0 0)
+			(end 1.75 0)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.Fab")
+			(uuid "19141f6d-cc3f-48cd-a458-1477eead039a")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0)
+			(size 3.5 3.5)
+			(drill 3)
+			(layers "*.Cu" "*.Mask")
+			(uuid "57156677-f8bf-49f8-894d-87121051d527")
+		)
+		(embedded_fonts no)
+	)
+	(footprint "tube_psu:MountingHole_3.0mm_NPTH_Ring3.5mm"
+		(locked yes)
+		(layer "F.Cu")
+		(uuid "14c89cc1-4ec0-4194-b582-3450d9575fe2")
+		(at 86.971 -87.522)
+		(descr "Unplated 3.0 mm hole with a 3.5 mm copper ring on every layer, no net (tube_psu, board-only)")
+		(property "Reference" "H3"
+			(at 0.001273 2.767452 0)
+			(layer "F.SilkS")
+			(uuid "61e88269-1dae-4811-8e31-bde521db499d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "MountingHole_3.0mm"
+			(at 0 2.95 0)
+			(layer "F.Fab")
+			(uuid "9a64a81b-dfe7-4a2d-a9d1-9c1ba5155b05")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a6b89f3e-2375-429b-ab3c-09f39efc736b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6ea381d1-ac81-4008-bb81-23366434833b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(attr board_only exclude_from_pos_files exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_circle
+			(center 0 0)
+			(end 2 0)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.CrtYd")
+			(uuid "9cd074b5-b03a-4e44-86e2-f7d70dd95f29")
+		)
+		(fp_circle
+			(center 0 0)
+			(end 1.75 0)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.Fab")
+			(uuid "394a2476-87c6-4fc4-bd82-226c91858f1e")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0)
+			(size 3.5 3.5)
+			(drill 3)
+			(layers "*.Cu" "*.Mask")
+			(uuid "e3391f05-4200-470b-8353-d3a10525c4ed")
+		)
+		(embedded_fonts no)
+	)
+	(footprint "tube_psu:MountingHole_3.0mm_NPTH_Ring3.5mm"
+		(locked yes)
+		(layer "F.Cu")
+		(uuid "649d36ad-0d3e-4944-8b1b-f33543f99263")
+		(at 3.371 14.477)
+		(descr "Unplated 3.0 mm hole with a 3.5 mm copper ring on every layer, no net (tube_psu, board-only)")
+		(property "Reference" "H7"
+			(at 0 -2.95 0)
+			(layer "F.SilkS")
+			(uuid "0c4a92b6-ed93-406c-b14c-1d86b566d491")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "MountingHole_3.0mm"
+			(at 0 2.95 0)
+			(layer "F.Fab")
+			(uuid "e227760f-184a-45b7-8bf7-ad619e5adcab")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "20a821da-e219-4b05-9776-4054da609898")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3ed25190-29d5-4197-92b3-4658f5faf594")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(attr board_only exclude_from_pos_files exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_circle
+			(center 0 0)
+			(end 2 0)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.CrtYd")
+			(uuid "edc566a6-e5b7-4f14-95c0-60975ddb62b6")
+		)
+		(fp_circle
+			(center 0 0)
+			(end 1.75 0)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.Fab")
+			(uuid "1d9d918e-5bdf-430a-b97a-f6539b2fc090")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0)
+			(size 3.5 3.5)
+			(drill 3)
+			(layers "*.Cu" "*.Mask")
+			(uuid "46fe0cb8-10b0-4f16-a2f4-93b202b18884")
+		)
+		(embedded_fonts no)
+	)
+	(footprint "tube_psu:MountingHole_3.0mm_NPTH_Ring3.5mm"
+		(locked yes)
+		(layer "F.Cu")
+		(uuid "7740af6b-ce77-4c90-b3e1-da3a7c35517d")
+		(at 87.148 -29.813)
+		(descr "Unplated 3.0 mm hole with a 3.5 mm copper ring on every layer, no net (tube_psu, board-only)")
+		(property "Reference" "H5"
+			(at 0 -2.95 0)
+			(layer "F.SilkS")
+			(uuid "075f400b-3967-4c36-ba74-fa7925dc692d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "MountingHole_3.0mm"
+			(at 0 2.95 0)
+			(layer "F.Fab")
+			(uuid "91c5b229-3513-46b0-8f8d-7f2f47da71e8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "90137643-7775-4f22-b428-cf1ace81a1c0")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "097dac59-6eec-48d3-88fd-25f2e1fab606")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(attr board_only exclude_from_pos_files exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_circle
+			(center 0 0)
+			(end 2 0)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.CrtYd")
+			(uuid "21e7081c-ecf5-48a8-b699-6101dd27fc54")
+		)
+		(fp_circle
+			(center 0 0)
+			(end 1.75 0)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.Fab")
+			(uuid "d3b6de63-f115-451a-afdf-e94584fb52cb")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0)
+			(size 3.5 3.5)
+			(drill 3)
+			(layers "*.Cu" "*.Mask")
+			(uuid "c4971636-e745-44e1-907b-17a4d887bf8f")
+		)
+		(embedded_fonts no)
+	)
+	(footprint "tube_psu:MountingHole_3.0mm_NPTH_Ring3.5mm"
+		(locked yes)
+		(layer "F.Cu")
+		(uuid "ac1a268c-001d-40d7-94f5-e95e75ed7e6f")
+		(at -67.029 14.477)
+		(descr "Unplated 3.0 mm hole with a 3.5 mm copper ring on every layer, no net (tube_psu, board-only)")
+		(property "Reference" "H6"
+			(at 0 -2.95 0)
+			(layer "F.SilkS")
+			(uuid "c08701b5-b8c6-435f-98d8-4777c234a528")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "MountingHole_3.0mm"
+			(at 0 2.95 0)
+			(layer "F.Fab")
+			(uuid "7b9c346e-e163-4656-8dbf-6631767ddce5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4c08f698-767b-4e59-9788-19583a72d4cd")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "32b3f530-c145-4c2b-b054-f157d1894170")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(attr board_only exclude_from_pos_files exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_circle
+			(center 0 0)
+			(end 2 0)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.CrtYd")
+			(uuid "0df6d082-4d32-4034-af8b-56b6360158e5")
+		)
+		(fp_circle
+			(center 0 0)
+			(end 1.75 0)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.Fab")
+			(uuid "c55b6661-e844-4af7-ad36-605685e34605")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0)
+			(size 3.5 3.5)
+			(drill 3)
+			(layers "*.Cu" "*.Mask")
+			(uuid "8a967ff8-a309-47e1-8d50-7374f4bdfee5")
+		)
+		(embedded_fonts no)
+	)
+	(footprint "tube_psu:MountingHole_3.0mm_NPTH_Ring3.5mm"
+		(locked yes)
+		(layer "F.Cu")
+		(uuid "ad64aeb7-0527-4568-8f75-0e6e5c13bfc6")
+		(at -67.029 -87.522)
+		(descr "Unplated 3.0 mm hole with a 3.5 mm copper ring on every layer, no net (tube_psu, board-only)")
+		(property "Reference" "H1"
+			(at 0.001274 2.767452 0)
+			(layer "F.SilkS")
+			(uuid "e4db64ca-1fc4-47eb-a408-8581fac68a93")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "MountingHole_3.0mm"
+			(at 0 2.95 0)
+			(layer "F.Fab")
+			(uuid "2c3404ae-63e7-4e02-a0f0-daeeba36bb05")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "21e8db5b-2f1a-4ef3-be9f-6a10a8be903d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "fd0a1bc4-721e-472e-810e-d4e0b1cafd70")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(attr board_only exclude_from_pos_files exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_circle
+			(center 0 0)
+			(end 2 0)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.CrtYd")
+			(uuid "372f779e-cc03-4878-9867-ef7e0d8a1875")
+		)
+		(fp_circle
+			(center 0 0)
+			(end 1.75 0)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.Fab")
+			(uuid "a24b34dd-2b00-4856-9db3-a736785c36c2")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0)
+			(size 3.5 3.5)
+			(drill 3)
+			(layers "*.Cu" "*.Mask")
+			(uuid "506eed93-7586-421c-bfbf-cc7e614d1d43")
+		)
+		(embedded_fonts no)
+	)
+	(footprint "tube_psu:MountingHole_3.0mm_NPTH_Ring3.5mm"
+		(locked yes)
+		(layer "F.Cu")
+		(uuid "adbc513e-69b2-45f1-8f2f-a8c3b400e25c")
+		(at 84.232 14.477)
+		(descr "Unplated 3.0 mm hole with a 3.5 mm copper ring on every layer, no net (tube_psu, board-only)")
+		(property "Reference" "H8"
+			(at 0 -2.95 0)
+			(layer "F.SilkS")
+			(uuid "36b3cda1-746a-4770-b102-cae2509bfd06")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "MountingHole_3.0mm"
+			(at 0 2.95 0)
+			(layer "F.Fab")
+			(uuid "df22c7f5-89e5-40a4-9707-1fbc5ba1111c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e5eaab4f-6cd3-4c12-89d4-e023dc259255")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e1fc939d-fc4f-420e-89d4-bee79c34618e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(attr board_only exclude_from_pos_files exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_circle
+			(center 0 0)
+			(end 2 0)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.CrtYd")
+			(uuid "f52f76ae-7906-4697-9568-fb5cd28be242")
+		)
+		(fp_circle
+			(center 0 0)
+			(end 1.75 0)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.Fab")
+			(uuid "ec990304-a141-4d21-9890-c695eb906d59")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0)
+			(size 3.5 3.5)
+			(drill 3)
+			(layers "*.Cu" "*.Mask")
+			(uuid "d5564022-fd95-4f98-88ac-0847e68d19dc")
+		)
+		(embedded_fonts no)
+	)
+	(footprint "tube_psu:MountingHole_3.0mm_NPTH_Ring3.5mm"
+		(locked yes)
+		(layer "F.Cu")
+		(uuid "e3558222-82a9-4ca1-aedc-7eb85b386c65")
+		(at 5.842 -40.132)
+		(descr "Unplated 3.0 mm hole with a 3.5 mm copper ring on every layer, no net (tube_psu, board-only)")
+		(property "Reference" "H4"
+			(at 0 -2.95 0)
+			(layer "F.SilkS")
+			(uuid "1c078c53-8dce-49a8-a507-71c32b01b8fc")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "MountingHole_3.0mm"
+			(at 0 2.95 0)
+			(layer "F.Fab")
+			(uuid "31f94ac2-db7c-47c6-a08d-3919450c8f3d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "24406bca-6282-4f16-af80-da289df9e026")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9f4aca5c-d75b-400a-a72f-396cecc36092")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(attr board_only exclude_from_pos_files exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_circle
+			(center 0 0)
+			(end 2 0)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.CrtYd")
+			(uuid "bed82f57-4402-4e69-b253-dfa13a53fba9")
+		)
+		(fp_circle
+			(center 0 0)
+			(end 1.75 0)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.Fab")
+			(uuid "dece438c-d5e1-4a46-a2ce-2a91fe6e21ef")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0)
+			(size 3.5 3.5)
+			(drill 3)
+			(layers "*.Cu" "*.Mask")
+			(uuid "d6235f04-d19a-4801-b0dd-68b6d38ce7aa")
+		)
+		(embedded_fonts no)
+	)
+	(gr_line
+		(start -71.9 -91.3)
+		(end -71.9 18.7)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(locked yes)
+		(layer "Edge.Cuts")
+		(uuid "47e36766-47ff-4fd5-9dad-3de9541a9f54")
+	)
+	(gr_line
+		(start -71.9 18.7)
+		(end 91.1 18.7)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(locked yes)
+		(layer "Edge.Cuts")
+		(uuid "3e411b6f-2fea-4c05-848f-0ab46997f25f")
+	)
+	(gr_line
+		(start 91.1 -91.3)
+		(end -71.9 -91.3)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(locked yes)
+		(layer "Edge.Cuts")
+		(uuid "2caefa3d-1774-4be5-9b39-098792e24d50")
+	)
+	(gr_line
+		(start 91.1 18.7)
+		(end 91.1 -91.3)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(locked yes)
+		(layer "Edge.Cuts")
+		(uuid "20e7d4ad-a5d0-47d3-aefe-44121f6fdc3d")
+	)
+	(embedded_fonts no)
+)
