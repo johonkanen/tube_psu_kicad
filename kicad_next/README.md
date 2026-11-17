@@ -130,20 +130,20 @@ netlist). Current count: primary 145 nets (HV_PRIMARY 40, PRIMARY_LV 5, SIGNAL 1
 | Barrier | Grade | Working voltage (assumption) | Creepage | Clearance | Inner layers |
 |---|---|---|---|---|---|
 | Primary ↔ DAB secondary (TR3, TR1, ISO2, heatsink) | reinforced | 420V rail vs GND: 420 + 358·\|sin\| in the negative half-wave → **552 Vrms, 778 Vpk** (ISO_GND earthed through the amplifier chassis) | 2 × 5.52 = **11.1 mm** | **4.0 mm** | 11.1 mm |
-| Primary ↔ heater (TR2, ISO1) | reinforced | DC+ vs HT_GND (earthed): 400 + min(0, v) → **318 Vrms, 400 Vpk** | 2 × 3.18 = 6.4 → **8.0 mm** (covers ≤ 400 Vrms, e.g. a heater elevation) | **4.0 mm** | 8.0 mm |
+| Primary ↔ heater (TR2, ISO1) | reinforced | DC+ vs HT_GND (earthed, or at the −100 V bias): **318–333 Vrms, ≤ 500 Vpk** | 2 × 3.33 = 6.7 → **8.0 mm** | **4.0 mm** | 8.0 mm |
 | Primary ↔ UART island (Si8621BD) | reinforced, user-touchable | as heater (PC ground = earth): 318 Vrms | 6.4 → **8.0 mm** (plan target) | **4.0 mm** | 8.0 mm |
 | DAB secondary ↔ UART | reinforced (ES3 to touchable) | 420 V DC → 420 Vrms | 2 × 4.2 = **8.4 mm** | 3.0 mm (1500 V transient behind reinforced insulation → 1.5 mm, margin) | 8.4 mm |
-| DAB secondary ↔ heater | basic | 420 Vrms | **4.2 mm** | 1.5 mm | 4.2 mm |
+| DAB secondary ↔ heater | functional (user 2026-11-17: heater tied to −100V BIAS or to signal ground via 100 Ω) | to 420V: up to 520 V; to ISO_GND / LV secondary: ≤ 115 V | **5.2 mm** to HV_SECONDARY, **1.5 mm** to SECONDARY_LV | 1.5 / 1.0 mm | 5.2 mm / – |
 | Heater ↔ UART | functional | ELV | – | 1.0 mm | 1.0 mm |
 | PE (Y caps) ↔ primary / secondary | basic | 318 / 420 Vrms | **3.2 / 4.2 mm** | 2.0 / 1.5 mm | 3.2 / 4.2 mm |
-| Mounting holes H1–H8 (ring, screws accessible) ↔ primary / secondary | reinforced | 318 / 420 Vrms | **6.4 / 8.4 mm** (basic 3.2 / 4.2 if the screws are bonded to PE) | = creepage | = creepage |
+| Mounting holes H1–H8 (screws bonded to the earthed chassis, user 2026-11-17) ↔ primary / secondary | basic (PE) | 318 / 420 Vrms | **3.2 / 4.2 mm** | 2.0 / 1.5 mm | 3.2 / 4.2 mm (hole clearance) |
 | Inside a domain: HV nets (DC+, mains, switch nodes, 420V, −100 V) | functional | ≤ 500 V | – | outer 1.2 mm (tracks / zones; pad pairs exempt), inner 0.5 mm | 0.5 mm |
 
 **Alternative if ISO_GND may float** (IEC 62368-1 5.4.1.8: a floating circuit is assumed earthed at the
 point giving the highest working voltage): with the 420V rail earthed, −80/−100 V vs DC+ reaches
 900 Vpk / ≈ 800 Vrms → reinforced creepage 2 × 8.0 = **16 mm**, clearance unchanged (4.0 mm; required
 withstand still set by the 2500 V transient). The rules use the 11.1 mm case; **the user must confirm
-that the secondary is always tied to the earthed amplifier chassis** – otherwise change 11.1 → 16.0 in
+that the secondary is always tied to the earthed amplifier chassis** (confirmed by the user 2026-11-17, so 11.1 mm stays) – otherwise change 11.1 → 16.0 in
 `tube_psu_5_2.kicad_dru` and `check_rules.py`.
 
 Uncertain / to verify: the IEC 62368-1 table and clause numbers above are from the TI summary and memory
@@ -162,7 +162,7 @@ DAB square wave (≤ 420 V) on top.
   margin construction (6 mm) is below 11.1 mm creepage for this working voltage (NEXT_REVISION_PLAN.md
   "Consequences of D6"). EC42 TR3: rows 40 mm apart – fine on the board.
 - Mounting holes have a copper ring on every layer with no net; H4 (5.8, −40.1) sits inside the board –
-  6.4 / 8.4 mm keep-off around it. Decide whether the screws are earthed.
+  3.2 / 4.2 mm keep-off around it (screws earthed via the chassis).
 - Heatsink: the shared PFC + DAB bracket must keep 11.1 mm creepage / 4.0 mm clearance from secondary
   copper unless it is treated as secondary or split (plan, D6).
 

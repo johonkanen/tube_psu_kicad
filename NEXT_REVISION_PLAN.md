@@ -32,7 +32,7 @@ Decided by the user 2026-11-17:
 | D3 | Mechanics | **Board outline and mounting holes unchanged.** The DAB TO-220 row (Q7/Q8/Q19/Q21) sits on a bent aluminium plate that is rebuilt to match, so the row may move; the control card next to it is tightly packed (keep J2 and give the card more room, not less). The PFC parts (Q5/Q6 TO-247, SICD1/2 TO-220-2) are on the **same** plate (its left part), so the whole power row may move with the new bracket. The heater LLC TO-220s (Q10/Q11) have no heatsink: free to move or become SMD |
 | D4 | Flyback controller | **iW1819-00** – NR 1.5 |
 | D5 | Copper | **1 oz top and bottom, 0.5 oz inner** |
-| D6 | Isolation | **Primary to secondary reinforced** (all isolated domains below) |
+| D6 | Isolation | **Primary to secondary reinforced** (all isolated domains below). ISO_GND is always earthed (via the amplifier); the mounting screws are bonded to the earthed chassis (basic 3.2 / 4.2 mm around the holes); the heater is tied to the −100 V bias or signal ground via 100 Ω |
 
 Isolation domains and barriers (spacing from IEC 62368-1 / IEC 60664-1, PD2, material group III,
 OVC II, ≤ 2000 m – derivation and assumptions in kicad_next/README.md; rules in
@@ -43,7 +43,7 @@ between layers):
 |---|---|---|---|
 | Primary | GND (mains-referenced), DC+ 400 V, AC1/AC2, 15V, 5V, +3V3 | – | functional: HV nets 1.2 mm outer / 0.5 mm inner |
 | DAB secondary | ISO_GND, 420V, 15V_ISO_SEC, 5V_ISOL, −80 V | TR3, TR1, ISO2 | **reinforced** (D6): 552 Vrms / 778 Vpk → creepage **11.1 mm**, clearance **4.0 mm**, inner layers 11.1 mm (16 mm if ISO_GND may float) |
-| Heater | HT_GND, 6V3 | TR2, ISO1 | **reinforced** (D6): 318 Vrms / 400 Vpk → 6.4 mm, **8.0 mm** used; clearance **4.0 mm**; to the DAB secondary basic 4.2 mm |
+| Heater | HT_GND, 6V3 | TR2, ISO1 | **reinforced** (D6): 318–333 Vrms → 6.7 mm, **8.0 mm** used; clearance **4.0 mm**; to the DAB secondary functional (heater tied to −100V BIAS or signal ground via 100 Ω): 5.2 mm to 420V / −100V, 1.5 mm to ISO_GND |
 | UART island (new) | ISO_UART_GND, cable 5 V / 3.3 V | Si8621BD | **reinforced, ≥ 8 mm** (user-touchable): creepage **8.0 mm**, clearance 4.0 mm; to the DAB secondary reinforced 8.4 mm |
 | AD1 / AD2 isolated measurements | HT_GND / ISO_GND side | ISO1 / ISO2 | reinforced (part of the domains above) |
 

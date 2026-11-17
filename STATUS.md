@@ -1555,3 +1555,12 @@ Start of the next board revision (tube_power 5.2, NEXT_REVISION_PLAN.md phase 1)
   reinforced working-voltage rating vs 552 Vrms to check; user questions: ISO_GND always earthed?
   mounting screws earthed? heater elevation? IEC clause / table numbers to be checked against the
   standard edition (see the README's "Uncertain" note).
+
+### 5.2 isolation answers (2026-11-17)
+
+User: ISO_GND is always earthed (primary ↔ secondary stays 11.1 mm creepage); the mounting screws are
+bonded to the earthed chassis (holes → basic PE spacing 3.2 / 4.2 mm, was reinforced 6.4 / 8.4 mm); the
+heater is tied to the −100 V bias or to signal ground through 100 Ω (heater ↔ secondary functional:
+5.2 mm to HV_SECONDARY, 1.5 mm to SECONDARY_LV, was basic 4.2 mm). `kicad_next/tube_psu_5_2.kicad_dru`
+and `tools/next/check_rules.py` updated; check_rules had silently dropped test cases beyond its 12 test
+positions (zip) – now 16 positions and an assert; 15/15 rule tests pass, `tools/next/check_next.sh` passes.

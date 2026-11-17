@@ -33,13 +33,16 @@ CASES = [
     ("+3V3", "HT_GND", "F", 7.0, {"creepage"}),                    # PRI-HEATER creepage 8.0
     ("+3V3", "HT_GND", "In3", 7.0, {"clearance"}),                 # PRI-HEATER inner 8.0
     ("+3V3", "HT_GND", "F", 8.5, set()),
-    ("420V", "HT_GND", "F", 3.0, {"creepage"}),                    # SEC-HEATER basic creepage 4.2
+    ("420V", "HT_GND", "F", 4.5, {"creepage"}),                    # SEC(HV)-HEATER functional creepage 5.2
+    ("ISO_GND", "HT_GND", "F", 1.2, {"creepage"}),                 # SEC(LV)-HEATER creepage 1.5
+    ("ISO_GND", "HT_GND", "F", 2.0, set()),
     ("DC+", "GND", "F", 1.0, {"clearance"}),                       # HV functional outer 1.2
     ("DC+", "GND", "In2", 0.6, set()),                             # HV class clearance 0.5 inner
     ("/05 PFC/PE", "GND", "F", 2.5, {"creepage"}),                 # PE-PRI basic creepage 3.2
 ]
-SLOTS = [(x, y) for y in (-70, -40, -10) for x in (-55, -30, 30, 55)]
-HOLE_TEST = ("GND", "F", 4.0, {"clearance", "creepage"})          # 4 mm from the H4 ring: 6.4 mm rule
+SLOTS = [(x, y) for y in (-70, -40, -10, 15) for x in (-55, -30, 30, 55)]
+assert len(CASES) <= len(SLOTS), "add test positions to SLOTS"
+HOLE_TEST = ("GND", "F", 1.5, {"clearance", "creepage"})          # 1.5 mm from the H4 ring: 2.0 / 3.2 mm rule (earthed screws)
 
 
 def track(b, net, layer, x1, y, x2, w=0.3):
