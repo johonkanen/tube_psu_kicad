@@ -66,7 +66,7 @@ Source: [simulation/FINDINGS.md](simulation/FINDINGS.md) (ngspice + hVHDL_ode, A
 | 4.7 | C10, C26 | Keep unfitted | mux settling is better without | – |
 | 4.8 | REF1 | Correct the schematic value to the fitted 1.65 V reference (ISL21010CFH315Z is the 1.5 V part) | documentation | L |
 | 4.9 | Firmware | HEATER_I gain −0.18 % calibration; AD2 (420 V) bandwidth 8.86 kHz in the control model | – | L |
-| 4.10 | U1, U4 + 18 resistors / 6 caps | Optional: replace the four LMH6658 difference amplifiers by **INA296B current-sense amplifiers** (SOT-23-8 2.9 × 2.8 mm, 1.1 MHz at every gain, CM −5…110 V, gain error ±0.1 %, 2.5 mA each from +3V3): PFC_I1/I2 INA296B2 (20 V/V, 80 mV/A, was 82.5), DHB_I INA296B3 (50 V/V, 0.2 V/A, ±8.25 A, was 0.182 V/A), HEATER_I INA296B4 (100 V/V, 0.4 V/A, same). All channels stay **bidirectional around +1V65_BIAS** (user 2026-11-17: reverse currents are measured, the DAB is bidirectional): **REF1 = REF2 = +1V65_BIAS**, which needs the bias buffer of item 4.1 (the REF pins drive an internal resistor network). (REF1 = +3V3 / REF2 = GND would also give a 1.65 V mid-scale, but ratiometric to the power-board +3V3 instead of the reference.) Keep the output 100 Ω / 100 pF (≤ 1 nF allowed). Saves ≈ 70 mm² of B.Cu courtyard (141 → 70 mm², 24 → 8 parts), gives ≥ the present bandwidth (DHB 452 kHz → 1.1 MHz, HEATER 241 kHz → 1.1 MHz), removes the resistor-ratio gain errors and the amplifier bias resistors that load the bias today (≈ 2.7 kΩ in total). INA181/INA2181 are smaller/cheaper but only 105–350 kHz (too slow for the 140 kHz DHB current) | space, accuracy | M – to decide |
+| 4.10 | U1, U4 + 18 resistors / 6 caps | Optional: replace the four LMH6658 difference amplifiers by **INA296B current-sense amplifiers** (SOT-23-8 2.9 × 2.8 mm, 1.1 MHz at every gain, CM −5…110 V, gain error ±0.1 %, 2.5 mA each from +3V3): PFC_I1/I2 INA296B2 (20 V/V, 80 mV/A, was 82.5), DHB_I INA296B3 (50 V/V, 0.2 V/A, ±8.25 A, was 0.182 V/A), HEATER_I INA296B4 (100 V/V, 0.4 V/A, same). All channels stay **bidirectional around +1V65_BIAS** (user 2026-11-17: reverse currents are measured, the DAB is bidirectional): **REF1 = REF2 = +1V65_BIAS**, which needs the bias buffer of item 4.1 (the REF pins drive an internal resistor network). (REF1 = +3V3 / REF2 = GND would also give a 1.65 V mid-scale, but ratiometric to the power-board +3V3 instead of the reference.) Keep the output 100 Ω / 100 pF (not 1 nF: it rings with the mux load) and sample ≥ 1.5 µs after the mux switch (section 4c). Saves ≈ 70 mm² of B.Cu courtyard (141 → 70 mm², 24 → 8 parts), gives ≥ the present bandwidth (DHB 452 kHz → 1.1 MHz, HEATER 241 kHz → 1.1 MHz), removes the resistor-ratio gain errors and the amplifier bias resistors that load the bias today (≈ 2.7 kΩ in total). INA181/INA2181 are smaller/cheaper but only 105–350 kHz (too slow for the 140 kHz DHB current) | space, accuracy | M – to decide |
 
 ## 4b. ADC channel allocation (J2 analog pins)
 
@@ -98,6 +98,47 @@ Today the critical channels are split: PFC_I2 on A, PFC_I1 and DHB_I on B, AUX o
 - Equivalent alternative: keep the power-board pins and swap the mux inputs on the control card
   (its mux table is still open there). Doing it on the power board needs no control-card change.
 - Firmware: update the channel map (ADA4 = PFC_I1, ADA6 = DHB_I, ADB3 = AUX).
+
+## 4c. Interface to the control-card ADC mux – no channel-to-channel leakage
+
+Control card: TMUX1308 (RON 120 Ω typ / 350 Ω max, C_D 40 pF, charge injection 1 pC, leakage
+±45 nA) → OPA365 follower → 33 Ω / 680 pF → **ADS7056, 14 bit, 0–3.3 V (1 LSB = 201 µV)**. The
+mux output node keeps the previous channel's voltage; each J2 output must recharge it through RON
+before the sample. Target: **< 0.5 LSB** of the previous channel for a full-scale (3.3 V)
+difference, at the planned dwell time. Simulations: `simulation/spice/mux_settling.py`
+(FINDINGS.md 9) and `simulation/spice/mux_ina296.py` (INA296 option).
+
+Rules for every J2 analog output:
+
+1. Driven by a low-impedance amplifier output through ≤ 100 Ω, with ≤ 100 pF at the pin –
+   never a large capacitor behind a large resistor (that charge-shares and then recovers with
+   its own slow RC: DC_LINK 254 LSB, AUX 505 LSB at 1 µs as built).
+2. Unbuffered dividers only with a reservoir ≥ 1 µF (AUX with C61 1 µF: fixed 0.67 LSB, plus
+   0.9 LSB offset from the 45 nA mux leakage through 3.9 kΩ). For zero leakage: **buffer AUX_MEAS**
+   (TLV316 follower + 100 Ω like U6/U8) – recommended (M), else item 4.5.
+3. No floating mux inputs: tie every spare J2 analog pin to GND on the power board (spares after
+   4b: J2-50/48/46/40 on ADC A, J2-49/39/37 on ADC B). A grounded input can also serve as a reset
+   step before a channel if ever needed.
+4. Dwell (switch → sample), firmware: ADC A ≥ 1 µs with the LMH6658 outputs (PFC ≤ 0.02 LSB,
+   DHB 0.18 LSB), **≥ 1.5 µs with the INA296 option** (≤ 0.02 LSB; 0.2–1 LSB at 1 µs); ADC B
+   ≥ 2 µs (HEATER_I 0.10 LSB; VAC/DC_LINK with fixes < 0.01 LSB from 0.4 µs). ADC A has ≥ 2.3 µs per
+   channel at 140 kHz, so both are met. ADC B's LLC-timed sequence must keep the 2 µs minimum.
+5. Charge injection (1 pC) ≤ 0.05 LSB and leakage current ≤ 0.02 LSB on ≤ 100 Ω sources –
+   no action.
+
+Resulting per-channel status (next revision, with items 4.2, 4.4, 4.5 / AUX buffer):
+
+| Channel | ADC | Output network | Leakage at the planned dwell |
+|---|---|---|---|
+| PFC_I1, PFC_I2 | A | LMH6658 (or INA296) + 100 Ω / 100 pF | ≤ 0.02 LSB (≥ 1 / 1.5 µs) |
+| DHB_I | A | LMH6658 (or INA296) + 33 Ω (C26 unfitted) | ≤ 0.18 LSB (1 µs), 0.01 (2 µs) |
+| HEATER_I | B | LMH6658 + 33 Ω (C10 unfitted) | 0.10 LSB (2 µs) |
+| VAC | B | TLV316 + 100 Ω, Cf 1 nF in the feedback, no output C | < 0.01 LSB |
+| DC_LINK | B | TLV316 + 100 Ω, Cf 1 nF, C4 removed | < 0.01 LSB |
+| AUX | B | follower + 100 Ω (recommended) / C61 1 µF | ≈ 0 / 0.67 LSB + 0.9 LSB offset |
+
+Do not put a capacitor larger than ≈ 100 pF on an INA296 output: 100 Ω + 1 nF rings with the mux
+load (up to 99 LSB at 0.7 µs in the model).
 
 ## 5. General / documentation
 

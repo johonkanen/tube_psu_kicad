@@ -233,6 +233,24 @@ J2-39 (ADB5) are unconnected on the power board but named "Cuk_cap_meas_raw" /
 "heater_cap_ad_meas" in the card's `power_board_header.csv`: as floating mux inputs they
 read whatever the previous channel left – do not use them, or tie them to GND.
 
+### 9a. INA296 option (NEXT_REVISION.md 4.10), `spice/mux_ina296.py`
+
+INA296 output modelled as a follower with 1.1 MHz loop GBW and an open-loop output resistance
+RO of 50 / 200 Ω (the datasheet gives no output-impedance curve), same mux model. LSB for a
+3.3 V difference:
+
+| Output network | RO | 0.2 µs | 0.4 µs | 0.7 µs | 1 µs | 1.5 µs | 2 µs |
+|---|---|---|---|---|---|---|---|
+| 100 Ω + 100 pF | 50 | 98 | 27 | 3.0 | 0.32 | 0 | 0 |
+| 100 Ω + 100 pF | 200 | 373 | 143 | 7.2 | 0.19 | 0 | 0 |
+| 33 Ω, no C | 50 | 85 | 21 | 2.6 | 0.31 | 0 | 0 |
+| 33 Ω, no C | 200 | 377 | 88 | 9.3 | 0.98 | 0.02 | 0 |
+| 100 Ω + 1 nF | 200 | 326 | 15 | 99 | 39 | 10 | 0.82 |
+
+The INA296 (1.1 MHz) settles slower than the LMH6658 (140 MHz GBW): sample ≥ 1.5 µs after the
+switch, keep 100 Ω / 100 pF (1 nF rings). Slew (5–8 V/µs) is not modelled (≈ +0.2 µs for the
+≈ 1 V charge-sharing dip).
+
 ## 10. ADC range of VAC_MEAS and AUX_MEAS
 
 - **VAC_MEAS** = 1.65 V + 0.005·(V(AC2) − V(AC1)). At 230 V rms (325 V peak) the swing is
