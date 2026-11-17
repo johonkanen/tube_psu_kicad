@@ -29,8 +29,9 @@ it was (its results reproduce; EF20 netlists / matrices unchanged).
   back (this also fixes an existing 5.08 mm DC+ creepage spot).
 - Si8275BB (UVLO 8 V) replaces the "Si8274 UVLO grade" question: every 15 V rail stays ≥ 14.45 V
   and ≤ 16.75 V.
-- Open: real core / bobbin dims (calipers), 12 W vs 15 W continuous, height (29.2 mm), board
-  move, preload power, D8 part (≥ 600 V). See EEL19_DESIGN.md 9–10.
+- Answered 2026-11-17: height OK (lots of room), board move OK, 0.2 W preloads OK, D8 fitted
+  is a 1000 V diode (OK). Still open: real core / bobbin dims (calipers), 12 W vs 15 W
+  continuous. See EEL19_DESIGN.md 9–10.
 - Commands: EEL19_DESIGN.md 11. Use `--jobs 4` while other simulations run (3 GB total budget).
 
 ---
@@ -83,7 +84,7 @@ option.)
    max 17.7 V, 15V_ISO_SEC still ≈ 12.8 V) or margin_order_8 (5V rail runs high).
 2. May 15V_ISO_SEC also get a preload (3.3 kΩ more, or R124 12.1 kΩ → 2.7 kΩ, 83 mW)?
    It removes the 17 V excursion when that rail carries only its bleeder.
-3. Which part is really fitted at D8? (Needs ≥ 600 V.) Can the D8 reverse voltage /
+3. ~~Which part is really fitted at D8?~~ Answered: a 1000 V diode (OK). Can the D8 reverse voltage /
    ringing be measured?
 4. Bench data to tighten the calibration: 5V at idle (model 4.7–4.9 V), 15V with the
    isolated outputs loaded and the primary gate drivers idle (model 19.9 V on today's

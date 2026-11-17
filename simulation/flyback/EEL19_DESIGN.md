@@ -350,7 +350,7 @@ start of each winding is its dot.
 | R64, R81, R84, R85 | 39k / 15k / 33k / 4.7k | **unchanged** | aux knee voltage unchanged (6 T at 0.93 V/T) |
 | new | – | **2.2 kΩ preload on 15V** (102 mW → 1206 0.25 W), **1 kΩ on 5V** (25 mW) | light-load excursions |
 | R124 | 12.1 kΩ (15V_ISO_SEC bleeder) | **2.61 kΩ** (= 12.1k ‖ 3.3k; 86 mW, 1206) or add 3.3 kΩ | min_S15 excursion |
-| D8 | ES1A-family 200 V | **≥ 600 V: ES1J / US1J (US1M 1000 V preferred)**, same SMA | V_R 395 V at 400 V, 420 V at 420 V |
+| D8 | 1000 V diode fitted (user) | keep ≥ 600 V (US1M 1000 V), same SMA | V_R 395 V at 400 V, 420 V at 420 V |
 | D4, D5 | ES1A family | ES1B/ES1D (≥ 100 V) – a true 50 V ES1A would be overstressed (77 V) | |
 | C1, C2 (220 µF, 15 V rails), C6/C36/C71, C114/C115 | – | check ripple-current rating at 15 W (winding rms 0.6–0.8 A at full15) | not simulated with the real ESR |
 | snubber D7 / R72 / R45 / C12 | S1M / 100R / 1M / 470p | unchanged in the model (Vcol 603 V at full15, R45 13 mW) – check on the bench | |
@@ -430,12 +430,13 @@ start of each winding is its dot.
    results assume the MyCoilTech / catalogue numbers.
 2. Is 12 W continuous with 15 W peaks acceptable on the IW1818, or is 15 W continuous required
    (iW1819 → board change)?
-3. Enclosure / mezzanine height above TR1 (29.2 mm body).
-4. Is the board move acceptable for the next revision: TR1 +0.93 mm, about 9 parts, the
-   ISO_GND pour pull-back (which also fixes the existing 5.08 mm DC+ spot)?
-5. Preload values (2.2k on 15V, 1k on 5V, R124 → 2.61k): about 0.2 W extra standby load.
-   Acceptable?
-6. Which part is fitted at D8 today? (Still needs ≥ 600 V.)
+Answered by the user (2026-11-17):
+
+- Height: plenty of room above TR1 (bench photo) – the 29.2 mm body is fine.
+- Board move (TR1 +0.93 mm, about 9 parts, ISO_GND pour pull-back): acceptable.
+- Preloads (2.2k on 15V, 1k on 5V, R124 → 2.61k), about 0.2 W continuous: acceptable.
+- D8 fitted today is a **1000 V** diode – OK for the 395–420 V reverse voltage (the D8 finding
+  is closed; keep a ≥ 600 V part, US1M class, in the BOM).
 
 ## 11. How to rerun
 
