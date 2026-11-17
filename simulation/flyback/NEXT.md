@@ -30,8 +30,8 @@ it was (its results reproduce; EF20 netlists / matrices unchanged).
 - Si8275BB (UVLO 8 V) replaces the "Si8274 UVLO grade" question: every 15 V rail stays ≥ 14.45 V
   and ≤ 16.75 V.
 - Answered 2026-11-17: height OK (lots of room), board move OK, 0.2 W preloads OK, D8 fitted
-  is a 1000 V diode (OK). Still open: real core / bobbin dims (calipers), 12 W vs 15 W
-  continuous. See EEL19_DESIGN.md 9–10.
+  is a 1000 V diode (OK). 12 W continuous is enough; iW1819-00 (in stock at DigiKey/Mouser)
+  may replace the IW1818 in the next revision. Still open: real core / bobbin dims (calipers). See EEL19_DESIGN.md 9–10.
 - Commands: EEL19_DESIGN.md 11. Use `--jobs 4` while other simulations run (3 GB total budget).
 
 ---

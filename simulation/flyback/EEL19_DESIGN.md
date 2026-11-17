@@ -428,8 +428,12 @@ start of each winding is its dot.
 
 1. Real EEL19 core / bobbin dimensions and pin pattern (section 9.1). The board-fit and window
    results assume the MyCoilTech / catalogue numbers.
-2. Is 12 W continuous with 15 W peaks acceptable on the IW1818, or is 15 W continuous required
-   (iW1819 → board change)?
+2. ~~12 W vs 15 W continuous?~~ Answered (user 2026-11-17): 12 W continuous is enough; changing
+   to the iW1819 is fine if it is stocked. It is: **iW1819-00** (0 mV cable compensation – right
+   here, no cable; OTP recovery 100 °C; SO-10 batwing, 800 V BJT, 72 kHz, up to 18 W) is in stock
+   at DigiKey (IW1819-00, about 4,800 pcs) and listed at Mouser; -01 / -11 (150 mV cable comp)
+   are 18-week lead time – do not use. Next revision: PWM2 → iW1819-00, new SO-10 batwing
+   footprint and pinout on sheet 1 (to do), keep Rsense 1.0 Ω / the EEL19 design.
 Answered by the user (2026-11-17):
 
 - Height: plenty of room above TR1 (bench photo) – the 29.2 mm body is fine.
