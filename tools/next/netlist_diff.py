@@ -81,12 +81,12 @@ def diff(p51, n51, p52, n52):
     free51 = set(n51) - set(matched)
     by_pin51 = {p: n for n in free51 for p in n51[n] if p[0] in stable}
     new_nets = []
-    for n, ps in n52.items():
+    for n, ps in sorted(n52.items()):
         if n in matched:
             continue
         cnt = collections.Counter(by_pin51[p] for p in ps if p in by_pin51)
-        if cnt:
-            matched[n] = cnt.most_common(1)[0][0]
+        if cnt:                           # deterministic tie-break (set order varies with PYTHONHASHSEED)
+            matched[n] = max(sorted(cnt), key=lambda m: cnt[m])
         else:
             new_nets.append(n)
     used51 = set(matched.values())
