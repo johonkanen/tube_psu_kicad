@@ -842,6 +842,12 @@ lib/tube_psu_next.pretty) now has a **milled slot on Edge.Cuts inside the footpr
 - On the board, with TR1 at (64.45, −4.28), the slot is at x 64.45, y −14.28 … +12.22.
 - KiCad's creepage check follows internal Edge.Cuts, and the fab mills the same outline.
 
+> **Update (5.2 phase 3, 2026-11-18, commit 53422e9):** KiCad DRC on the inner layers (where the slot
+> gives no credit, rule 11.1 mm) found FL_DC 10.1 mm from pin 5. Fixed in the footprint: the unused
+> inner-layer copper rings of the TR1 pads are removed, **both fly-lead holes moved 1.5 mm down to
+> y = +15.5 mm**, and **the slot is extended to 28 mm**. Surface path now ≥ 12.86 mm. The numbers below
+> are the earlier geometry (holes at y = +14.0, slot 26.5 mm).
+
 Shortest surface path between primary and isolated copper (pad edges), from a visibility-graph
 calculation on the generated footprint (pad circles and slot outline; script in the scratchpad,
 not committed):
