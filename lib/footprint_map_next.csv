@@ -162,7 +162,7 @@ P15V_OUT,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade ter
 P400V,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
 P5V_OUT,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
 PE,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
-PWM2,tube_psu:IW1818,Package_DIP:DIP-8-N6_W7.62mm,DIP-8 without pin 6
+PWM2,tube_psu_next:IW1819,tube_psu_next_parts:SOIC-10_Batwing_iW1819,Renesas 10-lead SOIC batwing (tools/next/gen_next_footprints_parts.py; confirm outline)
 Q1,tube_psu:Q_NMOS_SGD,tube_psu:LFPAK56_Proteus,"LFPAK56, three source pads numbered 1, 2 = G, 3 = D tab"
 Q2,tube_psu:Q_NMOS_SGD,tube_psu:LFPAK56_Proteus,"LFPAK56, three source pads numbered 1, 2 = G, 3 = D tab"
 Q5,tube_psu:Q_NMOS_GDS,Package_TO_SOT_THT:TO-247-3_Vertical,"TO-247, 1=G 2=D 3=S (KiCad pitch 5.45, Proteus 5.461)"
@@ -303,7 +303,7 @@ RL1,tube_psu:SONGLE_RELAY,tube_psu:Relay_Songle_SRD_5pin,"Songle relay, pads 1-5
 SEC_GND,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
 SICD1,tube_psu:C3D02060A,tube_psu:TO-220-2_Vertical_AK,"TO-220-2, pads A/K"
 SICD2,tube_psu:C3D02060A,tube_psu:TO-220-2_Vertical_AK,"TO-220-2, pads A/K"
-TR1,tube_psu:EF20,tube_psu:Transformer_EF20_2x5_P3.81mm,"EF20, pads 1-10"
+TR1,tube_psu_next:EEL19_4P6,tube_psu_next:Transformer_EEL19_V_4+6_FlyLeads,"EEL19 vertical 4+6, fly-lead holes 11/12 (NR 1.2)"
 TR2,tube_psu:EF25_8PIN,tube_psu:Transformer_EF25_2x5_P5.08mm_8pin,"EF25, pads 1,2,4,5,6,7,9,10"
 TR3,tube_psu:ETD34_TRAN_1P1S,tube_psu:Transformer_ETD34_4x3pads,"ETD34, pins 1-4 with three pads each"
 U1,tube_psu:LMH6658,Package_SO:TSSOP-8_3x3mm_P0.65mm,"TSSOP-8 (device OPA2353UA; the pads are TSSOP, not SO-8)"
@@ -315,3 +315,5 @@ U8,tube_psu:TLV316IDBVR,tube_psu:SOT-23-5_Proteus,"SOT-23-5, Proteus pad rows 2.
 V2,tube_psu:TPS73033,tube_psu:SOT-23-5_Proteus,"SOT-23-5, Proteus pad rows 2.39 mm apart, Proteus pad size"
 V3,tube_psu:TPS73033,tube_psu:SOT-23-5_Proteus,"SOT-23-5, Proteus pad rows 2.39 mm apart, Proteus pad size"
 V4,tube_psu:TPS73033,tube_psu:SOT-23-5_Proteus,"SOT-23-5, Proteus pad rows 2.39 mm apart, Proteus pad size"
+R125,tube_psu:R,Resistor_SMD:R_1206_3216Metric,1206
+R126,tube_psu:R,Resistor_SMD:R_0805_2012Metric,0805

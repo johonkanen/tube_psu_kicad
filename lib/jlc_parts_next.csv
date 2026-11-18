@@ -104,7 +104,7 @@ C98,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31
 C99,100n,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C5448934,TCC1206X7R104K501HT,CCTC,extended,81619,0.0271,2026-11-17,changed,below 630 V MLCC rule: 500 V on 400/420 V nets (or move to 1210),"100 nF X7R 500 V: no 1206 100 nF >=630 V at JLC (C15/C67/C70/C20 on DC+ 400 V, C89-C101 on 420V, C45 on -100V BIAS); 630 V would need 1210"
 C100,100n,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C5448934,TCC1206X7R104K501HT,CCTC,extended,81619,0.0271,2026-11-17,changed,below 630 V MLCC rule: 500 V on 400/420 V nets (or move to 1210),"100 nF X7R 500 V: no 1206 100 nF >=630 V at JLC (C15/C67/C70/C20 on DC+ 400 V, C89-C101 on 420V, C45 on -100V BIAS); 630 V would need 1210"
 C101,100n,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C5448934,TCC1206X7R104K501HT,CCTC,extended,81619,0.0271,2026-11-17,changed,below 630 V MLCC rule: 500 V on 400/420 V nets (or move to 1210),"100 nF X7R 500 V: no 1206 100 nF >=630 V at JLC (C15/C67/C70/C20 on DC+ 400 V, C89-C101 on 420V, C45 on -100V BIAS); 630 V would need 1210"
-C102,UCS2G560MND9,Capacitor_THT:CP_Radial_D10.0mm_P5.00mm,C22464691,KCXE1802E560MF,Ymin,extended,386,0.3329,2026-11-17,equivalent,,THT. UCS2G560MND9 not stocked; Ymin KCXE 56 uF 250 V D10x18 P5 (-100V BIAS rail; user: any >=160 V 56 uF 10 mm)
+C102,56u 250V,Capacitor_THT:CP_Radial_D10.0mm_P5.00mm,C22464691,KCXE1802E560MF,Ymin,extended,386,0.3329,2026-11-18,exact,,"Ymin KCXE 56 uF 250 V D10x18 P5 (-100V BIAS rail, >= 160 V)"
 C103,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-17,equivalent,,100 nF X7R 50 V 0603
 C104,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-17,equivalent,,100 nF X7R 50 V 0603
 C105,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-17,equivalent,,100 nF X7R 50 V 0603
@@ -119,11 +119,11 @@ CM1,SCF20-05-550,tube_psu:L_CommonMode_SCF20-05-550,C1534140,SCF20-05-550,KEMET,
 CM4,SCF20-05-550,tube_psu:L_CommonMode_SCF20-05-550,C1534140,SCF20-05-550,KEMET,extended,20,7.3717,2026-11-17,exact,LOW STOCK 20 (< 100): 10 boards max,THT. KEMET SCF20-05-550
 D2,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extended,5662,0.2931,2026-11-17,exact,,
 D3,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extended,5662,0.2931,2026-11-17,exact,,
-D4,ES1A,tube_psu:D_SMA_AC,C116492,ES1D,Shandong Jingdao Microelectronics,extended,236108,0.0112,2026-11-17,changed,value ES1A -> ES1D (schematic value stale),schematic ES1A (50 V) -> ES1D 200 V (known: the aux flyback rectifiers are ES1D-class 200 V)
-D5,ES1A,tube_psu:D_SMA_AC,C116492,ES1D,Shandong Jingdao Microelectronics,extended,236108,0.0112,2026-11-17,changed,value ES1A -> ES1D (schematic value stale),schematic ES1A (50 V) -> ES1D 200 V (known: the aux flyback rectifiers are ES1D-class 200 V)
+D4,ES1D,tube_psu:D_SMA_AC,C116492,ES1D,Shandong Jingdao Microelectronics,extended,236108,0.0112,2026-11-18,exact,,ES1D 200 V (NR 1.10: >= 100 V)
+D5,ES1D,tube_psu:D_SMA_AC,C116492,ES1D,Shandong Jingdao Microelectronics,extended,236108,0.0112,2026-11-18,exact,,ES1D 200 V (NR 1.10: >= 100 V)
 D6,ES1A,tube_psu:D_SMA_AC,C116492,ES1D,Shandong Jingdao Microelectronics,extended,236108,0.0112,2026-11-17,changed,value ES1A -> ES1D (schematic value stale),schematic ES1A (50 V) -> ES1D 200 V (known: the aux flyback rectifiers are ES1D-class 200 V)
 D7,S1M,tube_psu:D_SMA_AC,C64915,S1M,MDD(Microdiode Semiconductor),extended,143322,0.0163,2026-11-17,exact,,"S1M 1000 V standard recovery, as designed"
-D8,ES1A,tube_psu:D_SMA_AC,C412437,US1M,MDD(Microdiode Semiconductor),basic,1969040,0.0134,2026-11-17,changed,value ES1A -> US1M 1000 V (schematic value stale),"schematic ES1A -> US1M 1000 V ultrafast (fitted part is 1000 V, V_R 395-420 V; NEXT_REVISION 1.9)"
+D8,US1M,tube_psu:D_SMA_AC,C412437,US1M,MDD(Microdiode Semiconductor),basic,1969040,0.0134,2026-11-18,exact,,US1M 1000 V ultrafast (NR 1.9: >= 600 V)
 D9,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extended,5662,0.2931,2026-11-17,exact,,
 D10,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extended,5662,0.2931,2026-11-17,exact,,
 D11,S1M,tube_psu:D_SMA_AC,C64915,S1M,MDD(Microdiode Semiconductor),extended,143322,0.0163,2026-11-17,exact,,"S1M 1000 V standard recovery, as designed"
@@ -163,7 +163,7 @@ P15V_OUT,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,co
 P400V,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
 P5V_OUT,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
 PE,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
-PWM2,IW1818,Package_DIP:DIP-8-N6_W7.62mm,,,,,,,2026-11-17,missing,not available,iWatt/Renesas IW1818-00 (PDIP-7) 0 stock at JLC; consign
+PWM2,iW1819-00,tube_psu_next_parts:SOIC-10_Batwing_iW1819,,IW1819-00,RENESAS,,0,1.1154,2026-11-18,consigned,JLC C17225733 0 stock,"iW1819-00 (NR 1.5); JLC C17225733 listed with 0 stock 2026-11-18 -> consign (DigiKey / Mouser), or order through JLC global sourcing"
 Q1,BUK9Y15-60E,tube_psu:LFPAK56_Proteus,C458196,"BUK9Y15-60E,115",Nexperia,extended,1485,0.2638,2026-11-17,exact,,"BUK9Y15-60E,115"
 Q2,BUK9Y15-60E,tube_psu:LFPAK56_Proteus,C458196,"BUK9Y15-60E,115",Nexperia,extended,1485,0.2638,2026-11-17,exact,,"BUK9Y15-60E,115"
 Q5,C2M0160120D,Package_TO_SOT_THT:TO-247-3_Vertical,,,,,,,2026-11-17,missing,not available,THT. C2M0160120D (Wolfspeed) 0 stock; only clone-branded parts < 100; consign
@@ -182,8 +182,8 @@ R4,470k,Resistor_SMD:R_1206_3216Metric,C17997,1206W4F4703T5E,UNI-ROYAL(Uniroyal 
 R5,470k,Resistor_SMD:R_1206_3216Metric,C17997,1206W4F4703T5E,UNI-ROYAL(Uniroyal Elec),extended,134282,0.0051,2026-11-17,equivalent,,"470 kΩ 1 % 1206 (mains divider, ~110 V per resistor)"
 R6,470k,Resistor_SMD:R_1206_3216Metric,C17997,1206W4F4703T5E,UNI-ROYAL(Uniroyal Elec),extended,134282,0.0051,2026-11-17,equivalent,,"470 kΩ 1 % 1206 (mains divider, ~110 V per resistor)"
 R7,10k,Resistor_SMD:R_0603_1608Metric,C25804,0603WAF1002T5E,UNI-ROYAL(Uniroyal Elec),basic,44852996,0.0019,2026-11-17,equivalent,,10 kΩ 1 % 0603
-R8,2.49R,Resistor_SMD:R_1206_3216Metric,C2933666,FRC1206F2R49TS,FOJAN,extended,15005,0.0053,2026-11-17,equivalent,,2.49 Ω 1 % 1206 (PWM2 current sense)
-R9,2.49R,Resistor_SMD:R_1206_3216Metric,C2933666,FRC1206F2R49TS,FOJAN,extended,15005,0.0053,2026-11-17,equivalent,,2.49 Ω 1 % 1206 (PWM2 current sense)
+R8,2.0R,Resistor_SMD:R_1206_3216Metric,C17942,1206W4F200KT5E,UNI-ROYAL(Uniroyal Elec),extended,19323,0.0095,2026-11-18,changed,,2.0 Ohm 1 % 1206 (NR 1.6: Rsense 1.0 Ohm with R9)
+R9,2.0R,Resistor_SMD:R_1206_3216Metric,C17942,1206W4F200KT5E,UNI-ROYAL(Uniroyal Elec),extended,19323,0.0095,2026-11-18,changed,,2.0 Ohm 1 % 1206 (NR 1.6: Rsense 1.0 Ohm with R8)
 R10,1M,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C17514,0805W8F1004T5E,UNI-ROYAL(Uniroyal Elec),basic,1523445,0.0044,2026-11-17,equivalent,,"1 MΩ 1 % 0805 (dividers: <= 140 V per resistor, 0805 rated 150 V; R23/R34/R39 on 420V are at the limit)"
 R11,22k,Resistor_SMD:R_0603_1608Metric,C31850,0603WAF2202T5E,UNI-ROYAL(Uniroyal Elec),basic,2328671,0.0042,2026-11-17,equivalent,,22 kΩ 1 % 0603
 R12,4.7k,Resistor_SMD:R_0603_1608Metric,C23162,0603WAF4701T5E,UNI-ROYAL(Uniroyal Elec),basic,15102746,0.0028,2026-11-17,equivalent,,4.7 kΩ 1 % 0603
@@ -298,13 +298,13 @@ R120,1M,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C17514,0805W8F1
 R121,15k,Resistor_SMD:R_0603_1608Metric,C22809,0603WAF1502T5E,UNI-ROYAL(Uniroyal Elec),basic,3013077,0.0029,2026-11-17,equivalent,,15 kΩ 1 % 0603
 R122,6.8k,Resistor_SMD:R_0603_1608Metric,C23212,0603WAF6801T5E,UNI-ROYAL(Uniroyal Elec),basic,956944,0.0023,2026-11-17,equivalent,,6.8 kΩ 1 % 0603
 R123,12.1K,Resistor_SMD:R_1206_3216Metric,C247391,1206W4F1212T5E,UNI-ROYAL(Uniroyal Elec),extended,4303,0.0045,2026-11-17,equivalent,,12.1 kΩ 1 % 1206
-R124,12.1K,Resistor_SMD:R_1206_3216Metric,C247391,1206W4F1212T5E,UNI-ROYAL(Uniroyal Elec),extended,4303,0.0045,2026-11-17,equivalent,,12.1 kΩ 1 % 1206
+R124,2.61k,Resistor_SMD:R_1206_3216Metric,C245506,CR1206F2K61P05Z,Ever Ohms Tech,extended,75,0.0077,2026-11-18,changed,stock 75,"2.61 kOhm 1 % 1206 (NR 1.8, 15V_ISO_SEC bleeder); alt. AC1206FR-072K61L C229516 (43)"
 REF1,ISL21010CFH315Z-TK,tube_psu:SOT-23_Proteus,C2157117,ISL21010CFH315Z-TK,RENESAS,extended,1024,1.5743,2026-11-17,exact,REF1 fitted part differs (1.65 V bias),ISL21010CFH315Z-TK as in the schematic (1.5 V); the fitted REF1 is a 1.65 V-bias part - check before ordering
 RL1,SONGLE RELAY,tube_psu:Relay_Songle_SRD_5pin,C35449,SRD-05VDC-SL-C,Ningbo Songle Relay,extended,84108,0.444,2026-11-17,exact,,THT. SRD-05VDC-SL-C (5 V coil)
 SEC_GND,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
 SICD1,C3D02060A,tube_psu:TO-220-2_Vertical_AK,,,,,,,2026-11-17,missing,not available,"THT. C3D02060A 0 stock; nearest TO-220-2 SiC: Vishay VS-C04ET07T-M3 C5208854 (650 V 4 A, 480 stock; check pinout and Qc); consign"
 SICD2,C3D02060A,tube_psu:TO-220-2_Vertical_AK,,,,,,,2026-11-17,missing,not available,"THT. C3D02060A 0 stock; nearest TO-220-2 SiC: Vishay VS-C04ET07T-M3 C5208854 (650 V 4 A, 480 stock; check pinout and Qc); consign"
-TR1,EF20,tube_psu:Transformer_EF20_2x5_P3.81mm,,,,,,,2026-11-17,consigned,,custom transformers (EF20 / EF25 / ETD34)
+TR1,EEL19_4+6 Lp600u,tube_psu_next:Transformer_EEL19_V_4+6_FlyLeads,,,,,,,2026-11-18,consigned,,"custom transformer, EEL19 PC40 4+6 bobbin, P 52+52 T on fly leads (simulation/flyback/EEL19_DESIGN.md 6/6a)"
 TR2,EF25_8PIN,tube_psu:Transformer_EF25_2x5_P5.08mm_8pin,,,,,,,2026-11-17,consigned,,custom transformers (EF20 / EF25 / ETD34)
 TR3,ETD34 TRAN 1P1S,tube_psu:Transformer_ETD34_4x3pads,,,,,,,2026-11-17,consigned,,custom transformers (EF20 / EF25 / ETD34)
 U1,LMH6658,Package_SO:TSSOP-8_3x3mm_P0.65mm,C478382,LMH6643MMX/NOPB,Texas Instruments,extended,15316,0.9518,2026-11-17,changed,value LMH6658 -> LMH6643 (agreed),"LMH6658 not stocked -> LMH6643MMX/NOPB (agreed drop-in, VSSOP-8 = TSSOP-8 3x3 P0.65)"
@@ -316,3 +316,5 @@ U8,TLV316IDBVR,tube_psu:SOT-23-5_Proteus,C575578,TLV316IDBVR,Texas Instruments,e
 V2,MIC5205,tube_psu:SOT-23-5_Proteus,C37970,MIC5205-3.3YM5-TR,Microchip Tech,extended,673,0.4211,2026-11-17,exact,,MIC5205-3.3YM5-TR (3.3 V outputs AD2_3V3 / HT side)
 V3,MIC5205,tube_psu:SOT-23-5_Proteus,C37970,MIC5205-3.3YM5-TR,Microchip Tech,extended,673,0.4211,2026-11-17,exact,,MIC5205-3.3YM5-TR (3.3 V outputs AD2_3V3 / HT side)
 V4,TPS73033,tube_psu:SOT-23-5_Proteus,C57424,TPS73033DBVR,Texas Instruments,extended,3588,0.6111,2026-11-17,exact,,TPS73033DBVR
+R125,2.2k,Resistor_SMD:R_1206_3216Metric,C17948,1206W4F2201T5E,UNI-ROYAL(Uniroyal Elec),extended,207003,0.0053,2026-11-18,exact,,"new: 15V preload 2.2 kOhm 1206 0.25 W (NR 1.7, 102 mW)"
+R126,1k,Resistor_SMD:R_0805_2012Metric,C17513,0805W8F1001T5E,UNI-ROYAL(Uniroyal Elec),basic,39104446,0.0035,2026-11-18,exact,,"new: 5V preload 1 kOhm 0805 (NR 1.7, 25 mW)"

@@ -24,9 +24,9 @@ from p2k.sexpr import dump, parse  # noqa: E402
 
 LIB = os.path.join(ROOT, "lib", "tube_psu_next.kicad_sym")
 
-GROUNDS = ["GND", "ISO_GND", "HT_GND"]
+GROUNDS = ["GND", "ISO_GND", "HT_GND", "ISO_UART_GND"]       # ISO_UART_GND: 5.2 UART island (NR 3b)
 SUPPLIES = ["DC+", "420V", "15V", "15V_ISO_SEC", "6V3", "5V", "5V_ISOL", "+3V3", "AD2_3V3",
-            "+1V65_BIAS", "-5V_SEC", "-100V BIAS"]
+            "+1V65_BIAS", "-5V_SEC", "-100V BIAS", "UART_5V", "UART_3V3"]
 
 NC = "no_connect"
 
@@ -74,6 +74,14 @@ def build():
                  desc="Op-amp SOT-23-5, Proteus 1=OP 2=V- 3=+IN 4=-IN 5=V+"),
         from_std("Amplifier_Operational", "LM2904", "LMH6658", "U",
                  desc="Dual op-amp TSSOP-8 (Proteus device OPA2353UA), standard dual pinout"),
+        # --- 5.2 additions (NEXT_REVISION.md items in the descriptions) ---
+        from_std("Amplifier_Operational", "LM2904", "LMH6643", "U",
+                 desc="Dual op-amp LMH6643MMX VSSOP-8, standard dual pinout (drop-in for the LMH6658, NR 4.10b)"),
+        from_std("Amplifier_Operational", "LM2904", "TLV9062", "U",
+                 desc="Dual RRIO op-amp TLV9062IDGKR VSSOP-8, standard dual pinout (AUX / 5V_MEAS followers, NR 4b/4c)"),
+        from_std("Device", "L", "L_TOROID", "L", desc="PFC choke on a sendust toroid, two leads (NR 5.2)"),
+        from_std("Connector_Generic", "Conn_01x06", "CONN_01X06", "J",
+                 desc="6-pin 2.54 mm header, FTDI TTL-232R-3V3 pinout (NR 3b)"),
     ]
 
     syms += [
@@ -118,6 +126,47 @@ def build():
             desc="EF20 auxiliary flyback transformer, 10 pins"),
         box("EF25_8PIN", "TR", [(i, str(i), PAS) for i in (1, 2, 4, 5)], [(i, str(i), PAS) for i in (10, 9, 7, 6)],
             desc="EF25 heater transformer, pins 1 2 4 5 6 7 9 10"),
+    ]
+    # --- 5.2 additions -------------------------------------------------------------------------------
+    syms += [
+        # iW1819 (Renesas datasheet Rev. 1.5, 10-lead SOIC batwing): pin 4 NC (leave floating), 5/6
+        # collector, 7 emitter (short to 9 ISENSE), 3/8 GND, 10 ASU (active start-up output, unused here).
+        box("IW1819", "PWM", [(2, "VCC", PI), (1, "VSENSE", IN), (9, "ISENSE", IN), (7, "E", PAS), (10, "ASU", OUT)],
+            [(5, "C", PAS), (6, "C", PAS), (4, "NC", NC), None, (3, "GND", PI), (8, "GND", PI)],
+            desc="Flyback controller with integrated 800 V BJT, SO-10 batwing (iW1819-00, NR 1.5)"),
+        # UCC21520 (TI SLUSCJ9): same SOIC-16W pin positions as the Si8275 (5 = DISABLE, 6 = DT).
+        box("UCC21520", "DRV", [(3, "VCCI", PI), (8, "VCCI", PI), (1, "INA", IN), (2, "INB", IN), (5, "DIS", IN),
+                                (6, "DT", PAS), (4, "GND", PI), (7, "NC", NC)],
+            [(16, "VDDA", PI), (15, "OUTA", OUT), (14, "VSSA", PI), (13, "NC", NC), (12, "NC", NC),
+             (11, "VDDB", PI), (10, "OUTB", OUT), (9, "VSSB", PI)],
+            desc="Isolated dual gate driver 4 A / 6 A, 5.7 kVrms reinforced, SOIC-16W (UCC21520DWR, NR 3a)"),
+        box("UCC27511A", "DRV", [(1, "VDD", PI), (6, "IN+", IN), (5, "IN-", IN)],
+            [(2, "OUTH", OUT), (3, "OUTL", OUT), None, (4, "GND", PI)],
+            desc="Single low-side gate driver 4 A / 8 A, split outputs, SOT-23-6 (UCC27511ADBVR, NR 3a)"),
+        box("UCC27524A", "DRV", [(6, "VDD", PI), (1, "ENA", IN), (2, "INA", IN), (4, "INB", IN), (8, "ENB", IN)],
+            [(7, "OUTA", OUT), (5, "OUTB", OUT), None, (3, "GND", PI)],
+            desc="Dual 5 A low-side gate driver, SOIC-8 (UCC27524ADR, NR 3a)"),
+        # Si8621 WB SOIC-16 pinout (Skyworks datasheet 5.): A1 in -> B1 out, B2 in -> A2 out; CA-IS3721HW
+        # (Chipanalog, default high) has the same pinout.
+        box("SI8621", "U", [(3, "VDD1", PI), (4, "A1", IN), (5, "A2", OUT), (1, "GND1", PI), (7, "GND1", PI),
+                            (2, "NC", NC), (6, "NC", NC), (8, "NC", NC)],
+            [(14, "VDD2", PI), (13, "B1", OUT), (12, "B2", IN), (16, "GND2", PI), (9, "GND2", PI),
+             (10, "NC", NC), (11, "NC", NC), (15, "NC", NC)],
+            desc="2-channel digital isolator 1 fwd / 1 rev, WB SOIC-16 (Si8621xD / CA-IS3721HW, NR 3b)"),
+        box("XC6206", "U", [(3, "VIN", PI)], [(2, "VOUT", PO)], bottom=[(1, "GND", PI)],
+            desc="3.3 V LDO SOT-23 (XC6206P332MR: 1 = GND, 2 = VOUT, 3 = VIN)"),
+        # TR1 on the EEL19 4+6 bobbin (EEL19_DESIGN.md 6a, footprint Transformer_EEL19_V_4+6_FlyLeads):
+        # 11 / 12 = fly leads FL_DC / FL_C, 1 A15 finish, 2 GND, 3 A5 finish; 5 SHV, 7 S5, 8 SN5, 9 ISO_GND,
+        # 10 S15; bobbin pins 4 and 6 are clipped (no pad, no pin).
+        # (pin positions as on the 5.1 EF20 symbol: 1, 2, 3, FL_DC, FL_C down the left, 10, 9, 8, 7, 5 right)
+        box("EEL19_4P6", "TR", [(1, "A15", PAS), (2, "AGND", PAS), (3, "A5", PAS), (11, "FL_DC", PAS),
+                                (12, "FL_C", PAS)],
+            [(10, "S15", PAS), (9, "SGND", PAS), (8, "SN5", PAS), (7, "S5", PAS), (5, "SHV", PAS)],
+            desc="Aux flyback transformer EEL19 vertical 4+6 with fly-lead primary (NR 1.1)"),
+        # TR3 on the EC42/15 two-chamber bobbin (DAB_TRANSFORMER.md 5): two pins per winding end.
+        box("EC42_2CH", "TR", [(1, "P_START", PAS), (2, "P_START", PAS), None, (7, "P_FIN", PAS), (8, "P_FIN", PAS)],
+            [(9, "S_START", PAS), (10, "S_START", PAS), None, (15, "S_FIN", PAS), (16, "S_FIN", PAS)],
+            desc="DAB transformer EC42/15 two-chamber, option B 20:21 (NR 2.1); dots on 1+2 / 9+10"),
     ]
     l, r = header(range(1, 51))
     syms.append(box("HEADER_2X25_50MIL", "J", l, r, show_pin_names=False, desc="MCU connector 2x25, 50 mil"))

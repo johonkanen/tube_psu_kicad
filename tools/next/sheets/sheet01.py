@@ -21,9 +21,11 @@ sh = sheet("01_aux_supply.kicad_sch")
 
 # --- TR1 and the primary-side rectifiers ------------------------------------------------------------
 TX, TY = g(150), g(70)
-tr = sh.place("EF20", "TR1", TX, TY, value=sh_value("TR1"))
-P1, P2, P3, P4, P5 = (tr.pin(str(n)) for n in (1, 2, 3, 4, 5))
-P10, P9, P8, P7, P6 = (tr.pin(str(n)) for n in (10, 9, 8, 7, 6))
+# 5.2: EEL19 4+6 with fly-lead primary (NR 1.1, EEL19_DESIGN.md 6a): FL_DC (11) = DC+, FL_C (12) = collector,
+# 1 = A15 (15V), 2 = GND, 3 = A5 (5V / AUX_FB); 5 = SHV (-100V BIAS), 7 = S5, 8 = SN5, 9 = ISO_GND, 10 = S15
+tr = sh.place("EEL19_4P6", "TR1", TX, TY, value=sh_value("TR1"))
+P1, P2, P3, P4, P5 = (tr.pin(str(n)) for n in (1, 2, 3, 11, 12))
+P10, P9, P8, P7, P6 = (tr.pin(str(n)) for n in (10, 9, 8, 7, 5))
 # pin 1 -> D5 -> 15V rail (raised above the 5V group), C39 / C1 to GND
 _, dc, da = horiz2(sh, "D", "D5", TX - g(14), P1[1], sh_value("D5"), left="C", text="above")
 sh.wire(da, P1)
@@ -68,16 +70,23 @@ power_at(sh, "DC+", left(P4, 2), "left")
 xcol = TX - g(8)
 CROW = g(112)
 sh.wire(P5, (xcol, P5[1]), (xcol, CROW))
+sh.label("FLY_C", xcol, CROW, 0)                                 # 5.2: named collector node (HV net class)
 
 # --- PWM2 with the Vcc network, the snubber, the shunt and the feedback network ------------------
-PX, PY = g(70), g(116)
-pwm = sh.place("IW1818", "PWM2", PX, PY, value=sh_value("PWM2"))
-VCC, VSENSE, ISENSE, E, C8, C7, PGND = (pwm.pin(n) for n in (5, 4, 2, 1, 8, 7, 3))
+PX, PY = g(70), g(118)              # 5.2: +2 grid so the iW1819 C pins (row 0 of 6) stay on CROW
+# 5.2: iW1819-00 (NR 1.5, SO-10 batwing): 2 VCC, 1 VSENSE, 9 ISENSE + 7 E (shorted), 5/6 C, 3/8 GND,
+# 4 NC (floating), 10 ASU (active start-up output, unused: resistor start-up R114-R116 as in 5.1)
+pwm = sh.place("IW1819", "PWM2", PX, PY, value=sh_value("PWM2"))
+VCC, VSENSE, ISENSE, E, C8, C7, PGND = (pwm.pin(n) for n in (2, 1, 9, 7, 5, 6, 3))
 sh.wire(C8, (xcol, C8[1]))                                       # collector row
 sh.wire(C7, right(C7, 2), (C7[0] + g(2), C8[1]))
 sh.junction(C7[0] + g(2), C8[1])
 sh.wire(PGND, right(PGND, 2))
 power_at(sh, "GND", right(PGND, 2), "down")
+sh.wire(pwm.pin(8), right(pwm.pin(8), 2))
+power_at(sh, "GND", right(pwm.pin(8), 2), "down")
+sh.no_connect(*pwm.pin(4))
+sh.no_connect(*pwm.pin(10))
 # snubber: D7 (A at the collector) -> R72 -> node -> R45 || C12 -> DC+
 xs = g(120)
 _, dt, db = vert2(sh, "D", "D7", xs, CROW - g(3), sh_value("D7"), top="C")         # A = collector
@@ -184,6 +193,13 @@ for pin, dx, row, (dref, dside), rail, caps in groups:
     sh.junction(XN + g(4), row + g(6))
     power_at(sh, "ISO_GND", (XN + g(4), row + g(6)), "down")
     flagged_power(sh, rail, XN + g(30), row)
+# --- preloads (NR 1.7): 2.2k on 15V, 1k on 5V (standalone pairs) -------------------------------------
+for x, ref, rail in ((g(28), "R125", "15V"), (g(40), "R126", "5V")):
+    _, rt, rb = vert2(sh, "R", ref, x, g(52), sh_value(ref), top=1)                  # pin 1 = rail
+    power_at(sh, rail, rt, "up")
+    power_at(sh, "GND", rb, "down")
+sh.text("Preloads R125 / R126 (NR 1.7, light-load excursions).", g(16), g(62))
+
 sh.text("Secondary winding ends (PDF labels Sec11, d14_k, d15_K; IPC SEC11, D14_K, D15_K) and D5_A are wired directly.", TX + g(2), g(134))
 
 # --- terminals with the bleeders -----------------------------------------------------------------
@@ -205,6 +221,7 @@ sh.text("Terminals +15V OUT / -5V OUT / -80V OUT / +5V OUT / SEC GND = P15V_OUT 
 sh.text("the PDF joins the terminals RET_iso and ISO_GND by a bare wire (one net ISO_GND, no part).", g(100), g(203))
 
 # --- PDF notes ----------------------------------------------------------------------------------
+sh.text("5.2: TR1 = EEL19 4+6 (fly leads FL_DC / FL_C, pins 4 / 6 clipped), PWM2 = iW1819-00; R8 || R9 = 2.0R || 2.0R = 1.0R (Ipk 1.0 A, OCP 1.15 A).", g(16), g(37))
 for i, t in enumerate(("vsense nominal = 1.536 V; vsense OVP threshold = 1.838 V; Isense pk = 1V",
                        "R8/R9 = 3.57R if V1 design is used; Vpeak = 640V with V2 design",
                        "V1 : 67/9/4/54;  V2 : 52/8/3||7/3/3/42;  V3 : 58/9/4/47;  TR1 : core 171nh (winding notes)",

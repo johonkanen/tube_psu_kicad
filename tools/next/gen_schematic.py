@@ -42,6 +42,7 @@ FP_LIB_TABLE = """(fp_lib_table
 \t(version 7)
 \t(lib (name "tube_psu")(type "KiCad")(uri "${KIPRJMOD}/../lib/tube_psu.pretty")(options "")(descr "5.1 project footprints, pad numbers = IPC pin ids (tools/gen_footprints.py)"))
 \t(lib (name "tube_psu_next")(type "KiCad")(uri "${KIPRJMOD}/../lib/tube_psu_next.pretty")(options "")(descr "5.2 footprints (tools/next/gen_next_footprints.py)"))
+\t(lib (name "tube_psu_next_parts")(type "KiCad")(uri "${KIPRJMOD}/../lib/tube_psu_next_parts.pretty")(options "")(descr "5.2 part footprints not in the KiCad library (tools/next/gen_next_footprints_parts.py)"))
 )
 """
 

@@ -42,7 +42,7 @@ HV_NETS = {
         "DHB_HI_GATE", "Net-(Q19-G)", "Net-(D30-PadA)", "Net-(DRV5-VDDB)", "Net-(D19-K)",  # high side
         "/06 Heaters/HEATER_HI_SOURCE", "/06 Heaters/HEATER_CAP_MEAS",    # heater LLC bridge / tank
         "/06 Heaters/HEATER_HI_GATE", "Net-(DRV3-OUT+)", "Net-(DRV3-OUT-)", "Net-(DRV3-VDD2)", "Net-(D11-K)",
-        "Net-(D7-PadA)", "Net-(D7-K)", "Net-(C12-Pad2)",                   # flyback drain / clamp
+        "/01 AUX supply/FLY_C", "Net-(D7-K)", "Net-(C12-Pad2)",                   # flyback drain / clamp
         "Net-(R114-Pad1)", "Net-(R115-Pad1)", "Net-(R15-Pad1)", "Net-(R10-Pad1)",  # dividers from DC+
         "Net-(R4-Pad1)", "Net-(R5-Pad1)", "Net-(R47-Pad2)", "Net-(R48-Pad2)", "Net-(R50-Pad2)",
         "Net-(R51-Pad2)", "Net-(R109-Pad1)", "Net-(R111-Pad1)",

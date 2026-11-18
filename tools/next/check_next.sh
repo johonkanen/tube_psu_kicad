@@ -31,7 +31,7 @@ EOF
 
 step "5.2 symbol library up to date" python3 tools/next/gen_symbols.py --check
 step "5.2 schematic regenerated from tools/next/sheets, up to date" python3 tools/next/gen_schematic.py --check
-step "5.2 schematic vs 5.1 (informational)" python3 tools/next/gen_schematic.py --diff51
+step "5.2 part footprints up to date" python3 tools/next/gen_next_footprints_parts.py --check
 step "ERC" erc
 step "Net classes: one isolation domain per net, project file up to date" python3 tools/next/setup_project.py --check
 step "Board skeleton: 6 layers, JLC stackup, 5.1 outline and holes" quiet tools/p2k/bin/kipy tools/next/make_board.py --check

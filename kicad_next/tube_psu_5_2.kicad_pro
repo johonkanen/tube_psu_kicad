@@ -540,6 +540,10 @@
       },
       {
         "netclass": "HV_PRIMARY",
+        "pattern": "/01 AUX supply/FLY_C"
+      },
+      {
+        "netclass": "HV_PRIMARY",
         "pattern": "/05 PFC/IN2"
       },
       {
@@ -613,10 +617,6 @@
       {
         "netclass": "HV_PRIMARY",
         "pattern": "Net-(D7-K)"
-      },
-      {
-        "netclass": "HV_PRIMARY",
-        "pattern": "Net-(D7-PadA)"
       },
       {
         "netclass": "HV_PRIMARY",
@@ -832,15 +832,7 @@
       },
       {
         "netclass": "SECONDARY_LV",
-        "pattern": "Net-(D29-PadA)"
-      },
-      {
-        "netclass": "SECONDARY_LV",
         "pattern": "Net-(D32-PadA)"
-      },
-      {
-        "netclass": "SECONDARY_LV",
-        "pattern": "Net-(D4-PadA)"
       },
       {
         "netclass": "SECONDARY_LV",
@@ -861,6 +853,14 @@
       {
         "netclass": "SECONDARY_LV",
         "pattern": "Net-(R119-Pad2)"
+      },
+      {
+        "netclass": "SECONDARY_LV",
+        "pattern": "Net-(TR1-S15)"
+      },
+      {
+        "netclass": "SECONDARY_LV",
+        "pattern": "Net-(TR1-S5)"
       },
       {
         "netclass": "SECONDARY_LV",
@@ -1096,10 +1096,6 @@
       },
       {
         "netclass": "SIGNAL",
-        "pattern": "Net-(D5-PadA)"
-      },
-      {
-        "netclass": "SIGNAL",
         "pattern": "Net-(D9-K)"
       },
       {
@@ -1124,7 +1120,7 @@
       },
       {
         "netclass": "SIGNAL",
-        "pattern": "Net-(PWM2-Vsense)"
+        "pattern": "Net-(PWM2-VSENSE)"
       },
       {
         "netclass": "SIGNAL",
@@ -1149,6 +1145,10 @@
       {
         "netclass": "SIGNAL",
         "pattern": "Net-(REF1-VOUT)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "Net-(TR1-A15)"
       },
       {
         "netclass": "SIGNAL",
@@ -1277,6 +1277,14 @@
       {
         "netclass": "SIGNAL",
         "pattern": "unconnected-(L3-NC-Pad2)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "unconnected-(PWM2-ASU-Pad10)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "unconnected-(PWM2-NC-Pad4)"
       },
       {
         "netclass": "SIGNAL",
