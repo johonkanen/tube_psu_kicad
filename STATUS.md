@@ -1602,3 +1602,19 @@ still ALL CHECKS PASSED.
 - **Open (CHANGES_5_2.md):** iW1819 outline, CA-IS376x/372x reinforced certificates, UART isolator choice, DAB_DIS
   default (pull-down), UCC21520 DT vs FPGA dead time, bias-buffer stability (phase 4), ESL cap tuning, L1/L2
   measurement, Q10/Q11 body diode, C73, low stock R124; control-card pin / ADC channel map to update.
+
+## 5.2: PWM2 → ICE5AR4780BZS (2026-11-18)
+
+NEXT_REVISION 1.5 done in the 5.2 fork (details and value derivations: `kicad_next/CHANGES_5_2.md` item 1.5). The
+iW1819-00 (0 JLC stock) is replaced by the Infineon **ICE5AR4780BZS** (C3094802, DIP-7 = KiCad
+`Package_DIP:DIP-8-N6_W7.62mm`, symbol `ICE5AR`), wired as the datasheet's non-isolated application (figure 2):
+DRAIN = FLY_C, the integrated error amplifier regulates the primary 5V rail through R138 88.7k / R139 49.9k 0.1 %
+(36 µA: the start-up mode detection needs ≥ 25 kΩ at VERR), FB R140 4.7k + C138 10n, C139 2.2n, RSel R141 750k
+(ABM option 2), Rcs R8 ‖ R9 = 2 × 1.6R (Ipk limit 1.0 A), VCC from 15V via R142 10R / D10 with C58 22 µF 35 V,
+cascode start-up R114–R116 = 3 × 10M 1206 DC+ → GATE. Removed: R64, R81, R84, R85, R86, C50 (AUX_FB knee
+sensing), the iW1819 symbol and batwing footprint (`gen_next_footprints_parts.py` has no entries now). RCD clamp
+kept (VDS ≈ 570–630 V estimated; bench check, fallback R45 2 × 100k). LCSC numbers in `lib/jlc_parts_next.csv`.
+Checks: `tools/next/check_next.sh` ALL 5.2 CHECKS PASSED (ERC 0 errors / 14 warnings, 225 nets in one domain each,
+rule tests 19/19, netlist / CSV check), `tools/check_all.sh` ALL CHECKS PASSED. Open: loop, burst cross
+regulation, start-up vs OLP blanking (≥ 30 ms) and clamp VDS in the ICE5AR flyback simulation (separate task in
+`simulation/flyback`) and on the first board.

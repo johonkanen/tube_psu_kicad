@@ -17,11 +17,11 @@ questions and the generated netlist diff 5.1 → 5.2: [CHANGES_5_2.md](CHANGES_5
 | `kicad_next/tube_psu_5_2.kicad_dru` | custom rules: JLC limits, HV functional spacing, creepage / clearance between domains | by hand (this file is the source) |
 | `kicad_next/sym-lib-table`, `fp-lib-table` | `tube_psu_next` → `lib/tube_psu_next.kicad_sym` (used), `tube_psu` → `lib/tube_psu.kicad_sym` (5.1, reference); footprints `tube_psu` → `lib/tube_psu.pretty`, `tube_psu_next` → `lib/tube_psu_next.pretty`, `tube_psu_next_parts` → `lib/tube_psu_next_parts.pretty` | `gen_schematic.py` |
 | `tools/next/sheets/sheetNN.py`, `_common.py` | sheet scripts, copies of `tools/sheets/` (sheet scripts unchanged; `_common.py` redirects output, symbol library, CSVs) | phase 2 edits these |
-| `tools/next/gen_symbols.py` → `lib/tube_psu_next.kicad_sym` | 5.2 symbols (fork of `tools/gen_symbols.py`; identical output at the fork) | phase 2 adds iW1819, Si8621BD, … |
+| `tools/next/gen_symbols.py` → `lib/tube_psu_next.kicad_sym` | 5.2 symbols (fork of `tools/gen_symbols.py`; identical output at the fork) | phase 2 adds ICE5AR (PWM2, replaced the iW1819), SI8621, UCC21520, … |
 | `lib/part_map_next.csv`, `lib/footprint_map_next.csv`, `lib/jlc_parts_next.csv` | values, footprints, LCSC numbers per refdes – hand-edited forks of the 5.1 tables | by hand |
 | `tools/next/check_next.sh` | all 5.2 checks (below) | – |
 | `tools/next/gen_next_footprints.py` → `lib/tube_psu_next.pretty` | EEL19 / EC42 transformer footprints | (earlier) |
-| `tools/next/gen_next_footprints_parts.py` → `lib/tube_psu_next_parts.pretty` | footprints of new parts missing in the KiCad library (iW1819 SO-10 batwing) | phase 2 |
+| `tools/next/gen_next_footprints_parts.py` → `lib/tube_psu_next_parts.pretty` | footprints of new parts missing in the KiCad library – currently none (the iW1819 batwing went with the ICE5AR change; PWM2 uses KiCad `Package_DIP:DIP-8-N6_W7.62mm`) | phase 2 |
 | `tools/next/netlist_diff.py` | netlist diff 5.1 → 5.2 (section of CHANGES_5_2.md) + check that the three CSVs cover every part | phase 2 |
 | `kicad_next/CHANGES_5_2.md` | phase-2 change list per NR item, open questions, netlist diff | phase 2 |
 
@@ -102,7 +102,7 @@ starting values; phase 6 sizes the power paths from the currents (D5 copper).
 
 Domains are found from the schematic by `setup_project.py` (flood fill from GND / ISO_GND / HT_GND, not
 through the barrier parts TR1, TR2, TR3, ISO1, ISO2; no other part bridges two domains in the 5.1
-netlist). Count after phase 2: primary 149 nets (HV_PRIMARY 39, PRIMARY_LV 5, SIGNAL 105), DAB secondary 40
+netlist). Count after phase 2: primary 150 nets (HV_PRIMARY 39, PRIMARY_LV 5, SIGNAL 106; after the ICE5AR change), DAB secondary 40
 (HV_SECONDARY 12, SECONDARY_LV 28), heater 22, UART island 12 (ground ISO_UART_GND, barrier U11), PE 1.
 
 ### Basis

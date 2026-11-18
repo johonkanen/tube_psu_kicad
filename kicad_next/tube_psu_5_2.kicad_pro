@@ -888,10 +888,6 @@
       },
       {
         "netclass": "SIGNAL",
-        "pattern": "/01 AUX supply/AUX_FB"
-      },
-      {
-        "netclass": "SIGNAL",
         "pattern": "/04 MCU connector/5V_MEAS"
       },
       {
@@ -1060,7 +1056,7 @@
       },
       {
         "netclass": "SIGNAL",
-        "pattern": "Net-(C50-Pad2)"
+        "pattern": "Net-(C138-Pad1)"
       },
       {
         "netclass": "SIGNAL",
@@ -1069,6 +1065,10 @@
       {
         "netclass": "SIGNAL",
         "pattern": "Net-(D10-K)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "Net-(D10-PadA)"
       },
       {
         "netclass": "SIGNAL",
@@ -1108,11 +1108,19 @@
       },
       {
         "netclass": "SIGNAL",
-        "pattern": "Net-(PWM2-E)"
+        "pattern": "Net-(PWM2-CS)"
       },
       {
         "netclass": "SIGNAL",
-        "pattern": "Net-(PWM2-VSENSE)"
+        "pattern": "Net-(PWM2-FB)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "Net-(PWM2-GATE)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "Net-(PWM2-VERR)"
       },
       {
         "netclass": "SIGNAL",
@@ -1133,6 +1141,10 @@
       {
         "netclass": "SIGNAL",
         "pattern": "Net-(TR1-A15)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "Net-(TR1-A5)"
       },
       {
         "netclass": "SIGNAL",
@@ -1273,14 +1285,6 @@
       {
         "netclass": "SIGNAL",
         "pattern": "unconnected-(DRV5-NC-Pad7)"
-      },
-      {
-        "netclass": "SIGNAL",
-        "pattern": "unconnected-(PWM2-ASU-Pad10)"
-      },
-      {
-        "netclass": "SIGNAL",
-        "pattern": "unconnected-(PWM2-NC-Pad4)"
       },
       {
         "netclass": "SIGNAL",

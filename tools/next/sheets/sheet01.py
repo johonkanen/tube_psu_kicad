@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
-"""Sheet 1 - AUX supply (PDF page 1): the flyback auxiliary supply. PWM2 (IW1818) switches the primary
-of TR1 (EF20, pins 4/5) from DC+ with the RCD snubber D7 / R72 / R45 || C12; its Vcc comes from 15V
-through D10 (startup through R116 / R115 / R114 from DC+, C58 / C51), the current sense from the
-shunt R8 || R9 (pins E and I_sense), the feedback from the 5V winding (AUX_FB: R64 || R81 -> R86 ->
-Vsense, R84 || R85 || C50 to GND). Primary-side windings: 1-2 -> D5 -> 15V (C1, C39), 2-3 -> D6 -> 5V
+"""Sheet 1 - AUX supply (PDF page 1): the flyback auxiliary supply. 5.2: PWM2 = ICE5AR4780BZS (NR 1.5, DIP-7
+CoolSET, 800 V CoolMOS) switches the primary of TR1 (EEL19, fly leads FL_DC = DC+ / FL_C = FLY_C) from DC+ with
+the RCD clamp D7 / R72 / R45 || C12; its VCC comes from 15V through R142 / D10 (C58 / C51), the cascode
+start-up through R116 / R115 / R114 from DC+ to GATE, the current sense from Rcs = R8 || R9; the integrated
+error amplifier regulates the primary-side 5V rail directly (VERR divider R138 / R139, FB network R140 + C138,
+C139, RSel R141). Primary-side windings: 1 -> D5 -> 15V (C1, C39), 3 -> D6 -> 5V
 (C36, C6, C71). Secondary windings: 10 -> D4 -> 15V_ISO_SEC (C3, C2), 8 -> D14 -> -5V_SEC (C44, C40),
-7 -> D29 -> 5V_ISOL (C114, C115), 6 -> D8 -> -100V BIAS (C45, C102); pin 9 = ISO_GND. The outputs go
+7 -> D29 -> 5V_ISOL (C114, C115), 5 -> D8 -> -100V BIAS (C45, C102); pin 9 = ISO_GND. The outputs go
 to the terminals +15V OUT / -5V OUT / -80V OUT / +5V OUT / SEC GND (KiCad refdes P15V_OUT, N5V_OUT,
 N80V_OUT, P5V_OUT, SEC_GND) with the bleeders R124 / R123 / R68 / R67.
 
 PDF: DC- = GND, RET_iso / RET_ISO / ISO_GND = ISO_GND (the page joins the terminals RET_iso and
 ISO_GND by a bare wire, no part), 20V_ISO_sec = 15V_ISO_SEC, 5v_isol = 5V_ISOL, -100V bias = -100V
 BIAS; the PDF net labels d5_A, Sec11, d14_k, d15_K (IPC D5_A, SEC11, D14_K, D15_K) are the winding
-ends, wired directly here; aux_fb (two terminals in the PDF) = AUX_FB local labels. This sheet
+ends, wired directly here; the 5.1 aux_fb net (IW1818 knee sensing) is gone in 5.2. This sheet
 generates 15V, 5V, 15V_ISO_SEC, -5V_SEC, 5V_ISOL, -100V BIAS and ISO_GND (terminal SEC GND): their
-permanent PWR_FLAGs are here; PWM2 Vcc (#00032, fed through D10 / R114 only) has one too."""
+permanent PWR_FLAGs are here; PWM2 VCC (fed through D10 only) has one too."""
 from _common import *  # noqa: F401,F403
 
 sh = sheet("01_aux_supply.kicad_sch")
@@ -22,7 +23,7 @@ sh = sheet("01_aux_supply.kicad_sch")
 # --- TR1 and the primary-side rectifiers ------------------------------------------------------------
 TX, TY = g(150), g(70)
 # 5.2: EEL19 4+6 with fly-lead primary (NR 1.1, EEL19_DESIGN.md 6a): FL_DC (11) = DC+, FL_C (12) = collector,
-# 1 = A15 (15V), 2 = GND, 3 = A5 (5V / AUX_FB); 5 = SHV (-100V BIAS), 7 = S5, 8 = SN5, 9 = ISO_GND, 10 = S15
+# 1 = A15 (15V), 2 = GND, 3 = A5 (5V); 5 = SHV (-100V BIAS), 7 = S5, 8 = SN5, 9 = ISO_GND, 10 = S15
 tr = sh.place("EEL19_4P6", "TR1", TX, TY, value=sh_value("TR1"))
 P1, P2, P3, P4, P5 = (tr.pin(str(n)) for n in (1, 2, 3, 11, 12))
 P10, P9, P8, P7, P6 = (tr.pin(str(n)) for n in (10, 9, 8, 7, 5))
@@ -44,13 +45,9 @@ flagged_power(sh, "15V", TX - g(46), R20)
 # pin 2 = GND
 sh.wire(P2, left(P2, 2))
 power_at(sh, "GND", left(P2, 2), "left")
-# pin 3 -> D6 -> 5V rail, C36 / C6 / C71 (pin 2 = 5V) to GND; AUX_FB taken off by a stub label
+# pin 3 -> D6 -> 5V rail, C36 / C6 / C71 (pin 2 = 5V) to GND (5.2: no AUX_FB tap, PWM2 regulates the 5V rail)
 _, dc, da = horiz2(sh, "D", "D6", TX - g(26), P3[1], sh_value("D6"), left="C", text="below")
 sh.wire(da, P3)
-xfb = TX - g(16)
-sh.junction(xfb, P3[1])
-sh.wire((xfb, P3[1]), (xfb, P3[1] + g(8)))
-sh.label("AUX_FB", xfb, P3[1] + g(8), 270)
 x5 = TX - g(36)
 sh.wire(dc, (x5, P3[1]), (TX - g(64), P3[1]))
 GR5 = P3[1] + g(6)
@@ -72,24 +69,19 @@ CROW = g(112)
 sh.wire(P5, (xcol, P5[1]), (xcol, CROW))
 sh.label("FLY_C", xcol, CROW, 0)                                 # 5.2: named collector node (HV net class)
 
-# --- PWM2 with the Vcc network, the snubber, the shunt and the feedback network ------------------
-PX, PY = g(70), g(118)              # 5.2: +2 grid so the iW1819 C pins (row 0 of 6) stay on CROW
-# 5.2: iW1819-00 (NR 1.5, SO-10 batwing): 2 VCC, 1 VSENSE, 9 ISENSE + 7 E (shorted), 5/6 C, 3/8 GND,
-# 4 NC (floating), 10 ASU (active start-up output, unused: resistor start-up R114-R116 as in 5.1)
-pwm = sh.place("IW1819", "PWM2", PX, PY, value=sh_value("PWM2"))
-VCC, VSENSE, ISENSE, E, C8, C7, PGND = (pwm.pin(n) for n in (2, 1, 9, 7, 5, 6, 3))
-sh.wire(C8, (xcol, C8[1]))                                       # collector row
-sh.wire(C7, right(C7, 2), (C7[0] + g(2), C8[1]))
-sh.junction(C7[0] + g(2), C8[1])
+# --- PWM2 with the Vcc network, the clamp, the shunt, the start-up chain and the feedback network --------
+PX, PY = g(70), g(116)              # 5.2: DRAIN (right row 0 of 5) on CROW
+# 5.2: ICE5AR4780BZS (NR 1.5, Infineon datasheet V2.3, non-isolated application figure 2): 5 DRAIN = FLY_C,
+# 8 GND, 3 CS (Rcs R8 || R9), 4 GATE (cascode start-up R116 / R115 / R114 from DC+), 7 VCC (15V via R142 / D10,
+# C58 / C51), 1 VERR (5V divider R138 / R139), 2 FB (R140 + C138, C139, RSel R141 to GND)
+pwm = sh.place("ICE5AR", "PWM2", PX, PY, value=sh_value("PWM2"))
+GATE, VCC, VERR, FB, CS, DRAIN, PGND = (pwm.pin(n) for n in (4, 7, 1, 2, 3, 5, 8))
+sh.wire(DRAIN, (xcol, DRAIN[1]))                                 # drain row = CROW
 sh.wire(PGND, right(PGND, 2))
 power_at(sh, "GND", right(PGND, 2), "down")
-sh.wire(pwm.pin(8), right(pwm.pin(8), 2))
-power_at(sh, "GND", right(pwm.pin(8), 2), "down")
-sh.no_connect(*pwm.pin(4))
-sh.no_connect(*pwm.pin(10))
-# snubber: D7 (A at the collector) -> R72 -> node -> R45 || C12 -> DC+
+# clamp: D7 (A at the drain) -> R72 -> node -> R45 || C12 -> DC+
 xs = g(120)
-_, dt, db = vert2(sh, "D", "D7", xs, CROW - g(3), sh_value("D7"), top="C")         # A = collector
+_, dt, db = vert2(sh, "D", "D7", xs, CROW - g(3), sh_value("D7"), top="C")         # A = drain
 sh.junction(xs, CROW)
 _, rt, rb = vert2(sh, "R", "R72", xs, dt[1] - g(3), sh_value("R72"), top=1)        # pin 1 = node
 node = rt
@@ -104,69 +96,63 @@ power_at(sh, "DC+", rt, "up")
 _, ct, cb = vert2(sh, "C", "C15", g(100), g(91), sh_value("C15"), top=2)           # pin 2 = DC+
 power_at(sh, "DC+", ct, "up")
 power_at(sh, "GND", cb, "down")
-# Vcc: D10 from 15V, startup chain R116 / R115 / R114 from DC+, C58 / C51, PWR_FLAG (passive feed)
-xv = PX - g(18)
-NV = VCC[1] - g(12)
-sh.wire(VCC, (xv, VCC[1]), (xv, NV))
-_, da, dc = horiz2(sh, "D_Schottky", "D10", PX - g(38), NV, sh_value("D10"), left="A")   # A = 15V
-sh.wire(da, left(da, 2))
-power_at(sh, "15V", left(da, 2), "left")
-sh.wire(dc, (xv, NV), (xv + g(4), NV))
-sh.junction(xv, NV)
-sh.pwr_flag(xv + g(4), NV, 270)
-prev = (xv, NV)
+# GATE: cascode start-up chain R114 / R115 / R116 (3 x 10M 1206) from DC+
+xg = PX - g(14)
+sh.wire(GATE, (xg, GATE[1]))
+prev = (xg, GATE[1])
 for i, r in enumerate(("R114", "R115", "R116")):
-    _, rt, rb = vert2(sh, "R", r, xv, NV - g(3) - g(6 * i), sh_value(r), top=1)   # pin 1 = DC+ side
+    _, rt, rb = vert2(sh, "R", r, xg, GATE[1] - g(6) - g(8 * i), sh_value(r), top=1, text="right")   # pin 1 = DC+ side
     sh.wire(rb, prev)
     prev = rt
 power_at(sh, "DC+", prev, "up")
-for x, ref in ((xv - g(12), "C58"), (xv - g(6), "C51")):
-    _, ct, cb = vert2(sh, "C", ref, x, NV + g(3), sh_value(ref), top=1)           # pin 1 = Vcc
+# Vcc: 15V -> R142 -> D10 -> Vcc, C58 (22u) / C51 to GND, PWR_FLAG (passive feed)
+xv = PX - g(18)
+NV = VCC[1] - g(14)
+sh.wire(VCC, (xv, VCC[1]), (xv, NV))
+_, da, dc = horiz2(sh, "D_Schottky", "D10", PX - g(38), NV, sh_value("D10"), left="A")   # A = 15V side
+_, rl, rr = horiz2(sh, "R", "R142", PX - g(48), NV, sh_value("R142"), left=1, text="above")
+sh.wire(rr, da)
+sh.wire(rl, left(rl, 2))
+power_at(sh, "15V", left(rl, 2), "left")
+sh.wire(dc, (xv, NV), (xv, NV - g(4)))
+sh.junction(xv, NV)
+sh.pwr_flag(xv, NV - g(4), 0)
+for x, ref, sym in ((xv - g(12), "C58", "C_Polarized"), (xv - g(6), "C51", "C")):
+    _, ct, cb = vert2(sh, sym, ref, x, NV + g(3), sh_value(ref), top=1)           # pin 1 = Vcc
     sh.junction(x, NV)
     power_at(sh, "GND", cb, "down")
-# shunt: E and I_sense tied, R8 || R9 to GND
+# CS: Rcs = R8 || R9 to GND
 xe = PX - g(14)
-sh.wire(ISENSE, (xe, ISENSE[1]), (xe, E[1]))
-sh.wire(E, (xe, E[1]))
-sh.junction(xe, E[1])
-SROW = E[1] + g(8)
-sh.wire((xe, E[1]), (xe, SROW), (xe + g(10), SROW))
-_, at, ab = vert2(sh, "R", "R8", xe, SROW + g(3), sh_value("R8"), top=1)          # pin 1 = I_sense
+SROW = CS[1] + g(8)
+sh.wire(CS, (xe, CS[1]), (xe, SROW), (xe + g(10), SROW))
+_, at, ab = vert2(sh, "R", "R8", xe, SROW + g(3), sh_value("R8"), top=1)          # pin 1 = CS
 _, bt, bb = vert2(sh, "R", "R9", xe + g(10), SROW + g(3), sh_value("R9"), top=1)
 sh.junction(*at)
 sh.wire(ab, bb)
 sh.junction(*ab)
 power_at(sh, "GND", ab, "down")
-# feedback: AUX_FB -> R81 || R64 -> node -> R86 -> Vsense; R84 || R85 || C50 node - GND
-xn = PX - g(28)
-_, rl, rr = horiz2(sh, "R", "R86", PX - g(18), VSENSE[1], sh_value("R86"), left=2, text="below")   # pin 1 = Vsense
-sh.wire(rr, VSENSE)
-sh.wire((xn, VSENSE[1]), rl)
-sh.junction(xn, VSENSE[1])
-xl = PX - g(42)
-_, rl, rr = horiz2(sh, "R", "R81", PX - g(36), VSENSE[1], sh_value("R81"), left=1, text="above")   # pin 1 = AUX_FB
-sh.wire(rr, (xn, VSENSE[1]))
-sh.wire(rl, (xl, VSENSE[1]))
-sh.junction(xl, VSENSE[1])
-sh.wire((xl, VSENSE[1]), (xl - g(4), VSENSE[1]))
-sh.label("AUX_FB", xl - g(4), VSENSE[1], 180)
-row2 = VSENSE[1] + g(4)
-_, rl, rr = horiz2(sh, "R", "R64", PX - g(36), row2, sh_value("R64"), left=1, text="below")       # pin 1 = AUX_FB
-sh.wire((xl, VSENSE[1]), (xl, row2), rl)
-sh.wire(rr, (xn, row2), (xn, VSENSE[1]))
-row3 = row2 + g(4)
-sh.wire((xn, row2), (xn, row3))
-sh.junction(xn, row2)
-for x, ref, sym, top in ((xn - g(6), "C50", "C", 2), (xn, "R84", "R", 1), (xn + g(6), "R85", "R", 1)):
-    _, t, b = vert2(sh, sym, ref, x, row3 + g(3), sh_value(ref), top=top,        # node side on top
-                    text="left" if x < xn else "right")
-    if x != xn:
-        sh.wire((xn, row3), t)
-        sh.wire((xn, row3 + g(6)), b)
-    else:
-        sh.junction(*t)
-        sh.junction(*b)
-power_at(sh, "GND", (xn, row3 + g(6)), "down")
+# FB: R140 + C138 (compensation), C139 (HF pole), R141 = RSel (ABM option 2) to GND
+xf = PX - g(20)
+FROW = FB[1] + g(8)
+sh.wire(FB, (xf, FB[1]), (xf, FROW), (xf - g(12), FROW))
+for x, ref, sym in ((xf, "C139", "C"), (xf - g(6), "R141", "R")):
+    _, t, b = vert2(sh, sym, ref, x, FROW + g(3), sh_value(ref), top=1, text="right")
+    sh.junction(x, FROW)
+    power_at(sh, "GND", b, "down")
+_, t, b = vert2(sh, "R", "R140", xf - g(12), FROW + g(3), sh_value("R140"), top=1, text="left")
+_, ct, cb = vert2(sh, "C", "C138", xf - g(12), b[1] + g(3), sh_value("C138"), top=1, text="left")
+power_at(sh, "GND", cb, "down")
+# VERR: 5V -> R138 -> VERR node -> R139 -> GND (0.1 %)
+xd = PX - g(46)
+sh.wire(VERR, (xd, VERR[1]))
+_, rt, rb = vert2(sh, "R", "R138", xd, VERR[1] - g(3), sh_value("R138"), top=1, text="left")   # pin 1 = 5V
+power_at(sh, "5V", rt, "up")
+_, rt2, rb2 = vert2(sh, "R", "R139", xd, VERR[1] + g(3), sh_value("R139"), top=1, text="left")  # pin 1 = VERR
+power_at(sh, "GND", rb2, "down")
+sh.junction(xd, VERR[1])
+sh.text("PWM2 ICE5AR4780BZS (NR 1.5): 5V = 1.80 V x (1 + R138 / R139) = 5.00 V; RSel R141 750k = ABM option 2 (entry VFB 0.93 V, VCS 0.22 V);", g(16), g(146))
+sh.text("Rcs R8 || R9 = 0.8R (Ipk limit 1.0 A at VCS_N 0.8 V); start-up 3 x 10M from DC+ to GATE; VCC 14-15 V from 15V via R142 / D10.", g(16), g(149))
+sh.text("Layout: DRAIN pin 5 copper area for cooling (HV_PRIMARY, FLY_C); VERR / FB parts close to pins 1 / 2, Rcs return to pin 8.", g(16), g(152))
 
 # --- secondary rectifier groups, fanned out on separate rows (nested columns, no crossings) ------
 sh.wire(P9, right(P9, 4))
@@ -221,12 +207,8 @@ sh.text("Terminals +15V OUT / -5V OUT / -80V OUT / +5V OUT / SEC GND = P15V_OUT 
 sh.text("the PDF joins the terminals RET_iso and ISO_GND by a bare wire (one net ISO_GND, no part).", g(100), g(203))
 
 # --- PDF notes ----------------------------------------------------------------------------------
-sh.text("5.2: TR1 = EEL19 4+6 (fly leads FL_DC / FL_C, pins 4 / 6 clipped), PWM2 = iW1819-00; R8 || R9 = 2.0R || 2.0R = 1.0R (Ipk 1.0 A, OCP 1.15 A).", g(16), g(37))
-for i, t in enumerate(("vsense nominal = 1.536 V; vsense OVP threshold = 1.838 V; Isense pk = 1V",
-                       "R8/R9 = 3.57R if V1 design is used; Vpeak = 640V with V2 design",
-                       "V1 : 67/9/4/54;  V2 : 52/8/3||7/3/3/42;  V3 : 58/9/4/47;  TR1 : core 171nh (winding notes)",
-                       "R64 = 39k/ v2 trans;  Vsense @ 1.536V = 5.8368Vaux;  Isense ocp = 1.15V;  V5.1")):
-    sh.text(t + " (PDF note).", g(16), g(20 + 3 * i))
-sh.text("PWR_FLAGs: 15V, 5V, 15V_ISO_SEC, -5V_SEC, 5V_ISOL, -100V BIAS (rectifier outputs), ISO_GND (SEC GND terminal), PWM2 Vcc (D10 / R114): permanent.", g(16), g(34))
+sh.text("5.2: TR1 = EEL19 4+6 (fly leads FL_DC / FL_C, pins 4 / 6 clipped), PWM2 = ICE5AR4780BZS (5V regulated through VERR); R8 || R9 = 1.6R || 1.6R = 0.8R.", g(16), g(37))
+sh.text("5.1 PDF notes (IW1818 Vsense / Isense values, EF20 winding variants) dropped in 5.2: PWM2 and TR1 replaced (NR 1.1, 1.5).", g(16), g(20))
+sh.text("PWR_FLAGs: 15V, 5V, 15V_ISO_SEC, -5V_SEC, 5V_ISOL, -100V BIAS (rectifier outputs), ISO_GND (SEC GND terminal), PWM2 Vcc (fed through D10 only): permanent.", g(16), g(34))
 sh.save()
 print("sheet01: written")

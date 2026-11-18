@@ -19,14 +19,14 @@ continuous.
 | 1.2 | TR1 footprint | **Done:** `lib/tube_psu_next.pretty/Transformer_EEL19_V_4+6_FlyLeads` (`tools/next/gen_next_footprints.py`). Primary row 4 × 3.5 mm (pin 4 = crossover post, **no pad**), isolated row 6 × 2.7 mm (pin 2 spare, no pad), rows 12.5 mm apart, **+2 fly-lead holes** FL_DC / FL_C (1.2 mm drill) | new bobbin | H |
 | 1.3 | TR1 placement | Move TR1 ≈ +0.93 mm in x (recheck with the 4+6 footprint: up to +0.5 mm more); move D8, D14, C45, C40, C44 (+1.5…2 mm x), C114/C115 (+1.5 mm), C102 (≈ 1.4 mm down), new place for C3; re-route all TR1 pads, DC+ / collector to the fly-lead holes | fit | H |
 | 1.4 | ISO_GND pour (F.Cu) | Pull the edge back to x ≥ 69.8 for y 2…14 | FL_DC hole clearance; also fixes the **existing 5.08 mm DC+ to ISO_GND creepage** spot | H |
-| 1.5 | PWM2 | **Proposed change (2026-11-18): iW1819-00 is hard to get (JLC 0 pcs) → Infineon ICE5AR4780BZS** C3094802 (JLC 173 pcs, ≈ $1.26; DIP-7 THT): fixed-frequency 100 kHz current-mode CoolSET with integrated **800 V** CoolMOS (4.13 Ω), 15 W @ 85–300 Vac class (27.5 W @ 230 Vac), CS limit 0.8 V (Rcs ≈ 0.8 Ω for Ipk max ≈ 1.0 A), VCC on/off 16 / 10 V (OVP ≈ 25.5 V, supplied from the A15 winding / 15V), cascode start-up (resistor from DC+ to GATE), **integrated error amplifier (VERR, 1.80 V ref) → regulate the primary-side 5V rail directly through a divider** (no PSR knee sampling, no optocoupler – 5V is primary-referenced), Active Burst Mode at light load. With the EEL19 (Lp 600 µH) it runs DCM up to ≈ 50 W (15 W: Ipk ≈ 0.75 A); VDS ≈ 400 + 97 + clamp ≈ 650 V < 800 V. To do: schematic swap (phase 2 redo of sheet 1), controller model + flyback re-simulation (cross regulation, burst mode), DIP-7 footprint | IW1819 availability | H |
-| 1.6 | R8, R9 | 2.49 Ω → **2.0 Ω** 1206 1 % (Rsense 1.0 Ω, OCP 1.15 A) – value for the IW1818; confirm for the iW1819 | power capability | H |
+| 1.5 | PWM2 | **Done (2026-11-18, 5.2 fork; was proposed the same day): iW1819-00 (JLC 0 pcs) → Infineon ICE5AR4780BZS** C3094802 (JLC 173 pcs, ≈ $1.26; PG-DIP-7 THT = KiCad `Package_DIP:DIP-8-N6_W7.62mm`): fixed-frequency 100 kHz current-mode CoolSET with integrated **800 V** CoolMOS (4.13 Ω), CS limit 0.8 V, VCC on/off 16 / 10 V (OVP 25.5 V), cascode start-up, integrated error amplifier (VERR 1.80 V) regulating the **primary-side 5V rail directly**, Active Burst Mode. Circuit (datasheet figure 2): VERR divider R138 88.7k / R139 49.9k 0.1 % (36 µA – the start-up mode detection needs ≥ 25 kΩ at VERR), FB R140 4.7k + C138 10n, C139 2.2n, RSel R141 750k (ABM option 2), Rcs R8 ‖ R9 = 2 × 1.6R = 0.8 Ω (Ipk limit 1.0 A), VCC from 15V via R142 10R / D10 with C58 22 µF 35 V + C51, start-up R114–R116 3 × 10M 1206 DC+ → GATE; removed R64 / R81 / R84 / R85 / R86 / C50 (AUX_FB knee sensing). RCD clamp values kept (VDS ≈ 400 + clamp ≈ 120 (incl. VOR 102) + spike ≈ 570–600 V, ≈ 630 V at a 430 V bus; bench check, fallback R45 2 × 100k). Details: kicad_next/CHANGES_5_2.md item 1.5. Still to do: controller model + flyback re-simulation (cross regulation, burst mode, start-up vs OLP blanking, loop) | IW1819 availability | H |
+| 1.6 | R8, R9 | 2.49 Ω → **2.0 Ω** 1206 1 % (Rsense 1.0 Ω, OCP 1.15 A) – value for the IW1818. **Superseded by 1.5 (ICE5AR): 1.6 Ω each, Rcs 0.8 Ω, Ipk limit 1.0 A** | power capability | H |
 | 1.7 | new | **Preloads 2.2 kΩ on 15V** (1206, 0.25 W) and **1 kΩ on 5V** | light-load excursions | H |
 | 1.8 | R124 | 12.1 kΩ → **2.61 kΩ** 1206 (15V_ISO_SEC bleeder) | light-load excursion | H |
 | 1.9 | D8 | Keep a **≥ 600 V** diode in the BOM (US1M 1000 V; the fitted part is 1000 V); the schematic's ES1A-family 200 V is wrong | V_R 395–420 V | H |
 | 1.10 | D4, D5 | ES1B / ES1D (≥ 100 V) | V_R ≈ 77 V | M |
 | 1.11 | C1, C2, C6, C36, C71, C114, C115 | Check ripple-current rating at 15 W (winding rms 0.6–0.8 A) | not simulated with real ESR | M |
-| 1.12 | R64, R81, R84, R85 | **Unchanged** (aux turns ratio kept) | – | – |
+| 1.12 | R64, R81, R84, R85 | **Removed with 1.5** (the ICE5AR regulates the 5V rail through VERR; no aux knee sensing) | – | – |
 
 ## 2. DAB / DHB transformer (sheet 7) – TR3 + L3 → one two-chamber transformer
 
@@ -198,7 +198,7 @@ load (up to 99 LSB at 0.7 µs in the model).
 1. Calipers on the EEL19 core and 4+6 bobbin (pin diameter, base outline, inner winding length)
    and on the EC42/15 set (core outline, pin pitch / row spacing as in the drawing).
 2. Choose DAB option A or B (item 2.1).
-3. iW1819-00 datasheet: pinout, Rsense, Vcc and Vsense networks (item 1.5).
+3. ~~iW1819-00 datasheet~~ PWM2 is the ICE5AR4780BZS (item 1.5, done): its circuit values are set from the Infineon datasheet V2.3.
 4. Measure the PFC toroids: lead spacing / diameter, and L at 0 A and at peak current (item 5.2).
 5. Decide how the KiCad design leaves the migration baseline: once the board is edited by hand,
    drop `make_pcb.sh --check` and the Proteus comparisons from `tools/check_all.sh` (STATUS.md,

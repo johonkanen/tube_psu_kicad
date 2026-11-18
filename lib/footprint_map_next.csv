@@ -50,7 +50,6 @@ C46,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C47,tube_psu:C,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,2220
 C48,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C49,tube_psu:C,Capacitor_SMD:C_1206_3216Metric,1206 (3.0 mm pad spacing)
-C50,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C51,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C52,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C53,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
@@ -58,7 +57,7 @@ C54,tube_psu:C,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,2220
 C55,tube_psu:C,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,2220
 C56,tube_psu:C_Polarized,tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus,"12.5 mm radial electrolytic, P5, Proteus pad size"
 C57,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
-C58,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
+C58,tube_psu:C_Polarized,Capacitor_SMD:CP_Elec_5x5.4,SMD electrolytic D5 x 5.4 mm
 C59,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C60,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C61,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
@@ -159,7 +158,7 @@ P15V_OUT,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade ter
 P400V,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
 P5V_OUT,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
 PE,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
-PWM2,tube_psu_next:IW1819,tube_psu_next_parts:SOIC-10_Batwing_iW1819,Renesas 10-lead SOIC batwing (tools/next/gen_next_footprints_parts.py; confirm outline)
+PWM2,tube_psu_next:ICE5AR,Package_DIP:DIP-8-N6_W7.62mm,PG-DIP-7 = DIP-8 without pin 6 (KiCad std); drain pin 5 copper for cooling
 Q1,tube_psu:Q_NMOS_SGD,tube_psu:LFPAK56_Proteus,"LFPAK56, three source pads numbered 1, 2 = G, 3 = D tab"
 Q2,tube_psu:Q_NMOS_SGD,tube_psu:LFPAK56_Proteus,"LFPAK56, three source pads numbered 1, 2 = G, 3 = D tab"
 Q5,tube_psu:Q_NMOS_GDS,Package_TO_SOT_THT:TO-247-3_Vertical,"TO-247, 1=G 2=D 3=S (KiCad pitch 5.45, Proteus 5.461)"
@@ -232,7 +231,6 @@ R60,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R61,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R62,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R63,tube_psu:R,tube_psu:R_0805_2012Metric_Proteus2.13,0805 (Proteus pads 2.13 mm apart)
-R64,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R65,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R66,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R67,tube_psu:R,Resistor_SMD:R_1206_3216Metric,1206
@@ -249,12 +247,8 @@ R77,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R78,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R79,tube_psu:R,tube_psu:R_0805_2012Metric_Proteus,"0805, Proteus pad size"
 R80,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
-R81,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R82,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
 R83,tube_psu:R,tube_psu:R_0508_1220Metric_KRL2012,"KRL2012 0508 shunt, long-side terminals"
-R84,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
-R85,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
-R86,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R87,tube_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
 R88,tube_psu:R,tube_psu:R_0805_2012Metric_Proteus,"0805, Proteus pad size"
 R89,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
@@ -282,9 +276,9 @@ R110,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
 R111,tube_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
 R112,tube_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
 R113,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
-R114,tube_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
-R115,tube_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
-R116,tube_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
+R114,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, start-up chain on DC+)"
+R115,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, start-up chain on DC+)"
+R116,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, start-up chain on DC+)"
 R117,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R118,tube_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
 R119,tube_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
@@ -348,3 +342,10 @@ C136,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C137,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 R136,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
 R137,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
+R138,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
+R139,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
+R140,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
+R141,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
+R142,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
+C138,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+C139,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603

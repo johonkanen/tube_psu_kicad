@@ -7595,7 +7595,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(symbol "IW1819"
+	(symbol "ICE5AR"
 		(pin_names
 			(offset 1.016)
 		)
@@ -7603,7 +7603,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(property "Reference" "PWM"
-			(at -10.16 11.43 0)
+			(at -10.16 8.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7611,7 +7611,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "IW1819"
+		(property "Value" "ICE5AR"
 			(at -10.16 -8.89 0)
 			(effects
 				(font
@@ -7638,7 +7638,7 @@
 				)
 			)
 		)
-		(property "Description" "Flyback controller with integrated 800 V BJT, SO-10 batwing (iW1819-00, NR 1.5)"
+		(property "Description" "Fixed-frequency 100 kHz current-mode CoolSET, 800 V CoolMOS, error amplifier, DIP-7 (ICE5AR4780BZS, NR 1.5)"
 			(at 0 0 0)
 			(hide yes)
 			(effects
@@ -7647,9 +7647,9 @@
 				)
 			)
 		)
-		(symbol "IW1819_0_1"
+		(symbol "ICE5AR_0_1"
 			(rectangle
-				(start -10.16 10.16)
+				(start -10.16 7.62)
 				(end 10.16 -7.62)
 				(stroke
 					(width 0.254)
@@ -7660,137 +7660,11 @@
 				)
 			)
 		)
-		(symbol "IW1819_1_1"
-			(pin power_in line
-				(at -12.7 7.62 0)
-				(length 2.54)
-				(name "VCC"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input line
+		(symbol "ICE5AR_1_1"
+			(pin passive line
 				(at -12.7 5.08 0)
 				(length 2.54)
-				(name "VSENSE"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input line
-				(at -12.7 2.54 0)
-				(length 2.54)
-				(name "ISENSE"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "9"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at -12.7 0 0)
-				(length 2.54)
-				(name "E"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "7"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
-				(at -12.7 -2.54 0)
-				(length 2.54)
-				(name "ASU"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "10"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 12.7 7.62 180)
-				(length 2.54)
-				(name "C"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "5"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 12.7 5.08 180)
-				(length 2.54)
-				(name "C"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "6"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at 12.7 2.54 180)
-				(length 2.54)
-				(name "NC"
+				(name "GATE"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -7806,9 +7680,63 @@
 				)
 			)
 			(pin power_in line
-				(at 12.7 -2.54 180)
+				(at -12.7 2.54 0)
 				(length 2.54)
-				(name "GND"
+				(name "VCC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -12.7 0 0)
+				(length 2.54)
+				(name "VERR"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -12.7 -2.54 0)
+				(length 2.54)
+				(name "FB"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -12.7 -5.08 0)
+				(length 2.54)
+				(name "CS"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -7816,6 +7744,24 @@
 					)
 				)
 				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 12.7 5.08 180)
+				(length 2.54)
+				(name "DRAIN"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
 					(effects
 						(font
 							(size 1.27 1.27)
