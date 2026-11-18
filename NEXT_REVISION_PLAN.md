@@ -1,7 +1,8 @@
 # Next revision (tube_power 5.2) – implementation plan
 
-Status 2026-11-17: **phase 1 done** (kicad_next/ fork, 6-layer skeleton, stackup, rules – see
-[kicad_next/README.md](kicad_next/README.md)); phases 2–7 not started. **What** changes is in
+Status 2026-11-18: **phase 1 done** (kicad_next/ fork, 6-layer skeleton, stackup, rules – see
+[kicad_next/README.md](kicad_next/README.md)); **phase 2 done** (schematic changes, ERC clean – see
+[kicad_next/CHANGES_5_2.md](kicad_next/CHANGES_5_2.md)); phases 3–7 not started. **What** changes is in
 [NEXT_REVISION.md](NEXT_REVISION.md) (items referenced as NR x.y); this file is **how** and in
 which order. User decisions so far: **6-layer board**, **Fable does the parts placement**, the
 changes of NEXT_REVISION.md, JLC assembly (part numbers: `lib/jlc_parts.csv`, being filled).
@@ -87,6 +88,11 @@ Tasks:
 
 ## Phase 2 – schematic changes (scripts in `tools/next/`)
 
+**Status: done 2026-11-18** (STATUS.md "Phase 2 of 5.2"): every row below applied except the layout-only parts
+(C47/C54 placement) and the measured values (L1/L2 toroid value + footprint → phase 3); item list, decisions
+(DRV6 input side kept on the secondary, UART isolator CA-IS3721HW because Si8621BD is default-low, REF3325),
+open questions and the generated netlist diff 5.1 → 5.2: [kicad_next/CHANGES_5_2.md](kicad_next/CHANGES_5_2.md).
+
 Sheet by sheet (NR items):
 
 | Sheet | Changes |
@@ -100,7 +106,8 @@ Sheet by sheet (NR items):
 | 5 PFC | L1/L2 → toroid symbol/value (measured L) and footprint (5.2) |
 | all | LCSC field on every symbol (`lib/jlc_parts.csv`), electrolytic replacements (5.2b), REF1 value (4.8) |
 
-Exit: ERC clean, a netlist diff 5.1 → 5.2 reviewed against NEXT_REVISION.md item by item.
+Exit: ERC clean, a netlist diff 5.1 → 5.2 reviewed against NEXT_REVISION.md item by item. **Met 2026-11-18**
+(ERC 0 errors, `tools/next/netlist_diff.py`, `tools/next/check_next.sh` ALL 5.2 CHECKS PASSED).
 
 ## Phase 3 – footprints and 3D
 

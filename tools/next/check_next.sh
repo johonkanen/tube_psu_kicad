@@ -37,6 +37,7 @@ step "Net classes: one isolation domain per net, project file up to date" python
 step "Board skeleton: 6 layers, JLC stackup, 5.1 outline and holes" quiet tools/p2k/bin/kipy tools/next/make_board.py --check
 step "DRC of the board" drc
 step "Design rules parse and act (test tracks)" quiet tools/p2k/bin/kipy tools/next/check_rules.py
+step "Netlist diff 5.1 -> 5.2 in kicad_next/CHANGES_5_2.md up to date, CSVs cover every part" python3 tools/next/netlist_diff.py --check
 
 echo
 [ $fail -eq 0 ] && echo "ALL 5.2 CHECKS PASSED" || echo "SOME 5.2 CHECKS FAILED"

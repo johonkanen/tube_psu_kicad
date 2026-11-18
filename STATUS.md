@@ -1564,3 +1564,41 @@ heater is tied to the −100 V bias or to signal ground through 100 Ω (heater �
 5.2 mm to HV_SECONDARY, 1.5 mm to SECONDARY_LV, was basic 4.2 mm). `kicad_next/tube_psu_5_2.kicad_dru`
 and `tools/next/check_rules.py` updated; check_rules had silently dropped test cases beyond its 12 test
 positions (zip) – now 16 positions and an assert; 15/15 rule tests pass, `tools/next/check_next.sh` passes.
+
+## Phase 2 of 5.2 (2026-11-18)
+
+Schematic changes of NEXT_REVISION.md applied to the 5.2 fork (NEXT_REVISION_PLAN.md phase 2). Full item list,
+decisions, open questions and the generated netlist diff 5.1 → 5.2: **`kicad_next/CHANGES_5_2.md`**. Only
+`tools/next/`, `lib/*_next*` / `lib/tube_psu_next*` and `kicad_next/` were edited; `tools/check_all.sh` (5.1)
+still ALL CHECKS PASSED.
+
+- **Aux flyback:** TR1 → EEL19 4+6 with fly leads (symbol `EEL19_4P6`, footprint
+  `Transformer_EEL19_V_4+6_FlyLeads`, collector net FLY_C); PWM2 → iW1819-00 (pinout from the Renesas datasheet,
+  VSENSE / ISENSE / VCC thresholds equal the IW1818 values → feedback divider unchanged, ASU unused), new batwing
+  footprint generator `tools/next/gen_next_footprints_parts.py` → `lib/tube_psu_next_parts.pretty` (pattern after
+  LCSC C17225733, to confirm); R8/R9 2.0R, preloads R125 2.2k / R126 1k, R124 2.61k, D4/D5 (and D6/D14/D29) ES1D,
+  D8 US1M, C102 56u 250V.
+- **Gate drivers (NR 3a):** DRV5/DRV6 UCC21520DWR (DT 10k = 100 ns, DISABLE = DAB_DIS from J2-18, through ISO2
+  channel C to DRV6; DRV6 input side kept on the secondary), heater DRV3 = UCC21520 (replaces DRV3 + DRV9, D35 added
+  for the high-side turn-off path), DRV1/DRV2 UCC27511ADBVR, DRV4 UCC27524ADR, Q10/Q11 IPD60R280P7S DPAK, ISO1/ISO2
+  CA-IS3761LW (pinout checked = Si8661); R40/R25 removed. New `_common.py` cells `ucc21520_cell`, `ucc27511_cell`
+  (replace the 5.1 Si8275 / IXDD609 cells).
+- **DAB:** TR3 → EC42/15 two-chamber 20:21 (symbol `EC42_2CH`, two pins per winding end), L3 removed.
+- **Measurements:** LMH6643 (U1/U4) with balanced ESL caps (DHB C63/C122 12p, HEATER C11/C123 5.6p, PFC 20p
+  unchanged), U1 decoupling; VAC R49/R80 12k + C126/C127 1n; DC_LINK C130/C131 1n, R2 100R, C4 removed; REF1 →
+  REF3325AIDBZR with R110 1.00k / R3 1.96k + C128 and the bias buffer U9 (TLV316, R131 22R, C48); AUX_MEAS and the
+  new 5V_MEAS (R133/R134 0.1 %, C132) through the TLV9062 U10; J2 map per NR 4b (PFC_I1 J2-42, DHB_I J2-38, AUX
+  J2-43, 5V_MEAS J2-49, spares to GND).
+- **Isolated UART (NR 3b):** U11 CA-IS3721HW (Si8621 pinout, **default high** – the Si8621BD is default low),
+  U12 XC6206P332MR, J4 → FTDI 1×6, R136/R137 47R; new domain UART (ISO_UART_GND, class UART_ISO, barrier U11);
+  4 new rule tests (check_rules 19/19).
+- **Other:** 100 nF on DC+/420V/−100V → 1210 630 V; electrolytics per NR 5.2b; L1/L2 → toroid symbol, value
+  `TBD (measured)`, footprint phase 3; title blocks V5.2. LCSC numbers for every new / changed part in
+  `lib/jlc_parts_next.csv` (JLC API 2026-11-18); consigned: TR1, TR3, PWM2 (0 stock), L1/L2.
+- **Checks:** `tools/next/check_next.sh` ALL 5.2 CHECKS PASSED – ERC 0 errors / 14 warnings, 224 nets in one
+  domain each, DRC skeleton 0, rule tests 19/19, new step `tools/next/netlist_diff.py --check` (diff section of
+  CHANGES_5_2.md current, every part in the three CSVs with the schematic value / footprint). The `--diff51` step was
+  dropped (the schematic now differs from 5.1 on purpose).
+- **Open (CHANGES_5_2.md):** iW1819 outline, CA-IS376x/372x reinforced certificates, UART isolator choice, DAB_DIS
+  default (pull-down), UCC21520 DT vs FPGA dead time, bias-buffer stability (phase 4), ESL cap tuning, L1/L2
+  measurement, Q10/Q11 body diode, C73, low stock R124; control-card pin / ADC channel map to update.

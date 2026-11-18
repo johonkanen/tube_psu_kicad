@@ -3,8 +3,9 @@
 The next board revision, forked from the verified 5.1 migration in `kicad/` (which stays frozen and is
 checked by `tools/check_all.sh`). What changes is in [../NEXT_REVISION.md](../NEXT_REVISION.md), the
 phases and decisions D1–D6 in [../NEXT_REVISION_PLAN.md](../NEXT_REVISION_PLAN.md).
-State: **phase 1 done (2026-11-17)** – schematic forked (content = 5.1), 6-layer board skeleton, stackup,
-JLC rules, net classes per isolation domain, creepage / clearance rules. Phase 2 (schematic changes) next.
+State: **phase 2 done (2026-11-18)** – schematic changes of NEXT_REVISION.md applied (item-by-item list, open
+questions and the generated netlist diff 5.1 → 5.2: [CHANGES_5_2.md](CHANGES_5_2.md)); phase 1 (2026-11-17):
+6-layer board skeleton, stackup, JLC rules, net classes per isolation domain, creepage / clearance rules.
 
 ## What is where
 
@@ -14,12 +15,15 @@ JLC rules, net classes per isolation domain, creepage / clearance rules. Phase 2
 | `kicad_next/tube_psu_5_2.kicad_sch` + `01_…11_*.kicad_sch` | schematic (root + 11 sheets) | `tools/next/gen_schematic.py` (do not edit by hand while the scripts are the source) |
 | `kicad_next/tube_psu_5_2.kicad_pcb` | board skeleton: 5.1 outline, H1–H8, 6 copper layers, JLC stackup; no footprints yet | `tools/next/make_board.py` once; then edited in KiCad (phase 5+) |
 | `kicad_next/tube_psu_5_2.kicad_dru` | custom rules: JLC limits, HV functional spacing, creepage / clearance between domains | by hand (this file is the source) |
-| `kicad_next/sym-lib-table`, `fp-lib-table` | `tube_psu_next` → `lib/tube_psu_next.kicad_sym` (used), `tube_psu` → `lib/tube_psu.kicad_sym` (5.1, reference); footprints `tube_psu` → `lib/tube_psu.pretty`, `tube_psu_next` → `lib/tube_psu_next.pretty` | `gen_schematic.py` |
+| `kicad_next/sym-lib-table`, `fp-lib-table` | `tube_psu_next` → `lib/tube_psu_next.kicad_sym` (used), `tube_psu` → `lib/tube_psu.kicad_sym` (5.1, reference); footprints `tube_psu` → `lib/tube_psu.pretty`, `tube_psu_next` → `lib/tube_psu_next.pretty`, `tube_psu_next_parts` → `lib/tube_psu_next_parts.pretty` | `gen_schematic.py` |
 | `tools/next/sheets/sheetNN.py`, `_common.py` | sheet scripts, copies of `tools/sheets/` (sheet scripts unchanged; `_common.py` redirects output, symbol library, CSVs) | phase 2 edits these |
 | `tools/next/gen_symbols.py` → `lib/tube_psu_next.kicad_sym` | 5.2 symbols (fork of `tools/gen_symbols.py`; identical output at the fork) | phase 2 adds iW1819, Si8621BD, … |
 | `lib/part_map_next.csv`, `lib/footprint_map_next.csv`, `lib/jlc_parts_next.csv` | values, footprints, LCSC numbers per refdes – hand-edited forks of the 5.1 tables | by hand |
 | `tools/next/check_next.sh` | all 5.2 checks (below) | – |
 | `tools/next/gen_next_footprints.py` → `lib/tube_psu_next.pretty` | EEL19 / EC42 transformer footprints | (earlier) |
+| `tools/next/gen_next_footprints_parts.py` → `lib/tube_psu_next_parts.pretty` | footprints of new parts missing in the KiCad library (iW1819 SO-10 batwing) | phase 2 |
+| `tools/next/netlist_diff.py` | netlist diff 5.1 → 5.2 (section of CHANGES_5_2.md) + check that the three CSVs cover every part | phase 2 |
+| `kicad_next/CHANGES_5_2.md` | phase-2 change list per NR item, open questions, netlist diff | phase 2 |
 
 How the fork avoids touching shared code: `p2k.sheetkit.sheet()` hard-codes `kicad/`, and
 `p2k.sch_builder` reads `lib/<PROJECT>.kicad_sym` / `lib/footprint_map.csv` of `p2k_config.py`.
@@ -40,14 +44,15 @@ tools/next/check_next.sh                          # everything below, prints ALL
 ```
 
 `check_next.sh` steps: symbol library up to date; schematic regenerated in a temporary directory equals
-`kicad_next/` byte for byte; `--diff51` (informational: still identical to 5.1 after the renames); ERC
-(0 errors / 23 warnings, same as 5.1: 20 isolated_pin_label + 3 ground_pin_not_ground); every net in
+`kicad_next/` byte for byte; part footprints up to date; ERC (0 errors / 14 warnings after phase 2:
+12 isolated_pin_label + 2 ground_pin_not_ground on the UCC21520 high-side VSSA); every net in
 exactly one isolation domain and the project file up to date; board skeleton (6 layers, names / types,
 stackup thicknesses, outline and H1–H8 equal to `kicad/tube_psu.kicad_pcb`); DRC 0 violations;
 `check_rules.py` – kicad-cli silently drops a broken `.kicad_dru` rule, so 13 pairs of test tracks are
 added to a temporary copy of the board and the DRC must report exactly the expected violation at each
 (creepage 11.1 / 8.0 / 4.2 / 3.2 mm, inner-layer 11.1 / 8.0 mm, clearance 4.0 mm, HV functional 1.2 mm,
-mounting hole 6.4 mm).
+mounting hole; phase 2 adds 4 UART-island cases: 19 in total); `netlist_diff.py --check` (CHANGES_5_2.md netlist
+section up to date, every part in the three CSVs with the schematic value / footprint).
 
 ## Stackup (D5) – JLC06161H-3313, 6 layers, 1.6 mm, 1 oz outer / 0.5 oz inner
 
@@ -97,8 +102,8 @@ starting values; phase 6 sizes the power paths from the currents (D5 copper).
 
 Domains are found from the schematic by `setup_project.py` (flood fill from GND / ISO_GND / HT_GND, not
 through the barrier parts TR1, TR2, TR3, ISO1, ISO2; no other part bridges two domains in the 5.1
-netlist). Current count: primary 145 nets (HV_PRIMARY 40, PRIMARY_LV 5, SIGNAL 100), DAB secondary 40
-(HV_SECONDARY 12, SECONDARY_LV 28), heater 22, PE 1; UART island: none yet (phase 2).
+netlist). Count after phase 2: primary 149 nets (HV_PRIMARY 39, PRIMARY_LV 5, SIGNAL 105), DAB secondary 40
+(HV_SECONDARY 12, SECONDARY_LV 28), heater 22, UART island 12 (ground ISO_UART_GND, barrier U11), PE 1.
 
 ### Basis
 
@@ -166,7 +171,7 @@ DAB square wave (≤ 420 V) on top.
 - Heatsink: the shared PFC + DAB bracket must keep 11.1 mm creepage / 4.0 mm clearance from secondary
   copper unless it is treated as secondary or split (plan, D6).
 
-## Next prompt – phase 2 (schematic changes)
+## Prompt of phase 2 (schematic changes) – done 2026-11-18, see CHANGES_5_2.md
 
 ```
 Phase 2 of tube_power 5.2 in /home/jari/dev/tube_psu_kicad. Read NEXT_REVISION_PLAN.md (phase 2 table,
