@@ -360,6 +360,69 @@
 		(drill 1.2)
 		(layers "*.Cu" "*.Mask")
 	)
+	(zone
+		(net 0)
+		(net_name "")
+		(layers "F.Cu" "In1.Cu" "In2.Cu" "In3.Cu" "In4.Cu" "B.Cu")
+		(name "TR3 barrier")
+		(hatch edge 0.5)
+		(connect_pads
+			(clearance 0)
+		)
+		(min_thickness 0.25)
+		(filled_areas_thickness no)
+		(keepout
+			(tracks not_allowed)
+			(vias not_allowed)
+			(pads allowed)
+			(copperpour not_allowed)
+			(footprints allowed)
+		)
+		(placement
+			(enabled no)
+			(sheetname "")
+		)
+		(fill
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+		)
+		(polygon
+			(pts
+				(xy -7 -21.5) (xy 5 -21.5) (xy 5 21.5) (xy -7 21.5)
+			)
+		)
+	)
+	(fp_poly
+		(pts
+			(xy -7 -21.5) (xy 5 -21.5) (xy 5 21.5) (xy -7 21.5)
+		)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "Cmts.User")
+	)
+	(fp_text user "barrier 12 mm (no copper)"
+		(at -1 19 0)
+		(layer "Cmts.User")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "core = PRI: tape SEC core plate"
+		(at 14 19 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 0.7 0.7)
+				(thickness 0.15)
+			)
+		)
+	)
 	(fp_text user "${REFERENCE}"
 		(at 0 0 0)
 		(layer "F.Fab")
@@ -368,6 +431,17 @@
 				(size 1 1)
 				(thickness 0.15)
 			)
+		)
+	)
+	(model "${KIPRJMOD}/../lib/tube_psu_next.3dshapes/Transformer_EC42x15_2Slot.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
 		)
 	)
 )

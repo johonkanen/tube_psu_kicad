@@ -878,7 +878,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm"
+		(property "Footprint" "tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_H45mm"
 			(at 82.2452 69.85 0)
 			(effects
 				(font
@@ -974,7 +974,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus"
+		(property "Footprint" "tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_Proteus_H45mm"
 			(at 97.4852 69.85 0)
 			(effects
 				(font
@@ -1070,7 +1070,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus"
+		(property "Footprint" "tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_Proteus_H45mm"
 			(at 112.7252 69.85 0)
 			(effects
 				(font
@@ -1186,7 +1186,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus"
+		(property "Footprint" "tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_Proteus_H45mm"
 			(at 127.9652 69.85 0)
 			(effects
 				(font

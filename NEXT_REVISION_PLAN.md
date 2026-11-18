@@ -111,12 +111,12 @@ Exit: ERC clean, a netlist diff 5.1 → 5.2 reviewed against NEXT_REVISION.md it
 
 ## Phase 3 – footprints and 3D
 
-- Done: `Transformer_EEL19_V_4+6_FlyLeads`, `Transformer_EC42x15_2Slot_2x8_P5mm` (`tools/next/gen_next_footprints.py`).
-- To do: toroid L1/L2 (Ø 31.5 × 16.7 mm, flat, two leads – after measuring), iW1819 SO-10 batwing,
-  Si8621BD SOIC-16W, FTDI 1×6 header, INA241A SOT-23-8 (DDF), TLV9062 VSSOP-8, LDO SOT-23, TO-220
-  heatsink outlines; 3D models (KiCad library where possible, simple STEP boxes for the transformers
-  and toroids) so the board-plots 3D render and the height check are meaningful.
-- Calipers on the bought parts first (EEL19 bobbin, EC42 set, toroids) – NR 6.1.
+**Status: done 2026-11-18** (STATUS.md "Phase 3 of 5.2", kicad_next/README.md "Footprints and 3D models"): footprint
+audit against the JLC parts (all match; L1/L2 footprint added), creepage slots ISO1 / U11 (8.85 mm ≥ 8.0) and ISO2
+(12.50 mm ≥ 11.1), TR1 slot 28 mm + fly-lead holes 1.5 mm down (inner-layer spacing), TR3 12 mm barrier keep-out,
+toroid footprint (+ tie-slot variant), heatsink outline helper, 3D model on every part (14 own STEP models),
+`tools/next/check_footprints.py` in check_next.sh. Still open: caliper confirmation of the EEL19 4+6 bobbin
+(base outline, pin diameter), the EC42 set and the toroids (lead spacing / position, wire) – NR 6.1.
 
 ## Phase 4 – simulations of the 5.2 circuits
 
@@ -182,7 +182,7 @@ before routing.
 |---|---|---|
 | 1 decisions, fork, stackup, rules | Claude + user (D1–D6) | – |
 | 2 schematic | Claude (scripts) | 1 |
-| 3 footprints / 3D | Claude | calipers |
+| 3 footprints / 3D | Claude – **done** (calipers open) | calipers |
 | 4 simulations | Claude (subagents, ≤ 3 GB) | 2 |
 | 5 placement | **Fable** | 1, 2, 3 |
 | 6 routing | after review of 5 | 5 |

@@ -20,7 +20,7 @@ C15,100n,Capacitor_SMD:C_1210_3225Metric,C692295,FM32X104K631EGG,PSA(Prosperity 
 C16,1u,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,C784102,FS55X105K631EHG,PSA(Prosperity Dielectrics),extended,4206,0.7814,2026-11-17,equivalent,,"1 uF X7R 630 V 2220 (DHB half-bus caps on DC+/420V); Proteus device C2220C102FZGACTU (1 nF) is a stale library name, schematic value 1u"
 C17,4.7u,Capacitor_SMD:C_0603_1608Metric,C6119856,CGA0603X5R475K250JT,HRE,extended,350215,0.0144,2026-11-17,equivalent,,4.7 uF X5R 25 V 0603 (15V rail; C17 on 6V3)
 C18,10u,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C13585,CL31A106KBHNNNE,Samsung Electro-Mechanics,basic,4342840,0.1211,2026-11-17,equivalent,,"10 uF X5R 50 V 1206 (6V3, C18 on 15V)"
-C19,68u,Capacitor_THT:CP_Radial_D10.0mm_P5.00mm,C913388,KCXE5002W680MF,Ymin,extended,103,0.9059,2026-11-18,changed,stock 103,Ymin KCXE5002W680MF 68 uF 450 V D10x50 on 420V (NR 5.2b; 5.1 39 uF EKXJ451ELL390MJ50S not stocked)
+C19,68u,tube_psu_next_parts:CP_Radial_D10.0mm_P5.00mm_H50mm,C913388,KCXE5002W680MF,Ymin,extended,103,0.9059,2026-11-18,changed,stock 103,Ymin KCXE5002W680MF 68 uF 450 V D10x50 on 420V (NR 5.2b; 5.1 39 uF EKXJ451ELL390MJ50S not stocked)
 C20,100n,Capacitor_SMD:C_1210_3225Metric,C692295,FM32X104K631EGG,PSA(Prosperity Dielectrics),extended,16213,0.1229,2026-11-18,changed,,5.2: 100 nF X7R 630 V 1210 on DC+ / 420V / -100V BIAS (NR 5.6; 5.1 had 1206 500 V)
 C21,1u,Capacitor_SMD:C_0603_1608Metric,C15849,CL10A105KB8NNNC,Samsung Electro-Mechanics,basic,12659428,0.0145,2026-11-17,equivalent,,1 uF X5R 50 V 0603 (C43 on 15V_ISO_SEC)
 C22,4.7n,Capacitor_SMD:C_1206_3216Metric,C342746,C3216C0G2J472JT000N,TDK,extended,5833,0.3434,2026-11-17,equivalent,,"4.7 nF C0G 630 V 1206 (heater resonant split caps, up to 400 V)"
@@ -29,16 +29,16 @@ C24,10u,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C13585,CL31A10
 C25,1u,tube_psu:C_1206_3216Metric_Proteus3.15,C1848,CL31B105KBHNNNE,Samsung Electro-Mechanics,basic,792412,0.0507,2026-11-17,equivalent,,1 uF X7R 50 V 1206 (15 V bootstrap / rail)
 C26,na,Capacitor_SMD:C_0603_1608Metric,,,,,,,2026-11-17,dnp,,"value ""na"": not fitted in the Proteus design; no part"
 C27,1n2,Capacitor_SMD:C_0603_1608Metric,C576816,CC0603JRNPO9BN122,YAGEO,extended,3132,0.0179,2026-11-17,equivalent,,1.2 nF C0G 50 V
-C28,82u 450V,tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus,C51890374,ERT826M2WI45RRS0F-R,Man Yue Tech,extended,2870,0.9993,2026-11-18,exact,,Man Yue ERT826M2WI45RRS0F-R 82 uF 450 V D12.5x45 P5 on DC+ (NR 5.2b; 5.1 UPZ2W820MNY9 not stocked)
-C29,82u 450V,Capacitor_THT:CP_Radial_D12.5mm_P5.00mm,C51890374,ERT826M2WI45RRS0F-R,Man Yue Tech,extended,2870,0.9993,2026-11-18,exact,,Man Yue ERT826M2WI45RRS0F-R 82 uF 450 V D12.5x45 P5 on DC+ (NR 5.2b; 5.1 UPZ2W820MNY9 not stocked)
-C30,68u,Capacitor_THT:CP_Radial_D10.0mm_P5.00mm,C913388,KCXE5002W680MF,Ymin,extended,103,0.9059,2026-11-18,changed,stock 103,Ymin KCXE5002W680MF 68 uF 450 V D10x50 on 420V (NR 5.2b; 5.1 39 uF EKXJ451ELL390MJ50S not stocked)
-C31,1500u,Capacitor_THT:CP_Radial_D8.0mm_P3.50mm,C432399,10ZLH1500MEFCT78X20,Rubycon,extended,29042,0.1531,2026-11-17,equivalent,,THT. EEU-FR1A152L not stocked -> Rubycon 10ZLH1500MEFCT78X20 1500 uF 10 V low-Z D8x20 P3.5 on 6V3
-C32,1500u,Capacitor_THT:CP_Radial_D8.0mm_P3.50mm,C432399,10ZLH1500MEFCT78X20,Rubycon,extended,29042,0.1531,2026-11-17,equivalent,,THT. EEU-FR1A152L not stocked -> Rubycon 10ZLH1500MEFCT78X20 1500 uF 10 V low-Z D8x20 P3.5 on 6V3
+C28,82u 450V,tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_Proteus_H45mm,C51890374,ERT826M2WI45RRS0F-R,Man Yue Tech,extended,2870,0.9993,2026-11-18,exact,,Man Yue ERT826M2WI45RRS0F-R 82 uF 450 V D12.5x45 P5 on DC+ (NR 5.2b; 5.1 UPZ2W820MNY9 not stocked)
+C29,82u 450V,tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_H45mm,C51890374,ERT826M2WI45RRS0F-R,Man Yue Tech,extended,2870,0.9993,2026-11-18,exact,,Man Yue ERT826M2WI45RRS0F-R 82 uF 450 V D12.5x45 P5 on DC+ (NR 5.2b; 5.1 UPZ2W820MNY9 not stocked)
+C30,68u,tube_psu_next_parts:CP_Radial_D10.0mm_P5.00mm_H50mm,C913388,KCXE5002W680MF,Ymin,extended,103,0.9059,2026-11-18,changed,stock 103,Ymin KCXE5002W680MF 68 uF 450 V D10x50 on 420V (NR 5.2b; 5.1 39 uF EKXJ451ELL390MJ50S not stocked)
+C31,1500u,tube_psu_next_parts:CP_Radial_D8.0mm_P3.50mm_H20mm,C432399,10ZLH1500MEFCT78X20,Rubycon,extended,29042,0.1531,2026-11-17,equivalent,,THT. EEU-FR1A152L not stocked -> Rubycon 10ZLH1500MEFCT78X20 1500 uF 10 V low-Z D8x20 P3.5 on 6V3
+C32,1500u,tube_psu_next_parts:CP_Radial_D8.0mm_P3.50mm_H20mm,C432399,10ZLH1500MEFCT78X20,Rubycon,extended,29042,0.1531,2026-11-17,equivalent,,THT. EEU-FR1A152L not stocked -> Rubycon 10ZLH1500MEFCT78X20 1500 uF 10 V low-Z D8x20 P3.5 on 6V3
 C33,10u,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C13585,CL31A106KBHNNNE,Samsung Electro-Mechanics,basic,4342840,0.1211,2026-11-17,equivalent,,"10 uF X5R 50 V 1206 (6V3, C18 on 15V)"
 C34,470pF,Capacitor_SMD:C_0603_1608Metric,C106211,CC0603JRNPO9BN471,YAGEO,extended,246110,0.0045,2026-11-17,equivalent,,470 pF C0G 50 V (LDO bypass)
 C35,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-17,equivalent,,100 nF X7R 50 V 0603
 C36,22u,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C12891,CL31A226KAHNNNE,Samsung Electro-Mechanics,basic,2642489,0.1029,2026-11-17,equivalent,,22 uF X5R 25 V 1206 (5 V rails)
-C37,82u 450V,tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus,C51890374,ERT826M2WI45RRS0F-R,Man Yue Tech,extended,2870,0.9993,2026-11-18,exact,,Man Yue ERT826M2WI45RRS0F-R 82 uF 450 V D12.5x45 P5 on DC+ (NR 5.2b; 5.1 UPZ2W820MNY9 not stocked)
+C37,82u 450V,tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_Proteus_H45mm,C51890374,ERT826M2WI45RRS0F-R,Man Yue Tech,extended,2870,0.9993,2026-11-18,exact,,Man Yue ERT826M2WI45RRS0F-R 82 uF 450 V D12.5x45 P5 on DC+ (NR 5.2b; 5.1 UPZ2W820MNY9 not stocked)
 C38,470nF,Capacitor_THT:C_Rect_L26.5mm_W6.0mm_P22.50mm_MKS4,C3297747,R46KN347000P1K,KEMET,extended,805,0.4882,2026-11-17,equivalent,X2 body width vs 6 mm outline,THT. X2 470 nF 275 VAC P22.5 KEMET R46; verify the body width against the 6 mm footprint outline
 C39,4.7u,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C29823,1206B475K500NT,FH (Guangdong Fenghua Advanced Tech),basic,540274,0.0797,2026-11-17,equivalent,,4.7 uF X7R 50 V 1206 (15 V / PWM2 Vcc / -5 V)
 C40,100u,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C6119961,CGA1206X5R107M100NT,HRE,extended,45088,0.1691,2026-11-17,equivalent,,100 uF X5R 10 V 1206 (5 V / -5 V rails; 10 V for DC-bias margin)
@@ -56,7 +56,7 @@ C52,4.7u,Capacitor_SMD:C_0603_1608Metric,C6119856,CGA0603X5R475K250JT,HRE,extend
 C53,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-17,equivalent,,100 nF X7R 50 V 0603
 C54,1u,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,C784102,FS55X105K631EHG,PSA(Prosperity Dielectrics),extended,4206,0.7814,2026-11-17,equivalent,,"1 uF X7R 630 V 2220 (DHB half-bus caps on DC+/420V); Proteus device C2220C102FZGACTU (1 nF) is a stale library name, schematic value 1u"
 C55,1u,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,C784102,FS55X105K631EHG,PSA(Prosperity Dielectrics),extended,4206,0.7814,2026-11-17,equivalent,,"1 uF X7R 630 V 2220 (DHB half-bus caps on DC+/420V); Proteus device C2220C102FZGACTU (1 nF) is a stale library name, schematic value 1u"
-C56,82u 450V,tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus,C51890374,ERT826M2WI45RRS0F-R,Man Yue Tech,extended,2870,0.9993,2026-11-18,exact,,Man Yue ERT826M2WI45RRS0F-R 82 uF 450 V D12.5x45 P5 on DC+ (NR 5.2b; 5.1 UPZ2W820MNY9 not stocked)
+C56,82u 450V,tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_Proteus_H45mm,C51890374,ERT826M2WI45RRS0F-R,Man Yue Tech,extended,2870,0.9993,2026-11-18,exact,,Man Yue ERT826M2WI45RRS0F-R 82 uF 450 V D12.5x45 P5 on DC+ (NR 5.2b; 5.1 UPZ2W820MNY9 not stocked)
 C57,2u2,Capacitor_SMD:C_0603_1608Metric,C23630,CL10A225KO8NNNC,Samsung Electro-Mechanics,basic,2837663,0.01,2026-11-17,equivalent,,2.2 uF X5R 16 V 0603 (3.3 V rails)
 C58,22u 35V,Capacitor_SMD:CP_Elec_5x5.4,C2887274,RVT22UF35V67RV0104,KNSCHA,extended,19241,0.0354,2026-11-18,changed,,22 uF 35 V SMD electrolytic D5 x 5.4 (NR 1.5: PWM2 VCC hold-up during soft start)
 C59,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-17,equivalent,,100 nF X7R 50 V 0603
@@ -102,7 +102,7 @@ C98,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31
 C99,100n,Capacitor_SMD:C_1210_3225Metric,C692295,FM32X104K631EGG,PSA(Prosperity Dielectrics),extended,16213,0.1229,2026-11-18,changed,,5.2: 100 nF X7R 630 V 1210 on DC+ / 420V / -100V BIAS (NR 5.6; 5.1 had 1206 500 V)
 C100,100n,Capacitor_SMD:C_1210_3225Metric,C692295,FM32X104K631EGG,PSA(Prosperity Dielectrics),extended,16213,0.1229,2026-11-18,changed,,5.2: 100 nF X7R 630 V 1210 on DC+ / 420V / -100V BIAS (NR 5.6; 5.1 had 1206 500 V)
 C101,100n,Capacitor_SMD:C_1210_3225Metric,C692295,FM32X104K631EGG,PSA(Prosperity Dielectrics),extended,16213,0.1229,2026-11-18,changed,,5.2: 100 nF X7R 630 V 1210 on DC+ / 420V / -100V BIAS (NR 5.6; 5.1 had 1206 500 V)
-C102,56u 250V,Capacitor_THT:CP_Radial_D10.0mm_P5.00mm,C22464691,KCXE1802E560MF,Ymin,extended,386,0.3329,2026-11-18,exact,,"Ymin KCXE 56 uF 250 V D10x18 P5 (-100V BIAS rail, >= 160 V)"
+C102,56u 250V,tube_psu_next_parts:CP_Radial_D10.0mm_P5.00mm_H18mm,C22464691,KCXE1802E560MF,Ymin,extended,386,0.3329,2026-11-18,exact,,"Ymin KCXE 56 uF 250 V D10x18 P5 (-100V BIAS rail, >= 160 V)"
 C103,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-17,equivalent,,100 nF X7R 50 V 0603
 C104,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-17,equivalent,,100 nF X7R 50 V 0603
 C105,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-17,equivalent,,100 nF X7R 50 V 0603
@@ -113,8 +113,8 @@ C113,20p,Capacitor_SMD:C_0603_1608Metric,C1648,CL10C200JB8NNNC,Samsung Electro-M
 C114,22u,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C12891,CL31A226KAHNNNE,Samsung Electro-Mechanics,basic,2642489,0.1029,2026-11-17,equivalent,,22 uF X5R 25 V 1206 (5 V rails)
 C115,22u,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C12891,CL31A226KAHNNNE,Samsung Electro-Mechanics,basic,2642489,0.1029,2026-11-17,equivalent,,22 uF X5R 25 V 1206 (5 V rails)
 C117,680n,Capacitor_THT:C_Rect_L26.5mm_W11.5mm_P22.50mm_MKS4,C2888216,MKP62-275V684KP22.5,Dongtong,extended,989,0.2325,2026-11-17,equivalent,"X2 680n: generic brand, body size to verify",THT. X2 680 nF 275 VAC P22.5 (Dongtong MKP62); verify the body against the 11.5 mm outline
-CM1,SCF20-05-550,tube_psu:L_CommonMode_SCF20-05-550,C1534140,SCF20-05-550,KEMET,extended,20,7.3717,2026-11-17,exact,LOW STOCK 20 (< 100): 10 boards max,THT. KEMET SCF20-05-550
-CM4,SCF20-05-550,tube_psu:L_CommonMode_SCF20-05-550,C1534140,SCF20-05-550,KEMET,extended,20,7.3717,2026-11-17,exact,LOW STOCK 20 (< 100): 10 boards max,THT. KEMET SCF20-05-550
+CM1,SCF20-05-550,tube_psu_next_parts:L_CommonMode_SCF20-05-550,C1534140,SCF20-05-550,KEMET,extended,20,7.3717,2026-11-17,exact,LOW STOCK 20 (< 100): 10 boards max,THT. KEMET SCF20-05-550
+CM4,SCF20-05-550,tube_psu_next_parts:L_CommonMode_SCF20-05-550,C1534140,SCF20-05-550,KEMET,extended,20,7.3717,2026-11-17,exact,LOW STOCK 20 (< 100): 10 boards max,THT. KEMET SCF20-05-550
 D2,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extended,5662,0.2931,2026-11-17,exact,,
 D3,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extended,5662,0.2931,2026-11-17,exact,,
 D4,ES1D,tube_psu:D_SMA_AC,C116492,ES1D,Shandong Jingdao Microelectronics,extended,236108,0.0112,2026-11-18,exact,,ES1D 200 V (NR 1.10: >= 100 V)
@@ -135,30 +135,30 @@ D31,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extend
 D32,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extended,5662,0.2931,2026-11-17,exact,,
 D33,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extended,5662,0.2931,2026-11-17,exact,,
 D34,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extended,5662,0.2931,2026-11-17,exact,,
-DB1,TBS22K,tube_psu:D_Bridge_TBS,,,,,,,2026-11-17,missing,not available,TBS22K not stocked at JLC (TBS22K-TP 0); no same-footprint TBS bridge >=100 stock; consign or global sourcing
+DB1,TBS22K,tube_psu_next_parts:D_Bridge_TBS,,,,,,,2026-11-17,missing,not available,TBS22K not stocked at JLC (TBS22K-TP 0); no same-footprint TBS bridge >=100 stock; consign or global sourcing
 DRV1,UCC27511ADBVR,Package_TO_SOT_SMD:SOT-23-6,C2676982,UCC27511ADBVR,Texas Instruments,extended,6178,0.3895,2026-11-18,changed,,5.2: IXDD609D2TR (0 stock) -> UCC27511ADBVR 4 A / 8 A split outputs (NR 3a)
 DRV2,UCC27511ADBVR,Package_TO_SOT_SMD:SOT-23-6,C2676982,UCC27511ADBVR,Texas Instruments,extended,6178,0.3895,2026-11-18,changed,,5.2: IXDD609D2TR (0 stock) -> UCC27511ADBVR 4 A / 8 A split outputs (NR 3a)
 DRV3,UCC21520DWR,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,C601651,UCC21520DWR,Texas Instruments,extended,41923,0.9418,2026-11-18,changed,,5.2: Si8271 DRV3 + IXDD609 DRV9 -> one UCC21520DWR for the heater LLC half-bridge Q11 / Q10 (NR 3a)
 DRV4,UCC27524ADR,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,C185857,UCC27524ADR,Texas Instruments,extended,20290,0.249,2026-11-18,changed,,5.2: IXDD604D2TR (0 stock) -> UCC27524ADR dual 5 A low-side on 6V3 (NR 3a)
 DRV5,UCC21520DWR,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,C601651,UCC21520DWR,Texas Instruments,extended,41923,0.9418,2026-11-18,changed,,"5.2: Si8275BB (0 stock) -> UCC21520DWR isolated dual driver, 5.7 kVrms reinforced, 8 V UVLO, DT + DISABLE (NR 3a)"
 DRV6,UCC21520DWR,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,C601651,UCC21520DWR,Texas Instruments,extended,41923,0.9418,2026-11-18,changed,,5.2: Si8275BB (0 stock) -> UCC21520DWR (NR 3a); input side on the secondary via ISO2 as in 5.1
-GND,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
-HT_6V3,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
-HT_GND,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
-IN1,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
-IN2,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
-ISO1,CA-IS3761LW,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,C528659,CA-IS3761LW,Chipanalog,extended,2315,1.8524,2026-11-18,changed,reinforced certificate to confirm,"5.2: Si8661BD (2 pcs) -> CA-IS3761LW, same pinout (1 VDDA, 2-6 in, 7 out, 8/9 GND, 10 in, 11-15 out, 16 VDDB; checked), default low, VIOWM 1000 Vrms (WB); datasheet 2019 lists VDE/UL/CQC as pending"
-ISO2,CA-IS3761LW,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,C528659,CA-IS3761LW,Chipanalog,extended,2315,1.8524,2026-11-18,changed,reinforced certificate to confirm,"5.2: Si8661BD (2 pcs) -> CA-IS3761LW, same pinout (1 VDDA, 2-6 in, 7 out, 8/9 GND, 10 in, 11-15 out, 16 VDDB; checked), default low, VIOWM 1000 Vrms (WB); datasheet 2019 lists VDE/UL/CQC as pending"
+GND,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
+HT_6V3,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
+HT_GND,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
+IN1,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
+IN2,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
+ISO1,CA-IS3761LW,tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0,C528659,CA-IS3761LW,Chipanalog,extended,2315,1.8524,2026-11-18,changed,reinforced certificate to confirm,"5.2: Si8661BD (2 pcs) -> CA-IS3761LW, same pinout (1 VDDA, 2-6 in, 7 out, 8/9 GND, 10 in, 11-15 out, 16 VDDB; checked), default low, VIOWM 1000 Vrms (WB); datasheet 2019 lists VDE/UL/CQC as pending"
+ISO2,CA-IS3761LW,tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot11.1,C528659,CA-IS3761LW,Chipanalog,extended,2315,1.8524,2026-11-18,changed,reinforced certificate to confirm,"5.2: Si8661BD (2 pcs) -> CA-IS3761LW, same pinout (1 VDDA, 2-6 in, 7 out, 8/9 GND, 10 in, 11-15 out, 16 VDDB; checked), default low, VIOWM 1000 Vrms (WB); datasheet 2019 lists VDE/UL/CQC as pending"
 J2,50 PIN HEADER 50TH,tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus,C69941,1.27-2*25PPin,BOOMELE(Boom Precision Elec),extended,2834,0.3033,2026-11-17,equivalent,J2 generic header: check gender / height,THT. 2x25 1.27 mm pin header (BOOMELE); check gender/height against the mating board
 J4,FTDI 1x6,Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical,C492405,PZ254V-11-06P,XFCN,extended,72868,0.0431,2026-11-18,changed,,5.2: 3-pin 66226-003 -> 6-pin FTDI header on the UART island (NR 3b)
-L1,TBD (measured),,,,,,,,2026-11-18,consigned,value to measure,5.2: PFC choke = sendust ring OD 31.5 x 16.7 mm (NR 5.2); listing 3 mH at 0 A - measure L at 0 A and at the PFC peak current; schematic 5.1 said 200 uH (RM8)
-L2,TBD (measured),,,,,,,,2026-11-18,consigned,value to measure,5.2: PFC choke = sendust ring OD 31.5 x 16.7 mm (NR 5.2); listing 3 mH at 0 A - measure L at 0 A and at the PFC peak current; schematic 5.1 said 200 uH (RM8)
-N5V_OUT,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
-N80V_OUT,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
-P15V_OUT,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
-P400V,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
-P5V_OUT,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
-PE,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
+L1,TBD (measured),tube_psu_next:L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm,,,,,,,2026-11-18,consigned,value to measure,5.2: PFC choke = sendust ring OD 31.5 x 16.7 mm (NR 5.2); listing 3 mH at 0 A - measure L at 0 A and at the PFC peak current; schematic 5.1 said 200 uH (RM8)
+L2,TBD (measured),tube_psu_next:L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm,,,,,,,2026-11-18,consigned,value to measure,5.2: PFC choke = sendust ring OD 31.5 x 16.7 mm (NR 5.2); listing 3 mH at 0 A - measure L at 0 A and at the PFC peak current; schematic 5.1 said 200 uH (RM8)
+N5V_OUT,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
+N80V_OUT,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
+P15V_OUT,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
+P400V,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
+P5V_OUT,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
+PE,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
 PWM2,ICE5AR4780BZS,Package_DIP:DIP-8-N6_W7.62mm,C3094802,ICE5AR4780BZS,Infineon Technologies,extended,173,1.2595,2026-11-18,changed,,5.2 NR 1.5: replaces the iW1819-00 (0 stock); CoolSET 800 V 100 kHz DIP-7 THT
 Q1,BUK9Y15-60E,tube_psu:LFPAK56_Proteus,C458196,"BUK9Y15-60E,115",Nexperia,extended,1485,0.2638,2026-11-17,exact,,"BUK9Y15-60E,115"
 Q2,BUK9Y15-60E,tube_psu:LFPAK56_Proteus,C458196,"BUK9Y15-60E,115",Nexperia,extended,1485,0.2638,2026-11-17,exact,,"BUK9Y15-60E,115"
@@ -191,7 +191,7 @@ R17,15k,Resistor_SMD:R_0603_1608Metric,C22809,0603WAF1502T5E,UNI-ROYAL(Uniroyal 
 R18,100R,Resistor_SMD:R_0603_1608Metric,C22775,0603WAF1000T5E,UNI-ROYAL(Uniroyal Elec),basic,10602078,0.0019,2026-11-17,equivalent,,100 Ω 1 % 0603
 R19,5R,Resistor_SMD:R_1206_3216Metric,C2999547,FRC1206F4R99TS,FOJAN,extended,50427,0.0051,2026-11-17,equivalent,"5 Ω -> 4.99 Ω (E96, -0.2 %)",4.99 Ω 1 % 1206 (E96) for 5 Ω gate resistors
 R20,5R,Resistor_SMD:R_1206_3216Metric,C2999547,FRC1206F4R99TS,FOJAN,extended,50427,0.0051,2026-11-17,equivalent,"5 Ω -> 4.99 Ω (E96, -0.2 %)",4.99 Ω 1 % 1206 (E96) for 5 Ω gate resistors
-R21,4m,tube_psu:R_0508_1220Metric_KRL2012,,,,,,,2026-11-17,missing,4 mΩ shunt not available (5 mΩ option),"KRL2012-C-R004 (4 mΩ) not at JLC; same footprint stocked only as KRL2012E-M-R005-F-T5 C2073455 (5 mΩ, +25 % current-sense gain); consign the 4 mΩ part or accept 5 mΩ"
+R21,4m,tube_psu_next_parts:R_0508_1220Metric_KRL2012,,,,,,,2026-11-17,missing,4 mΩ shunt not available (5 mΩ option),"KRL2012-C-R004 (4 mΩ) not at JLC; same footprint stocked only as KRL2012E-M-R005-F-T5 C2073455 (5 mΩ, +25 % current-sense gain); consign the 4 mΩ part or accept 5 mΩ"
 R22,10k,Resistor_SMD:R_0603_1608Metric,C25804,0603WAF1002T5E,UNI-ROYAL(Uniroyal Elec),basic,44852996,0.0019,2026-11-17,equivalent,,10 kΩ 1 % 0603
 R23,1M,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C17514,0805W8F1004T5E,UNI-ROYAL(Uniroyal Elec),basic,1523445,0.0044,2026-11-17,equivalent,,"1 MΩ 1 % 0805 (dividers: <= 140 V per resistor, 0805 rated 150 V; R23/R34/R39 on 420V are at the limit)"
 R24,10R,Resistor_SMD:R_1206_3216Metric,C17903,1206W4F100JT5E,UNI-ROYAL(Uniroyal Elec),basic,1331047,0.0061,2026-11-17,equivalent,,10 Ω 1 % 1206
@@ -199,7 +199,7 @@ R26,40R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C2933439,FRC080
 R27,47R,Resistor_THT:R_Radial_Power_L13.0mm_W9.0mm_P5.00mm,,,,,,,2026-11-17,missing,not available,THT. Ohmite TWW10 47 Ω 10 W radial (TWW10J47RE) not stocked; consign
 R28,4.7R,tube_psu:R_0805_2012Metric_Proteus2.13,C17675,0805W8F470KT5E,UNI-ROYAL(Uniroyal Elec),basic,157492,0.0154,2026-11-17,equivalent,,4.7 Ω 1 % 0805 (footprint 0805; Proteus device says RES 1206)
 R29,330R,Resistor_SMD:R_0603_1608Metric,C23138,0603WAF3300T5E,UNI-ROYAL(Uniroyal Elec),basic,2592689,0.0017,2026-11-17,equivalent,,330 Ω 1 % 0603
-R30,4m,tube_psu:R_0508_1220Metric_KRL2012,,,,,,,2026-11-17,missing,4 mΩ shunt not available (5 mΩ option),"KRL2012-C-R004 (4 mΩ) not at JLC; same footprint stocked only as KRL2012E-M-R005-F-T5 C2073455 (5 mΩ, +25 % current-sense gain); consign the 4 mΩ part or accept 5 mΩ"
+R30,4m,tube_psu_next_parts:R_0508_1220Metric_KRL2012,,,,,,,2026-11-17,missing,4 mΩ shunt not available (5 mΩ option),"KRL2012-C-R004 (4 mΩ) not at JLC; same footprint stocked only as KRL2012E-M-R005-F-T5 C2073455 (5 mΩ, +25 % current-sense gain); consign the 4 mΩ part or accept 5 mΩ"
 R31,3.3R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C22356719,RCA053R3FLF,HKR(Hong Kong Resistors),extended,23128,0.0027,2026-11-17,equivalent,,3.3 Ω 1 % 0805
 R32,2.2k,Resistor_SMD:R_0603_1608Metric,C4190,0603WAF2201T5E,UNI-ROYAL(Uniroyal Elec),basic,4400697,0.0018,2026-11-17,equivalent,,2.2 kΩ 1 % 0603
 R33,330R,Resistor_SMD:R_0603_1608Metric,C23138,0603WAF3300T5E,UNI-ROYAL(Uniroyal Elec),basic,2592689,0.0017,2026-11-17,equivalent,,330 Ω 1 % 0603
@@ -249,14 +249,14 @@ R78,10k,Resistor_SMD:R_0603_1608Metric,C25804,0603WAF1002T5E,UNI-ROYAL(Uniroyal 
 R79,1M,tube_psu:R_0805_2012Metric_Proteus,C17514,0805W8F1004T5E,UNI-ROYAL(Uniroyal Elec),basic,1523445,0.0044,2026-11-17,equivalent,,"1 MΩ 1 % 0805 (dividers: <= 140 V per resistor, 0805 rated 150 V; R23/R34/R39 on 420V are at the limit)"
 R80,12k,Resistor_SMD:R_0603_1608Metric,C22790,0603WAF1202T5E,UNI-ROYAL(Uniroyal Elec),basic,956210,0.0019,2026-11-18,changed,,"5.2: 15k -> 12k (NR 4.3, VAC range)"
 R82,15k,Resistor_SMD:R_0603_1608Metric,C22809,0603WAF1502T5E,UNI-ROYAL(Uniroyal Elec),basic,3013077,0.0029,2026-11-17,equivalent,,15 kΩ 1 % 0603
-R83,4m,tube_psu:R_0508_1220Metric_KRL2012,,,,,,,2026-11-17,missing,4 mΩ shunt not available (5 mΩ option),"KRL2012-C-R004 (4 mΩ) not at JLC; same footprint stocked only as KRL2012E-M-R005-F-T5 C2073455 (5 mΩ, +25 % current-sense gain); consign the 4 mΩ part or accept 5 mΩ"
+R83,4m,tube_psu_next_parts:R_0508_1220Metric_KRL2012,,,,,,,2026-11-17,missing,4 mΩ shunt not available (5 mΩ option),"KRL2012-C-R004 (4 mΩ) not at JLC; same footprint stocked only as KRL2012E-M-R005-F-T5 C2073455 (5 mΩ, +25 % current-sense gain); consign the 4 mΩ part or accept 5 mΩ"
 R87,40R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C2933439,FRC0805F40R2TS,FOJAN,extended,32581,0.0026,2026-11-17,equivalent,"40 Ω -> 40.2 Ω (E96, +0.5 %)",40.2 Ω 1 % 0805 (E96) for 40 Ω
 R88,3.3R,tube_psu:R_0805_2012Metric_Proteus,C22356719,RCA053R3FLF,HKR(Hong Kong Resistors),extended,23128,0.0027,2026-11-17,equivalent,,3.3 Ω 1 % 0805
 R89,33k,Resistor_SMD:R_0603_1608Metric,C4216,0603WAF3302T5E,UNI-ROYAL(Uniroyal Elec),basic,2797847,0.0021,2026-11-17,equivalent,,33 kΩ 1 % 0603
 R90,40R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C2933439,FRC0805F40R2TS,FOJAN,extended,32581,0.0026,2026-11-17,equivalent,"40 Ω -> 40.2 Ω (E96, +0.5 %)",40.2 Ω 1 % 0805 (E96) for 40 Ω
 R91,8.2k,Resistor_SMD:R_0603_1608Metric,C25981,0603WAF8201T5E,UNI-ROYAL(Uniroyal Elec),basic,618202,0.0035,2026-11-17,equivalent,,8.2 kΩ 1 % 0603
 R92,3.3R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C22356719,RCA053R3FLF,HKR(Hong Kong Resistors),extended,23128,0.0027,2026-11-17,equivalent,,3.3 Ω 1 % 0805
-R93,4m,tube_psu:R_0508_1220Metric_KRL2012,,,,,,,2026-11-17,missing,4 mΩ shunt not available (5 mΩ option),"KRL2012-C-R004 (4 mΩ) not at JLC; same footprint stocked only as KRL2012E-M-R005-F-T5 C2073455 (5 mΩ, +25 % current-sense gain); consign the 4 mΩ part or accept 5 mΩ"
+R93,4m,tube_psu_next_parts:R_0508_1220Metric_KRL2012,,,,,,,2026-11-17,missing,4 mΩ shunt not available (5 mΩ option),"KRL2012-C-R004 (4 mΩ) not at JLC; same footprint stocked only as KRL2012E-M-R005-F-T5 C2073455 (5 mΩ, +25 % current-sense gain); consign the 4 mΩ part or accept 5 mΩ"
 R94,330R,Resistor_SMD:R_0603_1608Metric,C23138,0603WAF3300T5E,UNI-ROYAL(Uniroyal Elec),basic,2592689,0.0017,2026-11-17,equivalent,,330 Ω 1 % 0603
 R95,6.8k,Resistor_SMD:R_0603_1608Metric,C23212,0603WAF6801T5E,UNI-ROYAL(Uniroyal Elec),basic,956944,0.0023,2026-11-17,equivalent,,6.8 kΩ 1 % 0603
 R96,100,Resistor_SMD:R_0603_1608Metric,C22775,0603WAF1000T5E,UNI-ROYAL(Uniroyal Elec),basic,10602078,0.0019,2026-11-17,equivalent,,100 Ω 1 % 0603
@@ -289,12 +289,12 @@ R122,6.8k,Resistor_SMD:R_0603_1608Metric,C23212,0603WAF6801T5E,UNI-ROYAL(Uniroya
 R123,12.1K,Resistor_SMD:R_1206_3216Metric,C247391,1206W4F1212T5E,UNI-ROYAL(Uniroyal Elec),extended,4303,0.0045,2026-11-17,equivalent,,12.1 kΩ 1 % 1206
 R124,2.61k,Resistor_SMD:R_1206_3216Metric,C245506,CR1206F2K61P05Z,Ever Ohms Tech,extended,75,0.0077,2026-11-18,changed,stock 75,"2.61 kOhm 1 % 1206 (NR 1.8, 15V_ISO_SEC bleeder); alt. AC1206FR-072K61L C229516 (43)"
 REF1,REF3325AIDBZR,tube_psu:SOT-23_Proteus,C69039,REF3325AIDBZR,Texas Instruments,extended,13320,0.7043,2026-11-18,changed,,5.2: 2.5 V series reference (same SOT-23 pinout 1 IN / 2 OUT / 3 GND as the ISL21010); 5.1 value ISL21010CFH315Z was the 1.5 V part (NR 4.8); ISL21010CFH325Z (2.5 V) 0 stock
-RL1,SONGLE RELAY,tube_psu:Relay_Songle_SRD_5pin,C35449,SRD-05VDC-SL-C,Ningbo Songle Relay,extended,84108,0.444,2026-11-17,exact,,THT. SRD-05VDC-SL-C (5 V coil)
-SEC_GND,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
+RL1,SONGLE RELAY,tube_psu_next_parts:Relay_Songle_SRD_5pin,C35449,SRD-05VDC-SL-C,Ningbo Songle Relay,extended,84108,0.444,2026-11-17,exact,,THT. SRD-05VDC-SL-C (5 V coil)
+SEC_GND,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
 SICD1,C3D02060A,tube_psu:TO-220-2_Vertical_AK,,,,,,,2026-11-17,missing,not available,"THT. C3D02060A 0 stock; nearest TO-220-2 SiC: Vishay VS-C04ET07T-M3 C5208854 (650 V 4 A, 480 stock; check pinout and Qc); consign"
 SICD2,C3D02060A,tube_psu:TO-220-2_Vertical_AK,,,,,,,2026-11-17,missing,not available,"THT. C3D02060A 0 stock; nearest TO-220-2 SiC: Vishay VS-C04ET07T-M3 C5208854 (650 V 4 A, 480 stock; check pinout and Qc); consign"
 TR1,EEL19_4+6 Lp600u,tube_psu_next:Transformer_EEL19_V_4+6_FlyLeads,,,,,,,2026-11-18,consigned,,"custom transformer, EEL19 PC40 4+6 bobbin, P 52+52 T on fly leads (simulation/flyback/EEL19_DESIGN.md 6/6a)"
-TR2,EF25_8PIN,tube_psu:Transformer_EF25_2x5_P5.08mm_8pin,,,,,,,2026-11-17,consigned,,custom transformers (EF20 / EF25 / ETD34)
+TR2,EF25_8PIN,tube_psu_next_parts:Transformer_EF25_2x5_P5.08mm_8pin,,,,,,,2026-11-17,consigned,,custom transformers (EF20 / EF25 / ETD34)
 TR3,EC42/15 2CH 20:21,tube_psu_next:Transformer_EC42x15_2Slot_2x8_P5mm,,,,,,,2026-11-18,consigned,,"custom transformer: EC42/15 PC40, primary 20 T / secondary 21 T litz 135x0.071, gap 0.35 mm (simulation/dab/DAB_TRANSFORMER.md 5, option B)"
 U1,LMH6643,Package_SO:TSSOP-8_3x3mm_P0.65mm,C478382,LMH6643MMX/NOPB,Texas Instruments,extended,15316,0.9518,2026-11-18,exact,,"LMH6643MMX/NOPB (NR 4.10b, D2), VSSOP-8 = the TSSOP-8 3x3 P0.65 footprint, LMH6658 pinout"
 U2,TLV316IDBVR,tube_psu:SOT-23-5_Proteus,C575578,TLV316IDBVR,Texas Instruments,extended,4003,0.6422,2026-11-17,exact,,
@@ -335,7 +335,7 @@ R134,10k 0.1%,Resistor_SMD:R_0603_1608Metric,C95204,RT0603BRD0710KL,YAGEO,extend
 C132,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-18,equivalent,,new: 5V_MEAS filter 100 nF across R134 (NR 4b)
 R135,100R,Resistor_SMD:R_0603_1608Metric,C22775,0603WAF1000T5E,UNI-ROYAL(Uniroyal Elec),basic,10602078,0.0019,2026-11-18,equivalent,,new: 5V_MEAS output 100R (NR 4b)
 C133,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-18,equivalent,,new: U10 decoupling
-U11,CA-IS3721HW,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,C5337993,CA-IS3721HW,Chipanalog,extended,1358,1.1088,2026-11-18,changed,reinforced rating to confirm,"new: UART isolator (NR 3b). Si8621BD is default-LOW (Skyworks ordering guide) -> default-high needed (idle UART): CA-IS3721HW = Si8621 WB pinout, default high, stocked; alt. Si8621ED-B-IS (0 stock, consign)"
+U11,CA-IS3721HW,tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0,C5337993,CA-IS3721HW,Chipanalog,extended,1358,1.1088,2026-11-18,changed,reinforced rating to confirm,"new: UART isolator (NR 3b). Si8621BD is default-LOW (Skyworks ordering guide) -> default-high needed (idle UART): CA-IS3721HW = Si8621 WB pinout, default high, stocked; alt. Si8621ED-B-IS (0 stock, consign)"
 U12,XC6206P332MR,Package_TO_SOT_SMD:SOT-23,C5446,XC6206P332MR-G,Torex Semicon,basic,433714,0.1381,2026-11-18,exact,,new: 3.3 V LDO for the cable side of U11 (NR 3b.3)
 C134,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-18,equivalent,,new: U11 side-1 decoupling
 C135,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-18,equivalent,,new: U11 side-2 decoupling (island)

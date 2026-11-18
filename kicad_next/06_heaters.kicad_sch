@@ -3531,7 +3531,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tube_psu:R_0508_1220Metric_KRL2012"
+		(property "Footprint" "tube_psu_next_parts:R_0508_1220Metric_KRL2012"
 			(at 64.262 87.63 0)
 			(effects
 				(font
@@ -3858,7 +3858,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "tube_psu:Transformer_EF25_2x5_P5.08mm_8pin"
+		(property "Footprint" "tube_psu_next_parts:Transformer_EF25_2x5_P5.08mm_8pin"
 			(at 137.16 63.5 0)
 			(effects
 				(font
@@ -5447,7 +5447,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
+		(property "Footprint" "tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
 			(at 259.08 38.1 0)
 			(effects
 				(font
@@ -5522,7 +5522,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
+		(property "Footprint" "tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
 			(at 259.08 50.8 0)
 			(effects
 				(font
@@ -5791,7 +5791,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm"
+		(property "Footprint" "tube_psu_next_parts:CP_Radial_D8.0mm_P3.50mm_H20mm"
 			(at 290.5252 50.8 0)
 			(effects
 				(font
@@ -5889,7 +5889,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm"
+		(property "Footprint" "tube_psu_next_parts:CP_Radial_D8.0mm_P3.50mm_H20mm"
 			(at 300.6852 50.8 0)
 			(effects
 				(font

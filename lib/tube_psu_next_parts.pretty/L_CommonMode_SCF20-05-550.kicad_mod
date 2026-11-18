@@ -1,0 +1,131 @@
+(footprint "L_CommonMode_SCF20-05-550"
+	(version 20260206)
+	(generator "tube_psu_gen_footprints")
+	(layer "F.Cu")
+	(descr "Common-mode choke SCF20-05-550 (VAC T60405-R6131-X204), 4 pins (body from the Proteus silk) (tube_psu, pads from IPC-D-356A CM1) - 5.2 copy with a 3D model (tube_psu_next_parts; pads = lib/tube_psu.pretty)")
+	(property "Reference" "REF**"
+		(at 0 -13.821 0)
+		(layer "F.SilkS")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "L_CommonMode_SCF20-05-550"
+		(at 0 13.819 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_poly
+		(pts
+			(xy -7.5 12.499) (xy 7.5 12.499) (xy 7.5 -12.501) (xy -7.5 -12.501)
+		)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start -7.5 12.499)
+		(end 7.5 12.499)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start 7.5 12.499)
+		(end 7.5 -12.501)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start 7.5 -12.501)
+		(end -7.5 -12.501)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start -7.5 -12.501)
+		(end -7.5 12.499)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_poly
+		(pts
+			(xy -7.75 12.6026) (xy -7.6036 12.749) (xy 7.6036 12.749) (xy 7.75 12.6026) (xy 7.75 -12.6046) (xy 7.6036 -12.751) (xy -7.6036 -12.751) (xy -7.75 -12.6046)
+		)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at -6 -7)
+		(size 1.524 1.524)
+		(drill 1.016)
+		(layers "*.Cu" "*.Mask")
+	)
+	(pad "2" thru_hole circle
+		(at 6 -7)
+		(size 1.524 1.524)
+		(drill 1.016)
+		(layers "*.Cu" "*.Mask")
+	)
+	(pad "3" thru_hole circle
+		(at -6 7)
+		(size 1.524 1.524)
+		(drill 1.016)
+		(layers "*.Cu" "*.Mask")
+	)
+	(pad "4" thru_hole circle
+		(at 6 7)
+		(size 1.524 1.524)
+		(drill 1.016)
+		(layers "*.Cu" "*.Mask")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/../lib/tube_psu_next.3dshapes/L_CommonMode_SCF20-05-550.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

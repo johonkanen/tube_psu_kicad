@@ -2934,7 +2934,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "tube_psu:Relay_Songle_SRD_5pin"
+		(property "Footprint" "tube_psu_next_parts:Relay_Songle_SRD_5pin"
 			(at 55.88 60.96 0)
 			(effects
 				(font
@@ -3025,7 +3025,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
+		(property "Footprint" "tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
 			(at 30.48 53.34 0)
 			(effects
 				(font
@@ -4171,7 +4171,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
+		(property "Footprint" "tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
 			(at 30.48 104.14 0)
 			(effects
 				(font
@@ -4572,7 +4572,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tube_psu:L_CommonMode_SCF20-05-550"
+		(property "Footprint" "tube_psu_next_parts:L_CommonMode_SCF20-05-550"
 			(at 149.86 105.41 0)
 			(effects
 				(font
@@ -5006,7 +5006,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tube_psu:L_CommonMode_SCF20-05-550"
+		(property "Footprint" "tube_psu_next_parts:L_CommonMode_SCF20-05-550"
 			(at 195.58 105.41 0)
 			(effects
 				(font
@@ -5698,7 +5698,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu_next:L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm"
 			(at 254 88.9 0)
 			(effects
 				(font
@@ -6077,7 +6077,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tube_psu:R_0508_1220Metric_KRL2012"
+		(property "Footprint" "tube_psu_next_parts:R_0508_1220Metric_KRL2012"
 			(at 270.002 110.49 0)
 			(effects
 				(font
@@ -6218,7 +6218,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_psu_next:L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm"
 			(at 254 152.4 0)
 			(effects
 				(font
@@ -6597,7 +6597,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tube_psu:R_0508_1220Metric_KRL2012"
+		(property "Footprint" "tube_psu_next_parts:R_0508_1220Metric_KRL2012"
 			(at 270.002 173.99 0)
 			(effects
 				(font
@@ -6853,7 +6853,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "tube_psu:D_Bridge_TBS"
+		(property "Footprint" "tube_psu_next_parts:D_Bridge_TBS"
 			(at 342.9 50.8 0)
 			(effects
 				(font
@@ -7472,7 +7472,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
+		(property "Footprint" "tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
 			(at 375.92 127 0)
 			(effects
 				(font

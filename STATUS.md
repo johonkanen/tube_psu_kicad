@@ -1618,3 +1618,36 @@ Checks: `tools/next/check_next.sh` ALL 5.2 CHECKS PASSED (ERC 0 errors / 14 warn
 rule tests 19/19, netlist / CSV check), `tools/check_all.sh` ALL CHECKS PASSED. Open: loop, burst cross
 regulation, start-up vs OLP blanking (≥ 30 ms) and clamp VDS in the ICE5AR flyback simulation (separate task in
 `simulation/flyback`) and on the first board.
+
+## Phase 3 of 5.2 (2026-11-18)
+
+Footprints and 3D models of the 5.2 fork (NEXT_REVISION_PLAN.md phase 3; details, tables and the caliper list:
+`kicad_next/README.md` "Footprints and 3D models"). Only `tools/next/`, `lib/*next*`, `lib/tube_psu_next*.pretty`,
+`lib/tube_psu_next.3dshapes/` and `kicad_next/` were edited.
+
+- **Audit:** every LCSC part of `lib/jlc_parts_next.csv` (98 numbers, JLC API package strings 2026-11-18) matches
+  its footprint (package, pins, pitch; UCC21520DW has all 16 leads, NC 7/12/13 keep their pads; DPAK pinout;
+  electrolytic D × L / pitch). Mismatches fixed: L1/L2 without footprint, ISO1/ISO2/U11 without slots, missing /
+  wrong 3D models (KRL2012 path gone in KiCad 10, six 5.1 footprints without model, KiCad CP_Radial models
+  8–12.5 mm tall for 18–50 mm parts). LMH6643 kept on the 5.1 TSSOP-8 3 × 3 pattern (user-accepted).
+- **New footprints:** toroid `L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm` (+ `_TieSlots`; lead spacing a guess),
+  `SOIC-16W_…_Slot8.0` (ISO1, U11: surface path 8.85 mm ≥ 8.0) and `_Slot11.1` (ISO2: 12.50 mm ≥ 11.1),
+  `CP_Radial_…_H<n>mm` height variants, 5.1 footprint copies with models (DB1, CM1/CM4, shunts, RL1, terminals,
+  TR2), heatsink outline helper `Heatsink_Plate_Keepout_L120mm` (the 5.1 board has no bracket holes – outline +
+  4.0 / 11.1 mm keep-off lines only). No UCC21520 crosses a barrier (each in one domain).
+- **TR1 change found by the new KiCad-DRC test:** the EEL19 barrier pads violated the inner-layer 11.1 mm rule
+  (rows 10.8 mm, FL_DC 9.2 mm from pin 5 – no slot credit on inner layers). Pads now drop unused inner-layer
+  rings and the fly-lead holes moved 1.5 mm down (y 14.0 → 15.5), slot extended to 28 mm: barrels ≥ 11.2 mm,
+  surface path 12.86 mm. EEL19_DESIGN.md 12.6 (simulation/, not edited) still shows the old hole position.
+- **TR3:** no PCB slot needed (rows 37.6 mm); 12 mm barrier keep-out (all layers) under the divider; core-to-
+  secondary-pin isolation stays a transformer item (tape / core cap, DAB_TRANSFORMER.md 8).
+- **3D:** every footprint has a resolving model; 14 STEP models from `tools/next/gen_next_3d.py` (CadQuery venv)
+  in `lib/tube_psu_next.3dshapes/`, referenced as `${KIPRJMOD}/../lib/...`; a kicad-cli render of all new
+  footprints loads them (`reports/next/footprints_3d.png`, 2D drawings `reports/next/footprints/*.png`).
+  Tallest: C19/C30 50 mm, C28/29/37/56 45, TR3 31.5, TR1 29.2.
+- **Checks:** `tools/next/check_footprints.py` (new step in `tools/next/check_next.sh`): 349 parts, pads = symbol
+  pins, models exist, barrier creepage by a visibility-graph calculation and by KiCad's DRC on a temporary board
+  (plain SOIC-16W for ISO2 as negative control). `tools/next/check_next.sh` ALL 5.2 CHECKS PASSED (STEP up-to-date
+  check skipped without `~/.venvs/cq`), `tools/check_all.sh` ALL CHECKS PASSED.
+- **Open (calipers, NR 6.1):** EEL19 4+6 base outline / pin diameter / seated height; EC42 pin diameter, base,
+  core depth and core height over the secondary pins; toroid lead spacing / position / wire; EF25 and TBS heights.

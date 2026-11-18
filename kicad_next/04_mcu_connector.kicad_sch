@@ -12747,7 +12747,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm"
+		(property "Footprint" "tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0"
 			(at 241.3 223.52 0)
 			(effects
 				(font

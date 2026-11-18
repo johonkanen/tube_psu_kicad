@@ -1,0 +1,127 @@
+(footprint "D_Bridge_TBS"
+	(version 20260206)
+	(generator "tube_psu_gen_footprints")
+	(layer "F.Cu")
+	(descr "Taiwan Semiconductor TBS bridge rectifier (SMD, pads 1-4), body from the Proteus silk (tube_psu, pads from IPC-D-356A DB1) - 5.2 copy with a 3D model (tube_psu_next_parts; pads = lib/tube_psu.pretty)")
+	(property "Reference" "REF**"
+		(at 0 -4.67 0)
+		(layer "F.SilkS")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "D_Bridge_TBS"
+		(at 0 4.67 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_poly
+		(pts
+			(xy -4.375 3.35) (xy 4.225 3.35) (xy 4.225 -3.35) (xy -4.375 -3.35)
+		)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start -2.3528 3.35)
+		(end 2.3528 3.35)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start 4.225 1.1058)
+		(end 4.225 -1.1058)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start 2.3528 -3.35)
+		(end -2.3528 -3.35)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start -4.375 -1.1723)
+		(end -4.375 1.1723)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_poly
+		(pts
+			(xy -4.825 3.6536) (xy -4.6786 3.8) (xy 4.6786 3.8) (xy 4.825 3.6536) (xy 4.825 -3.6536) (xy 4.6786 -3.8) (xy -4.6786 -3.8) (xy -4.825 -3.6536)
+		)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at -3.675 2.55 90)
+		(size 2 1.8)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+	)
+	(pad "2" smd rect
+		(at 3.675 2.55 90)
+		(size 2 1.8)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+	)
+	(pad "3" smd rect
+		(at -3.675 -2.55 90)
+		(size 2 1.8)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+	)
+	(pad "4" smd rect
+		(at 3.675 -2.55 90)
+		(size 2 1.8)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/../lib/tube_psu_next.3dshapes/D_Bridge_TBS.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

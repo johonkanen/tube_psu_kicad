@@ -8845,7 +8845,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm"
+		(property "Footprint" "tube_psu_next_parts:CP_Radial_D10.0mm_P5.00mm_H18mm"
 			(at 237.7948 147.32 0)
 			(effects
 				(font
@@ -9584,7 +9584,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
+		(property "Footprint" "tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
 			(at 370.84 177.8 0)
 			(effects
 				(font
@@ -9809,7 +9809,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
+		(property "Footprint" "tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
 			(at 370.84 193.04 0)
 			(effects
 				(font
@@ -10107,7 +10107,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
+		(property "Footprint" "tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
 			(at 370.84 208.28 0)
 			(effects
 				(font
@@ -10405,7 +10405,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
+		(property "Footprint" "tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
 			(at 370.84 223.52 0)
 			(effects
 				(font
@@ -10703,7 +10703,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
+		(property "Footprint" "tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm"
 			(at 370.84 238.76 0)
 			(effects
 				(font

@@ -90,7 +90,7 @@ ICE5AR change (1.5) R64, R81, R84, R85, R86, C50.
 
 | NR | Done | Refdes / value / nets |
 |---|---|---|
-| 5.2 | partly | L1, L2 → symbol `L_TOROID` (two leads; 5.1 RM8 pri1 / pri2 = 1 / 2), value **`TBD (measured)`**, **no footprint** (RM8 dropped; toroid footprint after measuring: phase 3). PFC drain nodes named **PFC_DRAIN_1 / PFC_DRAIN_2** |
+| 5.2 | partly | L1, L2 → symbol `L_TOROID` (two leads; 5.1 RM8 pri1 / pri2 = 1 / 2), value **`TBD (measured)`**, footprint (phase 3) `tube_psu_next:L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm` (lead spacing to confirm with calipers; RM8 dropped). PFC drain nodes named **PFC_DRAIN_1 / PFC_DRAIN_2** |
 | 5.2b | yes | C28 / C29 / C37 / C56 value `82u 450V` (Man Yue ERT826M2WI45RRS0F-R C51890374), C19 / C30 **39u → 68u** (Ymin KCXE5002W680MF C913388, stock 103), C102 (see 1) |
 | 5.4 | yes | Q10, Q11 → **IPD60R280P7S** DPAK (C536813), footprint `Package_TO_SOT_SMD:TO-252-2` (1 G, 2 D tab, 3 S = the Q_NMOS_GDS pins) |
 | 5.5 | layout | heatsink / bracket – phase 5 |
@@ -124,13 +124,13 @@ PFC_DRAIN_1/2, HEATER_HI_DRV, Net-(D35-K), Net-(DRV3-VDDA); TRANS_PRI removed).
    model in phase 4; the 22R drop (≈ 13 mV) shifts the bias of all channels equally.
 7. **ESL caps** 12p / 5.6p are calculated start values (τ ≈ 180 ns ↔ 0.72 nH at 4 mΩ); HEATER at noise gain 101 is
    limited by the LMH6643 (≈ 0.56 MHz), tune on the bench. If the shunts become 5 mΩ (KRL2012E, NR 5.6) rescale.
-8. **L1 / L2**: value and footprint after measuring the toroids (NR 5.2, phase 3).
+8. **L1 / L2**: value after measuring the toroids (NR 5.2); footprint done in phase 3 (lead spacing / position to confirm with calipers, kicad_next/README.md).
 9. **Q10 / Q11 P7** standard body diode – LLC start-up / overload commutation in the phase-4 simulation (NR 5.4).
 10. **C73** (2.2 µF 450 V X6S 2220 on DC+) left as is (NR 5.6 asks for ≥ 630 V; no stocked 2.2 µF part).
 11. **R124 2.61k** low JLC stock (75 / 43 pcs).
 12. **R99 pin orientation** changed by the shared driver cell (pin 1 now at D11) – electrically identical.
-13. Phase-1 findings still open: slots under the SOIC-16W isolators (ISO1, ISO2, U11) and the EEL19 TR1 row
-    spacing vs 11.1 mm creepage (phase 3/5).
+13. ~~Phase-1 findings: slots under the SOIC-16W isolators (ISO1, ISO2, U11) and the EEL19 TR1 row
+    spacing vs 11.1 mm creepage (phase 3/5).~~ **Done in phase 3** (slot footprints, TR1 slot + fly-lead holes; kicad_next/README.md).
 
 ## Netlist diff 5.1 → 5.2 (generated)
 
@@ -150,14 +150,16 @@ Parts: 5.1 315, 5.2 349; removed 11, added 45.
 |---|---|---|---|
 | C11 | 20p -> 5.6p |  |  |
 | C15 |  |  | Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder -> Capacitor_SMD:C_1210_3225Metric |
-| C19 | 39u -> 68u |  |  |
+| C19 | 39u -> 68u |  | Capacitor_THT:CP_Radial_D10.0mm_P5.00mm -> tube_psu_next_parts:CP_Radial_D10.0mm_P5.00mm_H50mm |
 | C20 |  |  | Capacitor_SMD:C_1206_3216Metric -> Capacitor_SMD:C_1210_3225Metric |
-| C28 | 82u -> 82u 450V |  |  |
-| C29 | 82u -> 82u 450V |  |  |
-| C30 | 39u -> 68u |  |  |
-| C37 | 82u -> 82u 450V |  |  |
+| C28 | 82u -> 82u 450V |  | tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus -> tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_Proteus_H45mm |
+| C29 | 82u -> 82u 450V |  | Capacitor_THT:CP_Radial_D12.5mm_P5.00mm -> tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_H45mm |
+| C30 | 39u -> 68u |  | Capacitor_THT:CP_Radial_D10.0mm_P5.00mm -> tube_psu_next_parts:CP_Radial_D10.0mm_P5.00mm_H50mm |
+| C31 |  |  | Capacitor_THT:CP_Radial_D8.0mm_P3.50mm -> tube_psu_next_parts:CP_Radial_D8.0mm_P3.50mm_H20mm |
+| C32 |  |  | Capacitor_THT:CP_Radial_D8.0mm_P3.50mm -> tube_psu_next_parts:CP_Radial_D8.0mm_P3.50mm_H20mm |
+| C37 | 82u -> 82u 450V |  | tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus -> tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_Proteus_H45mm |
 | C45 |  |  | Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder -> Capacitor_SMD:C_1210_3225Metric |
-| C56 | 82u -> 82u 450V |  |  |
+| C56 | 82u -> 82u 450V |  | tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus -> tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_Proteus_H45mm |
 | C58 | 4.7u -> 22u 35V | C -> C_Polarized | Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder -> Capacitor_SMD:CP_Elec_5x5.4 |
 | C61 | 1n -> 100n |  |  |
 | C63 | 20p -> 12p |  |  |
@@ -169,24 +171,38 @@ Parts: 5.1 315, 5.2 349; removed 11, added 45.
 | C99 |  |  | Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder -> Capacitor_SMD:C_1210_3225Metric |
 | C100 |  |  | Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder -> Capacitor_SMD:C_1210_3225Metric |
 | C101 |  |  | Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder -> Capacitor_SMD:C_1210_3225Metric |
-| C102 | UCS2G560MND9 -> 56u 250V |  |  |
+| C102 | UCS2G560MND9 -> 56u 250V |  | Capacitor_THT:CP_Radial_D10.0mm_P5.00mm -> tube_psu_next_parts:CP_Radial_D10.0mm_P5.00mm_H18mm |
+| CM1 |  |  | tube_psu:L_CommonMode_SCF20-05-550 -> tube_psu_next_parts:L_CommonMode_SCF20-05-550 |
+| CM4 |  |  | tube_psu:L_CommonMode_SCF20-05-550 -> tube_psu_next_parts:L_CommonMode_SCF20-05-550 |
 | D4 | ES1A -> ES1D |  |  |
 | D5 | ES1A -> ES1D |  |  |
 | D6 | ES1A -> ES1D |  |  |
 | D8 | ES1A -> US1M |  |  |
 | D14 | ES1A -> ES1D |  |  |
 | D29 | ES1A -> ES1D |  |  |
+| DB1 |  |  | tube_psu:D_Bridge_TBS -> tube_psu_next_parts:D_Bridge_TBS |
 | DRV1 | IXDD609D2TR -> UCC27511ADBVR | IXDD609 -> UCC27511A | tube_psu:DFN-8-1EP_P0.95mm_IXDD60xD2 -> Package_TO_SOT_SMD:SOT-23-6 |
 | DRV2 | IXDD609D2TR -> UCC27511ADBVR | IXDD609 -> UCC27511A | tube_psu:DFN-8-1EP_P0.95mm_IXDD60xD2 -> Package_TO_SOT_SMD:SOT-23-6 |
 | DRV3 | SI8271 -> UCC21520DWR | SI8271 -> UCC21520 | tube_psu:SOIC-8_3.9x4.9mm_P1.27mm_Proteus -> Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm |
 | DRV4 | IXDD604D2TR -> UCC27524ADR | IXDD604 -> UCC27524A | tube_psu:DFN-8-1EP_P0.95mm_IXDD60xD2 -> Package_SO:SOIC-8_3.9x4.9mm_P1.27mm |
 | DRV5 | SI8275BB -> UCC21520DWR | SI8275 -> UCC21520 | tube_psu:SOIC-16_3.9x9.9mm_P1.27mm_Proteus -> Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm |
 | DRV6 | SI8275BB -> UCC21520DWR | SI8275 -> UCC21520 | tube_psu:SOIC-16_3.9x9.9mm_P1.27mm_Proteus_KiCadPads -> Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm |
-| ISO1 | SI8661 -> CA-IS3761LW |  | tube_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus -> Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm |
-| ISO2 | SI8661 -> CA-IS3761LW |  | tube_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus -> Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm |
+| GND |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
+| HT_6V3 |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
+| HT_GND |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
+| IN1 |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
+| IN2 |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
+| ISO1 | SI8661 -> CA-IS3761LW |  | tube_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus -> tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0 |
+| ISO2 | SI8661 -> CA-IS3761LW |  | tube_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus -> tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot11.1 |
 | J4 | 66226-003 -> FTDI 1x6 | CONN_01X03 -> CONN_01X06 | Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical -> Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical |
-| L1 | 200u -> TBD (measured) | RM8_INDUCTOR -> L_TOROID | tube_psu:L_RM8_Proteus ->  |
-| L2 | 200u -> TBD (measured) | RM8_INDUCTOR -> L_TOROID | tube_psu:L_RM8_Proteus ->  |
+| L1 | 200u -> TBD (measured) | RM8_INDUCTOR -> L_TOROID | tube_psu:L_RM8_Proteus -> tube_psu_next:L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm |
+| L2 | 200u -> TBD (measured) | RM8_INDUCTOR -> L_TOROID | tube_psu:L_RM8_Proteus -> tube_psu_next:L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm |
+| N5V_OUT |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
+| N80V_OUT |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
+| P15V_OUT |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
+| P400V |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
+| P5V_OUT |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
+| PE |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
 | PWM2 | IW1818 -> ICE5AR4780BZS | IW1818 -> ICE5AR |  |
 | Q10 | IPA60R280CFD7XKSA1 -> IPD60R280P7S |  | Package_TO_SOT_THT:TO-220-3_Vertical -> Package_TO_SOT_SMD:TO-252-2 |
 | Q11 | IPA60R280CFD7XKSA1 -> IPD60R280P7S |  | Package_TO_SOT_THT:TO-220-3_Vertical -> Package_TO_SOT_SMD:TO-252-2 |
@@ -194,15 +210,22 @@ Parts: 5.1 315, 5.2 349; removed 11, added 45.
 | R3 | 470 -> 1.96k |  |  |
 | R8 | 2.49R -> 1.6R |  |  |
 | R9 | 2.49R -> 1.6R |  |  |
+| R21 |  |  | tube_psu:R_0508_1220Metric_KRL2012 -> tube_psu_next_parts:R_0508_1220Metric_KRL2012 |
+| R30 |  |  | tube_psu:R_0508_1220Metric_KRL2012 -> tube_psu_next_parts:R_0508_1220Metric_KRL2012 |
 | R49 | 15k -> 12k |  |  |
 | R80 | 15k -> 12k |  |  |
+| R83 |  |  | tube_psu:R_0508_1220Metric_KRL2012 -> tube_psu_next_parts:R_0508_1220Metric_KRL2012 |
+| R93 |  |  | tube_psu:R_0508_1220Metric_KRL2012 -> tube_psu_next_parts:R_0508_1220Metric_KRL2012 |
 | R110 | 220 -> 1.00k |  |  |
 | R114 | 1M -> 10M |  | Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder -> Resistor_SMD:R_1206_3216Metric |
 | R115 | 1M -> 10M |  | Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder -> Resistor_SMD:R_1206_3216Metric |
 | R116 | 1M -> 10M |  | Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder -> Resistor_SMD:R_1206_3216Metric |
 | R124 | 12.1K -> 2.61k |  |  |
 | REF1 | ISL21010CFH315Z-TK -> REF3325AIDBZR |  |  |
+| RL1 |  |  | tube_psu:Relay_Songle_SRD_5pin -> tube_psu_next_parts:Relay_Songle_SRD_5pin |
+| SEC_GND |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
 | TR1 | EF20 -> EEL19_4+6 Lp600u | EF20 -> EEL19_4P6 | tube_psu:Transformer_EF20_2x5_P3.81mm -> tube_psu_next:Transformer_EEL19_V_4+6_FlyLeads |
+| TR2 |  |  | tube_psu:Transformer_EF25_2x5_P5.08mm_8pin -> tube_psu_next_parts:Transformer_EF25_2x5_P5.08mm_8pin |
 | TR3 | ETD34 TRAN 1P1S -> EC42/15 2CH 20:21 | ETD34_TRAN_1P1S -> EC42_2CH | tube_psu:Transformer_ETD34_4x3pads -> tube_psu_next:Transformer_EC42x15_2Slot_2x8_P5mm |
 | U1 | LMH6658 -> LMH6643 | LMH6658 -> LMH6643 |  |
 | U4 | LMH6658 -> LMH6643 | LMH6658 -> LMH6643 |  |

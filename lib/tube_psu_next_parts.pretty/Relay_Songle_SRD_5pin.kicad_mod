@@ -1,0 +1,137 @@
+(footprint "Relay_Songle_SRD_5pin"
+	(version 20260206)
+	(generator "tube_psu_gen_footprints")
+	(layer "F.Cu")
+	(descr "Songle relay, pads 1-5 (body from the Proteus silk) (tube_psu, pads from IPC-D-356A RL1) - 5.2 copy with a 3D model (tube_psu_next_parts; pads = lib/tube_psu.pretty)")
+	(property "Reference" "REF**"
+		(at 0 -9.323 0)
+		(layer "F.SilkS")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "Relay_Songle_SRD_5pin"
+		(at 0 9.071 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_poly
+		(pts
+			(xy -8.8745 7.751) (xy 8.4035 7.751) (xy 8.4035 -8.003) (xy -8.8745 -8.003)
+		)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start -8.8745 7.751)
+		(end 8.4035 7.751)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start 8.4035 7.751)
+		(end 8.4035 -8.003)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start 8.4035 -8.003)
+		(end -8.8745 -8.003)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start -8.8745 -8.003)
+		(end -8.8745 7.751)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_poly
+		(pts
+			(xy -9.1245 7.8546) (xy -8.9781 8.001) (xy 8.5071 8.001) (xy 8.6535 7.8546) (xy 8.6535 -8.1066) (xy 8.5071 -8.253) (xy -8.9781 -8.253) (xy -9.1245 -8.1066)
+		)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at 7.1175 0)
+		(size 1.778 1.778)
+		(drill 1.016)
+		(layers "*.Cu" "*.Mask")
+	)
+	(pad "2" thru_hole circle
+		(at -7.1175 6)
+		(size 1.778 1.778)
+		(drill 1.016)
+		(layers "*.Cu" "*.Mask")
+	)
+	(pad "3" thru_hole circle
+		(at -7.1175 -6)
+		(size 1.778 1.778)
+		(drill 1.016)
+		(layers "*.Cu" "*.Mask")
+	)
+	(pad "4" thru_hole circle
+		(at 5.0825 6)
+		(size 1.778 1.778)
+		(drill 1.016)
+		(layers "*.Cu" "*.Mask")
+	)
+	(pad "5" thru_hole circle
+		(at 5.0825 -6)
+		(size 1.778 1.778)
+		(drill 1.016)
+		(layers "*.Cu" "*.Mask")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/../lib/tube_psu_next.3dshapes/Relay_Songle_SRD_5pin.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

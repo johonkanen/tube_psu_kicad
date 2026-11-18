@@ -19,7 +19,7 @@ C15,tube_psu:C,Capacitor_SMD:C_1210_3225Metric,"1210 (5.2: >= 630 V, NR 5.6)"
 C16,tube_psu:C,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,2220
 C17,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C18,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
-C19,tube_psu:C_Polarized,Capacitor_THT:CP_Radial_D10.0mm_P5.00mm,"10 mm radial electrolytic, P5"
+C19,tube_psu:C_Polarized,tube_psu_next_parts:CP_Radial_D10.0mm_P5.00mm_H50mm,"D10 P5, 3D model 10 x 50 mm (KCXE5002W680MF)"
 C20,tube_psu:C,Capacitor_SMD:C_1210_3225Metric,"1210 (5.2: >= 630 V, NR 5.6)"
 C21,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C22,tube_psu:C,Capacitor_SMD:C_1206_3216Metric,1206 (3.0 mm pad spacing)
@@ -28,16 +28,16 @@ C24,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C25,tube_psu:C,tube_psu:C_1206_3216Metric_Proteus3.15,"1206, Proteus pad size"
 C26,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C27,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
-C28,tube_psu:C_Polarized,tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus,"12.5 mm radial electrolytic, P5, Proteus pad size"
-C29,tube_psu:C_Polarized,Capacitor_THT:CP_Radial_D12.5mm_P5.00mm,"12.5 mm radial electrolytic, P5"
-C30,tube_psu:C_Polarized,Capacitor_THT:CP_Radial_D10.0mm_P5.00mm,"10 mm radial electrolytic, P5"
-C31,tube_psu:C_Polarized,Capacitor_THT:CP_Radial_D8.0mm_P3.50mm,"8 mm radial electrolytic, P3.5"
-C32,tube_psu:C_Polarized,Capacitor_THT:CP_Radial_D8.0mm_P3.50mm,"8 mm radial electrolytic, P3.5"
+C28,tube_psu:C_Polarized,tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_Proteus_H45mm,"D12.5 P5 Proteus pads, 3D model 12.5 x 45 mm (ERT826M2WI45RRS0F-R)"
+C29,tube_psu:C_Polarized,tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_H45mm,"D12.5 P5, 3D model 12.5 x 45 mm (ERT826M2WI45RRS0F-R)"
+C30,tube_psu:C_Polarized,tube_psu_next_parts:CP_Radial_D10.0mm_P5.00mm_H50mm,"D10 P5, 3D model 10 x 50 mm (KCXE5002W680MF)"
+C31,tube_psu:C_Polarized,tube_psu_next_parts:CP_Radial_D8.0mm_P3.50mm_H20mm,"D8 P3.5, 3D model 8 x 20 mm (10ZLH1500MEFCT78X20)"
+C32,tube_psu:C_Polarized,tube_psu_next_parts:CP_Radial_D8.0mm_P3.50mm_H20mm,"D8 P3.5, 3D model 8 x 20 mm (10ZLH1500MEFCT78X20)"
 C33,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C34,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C35,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C36,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
-C37,tube_psu:C_Polarized,tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus,"12.5 mm radial electrolytic, P5, Proteus pad size"
+C37,tube_psu:C_Polarized,tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_Proteus_H45mm,"D12.5 P5 Proteus pads, 3D model 12.5 x 45 mm (ERT826M2WI45RRS0F-R)"
 C38,tube_psu:C,Capacitor_THT:C_Rect_L26.5mm_W6.0mm_P22.50mm_MKS4,"X2 film P22.5, 6 mm wide"
 C39,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C40,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
@@ -55,7 +55,7 @@ C52,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C53,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C54,tube_psu:C,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,2220
 C55,tube_psu:C,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,2220
-C56,tube_psu:C_Polarized,tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus,"12.5 mm radial electrolytic, P5, Proteus pad size"
+C56,tube_psu:C_Polarized,tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_Proteus_H45mm,"D12.5 P5 Proteus pads, 3D model 12.5 x 45 mm (ERT826M2WI45RRS0F-R)"
 C57,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C58,tube_psu:C_Polarized,Capacitor_SMD:CP_Elec_5x5.4,SMD electrolytic D5 x 5.4 mm
 C59,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
@@ -101,7 +101,7 @@ C98,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C99,tube_psu:C,Capacitor_SMD:C_1210_3225Metric,"1210 (5.2: >= 630 V, NR 5.6)"
 C100,tube_psu:C,Capacitor_SMD:C_1210_3225Metric,"1210 (5.2: >= 630 V, NR 5.6)"
 C101,tube_psu:C,Capacitor_SMD:C_1210_3225Metric,"1210 (5.2: >= 630 V, NR 5.6)"
-C102,tube_psu:C_Polarized,Capacitor_THT:CP_Radial_D10.0mm_P5.00mm,"10 mm radial electrolytic, P5"
+C102,tube_psu:C_Polarized,tube_psu_next_parts:CP_Radial_D10.0mm_P5.00mm_H18mm,"D10 P5, 3D model 10 x 18 mm (KCXE1802E560MF)"
 C103,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C104,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C105,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
@@ -112,8 +112,8 @@ C113,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C114,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C115,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C117,tube_psu:C,Capacitor_THT:C_Rect_L26.5mm_W11.5mm_P22.50mm_MKS4,"X2 film P22.5, 11 mm wide"
-CM1,tube_psu:SCF20-05-550,tube_psu:L_CommonMode_SCF20-05-550,"common-mode choke, 4 pins"
-CM4,tube_psu:SCF20-05-550,tube_psu:L_CommonMode_SCF20-05-550,"common-mode choke, 4 pins"
+CM1,tube_psu:SCF20-05-550,tube_psu_next_parts:L_CommonMode_SCF20-05-550,"common-mode choke, 4 pins (5.2 copy with 3D model)"
+CM4,tube_psu:SCF20-05-550,tube_psu_next_parts:L_CommonMode_SCF20-05-550,"common-mode choke, 4 pins (5.2 copy with 3D model)"
 D2,tube_psu:D_Schottky,tube_psu:D_SOD-323_AC,"SOD-323 (ZLLS400TA), pads A/C"
 D3,tube_psu:D_Schottky,tube_psu:D_SOD-323_AC,"SOD-323 (ZLLS400TA), pads A/C"
 D4,tube_psu:D,tube_psu:D_SMA_AC,"SMA (ES1A, S1M), pads A/C"
@@ -134,30 +134,30 @@ D31,tube_psu:D_Schottky,tube_psu:D_SOD-323_AC,"SOD-323 (ZLLS400TA), pads A/C"
 D32,tube_psu:D_Schottky,tube_psu:D_SOD-323_AC,"SOD-323 (ZLLS400TA), pads A/C"
 D33,tube_psu:D_Schottky,tube_psu:D_SOD-323_AC,"SOD-323 (ZLLS400TA), pads A/C"
 D34,tube_psu:D_Schottky,tube_psu:D_SOD-323_AC,"SOD-323 (ZLLS400TA), pads A/C"
-DB1,tube_psu:TBS22K,tube_psu:D_Bridge_TBS,"TBS SMD bridge, Proteus land pattern"
+DB1,tube_psu:TBS22K,tube_psu_next_parts:D_Bridge_TBS,"TBS SMD bridge, Proteus land pattern (5.2 copy with 3D model)"
 DRV1,tube_psu_next:UCC27511A,Package_TO_SOT_SMD:SOT-23-6,SOT-23-6 (KiCad library)
 DRV2,tube_psu_next:UCC27511A,Package_TO_SOT_SMD:SOT-23-6,SOT-23-6 (KiCad library)
 DRV3,tube_psu_next:UCC21520,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,SOIC-16W (KiCad library)
 DRV4,tube_psu_next:UCC27524A,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,SOIC-8 (KiCad library)
 DRV5,tube_psu_next:UCC21520,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,SOIC-16W (KiCad library)
 DRV6,tube_psu_next:UCC21520,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,SOIC-16W (KiCad library)
-GND,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
-HT_6V3,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
-HT_GND,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
-IN1,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
-IN2,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
-ISO1,tube_psu:SI8661,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,SOIC-16W (KiCad library)
-ISO2,tube_psu:SI8661,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,SOIC-16W (KiCad library)
+GND,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
+HT_6V3,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
+HT_GND,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
+IN1,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
+IN2,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
+ISO1,tube_psu:SI8661,tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0,"SOIC-16W + 1 x 14.5 mm creepage slot (8.0 mm reinforced, primary <-> heater; phase 3)"
+ISO2,tube_psu:SI8661,tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot11.1,"SOIC-16W + 1 x 19.5 mm creepage slot (11.1 mm reinforced, primary <-> DAB secondary; phase 3)"
 J2,tube_psu:HEADER_2X25_50MIL,tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus,2x25 1.27 mm header
 J4,tube_psu_next:CONN_01X06,Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical,"1x6 2.54 mm, FTDI TTL-232R-3V3 pinout (NR 3b.2)"
-L1,tube_psu_next:L_TOROID,,"TODO phase 3: toroid footprint (2 leads, spacing ~16.7 mm, courtyard ~D32.5, hold-down) after measuring - RM8 footprint dropped"
-L2,tube_psu_next:L_TOROID,,"TODO phase 3: toroid footprint (2 leads, spacing ~16.7 mm, courtyard ~D32.5, hold-down) after measuring - RM8 footprint dropped"
-N5V_OUT,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
-N80V_OUT,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
-P15V_OUT,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
-P400V,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
-P5V_OUT,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
-PE,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
+L1,tube_psu_next:L_TOROID,tube_psu_next:L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm,"sendust toroid OD 31.5 x H 16.7 flat, 2 leads P16.7 under the rim (guess - confirm with calipers), courtyard D32.5; _TieSlots variant for a cable-tie hold-down (phase 3)"
+L2,tube_psu_next:L_TOROID,tube_psu_next:L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm,"sendust toroid OD 31.5 x H 16.7 flat, 2 leads P16.7 under the rim (guess - confirm with calipers), courtyard D32.5; _TieSlots variant for a cable-tie hold-down (phase 3)"
+N5V_OUT,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
+N80V_OUT,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
+P15V_OUT,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
+P400V,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
+P5V_OUT,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
+PE,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
 PWM2,tube_psu_next:ICE5AR,Package_DIP:DIP-8-N6_W7.62mm,PG-DIP-7 = DIP-8 without pin 6 (KiCad std); drain pin 5 copper for cooling
 Q1,tube_psu:Q_NMOS_SGD,tube_psu:LFPAK56_Proteus,"LFPAK56, three source pads numbered 1, 2 = G, 3 = D tab"
 Q2,tube_psu:Q_NMOS_SGD,tube_psu:LFPAK56_Proteus,"LFPAK56, three source pads numbered 1, 2 = G, 3 = D tab"
@@ -190,7 +190,7 @@ R17,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
 R18,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R19,tube_psu:R,Resistor_SMD:R_1206_3216Metric,1206
 R20,tube_psu:R,Resistor_SMD:R_1206_3216Metric,1206
-R21,tube_psu:R,tube_psu:R_0508_1220Metric_KRL2012,"KRL2012 0508 shunt, long-side terminals"
+R21,tube_psu:R,tube_psu_next_parts:R_0508_1220Metric_KRL2012,"KRL2012 0508 shunt, long-side terminals (5.2 copy with 3D model)"
 R22,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R23,tube_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
 R24,tube_psu:R,Resistor_SMD:R_1206_3216Metric,1206
@@ -198,7 +198,7 @@ R26,tube_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
 R27,tube_psu:R,Resistor_THT:R_Radial_Power_L13.0mm_W9.0mm_P5.00mm,"TWW10 10 W wirewound, vertical"
 R28,tube_psu:R,tube_psu:R_0805_2012Metric_Proteus2.13,0805 (Proteus pads 2.13 mm apart)
 R29,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
-R30,tube_psu:R,tube_psu:R_0508_1220Metric_KRL2012,"KRL2012 0508 shunt, long-side terminals"
+R30,tube_psu:R,tube_psu_next_parts:R_0508_1220Metric_KRL2012,"KRL2012 0508 shunt, long-side terminals (5.2 copy with 3D model)"
 R31,tube_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
 R32,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
 R33,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
@@ -248,14 +248,14 @@ R78,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R79,tube_psu:R,tube_psu:R_0805_2012Metric_Proteus,"0805, Proteus pad size"
 R80,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R82,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
-R83,tube_psu:R,tube_psu:R_0508_1220Metric_KRL2012,"KRL2012 0508 shunt, long-side terminals"
+R83,tube_psu:R,tube_psu_next_parts:R_0508_1220Metric_KRL2012,"KRL2012 0508 shunt, long-side terminals (5.2 copy with 3D model)"
 R87,tube_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
 R88,tube_psu:R,tube_psu:R_0805_2012Metric_Proteus,"0805, Proteus pad size"
 R89,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R90,tube_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
 R91,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R92,tube_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
-R93,tube_psu:R,tube_psu:R_0508_1220Metric_KRL2012,"KRL2012 0508 shunt, long-side terminals"
+R93,tube_psu:R,tube_psu_next_parts:R_0508_1220Metric_KRL2012,"KRL2012 0508 shunt, long-side terminals (5.2 copy with 3D model)"
 R94,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R95,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R96,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
@@ -288,12 +288,12 @@ R122,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R123,tube_psu:R,Resistor_SMD:R_1206_3216Metric,1206
 R124,tube_psu:R,Resistor_SMD:R_1206_3216Metric,1206
 REF1,tube_psu:ADR380,tube_psu:SOT-23_Proteus,"SOT-23, Proteus pad numbering (REF1 ISL21010)"
-RL1,tube_psu:SONGLE_RELAY,tube_psu:Relay_Songle_SRD_5pin,"Songle relay, pads 1-5"
-SEC_GND,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
+RL1,tube_psu:SONGLE_RELAY,tube_psu_next_parts:Relay_Songle_SRD_5pin,"Songle relay, pads 1-5 (5.2 copy with 3D model)"
+SEC_GND,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
 SICD1,tube_psu:C3D02060A,tube_psu:TO-220-2_Vertical_AK,"TO-220-2, pads A/K"
 SICD2,tube_psu:C3D02060A,tube_psu:TO-220-2_Vertical_AK,"TO-220-2, pads A/K"
 TR1,tube_psu_next:EEL19_4P6,tube_psu_next:Transformer_EEL19_V_4+6_FlyLeads,"EEL19 vertical 4+6, fly-lead holes 11/12 (NR 1.2)"
-TR2,tube_psu:EF25_8PIN,tube_psu:Transformer_EF25_2x5_P5.08mm_8pin,"EF25, pads 1,2,4,5,6,7,9,10"
+TR2,tube_psu:EF25_8PIN,tube_psu_next_parts:Transformer_EF25_2x5_P5.08mm_8pin,"EF25, pads 1,2,4,5,6,7,9,10 (5.2 copy with 3D model)"
 TR3,tube_psu_next:EC42_2CH,tube_psu_next:Transformer_EC42x15_2Slot_2x8_P5mm,"EC42/15 2-chamber bobbin 2x8, P5, rows 40 mm; pads 1,2,7,8 / 9,10,15,16 (NR 2.2)"
 U1,tube_psu_next:LMH6643,Package_SO:TSSOP-8_3x3mm_P0.65mm,"TSSOP-8 (device OPA2353UA; the pads are TSSOP, not SO-8)"
 U2,tube_psu:TLV316IDBVR,tube_psu:SOT-23-5_Proteus,"SOT-23-5, Proteus pad rows 2.39 mm apart, Proteus pad size"
@@ -334,7 +334,7 @@ R134,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
 C132,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 R135,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
 C133,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
-U11,tube_psu_next:SI8621,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,SOIC-16W (KiCad library); slot under the barrier (phase 5)
+U11,tube_psu_next:SI8621,tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0,"SOIC-16W + 1 x 14.5 mm creepage slot (8.0 mm reinforced, primary <-> UART; phase 3)"
 U12,tube_psu_next:XC6206,Package_TO_SOT_SMD:SOT-23,"SOT-23 (1 GND, 2 VOUT, 3 VIN)"
 C134,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C135,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
