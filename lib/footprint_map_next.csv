@@ -347,5 +347,13 @@ R139,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
 R140,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
 R141,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
 R142,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
+R143,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, split-cap balancing)"
+R144,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, split-cap balancing)"
+R145,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, split-cap balancing)"
+R146,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, split-cap balancing)"
+R147,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, split-cap balancing)"
+R148,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, split-cap balancing)"
+R149,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, split-cap balancing)"
+R150,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, split-cap balancing)"
 C138,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C139,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603

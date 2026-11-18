@@ -1651,3 +1651,14 @@ Footprints and 3D models of the 5.2 fork (NEXT_REVISION_PLAN.md phase 3; details
   check skipped without `~/.venvs/cq`), `tools/check_all.sh` ALL CHECKS PASSED.
 - **Open (calipers, NR 6.1):** EEL19 4+6 base outline / pin diameter / seated height; EC42 pin diameter, base,
   core depth and core height over the secondary pins; toroid lead spacing / position / wire; EF25 and TBS heights.
+
+## 5.2: DAB gap 200 µH, split-cap balancing resistors (2026-11-18)
+
+User decisions from the DAB switching study (`simulation/dab/DAB_SIMULATION.md`): TR3 gap target **Lm ≈ 200 µH**
+(centre grind ≈ 0.66–0.68 mm, MKF 0.659 mm; spacer 0.335 mm; set by measuring Lm, 170–210 µH) in
+`simulation/dab/DAB_TRANSFORMER.md` 3.3–6 and NEXT_REVISION 2.1; firmware 2.7: dead time 150 ns total, DC+
+tracking V420·20/21 or burst at light load, frequency soft-start 420 → 140 kHz, zero power at φ ≈ −0.8°. New NR
+2.8, done in the 5.2 schematic: **R143–R150** 2 × 220k 1206 (C17956, 200 V) across each of C47, C54, C16, C55
+(sheet 07; secondary half bridge moved right for room), mid nets HV_PRIMARY / HV_SECONDARY. Checks:
+`tools/next/check_next.sh` ALL 5.2 CHECKS PASSED (ERC 0 errors / 14 warnings, 229 nets in one domain each),
+`tools/check_all.sh` ALL CHECKS PASSED.

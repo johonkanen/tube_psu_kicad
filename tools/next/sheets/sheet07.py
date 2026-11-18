@@ -2,7 +2,8 @@
 """Sheet 7 - DHB (PDF page 7): the dual half-bridge. Primary: Q19 / Q7 (DC+ -> DHB_HI_SOURCE ->
 DHB_CURRENT -> R83 4m -> GND), C47 / C54 with the DHB_CAP node -> TR3 primary (5.2: EC42/15, L3 removed),
 C67 / C70 across DC+ - DHB_CURRENT. Secondary: Q21 / Q8 (420V -> DHB_HI_SOURCE_SEC -> ISO_GND), C16 /
-C55 with the TRANS_SEC node at TR3's secondary, C89 / C90 on 420V. Every MOSFET gate has the same
+C55 with the TRANS_SEC node at TR3's secondary, C89 / C90 on 420V. 5.2: 2 x 220k balancing resistors
+across each split cap (R143-R146 primary, R147-R150 secondary, NR 2.8). Every MOSFET gate has the same
 network: global gate label -> 40R, with a Schottky diode + 3.3R turn-off path, optionally a 10k
 pull-down to the source (high side) or GND (Q7). The 420V rail: terminal +400V (P400V), caps C101 /
 C91 / C30 / C19 / C99 / C100 to ISO_GND (terminal GND is on ISO_GND), dividers R23 / R34 / R39 ->
@@ -82,7 +83,19 @@ sh.junction(xc, HC)
 # start (dot) = DHB_CAP, 7+8 primary finish = DHB_HI_SOURCE, 9+10 secondary start = TRANS_SEC, 15+16
 # secondary finish = DHB_HI_SOURCE_SEC; DAB_TRANSFORMER.md 5). L3 is removed: its leakage replaces it, DHB_CAP
 # goes straight to the primary (the 5.1 net TRANS_PRI disappears).
-sh.label("DHB_CAP", xc + g(2), CAPR, 0)
+# 5.2 (NR 2.8): balancing resistors R143 + R144 across C47 (DC+ symbol above, ends on the DHB_CAP row) and
+# R145 + R146 across C54 (column crosses the source row like C54), right of the C47 / C54 column.
+xbal = xc + g(6)
+_, rt, rb = vert2(sh, "R", "R143", xbal, CAPR - g(9), sh_value("R143"), top=1)    # pin 1 = DC+
+power_at(sh, "DC+", rt, "up")
+_, rt, rb2 = vert2(sh, "R", "R144", xbal, CAPR - g(3), sh_value("R144"), top=1)
+sh.junction(xbal, CAPR)
+_, rt, rb = vert2(sh, "R", "R145", xbal, CAPR + g(13), sh_value("R145"), top=1)   # pin 1 = DHB_CAP
+sh.wire((xbal, CAPR), rt)
+_, rt, rb = vert2(sh, "R", "R146", xbal, CAPR + g(19), sh_value("R146"), top=1)   # pin 2 = DHB_CURRENT
+sh.wire(rb, (xbal, HC))
+sh.junction(xbal, HC)
+sh.label("DHB_CAP", xbal + g(2), CAPR, 0)
 TRX, TRY = g(108), CAPR + g(4)
 tr = sh.place("EC42_2CH", "TR3", TRX, TRY, value=sh_value("TR3"))
 P1, P2, P7, P8 = (tr.pin(n) for n in ("1", "2", "7", "8"))
@@ -108,7 +121,7 @@ sh.wire((XA, HC), (xc + g(24), HC))
 sh.glabel("DHB_CURRENT", xc + g(24), HC, 0)
 
 # --- secondary half-bridge ------------------------------------------------------------------------
-Q2X = g(184)
+Q2X = g(196)                                       # 5.2: +12 (room for the C16 / C55 balancing resistors)
 XB = Q2X + g(2)
 V4R, IGR = DCP, HC
 q21 = sh.place("Q_NMOS_GDS", "Q21", Q2X, Y1, value=sh_value("Q21"))
@@ -124,7 +137,7 @@ xn = gate_net(sh, q21.pin(1), "DHB_HI_GATE_SEC", "R57", "R58", "D31", pull=("R56
 sh.junction(xn, SR)
 gate_net(sh, q8.pin(1), "DHB_LOW_GATE_SEC", "R87", "R88", "D32")
 # TR3 secondary: TRANS_SEC node with C16 / C55 (column crosses the source row), S2 = DHB_HI_SOURCE_SEC
-xc2 = g(132)
+xc2 = g(142)
 xbr = S1[0] + g(2)
 sh.wire(S1, (xbr, CAPR))
 sh.wire((xbr, CAPR), (xc2, CAPR))
@@ -141,9 +154,21 @@ sh.wire((xc2, V4R), (XB, V4R))
 _, ct, cb = vert2(sh, "C", "C55", xc2, CAPR + g(19), sh_value("C55"), top=1)     # pin 1 = TRANS_SEC
 sh.wire((xc2, CAPR), ct)
 sh.wire(cb, (xc2, IGR), (XB, IGR))
+# 5.2 (NR 2.8): balancing resistors R147 + R148 across C16 (420V symbol above, ends on the TRANS_SEC row) and
+# R149 + R150 across C55 (crosses the source row, ends on ISO_GND at C55), between TR3 and the C16 / C55 column.
+xbal2 = xc2 - g(8)
+_, rt, rb = vert2(sh, "R", "R147", xbal2, CAPR - g(9), sh_value("R147"), top=1)   # pin 1 = 420V
+power_at(sh, "420V", rt, "up")
+vert2(sh, "R", "R148", xbal2, CAPR - g(3), sh_value("R148"), top=1)
+sh.junction(xbal2, CAPR)
+_, rt, rb = vert2(sh, "R", "R149", xbal2, CAPR + g(13), sh_value("R149"), top=1)  # pin 1 = TRANS_SEC
+sh.wire((xbal2, CAPR), rt)
+_, rt, rb = vert2(sh, "R", "R150", xbal2, CAPR + g(19), sh_value("R150"), top=1)  # pin 2 = ISO_GND
+sh.wire(rb, (xbal2, IGR), (xc2, IGR))
+sh.junction(xc2, IGR)
 sh.wire(S2, (xn, SR))                              # through R56's bottom pin
 sh.wire((xn, SR), (XB, SR))
-xs_ = S2[0] + g(20)                                # label on a stub below the row (the row continues)
+xs_ = S2[0] + g(30)                                # label on a stub below the row (the row continues)
 sh.wire((xs_, SR), (xs_, SR + g(4)), (xs_ + g(4), SR + g(4)))
 sh.junction(xs_, SR)
 sh.glabel("DHB_HI_SOURCE_SEC", xs_ + g(4), SR + g(4), 0)
@@ -160,8 +185,8 @@ sh.junction(*mid)
 power_at(sh, "ISO_GND", mid, "down")
 flagged_power(sh, "420V", xk + g(16), V4R)
 sh.text("V5.1 (PDF hand note). 1W core loss: ETD34 : 32, RM12 : 26 (PDF note).", g(30), g(86))
-sh.text("5.2: TR3 = EC42/15 PC40 two-chamber 20:21 (leakage ~41 uH = series L, Lm ~300 uH, gap 0.35 mm); L3 removed (NR 2.1 / 2.4).", g(30), g(80))
-sh.text("Layout: C47 / C54 at the TR3 primary pins (NR 2.5), C16 / C55 at the secondary pins; firmware dead time 150-200 ns (NR 2.7).", g(30), g(83))
+sh.text("5.2: TR3 = EC42/15 PC40 two-chamber 20:21 (leakage ~41 uH = series L, Lm ~200 uH, gap ~0.68 mm set by measuring Lm); L3 removed (NR 2.1 / 2.4).", g(30), g(80))
+sh.text("Layout: C47 / C54 at the TR3 primary pins (NR 2.5), C16 / C55 at the secondary pins; firmware dead time 150 ns total (NR 2.7).", g(30), g(83))
 sh.text("The PDF joins the terminals SEC_GND and ISO_GND by a bare wire (one net, ISO_GND); terminal GND is on ISO_GND.", g(30), g(89))
 
 # --- 420V capacitor bank with the terminals +400V / GND, dividers -----------------------------------

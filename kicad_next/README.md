@@ -160,8 +160,8 @@ starting values; phase 6 sizes the power paths from the currents (D5 copper).
 
 Domains are found from the schematic by `setup_project.py` (flood fill from GND / ISO_GND / HT_GND, not
 through the barrier parts TR1, TR2, TR3, ISO1, ISO2; no other part bridges two domains in the 5.1
-netlist). Count after phase 2: primary 150 nets (HV_PRIMARY 39, PRIMARY_LV 5, SIGNAL 106; after the ICE5AR change), DAB secondary 40
-(HV_SECONDARY 12, SECONDARY_LV 28), heater 22, UART island 12 (ground ISO_UART_GND, barrier U11), PE 1.
+netlist). Count after phase 2: primary 152 nets (HV_PRIMARY 41, PRIMARY_LV 5, SIGNAL 106; after the ICE5AR change and NR 2.8), DAB secondary 42
+(HV_SECONDARY 14, SECONDARY_LV 28), heater 22, UART island 12 (ground ISO_UART_GND, barrier U11), PE 1.
 
 ### Basis
 

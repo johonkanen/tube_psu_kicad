@@ -3514,15 +3514,436 @@
 		(color 0 0 0 0)
 		(uuid "07b5108d-99b1-56db-9f7a-f497f0f60500")
 	)
+	(symbol
+		(lib_id "tube_psu_next:R")
+		(at 96.52 41.91 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "09584e63-a6c6-5053-9774-345d4951229c")
+		(property "Reference" "R143"
+			(at 101.26 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "220k"
+			(at 101.26 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 94.742 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 96.52 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 96.52 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C17956"
+			(at 96.52 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ed982c09-88fd-5427-8662-cb2212d5b697")
+		)
+		(pin "2"
+			(uuid "25651d1f-3766-5221-aa06-f85b3c9336c8")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
+					(reference "R143")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_psu_next:DC+")
+		(at 96.52 38.1 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "86bbb8a2-e41b-5aef-bc6b-b3ab4aab0526")
+		(property "Reference" "#PWR004"
+			(at 96.52 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "DC+"
+			(at 96.52 34.544 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 96.52 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 96.52 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"DC+\" (IPC net name)"
+			(at 96.52 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "af9854c2-25d3-525e-9441-3bbffbd47fd8")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
+					(reference "#PWR004")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_psu_next:R")
+		(at 96.52 49.53 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0a025e72-54c4-5518-bcb6-177fb8ba1b5d")
+		(property "Reference" "R144"
+			(at 101.26 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "220k"
+			(at 101.26 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 94.742 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 96.52 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 96.52 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C17956"
+			(at 96.52 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "266e57c1-b3c1-597f-bf3e-4b2c3977aeb4")
+		)
+		(pin "2"
+			(uuid "28464edd-c8f7-5c19-9bf6-d2350f1cc93a")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
+					(reference "R144")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(junction
+		(at 96.52 53.34)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f1a422b4-88ce-5641-9105-2ccc978c5e90")
+	)
+	(symbol
+		(lib_id "tube_psu_next:R")
+		(at 96.52 69.85 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "07207c7d-febe-52b5-a4bc-e28dc0a36add")
+		(property "Reference" "R145"
+			(at 101.26 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "220k"
+			(at 101.26 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 94.742 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 96.52 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 96.52 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C17956"
+			(at 96.52 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ac47ae66-3b8b-5454-ae6d-036ba4ec0fd9")
+		)
+		(pin "2"
+			(uuid "a2f8b915-1bf8-5aab-aeb7-da0d411722d6")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
+					(reference "R145")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 96.52 53.34) (xy 96.52 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d0709cfe-a4a1-50aa-a0cd-5333b288c1f2")
+	)
+	(wire
+		(pts
+			(xy 96.52 53.34) (xy 96.52 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "955e7d0c-98e9-5408-abe1-75906250fc10")
+	)
+	(symbol
+		(lib_id "tube_psu_next:R")
+		(at 96.52 77.47 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "fc8c6ccc-9ac2-5ff8-9d93-8312167b1c01")
+		(property "Reference" "R146"
+			(at 101.26 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "220k"
+			(at 101.26 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 94.742 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 96.52 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 96.52 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C17956"
+			(at 96.52 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "009f95d7-3901-539f-ab8f-ec9f99867709")
+		)
+		(pin "2"
+			(uuid "5f3bf034-e969-5631-9d79-018fd5d7e90b")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
+					(reference "R146")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 96.52 81.28) (xy 96.52 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b5ac990f-17cb-5151-b132-fa1e22205f35")
+	)
+	(wire
+		(pts
+			(xy 96.52 81.28) (xy 96.52 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f017d84e-64e8-55de-8f0e-be80f6eacca1")
+	)
+	(junction
+		(at 96.52 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1efd5589-9596-5dc6-9055-ceddf8743f89")
+	)
 	(label "DHB_CAP"
-		(at 91.44 53.34 0)
+		(at 99.06 53.34 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "f1a422b4-88ce-5641-9105-2ccc978c5e90")
+		(uuid "4d1a7f18-f64f-5828-8e9a-389f2c725623")
 	)
 	(symbol
 		(lib_id "tube_psu_next:EC42_2CH")
@@ -3628,7 +4049,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d0709cfe-a4a1-50aa-a0cd-5333b288c1f2")
+		(uuid "31402c82-5ffa-5ced-b141-fd837cceec11")
 	)
 	(wire
 		(pts
@@ -3638,7 +4059,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "955e7d0c-98e9-5408-abe1-75906250fc10")
+		(uuid "3c3caa59-d20c-5f56-892c-386d5e91556d")
 	)
 	(wire
 		(pts
@@ -3648,7 +4069,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b5ac990f-17cb-5151-b132-fa1e22205f35")
+		(uuid "5dafb058-db1e-57a7-91ae-a9a5f43fc571")
 	)
 	(wire
 		(pts
@@ -3658,13 +4079,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f017d84e-64e8-55de-8f0e-be80f6eacca1")
+		(uuid "31655860-cc0f-5ce4-a525-5a90ba58f587")
 	)
 	(junction
 		(at 119.38 53.34)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "1efd5589-9596-5dc6-9055-ceddf8743f89")
+		(uuid "f0ea2580-d62e-5489-9cfd-915d84acbfcf")
 	)
 	(wire
 		(pts
@@ -3674,7 +4095,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "4d1a7f18-f64f-5828-8e9a-389f2c725623")
+		(uuid "e4e6f2cb-dcc5-5db8-b9a0-f828e7190371")
 	)
 	(wire
 		(pts
@@ -3684,7 +4105,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "31402c82-5ffa-5ced-b141-fd837cceec11")
+		(uuid "d0825f7b-1ad4-510b-83d5-109626d7d4f3")
 	)
 	(wire
 		(pts
@@ -3694,13 +4115,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "3c3caa59-d20c-5f56-892c-386d5e91556d")
+		(uuid "6d8c7383-ca10-52f8-bf8b-af78d342bc7c")
 	)
 	(junction
 		(at 119.38 63.5)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "5dafb058-db1e-57a7-91ae-a9a5f43fc571")
+		(uuid "685a59ce-f813-5266-a076-94d06650dedd")
 	)
 	(symbol
 		(lib_id "tube_psu_next:C")
@@ -3782,7 +4203,7 @@
 		(at 104.14 91.44)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "31655860-cc0f-5ce4-a525-5a90ba58f587")
+		(uuid "f3141ca3-011e-55e0-8340-933504da3339")
 	)
 	(symbol
 		(lib_id "tube_psu_next:DC+")
@@ -3792,8 +4213,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "86bbb8a2-e41b-5aef-bc6b-b3ab4aab0526")
-		(property "Reference" "#PWR004"
+		(uuid "732cc49f-951a-5650-8bc6-902991370c38")
+		(property "Reference" "#PWR005"
 			(at 104.14 87.63 0)
 			(effects
 				(font
@@ -3838,12 +4259,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "af9854c2-25d3-525e-9441-3bbffbd47fd8")
+			(uuid "653b75be-f8c3-5be9-affe-3d8145d44880")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
-					(reference "#PWR004")
+					(reference "#PWR005")
 					(unit 1)
 				)
 			)
@@ -3853,7 +4274,7 @@
 		(at 104.14 83.82)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "f0ea2580-d62e-5489-9cfd-915d84acbfcf")
+		(uuid "3f67c807-add5-5647-a422-00c31c4347f1")
 	)
 	(wire
 		(pts
@@ -3863,7 +4284,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e4e6f2cb-dcc5-5db8-b9a0-f828e7190371")
+		(uuid "1a516f62-e440-5868-8706-dc9a492eec81")
 	)
 	(symbol
 		(lib_id "tube_psu_next:C")
@@ -3945,7 +4366,7 @@
 		(at 114.3 91.44)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "d0825f7b-1ad4-510b-83d5-109626d7d4f3")
+		(uuid "1a53b603-bb71-5f89-aaae-c1a533b6e3fc")
 	)
 	(wire
 		(pts
@@ -3955,7 +4376,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6d8c7383-ca10-52f8-bf8b-af78d342bc7c")
+		(uuid "ecbe3fb8-2d8d-501e-878c-8ed63c5f8773")
 	)
 	(global_label "DHB_CURRENT"
 		(shape passive)
@@ -3967,7 +4388,7 @@
 			)
 			(justify left)
 		)
-		(uuid "685a59ce-f813-5266-a076-94d06650dedd")
+		(uuid "e35d8234-6c2a-5bb1-b35d-6926ae6846e3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 119.38 91.44 0)
 			(effects
@@ -3981,7 +4402,7 @@
 	)
 	(symbol
 		(lib_id "tube_psu_next:Q_NMOS_GDS")
-		(at 233.68 50.8 0)
+		(at 248.92 50.8 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3989,7 +4410,7 @@
 		(dnp no)
 		(uuid "7ec09136-c30f-5d2e-b209-d289b11417d2")
 		(property "Reference" "Q21"
-			(at 238.76 49.53 0)
+			(at 254 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3998,7 +4419,7 @@
 			)
 		)
 		(property "Value" "STF7N60M2"
-			(at 238.76 52.07 0)
+			(at 254 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4007,7 +4428,7 @@
 			)
 		)
 		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
-			(at 238.76 48.26 0)
+			(at 254 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4016,7 +4437,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 233.68 50.8 0)
+			(at 248.92 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4025,7 +4446,7 @@
 			)
 		)
 		(property "Description" "N-MOSFET TO-220/TO-247, Proteus ids 1=G 2=D 3=S"
-			(at 233.68 50.8 0)
+			(at 248.92 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4034,7 +4455,7 @@
 			)
 		)
 		(property "LCSC" ""
-			(at 233.68 50.8 0)
+			(at 248.92 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4062,7 +4483,7 @@
 	)
 	(symbol
 		(lib_id "tube_psu_next:Q_NMOS_GDS")
-		(at 233.68 76.2 0)
+		(at 248.92 76.2 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4070,7 +4491,7 @@
 		(dnp no)
 		(uuid "762cf5b7-60ca-5cf1-999d-5f9ad1c9b806")
 		(property "Reference" "Q8"
-			(at 238.76 74.93 0)
+			(at 254 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4079,7 +4500,7 @@
 			)
 		)
 		(property "Value" "STF7N60M2"
-			(at 238.76 77.47 0)
+			(at 254 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4088,7 +4509,7 @@
 			)
 		)
 		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
-			(at 238.76 73.66 0)
+			(at 254 73.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4097,7 +4518,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 233.68 76.2 0)
+			(at 248.92 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4106,7 +4527,7 @@
 			)
 		)
 		(property "Description" "N-MOSFET TO-220/TO-247, Proteus ids 1=G 2=D 3=S"
-			(at 233.68 76.2 0)
+			(at 248.92 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4115,7 +4536,7 @@
 			)
 		)
 		(property "LCSC" ""
-			(at 233.68 76.2 0)
+			(at 248.92 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4143,57 +4564,77 @@
 	)
 	(wire
 		(pts
-			(xy 236.22 45.72) (xy 236.22 40.64)
+			(xy 251.46 45.72) (xy 251.46 45.72)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "f3141ca3-011e-55e0-8340-933504da3339")
-	)
-	(junction
-		(at 236.22 40.64)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "3f67c807-add5-5647-a422-00c31c4347f1")
+		(uuid "f812d711-9b5d-561b-97df-05522895fe17")
 	)
 	(wire
 		(pts
-			(xy 236.22 55.88) (xy 236.22 71.12)
+			(xy 251.46 45.72) (xy 251.46 40.64)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "1a516f62-e440-5868-8706-dc9a492eec81")
+		(uuid "db9d3932-e976-5acb-a609-0a1d82c89bc8")
 	)
 	(junction
-		(at 236.22 63.5)
+		(at 251.46 40.64)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "1a53b603-bb71-5f89-aaae-c1a533b6e3fc")
+		(uuid "ad9fc578-dcef-5de4-b0b7-7e4800b1dd1d")
 	)
 	(wire
 		(pts
-			(xy 236.22 81.28) (xy 236.22 91.44)
+			(xy 251.46 55.88) (xy 251.46 71.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "ecbe3fb8-2d8d-501e-878c-8ed63c5f8773")
+		(uuid "fa3ac231-b46b-57be-b87a-b53e081f1be2")
+	)
+	(junction
+		(at 251.46 63.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f7c6fc4d-0111-5c91-bb62-efd488899d03")
+	)
+	(wire
+		(pts
+			(xy 251.46 81.28) (xy 251.46 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "68508bea-699c-56df-bfa4-56186a009119")
+	)
+	(wire
+		(pts
+			(xy 251.46 81.28) (xy 251.46 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "79a80c9e-e39f-576c-a70d-3d28001148ea")
 	)
 	(symbol
 		(lib_id "tube_psu_next:ISO_GND")
-		(at 236.22 91.44 0)
+		(at 251.46 91.44 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "732cc49f-951a-5650-8bc6-902991370c38")
-		(property "Reference" "#PWR005"
-			(at 236.22 97.79 0)
+		(uuid "7dd8a405-5ac0-50dd-bcab-927c66f42317")
+		(property "Reference" "#PWR006"
+			(at 251.46 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4202,7 +4643,7 @@
 			)
 		)
 		(property "Value" "ISO_GND"
-			(at 236.22 95.25 0)
+			(at 251.46 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4210,7 +4651,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 236.22 91.44 0)
+			(at 251.46 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4219,7 +4660,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 236.22 91.44 0)
+			(at 251.46 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4228,7 +4669,7 @@
 			)
 		)
 		(property "Description" "Power symbol for net \"ISO_GND\" (IPC net name)"
-			(at 236.22 91.44 0)
+			(at 251.46 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4237,26 +4678,26 @@
 			)
 		)
 		(pin "1"
-			(uuid "653b75be-f8c3-5be9-affe-3d8145d44880")
+			(uuid "13db6fee-bf7d-56ae-bb4a-23d53ad1a340")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
-					(reference "#PWR005")
+					(reference "#PWR006")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(junction
-		(at 236.22 91.44)
+		(at 251.46 91.44)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "e35d8234-6c2a-5bb1-b35d-6926ae6846e3")
+		(uuid "88547de2-704b-5190-872e-ee3d08b39886")
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
-		(at 210.82 50.8 90)
+		(at 226.06 50.8 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4264,7 +4705,7 @@
 		(dnp no)
 		(uuid "0a29a74b-865c-573b-9479-cbeca87f6035")
 		(property "Reference" "R57"
-			(at 210.82 46.99 270)
+			(at 226.06 46.99 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4272,7 +4713,7 @@
 			)
 		)
 		(property "Value" "40R"
-			(at 210.82 48.77 270)
+			(at 226.06 48.77 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4280,7 +4721,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 210.82 52.578 0)
+			(at 226.06 52.578 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4289,7 +4730,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 210.82 50.8 0)
+			(at 226.06 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4298,7 +4739,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 210.82 50.8 0)
+			(at 226.06 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4307,7 +4748,7 @@
 			)
 		)
 		(property "LCSC" "C2933439"
-			(at 210.82 50.8 0)
+			(at 226.06 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4332,27 +4773,27 @@
 	)
 	(wire
 		(pts
-			(xy 195.58 50.8) (xy 207.01 50.8)
+			(xy 210.82 50.8) (xy 222.25 50.8)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "f812d711-9b5d-561b-97df-05522895fe17")
+		(uuid "78a88faa-5a5c-53ff-a05a-1159fcce1bc7")
 	)
 	(wire
 		(pts
-			(xy 214.63 50.8) (xy 228.6 50.8)
+			(xy 229.87 50.8) (xy 243.84 50.8)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "db9d3932-e976-5acb-a609-0a1d82c89bc8")
+		(uuid "5f1f00b5-6e91-555b-be57-497785875089")
 	)
 	(global_label "DHB_HI_GATE_SEC"
 		(shape passive)
-		(at 195.58 50.8 180)
+		(at 210.82 50.8 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4360,9 +4801,9 @@
 			)
 			(justify right)
 		)
-		(uuid "ad9fc578-dcef-5de4-b0b7-7e4800b1dd1d")
+		(uuid "8b92571a-45cc-5a96-8f88-0dfe740326c4")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 195.58 50.8 0)
+			(at 210.82 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4373,20 +4814,20 @@
 		)
 	)
 	(junction
-		(at 198.12 50.8)
+		(at 213.36 50.8)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "fa3ac231-b46b-57be-b87a-b53e081f1be2")
+		(uuid "df8e09c9-7818-5534-81b8-7c35df4fb4a9")
 	)
 	(junction
-		(at 223.52 50.8)
+		(at 238.76 50.8)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "f7c6fc4d-0111-5c91-bb62-efd488899d03")
+		(uuid "aefd3636-834e-55d0-b065-796f35d707e5")
 	)
 	(symbol
 		(lib_id "tube_psu_next:D_Schottky")
-		(at 203.2 55.88 0)
+		(at 218.44 55.88 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4394,7 +4835,7 @@
 		(dnp no)
 		(uuid "0432507c-63a6-5d3f-b841-83abed296329")
 		(property "Reference" "D31"
-			(at 203.2 57.91 0)
+			(at 218.44 57.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4402,7 +4843,7 @@
 			)
 		)
 		(property "Value" "ZLLS400TA"
-			(at 203.2 59.69 0)
+			(at 218.44 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4410,7 +4851,7 @@
 			)
 		)
 		(property "Footprint" "tube_psu:D_SOD-323_AC"
-			(at 203.2 55.88 0)
+			(at 218.44 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4419,7 +4860,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 203.2 55.88 0)
+			(at 218.44 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4428,7 +4869,7 @@
 			)
 		)
 		(property "Description" "Schottky diode, pins A/C"
-			(at 203.2 55.88 0)
+			(at 218.44 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4437,7 +4878,7 @@
 			)
 		)
 		(property "LCSC" "C460267"
-			(at 203.2 55.88 0)
+			(at 218.44 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4462,7 +4903,7 @@
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
-		(at 215.9 55.88 90)
+		(at 231.14 55.88 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4470,7 +4911,7 @@
 		(dnp no)
 		(uuid "31287cb4-3d3b-53f9-9e39-b7353de79ec3")
 		(property "Reference" "R58"
-			(at 215.9 57.91 270)
+			(at 231.14 57.91 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4478,7 +4919,7 @@
 			)
 		)
 		(property "Value" "3.3R"
-			(at 215.9 59.69 270)
+			(at 231.14 59.69 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4486,7 +4927,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 215.9 57.658 0)
+			(at 231.14 57.658 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4495,7 +4936,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 215.9 55.88 0)
+			(at 231.14 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4504,7 +4945,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 215.9 55.88 0)
+			(at 231.14 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4513,7 +4954,7 @@
 			)
 		)
 		(property "LCSC" "C22356719"
-			(at 215.9 55.88 0)
+			(at 231.14 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4538,77 +4979,77 @@
 	)
 	(wire
 		(pts
-			(xy 198.12 50.8) (xy 198.12 55.88)
+			(xy 213.36 50.8) (xy 213.36 55.88)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "68508bea-699c-56df-bfa4-56186a009119")
+		(uuid "e0d9a7a0-a1b3-58b7-bbcf-b2147624c6b3")
 	)
 	(wire
 		(pts
-			(xy 198.12 55.88) (xy 199.39 55.88)
+			(xy 213.36 55.88) (xy 214.63 55.88)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "79a80c9e-e39f-576c-a70d-3d28001148ea")
+		(uuid "c503dec1-16aa-53a2-8a7a-343ad0360bea")
 	)
 	(wire
 		(pts
-			(xy 199.39 55.88) (xy 199.39 55.88)
+			(xy 214.63 55.88) (xy 214.63 55.88)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "88547de2-704b-5190-872e-ee3d08b39886")
+		(uuid "7ab83168-0b11-56d4-a5a9-172bce64b13e")
 	)
 	(wire
 		(pts
-			(xy 207.01 55.88) (xy 212.09 55.88)
+			(xy 222.25 55.88) (xy 227.33 55.88)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "78a88faa-5a5c-53ff-a05a-1159fcce1bc7")
+		(uuid "fab5bda3-2a85-52aa-bbf5-7d02a7510334")
 	)
 	(wire
 		(pts
-			(xy 219.71 55.88) (xy 223.52 55.88)
+			(xy 234.95 55.88) (xy 238.76 55.88)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5f1f00b5-6e91-555b-be57-497785875089")
+		(uuid "90f92147-7da9-56af-93f6-4738d7af28c5")
 	)
 	(wire
 		(pts
-			(xy 223.52 55.88) (xy 223.52 55.88)
+			(xy 238.76 55.88) (xy 238.76 55.88)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "8b92571a-45cc-5a96-8f88-0dfe740326c4")
+		(uuid "9b7eb66c-b6d8-5d94-a7aa-496721e15449")
 	)
 	(wire
 		(pts
-			(xy 223.52 55.88) (xy 223.52 50.8)
+			(xy 238.76 55.88) (xy 238.76 50.8)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "df8e09c9-7818-5534-81b8-7c35df4fb4a9")
+		(uuid "5c14baa1-a265-5bff-a99c-50720b0f1a31")
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
-		(at 223.52 59.69 0)
+		(at 238.76 59.69 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4616,7 +5057,7 @@
 		(dnp no)
 		(uuid "fb072994-af06-5902-b848-a1fecb29968f")
 		(property "Reference" "R56"
-			(at 227.71 58.42 0)
+			(at 242.95 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4624,7 +5065,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 227.71 60.96 0)
+			(at 242.95 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4632,7 +5073,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 221.742 59.69 0)
+			(at 236.982 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4641,7 +5082,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 223.52 59.69 0)
+			(at 238.76 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4650,7 +5091,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 223.52 59.69 0)
+			(at 238.76 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4659,7 +5100,7 @@
 			)
 		)
 		(property "LCSC" "C25804"
-			(at 223.52 59.69 0)
+			(at 238.76 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4683,20 +5124,20 @@
 		)
 	)
 	(junction
-		(at 223.52 55.88)
+		(at 238.76 55.88)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "aefd3636-834e-55d0-b065-796f35d707e5")
+		(uuid "2d5003cf-2035-5555-8e10-bfeb6fbf8cf2")
 	)
 	(junction
-		(at 223.52 63.5)
+		(at 238.76 63.5)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "e0d9a7a0-a1b3-58b7-bbcf-b2147624c6b3")
+		(uuid "20c7e537-a241-5944-86f7-176143afb853")
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
-		(at 210.82 76.2 90)
+		(at 226.06 76.2 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4704,7 +5145,7 @@
 		(dnp no)
 		(uuid "09919b91-b64b-504f-80d0-e293d047e7aa")
 		(property "Reference" "R87"
-			(at 210.82 72.39 270)
+			(at 226.06 72.39 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4712,7 +5153,7 @@
 			)
 		)
 		(property "Value" "40R"
-			(at 210.82 74.17 270)
+			(at 226.06 74.17 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4720,7 +5161,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 210.82 77.978 0)
+			(at 226.06 77.978 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4729,7 +5170,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 210.82 76.2 0)
+			(at 226.06 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4738,7 +5179,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 210.82 76.2 0)
+			(at 226.06 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4747,7 +5188,7 @@
 			)
 		)
 		(property "LCSC" "C2933439"
-			(at 210.82 76.2 0)
+			(at 226.06 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4772,27 +5213,27 @@
 	)
 	(wire
 		(pts
-			(xy 195.58 76.2) (xy 207.01 76.2)
+			(xy 210.82 76.2) (xy 222.25 76.2)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "c503dec1-16aa-53a2-8a7a-343ad0360bea")
+		(uuid "c84a52e0-b2eb-508c-8068-106d4332e26a")
 	)
 	(wire
 		(pts
-			(xy 214.63 76.2) (xy 228.6 76.2)
+			(xy 229.87 76.2) (xy 243.84 76.2)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "7ab83168-0b11-56d4-a5a9-172bce64b13e")
+		(uuid "4996905c-a6fd-5372-90e4-662a18c18856")
 	)
 	(global_label "DHB_LOW_GATE_SEC"
 		(shape passive)
-		(at 195.58 76.2 180)
+		(at 210.82 76.2 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4800,9 +5241,9 @@
 			)
 			(justify right)
 		)
-		(uuid "fab5bda3-2a85-52aa-bbf5-7d02a7510334")
+		(uuid "b28fa455-9099-5eb9-895d-1bab83fb36e5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 195.58 76.2 0)
+			(at 210.82 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4813,20 +5254,20 @@
 		)
 	)
 	(junction
-		(at 198.12 76.2)
+		(at 213.36 76.2)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "90f92147-7da9-56af-93f6-4738d7af28c5")
+		(uuid "3e2a2214-9853-5bf6-b046-1e8612c3edb3")
 	)
 	(junction
-		(at 223.52 76.2)
+		(at 238.76 76.2)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "9b7eb66c-b6d8-5d94-a7aa-496721e15449")
+		(uuid "50bb1ad5-01d5-53c1-bc02-fbd26ea87dcd")
 	)
 	(symbol
 		(lib_id "tube_psu_next:D_Schottky")
-		(at 203.2 81.28 0)
+		(at 218.44 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4834,7 +5275,7 @@
 		(dnp no)
 		(uuid "8b83b000-2c23-5ff3-8503-554c43587fdb")
 		(property "Reference" "D32"
-			(at 203.2 83.31 0)
+			(at 218.44 83.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4842,7 +5283,7 @@
 			)
 		)
 		(property "Value" "ZLLS400TA"
-			(at 203.2 85.09 0)
+			(at 218.44 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4850,7 +5291,7 @@
 			)
 		)
 		(property "Footprint" "tube_psu:D_SOD-323_AC"
-			(at 203.2 81.28 0)
+			(at 218.44 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4859,7 +5300,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 203.2 81.28 0)
+			(at 218.44 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4868,7 +5309,7 @@
 			)
 		)
 		(property "Description" "Schottky diode, pins A/C"
-			(at 203.2 81.28 0)
+			(at 218.44 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4877,7 +5318,7 @@
 			)
 		)
 		(property "LCSC" "C460267"
-			(at 203.2 81.28 0)
+			(at 218.44 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4902,7 +5343,7 @@
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
-		(at 215.9 81.28 90)
+		(at 231.14 81.28 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4910,7 +5351,7 @@
 		(dnp no)
 		(uuid "748ee9d7-e341-5386-9c5f-c19867dcda46")
 		(property "Reference" "R88"
-			(at 215.9 83.31 270)
+			(at 231.14 83.31 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4918,7 +5359,7 @@
 			)
 		)
 		(property "Value" "3.3R"
-			(at 215.9 85.09 270)
+			(at 231.14 85.09 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4926,7 +5367,7 @@
 			)
 		)
 		(property "Footprint" "tube_psu:R_0805_2012Metric_Proteus"
-			(at 215.9 83.058 0)
+			(at 231.14 83.058 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4935,7 +5376,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 215.9 81.28 0)
+			(at 231.14 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4944,7 +5385,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 215.9 81.28 0)
+			(at 231.14 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4953,7 +5394,7 @@
 			)
 		)
 		(property "LCSC" "C22356719"
-			(at 215.9 81.28 0)
+			(at 231.14 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4978,87 +5419,7 @@
 	)
 	(wire
 		(pts
-			(xy 198.12 76.2) (xy 198.12 81.28)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5c14baa1-a265-5bff-a99c-50720b0f1a31")
-	)
-	(wire
-		(pts
-			(xy 198.12 81.28) (xy 199.39 81.28)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2d5003cf-2035-5555-8e10-bfeb6fbf8cf2")
-	)
-	(wire
-		(pts
-			(xy 207.01 81.28) (xy 212.09 81.28)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "20c7e537-a241-5944-86f7-176143afb853")
-	)
-	(wire
-		(pts
-			(xy 219.71 81.28) (xy 223.52 81.28)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c84a52e0-b2eb-508c-8068-106d4332e26a")
-	)
-	(wire
-		(pts
-			(xy 223.52 81.28) (xy 223.52 76.2)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4996905c-a6fd-5372-90e4-662a18c18856")
-	)
-	(wire
-		(pts
-			(xy 152.4 53.34) (xy 154.94 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b28fa455-9099-5eb9-895d-1bab83fb36e5")
-	)
-	(wire
-		(pts
-			(xy 154.94 53.34) (xy 167.64 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3e2a2214-9853-5bf6-b046-1e8612c3edb3")
-	)
-	(wire
-		(pts
-			(xy 152.4 55.88) (xy 154.94 55.88)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "50bb1ad5-01d5-53c1-bc02-fbd26ea87dcd")
-	)
-	(wire
-		(pts
-			(xy 154.94 55.88) (xy 154.94 53.34)
+			(xy 213.36 76.2) (xy 213.36 81.28)
 		)
 		(stroke
 			(width 0)
@@ -5066,31 +5427,39 @@
 		)
 		(uuid "a417a88b-5ff7-5ea1-b211-1ec5d641e1d4")
 	)
-	(junction
-		(at 154.94 53.34)
-		(diameter 0)
-		(color 0 0 0 0)
+	(wire
+		(pts
+			(xy 213.36 81.28) (xy 214.63 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
 		(uuid "82a076aa-b0cc-550f-8b52-a75610f6ef2c")
 	)
-	(label "TRANS_SEC"
-		(at 157.48 53.34 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
+	(wire
+		(pts
+			(xy 222.25 81.28) (xy 227.33 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
 		)
 		(uuid "6a982f13-99d6-53c0-9cbf-5eb185a78ffb")
 	)
-	(junction
-		(at 167.64 53.34)
-		(diameter 0)
-		(color 0 0 0 0)
+	(wire
+		(pts
+			(xy 234.95 81.28) (xy 238.76 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
 		(uuid "66df3c53-52db-5e45-8d9d-51e93f4c246b")
 	)
 	(wire
 		(pts
-			(xy 152.4 60.96) (xy 154.94 60.96)
+			(xy 238.76 81.28) (xy 238.76 76.2)
 		)
 		(stroke
 			(width 0)
@@ -5100,7 +5469,7 @@
 	)
 	(wire
 		(pts
-			(xy 154.94 60.96) (xy 154.94 63.5)
+			(xy 152.4 53.34) (xy 154.94 53.34)
 		)
 		(stroke
 			(width 0)
@@ -5108,15 +5477,87 @@
 		)
 		(uuid "d3302f84-e301-560a-8017-95e8182c80c3")
 	)
+	(wire
+		(pts
+			(xy 154.94 53.34) (xy 180.34 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "592d755d-d593-5288-b6fd-41659a8a1fcb")
+	)
+	(wire
+		(pts
+			(xy 152.4 55.88) (xy 154.94 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1b748cc5-7684-5bf1-87ba-871bc38009c8")
+	)
+	(wire
+		(pts
+			(xy 154.94 55.88) (xy 154.94 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "614e787f-4340-513a-8038-06c8f2f295d6")
+	)
+	(junction
+		(at 154.94 53.34)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5a8ddac5-dccd-5785-8a01-b4be6b7dee61")
+	)
+	(label "TRANS_SEC"
+		(at 157.48 53.34 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a28a3fe0-fd47-5cc0-9193-918c28bfd7d6")
+	)
+	(junction
+		(at 180.34 53.34)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "bc39195f-b9ab-5688-97ab-aea5e0ba7af6")
+	)
+	(wire
+		(pts
+			(xy 152.4 60.96) (xy 154.94 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b11551da-c887-52eb-a09b-975e8ff1dee0")
+	)
+	(wire
+		(pts
+			(xy 154.94 60.96) (xy 154.94 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "28291020-cbbe-5bfd-802c-36beef071663")
+	)
 	(junction
 		(at 154.94 63.5)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "592d755d-d593-5288-b6fd-41659a8a1fcb")
+		(uuid "0547583f-2bcb-531c-a39d-66260b05bb60")
 	)
 	(symbol
 		(lib_id "tube_psu_next:C")
-		(at 167.64 44.45 0)
+		(at 180.34 44.45 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5124,7 +5565,7 @@
 		(dnp no)
 		(uuid "13352974-9311-5553-8081-33c3889ce927")
 		(property "Reference" "C16"
-			(at 171.83 43.18 0)
+			(at 184.53 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5132,7 +5573,7 @@
 			)
 		)
 		(property "Value" "1u"
-			(at 171.28 45.72 0)
+			(at 183.98 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5140,7 +5581,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder"
-			(at 168.6052 48.26 0)
+			(at 181.3052 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5149,7 +5590,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 167.64 44.45 0)
+			(at 180.34 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5158,7 +5599,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 167.64 44.45 0)
+			(at 180.34 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5167,7 +5608,7 @@
 			)
 		)
 		(property "LCSC" "C784102"
-			(at 167.64 44.45 0)
+			(at 180.34 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5192,27 +5633,27 @@
 	)
 	(wire
 		(pts
-			(xy 167.64 48.26) (xy 167.64 53.34)
+			(xy 180.34 48.26) (xy 180.34 53.34)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "1b748cc5-7684-5bf1-87ba-871bc38009c8")
+		(uuid "f02b03cf-4537-5fb3-b1a3-e040c8d1ba4d")
 	)
 	(wire
 		(pts
-			(xy 167.64 40.64) (xy 236.22 40.64)
+			(xy 180.34 40.64) (xy 251.46 40.64)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "614e787f-4340-513a-8038-06c8f2f295d6")
+		(uuid "d969e085-2a52-518c-bf05-63aa6e1ad4b1")
 	)
 	(symbol
 		(lib_id "tube_psu_next:C")
-		(at 167.64 77.47 0)
+		(at 180.34 77.47 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5220,7 +5661,7 @@
 		(dnp no)
 		(uuid "768623ef-9bc0-5702-90ab-59231153320b")
 		(property "Reference" "C55"
-			(at 171.83 76.2 0)
+			(at 184.53 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5228,7 +5669,7 @@
 			)
 		)
 		(property "Value" "1u"
-			(at 171.28 78.74 0)
+			(at 183.98 78.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5236,7 +5677,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder"
-			(at 168.6052 81.28 0)
+			(at 181.3052 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5245,7 +5686,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 167.64 77.47 0)
+			(at 180.34 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5254,7 +5695,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 167.64 77.47 0)
+			(at 180.34 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5263,7 +5704,7 @@
 			)
 		)
 		(property "LCSC" "C784102"
-			(at 167.64 77.47 0)
+			(at 180.34 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5288,83 +5729,494 @@
 	)
 	(wire
 		(pts
-			(xy 167.64 53.34) (xy 167.64 73.66)
+			(xy 180.34 53.34) (xy 180.34 73.66)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5a8ddac5-dccd-5785-8a01-b4be6b7dee61")
+		(uuid "28991292-e898-5dc8-832f-19110fd10939")
 	)
 	(wire
 		(pts
-			(xy 167.64 81.28) (xy 167.64 91.44)
+			(xy 180.34 81.28) (xy 180.34 91.44)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "a28a3fe0-fd47-5cc0-9193-918c28bfd7d6")
+		(uuid "71d841be-eed0-56b5-ac5f-2cf840e9f763")
 	)
 	(wire
 		(pts
-			(xy 167.64 91.44) (xy 236.22 91.44)
+			(xy 180.34 91.44) (xy 251.46 91.44)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "bc39195f-b9ab-5688-97ab-aea5e0ba7af6")
+		(uuid "7824ce6c-3ea2-5484-8a05-98e510819dc8")
 	)
-	(wire
-		(pts
-			(xy 152.4 63.5) (xy 223.52 63.5)
+	(symbol
+		(lib_id "tube_psu_next:R")
+		(at 170.18 41.91 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c8c596a4-ebbe-5e27-a71b-57639f6eb53b")
+		(property "Reference" "R147"
+			(at 174.92 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
 		)
-		(stroke
-			(width 0)
-			(type default)
+		(property "Value" "220k"
+			(at 174.92 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
 		)
-		(uuid "b11551da-c887-52eb-a09b-975e8ff1dee0")
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 168.402 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 170.18 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 170.18 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C17956"
+			(at 170.18 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cf01357d-89c2-5603-a0ab-5ab5ba9b3194")
+		)
+		(pin "2"
+			(uuid "ab745a41-e7b6-5077-8c38-5e2babf01c54")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
+					(reference "R147")
+					(unit 1)
+				)
+			)
+		)
 	)
-	(wire
-		(pts
-			(xy 223.52 63.5) (xy 236.22 63.5)
+	(symbol
+		(lib_id "tube_psu_next:420V")
+		(at 170.18 38.1 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0f799be0-2607-5c61-ab9a-7b70990e6cb4")
+		(property "Reference" "#PWR007"
+			(at 170.18 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
-		(stroke
-			(width 0)
-			(type default)
+		(property "Value" "420V"
+			(at 170.18 34.544 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
 		)
-		(uuid "28291020-cbbe-5bfd-802c-36beef071663")
+		(property "Footprint" ""
+			(at 170.18 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 170.18 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"420V\" (IPC net name)"
+			(at 170.18 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2f5a1714-50df-5396-8949-1cb49bc62149")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
+					(reference "#PWR007")
+					(unit 1)
+				)
+			)
+		)
 	)
-	(wire
-		(pts
-			(xy 177.8 63.5) (xy 177.8 68.58)
+	(symbol
+		(lib_id "tube_psu_next:R")
+		(at 170.18 49.53 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5688a629-2e6b-5f84-a118-174bfc1d5962")
+		(property "Reference" "R148"
+			(at 174.92 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
 		)
-		(stroke
-			(width 0)
-			(type default)
+		(property "Value" "220k"
+			(at 174.92 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
 		)
-		(uuid "0547583f-2bcb-531c-a39d-66260b05bb60")
-	)
-	(wire
-		(pts
-			(xy 177.8 68.58) (xy 182.88 68.58)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 168.402 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
-		(stroke
-			(width 0)
-			(type default)
+		(property "Datasheet" ""
+			(at 170.18 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
-		(uuid "f02b03cf-4537-5fb3-b1a3-e040c8d1ba4d")
+		(property "Description" "Resistor"
+			(at 170.18 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C17956"
+			(at 170.18 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "04e1bd1b-6f16-5ef5-bf60-aa4b82ee3c47")
+		)
+		(pin "2"
+			(uuid "7a9ba802-1b0b-501d-80b6-50b6dd84debd")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
+					(reference "R148")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(junction
-		(at 177.8 63.5)
+		(at 170.18 53.34)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "d969e085-2a52-518c-bf05-63aa6e1ad4b1")
+		(uuid "9a165754-c1ea-5e79-80c7-ea7522c4ed96")
+	)
+	(symbol
+		(lib_id "tube_psu_next:R")
+		(at 170.18 69.85 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a75328df-6239-5121-bfea-c509b5f596c2")
+		(property "Reference" "R149"
+			(at 174.92 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "220k"
+			(at 174.92 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 168.402 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 170.18 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 170.18 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C17956"
+			(at 170.18 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e4ba9eca-23f6-558f-9092-ac43445d34f0")
+		)
+		(pin "2"
+			(uuid "e26d8d81-3d12-59bd-9e1c-5d2707ed7ab3")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
+					(reference "R149")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 170.18 53.34) (xy 170.18 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "22523fdb-1718-533b-8214-82286d98ba61")
+	)
+	(symbol
+		(lib_id "tube_psu_next:R")
+		(at 170.18 77.47 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1779aeff-38d2-5794-a237-39797400bdee")
+		(property "Reference" "R150"
+			(at 174.92 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "220k"
+			(at 174.92 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 168.402 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 170.18 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 170.18 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C17956"
+			(at 170.18 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "63a7fc62-528d-50f2-a535-9c7d9abad951")
+		)
+		(pin "2"
+			(uuid "9c2c048d-83a1-5e9b-93c6-5a4a97831183")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
+					(reference "R150")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 170.18 81.28) (xy 170.18 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "466133b0-28d8-5794-a281-ad65f3a2d8e0")
+	)
+	(wire
+		(pts
+			(xy 170.18 91.44) (xy 180.34 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "77137eaf-fcb5-5a20-b5a7-2348e721c642")
+	)
+	(junction
+		(at 180.34 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "cc77b181-ee5d-5da5-b95a-08dad93375cd")
+	)
+	(wire
+		(pts
+			(xy 152.4 63.5) (xy 238.76 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9163ebdd-ee6c-5ef7-9f53-e8631f0f6902")
+	)
+	(wire
+		(pts
+			(xy 238.76 63.5) (xy 251.46 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "74fc5751-4a5d-58c3-8c72-ab3390e750d8")
+	)
+	(wire
+		(pts
+			(xy 190.5 63.5) (xy 190.5 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ad5ae5fc-b9c6-55d3-9fb3-4ebaf5e644fe")
+	)
+	(wire
+		(pts
+			(xy 190.5 68.58) (xy 195.58 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bc81920d-ff53-53db-8a56-4490f90579f8")
+	)
+	(junction
+		(at 190.5 63.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a4dd2bcb-89ca-59b1-8c22-b500587f2f5a")
 	)
 	(global_label "DHB_HI_SOURCE_SEC"
 		(shape passive)
-		(at 182.88 68.58 0)
+		(at 195.58 68.58 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5372,9 +6224,9 @@
 			)
 			(justify left)
 		)
-		(uuid "28991292-e898-5dc8-832f-19110fd10939")
+		(uuid "31d882fe-c39e-56f7-9fbb-9b0f2841834f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 182.88 68.58 0)
+			(at 195.58 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5386,17 +6238,17 @@
 	)
 	(wire
 		(pts
-			(xy 236.22 40.64) (xy 279.4 40.64)
+			(xy 251.46 40.64) (xy 294.64 40.64)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "71d841be-eed0-56b5-ac5f-2cf840e9f763")
+		(uuid "e465dfed-0e9e-5146-be63-f6f4ca048447")
 	)
 	(symbol
 		(lib_id "tube_psu_next:C")
-		(at 259.08 44.45 0)
+		(at 274.32 44.45 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5404,7 +6256,7 @@
 		(dnp no)
 		(uuid "366b5e05-f5e9-5a9b-b95f-02a0e980bab1")
 		(property "Reference" "C89"
-			(at 263.27 43.18 0)
+			(at 278.51 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5412,7 +6264,7 @@
 			)
 		)
 		(property "Value" "100n"
-			(at 263.82 45.72 0)
+			(at 279.06 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5420,7 +6272,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_1210_3225Metric"
-			(at 260.0452 48.26 0)
+			(at 275.2852 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5429,7 +6281,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 259.08 44.45 0)
+			(at 274.32 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5438,7 +6290,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 259.08 44.45 0)
+			(at 274.32 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5447,7 +6299,7 @@
 			)
 		)
 		(property "LCSC" "C692295"
-			(at 259.08 44.45 0)
+			(at 274.32 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5471,24 +6323,24 @@
 		)
 	)
 	(junction
-		(at 259.08 40.64)
+		(at 274.32 40.64)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "7824ce6c-3ea2-5484-8a05-98e510819dc8")
+		(uuid "c7c9ed96-9ce0-530a-a9b0-cabc662e0ed0")
 	)
 	(wire
 		(pts
-			(xy 259.08 48.26) (xy 264.16 48.26)
+			(xy 274.32 48.26) (xy 279.4 48.26)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "9a165754-c1ea-5e79-80c7-ea7522c4ed96")
+		(uuid "330d4cac-5704-5f0a-b37a-f40f9ccda0b5")
 	)
 	(symbol
 		(lib_id "tube_psu_next:C")
-		(at 269.24 44.45 0)
+		(at 284.48 44.45 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5496,7 +6348,7 @@
 		(dnp no)
 		(uuid "112a7826-3291-5d1b-b1d8-5ad265f2070e")
 		(property "Reference" "C90"
-			(at 273.43 43.18 0)
+			(at 288.67 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5504,7 +6356,7 @@
 			)
 		)
 		(property "Value" "100n"
-			(at 273.98 45.72 0)
+			(at 289.22 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5512,7 +6364,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_1210_3225Metric"
-			(at 270.2052 48.26 0)
+			(at 285.4452 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5521,7 +6373,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 269.24 44.45 0)
+			(at 284.48 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5530,7 +6382,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 269.24 44.45 0)
+			(at 284.48 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5539,7 +6391,7 @@
 			)
 		)
 		(property "LCSC" "C692295"
-			(at 269.24 44.45 0)
+			(at 284.48 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5563,38 +6415,38 @@
 		)
 	)
 	(junction
-		(at 269.24 40.64)
+		(at 284.48 40.64)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "22523fdb-1718-533b-8214-82286d98ba61")
+		(uuid "dde52d56-40cb-575d-9bf2-c5d530769422")
 	)
 	(wire
 		(pts
-			(xy 269.24 48.26) (xy 264.16 48.26)
+			(xy 284.48 48.26) (xy 279.4 48.26)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "466133b0-28d8-5794-a281-ad65f3a2d8e0")
+		(uuid "dc88f453-42b1-5498-9a3f-608a667bd9d2")
 	)
 	(junction
-		(at 264.16 48.26)
+		(at 279.4 48.26)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "77137eaf-fcb5-5a20-b5a7-2348e721c642")
+		(uuid "5a6583cf-9cdf-5f00-85af-1794f12b3620")
 	)
 	(symbol
 		(lib_id "tube_psu_next:ISO_GND")
-		(at 264.16 48.26 0)
+		(at 279.4 48.26 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "7dd8a405-5ac0-50dd-bcab-927c66f42317")
-		(property "Reference" "#PWR006"
-			(at 264.16 54.61 0)
+		(uuid "831a7cdd-132c-5479-886f-3abc2483a784")
+		(property "Reference" "#PWR008"
+			(at 279.4 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5603,7 +6455,7 @@
 			)
 		)
 		(property "Value" "ISO_GND"
-			(at 264.16 52.07 0)
+			(at 279.4 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5611,7 +6463,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 264.16 48.26 0)
+			(at 279.4 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5620,7 +6472,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 264.16 48.26 0)
+			(at 279.4 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5629,7 +6481,7 @@
 			)
 		)
 		(property "Description" "Power symbol for net \"ISO_GND\" (IPC net name)"
-			(at 264.16 48.26 0)
+			(at 279.4 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5638,12 +6490,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "13db6fee-bf7d-56ae-bb4a-23d53ad1a340")
+			(uuid "f65c4aac-baf5-5910-aedf-b2852f751ace")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
-					(reference "#PWR006")
+					(reference "#PWR008")
 					(unit 1)
 				)
 			)
@@ -5651,15 +6503,15 @@
 	)
 	(symbol
 		(lib_id "tube_psu_next:420V")
-		(at 279.4 40.64 0)
+		(at 294.64 40.64 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "0f799be0-2607-5c61-ab9a-7b70990e6cb4")
-		(property "Reference" "#PWR007"
-			(at 279.4 44.45 0)
+		(uuid "dfc44969-e23c-5605-bcfa-835cbee2c802")
+		(property "Reference" "#PWR009"
+			(at 294.64 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5668,7 +6520,7 @@
 			)
 		)
 		(property "Value" "420V"
-			(at 279.4 37.084 0)
+			(at 294.64 37.084 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5676,7 +6528,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 279.4 40.64 0)
+			(at 294.64 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5685,7 +6537,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 279.4 40.64 0)
+			(at 294.64 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5694,7 +6546,7 @@
 			)
 		)
 		(property "Description" "Power symbol for net \"420V\" (IPC net name)"
-			(at 279.4 40.64 0)
+			(at 294.64 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5703,12 +6555,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "2f5a1714-50df-5396-8949-1cb49bc62149")
+			(uuid "51a92220-44aa-58db-8850-1e3d66d764e2")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
-					(reference "#PWR007")
+					(reference "#PWR009")
 					(unit 1)
 				)
 			)
@@ -5716,25 +6568,25 @@
 	)
 	(wire
 		(pts
-			(xy 279.4 40.64) (xy 279.4 43.18)
+			(xy 294.64 40.64) (xy 294.64 43.18)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "cc77b181-ee5d-5da5-b95a-08dad93375cd")
+		(uuid "199bff54-0fe6-5adc-b3e2-0346ea38b13c")
 	)
 	(symbol
 		(lib_id "tube_psu_next:PWR_FLAG")
-		(at 279.4 43.18 180)
+		(at 294.64 43.18 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "a00736d0-9f33-5cd9-9ce4-40db77feab23")
-		(property "Reference" "#FLG008"
-			(at 279.4 45.085 0)
+		(uuid "3fcd9050-ebf9-5e2c-8d0d-5283fc914f5d")
+		(property "Reference" "#FLG010"
+			(at 294.64 45.085 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5743,7 +6595,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 279.4 46.99 0)
+			(at 294.64 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5751,7 +6603,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 279.4 43.18 0)
+			(at 294.64 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5760,7 +6612,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 279.4 43.18 0)
+			(at 294.64 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5769,7 +6621,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 279.4 43.18 0)
+			(at 294.64 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5778,12 +6630,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "c302e2ff-9a0a-5a9d-b1b7-0cacd0210204")
+			(uuid "deedc9af-353d-5af4-b608-70930b734fa0")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
-					(reference "#FLG008")
+					(reference "#FLG010")
 					(unit 1)
 				)
 			)
@@ -5798,9 +6650,9 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "9163ebdd-ee6c-5ef7-9f53-e8631f0f6902")
+		(uuid "357054f7-a5f8-5699-a925-924138d88771")
 	)
-	(text "5.2: TR3 = EC42/15 PC40 two-chamber 20:21 (leakage ~41 uH = series L, Lm ~300 uH, gap 0.35 mm); L3 removed (NR 2.1 / 2.4)."
+	(text "5.2: TR3 = EC42/15 PC40 two-chamber 20:21 (leakage ~41 uH = series L, Lm ~200 uH, gap ~0.68 mm set by measuring Lm); L3 removed (NR 2.1 / 2.4)."
 		(exclude_from_sim no)
 		(at 38.1 101.6 0)
 		(effects
@@ -5809,9 +6661,9 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "74fc5751-4a5d-58c3-8c72-ab3390e750d8")
+		(uuid "7375411c-bf7f-5f92-970a-35c4e3635aa9")
 	)
-	(text "Layout: C47 / C54 at the TR3 primary pins (NR 2.5), C16 / C55 at the secondary pins; firmware dead time 150-200 ns (NR 2.7)."
+	(text "Layout: C47 / C54 at the TR3 primary pins (NR 2.5), C16 / C55 at the secondary pins; firmware dead time 150 ns total (NR 2.7)."
 		(exclude_from_sim no)
 		(at 38.1 105.41 0)
 		(effects
@@ -5820,7 +6672,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "ad5ae5fc-b9c6-55d3-9fb3-4ebaf5e644fe")
+		(uuid "dc6a5405-5809-55dc-860e-1d33e5a276ef")
 	)
 	(text "The PDF joins the terminals SEC_GND and ISO_GND by a bare wire (one net, ISO_GND); terminal GND is on ISO_GND."
 		(exclude_from_sim no)
@@ -5831,7 +6683,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "bc81920d-ff53-53db-8a56-4490f90579f8")
+		(uuid "9ce7d57e-c708-534e-87e0-6fbd029e5e61")
 	)
 	(symbol
 		(lib_id "tube_psu_next:PIN")
@@ -6067,19 +6919,19 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "a4dd2bcb-89ca-59b1-8c22-b500587f2f5a")
+		(uuid "d1befb00-bf4e-5e2c-9cac-4605ccfb628c")
 	)
 	(junction
 		(at 162.56 132.08)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "31d882fe-c39e-56f7-9fbb-9b0f2841834f")
+		(uuid "863ab5ee-c710-5c5c-b71f-04595bfa47ce")
 	)
 	(junction
 		(at 162.56 144.78)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "e465dfed-0e9e-5146-be63-f6f4ca048447")
+		(uuid "a634d4ff-adc9-5634-adb3-c1574db30920")
 	)
 	(symbol
 		(lib_id "tube_psu_next:C")
@@ -6165,19 +7017,19 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c7c9ed96-9ce0-530a-a9b0-cabc662e0ed0")
+		(uuid "8d363f27-57e2-553d-8bf1-94d300dca9f5")
 	)
 	(junction
 		(at 172.72 132.08)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "330d4cac-5704-5f0a-b37a-f40f9ccda0b5")
+		(uuid "b186e19e-4e4d-52f8-8248-72ad7b074614")
 	)
 	(junction
 		(at 172.72 144.78)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "dde52d56-40cb-575d-9bf2-c5d530769422")
+		(uuid "12596904-252a-5bcb-b2e0-72d171276ae8")
 	)
 	(symbol
 		(lib_id "tube_psu_next:C_Polarized")
@@ -6263,19 +7115,19 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "dc88f453-42b1-5498-9a3f-608a667bd9d2")
+		(uuid "5b3788e8-a5ac-5c1a-8e07-b2f1a3d20af8")
 	)
 	(junction
 		(at 182.88 132.08)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "5a6583cf-9cdf-5f00-85af-1794f12b3620")
+		(uuid "bb5ee883-1a32-5250-b964-2d78d8ff9799")
 	)
 	(junction
 		(at 182.88 144.78)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "199bff54-0fe6-5adc-b3e2-0346ea38b13c")
+		(uuid "be05f586-fd1c-59a8-bc80-05087e07e737")
 	)
 	(symbol
 		(lib_id "tube_psu_next:C_Polarized")
@@ -6361,7 +7213,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "357054f7-a5f8-5699-a925-924138d88771")
+		(uuid "083283f1-dbe8-55ab-86fa-1f2c9ca24ed3")
 	)
 	(wire
 		(pts
@@ -6371,19 +7223,19 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7375411c-bf7f-5f92-970a-35c4e3635aa9")
+		(uuid "87df572e-1da8-5eee-9697-f58bbb88af94")
 	)
 	(junction
 		(at 193.04 132.08)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "dc6a5405-5809-55dc-860e-1d33e5a276ef")
+		(uuid "b097334b-f6eb-5bb2-acf9-7777f4eea548")
 	)
 	(junction
 		(at 193.04 144.78)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "9ce7d57e-c708-534e-87e0-6fbd029e5e61")
+		(uuid "22fa3050-000a-589c-be69-b1cf136a3d6a")
 	)
 	(symbol
 		(lib_id "tube_psu_next:C")
@@ -6469,19 +7321,19 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d1befb00-bf4e-5e2c-9cac-4605ccfb628c")
+		(uuid "06b54f59-38a0-5839-aacf-7fd52574b9f9")
 	)
 	(junction
 		(at 203.2 132.08)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "863ab5ee-c710-5c5c-b71f-04595bfa47ce")
+		(uuid "964e69f9-db22-5b8a-9ceb-7972ab1fa792")
 	)
 	(junction
 		(at 203.2 144.78)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "a634d4ff-adc9-5634-adb3-c1574db30920")
+		(uuid "b93936c7-b200-5c3a-bd3d-751e25567fd3")
 	)
 	(symbol
 		(lib_id "tube_psu_next:C")
@@ -6567,19 +7419,19 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "8d363f27-57e2-553d-8bf1-94d300dca9f5")
+		(uuid "057f254d-aa49-5007-b390-37180212ba99")
 	)
 	(junction
 		(at 213.36 132.08)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "b186e19e-4e4d-52f8-8248-72ad7b074614")
+		(uuid "141ad436-6bd2-5291-ad48-b6ca2f7776dd")
 	)
 	(junction
 		(at 213.36 144.78)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "12596904-252a-5bcb-b2e0-72d171276ae8")
+		(uuid "2b076879-4a80-5eca-b9b0-3e0d8f54f1f1")
 	)
 	(wire
 		(pts
@@ -6589,7 +7441,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5b3788e8-a5ac-5c1a-8e07-b2f1a3d20af8")
+		(uuid "19bf9eaf-f06e-5785-8ee2-587a632ca004")
 	)
 	(symbol
 		(lib_id "tube_psu_next:ISO_GND")
@@ -6599,8 +7451,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "dfc44969-e23c-5605-bcfa-835cbee2c802")
-		(property "Reference" "#PWR009"
+		(uuid "ac328d18-4ecd-5c7e-85c3-eabb5812a340")
+		(property "Reference" "#PWR011"
 			(at 223.52 151.13 0)
 			(effects
 				(font
@@ -6645,12 +7497,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "51a92220-44aa-58db-8850-1e3d66d764e2")
+			(uuid "ca9b4882-b07c-5bf8-8f4e-ede97392ba22")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
-					(reference "#PWR009")
+					(reference "#PWR011")
 					(unit 1)
 				)
 			)
@@ -6664,7 +7516,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "bb5ee883-1a32-5250-b964-2d78d8ff9799")
+		(uuid "7b1fa1df-7158-58ea-9988-f621778e1fec")
 	)
 	(symbol
 		(lib_id "tube_psu_next:420V")
@@ -6674,8 +7526,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "e23504dc-d3ac-5e5e-a077-337c74d2af63")
-		(property "Reference" "#PWR010"
+		(uuid "87fa8a17-6d1f-5bf1-b09f-f0b93e1458eb")
+		(property "Reference" "#PWR012"
 			(at 223.52 135.89 0)
 			(effects
 				(font
@@ -6720,12 +7572,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "3196b980-7cd3-5e6f-ab2f-44ad87820929")
+			(uuid "db7da590-f0b4-5fb2-a28d-cad603854bb5")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
-					(reference "#PWR010")
+					(reference "#PWR012")
 					(unit 1)
 				)
 			)
@@ -6735,7 +7587,7 @@
 		(at 223.52 132.08)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "be05f586-fd1c-59a8-bc80-05087e07e737")
+		(uuid "7233dfca-7af1-5e7b-bd13-0bab6add5080")
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
@@ -6821,7 +7673,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "083283f1-dbe8-55ab-86fa-1f2c9ca24ed3")
+		(uuid "844ba673-4791-54aa-93c6-6858091b9997")
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
@@ -7055,7 +7907,7 @@
 		(at 233.68 157.48)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "87df572e-1da8-5eee-9697-f58bbb88af94")
+		(uuid "4c89bd0e-e4cc-58f3-a96b-bee615ce83bb")
 	)
 	(symbol
 		(lib_id "tube_psu_next:ISO_GND")
@@ -7065,8 +7917,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "ac328d18-4ecd-5c7e-85c3-eabb5812a340")
-		(property "Reference" "#PWR011"
+		(uuid "bb66dbf1-da94-563d-9815-2464e580956b")
+		(property "Reference" "#PWR013"
 			(at 233.68 171.45 0)
 			(effects
 				(font
@@ -7111,12 +7963,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "ca9b4882-b07c-5bf8-8f4e-ede97392ba22")
+			(uuid "71d5d3c9-5bde-511d-bc39-e869c9d774ab")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
-					(reference "#PWR011")
+					(reference "#PWR013")
 					(unit 1)
 				)
 			)
@@ -7206,7 +8058,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b097334b-f6eb-5bb2-acf9-7777f4eea548")
+		(uuid "12aa3078-c6c1-55d2-ac29-7cccd9192473")
 	)
 	(wire
 		(pts
@@ -7216,13 +8068,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "22fa3050-000a-589c-be69-b1cf136a3d6a")
+		(uuid "83079457-45d7-541c-baca-bf1f6175338c")
 	)
 	(junction
 		(at 243.84 157.48)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "06b54f59-38a0-5839-aacf-7fd52574b9f9")
+		(uuid "00eaf5ce-9646-5688-aae2-7d7a896cf9d7")
 	)
 	(global_label "CUK_CAP_MEAS2"
 		(shape passive)
@@ -7234,7 +8086,7 @@
 			)
 			(justify left)
 		)
-		(uuid "964e69f9-db22-5b8a-9ceb-7972ab1fa792")
+		(uuid "a86af417-8ce2-533c-89fb-a60b479fbe0a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 248.92 157.48 0)
 			(effects
@@ -7254,8 +8106,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "87fa8a17-6d1f-5bf1-b09f-f0b93e1458eb")
-		(property "Reference" "#PWR012"
+		(uuid "f3d13122-a231-50c9-80f5-ff7e1b1c21b1")
+		(property "Reference" "#PWR014"
 			(at 243.84 171.45 0)
 			(effects
 				(font
@@ -7300,12 +8152,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "db7da590-f0b4-5fb2-a28d-cad603854bb5")
+			(uuid "1f2f9494-3e4d-55c3-8914-b2a76851423f")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
-					(reference "#PWR012")
+					(reference "#PWR014")
 					(unit 1)
 				)
 			)
@@ -7321,7 +8173,7 @@
 			)
 			(justify left)
 		)
-		(uuid "b93936c7-b200-5c3a-bd3d-751e25567fd3")
+		(uuid "1d0a25f4-4f40-5819-bdc6-ff23bc3ef739")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 274.32 132.08 0)
 			(effects
@@ -7417,7 +8269,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "057f254d-aa49-5007-b390-37180212ba99")
+		(uuid "e647d220-33ba-510a-9f0c-e48e282063cd")
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
@@ -7579,8 +8431,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "bb66dbf1-da94-563d-9815-2464e580956b")
-		(property "Reference" "#PWR013"
+		(uuid "e49741d7-931c-5dea-837a-0d5319a5a568")
+		(property "Reference" "#PWR015"
 			(at 274.32 163.83 0)
 			(effects
 				(font
@@ -7625,12 +8477,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "71d5d3c9-5bde-511d-bc39-e869c9d774ab")
+			(uuid "52a3cd88-b749-5dda-867f-d46430832923")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
-					(reference "#PWR013")
+					(reference "#PWR015")
 					(unit 1)
 				)
 			)
@@ -7645,7 +8497,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "141ad436-6bd2-5291-ad48-b6ca2f7776dd")
+		(uuid "edd8c62b-a343-58f8-a494-a18192d78559")
 	)
 	(text "420V PWR_FLAG: permanent (the rail comes in through the terminal +400V)."
 		(exclude_from_sim no)
@@ -7656,7 +8508,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "2b076879-4a80-5eca-b9b0-3e0d8f54f1f1")
+		(uuid "c2d1c1bb-c0b4-575c-8b42-0fb209791093")
 	)
 	(embedded_fonts no)
 )

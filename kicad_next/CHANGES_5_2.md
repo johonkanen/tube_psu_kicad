@@ -8,7 +8,7 @@ Checks: `tools/next/check_next.sh` (ERC 0 errors, every net in one isolation dom
 netlist / CSV check). The generated netlist diff 5.1 → 5.2 is at the end of this file
 (`python3 tools/next/netlist_diff.py --update`).
 
-New refdes (next free numbers of 5.1): R125–R142, C118–C139, D35, U9–U12. Removed: DRV9, L3, R40, R25, C4, and with the
+New refdes (next free numbers of 5.1): R125–R150, C118–C139, D35, U9–U12. Removed: DRV9, L3, R40, R25, C4, and with the
 ICE5AR change (1.5) R64, R81, R84, R85, R86, C50.
 
 ## 1. Auxiliary flyback (sheet 1)
@@ -44,7 +44,9 @@ ICE5AR change (1.5) R64, R81, R84, R85, R86, C50.
 | 2.2 | yes | footprint `tube_psu_next:Transformer_EC42x15_2Slot_2x8_P5mm` |
 | 2.4 | yes | **L3 removed** (no jumper position: the leakage is the series L; the net TRANS_PRI disappears) |
 | 2.3 / 2.5 / 2.6 | layout | C47 / C54 at the TR3 primary pins (note on the sheet), phase 5 |
-| 2.7 | firmware | dead time 150–200 ns (note on sheets 2 / 7) |
+| 2.1 gap | doc | gap target **Lm ≈ 200 µH** (≈ 0.66–0.68 mm centre grind, set by measuring Lm; user 2026-11-18, simulation/dab/DAB_SIMULATION.md) – sheet-7 note updated (was Lm ~300 µH, gap 0.35 mm) |
+| 2.7 | firmware | dead time **150 ns total** (UCC21520 DT 100 ns is a minimum, not additive; notes on sheets 2 / 7 updated) |
+| 2.8 | yes | **R143 + R144** across C47 (DC+ → Net-(R143-Pad2) → DHB_CAP), **R145 + R146** across C54 (DHB_CAP → Net-(R145-Pad2) → DHB_CURRENT), **R147 + R148** across C16 (420V → Net-(R147-Pad2) → TRANS_SEC), **R149 + R150** across C55 (TRANS_SEC → Net-(R149-Pad2) → ISO_GND): split-cap balancing, **220k 1 % 1206** UNI-ROYAL 1206W4F2203T5E (C17956, 200 V, 143 771 pcs, extended), ≤ ≈ 105 V / 50 mW each. Drawn beside the C47 / C54 and C16 / C55 columns; the secondary half bridge moved 12 grid units right (Q2X 184 → 196, C16 / C55 column 132 → 142) to make room. Mid nets in HV_NETS (`setup_project.py`): R143 / R145 → HV_PRIMARY, R147 / R149 → HV_SECONDARY |
 
 ## 3. Gate drivers (sheets 2, 6, 9) – NR 3, 3a
 
@@ -100,7 +102,7 @@ ICE5AR change (1.5) R64, R81, R84, R85, R86, C50.
 
 ## Isolation domains after phase 2
 
-`setup_project.py`: 225 nets – SIGNAL 106, PRIMARY_LV 5, HV_PRIMARY 39, SECONDARY_LV 28, HV_SECONDARY 12,
+`setup_project.py`: 229 nets – SIGNAL 106, PRIMARY_LV 5, HV_PRIMARY 41, SECONDARY_LV 28, HV_SECONDARY 14,
 HEATER 22, UART_ISO 12, PE_EARTH 1. Barrier parts: TR1, TR2, TR3, ISO1, ISO2, **U11**. No other part bridges two
 domains (the UCC21520s have both sides in one domain). HV_NETS updated for the renamed nets (FLY_C,
 PFC_DRAIN_1/2, HEATER_HI_DRV, Net-(D35-K), Net-(DRV3-VDDA); TRANS_PRI removed).
@@ -118,7 +120,7 @@ PFC_DRAIN_1/2, HEATER_HI_DRV, Net-(D35-K), Net-(DRV3-VDDA); TRANS_PRI removed).
 4. ~~DAB_DIS default~~ **Decided (user 2026-11-18): keep the pull-down** (drivers enabled when J2-18 is not driven,
    matching the verified 5.1 behaviour); the pull-downs on the gate PWM inputs keep the bridges off. Control-card
    pin D15 (power-board J2-18) still to be assigned in the card's pin table.
-5. **Dead time**: UCC21520 DT 100 ns is a hardware minimum – the FPGA dead time (DAB 150–200 ns, heater LLC) must
+5. **Dead time**: UCC21520 DT 100 ns is a hardware minimum – the FPGA dead time (DAB 150 ns total, heater LLC) must
    stay above it, else DT sets the dead time.
 6. **Bias buffer stability**: U9 (TLV316) with 22R + 100 nF, feedback from the op-amp output – check with the vendor
    model in phase 4; the 22R drop (≈ 13 mV) shifts the bias of all channels equally.
@@ -138,11 +140,11 @@ Reviewed against the items above: every difference is one of the listed changes 
 re-symbolled parts – PWM2, DRV1–DRV4, TR1, TR3, J4, L1/L2 – show as + / − pins of the same net).
 
 <!-- netlist_diff.py begin -->
-Parts: 5.1 315, 5.2 349; removed 11, added 45.
+Parts: 5.1 315, 5.2 357; removed 11, added 53.
 
 **Removed parts:** C4 (1n), C50 (22pf), DRV9 (IXDD609D2TR), L3 (70u), R25 (82k), R40 (82k), R64 (39k), R81 (15k), R84 (33k), R85 (4.7k), R86 (1k)
 
-**Added parts:** C118 (100p), C119 (100p), C120 (1n), C121 (100p), C122 (12p), C123 (5.6p), C124 (100n), C125 (1u), C126 (1n), C127 (1n), C128 (100n), C129 (100n), C130 (1n), C131 (1n), C132 (100n), C133 (100n), C134 (100n), C135 (100n), C136 (1u), C137 (1u), C138 (10n), C139 (2.2n), D35 (ZLLS400TA), R125 (2.2k), R126 (1k), R127 (10k), R128 (10k), R129 (10k), R130 (10k), R131 (22R), R132 (100R), R133 (15k 0.1%), R134 (10k 0.1%), R135 (100R), R136 (47R), R137 (47R), R138 (88.7k 0.1%), R139 (49.9k 0.1%), R140 (4.7k), R141 (750k), R142 (10R), U9 (TLV316IDBVR), U10 (TLV9062IDGKR), U11 (CA-IS3721HW), U12 (XC6206P332MR)
+**Added parts:** C118 (100p), C119 (100p), C120 (1n), C121 (100p), C122 (12p), C123 (5.6p), C124 (100n), C125 (1u), C126 (1n), C127 (1n), C128 (100n), C129 (100n), C130 (1n), C131 (1n), C132 (100n), C133 (100n), C134 (100n), C135 (100n), C136 (1u), C137 (1u), C138 (10n), C139 (2.2n), D35 (ZLLS400TA), R125 (2.2k), R126 (1k), R127 (10k), R128 (10k), R129 (10k), R130 (10k), R131 (22R), R132 (100R), R133 (15k 0.1%), R134 (10k 0.1%), R135 (100R), R136 (47R), R137 (47R), R138 (88.7k 0.1%), R139 (49.9k 0.1%), R140 (4.7k), R141 (750k), R142 (10R), R143 (220k), R144 (220k), R145 (220k), R146 (220k), R147 (220k), R148 (220k), R149 (220k), R150 (220k), U9 (TLV316IDBVR), U10 (TLV9062IDGKR), U11 (CA-IS3721HW), U12 (XC6206P332MR)
 
 **Changed parts** (value / symbol / footprint, 5.1 -> 5.2):
 
@@ -230,11 +232,11 @@ Parts: 5.1 315, 5.2 349; removed 11, added 45.
 | U1 | LMH6658 -> LMH6643 | LMH6658 -> LMH6643 |  |
 | U4 | LMH6658 -> LMH6643 | LMH6658 -> LMH6643 |  |
 
-Nets: 5.1 208, 5.2 225 (with at least one part pin).
+Nets: 5.1 208, 5.2 229 (with at least one part pin).
 
 **5.1 nets gone** (no pin left in any 5.2 net): /04 MCU connector/ADA0, /04 MCU connector/ADA1, /04 MCU connector/ADA2, /04 MCU connector/ADA4, /04 MCU connector/CUK_CAP_MEAS_RAW, /04 MCU connector/HEATER_CAP_AD_MEAS, /07 DHB/TRANS_PRI, Net-(C50-Pad2), Net-(DRV3-OUT-), Net-(DRV5-NC6), Net-(DRV6-NC6), Net-(PWM2-Vsense), unconnected-(DRV5-NC12-Pad12), unconnected-(DRV5-NC13-Pad13), unconnected-(DRV5-NC7-Pad7), unconnected-(DRV6-NC12-Pad12), unconnected-(DRV6-NC13-Pad13), unconnected-(DRV6-NC7-Pad7), unconnected-(L1-NC-Pad1), unconnected-(L1-NC-Pad2), unconnected-(L2-NC-Pad1), unconnected-(L2-NC-Pad2), unconnected-(L3-NC-Pad1), unconnected-(L3-NC-Pad2)
 
-**New 5.2 nets** (only new part pins): ISO_UART_GND, Net-(C138-Pad1), Net-(D10-PadA), Net-(D35-K), Net-(DRV3-DT), Net-(DRV5-DT), Net-(DRV6-DT), Net-(PWM2-FB), Net-(PWM2-GATE), Net-(PWM2-VERR), Net-(U10A-+), Net-(U10A--), Net-(U10B-+), Net-(U10B--), Net-(U11-B1), Net-(U11-B2), Net-(U9-+), Net-(U9--), UART_3V3, UART_5V, /04 MCU connector/UART_RXD, /04 MCU connector/UART_TXD, unconnected-(DRV3-NC-Pad12), unconnected-(DRV3-NC-Pad13), unconnected-(DRV3-NC-Pad7), unconnected-(DRV5-NC-Pad12), unconnected-(DRV5-NC-Pad13), unconnected-(DRV5-NC-Pad7), unconnected-(DRV6-NC-Pad12), unconnected-(DRV6-NC-Pad13), unconnected-(DRV6-NC-Pad7), unconnected-(J4-Pin_2-Pad2), unconnected-(J4-Pin_6-Pad6), unconnected-(U11-NC-Pad10), unconnected-(U11-NC-Pad11), unconnected-(U11-NC-Pad15), unconnected-(U11-NC-Pad2), unconnected-(U11-NC-Pad6), unconnected-(U11-NC-Pad8)
+**New 5.2 nets** (only new part pins): ISO_UART_GND, Net-(C138-Pad1), Net-(D10-PadA), Net-(D35-K), Net-(DRV3-DT), Net-(DRV5-DT), Net-(DRV6-DT), Net-(PWM2-FB), Net-(PWM2-GATE), Net-(PWM2-VERR), Net-(R143-Pad2), Net-(R145-Pad2), Net-(R147-Pad2), Net-(R149-Pad2), Net-(U10A-+), Net-(U10A--), Net-(U10B-+), Net-(U10B--), Net-(U11-B1), Net-(U11-B2), Net-(U9-+), Net-(U9--), UART_3V3, UART_5V, /04 MCU connector/UART_RXD, /04 MCU connector/UART_TXD, unconnected-(DRV3-NC-Pad12), unconnected-(DRV3-NC-Pad13), unconnected-(DRV3-NC-Pad7), unconnected-(DRV5-NC-Pad12), unconnected-(DRV5-NC-Pad13), unconnected-(DRV5-NC-Pad7), unconnected-(DRV6-NC-Pad12), unconnected-(DRV6-NC-Pad13), unconnected-(DRV6-NC-Pad7), unconnected-(J4-Pin_2-Pad2), unconnected-(J4-Pin_6-Pad6), unconnected-(U11-NC-Pad10), unconnected-(U11-NC-Pad11), unconnected-(U11-NC-Pad15), unconnected-(U11-NC-Pad2), unconnected-(U11-NC-Pad6), unconnected-(U11-NC-Pad8)
 
 **5.1 nets split in 5.2:** Net-(DRV1-OUTA), Net-(DRV2-OUTA)
 
@@ -247,6 +249,7 @@ Nets: 5.1 208, 5.2 225 (with at least one part pin).
 | +1V65_BIAS | -R3.1 R110.1; new parts C122 C123 C126 R131 |
 | +3V3 | new parts C124 C125 C129 C133 C134 U9 U10 U11 |
 | 15V | +DRV3.11; -D10.A DRV1.3 DRV1.8 DRV2.3 DRV2.8; new parts R125 R142; removed parts DRV9 |
+| 420V | new parts R147 |
 | 5V | +DRV3.3 DRV3.8; -DRV3.2 DRV3.4 DRV5.5; new parts R126 R133 R138 |
 | 5V_ISOL | -DRV6.5 |
 | /04 MCU connector/ADB0 -> /04 MCU connector/5V_MEAS | new parts R135 |
@@ -256,9 +259,10 @@ Nets: 5.1 208, 5.2 225 (with at least one part pin).
 | /04 MCU connector/AUX_MEAS | +J2.43; -C61.2 J2.40 R11.2 R12.1; new parts R132 |
 | /04 MCU connector/F16 -> DAB_DIS | +DRV5.5 ISO2.4; new parts C120 R129 |
 | unconnected-(ISO2-VO_C-Pad13) -> DAB_DIS_SEC | +DRV6.5 |
-| DC+ | +TR1.11; -TR1.4 |
+| DC+ | +TR1.11; -TR1.4; new parts R143 |
 | /04 MCU connector/DC_LINK_MEAS | removed parts C4 |
-| /07 DHB/DHB_CAP | +TR3.1 TR3.2; removed parts L3 |
+| /07 DHB/DHB_CAP | +TR3.1 TR3.2; new parts R144 R145; removed parts L3 |
+| DHB_CURRENT | new parts R146 |
 | DHB_HI_SOURCE | +TR3.7 TR3.8; -TR3.2 |
 | DHB_HI_SOURCE_SEC | +TR3.15 TR3.16; -TR3.4 |
 | DHB_I_MEAS | +J2.38; -J2.37 |
@@ -271,7 +275,7 @@ Nets: 5.1 208, 5.2 225 (with at least one part pin).
 | /06 Heaters/HEATER_HI_SOURCE | +DRV3.14; -DRV3.5 |
 | Net-(DRV9-OUTA) -> /06 Heaters/HEATER_LOW_DRV | +DRV3.10; removed parts DRV9 |
 | HT_GND | +DRV4.3; -DRV4.7 DRV4.9 |
-| ISO_GND | new parts C119 R128; removed parts R25 |
+| ISO_GND | new parts C119 R128 R150; removed parts R25 |
 | Net-(R49-Pad1) -> Net-(C127-Pad1) | new parts C127 |
 | Net-(R2-Pad2) -> Net-(C131-Pad2) | new parts C131 |
 | Net-(D10-K) | +PWM2.7; -PWM2.5 R114.2 |
@@ -297,7 +301,7 @@ Nets: 5.1 208, 5.2 225 (with at least one part pin).
 | PFC_PWM1 | +DRV1.6; -DRV1.2 |
 | PFC_PWM2 | +DRV2.6; -DRV2.2 |
 | /04 MCU connector/RX | -J4.1; new parts U11 |
-| /07 DHB/TRANS_SEC | +TR3.10 TR3.9; -TR3.3 |
+| /07 DHB/TRANS_SEC | +TR3.10 TR3.9; -TR3.3; new parts R148 R149 |
 | /04 MCU connector/TX | -J4.2; new parts U11 |
 
 <!-- netlist_diff.py end -->

@@ -664,6 +664,14 @@
       },
       {
         "netclass": "HV_PRIMARY",
+        "pattern": "Net-(R143-Pad2)"
+      },
+      {
+        "netclass": "HV_PRIMARY",
+        "pattern": "Net-(R145-Pad2)"
+      },
+      {
+        "netclass": "HV_PRIMARY",
         "pattern": "Net-(R15-Pad1)"
       },
       {
@@ -733,6 +741,14 @@
       {
         "netclass": "HV_SECONDARY",
         "pattern": "Net-(Q21-G)"
+      },
+      {
+        "netclass": "HV_SECONDARY",
+        "pattern": "Net-(R147-Pad2)"
+      },
+      {
+        "netclass": "HV_SECONDARY",
+        "pattern": "Net-(R149-Pad2)"
       },
       {
         "netclass": "HV_SECONDARY",

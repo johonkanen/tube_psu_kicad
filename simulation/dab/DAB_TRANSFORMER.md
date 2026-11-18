@@ -157,6 +157,11 @@ divider. Values are with the recommended gap (section 4) unless the row says "un
 | 100 kHz sensitivity, ungapped | φ 25.2°, total 2.1 W | φ 15.2°, total 2.8 W, Bpk 0.133 T |
 | ZVS at 400 W (edge current, needs < −0.5 A) | −3.1 A / −3.0 A | −2.9 A / −2.7 A |
 
+**Gap target changed (user decision 2026-11-18, section 4):** option B is now gapped to
+**Lm ≈ 200 µH** (≈ 0.66–0.68 mm centre grind), not 0.300 mH. The "gapped" rows above are
+for 300 µH; at 200 µH the switching model gives φ +0.4°, I1rms +3 % and about +0.5 W at
+400 W (`DAB_SIMULATION.md` 2.4). Leakage changes by < 1 %.
+
 Option A uses 25:26 rather than 26:27 on purpose. Its best estimate (63 µH) and its MKF
 upper bound (84 µH) both fall inside 60–85 µH. 26:27 would give 68 / 93 µH, so its upper
 bound is out of range, and Pmax would drop to 515 W.
@@ -204,8 +209,17 @@ sets the dead time):
 - Hand check: the user's estimate was Lm ≈ 0.45 mH for 2 × 0.4 A. With the datasheet
   Co(tr) of 75.5 pF and 30 pF winding capacitance, the requirement is higher, about
   2 × 0.5 A at 150 ns.
-- **Recommendation: grind to the 150 ns value and run the FPGA at 150–200 ns dead time.**
-  Targets are A 337 µH (AL 0.54 µH) and B 300 µH (AL 0.75 µH).
+- ~~Recommendation: grind to the 150 ns value and run the FPGA at 150–200 ns dead time.
+  Targets were A 337 µH (AL 0.54 µH) and B 300 µH (AL 0.75 µH).~~ **Superseded (user decision
+  2026-11-18, from the switching model `dab_spice.py` / `DAB_SIMULATION.md` 2.4 and 3):
+  option B target Lm ≈ 200 µH (AL 0.50 µH, Np = 20), FPGA dead time 150 ns total.** 200 µH is
+  the "100 ns" row of the table (197 µH): ZVS at no load even with the 100 ns UCC21520 DT
+  alone (node swing 66 ns), no hard switching at a +5 % bus mismatch, only small (≤ 6 µJ)
+  edges in a 30–110 W window at −5 % (37 µJ at 307 µH). Cost: +0.5 W at 400 W, +0.3 W at no
+  load. The UCC21520's 100 ns DT is a minimum, not added to the FPGA dead time.
+  Gap for 200 µH, recomputed with `gap_for_lm` (MKF reluctance, option B, the same for the
+  served-litz and the TIW-litz secondary): **centre grind 0.659 mm, spacer (all legs)
+  0.335 mm**; the tolerance band 170–210 µH is 0.87–0.61 mm centre / 0.44–0.31 mm spacer.
   - At 200 ns the no-load charge margin is 1.33×.
   - At full load the node swings in about 25 ns (3 A), so the body diode then conducts for
     the rest of the dead time. That costs about 0.2 W in total, with no reverse-recovery
@@ -250,8 +264,10 @@ time or grind to the 100 ns column. (The current needed for more Im/2 margin sca
   fringing loss is negligible.
 - The spacer variant (gaps in all three legs) gives the same corrected losses. It spreads
   more stray field outside the core, so the **centre-leg grind is preferred**. A Kapton or
-  paper shim of 0.30 mm (A) or 0.18 mm (B) under all legs is a quick way to try the
-  first sample before grinding.
+  paper shim of 0.30 mm (A) or **0.335 mm (B, Lm 200 µH; 0.18 mm was the old 300 µH
+  target)** under all legs is a quick way to try the first sample before grinding. The
+  fringing increment at the B gap of ≈ 0.66 mm is of the same order as the 0.013 W found
+  for A at 0.58 mm, i.e. negligible.
 
 ## 5. Recommended winding specification
 
@@ -262,7 +278,7 @@ shift (section 1).
 |---|---|---|
 | primary, chamber 1 (10.4 mm) | 25 T Litz 135×0.071, 7 per layer, 4 layers | 20 T Litz 135×0.071, 7 per layer, 3 layers |
 | secondary, chamber 2 (12.4 mm) | 26 T Litz 135×0.071, 9 per layer, 3 layers | 21 T Litz 135×0.071, 9 per layer, 3 layers → **reinforced (TIW-jacket) litz 135×0.071, OD ≤ 1.6 mm, 7 per layer, 3 layers (section 8)** |
-| gap (centre leg, total) | 0.58 mm → Lm 337 µH | 0.35 mm → Lm 300 µH (TIW-litz secondary: 0.34 mm → 307 µH; set by measurement) |
+| gap (centre leg, total) | 0.58 mm → Lm 337 µH | **≈ 0.66–0.68 mm → Lm ≈ 200 µH** (AL 0.50 µH; MKF 0.659 mm, served or TIW-litz secondary; spacer alternative 0.335 mm under all legs; **set by measuring Lm**, section 6). Was 0.35 mm → 300 µH (user decision 2026-11-18, `DAB_SIMULATION.md` 3) |
 
 **Wire.** Litz 135×0.071 single-served has OD 1.19–1.29 mm and 0.534 mm² of copper
 (about 4.5 A/mm² at 2.4 A). An alternative is 60×0.1 (OD 1.2 mm), at about +25 % Pcu.
@@ -315,11 +331,16 @@ The ETD34 footprint does not fit. This is not done here.
    - if Lsc comes out too low, add a small residual L3.
 3. **Gap.** Grind the centre leg of one half, or both halves by half each, in steps.
    Re-measure Lm (primary open) after each step, at 10–100 kHz and a low level. **Stop at
-   337 µH (A) or 300 µH (B), tolerance −15 % / +5 %.** Lower is safer for ZVS and costs
-   only a little copper loss. Then re-check Lsc; it should be within 1 % of before.
+   337 µH (A) or 200 µH (B), tolerance −15 % / +5 %, i.e. B 170–210 µH** (≈ 0.87–0.61 mm
+   centre grind; aim for ≈ 200 µH ≈ 0.66 mm and grind in steps of ≈ 0.05 mm: one step is
+   ≈ 10 µH there). Lower is safer for ZVS and costs only a little copper loss
+   (≈ +0.5 W at 400 W for 200 vs 300 µH). Then re-check Lsc; it should be within 1 % of
+   before.
 4. **On the board.** Look at the switch-node transition at no load and at full load, with
-   150 ns dead time. If the no-load transition does not finish (the node does not reach the
-   rail before turn-on), set 200 ns or grind a little more.
+   **150 ns dead time total** (the UCC21520 DT 100 ns is a minimum, not additive). At 200 µH
+   the no-load swing is ≈ 66 ns (`DAB_SIMULATION.md` 2.4). If the no-load transition does not
+   finish (the node does not reach the rail before turn-on), grind a little more; do not
+   go above 200 ns (the sending-side current reverses before turn-on at 100–250 W).
 
 ## 7. Confidence and caveats
 
@@ -394,7 +415,7 @@ table in `out/results_tiw.md`, MAS `mas/tr3_dab_B_42uH_TIW.json`):
 |---|---|---|
 | secondary layers, build incl. 3 tape | 9/9/3, 4.0 mm | **7/7/7, 4.8 mm** (of 6.1 mm) |
 | Lsc best (MKF upper bound) | 40 µH (53) | **40 µH (54)** |
-| Lm req. at 150 ns → centre gap | 300 µH → 0.35 mm | **307 µH → 0.34 mm** |
+| Lm req. at 150 ns → centre gap | 300 µH → 0.35 mm | **307 µH → 0.34 mm** (now superseded: target 200 µH → 0.66 mm, section 4) |
 | φ at 400 W, gapped | 23.5° | **23.6°** |
 | Rdc pri / sec at 80 °C | 53 / 54 mΩ | 53 / **58 mΩ** |
 | Pcu / Pcore / total, gapped | 0.72 / 1.50 / 2.21 W | **0.73 / 1.50 / 2.23 W** |

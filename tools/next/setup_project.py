@@ -47,11 +47,13 @@ HV_NETS = {
         "Net-(R114-Pad1)", "Net-(R115-Pad1)", "Net-(R15-Pad1)", "Net-(R10-Pad1)",  # dividers from DC+
         "Net-(R4-Pad1)", "Net-(R5-Pad1)", "Net-(R47-Pad2)", "Net-(R48-Pad2)", "Net-(R50-Pad2)",
         "Net-(R51-Pad2)", "Net-(R109-Pad1)", "Net-(R111-Pad1)",
+        "Net-(R143-Pad2)", "Net-(R145-Pad2)",                     # C47 / C54 balancing mid nodes (NR 2.8)
     },
     "SECONDARY": {
         "420V", "/07 DHB/TRANS_SEC", "DHB_HI_SOURCE_SEC", "DHB_HI_GATE_SEC", "Net-(Q21-G)",
         "Net-(D31-PadA)", "Net-(DRV6-VDDA)", "Net-(D18-K)", "-100V BIAS", "Net-(D8-K)",
         "Net-(R23-Pad2)", "Net-(R34-Pad2)",
+        "Net-(R147-Pad2)", "Net-(R149-Pad2)",                     # C16 / C55 balancing mid nodes (NR 2.8)
     },
 }
 RAILS = {"GND", "15V", "5V", "+3V3", "+1V65_BIAS"}   # (UART island nets: one class UART_ISO)   # primary low-voltage supply nets -> PRIMARY_LV
