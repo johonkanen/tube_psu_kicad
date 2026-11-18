@@ -105,11 +105,10 @@ PFC_DRAIN_1/2, HEATER_HI_DRV, Net-(D35-K), Net-(DRV3-VDDA); TRANS_PRI removed).
    "pending" – get the current certificates (VIOWM vs the 552 Vrms ISO2 barrier). Both are default-low (3761L) /
    default-high (3721H) as intended: ISO1/ISO2 outputs low when the primary is unpowered (PWM off, DIS low, ADC CS
    low = harmless).
-3. **UART isolator part**: Si8621BD (asked for) is default-low → used CA-IS3721HW (default-high, same pinout).
-   Alternative: Si8621ED-B-IS (default-high, 0 JLC stock → consign). Confirm.
-4. **DAB_DIS default**: pull-down = drivers enabled when the FPGA does not drive J2-18 (as 5.1). A pull-up (disabled
-   until the FPGA enables) is the fail-safe alternative – needs firmware to drive it low. Control-card pin D15
-   (power-board J2-18) to be assigned in the card's pin table.
+3. ~~UART isolator part~~ **Decided (user 2026-11-18): keep the CA-IS3721HW** (default-high, same pinout as the Si8621).
+4. ~~DAB_DIS default~~ **Decided (user 2026-11-18): keep the pull-down** (drivers enabled when J2-18 is not driven,
+   matching the verified 5.1 behaviour); the pull-downs on the gate PWM inputs keep the bridges off. Control-card
+   pin D15 (power-board J2-18) still to be assigned in the card's pin table.
 5. **Dead time**: UCC21520 DT 100 ns is a hardware minimum – the FPGA dead time (DAB 150–200 ns, heater LLC) must
    stay above it, else DT sets the dead time.
 6. **Bias buffer stability**: U9 (TLV316) with 22R + 100 nF, feedback from the op-amp output – check with the vendor

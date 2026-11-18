@@ -49,7 +49,7 @@ EC42/15 PC40 + 2-chamber bobbin 8+8 pins.
 |---|---|---|---|---|
 | 3.1 | DRV5, DRV6 | Schematic / BOM: **Si8275BB** (dual input, 8 V UVLO) – already corrected in the KiCad design (`5ef2e7f`) | wrong part number (Si8274) | done in KiCad |
 | 3.2 | R40, R25 | Remove (DNP): they sit on pin 6 = NC of the Si8275 | dead-time resistors of the Si8274 | L |
-| 3.3 | DRV5/DRV6 EN (pin 5) | Optional: route EN to an FPGA pin (today tied to VDDI) for a hardware disable | Si8275 has no overlap protection; dead time only from firmware | L |
+| 3.3 | DRV5/DRV6 EN (pin 5) | Done in 5.2 as UCC21520 DISABLE = DAB_DIS (J2-18) with a **pull-down: drivers enabled by default** (user 2026-11-18: matches the verified 5.1 behaviour; the gate-signal pull-downs keep the bridges off) | hardware disable available to firmware | done |
 
 ## 3a. Gate drivers – free to change to stocked parts (user 2026-11-17)
 
