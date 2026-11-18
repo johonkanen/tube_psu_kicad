@@ -88,6 +88,12 @@ def om_analysis(name: str, force=False) -> dict:
         with open(path) as f:
             return json.load(f)
     opt = opts.get(name)
+    if opt.get("om_from"):
+        # same windings as another option (e.g. the ICE5AR controller variants): reuse its MKF result
+        res = om_analysis(opt["om_from"], force=force)
+        with open(path, "w") as f:
+            json.dump(dict(res, name=name), f, indent=1)
+        return res
     t = time.time()
     res = m.analyse(opt)
     mag = res.pop("magnetic")
@@ -134,6 +140,8 @@ def run_case(name: str, res: dict, case: dict, force=False, ic=None) -> dict:
     case = dict(case)
     if opt.get("preload"):
         case["preload"] = opt["preload"]
+    if opt.get("controller") == "ice5ar":
+        return run_case_ice(name, opt, res, case, path, vin, ic)
     pout = fs.expected_pout(case)
     if opt.get("rsense"):
         # EEL19 options: own sense resistor and knee threshold; u0 from the total primary
@@ -161,6 +169,33 @@ def run_case(name: str, res: dict, case: dict, force=False, ic=None) -> dict:
     t = time.time()
     vals = fs.run(net, f"{name}__{case['name']}")
     r = fs.summarise(vals)
+    r["seconds"] = time.time() - t
+    r["case"] = case
+    with open(path, "w") as f:
+        json.dump(r, f, indent=1)
+    return r
+
+
+def run_case_ice(name, opt, res, case, path, vin, ic):
+    """One load case with the ICE5AR4780BZS model (ice5ar_sim.py). The FB compensation
+    capacitors and the ABM entry blanking time are scaled with the output capacitors (cscale
+    0.1), so the loop keeps its shape and the cases settle in the same 9-40 ms runs; the
+    DC levels do not depend on either."""
+    import ice5ar_sim as ice
+    # batch runs: the slower FB network ice.BATCH_COMP (R1/C1/C2 only; same RSel, divider and ABM
+    # option, hence the same DC gain and levels), scaled with the output capacitors. The schematic
+    # network (R140 4.7k + C138 10n, C139 2.2n) scaled by 0.1 puts the loop crossover near the
+    # switching frequency and limit-cycles; it is verified with the real capacitors in ice5ar_checks.py.
+    case["comp"] = {**(opt.get("comp") or {}), **ice.BATCH_COMP}
+    n = case["name"]
+    wave = os.path.join(OUT, "spice", f"{name}__{n}_wave.txt") if n in ("nom", "max_S15", "full10", "full15") else None
+    net = ice.netlist(res, opt["spice"], case, vin=vin,
+                      tstop=case.get("tstop", 40e-3 if n == "idle" else 20e-3 if n == "light" else 12e-3 if n.startswith("min") else 9e-3),
+                      twin=case.get("twin", 10e-3 if n == "idle" else 5e-3 if n == "light" else 1.5e-3),
+                      wave_file=wave, ic=ic)
+    t = time.time()
+    vals = fs.run(net, f"{name}__{n}")
+    r = ice.summarise(vals)
     r["seconds"] = time.time() - t
     r["case"] = case
     with open(path, "w") as f:
@@ -237,6 +272,11 @@ class Pool:
 
 
 def show(n, c, r):
+    if "abm" in r:          # ICE5AR model
+        print(f"  {n:>12} {c:>8}: " + " ".join(f"{SHORT[k]}={r[k]:.3f}" for k in fs.RAILS if r.get(k) is not None)
+              + f" Vds={r['vcol']:.0f} FB={r['fb']:.2f} f={r['fsw'] / 1e3:.0f}k ABM={r['abm']:.2f} Pin={r['pin']:.2f}"
+              f" drift20={r['20V drift'] * 1e3:.0f}mV ({r['seconds']:.0f}s)", flush=True)
+        return
     print(f"  {n:>12} {c:>8}: " + " ".join(f"{SHORT[k]}={r[k]:.3f}" for k in fs.RAILS if r.get(k) is not None)
           + f" Vcol={r['vcol']:.0f} VrD8={r['-100V BIAS vrev']:.0f} u={r['u']:.3f} drift20={r['20V drift'] * 1e3:.0f}mV ({r['seconds']:.0f}s)", flush=True)
 

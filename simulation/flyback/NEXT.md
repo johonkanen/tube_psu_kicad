@@ -1,3 +1,43 @@
+# TR1 flyback study – session 5 (2026-11-18): ICE5AR4780BZS controller
+
+PWM2 is now the **Infineon ICE5AR4780BZS** (5.2 schematic, commit 009a237). The new ngspice model
+is `ice5ar_sim.py`: 100 kHz peak-current mode, frequency reduction, Active Burst Mode, VERR
+transconductance amplifier from the 5V rail, CoolMOS with 8.7 Ω hot. It is selected by the option
+key `"controller": "ice5ar"` (`*_ice` options); the iW1819 options are unchanged. Details:
+[EEL19_DESIGN.md](EEL19_DESIGN.md) section 13, tables [ice5ar_results.md](ice5ar_results.md).
+
+- **Schematic values modelled:**
+  - VERR R138 88.7k / R139 49.9k from 5V;
+  - FB R140 4.7k + C138 10n, C139 2.2n, R141 750k (ABM option 2);
+  - Rcs 0.8 Ω; VCC from 15V via R142 / D10, C58 22 µF.
+- **Results, TIW build** `eel19_tiw_sandwich_s_pre3_ice`, 19 cases (iW1819 model in brackets):
+  - 5V: 5.00 V in every case (4.79–5.16);
+  - 15V: 14.18–15.31 (14.44–15.45);
+  - 15V_ISO_SEC: 14.55–17.44 (14.94–17.42);
+  - 5V_ISOL: 4.81–5.35; −5V: 4.82–5.31; −80 V: 80.3–84.3.
+  - The extremes now come from the 5V rail's own load (min_5V / max_5V).
+  - Full load is tighter than before: all rails within 1 % of nominal at 15 W.
+- **VDS** 556 V at 15 W (586 V at a 430 V bus); enamel build 590 V. VCC 13.8–15.0 V, far from
+  UVLO and OVP.
+- **Loop** (real capacitors, schematic network): 5V step 0.1 ↔ 0.2 A gives −28 / +27 mV,
+  settled in 0.3 ms, no ringing.
+- **Start-up** from 0 V at 15 W: FB leaves the OLP level after 20 ms (OLP blanking 30 ms min);
+  C102 on −80 V follows the other rails.
+- **Light load:** option 2 bursts at light load (ripple 5V 31 mV, 15V 114 mV, −80 V 0.4 V pp).
+  Cross regulation of −80 V / 15V_ISO_SEC is the same as without burst. Keep option 2.
+- **Preloads unchanged.** The 5V preload R126 1k is essential: without it the loaded rails
+  collapse in min_5V / light.
+- **Losses at 15 W:** windings 1.53 W and core 0.12 W, as before. Switch 0.27 W (fast gate) to
+  0.75 W (model upper bound) → **CoolMOS Tj ≈ 85 °C** at Ta 50 °C (≤ 132 °C upper bound).
+- **Assumption to confirm on the bench:** the internal 15 kΩ FB pull-up is disconnected in the
+  non-isolated mode. If it is connected, 5V reads ≈ 5.12 V. Infineon's reference board data
+  support "disconnected".
+- **Reference board REF_5AR4780BZS-1_14W1** (AN062913): its slower compensation (22k + 100n,
+  10n), option 3 and a weighted 15 V / 5 V divider were compared (section 13.6). No change is
+  recommended.
+
+---
+
 # TR1 flyback study – session 4 (2026-11-18): reinforced isolation → TIW build
 
 **The user requires reinforced primary ↔ secondary isolation**: 552 Vrms / 778 Vpk, 11.1 mm

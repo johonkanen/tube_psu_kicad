@@ -453,6 +453,43 @@ OPTIONS.update({
                                                 "no margins, P1 52 | S15 16 | SHV 84 | S5+SN5 6+6 | A5 6 | A15 16 | P2 52, "
                                                 "Lp 600 uH, spacer gap, preloads 2.2k on 15V, 1k on 5V, 3.3k on 15V_ISO_SEC"),
 })
+# ---------------------------------------------------------------------------------------
+# Infineon ICE5AR4780BZS controller (2026-11-18, EEL19_DESIGN.md section 13): the same windings
+# (MKF matrix reused from the base option via "om_from"), simulated with ice5ar_sim.py instead of
+# the iW1819 model: 100 kHz peak-current mode, Rcs 0.8 ohm, 5V rail regulated through RF2/RF1 into
+# VERR, Active Burst Mode. "comp" overrides ice5ar_sim.COMP (FB network, divider, ABM option).
+# ---------------------------------------------------------------------------------------
+def _ice(base, name, comp=None, note=""):
+    o = OPTIONS[base]()
+    o.update(name=name, controller="ice5ar", om_from=base, write_mas=False,
+             title=o["title"] + " | ICE5AR4780BZS" + note)
+    if comp:
+        o["comp"] = comp
+    return o
+
+
+OPTIONS.update({
+    "eel19_tiw_sandwich_s_pre3_ice": lambda: _ice("eel19_tiw_sandwich_s_pre3", "eel19_tiw_sandwich_s_pre3_ice"),
+    "eel19_sandwich_b_pre3_ice": lambda: _ice("eel19_sandwich_b_pre3", "eel19_sandwich_b_pre3_ice"),
+    # ABM variants of the TIW build (light-load study). The base options use the 5.2 schematic
+    # network (RSel R141 750k = ABM option 2); _abm1 = no burst mode (R141 100k, the schematic
+    # fallback), _abm3 = high ABM level (R141 open)
+    "eel19_tiw_sandwich_s_pre3_ice_abm1": lambda: _ice("eel19_tiw_sandwich_s_pre3", "eel19_tiw_sandwich_s_pre3_ice_abm1",
+                                                       {"abm": 1, "rsel": 100e3}, " (no ABM, RSel 100k)"),
+    "eel19_tiw_sandwich_s_pre3_ice_abm3": lambda: _ice("eel19_tiw_sandwich_s_pre3", "eel19_tiw_sandwich_s_pre3_ice_abm3",
+                                                       {"abm": 3, "rsel": None}, " (ABM option 3, RSel open)"),
+    # preload study with the ICE5AR (TIW build, schematic network, ABM option 2): halved preloads
+    # (4.7k on 15V, 2.2k on 5V, 6.8k on 15V_ISO_SEC) and none (bleeders only)
+    "eel19_tiw_sandwich_s_pre3_ice_prehalf": lambda: dict(_ice("eel19_tiw_sandwich_s_pre3", "eel19_tiw_sandwich_s_pre3_ice_prehalf",
+                                                               note=" (preloads 4.7k / 2.2k / 6.8k)"),
+                                                          preload={"20V": 4700.0, "5V": 2200.0, "20V_ISO_SEC": 6800.0}),
+    "eel19_tiw_sandwich_s_pre3_ice_prenone": lambda: dict(_ice("eel19_tiw_sandwich_s_pre3", "eel19_tiw_sandwich_s_pre3_ice_prenone",
+                                                               note=" (no preloads)"), preload=None),
+})
+EEL19_ICE_OPTIONS = ["eel19_tiw_sandwich_s_pre3_ice", "eel19_sandwich_b_pre3_ice",
+                     "eel19_tiw_sandwich_s_pre3_ice_abm1", "eel19_tiw_sandwich_s_pre3_ice_abm3",
+                     "eel19_tiw_sandwich_s_pre3_ice_prehalf", "eel19_tiw_sandwich_s_pre3_ice_prenone"]
+
 EEL19_TIW_OPTIONS = ["eel19_tiw_simple_pre3", "eel19_tiw_sandwich_pre3", "eel19_tiw_paired_b_pre3",
                      "eel19_tiw_paired_c_pre3", "eel19_tiw_paired_m_pre3", "eel19_tiw_sandwich_s_pre3",
                      "eel19_tiw_paired_ms_pre3"]

@@ -31,6 +31,17 @@ scripts keep the Proteus labels `20V` / `20V_ISO_SEC` internally.
 > - a 1.2 × 26.5 mm creepage slot in the TR1 footprint (section 12.6);
 > - 3 tape layers around the core (section 12.5).
 >
+> **Update 2026-11-18 (later): PWM2 is now the Infineon ICE5AR4780BZS** (section 13). With the
+> 5.2 schematic values (VERR 88.7k / 49.9k from 5V, FB 4.7k + 10n ‖ 2.2n, RSel 750k = burst
+> option 2, Rcs 0.8 Ω) the TIW build gives:
+> - 5V 5.00 V in every case; 15V 14.18–15.31 V; 15V_ISO_SEC 14.55–17.44 V; 5V_ISOL / −5V 4.81–5.35 V;
+>   −80 V 80.3–84.3 V;
+> - VDS 556 V at 15 W (586 V at a 430 V bus);
+> - 5V step ±28 mV; start-up at 15 W clears the OLP timer after 20 ms (30 ms min);
+> - CoolMOS Tj ≈ 85 °C at 15 W.
+>
+> No schematic change is needed, and the preloads stay as they are (the 5V preload is now essential).
+>
 > The rest of this summary describes the enamel / margin-tape design, kept for reference.
 
 - **Turns: every winding is doubled from the EF20 recommendation:** P 104 (2 × 52, split) /
@@ -565,7 +576,7 @@ light-load modes set Ipk min and the energy per pulse.
 The **magnetics** do not depend on the controller: the leakage matrices, the window fill, the
 isolation and pin plan, and the ranking of the winding orders by leakage. **If PWM2 changes**
 (e.g. to the Infineon ICE5AR4780BZS proposed on 2026-11-18), keep the winding structure and
-redo the rail and loss numbers (NEXT.md has the list).
+redo the rail and loss numbers (NEXT.md has the list). **Done for the ICE5AR4780BZS in section 13.**
 
 **iW1819-00 vs the IW1818 parameters in the model.** Checked against iW1819 datasheet Rev 1.5
 (10-Feb-2022). The model has used the iW1819 thresholds from the start, because the IW1818
@@ -868,3 +879,289 @@ python3 tools/next/gen_next_footprints.py                                       
 
 Runtimes: 76 cases (4 options) took 1175 s with 4 jobs, peak 1.15 GB of ngspice; 19 cases take
 about 290–450 s.
+
+## 13. ICE5AR4780BZS controller (2026-11-18)
+
+The iW1819 is not available, so the 5.2 schematic (kicad_next, commit 009a237, CHANGES_5_2.md
+item 1.5) uses the **Infineon ICE5AR4780BZS** (CoolSET, 800 V CoolMOS, fixed 100 kHz peak-current
+mode, DIP-7). The winding structure of section 12 carries over unchanged. Only the controller
+model changes. Tables: [ice5ar_results.md](ice5ar_results.md). Code: `ice5ar_sim.py` (model),
+`ice5ar_checks.py` (real-capacitor checks), `ice5ar_report.py` (tables). The options have the
+controller key `"controller": "ice5ar"` (`options.py`, `*_ice`). They reuse the MKF matrix of their
+base option through `"om_from"`. The iW1819 options and their netlists are unchanged.
+
+### 13.1 Model (behavioural, ICE5ARxxxxBZS datasheet V2.3)
+
+- **Power stage:**
+  - CoolMOS: a smooth conductance 1/RDS(on) behind a 10 ns gate RC, RDS(on) **8.7 Ω** (the
+    125 °C datasheet value; 4.13 Ω at 25 °C).
+  - Drain node: Co(er) 3 pF + 10 pF transformer / layout (assumed), replacing the 30 pF of
+    the BJT model.
+  - Rcs **0.8 Ω** (R8 ‖ R9 = 2 × 1.6 Ω), internal CS filter 10 kΩ / 1 pF, LEB 220 ns.
+  - RCD clamp D7 / R72 100R / R45 1M ‖ C12 470p, transformer, rectifiers, capacitors and loads as before.
+- **PWM:** switch-on at every oscillator cycle. Switch-off when V1 = VCS·GPWM (2.03) + VPWM
+  (0.50 V) [+ MCOMP 50 mV/µs above 40 % duty] reaches VFB, or at VCS_N 0.80 V (delay
+  compensated, ideal comparator), after the blanking time. Dmax 0.75.
+- **Frequency:** 100 kHz for VFB ≥ 1.70 V, linear down to 43 kHz at 1.35 V, 43 kHz below
+  (datasheet figure 8), latched per cycle. Jitter ±4 % / 4 ms is optional and off by default
+  (it does not change the averages).
+- **Active Burst Mode:**
+  - Option 2 (VFB_EBLP 0.93 V, VCS_BLP 0.22 V) or option 3 (1.03 V, 0.27 V), or option 1 (none).
+  - Entry when VFB stays below the entry level for tFB_BEB 36 ms. Bursts at 83 kHz with
+    Ipk = VCS_BxP / Rcs.
+  - Burst on above VFB_BOn_NISO 1.95 V, off below VFB_BOff_NISO 1.55 V. Exit above VFB_LB 2.73 V.
+  - The error amplifier gm is 9.2 mA/V in ABM.
+- **Error amplifier:** VERR_REF 1.80 V, gm 2.8 mA/V, ±150 µA, output 0.05–3.15 V.
+  - It is fed from the **5V rail** through R138 88.7k / R139 49.9k (5.000 V).
+  - It drives the FB network R140 4.7k + C138 10n (series), C139 2.2n and RSel R141 750k, all to GND.
+  - The AUX_FB / Vsense divider of the PSR controller is gone.
+- **Assumption: the internal 15 kΩ FB pull-up (RFB) is disconnected in the non-isolated
+  configuration.** Then the DC loop gain is gm·RSel = 2100, and 5V load regulation is ≈ 1 mV.
+  - With RFB connected, the amplifier would have to sink 90 µA just to hold FB at 1.95 V
+    (minimum sink current 85 µA), and ABM option 2 could never be entered.
+  - The REF_5AR4780BZS-1_14W1 measurements (13.6) also show VERR almost constant from no load
+    to full load.
+  - Sensitivity, real capacitors (`ice5ar_checks.py step --comp rfb=15e3`): with RFB connected,
+    5V sits at 5.12 V (+2.4 %) at nominal load. The step response is unchanged.
+- **VCC:** from 15V through R142 10R and D10 (Schottky), so VCC = 15V − 0.35 V. UVLO 16.0 / 10.0 V
+  and OVP 25.5 V are checked per case. The start-up check (13.4) simulates C58 22 µF + C51,
+  1.5 mA IC current and the soft start (CS limit 0.30 V + 0.15 V per 3 ms).
+- **Fixed load on 15V:** 7.8 mA. That is the calibrated 9.5 mA minus the IW1818's ≈ 3.2 mA, plus
+  the ICE5AR's 0.9 mA IVCC_Normal and ≈ 0.6 mA gate drive.
+- **Batch runs (19 cases):**
+  - Output capacitors are scaled by 0.1 as before.
+  - The FB network is replaced by a slower one (R1 4.7k, C1 2.2 µF, C2 22 nF, scaled by 0.1) with
+    the same RSel, divider and ABM option, so the DC levels are the same.
+  - The ABM blanking is scaled to 3.6 ms.
+  - The schematic network scaled by 0.1 puts the loop crossover close to fsw and limit-cycles.
+    It is therefore verified only with the real capacitors (13.4).
+
+### 13.2 Results over the 19 cases, compared with the iW1819 model
+
+Nominal (min–max) over the 16 standard cases. **5V is regulated directly**, so it stays at
+4.996–4.999 V in every case. All other rails are cross-regulated from it:
+
+| rail | TIW `eel19_tiw_sandwich_s_pre3`, ICE5AR | same, iW1819 | enamel `eel19_sandwich_b_pre3`, ICE5AR | same, iW1819 |
+|---|---|---|---|---|
+| 15V | 14.67 (14.18–15.31) | 14.65 (14.44–15.45) | 14.69 (14.18–15.67) | 14.68 (14.56–15.97) |
+| 5V | 5.00 (5.00–5.00) | 4.99 (4.79–5.16) | 5.00 (5.00–5.00) | 5.00 (4.83–5.22) |
+| 15V_ISO_SEC | 15.08 (14.55–17.44) | 15.06 (14.94–17.42) | 14.96 (14.43–16.86) | 14.94 (14.82–16.75) |
+| 5V_ISOL | 5.01 (4.81–5.35) | 5.02 (4.90–5.34) | 4.99 (4.79–5.34) | 5.01 (4.89–5.32) |
+| −5V_SEC | 5.01 (4.82–5.31) | 5.00 (4.93–5.29) | 5.01 (4.81–5.32) | 5.01 (4.95–5.29) |
+| −80 V | 82.9 (80.3–84.3) | 82.7 (80.5–84.1) | 82.4 (79.7–83.7) | 82.2 (80.5–83.7) |
+| VDS / Vcol peak, std / full15 | 553 / 556 V | 552 / 568 V | 582 / 590 V | 571 / 603 V |
+| full15 (15 W out): 15V / 15V_ISO / 5V_ISOL | 14.72 / 15.12 / 4.98 | 14.55 / 14.94 / 4.86 | 14.74 / 15.01 / 4.96 | 14.55 / 14.81 / 4.83 |
+
+- The ranges are about as wide as with the iW1819, but they are distributed differently:
+  - The extremes now come from the **5V rail's own load** (the regulated winding), not from
+    the A5 knee.
+  - In min_5V (5V carries only R126 1k), every other rail droops: 15V 14.18 V, 5V_ISOL / −5V
+    4.81 V, −80 V 80.3 V.
+  - In max_5V they rise: 15V 14.91 V, 15V_ISO_SEC 15.35 V, −80 V 84.3 V.
+  - The bleeder-only cases are as before: min_15V 15.31 V, min_S15 17.44 V.
+- **Full load is better than with the iW1819:** at full15 every rail is within 1 % of the
+  nominal case, at 400 and 325 V. The 100 kHz peak-current loop has no knee-sampling error.
+- **Operating point:** DCM everywhere.
+  - Frequency reduction is active over most of the range: FB 1.29–1.45 V and 47–63 kHz in the
+    standard cases, 1.67 V / 94 kHz at full15, Ipk 0.75 A (of 1.0 A).
+  - Pin: 6.5 W nominal, 17.4 W at full15. The iW1819 model had 17.0 W.
+- **VCC (from 15V):** 13.8–15.0 V over the 19 cases (TIW), up to 15.3 V for the enamel build.
+  That is above UVLO-off (10.0 V, max 10.4 V) and far below OVP (25.5 V, min 24 V). No case
+  crosses a threshold.
+- **VDS peak:** 556 V at full15 (TIW), 586 V at a 430 V bus (73 % of 800 V). The enamel build
+  gives 590 V. D8 V_R is 406 / 430 V at 400 / 430 V. The clamp voltage is ≈ 100 V (R45 10 mW,
+  R72 58 mW at full15).
+
+### 13.3 Light load and Active Burst Mode
+
+- **Option 2 (R141 750k, the schematic):**
+  - *light* (all rails at bleeder + preload, Pin 1.0 W) runs in ABM: bursts every 1.3 ms, FB
+    1.55–1.95 V.
+  - *idle* (Pin 1.42 W) stays in normal mode at 43 kHz with FB ≈ 0.9 V. That is just above the
+    option-2 entry (FB 0.93 V ≈ 0.9 W).
+  - Average levels, light / idle: 15V 14.54 / 14.92, 15V_ISO_SEC 15.07 / 15.59, 5V_ISOL 5.16 / 5.21,
+    −5V 5.11 / 5.28, −80 V 80.5 / 83.0 V. The iW1819 model gave 14.58 / 14.44, 15.17 / 15.14,
+    5.18 / 5.02, 5.13 / 5.12 and 80.8 / 80.5.
+- **Ripple with the real capacitors and the real FB network** (`ice5ar_checks.py light idle`, pp
+  over 40 ms):
+
+  | case | 5V | 15V | 15V_ISO_SEC | 5V_ISOL | −5V | −80 V |
+  |---|---|---|---|---|---|---|
+  | light, ABM option 2 (bursts) | 31 mV | 114 mV | 57 mV | 13 mV | 11 mV | 0.40 V |
+  | light, no ABM (R141 100k) | 1 mV | 48 mV | 30 mV | 5 mV | 9 mV | 0.25 V |
+  | idle, option 2 (normal mode) | 9 mV | 39 mV | 40 mV | 3 mV | 2 mV | 0.17 V |
+
+- **Burst cross regulation of −80 V and 15V_ISO_SEC is fine.**
+  - Option 2 vs no burst changes the light-load averages by ≤ 0.2 V on −80 V and ≤ 0.04 V on
+    15V_ISO_SEC (80.53 vs 80.35 V, 15.07 vs 15.04 V).
+  - The burst ripple is 0.4 V pp on −80 V and 57 mV on 15V_ISO_SEC.
+  - Option 3 gives about the same averages, but more ripple (larger packets).
+- **Recommendation: keep option 2 (R141 750k).**
+  - It has the smallest packets, and the FB network (C138 + C139 = 12.2 nF, τ = 9.2 ms with
+    750k) is small enough for a reliable RSel detection.
+  - Option 1 (R141 ≤ 470k) would also work, because the preloads keep the load above the
+    minimum on-time power. That minimum is 0.28 W at LEB 220 ns, but up to ≈ 0.8 W at LEB
+    365 ns at 400 V, against the ≈ 1.0 W light-load floor. With less margin, a preload
+    reduction would then be blocked. With ABM there is no minimum-load requirement.
+  - Option 1 with RSel 100k also costs 14 mV of 5V accuracy (gm·RSel = 280).
+- **Preloads: keep them as they are** (R125 2.2k on 15V, R126 1k on 5V, R124 2.61k → 3.3k on
+  15V_ISO_SEC). TIW build, schematic network, ABM option 2:
+
+  | case | preloads 2.2k / 1k / 3.3k | halved 4.7k / 2.2k / 6.8k | none |
+  |---|---|---|---|
+  | min_15V: 15V | 15.31 V | 15.55 V | 15.94 V |
+  | min_S15: 15V_ISO_SEC | 17.44 V | 18.08 V | 18.97 V |
+  | min_5V: 15V / 5V_ISOL / −5V | 14.18 / 4.81 / 4.82 V | 14.09 / 4.77 / 4.78 V | **collapses** (15V → 0, −80 V 64 V) |
+  | light: 15V / 15V_ISO_SEC / −80 V | 14.54 / 15.07 / 80.5 V | 14.49 / 15.12 / 79.7 V | **15V 10.6 V and falling** |
+  | idle: 15V_ISO_SEC | 15.59 V | 15.74 V | 16.06 V |
+
+  - **The 5V preload is now essential.** 5V is the regulated rail.
+    - If it carries only the 36 µA divider, the controller throttles the power until the
+      5V winding's share (leakage peak charging) is enough for 5V alone.
+    - The loaded rails then starve: in min_5V and light without preloads they collapse in the
+      scaled runs. Not checked with the real capacitors, but the direction is physical.
+    - R126 1k (25 mW) holds min_5V at 14.18 V on 15V and 4.81 V on 5V_ISOL / −5V. 2.2k would
+      lose another 0.1 V; **do not go above 1k**.
+  - The 15V and 15V_ISO_SEC preloads could be halved. The bleeder-only excursions grow by
+    +0.25 V and +0.65 V. That is harmless for the UCC21520 (VDD abs max 30 V), but there is no
+    reason to change them. **The preloads need not grow.**
+
+### 13.4 Loop, step response, start-up (real capacitors, schematic FB network)
+
+- **5V load step 0.1 → 0.2 → 0.1 A at nominal load** (`ice5ar_checks.py step`):
+  - 5V dips **−28 mV** on the step and peaks **+27 mV** on the release. It is back within 2 mV
+    after ≈ 0.3 ms, with one overshoot and no ringing.
+  - FB moves 1.43 → 1.60 V (step) and 1.45 → 1.24 V (release), then settles in ≈ 2 ms.
+  - The other rails follow by cross regulation: 15V +0.17 V, 15V_ISO_SEC +0.21 V, −80 V +0.95 V
+    while 5V carries the extra 0.1 A. The release peak is ≤ +0.12 V.
+  - That is a well-damped loop: crossover around 1 kHz, phase margin estimated > 45 °. The
+    plant has more phase than the integrator estimate in CHANGES_5_2.md, because the 5V rail's
+    own capacitors and the ESR zeros respond faster than the reflected bulk (C102) energy.
+  - **Note on the RFB assumption:** the "1.7 % load regulation, DC gain 42" estimate in
+    CHANGES_5_2.md 1.5 FB assumes the internal 15 kΩ is connected. If it is disconnected (the
+    model, and what the reference board's data suggest), the DC gain is gm·R141 ≈ 2100. The
+    loop shape is set by R141 ‖ (C138 + C139) (pole 17 Hz) and R140 / C138 (zero 3.4 kHz).
+    The simulated step is fine either way: with RFB connected, 5V sits at 5.12 V, −31 / +29 mV.
+- **Start-up** (`ice5ar_checks.py startup startup_full15`):
+  - Setup: all rails start from 0 V. VCC starts at VCC_ON 16 V on C58 22 µF + C51, with 1.5 mA
+    IC current and soft start 0.30 → 0.80 V in 4 × 3 ms. The constant-current loads are rolled
+    off below 20 % of nominal, as in all runs.
+
+  | loads | FB above VFB_OLP 2.73 V until | rails at 95 % | −80 V (C102) at 95 % | overshoot | VCC min |
+  |---|---|---|---|---|---|
+  | nominal | 15.7 ms | 14.5–14.9 ms | 15.2 ms | ≤ 2.4 % (15V) | 14.5 V (never below; 15V takes over) |
+  | full15 (15 W) | 20.4 ms | 18.3–18.8 ms | 19.0 ms | ≤ 2.0 % | 14.5 V |
+
+  - **The overload timer (tFB_OLP_B 30 ms min, 54 ms typ) is not reached.** FB leaves the OLP
+    level at 15.7 / 20.4 ms, a 1.5× margin at the minimum blanking time with 15 W of load.
+  - C102 (56 µF at 82 V, 0.19 J) is the slowest rail but follows within 0.5 ms of the others.
+  - VCC hold-up is not critical: the 15V rail passes VCC within the soft start.
+- **Burst-mode loop:** in ABM (light), FB swings 1.55–1.95 V with bursts every 1.3 ms. 5V ripple
+  is 31 mV pp. No sub-bursting or ABM exit was seen.
+
+### 13.5 Losses and CoolMOS junction temperature
+
+TIW build (`ice5ar_results.md` has the enamel build too):
+
+| case | Pin | switch (10 ns gate RC) | switch (2 ns gate RC) | Rcs | clamp (R72 + R45) | windings (MKF) | core (iGSE) |
+|---|---|---|---|---|---|---|---|
+| nom | 6.50 W | 0.28 W | – | 6 mW | 32 mW | 0.53 W (iW1819: 0.56) | 0.05 W |
+| full15 | 17.43 W | 0.75 W | **0.27 W** | 19 mW | 68 mW | 1.53 W (iW1819: 1.56) | 0.12 W |
+
+- **Switch loss at full15:**
+  - Conduction: Irms² × 8.7 Ω = 0.20 W, as estimated in NEXT.md.
+  - The capacitive turn-on loss (13 pF + reflected rectifier capacitance, at ≈ 300–500 V)
+    is ≈ 0.07 W.
+  - The rest of the 10 ns-RC figure is the turn-off overlap of the model's slow conductance.
+    The cascode CoolMOS turns off in a few ns and Coss takes the current (the datasheet's
+    "30 ns" fall time is the drain voltage slewing), so **0.27–0.35 W is the realistic
+    figure**, and 0.75 W is an upper bound.
+- **Junction temperature**, RthJA 107 K/W (datasheet, minimum drain copper), controller 0.02 W,
+  Ta 50 °C:
+  - **Tj ≈ 82–90 °C at 15 W** (realistic switch loss), 61 °C at idle, ≤ 82 °C at nominal.
+  - Upper bound with the 0.75 W figure: 132 °C, or 111 °C with ≈ 2 cm² drain copper
+    (≈ 80 K/W, assumed).
+  - Keep the drain-pin copper as CHANGES_5_2.md 1.5 layout says. Measure the case temperature
+    at 15 W.
+- **Windings and core** are the same as with the iW1819 (−2 %). The lower Ipk (0.75 vs 0.86 A at
+  15 W, 100 vs 72 kHz) roughly cancels the higher frequency. Bpk is 0.14 T at full15 (0.16 T
+  before).
+
+### 13.6 Comparison with Infineon's non-isolated reference board
+
+REF_5AR4780BZS-1_14W1, AN062913 V1.0 (2024-08-23), ICE5AR4780BZS-1, 15 V / 0.83 A + 5 V / 0.4 A,
+non-isolated with the VERR amplifier. The engineering report of the older DEMO_5AR4780BZS_14W1
+(mouser) could not be downloaded (access denied). Values from its schematic / BOM:
+
+| | reference board | 5.2 schematic (this design) |
+|---|---|---|
+| VERR divider | weighted: R153 270k from 15 V, R103 180k from 5 V, R11 27k ‖ C10 330p to GND (R‖ = 21.3 kΩ) | R138 88.7k from 5V, R139 49.9k (R‖ = 31.9 kΩ) |
+| FB network | R9 22k + C7 100n in series, C6 10n, R10 (RSel) **not fitted → ABM option 3** | R140 4.7k + C138 10n, C139 2.2n, R141 750k (option 2) |
+| zero / pole of the FB network | 72 Hz / 0.8 kHz | 3.4 kHz (+ 17 Hz pole from R141 ‖ 12.2 nF) |
+| Rcs | 2 Ω ‖ 2.2 Ω = 1.05 Ω | 0.8 Ω |
+| VCC | aux winding via D2, C3 33 µF, ZD1 27 V | 15V via R142 10R / D10, C58 22 µF |
+| start-up | 3 × 15 MΩ to GATE | 3 × 10 MΩ to GATE |
+| clamp | R4 150k 2 W, C2 1 nF 630 V, D1 UF4006 | R45 1M, C12 470p, D7 S1M, R72 100R |
+| output caps | 15 V: 680 + 680 µF, 5 V: 680 + 330 µF (+ 2.2 µH LC) | 15V: 220 µF, 5V: 144 µF, −80 V 56 µF ... |
+
+Measured on the reference board:
+- 15 V 15.13 → 15.25 V and 5 V 4.984 → 4.959 V from no load to full load.
+- VERR stays within ≈ 6 mV over that range, consistent with a high DC gain (RFB not loading FB).
+- No-load input 75–107 mW. ABM at 0.5 W with FB 1.95 / 1.55 V, VCS 0.27 V, 86 kHz.
+- Ripple 43 / 30 mV pp in ABM and 50 / 33 mV at full load.
+
+These are the same thresholds as in the model, and our simulated ABM ripple is of the same
+order (5V 31 mV, 15V 114 mV with ≈ 1/6 of the capacitance). The reference board circuit itself
+was not simulated: its transformer data are only a drawing, and the leakage would have to be
+guessed. Differences that matter:
+
+- **Compensation:** the reference board uses a slow lead network (zero 72 Hz, gain gm·22k)
+  with 110 nF on FB. That is fine with option 3 because its VCC charge time is long (33 µF).
+  - Ours is faster: the zero sits at 3.4 kHz and the low-frequency part is set by R141.
+  - In the simulation ours is well damped, and its 12.2 nF keeps the option-2 detection
+    reliable (τ 9.2 ms).
+  - **No change needed.** If the bench step shows ringing, raise C138 to 22 nF (zero 1.5 kHz,
+    τ 18 ms, still < 47 ms).
+- **Weighted feedback** (15 V + 5 V) centres both rails on the reference board. Here it would
+  reduce the min_5V / max_5V excursions of the other rails, but the −80 V / isolated rails
+  would not gain. Not recommended for now; it is an option if the 5V-load-dependent shift of
+  15V (14.18–14.91 V) turns out to matter.
+- **Clamp:** the reference board's clamp is much stiffer (150 k / 1 nF). Ours gives VDS 556 V
+  (TIW, 400 V) / 586 V (430 V bus) with ≈ 100 V clamp voltage, so the 1 M clamp is enough.
+  Keep CHANGES_5_2.md's fallback (2 × 100 k, 1 nF) for the bench.
+
+### 13.7 Recommended values for the schematic (5.2)
+
+- **Keep as drawn:**
+  - VERR R138 88.7k / R139 49.9k 0.1 % (5.000 V; R‖ 31.9 kΩ ≥ 25.3 kΩ for the non-isolated
+    mode detection);
+  - FB R140 4.7k + C138 10n, C139 2.2n;
+  - **R141 750k = ABM option 2** (better than option 1 or 3 here);
+  - Rcs 0.8 Ω; R142 10R / D10 / C58 22 µF;
+  - start-up 3 × 10 MΩ; clamp unchanged.
+- **Preloads unchanged:** R125 2.2k on 15V, **R126 1k on 5V (essential now, do not increase)**,
+  3.3k on 15V_ISO_SEC.
+- **Bench checks:**
+  - VDS (expect ≈ 560 V at 15 W, 400 V);
+  - 5V step (expect ±30 mV);
+  - start-up at full load (FB below 2.73 V after ≈ 20 ms);
+  - CoolMOS case temperature at 15 W;
+  - 5V level at nominal load: 5.00 V if RFB is disconnected as modelled, ≈ 5.1 V if not.
+
+### 13.8 How to rerun
+
+```
+cd /home/jari/dev/tube_psu_kicad
+python3 simulation/flyback/run_flyback.py eel19_tiw_sandwich_s_pre3_ice eel19_sandwich_b_pre3_ice --jobs 4   # 38 cases, ~13 min
+python3 simulation/flyback/run_flyback.py eel19_tiw_sandwich_s_pre3_ice_abm1 eel19_tiw_sandwich_s_pre3_ice_abm3 \
+    --cases nom light idle min_S15 min_20V min_SHV --jobs 4
+python3 simulation/flyback/run_flyback.py eel19_tiw_sandwich_s_pre3_ice_prehalf eel19_tiw_sandwich_s_pre3_ice_prenone \
+    --cases nom light idle min_20V min_5V min_S15 min_S5 min_SN5 min_SHV --jobs 4
+python3 simulation/flyback/ice5ar_checks.py step startup startup_full15 light idle --jobs 4   # real capacitors, 3-10 min each
+python3 simulation/flyback/ice5ar_checks.py light idle --option eel19_tiw_sandwich_s_pre3_ice_abm1 --tag _abm1
+python3 simulation/flyback/ice5ar_checks.py step --comp rfb=15e3                             # RFB-connected sensitivity
+python3 simulation/flyback/losses.py eel19_tiw_sandwich_s_pre3_ice eel19_sandwich_b_pre3_ice [--case full15]
+python3 simulation/flyback/ice5ar_report.py                                                   # ice5ar_results.md
+```
+
+Peak ngspice memory: 1.16 GB with 4 jobs.
