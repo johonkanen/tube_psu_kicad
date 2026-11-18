@@ -7,7 +7,7 @@
 	(title_block
 		(title "Tube power supply - PFC")
 		(company "Tube power supply")
-		(rev "V5.1")
+		(rev "V5.2")
 		(comment 1 "Redrawn from Proteus tube_power_5_1")
 	)
 	(lib_symbols
@@ -1688,7 +1688,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "tube_psu_next:RM8_INDUCTOR"
+		(symbol "tube_psu_next:L_TOROID"
 			(pin_numbers
 				(hide yes)
 			)
@@ -1711,7 +1711,7 @@
 					)
 				)
 			)
-			(property "Value" "RM8_INDUCTOR"
+			(property "Value" "L_TOROID"
 				(at 1.905 0 90)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1743,7 +1743,7 @@
 					)
 				)
 			)
-			(property "Description" "PFC choke on RM8 core: winding pri1-pri2; pins 1 and 2 are unconnected bobbin pins (no net in Proteus)"
+			(property "Description" "PFC choke on a sendust toroid, two leads (NR 5.2)"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1776,7 +1776,7 @@
 					)
 				)
 			)
-			(symbol "RM8_INDUCTOR_0_1"
+			(symbol "L_TOROID_0_1"
 				(arc
 					(start 0 2.54)
 					(mid 0.6323 1.905)
@@ -1826,47 +1826,11 @@
 					)
 				)
 			)
-			(symbol "RM8_INDUCTOR_1_1"
+			(symbol "L_TOROID_1_1"
 				(pin passive line
 					(at 0 3.81 270)
 					(length 1.27)
 					(name "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "pri1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -3.81 90)
-					(length 1.27)
-					(name "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "pri2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 5.08 1.27 180)
-					(length 2.54)
-					(name "NC"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1881,10 +1845,10 @@
 						)
 					)
 				)
-				(pin no_connect line
-					(at 5.08 -1.27 180)
-					(length 2.54)
-					(name "NC"
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -5710,7 +5674,7 @@
 		)
 	)
 	(symbol
-		(lib_id "tube_psu_next:RM8_INDUCTOR")
+		(lib_id "tube_psu_next:L_TOROID")
 		(at 254 88.9 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -5726,7 +5690,7 @@
 				)
 			)
 		)
-		(property "Value" "200u"
+		(property "Value" "TBD (measured)"
 			(at 254 92.71 90)
 			(effects
 				(font
@@ -5734,7 +5698,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tube_psu:L_RM8_Proteus"
+		(property "Footprint" ""
 			(at 254 88.9 0)
 			(effects
 				(font
@@ -5752,7 +5716,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "PFC choke on RM8 core: winding pri1-pri2; pins 1 and 2 are unconnected bobbin pins (no net in Proteus)"
+		(property "Description" "PFC choke on a sendust toroid, two leads (NR 5.2)"
 			(at 254 88.9 0)
 			(effects
 				(font
@@ -5769,12 +5733,6 @@
 				)
 				(hide yes)
 			)
-		)
-		(pin "pri1"
-			(uuid "65a9f915-b68d-5d1a-bb68-07cbe4aec6cd")
-		)
-		(pin "pri2"
-			(uuid "d8a2d9ee-35b7-504d-ab42-dd72ffb720d9")
 		)
 		(pin "1"
 			(uuid "abc5b652-e68f-527b-b211-23d754c0dbeb")
@@ -5908,6 +5866,16 @@
 		(color 0 0 0 0)
 		(uuid "a4a59b8d-2119-5607-86d5-6ce5180deb72")
 	)
+	(label "PFC_DRAIN_1"
+		(at 266.7 88.9 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "26558e75-ccaa-544f-a692-02c97455be60")
+	)
 	(symbol
 		(lib_id "tube_psu_next:C3D02060A")
 		(at 284.48 88.9 180)
@@ -5992,7 +5960,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "26558e75-ccaa-544f-a692-02c97455be60")
+		(uuid "480780b9-09e4-5a3a-8a48-dfd247cc3937")
 	)
 	(wire
 		(pts
@@ -6002,7 +5970,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "480780b9-09e4-5a3a-8a48-dfd247cc3937")
+		(uuid "72970127-7b65-5c1c-915b-0dc1fb0aa32d")
 	)
 	(wire
 		(pts
@@ -6012,7 +5980,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "72970127-7b65-5c1c-915b-0dc1fb0aa32d")
+		(uuid "48d2282d-bd38-5b35-95f2-7165b65eb2af")
 	)
 	(global_label "GATE1"
 		(shape passive)
@@ -6024,7 +5992,7 @@
 			)
 			(justify right)
 		)
-		(uuid "48d2282d-bd38-5b35-95f2-7165b65eb2af")
+		(uuid "7c139346-9c75-5602-8147-1a2b017a0e1e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 259.08 96.52 0)
 			(effects
@@ -6044,7 +6012,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7c139346-9c75-5602-8147-1a2b017a0e1e")
+		(uuid "4e9f6736-098f-5f34-9c63-eda285dfb2a5")
 	)
 	(wire
 		(pts
@@ -6054,13 +6022,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "4e9f6736-098f-5f34-9c63-eda285dfb2a5")
+		(uuid "f9aba653-9be0-530e-b165-38a111b08037")
 	)
 	(junction
 		(at 271.78 106.68)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "f9aba653-9be0-530e-b165-38a111b08037")
+		(uuid "00d11200-505e-5235-9144-a9c9e5e7da61")
 	)
 	(global_label "PFC CURRENT 2+"
 		(shape passive)
@@ -6072,7 +6040,7 @@
 			)
 			(justify left)
 		)
-		(uuid "00d11200-505e-5235-9144-a9c9e5e7da61")
+		(uuid "63565b4c-95ae-5263-adc0-4e2fb278564b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 276.86 106.68 0)
 			(effects
@@ -6226,7 +6194,7 @@
 		)
 	)
 	(symbol
-		(lib_id "tube_psu_next:RM8_INDUCTOR")
+		(lib_id "tube_psu_next:L_TOROID")
 		(at 254 152.4 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -6242,7 +6210,7 @@
 				)
 			)
 		)
-		(property "Value" "200u"
+		(property "Value" "TBD (measured)"
 			(at 254 148.59 90)
 			(effects
 				(font
@@ -6250,7 +6218,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tube_psu:L_RM8_Proteus"
+		(property "Footprint" ""
 			(at 254 152.4 0)
 			(effects
 				(font
@@ -6268,7 +6236,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "PFC choke on RM8 core: winding pri1-pri2; pins 1 and 2 are unconnected bobbin pins (no net in Proteus)"
+		(property "Description" "PFC choke on a sendust toroid, two leads (NR 5.2)"
 			(at 254 152.4 0)
 			(effects
 				(font
@@ -6285,12 +6253,6 @@
 				)
 				(hide yes)
 			)
-		)
-		(pin "pri1"
-			(uuid "04c69951-f5cf-5a4b-bcd6-24d9bd56e1ea")
-		)
-		(pin "pri2"
-			(uuid "299ddea2-039f-5a27-a999-912c91f63fd2")
 		)
 		(pin "1"
 			(uuid "3ce4196c-e528-531f-bd2f-fc399ad2ec92")
@@ -6315,7 +6277,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "63565b4c-95ae-5263-adc0-4e2fb278564b")
+		(uuid "ce1bd926-a5fb-5a49-a3d4-1ae7674f4c28")
 	)
 	(symbol
 		(lib_id "tube_psu_next:Q_NMOS_GDS")
@@ -6406,7 +6368,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ce1bd926-a5fb-5a49-a3d4-1ae7674f4c28")
+		(uuid "99c5af03-9f4f-5816-84cc-e83132baff19")
 	)
 	(wire
 		(pts
@@ -6416,13 +6378,23 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "99c5af03-9f4f-5816-84cc-e83132baff19")
+		(uuid "8c912d32-09ce-5864-961b-261725dfd5b3")
 	)
 	(junction
 		(at 271.78 152.4)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "8c912d32-09ce-5864-961b-261725dfd5b3")
+		(uuid "410b5eeb-0f45-5d72-85f0-11964dce3e6e")
+	)
+	(label "PFC_DRAIN_2"
+		(at 266.7 152.4 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0252dcae-2339-5c89-a42d-52bccd84cdb9")
 	)
 	(symbol
 		(lib_id "tube_psu_next:C3D02060A")
@@ -6508,7 +6480,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "410b5eeb-0f45-5d72-85f0-11964dce3e6e")
+		(uuid "4509e790-0a8e-5e02-a4f7-40f9517daade")
 	)
 	(wire
 		(pts
@@ -6518,7 +6490,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "0252dcae-2339-5c89-a42d-52bccd84cdb9")
+		(uuid "b740916a-1006-540b-adaa-635d88fcfc58")
 	)
 	(wire
 		(pts
@@ -6528,7 +6500,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "4509e790-0a8e-5e02-a4f7-40f9517daade")
+		(uuid "dcc2004c-94d8-5abd-b7fa-d8adf3cef13c")
 	)
 	(global_label "GATE2"
 		(shape passive)
@@ -6540,7 +6512,7 @@
 			)
 			(justify right)
 		)
-		(uuid "b740916a-1006-540b-adaa-635d88fcfc58")
+		(uuid "28d3faa8-5ad4-5471-a014-702975dd048b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 259.08 160.02 0)
 			(effects
@@ -6560,7 +6532,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "dcc2004c-94d8-5abd-b7fa-d8adf3cef13c")
+		(uuid "08fcbf92-d62d-541d-a3f5-906e2311b783")
 	)
 	(wire
 		(pts
@@ -6570,13 +6542,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "28d3faa8-5ad4-5471-a014-702975dd048b")
+		(uuid "c8dcbd1f-ddf0-5d79-880f-49444dc2deac")
 	)
 	(junction
 		(at 271.78 170.18)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "08fcbf92-d62d-541d-a3f5-906e2311b783")
+		(uuid "14fd686e-4f14-5297-bfe8-93fb403835d8")
 	)
 	(global_label "PFC CURRENT 3+"
 		(shape passive)
@@ -6588,7 +6560,7 @@
 			)
 			(justify left)
 		)
-		(uuid "c8dcbd1f-ddf0-5d79-880f-49444dc2deac")
+		(uuid "7354bf7c-ee35-597e-b35f-a1751d2c0b06")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 276.86 170.18 0)
 			(effects
@@ -6749,7 +6721,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "14fd686e-4f14-5297-bfe8-93fb403835d8")
+		(uuid "241781dd-eba0-58bf-abf4-ed58f507aaaf")
 	)
 	(wire
 		(pts
@@ -6759,13 +6731,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7354bf7c-ee35-597e-b35f-a1751d2c0b06")
+		(uuid "d94538e0-2b9b-55e3-8e1f-ed0e41626b28")
 	)
 	(junction
 		(at 299.72 88.9)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "241781dd-eba0-58bf-abf4-ed58f507aaaf")
+		(uuid "96a22adf-70c2-5c9f-ad55-656eb5c279b4")
 	)
 	(symbol
 		(lib_id "tube_psu_next:DC+")
@@ -6841,7 +6813,18 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "d94538e0-2b9b-55e3-8e1f-ed0e41626b28")
+		(uuid "b85d6238-2076-5966-870f-8f9aec012147")
+	)
+	(text "5.2: L1 / L2 = sendust toroids (OD 31.5 x 16.7 mm, 2 leads, NR 5.2); value = measured L at 0 A / PFC peak (TBD), footprint phase 3."
+		(exclude_from_sim no)
+		(at 228.6 194.31 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a8435c33-da5a-53a8-b132-06eeaab12977")
 	)
 	(symbol
 		(lib_id "tube_psu_next:TBS22K")
@@ -6935,7 +6918,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "96a22adf-70c2-5c9f-ad55-656eb5c279b4")
+		(uuid "96e8f697-d754-5ac9-8198-0a48d5c7db17")
 	)
 	(global_label "AC1"
 		(shape passive)
@@ -6947,7 +6930,7 @@
 			)
 			(justify left)
 		)
-		(uuid "b85d6238-2076-5966-870f-8f9aec012147")
+		(uuid "8ef8f0f9-9881-5d2c-9084-90f24eff7a16")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 342.9 40.64 0)
 			(effects
@@ -6967,7 +6950,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "a8435c33-da5a-53a8-b132-06eeaab12977")
+		(uuid "10de7565-65a9-5aaa-a017-d7d47f72427d")
 	)
 	(global_label "AC2"
 		(shape passive)
@@ -6979,7 +6962,7 @@
 			)
 			(justify right)
 		)
-		(uuid "96e8f697-d754-5ac9-8198-0a48d5c7db17")
+		(uuid "7a8a7486-1c8a-57ee-9a0f-0944cc424bf3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 342.9 60.96 0)
 			(effects
@@ -6999,7 +6982,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "8ef8f0f9-9881-5d2c-9084-90f24eff7a16")
+		(uuid "d325aa87-fd97-5c2d-b814-dde9813a341f")
 	)
 	(symbol
 		(lib_id "tube_psu_next:DC+")
@@ -7074,7 +7057,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "10de7565-65a9-5aaa-a017-d7d47f72427d")
+		(uuid "d4908ffc-2417-579c-9208-f11012ec1eec")
 	)
 	(symbol
 		(lib_id "tube_psu_next:PWR_FLAG")
@@ -7149,7 +7132,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7a8a7486-1c8a-57ee-9a0f-0944cc424bf3")
+		(uuid "c0a03088-5219-5ab8-ae14-d3ef6a10bd6d")
 	)
 	(symbol
 		(lib_id "tube_psu_next:GND")
@@ -7224,7 +7207,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d325aa87-fd97-5c2d-b814-dde9813a341f")
+		(uuid "f5b77e14-3fea-5eed-9ef9-ff3aaaf917df")
 	)
 	(symbol
 		(lib_id "tube_psu_next:PWR_FLAG")
@@ -7300,7 +7283,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "d4908ffc-2417-579c-9208-f11012ec1eec")
+		(uuid "4c41f16f-8e49-5655-a21e-31e9e6e5182d")
 	)
 	(text "DC+ and GND PWR_FLAGs: permanent (generated here)."
 		(exclude_from_sim no)
@@ -7311,7 +7294,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "c0a03088-5219-5ab8-ae14-d3ef6a10bd6d")
+		(uuid "d6afa922-fae3-5404-9def-47639c594286")
 	)
 	(symbol
 		(lib_id "tube_psu_next:C")
@@ -7397,7 +7380,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "f5b77e14-3fea-5eed-9ef9-ff3aaaf917df")
+		(uuid "4d68eb25-6ad4-5119-99e9-5cbf0af7e692")
 	)
 	(symbol
 		(lib_id "tube_psu_next:GND")
@@ -7545,7 +7528,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "4c41f16f-8e49-5655-a21e-31e9e6e5182d")
+		(uuid "f66d055c-b158-5a14-b7ac-1c1c2a452a90")
 	)
 	(label "PE"
 		(at 381 121.92 90)
@@ -7555,7 +7538,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "d6afa922-fae3-5404-9def-47639c594286")
+		(uuid "48b9b08c-005e-56f9-a2f5-2cf1afe7c1b6")
 	)
 	(label "IN2"
 		(at 50.8 190.5 180)
@@ -7565,7 +7548,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "4d68eb25-6ad4-5119-99e9-5cbf0af7e692")
+		(uuid "080c9db9-dd01-51b5-8eb8-a804cc2bf430")
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
@@ -7651,7 +7634,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f66d055c-b158-5a14-b7ac-1c1c2a452a90")
+		(uuid "b5e23ee2-507b-532e-abf5-bce427784b36")
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
@@ -7737,7 +7720,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "48b9b08c-005e-56f9-a2f5-2cf1afe7c1b6")
+		(uuid "3e858ab4-274a-5896-9a65-f369af1d33d1")
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
@@ -7823,7 +7806,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "080c9db9-dd01-51b5-8eb8-a804cc2bf430")
+		(uuid "4bbda06e-4a26-5d58-b5d8-1afc03766d6e")
 	)
 	(wire
 		(pts
@@ -7833,7 +7816,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b5e23ee2-507b-532e-abf5-bce427784b36")
+		(uuid "21019dd3-e75c-5386-abc9-59b2d3195dc0")
 	)
 	(label "RES_IN"
 		(at 95.25 190.5 0)
@@ -7843,7 +7826,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "3e858ab4-274a-5896-9a65-f369af1d33d1")
+		(uuid "66d7f328-7648-5230-b298-f2d2b6d22ddb")
 	)
 	(text "PDF notes: DEBB33F222KN3A/ 2n2, T60405-R6131-X204 VAC; R463F247040N0M/ 47n 305VAC, R463F310040M1M/ 100nf 310VAC;"
 		(exclude_from_sim no)
@@ -7854,7 +7837,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "4bbda06e-4a26-5d58-b5d8-1afc03766d6e")
+		(uuid "39634bb7-646c-5aa3-99dd-71ad5d15fc3f")
 	)
 	(text "HF bypass for low side bridge rectifier diodes (C64 / C66). V5.1 (PDF hand note). PE is a one-sheet net (local labels)."
 		(exclude_from_sim no)
@@ -7865,7 +7848,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "21019dd3-e75c-5386-abc9-59b2d3195dc0")
+		(uuid "c615e475-09ed-5892-ac46-a0a230640997")
 	)
 	(embedded_fonts no)
 )

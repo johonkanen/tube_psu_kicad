@@ -30,7 +30,12 @@ SUBSHEETS = ["01_aux_supply", "02_dhb_gate_drive", "03_isolated_measurements", "
              "06_heaters", "07_dhb", "08_current_measurement", "09_ac_measurement",
              "10_pfc_current_measurement", "11_startup"]
 # Text replacements on the 5.1 root sheet (old, new). Phase 2: title block rev, notes, new sheets.
-ROOT_EDITS = [('(project "tube_psu"', f'(project "{PROJECT}"')]
+ROOT_EDITS = [('(project "tube_psu"', f'(project "{PROJECT}"'),
+              ('(rev "V5.1")', '(rev "V5.2")'),
+              ('(comment 1 "Redrawn from Proteus tube_power_5_1")',
+               '(comment 1 "tube_power 5.2 - from the 5.1 migration, NEXT_REVISION.md changes (tools/next)")'),
+              ('(text "Tube power supply V5.1 - redrawn from Proteus. One sheet per Proteus PDF page.',
+               '(text "Tube power supply V5.2 (tube_power 5.2, kicad_next/CHANGES_5_2.md) - based on the V5.1 redraw from Proteus. One sheet per Proteus PDF page.')]
 
 SYM_LIB_TABLE = """(sym_lib_table
 \t(version 7)

@@ -7,7 +7,7 @@
 	(title_block
 		(title "Tube power supply - AUX supply")
 		(company "Tube power supply")
-		(rev "V5.1")
+		(rev "V5.2")
 		(comment 1 "Redrawn from Proteus tube_power_5_1")
 	)
 	(lib_symbols
@@ -3451,7 +3451,7 @@
 				)
 			)
 		)
-		(property "Value" "ES1A"
+		(property "Value" "ES1D"
 			(at 157.48 92.71 0)
 			(effects
 				(font
@@ -7614,7 +7614,7 @@
 				)
 			)
 		)
-		(property "Value" "ES1A"
+		(property "Value" "ES1D"
 			(at 213.36 109.22 0)
 			(effects
 				(font
@@ -8125,7 +8125,7 @@
 				)
 			)
 		)
-		(property "Value" "ES1A"
+		(property "Value" "ES1D"
 			(at 213.36 129.54 0)
 			(effects
 				(font

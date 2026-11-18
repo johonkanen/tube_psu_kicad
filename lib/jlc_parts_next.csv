@@ -120,17 +120,17 @@ D2,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extende
 D3,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extended,5662,0.2931,2026-11-17,exact,,
 D4,ES1D,tube_psu:D_SMA_AC,C116492,ES1D,Shandong Jingdao Microelectronics,extended,236108,0.0112,2026-11-18,exact,,ES1D 200 V (NR 1.10: >= 100 V)
 D5,ES1D,tube_psu:D_SMA_AC,C116492,ES1D,Shandong Jingdao Microelectronics,extended,236108,0.0112,2026-11-18,exact,,ES1D 200 V (NR 1.10: >= 100 V)
-D6,ES1A,tube_psu:D_SMA_AC,C116492,ES1D,Shandong Jingdao Microelectronics,extended,236108,0.0112,2026-11-17,changed,value ES1A -> ES1D (schematic value stale),schematic ES1A (50 V) -> ES1D 200 V (known: the aux flyback rectifiers are ES1D-class 200 V)
+D6,ES1D,tube_psu:D_SMA_AC,C116492,ES1D,Shandong Jingdao Microelectronics,extended,236108,0.0112,2026-11-18,exact,,"ES1D 200 V (5.2: schematic value corrected from ES1A, as fitted / as the JLC choice of 5.1)"
 D7,S1M,tube_psu:D_SMA_AC,C64915,S1M,MDD(Microdiode Semiconductor),extended,143322,0.0163,2026-11-17,exact,,"S1M 1000 V standard recovery, as designed"
 D8,US1M,tube_psu:D_SMA_AC,C412437,US1M,MDD(Microdiode Semiconductor),basic,1969040,0.0134,2026-11-18,exact,,US1M 1000 V ultrafast (NR 1.9: >= 600 V)
 D9,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extended,5662,0.2931,2026-11-17,exact,,
 D10,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extended,5662,0.2931,2026-11-17,exact,,
 D11,S1M,tube_psu:D_SMA_AC,C64915,S1M,MDD(Microdiode Semiconductor),extended,143322,0.0163,2026-11-17,exact,,"S1M 1000 V standard recovery, as designed"
-D14,ES1A,tube_psu:D_SMA_AC,C116492,ES1D,Shandong Jingdao Microelectronics,extended,236108,0.0112,2026-11-17,changed,value ES1A -> ES1D (schematic value stale),schematic ES1A (50 V) -> ES1D 200 V (known: the aux flyback rectifiers are ES1D-class 200 V)
+D14,ES1D,tube_psu:D_SMA_AC,C116492,ES1D,Shandong Jingdao Microelectronics,extended,236108,0.0112,2026-11-18,exact,,"ES1D 200 V (5.2: schematic value corrected from ES1A, as fitted / as the JLC choice of 5.1)"
 D18,S1M,tube_psu:D_SMA_AC,C64915,S1M,MDD(Microdiode Semiconductor),extended,143322,0.0163,2026-11-17,exact,,"S1M 1000 V standard recovery, as designed"
 D19,S1M,tube_psu:D_SMA_AC,C64915,S1M,MDD(Microdiode Semiconductor),extended,143322,0.0163,2026-11-17,exact,,"S1M 1000 V standard recovery, as designed"
 D28,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extended,5662,0.2931,2026-11-17,exact,,
-D29,ES1A,tube_psu:D_SMA_AC,C116492,ES1D,Shandong Jingdao Microelectronics,extended,236108,0.0112,2026-11-17,changed,value ES1A -> ES1D (schematic value stale),schematic ES1A (50 V) -> ES1D 200 V (known: the aux flyback rectifiers are ES1D-class 200 V)
+D29,ES1D,tube_psu:D_SMA_AC,C116492,ES1D,Shandong Jingdao Microelectronics,extended,236108,0.0112,2026-11-18,exact,,"ES1D 200 V (5.2: schematic value corrected from ES1A, as fitted / as the JLC choice of 5.1)"
 D30,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extended,5662,0.2931,2026-11-17,exact,,
 D31,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extended,5662,0.2931,2026-11-17,exact,,
 D32,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extended,5662,0.2931,2026-11-17,exact,,
@@ -152,8 +152,8 @@ ISO1,CA-IS3761LW,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,C528659,CA-IS3761LW,Chip
 ISO2,CA-IS3761LW,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,C528659,CA-IS3761LW,Chipanalog,extended,2315,1.8524,2026-11-18,changed,reinforced certificate to confirm,"5.2: Si8661BD (2 pcs) -> CA-IS3761LW, same pinout (1 VDDA, 2-6 in, 7 out, 8/9 GND, 10 in, 11-15 out, 16 VDDB; checked), default low, VIOWM 1000 Vrms (WB); datasheet 2019 lists VDE/UL/CQC as pending"
 J2,50 PIN HEADER 50TH,tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus,C69941,1.27-2*25PPin,BOOMELE(Boom Precision Elec),extended,2834,0.3033,2026-11-17,equivalent,J2 generic header: check gender / height,THT. 2x25 1.27 mm pin header (BOOMELE); check gender/height against the mating board
 J4,FTDI 1x6,Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical,C492405,PZ254V-11-06P,XFCN,extended,72868,0.0431,2026-11-18,changed,,5.2: 3-pin 66226-003 -> 6-pin FTDI header on the UART island (NR 3b)
-L1,200u,tube_psu:L_RM8_Proteus,,,,,,,2026-11-17,consigned,,RM8 inductors wound by the user
-L2,200u,tube_psu:L_RM8_Proteus,,,,,,,2026-11-17,consigned,,RM8 inductors wound by the user
+L1,TBD (measured),,,,,,,,2026-11-18,consigned,value to measure,5.2: PFC choke = sendust ring OD 31.5 x 16.7 mm (NR 5.2); listing 3 mH at 0 A - measure L at 0 A and at the PFC peak current; schematic 5.1 said 200 uH (RM8)
+L2,TBD (measured),,,,,,,,2026-11-18,consigned,value to measure,5.2: PFC choke = sendust ring OD 31.5 x 16.7 mm (NR 5.2); listing 3 mH at 0 A - measure L at 0 A and at the PFC peak current; schematic 5.1 said 200 uH (RM8)
 N5V_OUT,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
 N80V_OUT,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
 P15V_OUT,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"

@@ -67,9 +67,20 @@ def _save_next(self):
 Sheet.save = _save_next
 
 
+TITLE_REV, TITLE_COMMENT = "V5.2", "tube_power 5.2 - from the 5.1 migration, NEXT_REVISION.md changes (tools/next)"
+
+
 def sheet(fname):
-    """The 5.2 sub-sheet kicad_next/<fname>, cleared for a fresh rebuild (replaces p2k.sheetkit.sheet)."""
-    return Sheet(os.path.join(OUT_DIR, fname), project=PROJECT).clear()
+    """The 5.2 sub-sheet kicad_next/<fname>, cleared for a fresh rebuild (replaces p2k.sheetkit.sheet); the
+    title block gets the 5.2 revision."""
+    sh = Sheet(os.path.join(OUT_DIR, fname), project=PROJECT).clear()
+    for tb in find_all(sh.tree, "title_block"):
+        for c in tb:
+            if isinstance(c, list) and c and str(c[0]) == "rev":
+                c[1] = TITLE_REV
+            elif isinstance(c, list) and c and str(c[0]) == "comment" and c[1] == 1:
+                c[2] = TITLE_COMMENT
+    return sh
 
 
 # --- LCSC field --------------------------------------------------------------------------------------
@@ -289,7 +300,7 @@ def ucc27511_cell(sh, ref, UX, UY, vcc, gnd, in_label, r_in, cdec, r_on, r_off, 
     sh.junction(xj, yb)
     sh.glabel(out_label, xj + g(10), yb, 0)
     rref, rval = r_gate
-    _, rt, rb = vert2(sh, "R", rref, xj + g(6), yb + g(3), rval, top=1, text="left")
+    _, rt, rb = vert2(sh, "R", rref, xj + g(6), yb + g(3), rval, top=2, text="left")   # pin 2 = gate (as 5.1)
     sh.junction(*rt)
     power_at(sh, gnd, rb, "down")
     return u

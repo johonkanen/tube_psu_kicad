@@ -7,11 +7,11 @@
 	(title_block
 		(title "Tube power supply")
 		(company "Tube power supply")
-		(rev "V5.1")
-		(comment 1 "Redrawn from Proteus tube_power_5_1")
+		(rev "V5.2")
+		(comment 1 "tube_power 5.2 - from the 5.1 migration, NEXT_REVISION.md changes (tools/next)")
 	)
 	(lib_symbols)
-	(text "Tube power supply V5.1 - redrawn from Proteus. One sheet per Proteus PDF page.\nNet names follow the IPC-D-356A netlist (reference/pins_by_net.md)."
+	(text "Tube power supply V5.2 (tube_power 5.2, kicad_next/CHANGES_5_2.md) - based on the V5.1 redraw from Proteus. One sheet per Proteus PDF page.\nNet names follow the IPC-D-356A netlist (reference/pins_by_net.md)."
 		(exclude_from_sim no)
 		(at 25.4 22.86 0)
 		(effects

@@ -38,7 +38,7 @@ EARTH = {"/05 PFC/PE"}                                     # protective earth (Y
 HV_NETS = {
     "PRIMARY": {
         "DC+", "AC1", "AC2", "/05 PFC/IN2", "/05 PFC/L1_PRI2", "/05 PFC/L2_PRI2", "/05 PFC/RES_IN",
-        "Net-(RL1-COM)", "Net-(L1-1)", "Net-(L2-2)",                     # mains, inrush, PFC drains
+        "Net-(RL1-COM)", "/05 PFC/PFC_DRAIN_1", "/05 PFC/PFC_DRAIN_2",                     # mains, inrush, PFC drains
         "DHB_HI_SOURCE", "/07 DHB/DHB_CAP",           # DAB primary bridge
         "DHB_HI_GATE", "Net-(Q19-G)", "Net-(D30-PadA)", "Net-(DRV5-VDDB)", "Net-(D19-K)",  # high side
         "/06 Heaters/HEATER_HI_SOURCE", "/06 Heaters/HEATER_CAP_MEAS",    # heater LLC bridge / tank

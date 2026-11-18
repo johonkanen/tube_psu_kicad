@@ -151,8 +151,8 @@ ISO1,tube_psu:SI8661,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,SOIC-16W (KiCad libr
 ISO2,tube_psu:SI8661,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,SOIC-16W (KiCad library)
 J2,tube_psu:HEADER_2X25_50MIL,tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus,2x25 1.27 mm header
 J4,tube_psu_next:CONN_01X06,Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical,"1x6 2.54 mm, FTDI TTL-232R-3V3 pinout (NR 3b.2)"
-L1,tube_psu:RM8_INDUCTOR,tube_psu:L_RM8_Proteus,"RM8 choke: winding pads pri1/pri2, bobbin pins 1/2 (no net); 45 deg on the board"
-L2,tube_psu:RM8_INDUCTOR,tube_psu:L_RM8_Proteus,"RM8 choke: winding pads pri1/pri2, bobbin pins 1/2 (no net); 45 deg on the board"
+L1,tube_psu_next:L_TOROID,,"TODO phase 3: toroid footprint (2 leads, spacing ~16.7 mm, courtyard ~D32.5, hold-down) after measuring - RM8 footprint dropped"
+L2,tube_psu_next:L_TOROID,,"TODO phase 3: toroid footprint (2 leads, spacing ~16.7 mm, courtyard ~D32.5, hold-down) after measuring - RM8 footprint dropped"
 N5V_OUT,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
 N80V_OUT,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
 P15V_OUT,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"

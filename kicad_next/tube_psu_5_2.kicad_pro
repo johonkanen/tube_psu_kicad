@@ -556,6 +556,14 @@
       },
       {
         "netclass": "HV_PRIMARY",
+        "pattern": "/05 PFC/PFC_DRAIN_1"
+      },
+      {
+        "netclass": "HV_PRIMARY",
+        "pattern": "/05 PFC/PFC_DRAIN_2"
+      },
+      {
+        "netclass": "HV_PRIMARY",
         "pattern": "/05 PFC/RES_IN"
       },
       {
@@ -629,14 +637,6 @@
       {
         "netclass": "HV_PRIMARY",
         "pattern": "Net-(DRV5-VDDB)"
-      },
-      {
-        "netclass": "HV_PRIMARY",
-        "pattern": "Net-(L1-1)"
-      },
-      {
-        "netclass": "HV_PRIMARY",
-        "pattern": "Net-(L2-2)"
       },
       {
         "netclass": "HV_PRIMARY",
@@ -1273,22 +1273,6 @@
       {
         "netclass": "SIGNAL",
         "pattern": "unconnected-(DRV5-NC-Pad7)"
-      },
-      {
-        "netclass": "SIGNAL",
-        "pattern": "unconnected-(L1-NC-Pad1)"
-      },
-      {
-        "netclass": "SIGNAL",
-        "pattern": "unconnected-(L1-NC-Pad2)"
-      },
-      {
-        "netclass": "SIGNAL",
-        "pattern": "unconnected-(L2-NC-Pad1)"
-      },
-      {
-        "netclass": "SIGNAL",
-        "pattern": "unconnected-(L2-NC-Pad2)"
       },
       {
         "netclass": "SIGNAL",

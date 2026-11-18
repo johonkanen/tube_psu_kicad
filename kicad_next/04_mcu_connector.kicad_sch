@@ -7,7 +7,7 @@
 	(title_block
 		(title "Tube power supply - MCU connector")
 		(company "Tube power supply")
-		(rev "V5.1")
+		(rev "V5.2")
 		(comment 1 "Redrawn from Proteus tube_power_5_1")
 	)
 	(lib_symbols

@@ -148,8 +148,9 @@ XDC = g(236)
 for row, lref, lleft, qref, gate, dref, rref, cur in (
         (TOPR, "L2", "pri1", "Q5", "GATE1", "SICD1", "R93", "PFC CURRENT 2+"),
         (AC2R, "L1", "pri2", "Q6", "GATE2", "SICD2", "R21", "PFC CURRENT 3+")):
-    t = -1 if lleft == "pri2" else 1                           # texts away from the NC bobbin pins
-    _, l1, l2 = horiz2(sh, "RM8_INDUCTOR", lref, g(200), row, sh_value(lref), left=lleft,
+    # 5.2 (NR 5.2): sendust toroid with two leads (5.1 RM8 pri1 / pri2 = toroid pins 1 / 2, same orientation)
+    t = -1 if lleft == "pri2" else 1
+    _, l1, l2 = horiz2(sh, "L_TOROID", lref, g(200), row, sh_value(lref), left={"pri1": 1, "pri2": 2}[lleft],
                        ref_at=(g(200), row + t * g(5), 90, None), value_at=(g(200), row + t * g(3), 90, None))
     sh.wire((dr if row == TOPR else xdrop, row), l1)
     q = sh.place("Q_NMOS_GDS", qref, g(212), row + g(6), value=sh_value(qref))
@@ -158,6 +159,7 @@ for row, lref, lleft, qref, gate, dref, rref, cur in (
     sh.wire(l2, node)
     sh.wire(node, D)
     sh.junction(*node)
+    sh.label("PFC_DRAIN_1" if qref == "Q5" else "PFC_DRAIN_2", node[0] - g(4), row, 0)   # 5.2: named (HV class)
     _, a, k = horiz2(sh, "C3D02060A", dref, g(224), row, sh_value(dref), left="A")
     sh.wire(node, a)
     sh.wire(k, (XDC, row))
@@ -173,6 +175,7 @@ sh.wire((XDC, AC2R), (XDC, TOPR), (XDC, TOPR - g(6)))
 sh.junction(XDC, TOPR)
 power_at(sh, "DC+", (XDC, TOPR - g(6)), "up")
 sh.text("PFC drain 1 / pfc drain 2 (PDF labels) are the wired nodes L2-Q5-SICD1 / L1-Q6-SICD2.", g(180), g(150))
+sh.text("5.2: L1 / L2 = sendust toroids (OD 31.5 x 16.7 mm, 2 leads, NR 5.2); value = measured L at 0 A / PFC peak (TBD), footprint phase 3.", g(180), g(153))
 
 # --- bridge rectifier DB1 (standalone, as in the PDF): generates DC+ and GND -> permanent PWR_FLAGs
 DBX, DBY = g(270), g(40)
