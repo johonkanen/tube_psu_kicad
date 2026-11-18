@@ -452,4 +452,5 @@ while the leakage does not change.
 | `fd_leakage.py` | axisymmetric FD leakage, pot / rod / ER combination (`python3 fd_leakage.py` runs a grid-convergence self-test) |
 | `dab_wave.py` | exact steady-state DAB waveforms, phase for P, ZVS edge currents (`python3 dab_wave.py` runs a check against the textbook power formula) |
 | `run_dab.py` | sweep, knobs, recommended options with gap / ZVS, baseline, MAS export; `--tiw`: option B with the TIW-litz secondary (section 8) |
+| `dab_spice.py`, `DAB_SIMULATION.md` | ngspice switching model of the whole DAB with this transformer: ZVS, dead time, gap / Lm, shunt, start-up. **It recommends Lm ≈ 200 µH (≈ 0.68 mm centre gap) rather than the 300 µH of section 4, for tolerance against bus-voltage mismatch at light load** |
 | `mas/tr3_dab_*.json` | MAS of the recommended options (and `tr3_dab_B_42uH_TIW.json`, section 8), gapped (inputs: 400 W operating point; magnetic; outputs: L matrix, losses) |
