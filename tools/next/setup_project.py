@@ -28,9 +28,10 @@ SCH = os.path.join(ROOT, "kicad_next", "tube_psu_5_2.kicad_sch")
 CLI = os.path.join(ROOT, "tools", "p2k", "bin", "kicad-cli")
 
 # --- domains ----------------------------------------------------------------------------------------
-GROUNDS = {"PRIMARY": "GND", "SECONDARY": "ISO_GND", "HEATER": "HT_GND"}  # UART: phase 2 adds "ISO_UART_GND"
-BARRIERS = {"TR1", "TR2", "TR3", "ISO1", "ISO2"}          # parts whose pins sit in two domains
-ISO_SIDE2 = {"ISO1": "HEATER", "ISO2": "SECONDARY"}       # Si8661: pins 1-8 primary, 9-16 side 2
+GROUNDS = {"PRIMARY": "GND", "SECONDARY": "ISO_GND", "HEATER": "HT_GND", "UART": "ISO_UART_GND"}
+BARRIERS = {"TR1", "TR2", "TR3", "ISO1", "ISO2", "U11"}   # parts whose pins sit in two domains
+# isolators: pins 1-8 primary, 9-16 side 2 (CA-IS3761LW / Si8661 ISO1 / ISO2, CA-IS3721HW / Si8621 U11)
+ISO_SIDE2 = {"ISO1": "HEATER", "ISO2": "SECONDARY", "U11": "UART"}
 EARTH = {"/05 PFC/PE"}                                     # protective earth (Y caps to primary)
 
 # --- HV nets (> ~60 V to the domain ground or floating with a switch node) ---------------------------
@@ -53,7 +54,7 @@ HV_NETS = {
         "Net-(R23-Pad2)", "Net-(R34-Pad2)",
     },
 }
-RAILS = {"GND", "15V", "5V", "+3V3", "+1V65_BIAS"}   # primary low-voltage supply nets -> PRIMARY_LV
+RAILS = {"GND", "15V", "5V", "+3V3", "+1V65_BIAS"}   # (UART island nets: one class UART_ISO)   # primary low-voltage supply nets -> PRIMARY_LV
 DOMAIN_CLASS = {"SECONDARY": "SECONDARY_LV", "HEATER": "HEATER", "UART": "UART_ISO", "EARTH": "PE_EARTH"}
 
 # --- net classes: (name, clearance, track, via, drill) mm; clearance = functional, all layers --------

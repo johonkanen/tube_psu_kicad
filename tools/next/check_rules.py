@@ -39,8 +39,15 @@ CASES = [
     ("DC+", "GND", "F", 1.0, {"clearance"}),                       # HV functional outer 1.2
     ("DC+", "GND", "In2", 0.6, set()),                             # HV class clearance 0.5 inner
     ("/05 PFC/PE", "GND", "F", 2.5, {"creepage"}),                 # PE-PRI basic creepage 3.2
+    ("GND", "ISO_UART_GND", "In2", 7.0, {"clearance"}),            # PRI-UART inner 8.0 (5.2 island)
+    ("UART_3V3", "HT_GND", "F", 0.8, {"clearance"}),               # HEATER-UART functional 1.0
+    ("+3V3", "UART_5V", "F", 7.0, {"creepage"}),                   # PRI-UART reinforced creepage 8.0
+    ("ISO_GND", "ISO_UART_GND", "F", 8.0, {"creepage"}),           # SEC-UART reinforced creepage 8.4
 ]
-SLOTS = [(x, y) for y in (-70, -40, -10, 15) for x in (-55, -30, 30, 55)]
+# The four extra slots (5.2 UART cases): KiCad 10 reported no creepage violation for test tracks at
+# (-10, -70) and (75, -50) (clearance works there; not understood - the creepage cases sit at (-10, -15) /
+# (75, 0), where it is reported). A wrong rule still shows up as a FAIL, a silent slot only as a false FAIL.
+SLOTS = [(x, y) for y in (-70, -40, -10, 15) for x in (-55, -30, 30, 55)] + [(-10, -70), (75, -50), (-10, -15), (75, 0)]
 assert len(CASES) <= len(SLOTS), "add test positions to SLOTS"
 HOLE_TEST = ("GND", "F", 1.5, {"clearance", "creepage"})          # 1.5 mm from the H4 ring: 2.0 / 3.2 mm rule (earthed screws)
 

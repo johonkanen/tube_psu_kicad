@@ -6,14 +6,13 @@ AD2,ADC121S101,tube_psu:SOT-23-6_Proteus,C74860,ADC121S101CIMF/NOPB,Texas Instru
 C1,220u,tube_psu:CP_Elec_6.3x7.7_EEEFTE221XAP,C190724,EEEFTE221XAP,PANASONIC,extended,2544,0.557,2026-11-17,exact,,25 V on the 15 V rails
 C2,220u,tube_psu:CP_Elec_6.3x7.7_EEEFTE221XAP,C190724,EEEFTE221XAP,PANASONIC,extended,2544,0.557,2026-11-17,exact,,25 V on the 15 V rails
 C3,4.7u,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C29823,1206B475K500NT,FH (Guangdong Fenghua Advanced Tech),basic,540274,0.0797,2026-11-17,equivalent,,4.7 uF X7R 50 V 1206 (15 V / PWM2 Vcc / -5 V)
-C4,1n,Capacitor_SMD:C_0603_1608Metric,C106246,CC0603JRNPO9BN102,YAGEO,extended,456648,0.0056,2026-11-17,equivalent,,1 nF C0G 50 V
 C5,1n,Capacitor_SMD:C_0603_1608Metric,C106246,CC0603JRNPO9BN102,YAGEO,extended,456648,0.0056,2026-11-17,equivalent,,1 nF C0G 50 V
 C6,22u,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C12891,CL31A226KAHNNNE,Samsung Electro-Mechanics,basic,2642489,0.1029,2026-11-17,equivalent,,22 uF X5R 25 V 1206 (5 V rails)
 C7,1n,Capacitor_SMD:C_0603_1608Metric,C106246,CC0603JRNPO9BN102,YAGEO,extended,456648,0.0056,2026-11-17,equivalent,,1 nF C0G 50 V
 C8,10u,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C13585,CL31A106KBHNNNE,Samsung Electro-Mechanics,basic,4342840,0.1211,2026-11-17,equivalent,,"10 uF X5R 50 V 1206 (6V3, C18 on 15V)"
 C9,10u,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C13585,CL31A106KBHNNNE,Samsung Electro-Mechanics,basic,4342840,0.1211,2026-11-17,equivalent,,"10 uF X5R 50 V 1206 (6V3, C18 on 15V)"
 C10,na,Capacitor_SMD:C_0603_1608Metric,,,,,,,2026-11-17,dnp,,"value ""na"": not fitted in the Proteus design; no part"
-C11,20p,Capacitor_SMD:C_0603_1608Metric,C1648,CL10C200JB8NNNC,Samsung Electro-Mechanics,basic,2239262,0.0089,2026-11-17,equivalent,,20 pF C0G 50 V
+C11,5.6p,Capacitor_SMD:C_0603_1608Metric,C1674,0603CG5R6C500NT,FH (Guangdong Fenghua Advanced Tech),extended,213359,0.005,2026-11-18,changed,,"5.2: 20p -> 5.6p C0G, HEATER feedback cap tau = 33k * 5.6p = 185 ns (NR 4.11, bench-tune)"
 C12,470p,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C107177,CC1206JKNPOCBN471,YAGEO,extended,127478,0.0417,2026-11-17,equivalent,,RCD snubber on DC+ (400 V): 470 pF C0G 1 kV
 C13,1u,Capacitor_SMD:C_0603_1608Metric,C15849,CL10A105KB8NNNC,Samsung Electro-Mechanics,basic,12659428,0.0145,2026-11-17,equivalent,,1 uF X5R 50 V 0603 (C43 on 15V_ISO_SEC)
 C14,4.7u,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C29823,1206B475K500NT,FH (Guangdong Fenghua Advanced Tech),basic,540274,0.0797,2026-11-17,equivalent,,4.7 uF X7R 50 V 1206 (15 V / PWM2 Vcc / -5 V)
@@ -63,9 +62,9 @@ C57,2u2,Capacitor_SMD:C_0603_1608Metric,C23630,CL10A225KO8NNNC,Samsung Electro-M
 C58,4.7u,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C29823,1206B475K500NT,FH (Guangdong Fenghua Advanced Tech),basic,540274,0.0797,2026-11-17,equivalent,,4.7 uF X7R 50 V 1206 (15 V / PWM2 Vcc / -5 V)
 C59,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-17,equivalent,,100 nF X7R 50 V 0603
 C60,2u2,Capacitor_SMD:C_0603_1608Metric,C23630,CL10A225KO8NNNC,Samsung Electro-Mechanics,basic,2837663,0.01,2026-11-17,equivalent,,2.2 uF X5R 16 V 0603 (3.3 V rails)
-C61,1n,Capacitor_SMD:C_0603_1608Metric,C106246,CC0603JRNPO9BN102,YAGEO,extended,456648,0.0056,2026-11-17,equivalent,,1 nF C0G 50 V
+C61,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-18,changed,,"5.2: 1n -> 100n (divider filter; AUX buffered by U10A, NR 4c.2)"
 C62,2.2u,Capacitor_SMD:C_0603_1608Metric,C23630,CL10A225KO8NNNC,Samsung Electro-Mechanics,basic,2837663,0.01,2026-11-17,equivalent,,2.2 uF X5R 16 V 0603 (3.3 V rails)
-C63,20p,Capacitor_SMD:C_0603_1608Metric,C1648,CL10C200JB8NNNC,Samsung Electro-Mechanics,basic,2239262,0.0089,2026-11-17,equivalent,,20 pF C0G 50 V
+C63,12p,Capacitor_SMD:C_0603_1608Metric,C38523,CL10C120JB8NNNC,Samsung Electro-Mechanics,basic,477485,0.0122,2026-11-18,changed,,"5.2: 20p -> 12p C0G, DHB feedback cap tau = 15k * 12p = 180 ns (NR 4.11, bench-tune)"
 C64,47n,Capacitor_THT:C_Rect_L13.0mm_W5.0mm_P10.00mm_FKS3_FKP3_MKS4,C3298405,B32921C3473K289,TDK,extended,1661,0.1832,2026-11-17,equivalent,,THT. R463F247000N0K not stocked -> TDK B32921C3473K289 X2 47 nF 305 VAC P10 (AC1/AC2 to GND)
 C65,2n2,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,C96522,CS45-E2GA222M-NKA,TDK,extended,35891,0.0476,2026-11-17,equivalent,,THT. Y2 2.2 nF disc P7.5: TDK CS45-E2GA222M-NKA (X1/Y2 300/440 VAC)
 C66,47n,Capacitor_THT:C_Rect_L13.0mm_W5.0mm_P10.00mm_FKS3_FKP3_MKS4,C3298405,B32921C3473K289,TDK,extended,1661,0.1832,2026-11-17,equivalent,,THT. R463F247000N0K not stocked -> TDK B32921C3473K289 X2 47 nF 305 VAC P10 (AC1/AC2 to GND)
@@ -152,7 +151,7 @@ IN2,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consign
 ISO1,CA-IS3761LW,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,C528659,CA-IS3761LW,Chipanalog,extended,2315,1.8524,2026-11-18,changed,reinforced certificate to confirm,"5.2: Si8661BD (2 pcs) -> CA-IS3761LW, same pinout (1 VDDA, 2-6 in, 7 out, 8/9 GND, 10 in, 11-15 out, 16 VDDB; checked), default low, VIOWM 1000 Vrms (WB); datasheet 2019 lists VDE/UL/CQC as pending"
 ISO2,CA-IS3761LW,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,C528659,CA-IS3761LW,Chipanalog,extended,2315,1.8524,2026-11-18,changed,reinforced certificate to confirm,"5.2: Si8661BD (2 pcs) -> CA-IS3761LW, same pinout (1 VDDA, 2-6 in, 7 out, 8/9 GND, 10 in, 11-15 out, 16 VDDB; checked), default low, VIOWM 1000 Vrms (WB); datasheet 2019 lists VDE/UL/CQC as pending"
 J2,50 PIN HEADER 50TH,tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus,C69941,1.27-2*25PPin,BOOMELE(Boom Precision Elec),extended,2834,0.3033,2026-11-17,equivalent,J2 generic header: check gender / height,THT. 2x25 1.27 mm pin header (BOOMELE); check gender/height against the mating board
-J4,66226-003,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,C49257,2.54-1*3PPin,BOOMELE(Boom Precision Elec),extended,209824,0.029,2026-11-17,equivalent,,THT. 1x3 2.54 mm pin header for FCI 66226-003
+J4,FTDI 1x6,Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical,C492405,PZ254V-11-06P,XFCN,extended,72868,0.0431,2026-11-18,changed,,5.2: 3-pin 66226-003 -> 6-pin FTDI header on the UART island (NR 3b)
 L1,200u,tube_psu:L_RM8_Proteus,,,,,,,2026-11-17,consigned,,RM8 inductors wound by the user
 L2,200u,tube_psu:L_RM8_Proteus,,,,,,,2026-11-17,consigned,,RM8 inductors wound by the user
 N5V_OUT,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
@@ -174,8 +173,8 @@ Q11,IPD60R280P7S,Package_TO_SOT_SMD:TO-252-2,C536813,IPD60R280P7S,Infineon Techn
 Q19,STF7N60M2,Package_TO_SOT_THT:TO-220-3_Vertical,,,,,,,2026-11-17,missing,not available,THT. STF7N60M2 2 in stock; consign or global sourcing
 Q21,STF7N60M2,Package_TO_SOT_THT:TO-220-3_Vertical,,,,,,,2026-11-17,missing,not available,THT. STF7N60M2 2 in stock; consign or global sourcing
 R1,5R,Resistor_SMD:R_1206_3216Metric,C2999547,FRC1206F4R99TS,FOJAN,extended,50427,0.0051,2026-11-17,equivalent,"5 Ω -> 4.99 Ω (E96, -0.2 %)",4.99 Ω 1 % 1206 (E96) for 5 Ω gate resistors
-R2,1k,Resistor_SMD:R_0603_1608Metric,C21190,0603WAF1001T5E,UNI-ROYAL(Uniroyal Elec),basic,29932409,0.0017,2026-11-17,equivalent,,1 kΩ 1 % 0603
-R3,470,Resistor_SMD:R_0603_1608Metric,C23179,0603WAF4700T5E,UNI-ROYAL(Uniroyal Elec),basic,3383218,0.0023,2026-11-17,equivalent,,470 Ω 1 % 0603
+R2,100R,Resistor_SMD:R_0603_1608Metric,C22775,0603WAF1000T5E,UNI-ROYAL(Uniroyal Elec),basic,10602078,0.0019,2026-11-18,changed,,"5.2: 1k -> 100R (NR 4.4, ADC mux)"
+R3,1.96k,Resistor_SMD:R_0603_1608Metric,C22854,0603WAF1961T5E,UNI-ROYAL(Uniroyal Elec),extended,63859,0.0016,2026-11-18,changed,,"5.2: 470R -> 1.96k (bias divider, NR 4.1)"
 R4,470k,Resistor_SMD:R_1206_3216Metric,C17997,1206W4F4703T5E,UNI-ROYAL(Uniroyal Elec),extended,134282,0.0051,2026-11-17,equivalent,,"470 kΩ 1 % 1206 (mains divider, ~110 V per resistor)"
 R5,470k,Resistor_SMD:R_1206_3216Metric,C17997,1206W4F4703T5E,UNI-ROYAL(Uniroyal Elec),extended,134282,0.0051,2026-11-17,equivalent,,"470 kΩ 1 % 1206 (mains divider, ~110 V per resistor)"
 R6,470k,Resistor_SMD:R_1206_3216Metric,C17997,1206W4F4703T5E,UNI-ROYAL(Uniroyal Elec),extended,134282,0.0051,2026-11-17,equivalent,,"470 kΩ 1 % 1206 (mains divider, ~110 V per resistor)"
@@ -219,7 +218,7 @@ R45,1M,Resistor_SMD:R_1206_3216Metric,C17927,1206W4F1004T5E,UNI-ROYAL(Uniroyal E
 R46,2R,Resistor_SMD:R_1206_3216Metric,C2907381,FRC1206F2R00TS,FOJAN,extended,1911485,0.0065,2026-11-17,equivalent,,2 Ω 1 % 1206
 R47,1M,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C17514,0805W8F1004T5E,UNI-ROYAL(Uniroyal Elec),basic,1523445,0.0044,2026-11-17,equivalent,,"1 MΩ 1 % 0805 (dividers: <= 140 V per resistor, 0805 rated 150 V; R23/R34/R39 on 420V are at the limit)"
 R48,1M,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C17514,0805W8F1004T5E,UNI-ROYAL(Uniroyal Elec),basic,1523445,0.0044,2026-11-17,equivalent,,"1 MΩ 1 % 0805 (dividers: <= 140 V per resistor, 0805 rated 150 V; R23/R34/R39 on 420V are at the limit)"
-R49,15k,Resistor_SMD:R_0603_1608Metric,C22809,0603WAF1502T5E,UNI-ROYAL(Uniroyal Elec),basic,3013077,0.0029,2026-11-17,equivalent,,15 kΩ 1 % 0603
+R49,12k,Resistor_SMD:R_0603_1608Metric,C22790,0603WAF1202T5E,UNI-ROYAL(Uniroyal Elec),basic,956210,0.0019,2026-11-18,changed,,"5.2: 15k -> 12k (NR 4.3, VAC range)"
 R50,1M,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C17514,0805W8F1004T5E,UNI-ROYAL(Uniroyal Elec),basic,1523445,0.0044,2026-11-17,equivalent,,"1 MΩ 1 % 0805 (dividers: <= 140 V per resistor, 0805 rated 150 V; R23/R34/R39 on 420V are at the limit)"
 R51,1M,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C17514,0805W8F1004T5E,UNI-ROYAL(Uniroyal Elec),basic,1523445,0.0044,2026-11-17,equivalent,,"1 MΩ 1 % 0805 (dividers: <= 140 V per resistor, 0805 rated 150 V; R23/R34/R39 on 420V are at the limit)"
 R52,1M,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C17514,0805W8F1004T5E,UNI-ROYAL(Uniroyal Elec),basic,1523445,0.0044,2026-11-17,equivalent,,"1 MΩ 1 % 0805 (dividers: <= 140 V per resistor, 0805 rated 150 V; R23/R34/R39 on 420V are at the limit)"
@@ -250,7 +249,7 @@ R76,10k,Resistor_SMD:R_0603_1608Metric,C25804,0603WAF1002T5E,UNI-ROYAL(Uniroyal 
 R77,10k,Resistor_SMD:R_0603_1608Metric,C25804,0603WAF1002T5E,UNI-ROYAL(Uniroyal Elec),basic,44852996,0.0019,2026-11-17,equivalent,,10 kΩ 1 % 0603
 R78,10k,Resistor_SMD:R_0603_1608Metric,C25804,0603WAF1002T5E,UNI-ROYAL(Uniroyal Elec),basic,44852996,0.0019,2026-11-17,equivalent,,10 kΩ 1 % 0603
 R79,1M,tube_psu:R_0805_2012Metric_Proteus,C17514,0805W8F1004T5E,UNI-ROYAL(Uniroyal Elec),basic,1523445,0.0044,2026-11-17,equivalent,,"1 MΩ 1 % 0805 (dividers: <= 140 V per resistor, 0805 rated 150 V; R23/R34/R39 on 420V are at the limit)"
-R80,15k,Resistor_SMD:R_0603_1608Metric,C22809,0603WAF1502T5E,UNI-ROYAL(Uniroyal Elec),basic,3013077,0.0029,2026-11-17,equivalent,,15 kΩ 1 % 0603
+R80,12k,Resistor_SMD:R_0603_1608Metric,C22790,0603WAF1202T5E,UNI-ROYAL(Uniroyal Elec),basic,956210,0.0019,2026-11-18,changed,,"5.2: 15k -> 12k (NR 4.3, VAC range)"
 R81,15k,Resistor_SMD:R_0603_1608Metric,C22809,0603WAF1502T5E,UNI-ROYAL(Uniroyal Elec),basic,3013077,0.0029,2026-11-17,equivalent,,15 kΩ 1 % 0603
 R82,15k,Resistor_SMD:R_0603_1608Metric,C22809,0603WAF1502T5E,UNI-ROYAL(Uniroyal Elec),basic,3013077,0.0029,2026-11-17,equivalent,,15 kΩ 1 % 0603
 R83,4m,tube_psu:R_0508_1220Metric_KRL2012,,,,,,,2026-11-17,missing,4 mΩ shunt not available (5 mΩ option),"KRL2012-C-R004 (4 mΩ) not at JLC; same footprint stocked only as KRL2012E-M-R005-F-T5 C2073455 (5 mΩ, +25 % current-sense gain); consign the 4 mΩ part or accept 5 mΩ"
@@ -280,7 +279,7 @@ R106,330R,Resistor_SMD:R_0603_1608Metric,C23138,0603WAF3300T5E,UNI-ROYAL(Uniroya
 R107,1k,Resistor_SMD:R_0603_1608Metric,C21190,0603WAF1001T5E,UNI-ROYAL(Uniroyal Elec),basic,29932409,0.0017,2026-11-17,equivalent,,1 kΩ 1 % 0603
 R108,1k,Resistor_SMD:R_0603_1608Metric,C21190,0603WAF1001T5E,UNI-ROYAL(Uniroyal Elec),basic,29932409,0.0017,2026-11-17,equivalent,,1 kΩ 1 % 0603
 R109,1M,tube_psu:R_0805_2012Metric_Proteus,C17514,0805W8F1004T5E,UNI-ROYAL(Uniroyal Elec),basic,1523445,0.0044,2026-11-17,equivalent,,"1 MΩ 1 % 0805 (dividers: <= 140 V per resistor, 0805 rated 150 V; R23/R34/R39 on 420V are at the limit)"
-R110,220,Resistor_SMD:R_0603_1608Metric,C22962,0603WAF2200T5E,UNI-ROYAL(Uniroyal Elec),basic,1824001,0.0019,2026-11-17,equivalent,,220 Ω 1 % 0603
+R110,1.00k,Resistor_SMD:R_0603_1608Metric,C21190,0603WAF1001T5E,UNI-ROYAL(Uniroyal Elec),basic,29932409,0.0017,2026-11-18,changed,,"5.2: 220R -> 1.00k (bias divider 2.5 V -> 1.655 V, unloaded behind U9)"
 R111,1M,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C17514,0805W8F1004T5E,UNI-ROYAL(Uniroyal Elec),basic,1523445,0.0044,2026-11-17,equivalent,,"1 MΩ 1 % 0805 (dividers: <= 140 V per resistor, 0805 rated 150 V; R23/R34/R39 on 420V are at the limit)"
 R112,1M,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C17514,0805W8F1004T5E,UNI-ROYAL(Uniroyal Elec),basic,1523445,0.0044,2026-11-17,equivalent,,"1 MΩ 1 % 0805 (dividers: <= 140 V per resistor, 0805 rated 150 V; R23/R34/R39 on 420V are at the limit)"
 R113,15k,Resistor_SMD:R_0603_1608Metric,C22809,0603WAF1502T5E,UNI-ROYAL(Uniroyal Elec),basic,3013077,0.0029,2026-11-17,equivalent,,15 kΩ 1 % 0603
@@ -295,7 +294,7 @@ R121,15k,Resistor_SMD:R_0603_1608Metric,C22809,0603WAF1502T5E,UNI-ROYAL(Uniroyal
 R122,6.8k,Resistor_SMD:R_0603_1608Metric,C23212,0603WAF6801T5E,UNI-ROYAL(Uniroyal Elec),basic,956944,0.0023,2026-11-17,equivalent,,6.8 kΩ 1 % 0603
 R123,12.1K,Resistor_SMD:R_1206_3216Metric,C247391,1206W4F1212T5E,UNI-ROYAL(Uniroyal Elec),extended,4303,0.0045,2026-11-17,equivalent,,12.1 kΩ 1 % 1206
 R124,2.61k,Resistor_SMD:R_1206_3216Metric,C245506,CR1206F2K61P05Z,Ever Ohms Tech,extended,75,0.0077,2026-11-18,changed,stock 75,"2.61 kOhm 1 % 1206 (NR 1.8, 15V_ISO_SEC bleeder); alt. AC1206FR-072K61L C229516 (43)"
-REF1,ISL21010CFH315Z-TK,tube_psu:SOT-23_Proteus,C2157117,ISL21010CFH315Z-TK,RENESAS,extended,1024,1.5743,2026-11-17,exact,REF1 fitted part differs (1.65 V bias),ISL21010CFH315Z-TK as in the schematic (1.5 V); the fitted REF1 is a 1.65 V-bias part - check before ordering
+REF1,REF3325AIDBZR,tube_psu:SOT-23_Proteus,C69039,REF3325AIDBZR,Texas Instruments,extended,13320,0.7043,2026-11-18,changed,,5.2: 2.5 V series reference (same SOT-23 pinout 1 IN / 2 OUT / 3 GND as the ISL21010); 5.1 value ISL21010CFH315Z was the 1.5 V part (NR 4.8); ISL21010CFH325Z (2.5 V) 0 stock
 RL1,SONGLE RELAY,tube_psu:Relay_Songle_SRD_5pin,C35449,SRD-05VDC-SL-C,Ningbo Songle Relay,extended,84108,0.444,2026-11-17,exact,,THT. SRD-05VDC-SL-C (5 V coil)
 SEC_GND,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
 SICD1,C3D02060A,tube_psu:TO-220-2_Vertical_AK,,,,,,,2026-11-17,missing,not available,"THT. C3D02060A 0 stock; nearest TO-220-2 SiC: Vishay VS-C04ET07T-M3 C5208854 (650 V 4 A, 480 stock; check pinout and Qc); consign"
@@ -303,10 +302,10 @@ SICD2,C3D02060A,tube_psu:TO-220-2_Vertical_AK,,,,,,,2026-11-17,missing,not avail
 TR1,EEL19_4+6 Lp600u,tube_psu_next:Transformer_EEL19_V_4+6_FlyLeads,,,,,,,2026-11-18,consigned,,"custom transformer, EEL19 PC40 4+6 bobbin, P 52+52 T on fly leads (simulation/flyback/EEL19_DESIGN.md 6/6a)"
 TR2,EF25_8PIN,tube_psu:Transformer_EF25_2x5_P5.08mm_8pin,,,,,,,2026-11-17,consigned,,custom transformers (EF20 / EF25 / ETD34)
 TR3,EC42/15 2CH 20:21,tube_psu_next:Transformer_EC42x15_2Slot_2x8_P5mm,,,,,,,2026-11-18,consigned,,"custom transformer: EC42/15 PC40, primary 20 T / secondary 21 T litz 135x0.071, gap 0.35 mm (simulation/dab/DAB_TRANSFORMER.md 5, option B)"
-U1,LMH6658,Package_SO:TSSOP-8_3x3mm_P0.65mm,C478382,LMH6643MMX/NOPB,Texas Instruments,extended,15316,0.9518,2026-11-17,changed,value LMH6658 -> LMH6643 (agreed),"LMH6658 not stocked -> LMH6643MMX/NOPB (agreed drop-in, VSSOP-8 = TSSOP-8 3x3 P0.65)"
+U1,LMH6643,Package_SO:TSSOP-8_3x3mm_P0.65mm,C478382,LMH6643MMX/NOPB,Texas Instruments,extended,15316,0.9518,2026-11-18,exact,,"LMH6643MMX/NOPB (NR 4.10b, D2), VSSOP-8 = the TSSOP-8 3x3 P0.65 footprint, LMH6658 pinout"
 U2,TLV316IDBVR,tube_psu:SOT-23-5_Proteus,C575578,TLV316IDBVR,Texas Instruments,extended,4003,0.6422,2026-11-17,exact,,
 U3,TLV316IDBVR,tube_psu:SOT-23-5_Proteus,C575578,TLV316IDBVR,Texas Instruments,extended,4003,0.6422,2026-11-17,exact,,
-U4,LMH6658,Package_SO:TSSOP-8_3x3mm_P0.65mm,C478382,LMH6643MMX/NOPB,Texas Instruments,extended,15316,0.9518,2026-11-17,changed,value LMH6658 -> LMH6643 (agreed),"LMH6658 not stocked -> LMH6643MMX/NOPB (agreed drop-in, VSSOP-8 = TSSOP-8 3x3 P0.65)"
+U4,LMH6643,Package_SO:TSSOP-8_3x3mm_P0.65mm,C478382,LMH6643MMX/NOPB,Texas Instruments,extended,15316,0.9518,2026-11-18,exact,,"LMH6643MMX/NOPB (NR 4.10b, D2), VSSOP-8 = the TSSOP-8 3x3 P0.65 footprint, LMH6658 pinout"
 U6,TLV316IDBVR,tube_psu:SOT-23-5_Proteus,C575578,TLV316IDBVR,Texas Instruments,extended,4003,0.6422,2026-11-17,exact,,
 U8,TLV316IDBVR,tube_psu:SOT-23-5_Proteus,C575578,TLV316IDBVR,Texas Instruments,extended,4003,0.6422,2026-11-17,exact,,
 V2,MIC5205,tube_psu:SOT-23-5_Proteus,C37970,MIC5205-3.3YM5-TR,Microchip Tech,extended,673,0.4211,2026-11-17,exact,,MIC5205-3.3YM5-TR (3.3 V outputs AD2_3V3 / HT side)
@@ -323,3 +322,30 @@ C121,100p,Capacitor_SMD:C_0603_1608Metric,C14858,CL10C101JB8NNNC,Samsung Electro
 R129,10k,Resistor_SMD:R_0603_1608Metric,C25804,0603WAF1002T5E,UNI-ROYAL(Uniroyal Elec),basic,44852996,0.0019,2026-11-18,equivalent,,"new: DAB_DIS pull-down (DRV5 DISABLE, NR 3.3)"
 C120,1n,Capacitor_SMD:C_0603_1608Metric,C106246,CC0603JRNPO9BN102,YAGEO,extended,456648,0.0056,2026-11-18,equivalent,,new: DRV5 DISABLE bypass 1 nF C0G (UCC21520 datasheet)
 D35,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extended,5662,0.2931,2026-11-18,exact,,new: heater high-side turn-off diode (UCC21520 has one output per channel)
+C122,12p,Capacitor_SMD:C_0603_1608Metric,C38523,CL10C120JB8NNNC,Samsung Electro-Mechanics,basic,477485,0.0122,2026-11-18,equivalent,,"new: DHB + leg cap (+ input to +1V65_BIAS), equal to C63 (NR 4.11)"
+C123,5.6p,Capacitor_SMD:C_0603_1608Metric,C1674,0603CG5R6C500NT,FH (Guangdong Fenghua Advanced Tech),extended,213359,0.005,2026-11-18,equivalent,,"new: HEATER + leg cap (+ input to +1V65_BIAS), equal to C11 (NR 4.11)"
+C124,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-18,equivalent,,new: U1 decoupling 100 nF at pin 8 (NR 4.6)
+C125,1u,Capacitor_SMD:C_0603_1608Metric,C15849,CL10A105KB8NNNC,Samsung Electro-Mechanics,basic,12659428,0.0145,2026-11-18,equivalent,,new: U1 decoupling 1 uF at pin 8 (NR 4.6)
+C126,1n,Capacitor_SMD:C_0603_1608Metric,C106246,CC0603JRNPO9BN102,YAGEO,extended,456648,0.0056,2026-11-18,equivalent,,"new: 1 nF C0G across R80 (NR 4.2, VAC low-pass 13.3 kHz)"
+C127,1n,Capacitor_SMD:C_0603_1608Metric,C106246,CC0603JRNPO9BN102,YAGEO,extended,456648,0.0056,2026-11-18,equivalent,,"new: 1 nF C0G across R49 (NR 4.2), matched with C126"
+C128,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-18,equivalent,,new: 100 nF on the REF1 divider node (NR 4.1)
+U9,TLV316IDBVR,Package_TO_SOT_SMD:SOT-23-5,C575578,TLV316IDBVR,Texas Instruments,extended,4003,0.6422,2026-11-18,exact,,new: +1V65_BIAS buffer (NR 4.1)
+R131,22R,Resistor_SMD:R_0603_1608Metric,C23345,0603WAF220JT5E,UNI-ROYAL(Uniroyal Elec),basic,4965136,0.0017,2026-11-18,equivalent,,new: bias buffer output resistor 22R (NR 4.1)
+C129,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-18,equivalent,,new: U9 decoupling
+C130,1n,Capacitor_SMD:C_0603_1608Metric,C106246,CC0603JRNPO9BN102,YAGEO,extended,456648,0.0056,2026-11-18,equivalent,,new: 1 nF C0G across R17 (NR 4.4)
+C131,1n,Capacitor_SMD:C_0603_1608Metric,C106246,CC0603JRNPO9BN102,YAGEO,extended,456648,0.0056,2026-11-18,equivalent,,"new: 1 nF C0G across R82 (NR 4.4), matched with C130"
+U10,TLV9062IDGKR,Package_SO:VSSOP-8_3x3mm_P0.65mm,C398356,TLV9062IDGKR,Texas Instruments,extended,48430,0.2292,2026-11-18,exact,,"new: dual follower, A = AUX_MEAS, B = 5V_MEAS (NR 4b / 4c)"
+R132,100R,Resistor_SMD:R_0603_1608Metric,C22775,0603WAF1000T5E,UNI-ROYAL(Uniroyal Elec),basic,10602078,0.0019,2026-11-18,equivalent,,new: AUX_MEAS output 100R (NR 4c.1)
+R133,15k 0.1%,Resistor_SMD:R_0603_1608Metric,C318137,AR03BTCX1502,Viking Tech,extended,3509,0.0322,2026-11-18,equivalent,,new: 5V_MEAS divider top 15k 0.1 % (NR 4b)
+R134,10k 0.1%,Resistor_SMD:R_0603_1608Metric,C95204,RT0603BRD0710KL,YAGEO,extended,1886597,0.0261,2026-11-18,equivalent,,new: 5V_MEAS divider bottom 10k 0.1 % (NR 4b)
+C132,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-18,equivalent,,new: 5V_MEAS filter 100 nF across R134 (NR 4b)
+R135,100R,Resistor_SMD:R_0603_1608Metric,C22775,0603WAF1000T5E,UNI-ROYAL(Uniroyal Elec),basic,10602078,0.0019,2026-11-18,equivalent,,new: 5V_MEAS output 100R (NR 4b)
+C133,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-18,equivalent,,new: U10 decoupling
+U11,CA-IS3721HW,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,C5337993,CA-IS3721HW,Chipanalog,extended,1358,1.1088,2026-11-18,changed,reinforced rating to confirm,"new: UART isolator (NR 3b). Si8621BD is default-LOW (Skyworks ordering guide) -> default-high needed (idle UART): CA-IS3721HW = Si8621 WB pinout, default high, stocked; alt. Si8621ED-B-IS (0 stock, consign)"
+U12,XC6206P332MR,Package_TO_SOT_SMD:SOT-23,C5446,XC6206P332MR-G,Torex Semicon,basic,433714,0.1381,2026-11-18,exact,,new: 3.3 V LDO for the cable side of U11 (NR 3b.3)
+C134,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-18,equivalent,,new: U11 side-1 decoupling
+C135,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-18,equivalent,,new: U11 side-2 decoupling (island)
+C136,1u,Capacitor_SMD:C_0603_1608Metric,C15849,CL10A105KB8NNNC,Samsung Electro-Mechanics,basic,12659428,0.0145,2026-11-18,equivalent,,new: U12 input 1 uF (island)
+C137,1u,Capacitor_SMD:C_0603_1608Metric,C15849,CL10A105KB8NNNC,Samsung Electro-Mechanics,basic,12659428,0.0145,2026-11-18,equivalent,,new: U12 output 1 uF (island)
+R136,47R,Resistor_SMD:R_0603_1608Metric,C23182,0603WAF470JT5E,UNI-ROYAL(Uniroyal Elec),basic,1256720,0.0018,2026-11-18,equivalent,,new: cable TXD series resistor (NR 3b.4)
+R137,47R,Resistor_SMD:R_0603_1608Metric,C23182,0603WAF470JT5E,UNI-ROYAL(Uniroyal Elec),basic,1256720,0.0018,2026-11-18,equivalent,,new: cable RXD series resistor (NR 3b.4)

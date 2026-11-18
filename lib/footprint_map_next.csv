@@ -5,7 +5,6 @@ AD2,tube_psu:ADC121S101,tube_psu:SOT-23-6_Proteus,"SOT-23-6, Proteus pad rows 2.
 C1,tube_psu:C_Polarized,tube_psu:CP_Elec_6.3x7.7_EEEFTE221XAP,"EEEFTE221XAP SMD electrolytic, Proteus pads"
 C2,tube_psu:C_Polarized,tube_psu:CP_Elec_6.3x7.7_EEEFTE221XAP,"EEEFTE221XAP SMD electrolytic, Proteus pads"
 C3,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
-C4,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C5,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C6,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C7,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
@@ -151,7 +150,7 @@ IN2,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal
 ISO1,tube_psu:SI8661,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,SOIC-16W (KiCad library)
 ISO2,tube_psu:SI8661,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,SOIC-16W (KiCad library)
 J2,tube_psu:HEADER_2X25_50MIL,tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus,2x25 1.27 mm header
-J4,tube_psu:CONN_01X03,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,1x3 2.54 mm (FCI 66226-003)
+J4,tube_psu_next:CONN_01X06,Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical,"1x6 2.54 mm, FTDI TTL-232R-3V3 pinout (NR 3b.2)"
 L1,tube_psu:RM8_INDUCTOR,tube_psu:L_RM8_Proteus,"RM8 choke: winding pads pri1/pri2, bobbin pins 1/2 (no net); 45 deg on the board"
 L2,tube_psu:RM8_INDUCTOR,tube_psu:L_RM8_Proteus,"RM8 choke: winding pads pri1/pri2, bobbin pins 1/2 (no net); 45 deg on the board"
 N5V_OUT,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
@@ -302,10 +301,10 @@ SICD2,tube_psu:C3D02060A,tube_psu:TO-220-2_Vertical_AK,"TO-220-2, pads A/K"
 TR1,tube_psu_next:EEL19_4P6,tube_psu_next:Transformer_EEL19_V_4+6_FlyLeads,"EEL19 vertical 4+6, fly-lead holes 11/12 (NR 1.2)"
 TR2,tube_psu:EF25_8PIN,tube_psu:Transformer_EF25_2x5_P5.08mm_8pin,"EF25, pads 1,2,4,5,6,7,9,10"
 TR3,tube_psu_next:EC42_2CH,tube_psu_next:Transformer_EC42x15_2Slot_2x8_P5mm,"EC42/15 2-chamber bobbin 2x8, P5, rows 40 mm; pads 1,2,7,8 / 9,10,15,16 (NR 2.2)"
-U1,tube_psu:LMH6658,Package_SO:TSSOP-8_3x3mm_P0.65mm,"TSSOP-8 (device OPA2353UA; the pads are TSSOP, not SO-8)"
+U1,tube_psu_next:LMH6643,Package_SO:TSSOP-8_3x3mm_P0.65mm,"TSSOP-8 (device OPA2353UA; the pads are TSSOP, not SO-8)"
 U2,tube_psu:TLV316IDBVR,tube_psu:SOT-23-5_Proteus,"SOT-23-5, Proteus pad rows 2.39 mm apart, Proteus pad size"
 U3,tube_psu:TLV316IDBVR,tube_psu:SOT-23-5_Proteus,"SOT-23-5, Proteus pad rows 2.39 mm apart, Proteus pad size"
-U4,tube_psu:LMH6658,Package_SO:TSSOP-8_3x3mm_P0.65mm,"TSSOP-8 (device OPA2353UA; the pads are TSSOP, not SO-8)"
+U4,tube_psu_next:LMH6643,Package_SO:TSSOP-8_3x3mm_P0.65mm,"TSSOP-8 (device OPA2353UA; the pads are TSSOP, not SO-8)"
 U6,tube_psu:TLV316IDBVR,tube_psu:SOT-23-5_Proteus,"SOT-23-5, Proteus pad rows 2.39 mm apart, Proteus pad size"
 U8,tube_psu:TLV316IDBVR,tube_psu:SOT-23-5_Proteus,"SOT-23-5, Proteus pad rows 2.39 mm apart, Proteus pad size"
 V2,tube_psu:TPS73033,tube_psu:SOT-23-5_Proteus,"SOT-23-5, Proteus pad rows 2.39 mm apart, Proteus pad size"
@@ -322,3 +321,30 @@ C121,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 R129,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
 C120,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 D35,tube_psu:D_Schottky,tube_psu:D_SOD-323_AC,"SOD-323, pads A/C"
+C122,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+C123,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+C124,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+C125,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+C126,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+C127,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+C128,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+U9,tube_psu:TLV316IDBVR,Package_TO_SOT_SMD:SOT-23-5,SOT-23-5 (KiCad library; MCP6L91T pin ids 1 OUT 2 V- 3 + 4 - 5 V+)
+R131,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
+C129,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+C130,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+C131,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+U10,tube_psu_next:TLV9062,Package_SO:VSSOP-8_3x3mm_P0.65mm,VSSOP-8 (KiCad library)
+R132,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
+R133,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
+R134,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
+C132,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+R135,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
+C133,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+U11,tube_psu_next:SI8621,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,SOIC-16W (KiCad library); slot under the barrier (phase 5)
+U12,tube_psu_next:XC6206,Package_TO_SOT_SMD:SOT-23,"SOT-23 (1 GND, 2 VOUT, 3 VIN)"
+C134,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+C135,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+C136,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+C137,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+R136,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
+R137,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603

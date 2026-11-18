@@ -307,8 +307,32 @@ def sh_value(ref):
     return _PART_MAP[ref]
 
 
+def follower(sh, part, ref, unit, X, Y, rout, out_label=None, local=True):
+    """Unity-gain follower (5.2, NEXT_REVISION.md 4.1 / 4b / 4c): op-amp unit at (X, Y) with the - input fed
+    back from the output (before the series resistor), output through rout = (rref, rval) (pin 1 at the
+    op-amp) to the label out_label (local or global; None = the caller wires the resistor end). Returns
+    (+ input point, resistor far end, placed unit); supply pins (TLV316 V+ / V-) are wired by the caller. Pins as the MCP6L91T / LM2904 std symbols (+ at (-7.62, 2.54),
+    - at (-7.62, -2.54), out at (7.62, 0))."""
+    pins = (3, 4, 1) if part == "TLV316IDBVR" else {1: (3, 2, 1), 2: (5, 6, 7)}[unit]   # (+, -, out)
+    u = sh.place(part, ref, X, Y, unit=unit, value=sh_value(ref))
+    INP, INN, OUT = (u.pin(n) for n in pins)
+    node = (X + g(8), OUT[1])
+    sh.wire(OUT, node)
+    fy = INN[1] + g(2)
+    sh.wire(INN, (X - g(8), INN[1]), (X - g(8), fy), (node[0], fy), node)
+    sh.junction(*node)
+    rref, rval = rout
+    _, rl, rr = horiz2(sh, "R", rref, X + g(14), OUT[1], rval, left=1, text="above")
+    sh.wire(node, rl)
+    if out_label:
+        q = right(rr, 3)
+        sh.wire(rr, q)
+        (sh.label if local else sh.glabel)(out_label, *q, 0)
+    return INP, rr, u
+
+
 def lmh6658_diffamp(sh, ref, unit, AX, AY, inp, bias, bias_top, inn_gnd, fb, cfb, rout, out_label, cout,
-                    cbias=None, rout_amp=1, cout_label=2):
+                    cbias=None, rout_amp=1, cout_label=2, part="LMH6643"):
     """One half of an LMH6658 drawn as on sheets 8/10: non-inverting amplifier with the input
     through inp = (label, (rref, rval)) (pin 1 at the op-amp), the + node biased by bias = (rref,
     rval) to +1V65_BIAS (`bias_top` = pin on the +1V65_BIAS side), optionally with cbias = (cref,
@@ -316,7 +340,7 @@ def lmh6658_diffamp(sh, ref, unit, AX, AY, inp, bias, bias_top, inn_gnd, fb, cfb
     GND), feedback fb = (rref, rval) and cfb = (cref, cval) (pin 2 at the - node), output through
     rout = (rref, rval) (pin `rout_amp` at the op-amp) to the global label out_label with cout =
     (cref, cval) to GND (pin `cout_label` at the label). Returns the placed unit."""
-    u = sh.place("LMH6658", ref, AX, AY, unit=unit, value="LMH6658")
+    u = sh.place(part, ref, AX, AY, unit=unit, value=sh_value(ref))       # 5.2: LMH6643 (NR 4.10b)
     pins = {1: (3, 2, 1), 2: (5, 6, 7)}[unit]
     INP, INN, OUT = (u.pin(n) for n in pins)
     # + input (the resistor moves left when the bias cap needs the room)

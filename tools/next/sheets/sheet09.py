@@ -31,15 +31,25 @@ for x, lab, chain, pin in ((AX - g(30), "AC1", ("R47", "R48", "R79"), INN),
         prev = rb
     sh.wire(prev, (x, pin[1]), pin)
 # bias of the + input, feedback of the - input
-_, rt, rb = vert2(sh, "R", "R80", AX - g(12), AY - g(5), "15k", top=1)     # pin 1 = +1V65_BIAS
+_, rt, rb = vert2(sh, "R", "R80", AX - g(12), AY - g(5), sh_value("R80"), top=1)     # pin 1 = +1V65_BIAS
 sh.junction(*rb)
 power_at(sh, "+1V65_BIAS", rt, "up")
+# 5.2 (NR 4.2): C126 1 nF C0G across R80 (pole 13.3 kHz with 12k), matched with C127 across R49
+_, ct, cb = vert2(sh, "C", "C126", AX - g(17), AY - g(5), sh_value("C126"), top=1, text="left")   # pin 1 = +1V65_BIAS
+sh.wire(ct, rt)
+sh.junction(*rt)
+sh.junction(*cb)
 node = (AX + g(12), OUT[1])
 sh.wire(OUT, node)
-_, rl, rr = horiz2(sh, "R", "R49", AX + g(2), AY + g(12), "15k", left=2, text="below")   # pin 1 = output
+_, rl, rr = horiz2(sh, "R", "R49", AX + g(2), AY + g(12), sh_value("R49"), left=2, text="above")   # pin 1 = output
 sh.wire(node, (node[0], AY + g(12)), rr)
 sh.wire(rl, (AX - g(14), AY + g(12)), (AX - g(14), INN[1]))
 sh.junction(AX - g(14), INN[1])
+_, cl, cr = horiz2(sh, "C", "C127", AX + g(2), AY + g(16), sh_value("C127"), left=2, text="below")  # pin 1 = output
+sh.wire((AX - g(14), AY + g(12)), (AX - g(14), AY + g(16)), cl)
+sh.wire(cr, (node[0], AY + g(16)), (node[0], AY + g(12)))
+sh.junction(AX - g(14), AY + g(12))
+sh.junction(node[0], AY + g(12))
 sh.junction(*node)
 # output through R65 to VAC_MEAS
 _, rl, rr = horiz2(sh, "R", "R65", AX + g(18), OUT[1], "100R", left=2, text="above")     # pin 2 = output side
@@ -58,5 +68,6 @@ power_at(sh, "GND", right(cr, 3), "right")
 power_at(sh, "GND", VN, "down")
 
 sh.text("PDF labels pfc_pwm1/2, gate1/2 = nets PFC_PWM1/2, GATE1/2.", g(40), g(160))
+sh.text("5.2: R49 / R80 15k -> 12k (gain 0.004, no clipping up to 264 Vrms, NR 4.3), C126 / C127 1 nF C0G across R80 / R49 (NR 4.2); no output cap (ADC mux).", g(40), g(163))
 sh.save()
 print("sheet09: written")

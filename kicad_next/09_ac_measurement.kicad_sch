@@ -4064,7 +4064,7 @@
 				)
 			)
 		)
-		(property "Value" "15k"
+		(property "Value" "12k"
 			(at 115.95 147.32 0)
 			(effects
 				(font
@@ -4099,7 +4099,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C22809"
+		(property "LCSC" "C22790"
 			(at 111.76 146.05 0)
 			(effects
 				(font
@@ -4194,6 +4194,104 @@
 			)
 		)
 	)
+	(symbol
+		(lib_id "tube_psu_next:C")
+		(at 105.41 146.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ec02d6a9-7cae-5770-94ae-6360aab01822")
+		(property "Reference" "C126"
+			(at 100.67 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1n"
+			(at 101.77 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 106.3752 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 105.41 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 105.41 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C106246"
+			(at 105.41 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2056e2e2-bb5b-5734-bb15-28590a9931cd")
+		)
+		(pin "2"
+			(uuid "d31d5ecb-4c0c-5898-ae33-9a826f360db4")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/6eb35f48-6b08-4c9b-99f9-370c4b4c9404"
+					(reference "C126")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 105.41 142.24) (xy 111.76 142.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "02b67d70-4470-574a-b6a5-d8aaabbfa37f")
+	)
+	(junction
+		(at 111.76 142.24)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "21210e60-8bce-5baa-9c06-1f4d19a79d1c")
+	)
+	(junction
+		(at 105.41 149.86)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "db2b93ea-c9c3-5344-8762-ea15bb3af94e")
+	)
 	(wire
 		(pts
 			(xy 134.62 152.4) (xy 142.24 152.4)
@@ -4202,7 +4300,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "02b67d70-4470-574a-b6a5-d8aaabbfa37f")
+		(uuid "99826190-7d39-5d16-b905-1378b05a16c5")
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
@@ -4214,15 +4312,15 @@
 		(dnp no)
 		(uuid "7a8b7dc3-c066-5579-9659-b8ed06584051")
 		(property "Reference" "R49"
-			(at 129.54 169.67 90)
+			(at 129.54 163.83 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "15k"
-			(at 129.54 171.45 90)
+		(property "Value" "12k"
+			(at 129.54 165.61 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4256,7 +4354,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C22809"
+		(property "LCSC" "C22790"
 			(at 129.54 167.64 0)
 			(effects
 				(font
@@ -4288,7 +4386,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "21210e60-8bce-5baa-9c06-1f4d19a79d1c")
+		(uuid "5e28874e-06a5-5bc6-b0b7-869dd37522af")
 	)
 	(wire
 		(pts
@@ -4298,7 +4396,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "db2b93ea-c9c3-5344-8762-ea15bb3af94e")
+		(uuid "f2468e8b-29e9-5cff-9f78-0695ffae4cb6")
 	)
 	(wire
 		(pts
@@ -4308,7 +4406,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "99826190-7d39-5d16-b905-1378b05a16c5")
+		(uuid "db660840-88a6-5f92-ac21-6fba63a20611")
 	)
 	(wire
 		(pts
@@ -4318,7 +4416,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5e28874e-06a5-5bc6-b0b7-869dd37522af")
+		(uuid "03be97c9-d250-5282-8075-b978783a74ab")
 	)
 	(wire
 		(pts
@@ -4328,7 +4426,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f2468e8b-29e9-5cff-9f78-0695ffae4cb6")
+		(uuid "0c504888-39de-510d-9805-33719512a750")
 	)
 	(wire
 		(pts
@@ -4338,19 +4436,147 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "db660840-88a6-5f92-ac21-6fba63a20611")
+		(uuid "6fc39369-e5c9-572b-8539-2ac06209e505")
 	)
 	(junction
 		(at 109.22 154.94)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "03be97c9-d250-5282-8075-b978783a74ab")
+		(uuid "30d86de3-db40-5e66-832b-72b1532c4e1d")
+	)
+	(symbol
+		(lib_id "tube_psu_next:C")
+		(at 129.54 172.72 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8ea9d4fd-bb77-519a-bf17-4e11d150a49a")
+		(property "Reference" "C127"
+			(at 129.54 174.75 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1n"
+			(at 129.54 176.53 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 125.73 173.6852 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 129.54 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 129.54 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C106246"
+			(at 129.54 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "df1d7c65-138d-5ef9-adee-5e651efc6059")
+		)
+		(pin "2"
+			(uuid "47d0d94f-9f82-596f-b7b6-fc44dd23b855")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/6eb35f48-6b08-4c9b-99f9-370c4b4c9404"
+					(reference "C127")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 109.22 167.64) (xy 109.22 172.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d2ba5d7f-2f3e-53ef-a77f-53dd8649a74d")
+	)
+	(wire
+		(pts
+			(xy 109.22 172.72) (xy 125.73 172.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "73fe2d4b-eea1-5108-85bb-4d09d4073465")
+	)
+	(wire
+		(pts
+			(xy 133.35 172.72) (xy 142.24 172.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cb021653-8195-5d6f-8b68-60db57217a54")
+	)
+	(wire
+		(pts
+			(xy 142.24 172.72) (xy 142.24 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "07e7f4a0-630b-50b8-a2af-bc4ba6d7b02d")
+	)
+	(junction
+		(at 109.22 167.64)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "01e2df4e-d50e-5231-bdd1-66ff20fcb17d")
+	)
+	(junction
+		(at 142.24 167.64)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4e7b8204-7526-5b62-a6ab-d0d337777e5b")
 	)
 	(junction
 		(at 142.24 152.4)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "0c504888-39de-510d-9805-33719512a750")
+		(uuid "1c9ac77c-9462-5b29-b779-7568903d6c81")
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
@@ -4436,7 +4662,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6fc39369-e5c9-572b-8539-2ac06209e505")
+		(uuid "789b29ce-42ac-5599-a564-f32cbbb2d8ac")
 	)
 	(wire
 		(pts
@@ -4446,7 +4672,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "30d86de3-db40-5e66-832b-72b1532c4e1d")
+		(uuid "c7132af7-dc82-56ab-9ec9-00c9e2e0ad9d")
 	)
 	(global_label "VAC_MEAS"
 		(shape passive)
@@ -4458,7 +4684,7 @@
 			)
 			(justify left)
 		)
-		(uuid "d2ba5d7f-2f3e-53ef-a77f-53dd8649a74d")
+		(uuid "461cbc5d-7807-5673-91c5-af97de3a4cc3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 157.48 152.4 0)
 			(effects
@@ -4478,7 +4704,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "73fe2d4b-eea1-5108-85bb-4d09d4073465")
+		(uuid "64ccf0a5-15e5-5fbe-8b0e-a2b61721e403")
 	)
 	(symbol
 		(lib_id "tube_psu_next:+3V3")
@@ -4629,7 +4855,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "cb021653-8195-5d6f-8b68-60db57217a54")
+		(uuid "017d69ad-4b0c-5e48-8626-f7e1b0caa834")
 	)
 	(wire
 		(pts
@@ -4639,13 +4865,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "07e7f4a0-630b-50b8-a2af-bc4ba6d7b02d")
+		(uuid "de1f2a05-05c4-583b-a9c9-85f2530503d3")
 	)
 	(junction
 		(at 124.46 139.7)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "01e2df4e-d50e-5231-bdd1-66ff20fcb17d")
+		(uuid "27de0e1e-d322-5807-bf26-9acc7fb1d10c")
 	)
 	(wire
 		(pts
@@ -4655,7 +4881,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "4e7b8204-7526-5b62-a6ab-d0d337777e5b")
+		(uuid "76df8b4b-f348-5f76-86bb-3dde80066028")
 	)
 	(symbol
 		(lib_id "tube_psu_next:GND")
@@ -4797,7 +5023,18 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "1c9ac77c-9462-5b29-b779-7568903d6c81")
+		(uuid "04cd8be3-6050-5ff6-b05c-c7d6ee5420a2")
+	)
+	(text "5.2: R49 / R80 15k -> 12k (gain 0.004, no clipping up to 264 Vrms, NR 4.3), C126 / C127 1 nF C0G across R80 / R49 (NR 4.2); no output cap (ADC mux)."
+		(exclude_from_sim no)
+		(at 50.8 207.01 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9f9bcef2-ff2d-52a0-a428-1f3685254f93")
 	)
 	(embedded_fonts no)
 )

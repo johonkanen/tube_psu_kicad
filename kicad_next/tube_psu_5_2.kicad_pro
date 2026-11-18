@@ -892,31 +892,11 @@
       },
       {
         "netclass": "SIGNAL",
-        "pattern": "/04 MCU connector/ADA0"
-      },
-      {
-        "netclass": "SIGNAL",
-        "pattern": "/04 MCU connector/ADA1"
-      },
-      {
-        "netclass": "SIGNAL",
-        "pattern": "/04 MCU connector/ADA2"
-      },
-      {
-        "netclass": "SIGNAL",
-        "pattern": "/04 MCU connector/ADA4"
-      },
-      {
-        "netclass": "SIGNAL",
-        "pattern": "/04 MCU connector/ADB0"
+        "pattern": "/04 MCU connector/5V_MEAS"
       },
       {
         "netclass": "SIGNAL",
         "pattern": "/04 MCU connector/AUX_MEAS"
-      },
-      {
-        "netclass": "SIGNAL",
-        "pattern": "/04 MCU connector/CUK_CAP_MEAS_RAW"
       },
       {
         "netclass": "SIGNAL",
@@ -929,10 +909,6 @@
       {
         "netclass": "SIGNAL",
         "pattern": "/04 MCU connector/G15"
-      },
-      {
-        "netclass": "SIGNAL",
-        "pattern": "/04 MCU connector/HEATER_CAP_AD_MEAS"
       },
       {
         "netclass": "SIGNAL",
@@ -1076,6 +1052,14 @@
       },
       {
         "netclass": "SIGNAL",
+        "pattern": "Net-(C127-Pad1)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "Net-(C131-Pad2)"
+      },
+      {
+        "netclass": "SIGNAL",
         "pattern": "Net-(C50-Pad2)"
       },
       {
@@ -1144,19 +1128,27 @@
       },
       {
         "netclass": "SIGNAL",
-        "pattern": "Net-(R2-Pad2)"
-      },
-      {
-        "netclass": "SIGNAL",
-        "pattern": "Net-(R49-Pad1)"
-      },
-      {
-        "netclass": "SIGNAL",
         "pattern": "Net-(REF1-VOUT)"
       },
       {
         "netclass": "SIGNAL",
         "pattern": "Net-(TR1-A15)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "Net-(U10A-+)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "Net-(U10A--)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "Net-(U10B-+)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "Net-(U10B--)"
       },
       {
         "netclass": "SIGNAL",
@@ -1205,6 +1197,14 @@
       {
         "netclass": "SIGNAL",
         "pattern": "Net-(U8--)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "Net-(U9-+)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "Net-(U9--)"
       },
       {
         "netclass": "SIGNAL",
@@ -1301,6 +1301,66 @@
       {
         "netclass": "SIGNAL",
         "pattern": "unconnected-(RL1-NC-Pad2)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "unconnected-(U11-NC-Pad2)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "unconnected-(U11-NC-Pad6)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "unconnected-(U11-NC-Pad8)"
+      },
+      {
+        "netclass": "UART_ISO",
+        "pattern": "/04 MCU connector/UART_RXD"
+      },
+      {
+        "netclass": "UART_ISO",
+        "pattern": "/04 MCU connector/UART_TXD"
+      },
+      {
+        "netclass": "UART_ISO",
+        "pattern": "ISO_UART_GND"
+      },
+      {
+        "netclass": "UART_ISO",
+        "pattern": "Net-(U11-B1)"
+      },
+      {
+        "netclass": "UART_ISO",
+        "pattern": "Net-(U11-B2)"
+      },
+      {
+        "netclass": "UART_ISO",
+        "pattern": "UART_3V3"
+      },
+      {
+        "netclass": "UART_ISO",
+        "pattern": "UART_5V"
+      },
+      {
+        "netclass": "UART_ISO",
+        "pattern": "unconnected-(J4-Pin_2-Pad2)"
+      },
+      {
+        "netclass": "UART_ISO",
+        "pattern": "unconnected-(J4-Pin_6-Pad6)"
+      },
+      {
+        "netclass": "UART_ISO",
+        "pattern": "unconnected-(U11-NC-Pad10)"
+      },
+      {
+        "netclass": "UART_ISO",
+        "pattern": "unconnected-(U11-NC-Pad11)"
+      },
+      {
+        "netclass": "UART_ISO",
+        "pattern": "unconnected-(U11-NC-Pad15)"
       }
     ]
   },
