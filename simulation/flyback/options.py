@@ -307,6 +307,96 @@ def eel19_simple(preload=None):
                 ], preload)
 
 
+# ---------------------------------------------------------------------------------------
+# EEL19 with triple-insulated wire (2026-11-18, EEL19_DESIGN.md section 12): the user requires
+# REINFORCED primary <-> secondary isolation at 552 Vrms / 778 Vpk (kicad_next/README.md), so
+# the 3 + 3 mm margins (6 mm creepage) of the enamel designs are too small. The isolated
+# windings (S15, S5, SN5, SHV) are Furukawa TEX-E (IEC 62368-1 Annex J class TIW; om_model
+# TEX_E), primary and primary-side aux (P, A5, A15) stay enamel; no margin tape (full 21.2 mm
+# width), 1 tape layer between sections for mechanics, outer wrap 2 layers. Same turns as
+# the enamel design (104 / 16 / 6 || 16 / 6 / 6 / 84), Lp 600 uH, Rsense 1.0 ohm, spacer gap.
+# ---------------------------------------------------------------------------------------
+TEX20, TEX25, TEX30 = "TEX-E 0.20", "TEX-E 0.25", "TEX-E 0.30"
+
+
+def _tiw(name, title, sections):
+    return _eel(name, title + " (TEX-E TIW secondaries, no margins)", sections, PRELOAD_EEL, gap_kind="spacer")
+
+
+def eel19_tiw_simple():
+    """Simplest TIW build, no split primary: P 104 (2 layers) | A15 | A5 | S15 | S5+SN5 | SHV."""
+    return _tiw("eel19_tiw_simple_pre3", "P 104 | A15 16 | A5 6 | S15 16 | S5+SN5 6+6 | SHV 84", [
+        {"windings": [("P", 104, 1, W30, PRI)], "tape_after": 1},
+        {"windings": [("A15", 16, 3, W30, PRI)], "align": "spread", "tape_after": 1},
+        {"windings": [("A5", 6, 8, W30, PRI)], "align": "spread", "tape_after": 1},
+        {"windings": [("S15", 16, 2, TEX30, SEC)], "align": "spread", "tape_after": 1},
+        {"windings": [("S5", 6, 3, TEX30, SEC), ("SN5", 6, 3, TEX30, SEC)], "mode": "multifilar",
+         "align": "spread", "tape_after": 1},
+        {"windings": [("SHV", 84, 1, TEX20, SEC)], "align": "spread", "tape_after": 2},
+    ])
+
+
+def eel19_tiw_sandwich():
+    """The enamel recommendation's order without barriers or margins:
+    P1 52 | S15 16 | SHV 84 | S5+SN5 6+6 | A5 6 | A15 16 | P2 52."""
+    return _tiw("eel19_tiw_sandwich_pre3", "P1 52 | S15 16 | SHV 84 | S5+SN5 | A5 6 | A15 16 | P2 52", [
+        {"windings": [("P1", 52, 1, W30, PRI)], "tape_after": 1},
+        {"windings": [("S15", 16, 2, TEX30, SEC)], "align": "spread", "tape_after": 1},
+        {"windings": [("SHV", 84, 1, TEX20, SEC)], "align": "spread", "tape_after": 1},
+        {"windings": [("S5", 6, 3, TEX30, SEC), ("SN5", 6, 3, TEX30, SEC)], "mode": "multifilar",
+         "align": "spread", "tape_after": 1},
+        {"windings": [("A5", 6, 8, W30, PRI)], "align": "spread", "tape_after": 1},
+        {"windings": [("A15", 16, 3, W30, PRI)], "align": "spread", "tape_after": 1},
+        {"windings": [("P2", 52, 1, W30, PRI)], "tape_after": 2},
+    ])
+
+
+def eel19_tiw_sandwich_spread():
+    """eel19_tiw_sandwich with the primary halves in AWG32 spread over the full 21.2 mm width
+    (pitch 0.41 mm), matching the full-width TIW layers. A close-wound AWG32 layer (12.5 mm,
+    centred) under full-width secondaries raises the P-S leakage from 30 to 47 uH (MKF); the
+    spread layer keeps the widths matched and the thinner wire lowers the proximity loss."""
+    o = eel19_tiw_sandwich()
+    for s in o["sections"]:
+        if s["windings"][0][0] in ("P1", "P2"):
+            s["windings"] = [(w[0], w[1], w[2], W32, w[4]) for w in s["windings"]]
+            s["align"] = "spread"
+    o["name"] = "eel19_tiw_sandwich_s_pre3"
+    o["title"] = o["title"].replace("P1 52", "P1 52 (AWG32 spread)")
+    return o
+
+
+def _spread_primary(o, name):
+    """Primary halves of a TIW option in AWG32 spread over the full width (see eel19_tiw_sandwich_spread)."""
+    for s in o["sections"]:
+        if s["windings"][0][0] in ("P1", "P2"):
+            s["windings"] = [(w[0], w[1], w[2], W32, w[4]) for w in s["windings"]]
+            s["align"] = "spread"
+    o["name"] = name
+    o["title"] = o["title"].replace("EEL19: P1", "EEL19: P1 (AWG32 spread)")
+    return o
+
+
+def eel19_tiw_paired(order="b"):
+    """Tight interleave: each voltage class in one multifilar layer, enamel aux strand by strand
+    beside the TIW secondaries (the TIW alone is the reinforced insulation).
+    order b: P1 | SHV | A15+S15 | A5+S5+SN5 | P2  (low-turn layers shielded from P1 by SHV)
+    order c: P1 | A5+S5+SN5 | A15+S15 | SHV | P2
+    order m: P1 | A15+S15 | SHV | A5+S5+SN5 | P2"""
+    p1 = {"windings": [("P1", 52, 1, W30, PRI)], "tape_after": 1}
+    p2 = {"windings": [("P2", 52, 1, W30, PRI)], "tape_after": 2}
+    shv = {"windings": [("SHV", 84, 1, TEX20, SEC)], "align": "spread", "tape_after": 1}
+    # 16 x (1 x AWG28 0.366 + 2 x 0.45) = 20.3 mm; 6 x (2 x 0.295 + 6 x 0.45) = 19.7 mm of 21.2 mm
+    w15 = {"windings": [("A15", 16, 1, W28, PRI), ("S15", 16, 2, TEX25, SEC)], "mode": "multifilar",
+           "align": "spread", "tape_after": 1}
+    w5 = {"windings": [("A5", 6, 2, W30, PRI), ("S5", 6, 3, TEX25, SEC), ("SN5", 6, 3, TEX25, SEC)],
+          "mode": "multifilar", "align": "spread", "tape_after": 1}
+    # order m: SHV in the middle, each paired layer next to one primary half
+    secs = {"b": [p1, shv, w15, w5, p2], "c": [p1, w5, w15, shv, p2], "m": [p1, w15, shv, w5, p2]}[order]
+    names = " | ".join("+".join(w[0] for w in x["windings"]) for x in secs)
+    return _tiw(f"eel19_tiw_paired_{order}_pre3", names, secs)
+
+
 PRELOAD = {"20V": 3300.0, "5V": 1000.0}      # what-if preload resistors (not in the schematic)
 PRELOAD_ISO = {**PRELOAD, "20V_ISO_SEC": 3300.0}   # + 3.3 k on 15V_ISO_SEC (e.g. R124 12.1k -> 2.6k)
 PRELOAD_EEL = {"20V": 2200.0, "5V": 1000.0, "20V_ISO_SEC": 3300.0}   # EEL19 recommendation
@@ -349,6 +439,23 @@ OPTIONS = {"current": current, "stacked": stacked, "margin_sandwich": margin_san
                                                    "preloads 2.2k on 15V, 1k on 5V, 3.3k on 15V_ISO_SEC"),
            "eel19_spacer_pre": lambda: dict(eel19_sandwich(PRELOAD), name="eel19_spacer_pre", gap_kind="spacer",
                                             title="EEL19: eel19_sandwich_pre with a spacer gap (all legs) instead of a ground centre leg")}
+
+OPTIONS.update({
+    "eel19_tiw_simple_pre3": eel19_tiw_simple, "eel19_tiw_sandwich_pre3": eel19_tiw_sandwich,
+    "eel19_tiw_paired_b_pre3": lambda: eel19_tiw_paired("b"), "eel19_tiw_paired_c_pre3": lambda: eel19_tiw_paired("c"),
+    "eel19_tiw_paired_m_pre3": lambda: eel19_tiw_paired("m"),
+    "eel19_tiw_sandwich_s_pre3": eel19_tiw_sandwich_spread,
+    "eel19_tiw_paired_ms_pre3": lambda: _spread_primary(eel19_tiw_paired("m"), "eel19_tiw_paired_ms_pre3"),
+    # the TIW recommendation (EEL19_DESIGN.md 12): eel19_tiw_sandwich_s_pre3; this entry only writes
+    # mas/tr1_eel19_tiw_recommended.json (run_flyback.py --om-only eel19_tiw_recommended)
+    "eel19_tiw_recommended": lambda: dict(eel19_tiw_sandwich_spread(), name="eel19_tiw_recommended", write_mas=True,
+                                          title="EEL19 TIW RECOMMENDED (= eel19_tiw_sandwich_s_pre3): TEX-E secondaries, "
+                                                "no margins, P1 52 | S15 16 | SHV 84 | S5+SN5 6+6 | A5 6 | A15 16 | P2 52, "
+                                                "Lp 600 uH, spacer gap, preloads 2.2k on 15V, 1k on 5V, 3.3k on 15V_ISO_SEC"),
+})
+EEL19_TIW_OPTIONS = ["eel19_tiw_simple_pre3", "eel19_tiw_sandwich_pre3", "eel19_tiw_paired_b_pre3",
+                     "eel19_tiw_paired_c_pre3", "eel19_tiw_paired_m_pre3", "eel19_tiw_sandwich_s_pre3",
+                     "eel19_tiw_paired_ms_pre3"]
 
 EEL19_OPTIONS = ["eel19_sandwich_pre", "eel19_sandwich_pre3", "eel19_sandwich_b_pre", "eel19_sandwich_b_pre3",
                  "eel19_simple_pre",

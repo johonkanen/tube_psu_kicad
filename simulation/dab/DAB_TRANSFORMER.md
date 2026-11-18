@@ -261,8 +261,8 @@ shift (section 1).
 | item | A (70 µH class) | B (42 µH class) |
 |---|---|---|
 | primary, chamber 1 (10.4 mm) | 25 T Litz 135×0.071, 7 per layer, 4 layers | 20 T Litz 135×0.071, 7 per layer, 3 layers |
-| secondary, chamber 2 (12.4 mm) | 26 T Litz 135×0.071, 9 per layer, 3 layers | 21 T Litz 135×0.071, 9 per layer, 3 layers |
-| gap (centre leg, total) | 0.58 mm → Lm 337 µH | 0.35 mm → Lm 300 µH |
+| secondary, chamber 2 (12.4 mm) | 26 T Litz 135×0.071, 9 per layer, 3 layers | 21 T Litz 135×0.071, 9 per layer, 3 layers → **reinforced (TIW-jacket) litz 135×0.071, OD ≤ 1.6 mm, 7 per layer, 3 layers (section 8)** |
+| gap (centre leg, total) | 0.58 mm → Lm 337 µH | 0.35 mm → Lm 300 µH (TIW-litz secondary: 0.34 mm → 307 µH; set by measurement) |
 
 **Wire.** Litz 135×0.071 single-served has OD 1.19–1.29 mm and 0.534 mm² of copper
 (about 4.5 A/mm² at 2.4 A). An alternative is 60×0.1 (OD 1.2 mm), at about +25 % Pcu.
@@ -273,7 +273,8 @@ shift (section 1).
 - Put one layer of tape between layers if the litz is single-served.
 - Put **3 layers of polyester tape (25 µm film)** over each winding.
 - The 5 mm divider separates the windings. The core counts as primary side, and the
-  secondary is isolated (ISO_GND). Keep the secondary's outer layer at least 0.5 mm below
+  secondary is isolated (ISO_GND). **Reinforced isolation is required (section 8): the
+  secondary must be TIW-jacket litz; the divider and tape alone do not meet 11.1 mm.** Keep the secondary's outer layer at least 0.5 mm below
   the flange rim, and run its leads out without crossing chamber 1.
 
 **Pins.** Use 2 pins per winding end, splitting the litz strands over 2 adjacent pins.
@@ -334,12 +335,121 @@ The ETD34 footprint does not fit. This is not done here.
   Coss rises at low voltage; the time-related value covers this.
 - MKF's fringing term was overridden on physical grounds (section 4).
 
-## 8. Files
+## 8. Isolation (reinforced, added 2026-11-18)
+
+**Requirement** (kicad_next/README.md, isolation domains): TR3 bridges the primary (DC+, mains
+referenced) and the DAB secondary (420 V rail, ISO_GND earthed). The insulation between the two
+windings, and from the secondary to anything primary-side, must be **reinforced** for a working
+voltage of **552 Vrms / 778 Vpk**: creepage **11.1 mm**, clearance **4.0 mm** (PD2, material
+group III, OVC II). On top of the mains-frequency term there is the 140 kHz square-wave difference
+of the two bridges (up to ≈ 410 V); IEC 60664-4 (> 30 kHz) has not been assessed, but at this
+voltage its creepage values are well below 11.1 mm.
+
+**The core counts as primary.** The primary is served litz on the tube: served litz is not
+insulation, and from the primary to the core there is only the tube wall and a few millimetres
+over the chamber-1 flange. So the core is treated as a primary-side conductive part.
+
+| path | served litz on both windings, 3 tape layers (section 5 as drawn) | required |
+|---|---|---|
+| primary ↔ secondary over the 5 mm divider. The windings touch the divider; the path runs from the outer layer edge (r ≈ 12.9 mm) up to the rim (r 15.0), across 5 mm and down the other side | 2.1 + 5.0 + 2.1 ≈ **9.2 mm** | 11.1 mm: **fails** |
+| secondary winding ↔ core over the chamber-2 flange (winding edge → rim → core end face) | ≈ 2 + 1 ≈ **3 mm** | 11.1 mm: **fails** |
+| secondary outer layer ↔ ER outer leg (r 15.25 mm), through air | ≈ 2.3 mm | 4.0 mm clearance: **fails** |
+| primary pin row ↔ secondary pin row (40 mm) | ≈ 38 mm | **passes** |
+
+**Do 3 tape layers suffice under a "solid insulation" reading? No.**
+- IEC 62368-1 accepts thin-sheet insulation as reinforced: ≥ 3 layers, any 2 of which pass the
+  electric-strength test (or 2 layers if each passes it alone). That covers the tape over a
+  winding's surface.
+- But the tape does not enclose the winding. It ends against the divider and the flanges in
+  joints that are not cemented, and the litz runs out to the pins through those joints.
+- Along such joints the creepage rules apply in full, and those are the three failing rows
+  above. A taller divider would need ≥ 3 mm of free wall above each winding *and* a wider
+  divider; margin tape cannot be fitted either (it would take 5.5 mm per side in 10.4 / 12.4 mm
+  chambers). Neither fits this bobbin.
+
+**Decision: wind the secondary in reinforced-insulated litz (TIW litz). The primary stays served
+litz.**
+- With one winding in IEC 62368-1 Annex J wire, the wire's own insulation is the reinforced
+  barrier: to the primary, to the core and through the divider joints alike. The divider and
+  the tape then only do mechanical work.
+- Products in the 135 × 0.071 class:
+  - **Elektrisola EFOLIT**: taped reinforced litz with ≥ 3 tape layers (sPET / sPEN / sPI),
+    VDE-certified to EN 62368-1 Annex J, IEC 61558-1 Annex K and IEC 60601-1 Annex L. The
+    reinforced range starts at 1.5 mm OD; made to order.
+  - **New England Wire NEWind**: litz with triple extruded FEP / ETFE (155 °C) or PFA (180 °C),
+    listed for IEC 62368-1 Annex J.
+  - **Rubadue TCA3 litz**: triple extruded. MKF has 135/38 AWG at 1.76 mm OD; 0.071 mm strands
+    are a custom construction.
+  - Furukawa TEX-ELZ only goes up to 7 strands (7/0.30), which is too small.
+- **Specify:** 135 × 0.071 mm (or the nearest stock construction of ≈ 0.53 mm² Cu with
+  ≤ 0.08 mm strands), reinforced to IEC 62368-1 Annex J, OD ≤ 1.6 mm, ≥ 155 °C.
+- **Annex J vs Annex K:** some regulators want IEC 61558-1 Annex K for transformers with SELV
+  outputs (Australian SCO guidance). EFOLIT lists both.
+
+**Rerun for option B with the TIW-litz secondary** (`python3 simulation/dab/run_dab.py --tiw`,
+OD assumed 1.55 mm, so 7 turns per layer in the 12.4 mm chamber, 3 × 7; the primary is unchanged;
+table in `out/results_tiw.md`, MAS `mas/tr3_dab_B_42uH_TIW.json`):
+
+| | B, served litz (section 3.3) | **B, TIW-litz secondary** |
+|---|---|---|
+| secondary layers, build incl. 3 tape | 9/9/3, 4.0 mm | **7/7/7, 4.8 mm** (of 6.1 mm) |
+| Lsc best (MKF upper bound) | 40 µH (53) | **40 µH (54)** |
+| Lm req. at 150 ns → centre gap | 300 µH → 0.35 mm | **307 µH → 0.34 mm** |
+| φ at 400 W, gapped | 23.5° | **23.6°** |
+| Rdc pri / sec at 80 °C | 53 / 54 mΩ | 53 / **58 mΩ** |
+| Pcu / Pcore / total, gapped | 0.72 / 1.50 / 2.21 W | **0.73 / 1.50 / 2.23 W** |
+
+The copper is unchanged and the leakage is unchanged within 1 %: the 3 × 7 layers sit at the
+divider like the 9/9/3 build, so the extra jacket thickness barely moves the field. **Option B
+stands as specified**, apart from the secondary wire and the 7-turn layers. Above 1.75 mm OD,
+7 turns no longer fit the 12.4 mm chamber, and 6 per layer would need 4 layers (≈ 7 mm, more
+than the 6.1 mm available). In that case use 120 × 0.071 strands or a thinner taped jacket.
+
+**What still needs care with the TIW-litz secondary:**
+1. **Terminations.** The jacket must run unbroken into the chamber and out to pins 9/10 and
+   15/16. Strip it only over the last few millimetres that wrap the pin. Never lead secondary
+   wire across chamber 1 or the primary pins.
+2. **Secondary pins ↔ core.** On this horizontal EC bobbin the core end plates sit above the
+   pin rows (core 43 mm along the axis, pin rows at ±20 mm). The bare pin wraps of pins 9/10/15/16
+   are a few millimetres from the core, which is primary-side.
+   - **Measure** the path from the secondary pin wraps to the core along the bobbin: it needs
+     ≥ 11.1 mm creepage and ≥ 4.0 mm clearance.
+   - If it is shorter (likely), insulate the core end plate on the secondary side with
+     **3 layers of polyester tape** (thin-sheet reinforced) wrapped around the plate, or fit an
+     insulating core cap.
+   - The primary pins need nothing (same domain).
+3. **Primary ↔ secondary pins on the PCB:** the rows are 40 mm apart, which is fine.
+4. **Hipot (type / sample):** primary + core to secondary, 3 kV rms for 1 min (or 4.2 kV DC).
+   **Partial discharge:** 778 Vpk recurring is above the ≈ 700 V level from which IEC 60664-1
+   asks for PD-free reinforced insulation (verify against the edition used). Run a PD test on
+   the first samples (extinction ≥ 1.5 × 778 V ≈ 1.2 kVpk). Extruded TIW litz is typically
+   PD-free well above that; taped constructions should state it.
+
+### 8.1 Vacuum impregnation (optional add-on)
+
+Vacuum (or vacuum-pressure) impregnation with a transformer varnish or resin, such as a polyester
+or epoxy class F/H varnish, fills the voids in the litz bundles, between layers and in the
+tape / divider joints. This helps in three ways:
+- **Partial discharge:** it removes the air voids where PD starts at the 778 Vpk recurring peak
+  plus the 140 kHz edges.
+- **Humidity and dirt:** pollution in the chamber joints is sealed, and the windings take up
+  less moisture.
+- **Noise and mechanics:** no magnetostrictive or winding hum, and the turns are fixed against
+  the divider, so the leakage does not drift.
+
+It also improves heat transfer a little. **It does not reduce the creepage or clearance
+requirement.** Only a qualified cemented-joint process does that (IEC 62368-1 / IEC 60664-3
+coating or potting with type tests, which can count the joints as PD1 / solid insulation), and
+this design does not claim one. Impregnate after the gap is set and Lm / Lsc are measured, and
+measure again afterwards: the varnish's permittivity raises the winding capacitance slightly,
+while the leakage does not change.
+
+## 9. Files
 
 | file | content |
 |---|---|
 | `om_dab.py` | custom EC42 shape, 2-chamber bobbin, hand-placed coil in MKF format, inductance matrix, leakage, Rdc |
 | `fd_leakage.py` | axisymmetric FD leakage, pot / rod / ER combination (`python3 fd_leakage.py` runs a grid-convergence self-test) |
 | `dab_wave.py` | exact steady-state DAB waveforms, phase for P, ZVS edge currents (`python3 dab_wave.py` runs a check against the textbook power formula) |
-| `run_dab.py` | sweep, knobs, recommended options with gap / ZVS, baseline, MAS export |
-| `mas/tr3_dab_*.json` | MAS of the recommended options, gapped (inputs: 400 W operating point; magnetic; outputs: L matrix, losses) |
+| `run_dab.py` | sweep, knobs, recommended options with gap / ZVS, baseline, MAS export; `--tiw`: option B with the TIW-litz secondary (section 8) |
+| `mas/tr3_dab_*.json` | MAS of the recommended options (and `tr3_dab_B_42uH_TIW.json`, section 8), gapped (inputs: 400 W operating point; magnetic; outputs: L matrix, losses) |

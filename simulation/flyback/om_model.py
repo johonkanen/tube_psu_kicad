@@ -90,9 +90,33 @@ def load():
         _loaded = True
 
 
+# Furukawa TEX-E triple-insulated wire (2026-11-18; not in MKF's database). Sizes from the
+# Furukawa TEX-E table (typical / max overall diameter = Cu + 0.20 / + 0.217 mm for 0.20-0.25 mm,
+# + 0.22 mm for 0.30 mm) and the Block CU-TIW 100/0,25 datasheet (TEX-E, 120 degC class E,
+# UL 130 degC, solderable without stripping). Built on MKF's Rubadue TCA3 record, so MKF
+# treats it like its own TIW entries (round, 1 conductor, 3-layer insulated coating).
+TEX_E = {"TEX-E 0.20": (0.20e-3, 0.400e-3, 0.417e-3), "TEX-E 0.25": (0.25e-3, 0.450e-3, 0.467e-3),
+         "TEX-E 0.30": (0.30e-3, 0.500e-3, 0.520e-3)}
+
+
+def _tex_e(name: str) -> dict:
+    cu, od, odmax = TEX_E[name]
+    w = copy.deepcopy(P.find_wire_by_name("Round TCA3 30 AWG"))
+    w["name"] = name
+    w["conductingDiameter"]["nominal"] = cu
+    w["outerDiameter"]["nominal"] = od
+    w["outerDiameter"]["maximum"] = odmax
+    w["coating"].update({"material": "TEX-E (modified polyester / heat-resistant resin / polyamide)",
+                         "numberLayers": 3, "thicknessLayers": (od - cu) / 2, "temperatureRating": 120.0})
+    w["manufacturerInfo"]["name"] = "Furukawa Electric"
+    return w
+
+
 @functools.lru_cache(maxsize=None)
 def wire(name: str) -> dict:
     load()
+    if name in TEX_E:
+        return _tex_e(name)
     return P.find_wire_by_name(name)
 
 

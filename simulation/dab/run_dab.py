@@ -47,6 +47,7 @@ L60 = m.litz_name(60, "0.1")
 L90 = m.litz_name(90, "0.1")
 L135 = m.litz_name(135, "0.071")
 L180 = m.litz_name(180, "0.071")
+L135_TIW = "Litz 135x0.071 - Reinforced TIW jacket (OD 1.55)"   # om_dab.TIW_LITZ
 
 ALIGN = {"div": ("high", "low"),      # both windings pushed to the divider (min leakage)
          "fl": ("low", "high"),       # pushed to the flanges (max leakage)
@@ -541,5 +542,41 @@ def main(quick=False):
     print("written", os.path.join(OUT, "results.md"))
 
 
+def isolation_variant():
+    """Option B (20:21) with the SECONDARY in reinforced-insulated litz (DAB_TRANSFORMER.md 8):
+    135 x 0.071 with an Annex J jacket, OD 1.55 mm -> 7 turns per layer in the 12.4 mm chamber
+    (3 x 7); primary unchanged (served 135 x 0.071, 7 per layer). Same evaluation as the
+    recommended options: ungapped, gap for the 150 ns ZVS point, losses. Writes
+    out/results_tiw.md and mas/tr3_dab_B_42uH_TIW.json."""
+    os.makedirs(OUT, exist_ok=True)
+    m.load()
+    md = ["## Option B with the secondary in reinforced (TIW-jacket) litz", "", HDR]
+    res = {}
+    for key, ws, tpl in (("B_42uH", L135, (7, 9)), ("B_42uH_TIW", L135_TIW, (7, 7))):
+        wds = windings_new(20, 21, L135, ws, align="div", tpl=tpl)
+        r = evaluate(f"{key} 20:21", wds, keep=True)
+        z = lm_for_zvs(wds, r["er_factor"], 150e-9)
+        gc = gap_for_lm(wds, "centre", z["Lm_req_uH"] * 1e-6)
+        rg = evaluate(f"{key} gapped centre {gc * 1e3:.3f} mm", wds, gap_kind="centre", gap=gc, keep=True)
+        res[key] = {"ungapped": strip(r), "gapped_centre": strip(rg), "zvs150": z, "centre_gap_mm": gc * 1e3}
+        md += [fmt_row(r), fmt_row(rg)]
+        if key.endswith("TIW"):
+            json.dump(mas_doc(rg, f"{key} 20:21 gapped centre, secondary reinforced litz"),
+                      open(os.path.join(MAS_DIR, f"tr3_dab_{key}.json"), "w"), indent=1)
+        print(fmt_row(rg), flush=True)
+    md += ["", "| option | Lm req (150 ns) µH | centre gap mm | Rdc pri / sec mΩ | builds mm (incl. tape) |", "|---|---|---|---|---|"]
+    for key, v in res.items():
+        g = v["gapped_centre"]
+        md.append(f"| {key} | {v['zvs150']['Lm_req_uH']:.0f} | {v['centre_gap_mm']:.3f} | "
+                  f"{g['Rdc_80C'][0] * 1e3:.0f} / {g['Rdc_80C'][1] * 1e3:.0f} | "
+                  + " / ".join(f"{w['build_with_tape_mm']:.2f} ({w['turns_per_layer']}x{w['layers']})" for w in g["geometry"]["windings"]) + " |")
+    json.dump(res, open(os.path.join(OUT, "results_tiw.json"), "w"), indent=1, default=float)
+    open(os.path.join(OUT, "results_tiw.md"), "w").write("\n".join(md) + "\n")
+    print("\n".join(md))
+
+
 if __name__ == "__main__":
-    main(quick="--quick" in sys.argv)
+    if "--tiw" in sys.argv:
+        isolation_variant()
+    else:
+        main(quick="--quick" in sys.argv)

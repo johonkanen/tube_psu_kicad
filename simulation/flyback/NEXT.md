@@ -1,3 +1,83 @@
+# TR1 flyback study – session 4 (2026-11-18): reinforced isolation → TIW build
+
+**The user requires reinforced primary ↔ secondary isolation**: 552 Vrms / 778 Vpk, 11.1 mm
+creepage, 4.0 mm clearance (kicad_next/README.md). The 3 + 3 mm margins of the enamel EEL19
+build are too small. Details: [EEL19_DESIGN.md](EEL19_DESIGN.md) section 12, tables in
+[eel19_results.md](eel19_results.md).
+
+- **New recommendation: `eel19_tiw_sandwich_s_pre3`.** MAS:
+  [mas/tr1_eel19_tiw_recommended.json](mas/tr1_eel19_tiw_recommended.json).
+  - Build: P1 52 (AWG32, spread over the full 21.2 mm) | S15 16 (2 × TEX-E 0.30) |
+    SHV 84 (TEX-E 0.20, 2 layers) | S5+SN5 6+6 (3 + 3 × TEX-E 0.30, one bundle) | A5 6 (8 × AWG30) |
+    A15 16 (3 × AWG30) | P2 52 (AWG32 spread).
+  - No margins, 1 tape layer between sections.
+  - Same turns, Lp 600 µH, Rsense 1.0 Ω and preloads as before; spacer gap.
+  - P–S leakage 14 µH (enamel 20 µH); P with everything shorted 3.1 µH (enamel 8.9 µH).
+- **Results** (iW1819 model):
+
+  | rail / quantity | TIW build | enamel b_pre3 |
+  |---|---|---|
+  | 15V | 14.44–15.45 V | 14.59–15.97 V |
+  | 5V | 4.79–5.16 V | 4.83–5.22 V |
+  | 15V_ISO_SEC | 15.02–17.42 V | 14.91–16.75 V |
+  | 5V_ISOL | 4.90–5.34 V | |
+  | −5V | 4.93–5.29 V | |
+  | −80 V | 80.5–84.1 V | |
+  | Vcol at full15 | 568 V | 603 V |
+  | winding loss at full15 (MKF upper bound) | 1.56 W | 1.22 W |
+  | window radial build | 83 % | 69 % |
+
+  ΔT ≈ 41 °C at 15 W.
+- **Alternative `eel19_tiw_paired_ms_pre3`** (15 V and 5 V windings each in one shared
+  multifilar layer, primary spread): best 15 V tracking (14.4–15.3 V on both 15 V rails), but
+  5V_ISOL / −5V reach 5.6–5.7 V at bleeder-only load, and it is harder to wind.
+- **Rejected:**
+  - Paired variants with a close-wound primary: MKF winding loss 3.6–5 W at 15 W.
+  - Simple order: 15V reaches 18.5 V.
+  - Close-wound AWG32 primary: P–S leakage 47 µH.
+- **Buy:** Furukawa TEX-E 0.30 mm and 0.20 mm, about 10 m each (e.g. Block CU-TIW 100/0,30 and
+  100/0,20). Solder-pot tinning at ≈ 420–450 °C, or strip only the pin wrap.
+- **Core = primary.** Wrap the bottom yoke / outer legs with 3 tape layers (the secondary pin
+  wraps are within 11.1 mm of the core). Hipot: primary + core → isolated pins, 3 kV rms.
+  PD test on the first samples (778 Vpk recurring).
+- **PCB:** the TR1 footprint (`tools/next/gen_next_footprints.py` →
+  `lib/tube_psu_next.pretty/Transformer_EEL19_V_4+6_FlyLeads`) now has a **1.2 × 26.5 mm milled
+  slot on Edge.Cuts** on the row midline, y −10 … +16.5.
+  - Minimum creepage between primary and isolated pads is now 13.18 mm (was 9.23 mm FL_DC → pin 5
+    and 10.8 mm row to row).
+  - The fly-lead holes can stay where they were.
+- **TR3 (DAB, option B 20:21):** the 5 mm divider gives only ≈ 9.2 mm creepage, and the
+  secondary is ≈ 3 mm from the core, so 3 tape layers do not make it reinforced.
+  - **Secondary in reinforced-jacket litz** (135 × 0.071, IEC 62368-1 Annex J: Elektrisola
+    EFOLIT, NEWind FEP, Rubadue TCA3 litz; OD ≤ 1.6 mm, 7 turns per layer × 3).
+  - Rerun: Lsc 40 µH and losses 2.23 W (unchanged); gap 0.34 mm.
+  - See DAB_TRANSFORMER.md section 8.
+- **Controller change pending:** the iW1819 is hard to get, and the user proposes the
+  **Infineon ICE5AR4780BZS**.
+  - The magnetics carry over: winding structure, leakage, isolation, footprint and slot.
+  - The **rail voltages, light-load excursions, Vcol and losses depend on the iW1819 model**
+    and must be redone.
+  - The follow-up needs to model:
+    - 100 kHz fixed-frequency peak-current mode (DCM at 15 W with Lp 600 µH: Ipk ≈ 0.75 A;
+      BCM only at about 50 W), with jitter;
+    - Rcs ≈ 0.8 Ω (CS limit 0.8 V → 1.0 A, so the same Bpk 0.247 T / OCP margin), and leading-edge
+      blanking;
+    - regulation by a resistor divider from the primary-side **5V** rail into VERR (internal
+      transconductance amplifier, ref 1.80 V) instead of PSR knee sampling. The A5 winding then
+      feeds 5V directly, and AUX_FB / the Vsense divider go away. The cross regulation then
+      depends on the 5V rail's own load, not the knee, so rerun all 19 cases;
+    - Active Burst Mode (≈ 83 kHz bursts, selectable entry / exit levels) instead of
+      PFM / DPWM / DDPWM. The light-load cases (min_*, light, idle) and the preload values need
+      a new look;
+    - VCC from A15 / 15V: on / off 16 / 10 V, VCC OVP ≈ 25.5 V. Check that 15V stays below the
+      OVP in min_15V, and that start-up works with the 16 V turn-on threshold;
+    - CoolMOS 800 V, 4.13 Ω: conduction loss about 0.2 W at 15 W; output capacitance in place of
+      the BJT model (affects the snubber and Vcol);
+    - possibly fewer turns for 100 kHz (same Bpk at Ipk 1.0 A). Keep 104 T unless the regulation
+      structure changes the 6 T A5 requirement.
+
+---
+
 # TR1 flyback study – where it stands (session 3, 2026-11-17: new EEL19 transformer)
 
 **Session 3 (2026-11-17): the user chose a NEW transformer on an EEL19 core** (vertical 5+5

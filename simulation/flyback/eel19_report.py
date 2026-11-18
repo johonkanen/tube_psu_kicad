@@ -42,7 +42,8 @@ def rng(res, rail, cases):
 
 
 def main(names=None):
-    names = names or [n for n in opts.EEL19_OPTIONS if os.path.exists(os.path.join(OUT, "om", f"{n}.json"))]
+    names = names or [n for n in opts.EEL19_OPTIONS + opts.EEL19_TIW_OPTIONS
+                      if os.path.exists(os.path.join(OUT, "om", f"{n}.json"))]
     allx = [REF] + names
     data = {n: load(n) for n in allx}
     s = ["# EEL19 options – summary tables", "",
@@ -114,7 +115,9 @@ def main(names=None):
             continue
         s.append(f"| {n} | " + " | ".join(f"{max(res[c][x + ' vrev'] for c in cs):.0f}" for x in RAILS) + " |")
     lo_rows = []
-    for n in allx:
+    # eel19_recommended (= eel19_sandwich_b_pre3 with the spacer gap) is run for nom / full15
+    # only, as the loss reference of the TIW variants (same gap type)
+    for n in allx + [x for x in ("eel19_recommended",) if x not in allx]:
         for case in ("nom", "full15"):
             p = os.path.join(OUT, "losses", f"{n}.json" if case == "nom" else f"{n}__{case}.json")
             if os.path.exists(p):
@@ -131,11 +134,11 @@ def main(names=None):
     with open(os.path.join(HERE, "eel19_results.md"), "w") as f:
         f.write("\n".join(s) + "\n")
     for n in names:
-        if n == "eel19_spacer_pre" or n.endswith("_pre3"):
+        if n in ("eel19_spacer_pre", "eel19_sandwich_pre3", "eel19_sandwich_b_pre3"):
             continue                      # same winding as an option without the suffix
         opt = opts.get(n)
         m.use_core(opt.get("core"))
-        rp.geometry_png(n, os.path.join(HERE, f"geometry_{n.replace('_pre', '')}.png"))
+        rp.geometry_png(n, os.path.join(HERE, f"geometry_{n.replace('_pre3', '').replace('_pre', '')}.png"))
     print("\n".join(s))
 
 

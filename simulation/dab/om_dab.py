@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import copy
 import functools
+import json
 import math
 
 import numpy as np
@@ -59,9 +60,26 @@ def load():
         _loaded = True
 
 
+# Reinforced-insulated litz for the isolated winding (2026-11-18, DAB_TRANSFORMER.md 8):
+# 135 x 0.071 mm strands (same copper as the served litz) with an IEC 62368-1 Annex J
+# reinforced jacket - taped (Elektrisola EFOLIT, >= 3 tape layers) or triple extruded FEP / PFA /
+# ETFE (New England Wire NEWind, Rubadue TCA3 litz). Overall diameter assumed 1.55 mm (bundle
+# about 1.1 mm + 2 x 0.2 mm jacket; EFOLIT lists 1.5 mm as its smallest reinforced OD) -
+# confirm with the quote. Built on MKF's served 135 x 0.071 record (strand data for the
+# losses), only the outer diameter changes.
+TIW_LITZ = {"Litz 135x0.071 - Reinforced TIW jacket (OD 1.55)": ("Litz 135x0.071 - Grade 1 - Single Served", 1.55e-3)}
+
+
 @functools.lru_cache(maxsize=None)
 def wire(name: str) -> dict:
     load()
+    if name in TIW_LITZ:
+        base, od = TIW_LITZ[name]
+        w = json.loads(json.dumps(P.find_wire_by_name(base)))
+        w["name"] = name
+        w["outerDiameter"] = {"nominal": od, "maximum": od}
+        w["coating"] = dict(w.get("coating") or {}, type="insulated", numberLayers=3, breakdownVoltage=6000.0)
+        return w
     return P.find_wire_by_name(name)
 
 

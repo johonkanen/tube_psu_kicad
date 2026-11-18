@@ -15,6 +15,24 @@ scripts keep the Proteus labels `20V` / `20V_ISO_SEC` internally.
 
 ## Summary
 
+> **Update 2026-11-18: reinforced isolation is required** (552 Vrms / 778 Vpk, 11.1 mm creepage).
+> The 3 + 3 mm margins of the enamel build below are too small. **The recommendation is now the
+> TIW variant `eel19_tiw_sandwich_s_pre3` (section 12):**
+> - TEX-E triple-insulated secondaries: S15 2 × 0.30, SHV 0.20, S5 / SN5 3 × 0.30;
+> - enamel primary (AWG32, spread over the full width) and aux windings;
+> - no margins, same turns, Lp, Rsense and preloads.
+>
+> Results:
+> - Regulation as good as or better than the enamel build (15V 14.44–15.45 V, 5V 4.79–5.16 V).
+> - Vcol 568 V at 15 W.
+> - Winding loss 1.56 W at 15 W (MKF upper bound).
+>
+> Also needed:
+> - a 1.2 × 26.5 mm creepage slot in the TR1 footprint (section 12.6);
+> - 3 tape layers around the core (section 12.5).
+>
+> The rest of this summary describes the enamel / margin-tape design, kept for reference.
+
 - **Turns: every winding is doubled from the EF20 recommendation:** P 104 (2 × 52, split) /
   A15 16 / A5 6 ‖ S15 16 / S5 6 / SN5 6 / SHV 84. Because of this the turns ratios, the 5.58 V
   aux knee and Vor = 96.7 V are the same as before. **The Vsense divider (R64/R81/R84/R85)
@@ -288,7 +306,7 @@ core-loss path reports a Bpk of only 0.075–0.13 T for the custom shape.
   load and **≤ 33 °C at 15 W** with the spacer gap (≈ 52 °C with the MKF ground-gap loss).
   Measure it on the sample.
 
-## 6. Recommended build – `eel19_sandwich_b_pre3` with spacer gap
+## 6. Enamel build – `eel19_sandwich_b_pre3` with spacer gap (superseded 2026-11-18 by the TIW build, section 12)
 
 ![recommended geometry](geometry_eel19_sandwich_b.png)
 
@@ -389,7 +407,7 @@ The pin count is exactly enough (the 5+5 pin 4 spacer is dropped, the 6-pin row 
 
 | ref | today | new | why |
 |---|---|---|---|
-| TR1 | EF20 10-pin, V2 52/8/3‖7/3/3/42 | **EEL19 vertical 4+6 (bought; 5+5 also works), PC40, 104(52+52)/16/6 ‖ 16/6/6/84, Lp 600 µH, spacer gap** | 15 W, better cross regulation |
+| TR1 | EF20 10-pin, V2 52/8/3‖7/3/3/42 | **EEL19 vertical 4+6 (bought; 5+5 also works), PC40, 104(52+52)/16/6 ‖ 16/6/6/84, Lp 600 µH, spacer gap** | 15 W, better cross regulation  **2026-11-18: secondaries in TEX-E TIW, primary AWG32 spread, no margins (section 12.3)** |
 | TR1 footprint | Transformer_EF20_2x5_P3.81mm (3.81 × 10.16 mm) | new EEL19 4+6: pitch 3.5 / 2.7 mm, rows 12.5 mm (section 6a), crossover and spare pins without pad, **+2 holes FL_DC / FL_C** (1.2 mm drill, 2.2 mm pad) | new bobbin, fly leads |
 | R8, R9 | 2.49 Ω 1206 | **2.0 Ω 1206 1 %** (Rsense 1.0 Ω; 32 mW total at 15 W) | Ipk max 1.0 A, OCP 1.15 A |
 | R64, R81, R84, R85 | 39k / 15k / 33k / 4.7k | **unchanged** | aux knee voltage unchanged (6 T at 0.93 V/T) |
@@ -515,3 +533,338 @@ python3 simulation/flyback/eel19_report.py                                 # eel
   - 57 cases (3 options) took 814 s with 4 jobs, peak 0.72 GB ngspice.
   - 38 cases took 528 s; 19 cases took 290 s.
   - MKF matrix of one EEL19 sandwich: about 1.5 min.
+
+## 12. TIW variant: reinforced isolation (2026-11-18), recommended
+
+**New requirement.** The user requires **reinforced** primary ↔ secondary isolation. TR1's
+isolated windings belong to the DAB-secondary domain (ISO_GND, earthed), so the working
+voltage is **552 Vrms / 778 Vpk**: **11.1 mm creepage, 4.0 mm clearance**
+(kicad_next/README.md, isolation domains). The enamel design above has 3 + 3 mm margins, i.e.
+6 mm around each barrier edge, which is too small. Wider margins do not fit either: two
+5.6 mm margins would leave 10 mm of the 21.2 mm window.
+
+The isolated windings (S15, SHV, S5, SN5) are therefore wound in **triple-insulated wire**,
+Furukawa **TEX-E** (IEC 62368-1 Annex J class). The primary and the primary-side aux windings
+(P1/P2, A5, A15) stay enamel. No margin tape is used, so the full 21.2 mm width is available.
+There is 1 tape layer between sections (mechanical) and a 2-layer outer wrap. The turns are
+unchanged (104 / 16 / 6 ‖ 16 / 6 / 6 / 84), as are Lp 600 µH, Rsense 1.0 Ω and the preloads of
+`eel19_sandwich_b_pre3` (2.2 k / 1 k / 3.3 k). The spacer gap is set by measurement (section 4).
+Code: `options.py` (`eel19_tiw_*`), TEX-E wires in `om_model.TEX_E`.
+
+**What depends on the controller model.** The rail voltages, Vcol, D8 V_R and the waveforms
+behind the loss figures below come from the calibrated ngspice model of the **iW1819 / IW1818
+family**:
+- primary-side regulation by sampling the A5 knee;
+- 72 kHz QR PWM;
+- the PFM → DPWM 25 kHz → DDPWM 2.1 kHz light-load modes;
+- VIPK(HIGH) 1.00 V / VIPK(LOW) 0.23 V with Rsense 1.0 Ω.
+
+The **light-load excursions** (min_*, light, idle) depend most on that control law: the
+light-load modes set Ipk min and the energy per pulse.
+
+The **magnetics** do not depend on the controller: the leakage matrices, the window fill, the
+isolation and pin plan, and the ranking of the winding orders by leakage. **If PWM2 changes**
+(e.g. to the Infineon ICE5AR4780BZS proposed on 2026-11-18), keep the winding structure and
+redo the rail and loss numbers (NEXT.md has the list).
+
+**iW1819-00 vs the IW1818 parameters in the model.** Checked against iW1819 datasheet Rev 1.5
+(10-Feb-2022). The model has used the iW1819 thresholds from the start, because the IW1818
+full datasheet is not public. Hence **no model change is needed**:
+
+| parameter | iW1819-00 | in the model / IW1818 |
+|---|---|---|
+| VSENSE(NOM) / OVP | 1.536 V (1.521–1.551) / 1.838 V | same |
+| VOCP / VIPK(HIGH) / VIPK(LOW) | 1.15 V (1.11–1.19) / 1.00 V / 0.23 V | same (Rsense 1.0 Ω → Ipk 1.0 A, OCP 1.15 A) |
+| fSW max (PWM, > 50 % load) | 72 kHz | same |
+| light-load modes | PFM → DPWM ≈ 25 kHz → DPFM → DDPWM ≈ 2.1 kHz | same law (partly assumed) |
+| BJT | VCES / VCBO 800 V, VCEO 450 V, IC 4 A, ICM 8 A | same |
+| rating | 18 W (85–264 VAC, open frame, 50 °C) | IW1818: 10 W (Renesas 10–12 W) |
+| VCC | 20 V operating, 25 V abs, start-up 14.5 V (13.5–15.5), UVLO 4.4 V, ICCQ 2.7 mA | model: fixed 9.5 mA on 15V (IC + Si827x supplies), no VCC start-up modelled |
+| thermal | θJA 55.2 °C/W (JEDEC 4-layer), ψJ-collector 5.8 °C/W, TSD 150 °C, recovery 100 °C (-00) | IW1818 summary: ψJB 25 °C/W at the GND pin, so on the iW1819 measure the **collector pins 5/6** temperature |
+| package / pins | SO-10 batwing: 1 VSENSE, 2 VCC, 3 GND, 4 NC (leave open), 5/6 C, 7 E, 8 GND, 9 ISENSE, 10 ASU (active start-up, optional) | new footprint and symbol (NEXT_REVISION 1.5) |
+| cable compensation | -00: 0 mV (right: no cable); -01/-11: 150 mV | – |
+
+### 12.1 TEX-E sizes used
+
+Typical outer diameter = Cu + 0.20 mm (Furukawa TEX-E table; Block CU-TIW 100/0,25 = TEX-E 0.25:
+heat class 120 °C (E), UL 130 °C, "solderable without prior stripping"):
+
+| TEX-E | Cu mm | OD typ / max mm | R20 max Ω/km | used for |
+|---|---|---|---|---|
+| 0.20 | 0.20 | 0.400 / 0.417 | 607.6 | SHV (84 T, 2 layers) |
+| 0.25 | 0.25 | 0.450 / 0.467 | 382.5 | the paired-layer variants |
+| 0.30 | 0.30 | 0.500 / 0.520 | 262.9 | S15 (2 in parallel), S5 / SN5 (3 in parallel each) |
+
+**Solderability:** the polyester / polyamide layers are "solderable", but only in a hot solder
+pot. Dip at about **420–450 °C for 2–4 s** (typical for TIW; confirm with the Furukawa sheet). A
+350 °C iron does not get through. Alternatively strip mechanically, but never more than the
+length that wraps the pin. Tin the ends before winding the pin wraps, and check the tinning
+reaches the copper (resistance check of each winding against the table in 12.3).
+
+### 12.2 Options and results
+
+Options (all TIW secondaries, no margins, spacer gap, preloads of b_pre3):
+
+| option | build (radially outwards) |
+|---|---|
+| eel19_tiw_simple_pre3 | P 104 (AWG30, 2 layers) \| A15 \| A5 \| S15 \| S5+SN5 \| SHV: simplest, no split primary |
+| eel19_tiw_sandwich_pre3 | P1 52 \| S15 16 \| SHV 84 \| S5+SN5 6+6 \| A5 6 \| A15 16 \| P2 52, primary AWG30 close-wound (15.3 mm, centred) |
+| **eel19_tiw_sandwich_s_pre3** | **same order, primary AWG32 spread over the full 21.2 mm** |
+| eel19_tiw_paired_b / _c / _m_pre3 | tight interleave: A15+S15 (1 × AWG28 + 2 × TEX-E 0.25) in one multifilar layer, A5+S5+SN5 (2 × AWG30 + 3 + 3 × TEX-E 0.25) in one; b: P1 \| SHV \| 15 V pair \| 5 V triple \| P2, c: P1 \| 5 V triple \| 15 V pair \| SHV \| P2, m: P1 \| 15 V pair \| SHV \| 5 V triple \| P2 (primary AWG30 close-wound) |
+| eel19_tiw_paired_ms_pre3 | paired_m with the primary AWG32 spread over the full width |
+
+Leakage referred to 104 T (MKF), radial build:
+
+| option | P–A5 | P–S15 | P–S5 | P–SHV | A5–S15 | A5–S5 | A5–SHV | A15–S15 | build mm (of 3.975) |
+|---|---|---|---|---|---|---|---|---|---|
+| eel19_sandwich_b_pre3 (enamel, margins) | 20.1 | 20.2 | 21.5 | 20.9 | 32.7 | 13.8 | 25.5 | 43.1 | 2.76 |
+| eel19_tiw_simple | 21.1 | 29.7 | 43.5 | 56.0 | 7.2 | 21.0 | 33.6 | 13.8 | 3.36 |
+| eel19_tiw_sandwich | 30.0 | 29.8 | 31.0 | 28.4 | 36.7 | 10.0 | 23.4 | 45.3 | 3.42 |
+| **eel19_tiw_sandwich_s** | **14.6** | **14.2** | **15.6** | **13.1** | 36.3 | **9.9** | 23.2 | – | 3.31 |
+| eel19_tiw_paired_b | 33.2 | 24.3 | 25.5 | 23.1 | 19.6 | 13.9 | 30.7 | 7.2 | 2.62 |
+| eel19_tiw_paired_ms | 18.8 | 9.9 | 10.9 | 8.1 | 35.5 | 14.0 | 21.3 | ≈ 7 | 2.51 |
+
+- **Matching the primary's width to the secondaries matters most.** A close-wound primary
+  layer that is narrower than the full-width TIW layers (15.3 mm AWG30, or 12.5 mm AWG32)
+  creates radial stray field at the layer ends:
+  - P–S leakage 30 µH (AWG30, 15.3 mm), 47 µH (AWG32 close-wound, MKF; option dropped);
+  - **14 µH** with AWG32 spread over 21.2 mm.
+- That is lower than the enamel design (20 µH), whose layers were all 15.2 mm wide.
+
+Rails over the 15 standard cases at 400 V, nominal (min–max), V (**iW1819-model dependent**):
+
+| option | 15V | 5V | 15V_ISO_SEC | 5V_ISOL | −5V_SEC | −80 V | Vcol max (std / full15) |
+|---|---|---|---|---|---|---|---|
+| eel19_sandwich_b_pre3 (enamel) | 14.68 (14.59–15.97) | 5.00 (4.83–5.22) | 14.94 (14.91–16.75) | 5.01 (4.89–5.32) | 5.01 (4.95–5.29) | 82.2 (80.5–83.7) | 571 / 603 |
+| eel19_tiw_simple | 15.90 (15.49–**18.50**) | 5.28 (5.17–5.62) | 15.21 (15.02–15.81) | 5.05 (4.91–5.39) | 5.02 (4.93–5.30) | 80.6 (79.2–80.9) | 608 / 642 |
+| eel19_tiw_sandwich | 14.64 (14.49–16.12) | 4.99 (4.79–5.22) | 15.06 (15.06–17.57) | 5.01 (4.89–5.34) | 4.99 (4.91–5.30) | 82.7 (80.5–84.8) | 608 / 649 |
+| **eel19_tiw_sandwich_s** | **14.65 (14.44–15.45)** | **4.99 (4.79–5.16)** | **15.06 (15.02–17.42)** | **5.02 (4.90–5.34)** | **5.00 (4.93–5.29)** | **82.7 (80.5–84.1)** | **552 / 568** |
+| eel19_tiw_paired_b | 14.70 (14.37–14.92) | 5.00 (4.74–5.27) | 14.46 (14.19–14.86) | 4.86 (4.72–5.47) | 4.83 (4.73–5.47) | 83.8 (78.8–87.6) | 608 / 648 |
+| eel19_tiw_paired_c | 14.55 (14.20–14.77) | 5.00 (4.73–5.24) | 14.32 (14.01–14.74) | 4.87 (4.73–5.38) | 4.84 (4.76–5.39) | 83.0 (76.6–85.9) | 608 / 656 |
+| eel19_tiw_paired_m | 15.00 (14.53–15.10) | 5.08 (4.75–5.41) | 14.76 (14.50–15.69) | 4.95 (4.79–5.67) | 4.92 (4.81–5.66) | 81.9 (78.3–82.5) | 606 / 643 |
+| eel19_tiw_paired_ms | 15.02 (14.52–15.11) | 5.08 (4.75–5.35) | 14.79 (14.38–15.33) | 4.94 (4.79–5.71) | 4.91 (4.80–5.63) | 82.0 (78.3–82.5) | 550 / 568 |
+
+Full load, recommended `eel19_tiw_sandwich_s_pre3` (enamel b_pre3 in brackets):
+
+| case | 15V | 5V | 15V_ISO_SEC | 5V_ISOL | −5V | −80 V | Pin W | Ipk A | u | Vcol pk |
+|---|---|---|---|---|---|---|---|---|---|---|
+| full10 | 14.59 (14.64) | 4.95 (4.97) | 14.98 (14.89) | 4.93 (4.93) | 4.96 (4.98) | 82.6 (82.2) | 12.5 (12.5) | 0.729 | 0.53 | 560 (587) |
+| full15 | 14.55 (14.55) | 4.93 (4.92) | 14.94 (14.81) | 4.86 (4.83) | 4.98 (4.99) | 82.8 (82.1) | 17.1 (17.1) | 0.857 | 0.73 | 568 (603) |
+| full15_325 | 14.44 (14.45) | 4.89 (4.88) | 14.83 (14.71) | 4.82 (4.80) | 4.94 (4.95) | 82.2 (81.6) | 16.8 (17.0) | 0.835 | 0.70 | 492 (527) |
+
+Losses (MKF Dowell / Ferreira with gap fringing, 60 °C windings, spacer gap; an upper bound as in
+section 5, waveforms from the iW1819 model). Winding W at nom / full15 (of which primary at full15),
+core iGSE at full15:
+
+| option | winding nom | winding full15 (primary) | core full15 | ΔT at 15 W (section 5 formula) |
+|---|---|---|---|---|
+| eel19_recommended (enamel, spacer) | 0.42 | 1.22 (0.46) | 0.14 | ≈ 34 °C |
+| eel19_tiw_simple | 0.51 | 1.00 (0.43) | 0.34 | – |
+| eel19_tiw_sandwich | 0.89 | 2.49 (1.26) | 0.42 | – |
+| **eel19_tiw_sandwich_s** | **0.56** | **1.56 (0.46)** | **0.14** | **≈ 41 °C** |
+| eel19_tiw_paired_b / c / m | 1.74 / 1.60 / 1.31 | 5.0 / 4.9 / 3.6 | 0.29–0.33 | too hot |
+| eel19_tiw_paired_ms | 0.55 | 1.68 (0.61) | 0.13 | ≈ 43 °C |
+
+Observations:
+- **Simple order (no split primary)** puts A15 between P and A5 again. 15V peak-charges to
+  18.5 V in min_15V (limit 18.7 V) and 5V runs 5.3 V: not usable, as with enamel.
+- **Sandwich with the spread AWG32 primary** gives the enamel design's regulation or better on
+  every rail:
+  - 15V max 15.45 instead of 15.97 V; 5V within 4.79–5.16 V.
+  - The one exception is 15V_ISO_SEC in min_S15 (rail on bleeder + 3.3 k only): 17.42 instead
+    of 16.75 V, harmless for the Si8275BB (abs max 30 V). The other 15V_ISO_SEC cases are
+    15.0–15.2 V.
+  - It has the lowest Vcol (568 V at full15, 71 % of 800 V) because of its low primary leakage.
+- **Paired interleave** (15 V pair and 5 V triple in shared multifilar layers) tracks the two
+  15 V rails best: 14.4–15.3 V in every case. But 5V_ISOL / −5V reach 5.6–5.7 V when they
+  carry only their bleeders.
+  - With a close-wound primary, MKF puts 3.6–5 W of winding loss at 15 W into it, driven by
+    the high-frequency ringing in the tightly coupled shared layers. That is not usable.
+  - Spread-primary `paired_ms` brings this down to 1.7 W, similar to the sandwich. It is the
+    **alternative if tight 15 V tracking matters more than the bleeder-only 5 V excursions**.
+    It is also harder to wind: 8 strands in one layer of the 5 V triple.
+- **Window fill:**
+
+  | | enamel b_pre3 | TIW sandwich_s |
+  |---|---|---|
+  | radial build | 2.76 mm (69 %) | 3.31 mm (83 %) |
+  | P1 / P2 | 82 % of 15.2 mm close-wound | 59 % of 21.2 mm, spread at 0.41 mm pitch |
+  | S15 | – | 75 % |
+  | S5+SN5 | – | 85 % |
+  | SHV | – | 2 layers, 79 % |
+  | A5 / A15 | – | 67 % |
+
+  With the core wrap (12.5) about 0.5 mm of radial room remains.
+- **Losses:** the TIW build has about 0.35 W more winding loss at 15 W (MKF upper bound), from
+  the thicker TIW layers and a larger radial build. That is ≈ 41 °C rise at 15 W (TEX-E is
+  120 °C class), and about 17 °C at nominal load. At the 12 W continuous design value it is
+  well within limits.
+
+### 12.3 Recommended TIW build: `eel19_tiw_sandwich_s_pre3` (winding spec)
+
+![TIW recommended geometry](geometry_eel19_tiw_sandwich_s.png)
+
+MAS: [mas/tr1_eel19_tiw_recommended.json](mas/tr1_eel19_tiw_recommended.json) (option
+`eel19_tiw_recommended`).
+- Core, gap and Lp as in sections 1–4: Lp 600 µH ± 5 %, spacer ≈ 0.4 mm set by measurement.
+- Bobbin: EEL19 vertical 4+6 (section 6a).
+- Winding width: the full bobbin window (model 21.2 mm), no margin tape.
+- All windings go in the same rotational direction, and the start of each winding is its dot.
+
+| # | winding | turns | wire | layer(s) | start → finish (footprint pin numbers; 6a names) | notes |
+|---|---|---|---|---|---|---|
+| 1 | **P1** (primary half 1) | 52 | 1 × AWG32 heavy (0.24 mm) enamel | 1, **spread over the full width** (pitch ≈ 0.41 mm) | **FL_DC (DC+)** at the base end → top flange; return lead down the primary-side flange to **pin 4 (P4)**, the crossover post (clipped at the base) | quiet DC+ end innermost |
+| – | tape | | 1 layer polyester 25 µm, full width | | | mechanical only |
+| 2 | **S15** → 15V_ISO_SEC (D4) | 16 | **2 × TEX-E 0.30** in parallel | 1, spread (16 mm) | pin 9 (S5, ISO_GND) → pin 10 (S6) | strands side by side |
+| – | tape | | 1 layer | | | |
+| 3 | **SHV** → −80 V (D8) | 84 | **1 × TEX-E 0.20** | 2 (42 + 42, each spread; model 53 + 31) | pin 5 (S1) → pin 9 | |
+| – | tape | | 1 layer | | | |
+| 4 | **S5 + SN5** → 5V_ISOL (D29), −5V_SEC (D14) | 6 + 6 | **3 × TEX-E 0.30 each**, wound as one 6-strand bundle (strands alternate S5 / SN5) | 1, spread (18 mm) | S5: pin 9 → pin 7 (S3); SN5: pin 8 (S4) → pin 9 | |
+| – | tape | | 1 layer | | | |
+| 5 | **A5** → 5V + AUX_FB (D6) | 6 | 8 × AWG30 heavy enamel in parallel | 1, spread | pin 2 (GND) → pin 3 | |
+| – | tape | | 1 layer | | | |
+| 6 | **A15** → 15V (D5) | 16 | 3 × AWG30 heavy in parallel | 1, spread | pin 2 → pin 1 | |
+| – | tape | | 1 layer | | | |
+| 7 | **P2** (primary half 2) | 52 | 1 × AWG32 heavy | 1, spread over the full width | from **pin 4** → wound top to bottom → **FL_C (collector)** at the base end | P1 + P2 in series aiding |
+| – | outer wrap | | 2 layers tape; then **3 layers around the bottom yoke and outer legs** after assembly (12.5) | | | |
+
+- **Pins:** as in section 6a. 1 A15 finish, 2 GND, 3 A5 finish, 4 crossover (clipped),
+  5 SHV, 6 spare (clipped), 7 S5, 8 SN5, 9 ISO_GND, 10 S15, plus the FL_DC and FL_C fly leads.
+- **The TEX-E runs unbroken from its layer to its isolated-row pin with the insulation
+  intact.** It leaves along the isolated-side flange only, and only the pin wrap is stripped
+  or solder-dipped. TIW ends that are inside the build (S15, SHV, S5/SN5 starts and
+  finishes) may cross enamel windings and tape. No sleeving is needed for isolation;
+  optionally add a short PTFE sleeve at the bobbin exit against abrasion.
+- **The P1–P2 crossover and the fly leads** stay on the primary side. Fly leads: AWG32
+  doubled and twisted, or spliced to a 0.4–0.5 mm tinned lead, in PTFE sleeving (mechanical),
+  to the FL_DC / FL_C holes.
+- **DC resistance at 60 °C** (MKF): P1 0.78 Ω, P2 1.36 Ω, S15 61 mΩ, SHV 1.65 Ω, S5 / SN5
+  20 mΩ, A5 11 mΩ, A15 85 mΩ.
+- **Measurements:** as section 9, with these model values:
+  - P with all other windings shorted: model 3.1 µH (enamel design 8.9 µH); P–A5 and P–S15 shorted alone: 14 µH each, referred to 104 T.
+  - Turns-ratio check 104 : 16 : 6 : 16 : 6 : 6 : 84.
+  - Hipot primary + core → isolated pins 3 kV rms 1 min.
+- **What to buy** (TEX-E is sold in small spools, e.g. Block CU-TIW 100/0,xx, about
+  150–250 m per 0.1 kg spool):
+
+  | wire | for | length per transformer (MLT ≈ 33–40 mm) |
+  |---|---|---|
+  | **TEX-E 0.30** | S15 (2 × 16 T), S5 + SN5 (6 × 6 T) | ≈ 2.8 m (68 turns of wire) |
+  | **TEX-E 0.20** | SHV 84 T | ≈ 3.5 m |
+  | AWG32 / AWG30 heavy enamel | primary and aux, as before | – |
+
+  With leads and spare, 10 m of each TIW size covers 2–3 prototypes. TEX-E 0.25 is not
+  needed for the recommended build.
+
+### 12.4 Vacuum impregnation (optional add-on)
+
+Vacuum (or vacuum-pressure) impregnation with a class F/H polyester or epoxy transformer
+varnish fills the voids between turns, layers and tape. This helps in three ways:
+- **Partial discharge:** at the 778 Vpk recurring peak plus the 72 kHz collector edges, it
+  takes away the air gaps where PD starts.
+- **Humidity and pollution:** it seals the bobbin joints and the pin area.
+- **Noise and mechanics:** it fixes the turns and the gap spacer. That removes audible noise
+  in the DPWM / burst modes and keeps Lp and the leakage stable.
+
+It also helps heat transfer a little. **It does not reduce the creepage or clearance
+requirements** (11.1 / 4.0 mm). Only a qualified cemented-joint or coating process (IEC 60664-3
+/ IEC 62368-1 type-tested, which can be treated as PD1 / solid insulation) does that, and it is
+not claimed here. Impregnate after the gap is set and Lp is measured, then re-measure Lp and the
+leakage. Varnish raises the interwinding capacitance slightly, so check the collector ringing
+on the bench. TEX-E is compatible with common polyester / epoxy varnishes, but check the varnish
+datasheet for TIW (polyamide outer layer).
+### 12.5 Isolation of the TIW build (what is still needed)
+
+- **Between the windings:** no tape barrier and no margins. The TEX-E insulation is the
+  reinforced barrier (IEC 62368-1 Annex J: three layers, each pair passing the electric-strength
+  test). This holds between every isolated winding and every enamel winding, and also to the
+  core. The single tape layers are mechanical only.
+- **The core counts as primary.** P1 sits on the 0.6 mm bobbin column, and the creepage from
+  P1 over the flange to the yoke is only a few millimetres.
+  - With TIW the isolated windings need no distance to the core. Their **bare ends at the pins
+    do**: ≥ 11.1 mm creepage and ≥ 4.0 mm clearance to the core.
+  - On the vertical 4+6 bobbin the bottom yoke sits right above the base between the pin rows
+    (about 3–4 mm horizontally from the isolated row). So that distance is almost certainly
+    short.
+  - **Wrap the bottom yoke and the outer legs with 3 layers of polyester tape** (thin-sheet
+    reinforced insulation) before the clip or outer wrap goes on, or use an insulating core
+    cap, then check with the hipot.
+- **TIW terminations:**
+  - The TEX-E runs unbroken from the winding to the isolated-row pin with its insulation
+    intact. It never crosses the primary row or the primary-side base.
+  - Strip or solder only the length that wraps the pin (≤ 3 mm above the base).
+  - Each start and finish leaves along the isolated-side flange. Where it crosses enamel
+    windings or tape, nothing extra is needed (the wire is the insulation). A short PTFE
+    sleeve over the TIW at the bobbin exit only protects it from abrasion.
+- **Enamel leads:**
+  - The A5 / A15 ends and the P1–P2 crossover (pin 4) stay on the primary side. The crossover
+    may lie directly over TIW turns.
+  - The fly leads FL_DC / FL_C keep their PTFE sleeving for mechanical protection and the
+    PCB holes. Isolation-wise they are primary wires, which may touch TIW.
+- **Bobbin base:**
+  - The primary pin row and the isolated pin row are 12.5 mm apart (≈ 11.7 mm creepage over a
+    flat base with 0.8 mm pins).
+  - Clipped pin 4 (crossover, ≈ DC+ + Vor/2) is primary. Its stub to the nearest isolated pin
+    (S1/pin 5, 12.5 mm row distance, offset 1.5 mm) is ≥ 11.6 mm.
+  - **Measure the real base:** it must have ≥ 11.1 mm between the rows along its surface,
+    including standoffs. A rib or slot on the base helps if it does not.
+- **TEX-E rating vs 552 Vrms / 778 Vpk:** TEX-E is listed for reinforced insulation (UL / VDE
+  to IEC 60950-1 Annex U, IEC 62368-1 Annex J, IEC 61558-1 Annex K). **Confirm on the
+  certificate that the permitted working voltage covers 552 Vrms / 778 Vpk.**
+  - The flyback adds HF on top: the collector end swings to about 600 V above GND at 72 kHz,
+    and GND swings to −358 V against the earthed ISO_GND. Both together stay below 778 Vpk.
+  - 778 Vpk recurring is above the ≈ 700 V level from which IEC 60664-1 asks for PD-free
+    reinforced insulation (verify against the edition used). Run a PD test on the first
+    samples (extinction ≥ 1.5 × 778 V ≈ 1.2 kVpk).
+- **Hipot:** 3 kV rms for 1 min (or 4.2 kV DC) from the primary (P, A5, A15, pins 1–3, FL_DC /
+  FL_C) **and the core** to the isolated pins 5, 7–10.
+
+### 12.6 PCB: creepage slot in the TR1 footprint
+
+`Transformer_EEL19_V_4+6_FlyLeads` (tools/next/gen_next_footprints.py →
+lib/tube_psu_next.pretty) now has a **milled slot on Edge.Cuts inside the footprint**:
+- **1.2 mm wide** (JLC non-plated slot ≥ 1.0 mm), on the row midline x = 0, from y = −10.0 to
+  y = +16.5 mm (**26.5 mm long**, rounded ends).
+- It reaches 3.25 mm past the top isolated pad (pin 10) and 2.5 mm past the fly-lead pads.
+- It lies under the bobbin (the base ends at y ±11.25) and continues past the base between
+  FL_DC and the isolated row. The courtyard includes it.
+- On the board, with TR1 at (64.45, −4.28), the slot is at x 64.45, y −14.28 … +12.22.
+- KiCad's creepage check follows internal Edge.Cuts, and the fab mills the same outline.
+
+Shortest surface path between primary and isolated copper (pad edges), from a visibility-graph
+calculation on the generated footprint (pad circles and slot outline; script in the scratchpad,
+not committed):
+
+| pair | without slot | with slot |
+|---|---|---|
+| FL_DC (pad 11) – pin 5 (SHV, −80 V) | **9.23 mm** (fails) | **13.18 mm** |
+| pin 2 (GND) – pin 8 (−5V_SEC), pin 3 (AUX_FB) – pin 7 (5V_ISOL) | 10.81 mm (fails) | > 15 mm |
+| pin 1 (15V) – pin 9 / pin 10 | 10.86 / 10.89 mm (fail) | 14.85 / 13.23 mm |
+| minimum over all primary (1–3, 11, 12) × isolated (5, 7–10) pairs | 9.23 mm | **13.18 mm** (≥ 11.1 mm) |
+
+- **Fly-lead holes:** FL_DC at (−2.2, 14.0) is only 9.2 mm from pad 5 without the slot. The
+  slot fences it off, so the holes stay where the board-fit study put them (no part moves).
+- **Without a slot**, FL_DC would have to move to x ≤ −5.5 (11.9 mm) and FL_C to about −10.3,
+  which collides with the left-side parts.
+- Clearance (through air) is ≥ 9.2 mm everywhere, against 4.0 mm required.
+- **Copper on inner layers:** none from either domain may cross the slot line. That is already
+  required (inner-layer spacing 11.1 mm, README).
+- The ISO_GND F.Cu pour must stay ≥ 11.1 mm creepage from the primary pads; the slot helps
+  there too.
+
+### 12.7 How to rerun
+
+```
+cd /home/jari/dev/tube_psu_kicad
+python3 simulation/flyback/run_flyback.py --om-only eel19_tiw_recommended            # MAS file
+python3 simulation/flyback/run_flyback.py eel19_tiw_sandwich_s_pre3 --jobs 4          # 19 cases, ~5 min, ~0.45 GB
+python3 simulation/flyback/run_flyback.py eel19_tiw_simple_pre3 eel19_tiw_sandwich_pre3 \
+    eel19_tiw_paired_b_pre3 eel19_tiw_paired_c_pre3 eel19_tiw_paired_m_pre3 eel19_tiw_paired_ms_pre3 --jobs 4
+python3 simulation/flyback/run_flyback.py eel19_recommended --cases nom full15 --jobs 2   # enamel loss reference
+python3 simulation/flyback/losses.py eel19_tiw_sandwich_s_pre3 [--case full15]
+python3 simulation/flyback/eel19_report.py                                            # eel19_results.md, geometry_eel19_tiw_*.png
+python3 tools/next/gen_next_footprints.py                                             # TR1 footprint with the slot
+```
+
+Runtimes: 76 cases (4 options) took 1175 s with 4 jobs, peak 1.15 GB of ngspice; 19 cases take
+about 290–450 s.

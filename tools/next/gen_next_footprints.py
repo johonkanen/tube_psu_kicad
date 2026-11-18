@@ -53,6 +53,28 @@ def circle(x, y, r, layer, width):
             f"\t\t\t(width {f(width)})\n\t\t\t(type solid)\n\t\t)\n\t\t(fill no)\n\t\t(layer \"{layer}\")\n\t)\n")
 
 
+def arc(x0, y0, xm, ym, x1, y1, layer, width):
+    return (f"\t(fp_arc\n\t\t(start {f(x0)} {f(y0)})\n\t\t(mid {f(xm)} {f(ym)})\n\t\t(end {f(x1)} {f(y1)})\n"
+            f"\t\t(stroke\n\t\t\t(width {f(width)})\n\t\t\t(type solid)\n\t\t)\n\t\t(layer \"{layer}\")\n\t)\n")
+
+
+def slot(xc, y0, y1, w, layer="Edge.Cuts"):
+    """Milled (non-plated) slot along y, x = xc +- w/2, rounded ends (tool diameter w), y0 < y1 are
+    the outer ends of the rounded tips. An internal Edge.Cuts outline: KiCad's creepage check and
+    the fab's routing both follow it."""
+    r = w / 2
+    a, b = y0 + r, y1 - r
+    return (line(xc - r, a, xc - r, b, layer, 0.05) + arc(xc - r, b, xc, y1, xc + r, b, layer, 0.05)
+            + line(xc + r, b, xc + r, a, layer, 0.05) + arc(xc + r, a, xc, y0, xc - r, a, layer, 0.05))
+
+
+# TR1 creepage slot (2026-11-18, simulation/flyback/EEL19_DESIGN.md 12.6): primary <-> isolated is
+# REINFORCED, 552 Vrms -> 11.1 mm creepage (kicad_next/README.md); the pad rows are only 10.8 mm
+# apart edge to edge. Slot 1.2 mm wide on the row midline, from 3.25 mm above the top isolated
+# pad to 2.5 mm below the fly-lead pads, so FL_DC (9.2 mm direct to pad 5) is also fenced off.
+EEL19_SLOT = {"x": 0.0, "y0": -10.0, "y1": 16.5, "w": 1.2}
+
+
 def pad(num, x, y, size, drill, shape="circle"):
     return (f"\t(pad \"{num}\" thru_hole {shape}\n\t\t(at {f(x)} {f(y)})\n\t\t(size {f(size)} {f(size)})\n"
             f"\t\t(drill {f(drill)})\n\t\t(layers \"*.Cu\" \"*.Mask\")\n\t)\n")
@@ -91,9 +113,13 @@ def eel19():
     # courtyard: body + 0.5 mm, extended down over the fly-lead pads
     c = 0.5
     flx, fly, flp = (-2.2, -7.0), 14.0, 2.2
+    # (and over the creepage slot, which runs down past the fly-lead pads)
+    sl = EEL19_SLOT
+    cx1 = max(max(flx) + flp / 2, sl["x"] + sl["w"] / 2) + 0.25
+    cy1 = max(fly + flp / 2, sl["y1"]) + 0.25
     body += poly([(-bx - c, -by - c), (bx + c, -by - c), (bx + c, by + c),
-                  (max(flx) + flp / 2 + 0.25, by + c), (max(flx) + flp / 2 + 0.25, fly + flp / 2 + 0.25),
-                  (min(flx) - flp / 2 - 0.25, fly + flp / 2 + 0.25), (min(flx) - flp / 2 - 0.25, by + c),
+                  (cx1, by + c), (cx1, cy1),
+                  (min(flx) - flp / 2 - 0.25, cy1), (min(flx) - flp / 2 - 0.25, by + c),
                   (-bx - c, by + c)], "F.CrtYd", 0.05)
     # primary row (x = -6.25): 1, 2, 3 with pads, 4 clipped
     for i, y in enumerate((-5.25, -1.75, 1.75)):
@@ -108,12 +134,17 @@ def eel19():
     body += pad(11, flx[0], fly, flp, 1.2)
     body += pad(12, flx[1], fly, flp, 1.2)
     body += text("user", "FL_DC", flx[0], fly + 2.0, "F.Fab", 0.6) + text("user", "FL_C", flx[1], fly + 2.0, "F.Fab", 0.6)
+    # reinforced-insulation slot between the primary and the isolated side (EEL19_SLOT)
+    sl = EEL19_SLOT
+    body += slot(sl["x"], sl["y0"], sl["y1"], sl["w"])
+    body += text("user", "slot 1.2 (creepage)", sl["x"] + 1.6, sl["y1"] - 1.0, "F.Fab", 0.5)
     descr = ("EEL19 vertical bobbin 4+6 (pitch 3.5 / 2.7 mm, rows 12.5 mm), aux flyback TR1 for the next "
              "revision: pads 1-3 primary-side aux, pin 4 crossover (clipped, no pad), pads 5, 7-10 isolated, "
-             "pin 6 spare (clipped), pads 11/12 fly leads FL_DC/FL_C; body 15.8 x 22.5 mm, height about 29.2 mm "
+             "pin 6 spare (clipped), pads 11/12 fly leads FL_DC/FL_C; 1.2 x 26.5 mm milled slot (Edge.Cuts) between "
+             "the rows for 11.1 mm reinforced creepage; body 15.8 x 22.5 mm, height about 29.2 mm "
              "(tube_psu_next, simulation/flyback/EEL19_DESIGN.md 6a; confirm dims with calipers)")
     return footprint("Transformer_EEL19_V_4+6_FlyLeads", descr, "transformer EEL19 flyback fly-lead", body,
-                     -by - 1.5, fly + 3.5)
+                     -by - 1.5, sl["y1"] + 1.5)
 
 
 def ec42():
