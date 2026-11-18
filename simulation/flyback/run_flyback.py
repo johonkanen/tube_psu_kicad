@@ -69,14 +69,41 @@ FULL_CASES = [
 ]
 
 
+# Wide input range (2026-11-18, EEL19_DESIGN.md section 14, ICE5AR0680AG): 20 W = the full15
+# pattern scaled by 1.37 (15 V rails 0.41 A, 5 V rails 0.41 A, -5 V 0.27 A, -80 V 18.2 mA on top of
+# the bleeder; with the preloads, bleeders and fixed loads 20.1 W), at 100 / 200 / 400 / 450 V DC+;
+# full20_100_csmin = full20_100 with the minimum current limit VCS_N 0.72 V; nom100 / nom450 =
+# nominal loads at the input extremes; full15_100 = 15 W at 100 V. Run for options with "wide_cases".
+FULL20 = {"20V": 0.41, "5V": 0.41, "20V_ISO_SEC": 0.41, "5V_ISOL": 0.41, "-5V_SEC": 0.27, "-100V BIAS": 0.0182}
+WIDE_CASES = [
+    {"name": "full20", "loads": dict(FULL20), "title": "20 W at 400 V"},
+    {"name": "full20_100", "loads": dict(FULL20), "vin": 100.0, "title": "20 W at DC+ = 100 V"},
+    {"name": "full20_200", "loads": dict(FULL20), "vin": 200.0, "title": "20 W at DC+ = 200 V"},
+    {"name": "full20_450", "loads": dict(FULL20), "vin": 450.0, "title": "20 W at DC+ = 450 V"},
+    {"name": "full20_100_csmin", "loads": dict(FULL20), "vin": 100.0, "ice": {"vcs_n": 0.72},
+     "title": "20 W at 100 V with the minimum current limit VCS_N 0.72 V"},
+    {"name": "full15_100", "loads": dict(FULL15), "vin": 100.0, "title": "15 W at DC+ = 100 V"},
+    {"name": "nom100", "loads": dict(NOM), "vin": 100.0, "title": "nominal at DC+ = 100 V"},
+    {"name": "nom450", "loads": dict(NOM), "vin": 450.0, "title": "nominal at DC+ = 450 V"},
+    # switch-loss bound with a 2 ns gate RC (the 10 ns model RC overstates the turn-off overlap)
+    {"name": "full20_100_fast", "loads": dict(FULL20), "vin": 100.0, "ice": {"tgate": 2e-9},
+     "title": "full20_100 with a 2 ns gate RC"},
+    {"name": "full20_450_fast", "loads": dict(FULL20), "vin": 450.0, "ice": {"tgate": 2e-9},
+     "title": "full20_450 with a 2 ns gate RC"},
+]
+
+
 def all_cases():
-    return cases() + FULL_CASES
+    return cases() + FULL_CASES + WIDE_CASES
 
 
 def option_cases(opt, names=None):
     """Load cases of one option: the 16 standard cases, plus FULL_CASES when the option asks
-    for them; `names` (from --cases) selects from all of them."""
-    pool = all_cases() if (opt.get("full_cases") or names) else cases()
+    for them (and WIDE_CASES for "wide_cases"); `names` (from --cases) selects from all of them."""
+    if names:
+        pool = all_cases()
+    else:
+        pool = cases() + (FULL_CASES if opt.get("full_cases") else []) + (WIDE_CASES if opt.get("wide_cases") else [])
     return [c for c in pool if not names or c["name"] in names]
 
 
@@ -187,8 +214,15 @@ def run_case_ice(name, opt, res, case, path, vin, ic):
     # network (R140 4.7k + C138 10n, C139 2.2n) scaled by 0.1 puts the loop crossover near the
     # switching frequency and limit-cycles; it is verified with the real capacitors in ice5ar_checks.py.
     case["comp"] = {**(opt.get("comp") or {}), **ice.BATCH_COMP}
+    # power-stage variant (ICE5AR0680AG: RDS(on), Co(er)) and sense resistor of the option; a
+    # case's own "ice" entries (e.g. the minimum current limit) override the option's
+    if opt.get("ice") or case.get("ice"):
+        case["ice"] = {**(opt.get("ice") or {}), **(case.get("ice") or {})}
+    if opt.get("rcs"):
+        case["rcs"] = opt["rcs"]
     n = case["name"]
-    wave = os.path.join(OUT, "spice", f"{name}__{n}_wave.txt") if n in ("nom", "max_S15", "full10", "full15") else None
+    wave = os.path.join(OUT, "spice", f"{name}__{n}_wave.txt") if (n in ("nom", "max_S15", "full10", "full15")
+                                                                    or n.startswith("full20")) else None
     net = ice.netlist(res, opt["spice"], case, vin=vin,
                       tstop=case.get("tstop", 40e-3 if n == "idle" else 20e-3 if n == "light" else 12e-3 if n.startswith("min") else 9e-3),
                       twin=case.get("twin", 10e-3 if n == "idle" else 5e-3 if n == "light" else 1.5e-3),

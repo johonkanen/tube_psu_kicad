@@ -42,6 +42,20 @@ scripts keep the Proteus labels `20V` / `20V_ISO_SEC` internally.
 >
 > No schematic change is needed, and the preloads stay as they are (the 5V preload is now essential).
 >
+> **Update 2026-11-18 (evening): 100–450 V DC+ with the ICE5AR0680AG** (section 14). 20 W from
+> 100 V to 450 V works on the EEL19, with no derating, using:
+> - the same turns (Vor 97 V) and the same Lp 600 µH;
+> - **thin strands**: TEX-E 0.20 for every isolated winding, AWG32 for every enamel winding;
+> - **Rcs 0.685 Ω**.
+>
+> Results:
+> - ΔT 48 K at 100 V / 20 W (MKF upper bound); Bpk 0.32 T at the worst-case current limit;
+> - VDS 622 V at 450 V; rails as in section 13;
+> - a full-load start at 100 V clears the OLP timer even at the minimum current limit.
+>
+> A higher Vor (120–150 V) is worse on this core. PWM2 becomes a PG-DSO-12 (SO-16-narrow land
+> pattern, 4 drain pins). The VIN pin gets a line-OVP divider (≈ 483 V) or GND.
+>
 > The rest of this summary describes the enamel / margin-tape design, kept for reference.
 
 - **Turns: every winding is doubled from the EF20 recommendation:** P 104 (2 × 52, split) /
@@ -1171,3 +1185,431 @@ python3 simulation/flyback/ice5ar_report.py                                     
 ```
 
 Peak ngspice memory: 1.16 GB with 4 jobs.
+
+## 14. 100–450 V input with ICE5AR0680AG (2026-11-18)
+
+**Task.** Full power from **100 V to 450 V DC+** (rectified mains before the PFC starts, 400 V
+after), **15–20 W total**, EEL19 core kept (EEL25 formers are hard to get), controller **Infineon
+ICE5AR0680AG** (PG-DSO-12, 800 V CoolMOS 0.71 Ω / 1.27 Ω at 125 °C, Co(er) 24 pF, 100 kHz, RthJA
+94 K/W with minimum drain copper; same ICE5 controller core as the ICE5AR4780BZS of section 13).
+Constraints kept: 4+6 vertical bobbin with fly-lead split primary, TEX-E secondaries (reinforced, no
+margin tape), the six rails with today's load pattern scaled up. Code: `wide_input.py` (design
+sweep), `options.py` (`eel19w_*`, `eel19_wide`, `eel19_wide600_0680`, `eel19_wide_0680`), `run_flyback.py` (new cases
+`full20*`, `full15_100`, `nom100`, `nom450`), `ice5ar_checks.py` (100 / 450 V checks),
+`wide_report.py` → [wide_results.md](wide_results.md).
+
+> **Verdict: 20 W from 100 V to 450 V is achievable on the EEL19.** The changes:
+> - the **same turns** (P1 52 | S15 16 | SHV 84 | S5+SN5 6+6 | A5 6 | A15 16 | P2 52, Vor 97 V) and
+>   the **same Lp 600 µH**;
+> - **thin strands**: TEX-E 0.20 for every isolated winding, AWG32 for every enamel winding;
+> - **Rcs 0.685 Ω** (2 × 1.37 Ω).
+>
+> Raising Vor to 120–150 V, which the hand estimate suggested, makes it worse.
+>
+> - Transformer at 20 W (MKF upper bound, as in sections 5 / 12; losses on the simulated currents):
+>   - 2.06 W, ΔT ≈ **48 K at 100 V**;
+>   - 1.86–1.92 W, 44–46 K at 200–450 V;
+>   - → ≤ 98 °C at 50 °C ambient (TEX-E 120 °C).
+> - Bpk 0.22 T at 20 W, **0.32 T at the worst-case current limit** (1.30 A; PC40 Bsat ≈ 0.39 T at 100 °C).
+> - 100 V: CCM, D 0.51, Ipk 0.88 A against a minimum current limit of 1.04 A. No subharmonic
+>   oscillation.
+> - A full-load start at 100 V clears the overload timer even at VCS_N min (26.0 ms < 30 ms).
+> - Most this core can do continuously at 100 V is ≈ 24.5 W (14.5).
+> - Simulated with ngspice (ICE5AR model with the 0680AG power stage): see 14.6–14.8.
+
+### 14.1 What changes at 100 V input (and why the hand estimate is too pessimistic)
+
+Today's transformer (Np 104, Lp 600 µH, Vor 97 V) at 20 W and 100 V: CCM, D ≈ 0.49, Ipk ≈ 0.88 A,
+primary rms ≈ 0.37 A (2× the 0.18 A at 400 V). The hand estimate is right about these currents.
+
+It overrates the copper loss, though, because the winding loss of this build is not primary DC
+loss:
+- **Primary DC loss** (P1 0.78 Ω + P2 1.36 Ω at 60 °C) is 0.30 W at 100 V and 0.07 W at 400 V.
+  The whole transformer's ohmic loss is 0.40 W at 100 V and 0.18 W at 400 V.
+- **MKF's winding loss** is 2.33 W at 100 V and 2.01 W at 400 V (20 W, synthetic waveforms):
+  - about 80 % of it is proximity loss in **every** winding (SHV 0.23 W at 44 mA rms, S15 0.30 W);
+  - the source is the field of the gap (fringing) and the window field of the commutating ampere-turns;
+  - 100 V adds only ≈ 16 % to it (CCM: the magnetising current has a large DC part and a small ripple,
+    so the fringing field swings less than in DCM).
+- Result: ΔT 56 K at 100 V / 20 W for today's build – hot, but not the 3 W+ / too hot of the estimate.
+
+The real problems with today's values at 100 V / 20 W are:
+- the current limit: 0.72 V / 0.8 Ω = 0.90 A minimum, against Ipk 0.88 A;
+- the flux at the maximum limit if Rcs is lowered.
+
+### 14.2 Method: synthetic waveforms through MKF (`wide_input.py`)
+
+The sweep must cover 4 inputs × ~25 transformers. Running ngspice for each would be slow, so
+`wide_input.py` builds the ideal flyback waveforms and hands them to MKF with the real coil
+geometry. MKF is the same as in `losses.py`: Dowell / Ferreira with gap fringing at 60 °C for the
+windings, iGSE PC40 for the core.
+
+How the waveforms are built:
+- CCM or DCM from Lp and the power; η 0.86.
+- The ICE5 frequency reduction is applied for the candidate's Rcs: FB = 2.03·Ipk·Rcs + 0.5 V
+  (+ slope compensation).
+- Each secondary carries its rail's DC current during the off-time. Its share of the magnetising
+  ampere-turns is N·I / ΣN·I.
+- The primary is P1 = P2.
+
+Gap and Lp come from the same MKF gap fit as every other option (spacer gap). Loads: the full15
+pattern scaled; 20 W = 15V / 5V / 15V_ISO_SEC / 5V_ISOL 0.41 A, −5V 0.27 A, −80 V 18.2 mA, plus the
+preloads, bleeders and fixed loads (`run_flyback.FULL20`).
+
+**Check against ngspice:** today's build at full15 / 400 V gives 1.48 W winding loss from the
+synthetic waveforms against 1.53 W from the simulated currents (section 13.5). Per winding it
+agrees within ±10 %. The core loss is 0.08 W against 0.12 W, because the simulation includes the
+ringing.
+
+Limits used:
+- **ΔT ≤ 60 K** with the section 5 surface formula: 50 °C ambient → 110 °C, 10 K below the TEX-E
+  120 °C class.
+- **Bpk ≤ 0.32 T at the maximum current limit** (0.88 V / (0.99·Rcs)).
+- **Rcs ≤ 0.72 V / (1.01 · 1.1 · Ipk(100 V, full power))**: the minimum limit keeps 10 % margin
+  over the 100 V peak.
+
+### 14.3 Design space on the EEL19 (20 W, synthetic waveforms)
+
+Every candidate is the TIW sandwich_s build with only the primary changed. The primary halves are
+spread over the full 21.2 mm width in one layer each (up to 88 turns of AWG32 fit). The secondary
+turns, and so the cross regulation, stay the same. Vor = Np × 0.935 V. ΔT at 20 W (full tables with Rcs and the frequency reduction: [wide_results.md](wide_results.md)).
+Bpk at the maximum limit uses each candidate's own Rcs from the 10 % rule:
+
+| Np (2 × half) | Vor V | Lp µH | MKF gap mm | ΔT 100 V K | ΔT 400 V K | winding W 100 / 400 V | Bpk at max limit T | VDS at 450 V ≈ | D8 V_R at 450 V |
+|---|---|---|---|---|---|---|---|---|---|
+| 80 | 75 | 420 | 0.43 | 48 | 43 | 1.88 / 1.60 | 0.32 | 585 | 554 |
+| 88 | 82 | 500 | – | 49 | 44 | 1.94 / 1.67 | ≈ 0.32 | 590 | 512 |
+| 96 | 90 | 600 | 0.44 | 50 | 44 | 2.01 / 1.67 | 0.33 | 600 | 476 |
+| **104 (today)** | **97** | **600** | **0.59** | **56** | **49** | **2.33 / 2.01** | **0.30** | **607** | **445** |
+| 104 | 97 | 650 | 0.51 | 53 | 47 | 2.19 / 1.86 | 0.31 | 607 | 445 |
+| 104 | 97 | 700 | 0.44 | 51 | 46 | 2.08 / 1.80 | 0.33 | 607 | 445 |
+| 104, primary AWG33 / AWG30 | 97 | 700 | – | 50 / 57 | 44 / 53 | 2.02 / 1.69 – 2.36 / 2.12 | 0.33 | 607 | 445 |
+| 104 | 97 | 900 | 0.29 | 48 | 40 | 1.78 / 1.37 | 0.38 ✗ | 607 | 445 |
+| 112 | 105 | 800 | 0.45 | 54 | 47 | 2.18 / 1.86 | 0.32 | 615 | 420 |
+| 128 | 120 | 900 / 1200 | – / 0.36 | 61 / 56 | 53 / 45 | 2.61 / 2.21 | 0.30 / 0.36 ✗ | 630 | 377 |
+| 140 | 131 | 1000 / 1400 | – / 0.37 | 65 / 59 | 58 / 46 | 2.87 / 2.48 | 0.29 / 0.36 ✗ | 641 | 352 |
+| 152 | 142 | 1000 / 1200 / 1600 | – / – / 0.39 | 73 / 68 / 64 | 67 / 58 / 48 | 3.34 / 2.97 | 0.25 / 0.30 / 0.36 ✗ | 652 | 331 |
+| 152, primary AWG31 | 142 | 1200 | – | 73 | 63 | 3.27 / 2.75 | 0.30 | 652 | 331 |
+| 164 | 153 | 1400 / 1800 | – / 0.42 | 73 / 69 | 59 / 50 | 3.28 / 2.51 | 0.30 / 0.36 ✗ | 663 | 312 |
+| 96, thin strands | 90 | 600 | – | 42 | 37 | 1.60 / 1.33 | 0.33 | 600 | 476 |
+| 104, thin strands | 97 | 550 / 650 / 700 | 0.71 / 0.51 / 0.45 | 49 / 45 / 43 | 45 / 39 / 39 | 2.00 / 1.78 – 1.75 / 1.48 – 1.66 / 1.43 | 0.29 / 0.31 / 0.33 | 607 | 445 |
+| **104, thin strands (chosen)** | **97** | **600** | **0.60** | **46** | **41** | **1.86 / 1.60** | **0.30 (0.32 with Rcs 0.685)** | **607** | **445** |
+
+At full power the frequency stays at 100 kHz for every candidate: FB = 2.03·Ipk·Rcs + 0.5 V ≥ 1.8 V with
+the Rcs of the 10 % rule. Where two Lp values are given for one Np, the flux-limited optimum lies
+between them (≈ 1030 µH at Np 128, ≈ 1400 µH at Np 152). Interpolated there, ΔT is ≈ 59 / 50 K and
+≈ 66 / 53 K: still 6–13 K worse than Np 104.
+
+Findings:
+- **A higher Vor does not help on this core. It costs 5–20 K.**
+  - At the flux limit, the gap is set by the ampere-turns at the current limit:
+    lg ≈ µ0·Np·Ilim / Bmax.
+  - In CCM, Np·Ipk(100 V) ≈ Pin/VT + Iin·Np + Np·ΔI/2, which grows with Np. More turns therefore
+    need a larger gap, which means more fringing field.
+  - More turns also mean a longer primary layer in that field, and longer secondary conduction
+    pulses at the higher duty cycle.
+  - The usual argument for a high Vor (lower primary rms → lower DC loss) is about 0.1 W here:
+    Np·Irms² stays about constant, because R ∝ Np and Irms² ∝ 1/D.
+- **For a given Np, the largest Lp the flux limit allows is the coolest** (smaller gap). With Np 104
+  that is ≈ 650–700 µH at Rcs 0.75–0.79 Ω; 900 µH would be 4 K cooler, but its Bpk at the limit is
+  0.38 T. The gain from 600 to 650 µH is only 1 K, though. The chosen design keeps 600 µH for more
+  current-limit headroom at 100 V (start-up against the OLP timer, 14.4 / 14.7).
+- **Fewer turns are marginally cooler** (Np 80–96: −3…−6 K at the flux limit). They need a higher
+  current limit (Ipk 0.89–1.05 A at 100 V) and raise the D8 / secondary rectifier stress (V_R 476–555 V
+  at 450 V). Not worth a turns change for 3–6 K.
+- **Thin strands give the largest gain, −7 to −8 K.** Gap-fringing proximity loss per strand goes
+  with d⁴, the DC loss with 1/d². The thin set:
+  - S15 3 × TEX-E 0.20, S5 / SN5 4 × 0.20 each, A5 10 × AWG32, A15 4 × AWG32;
+  - primary and SHV unchanged (AWG32 / TEX-E 0.20);
+  - cuts the winding loss by 20 % (2.19 → 1.75 W at 100 V);
+  - lowers the radial build from 3.31 to 3.00 mm;
+  - leaves **one TIW size (TEX-E 0.20) and one enamel size (AWG32)** for the whole transformer.
+  - S15 and S5+SN5 fill 91 % of the width (19.2 of 21.2 mm, spread). A thinner primary (AWG33)
+    would gain only 1 K more.
+- **Switch:** the CoolMOS loss is ≈ 0.37 W at 100 V (conduction 0.17 W, CCM turn-on) and up to
+  0.6 W at 450 V. At 450 V the capacitive turn-on loss of Co(er) 24 pF + 10 pF dominates (DCM,
+  turn-on at ≈ Vin at 100 kHz, ≈ 0.35 W). It is the same for every candidate.
+
+### 14.4 Chosen design: `eel19_wide` = `eel19w_n52_l600_a32_t` (winding spec)
+
+MAS: [mas/tr1_eel19_wide.json](mas/tr1_eel19_wide.json). It is section 12.3 with **only the strands
+changed**: same turns, order, pins, Lp 600 µH and gap.
+
+| # | winding | turns | wire (section 12.3 in brackets) | layer | pins |
+|---|---|---|---|---|---|
+| 1 | P1 | 52 | 1 × AWG32 heavy, spread over 21.2 mm (same) | 1 | FL_DC → pin 4 |
+| 2 | S15 | 16 | **3 × TEX-E 0.20** (2 × TEX-E 0.30), 19.2 mm of 21.2 mm | 1 | pin 9 → pin 10 |
+| 3 | SHV | 84 | 1 × TEX-E 0.20 (same) | 2 | pin 5 → pin 9 |
+| 4 | S5 + SN5 | 6 + 6 | **4 + 4 × TEX-E 0.20**, one 8-strand bundle (3 + 3 × TEX-E 0.30), 19.2 mm | 1 | as 12.3 |
+| 5 | A5 | 6 | **10 × AWG32** (8 × AWG30) | 1 | pin 2 → pin 3 |
+| 6 | A15 | 16 | **4 × AWG32** (3 × AWG30) | 1 | pin 2 → pin 1 |
+| 7 | P2 | 52 | 1 × AWG32, spread (same) | 1 | pin 4 → FL_C |
+
+- **Lp 600 µH ± 5 %** (P1 + P2 in series), AL 55.5 nH: the same target, gap and 30-turn test coil
+  (50 µH) as section 4.
+- Radial build 3.00 mm of 3.975 mm (was 3.31): 1 mm left for the wrap and the tape.
+- **Only two wire types: TEX-E 0.20 and AWG32 heavy.**
+  - TEX-E 0.20 per transformer: ≈ 3.5 m (SHV) + 48 + 48 turns ≈ 3.5 m = **≈ 7 m**.
+  - TEX-E 0.30 is no longer needed.
+- DC resistance at 60 °C (MKF): P1 0.78 Ω, P2 1.30 Ω, S15 90 mΩ, SHV 1.62 Ω, S5 / SN5 33 mΩ, A5 14 mΩ,
+  A15 96 mΩ.
+- Wind the 8-strand S5 / SN5 bundle with the strands flat side by side (alternating S5 / SN5), as
+  in 12.3. The isolation is unchanged: every isolated winding is TEX-E, and every TEX-E end runs
+  unbroken to its pin (12.5).
+- **Rcs 0.685 Ω** (R8 = R9 = 1.37 Ω 1 % 1206):
+  - current limit 1.04 A (VCS_N 0.72 V, Rcs +1 %) … 1.17 A typical … 1.30 A (0.88 V, Rcs −1 %);
+  - Bpk at 1.30 A: **0.320 T** (0.336 T with Lp +5 %), against PC40 Bsat ≈ 0.39 T at 100 °C;
+  - the 100 V / 20 W peak (0.88 A simulated, 14.6) is 15 % below the minimum limit.
+
+**Why not Lp 650 µH with Rcs 0.75 Ω** (`eel19_wide_0680`, simulated in full first)? It is 1–3 K
+cooler: 45 / 42–43 K instead of 48 / 44–46 K. But:
+- its current-limit headroom at 100 V is smaller (0.95 A minimum against 0.83 A);
+- at VCS_N min a 20 W start at 100 V takes 31.3 ms, against the 30 ms minimum OLP blanking (14.7).
+
+Lp 600 µH / 0.685 Ω clears the same start in 26.0 ms and keeps the section-4 gap procedure. The
+650 µH results are kept in [wide_results.md](wide_results.md).
+
+### 14.5 Power vs input voltage – what the EEL19 can do
+
+Two limits set the power (synthetic waveforms, table "Maximum continuous output power" in
+[wide_results.md](wide_results.md)):
+
+- **Thermal:** ΔT ≤ 60 K.
+- **Current limit:** Ipk ≤ minimum limit / 1.1.
+  - With the flux rule (Bpk ≤ 0.32 T at the maximum limit), this is the core's energy limit.
+  - In DCM and near the boundary, P ≈ ½·Lp·Ilim²·f, independent of Vin.
+  - At 100 V (CCM) the ripple eats part of the peak, so the power there is only slightly lower.
+
+| design | Rcs Ω | 100 V | 125 V | 150 V | 200 V | 300–450 V |
+|---|---|---|---|---|---|---|
+| **chosen, Lp 600 µH, thin strands** (= Rcs at the flux limit) | **0.685** | **22.7 W** (thermal 25.1) | 23.1 (26.5) | 23.1 (27.6) | 23.1 (28.5) | 23.1 (29–30) |
+| Lp 650 µH, thin strands (first choice) | 0.75 | 20.6 (25.6) | 20.9 (27.2) | 20.9 (28.5) | 20.9 (30.3) | 20.9 (31–32) |
+| Lp 650 µH, thin strands, Rcs at the flux limit | 0.742 | 21.0 (25.7) | 21.3 | 21.3 | 21.3 | 21.3 |
+| Lp 550 µH, thin strands, Rcs at the flux limit | 0.629 | **24.6** (24.6 / 24.7) | 25.1 | 25.2 | 25.2 | 25.2 |
+| Lp 500 µH, thin strands, Rcs at the flux limit | 0.571 | 23.4 (thermal) | 24.2 (thermal) | 24.4 (thermal) | 25.5 (thermal) | 25.9–26.4 (thermal) |
+| today's TR1 (600 µH, std strands), Rcs at the flux limit | 0.685 | 21.6 (thermal) | 22.1 (thermal) | 23.0 | 23.1 | 23.1 |
+
+- **The chosen design delivers 20 W at every input voltage with headroom.** Its current limit
+  (minimum, with 10 % margin) allows 22.7 W at 100 V and 23.1 W above 125 V. The thermal limit is
+  25.1 W at 100 V and 26.5–30 W above.
+- So **there is no derating between 100 and 450 V**: full 20 W everywhere. ≈ 22.5 W is possible
+  everywhere with the 10 % current-limit margin.
+- **Most the EEL19 can do continuously at 100 V** (this winding structure, ΔT 60 K, MKF upper
+  bound): **≈ 24.5 W**, with Lp ≈ 550 µH and Rcs ≈ 0.63 Ω (thin strands; Bpk 0.32 T at the maximum limit). At that point the thermal and the current limit meet.
+  - A smaller Lp lets the current limit rise at the same Bpk, but the larger gap costs loss.
+  - At 200–450 V the same transformers reach ≈ 25–26 W.
+  - Beyond that the core is full: more power needs a larger core.
+- **Fallback: today's TR1 unchanged** (600 µH, standard strands) with only the new Rcs also
+  carries 20 W at 100 V:
+  - simulated with Rcs 0.75 Ω (`eel19_tiw_sandwich_s_pre3_0680`): Ipk 0.86 A;
+  - ΔT 56 K (MKF, synthetic), i.e. 4 K from the limit instead of 12–14 K;
+  - with Rcs 0.685 Ω: Bpk 0.32 T at the maximum limit, 21.6 W thermal limit at 100 V.
+  - The thin-strand rewind is the recommendation; the old build is usable for a first board.
+
+### 14.6 Simulation with the ICE5AR0680AG (`eel19_wide600_0680`, ngspice)
+
+**Model:** `ice5ar_sim.py` of section 13.1, unchanged except for the power stage of the 0680AG:
+- **RDS(on) 1.27 Ω** (125 °C, datasheet at ID 2 A), **Co(er) 24 pF** + 10 pF transformer / layout;
+- **Rcs 0.685 Ω**.
+
+The rest is the same:
+- the controller (100 kHz, frequency reduction, slope compensation 50 mV/µs above 40 % duty,
+  VCS_N 0.80 V, LEB 220 ns, Dmax 0.75, ABM option 2);
+- VERR / FB from the 5.2 schematic;
+- the clamp, rectifiers and preloads.
+
+The DSO-12 and DIP-7 versions share the controller chip (same datasheet tables). The
+transformer is the full MKF inductance matrix of `eel19w_n52_l600_a32_t`. Cases:
+- the 16 standard cases (400 V + nom325) and full10 / full15 / full15_325;
+- `full20` at 400 V and `full20_100 / _200 / _450`;
+- `full20_100_csmin` (VCS_N 0.72 V);
+- `full15_100`, `nom100`, `nom450`;
+- `full20_100_fast / _450_fast` (2 ns gate RC, for the switch loss).
+
+Scaled capacitors as in section 13. 29 cases, 2 jobs, 17 min, peak 0.65 GB. The Lp 650 µH /
+0.75 Ω variant (`eel19_wide_0680`) gives the same rails within ±0.05 V (15V_ISO_SEC in min_S15 / idle:
+−0.17 / −0.08 V), wide_results.md.
+
+| rail | standard 16 cases: nom (min–max) | section 13 (4780BZS, today's TIW build) | full20 at 100 / 200 / 400 / 450 V |
+|---|---|---|---|
+| 15V | 14.69 (14.17–15.20) | 14.67 (14.18–15.31) | 14.75 / 14.76 / 14.76 / 14.76 |
+| 5V | 5.00 (5.00–5.00) | 5.00 (5.00–5.00) | 5.00 everywhere |
+| 15V_ISO_SEC | 15.06 (14.50–17.34) | 15.08 (14.55–17.44) | 15.10 / 15.11 / 15.11 / 15.11 |
+| 5V_ISOL | 4.97 (4.76–5.36) | 5.01 (4.81–5.35) | 4.95 / 4.93 / 4.93 / 4.93 |
+| −5V | 5.00 (4.80–5.32) | 5.01 (4.82–5.31) | 5.05 everywhere |
+| −80 V | 83.0 (80.2–84.3) | 82.9 (80.3–84.3) | 83.7 / 83.8 / 83.8 / 83.8 |
+
+- **Cross regulation does not depend on DC+.** Peak-current mode with the 5V rail regulated
+  directly: at 20 W every rail is within 15 mV between 100 V (CCM) and 450 V (DCM). nom100 /
+  nom450 equal nom to ±5 mV.
+- **The thin strands cost 0.02–0.07 V on 5V_ISOL at load** (S5: 33 mΩ instead of 20 mΩ):
+  - max_S5 4.77 V (was 4.85);
+  - full20 4.93–4.95 V (4.96 V with today's strands, `eel19_tiw_sandwich_s_pre3_0680`);
+  - every other rail is within ±0.1 V of section 13.
+- **Light load:** idle now also runs in ABM, like light. The lower Rcs puts FB lower at the same
+  power (≈ 0.9 V → entry).
+  - light / idle: 15V 14.55 / 15.01 V, 15V_ISO_SEC 15.03 / 15.60 V, −80 V 80.5 / 83.3 V.
+  - The burst peak current is VCS_BLP / Rcs = 0.32 A (0.28 A with 0.8 Ω).
+- **Operating point at 20 W:**
+
+  | DC+ | mode | duty | f | FB | Ipk | Pin | η (model) |
+  |---|---|---|---|---|---|---|---|
+  | 100 V | CCM | 0.51 | 99 kHz | 1.72 V | 0.88 A | 23.1 W | 87 % |
+  | 200 V | DCM | 0.25 | 91 kHz | 1.69 V | 0.90 A | 23.1 W | 87 % |
+  | 400 V | DCM | 0.12 | 91 kHz | 1.66 V | 0.89 A | 23.0 W | 87 % |
+  | 450 V | DCM | 0.10 | 91 kHz | 1.65 V | 0.89 A | 23.1 W | 87 % |
+
+  - η is the model's; it does not include the MKF winding / core losses.
+  - The frequency reduction is just active at full power above 200 V: FB < 1.70 V with the lower Rcs.
+  - The 100 V peak (0.88 A) is **15 % below the minimum current limit** of 1.04 A (0.72 V / 0.692 Ω).
+  - full20_100_csmin (VCS_N 0.72 V) is identical to full20_100: the converter never touches the
+    limit in steady state.
+  - With the CS-referred slope ramp counted against the limit (if the IC adds it before the limit
+    comparator; ≈ 25 mV at D 0.51), the margin is still 12 %.
+- **VDS peak:**
+  - 622 V at 450 V / 20 W (78 % of 800 V);
+  - 604 V at nom450, 571 V at full20 / 400 V, 262 V at 100 V;
+  - clamp ≈ 100 V above DC+, as in section 13.
+  - At a 505 V bus (the upper end of the LOVP trip, 14.9) ≈ 675 V.
+- **D8 V_R** 447 V at 450 V (1000 V part fitted). D4 / D5 ≤ 85 V.
+- **VCC** 13.8–14.9 V in every case, 14.3 V at full20 for all four inputs. VCC comes from the
+  15V rail and does not depend on DC+. Far from UVLO 10.0 V (max 10.4 V) and OVP 25.5 V (min 24 V).
+
+### 14.7 Start-up, CCM stability, load steps (real capacitors, schematic FB network)
+
+`ice5ar_checks.py --option eel19_wide600_0680 --tag _w600_0680`. The Lp 650 µH variant used
+`--option eel19_wide_0680 --tag _0680`. Setup:
+- unscaled output capacitors and the 5.2 FB network (R140 4.7k + C138 10n, C139 2.2n, R141 750k);
+- start-up from 0 V with VCC at VCC_ON, the soft start and the 20 W constant-current loads applied
+  from t = 0, as in 13.4;
+- the long runs store every 0.5 µs (`save_step`; the 10 ns internal step is kept).
+
+- **CCM at 100 V / 20 W (`ccm100`), 200 cycles:**
+  - Ipk 0.852–0.858 A; the largest cycle-to-cycle change is 5.6 mA (0.7 %);
+  - on-time 4.98–5.14 µs (D 0.51); about 0.08 A left in the primary at turn-on (shallow CCM);
+  - **no subharmonic oscillation.**
+  - Analytically: at D ≈ 0.5 the down-slope / up-slope ratio is Vor / Vin ≈ 0.97, so the loop needs
+    no compensation ramp at all. The internal 50 mV/µs (FB-referred, 25 mV/µs at CS, ≥ 20 mV/µs
+    minimum) is margin for a sagging DC+.
+  - The RHP zero of the CCM flyback is at (1−D)²·R_refl / (2π·D·Lp) ≈ 60 kHz (R_refl = Vor²/20 W),
+    far above the ≈ 1 kHz crossover.
+  - Lp 650 µH variant, 200 V (`ccm200`): DCM near the boundary, cycle-to-cycle ≤ 3 mA.
+- **Start-up against the overload timer** (FB above VFB_OLP 2.73 V; tFB_OLP_B 30 ms min, 54 ms typ):
+
+  | case | FB below 2.73 V after | rails at 95 % | overshoot | VCC min |
+  |---|---|---|---|---|
+  | **full20_100 (100 V, 20 W)** | **21.3 ms** | 19.3–19.9 ms | ≤ 2.0 % | 14.57 V |
+  | **full20_100, VCS_N 0.72 V (minimum)** | **26.0 ms** | 22.7–23.4 ms | ≤ 1.7 % | 14.48 V |
+  | Lp 650 µH / 0.75 Ω: nom100 | 15.7 ms | 14.6–15.2 ms | ≤ 2.1 % | 14.5 V |
+  | Lp 650 µH / 0.75 Ω: full20_100 | 24.4 ms | 21.8–22.5 ms | ≤ 1.8 % | 14.55 V |
+  | Lp 650 µH / 0.75 Ω: full20_100, VCS_N 0.72 V | **31.3 ms** ✗ | 27.0–27.8 ms | – | 14.24 V |
+  | Lp 650 µH / 0.75 Ω: full15_100, VCS_N 0.72 V | 23.3 ms | 20.9–21.5 ms | – | 14.55 V |
+  | Lp 650 µH / 0.75 Ω: full20_450 | 16.8 ms | 15.1–15.6 ms | ≤ 1.9 % | 14.57 V |
+  | (section 13: full15 at 400 V, 4780BZS) | 20.4 ms | 18.3–18.8 ms | ≤ 2.0 % | 14.5 V |
+
+  - **A start into the full 20 W at 100 V is the tightest point.**
+    - At 100 V the soft start (CS limit 0.30 → 0.80 V in 12 ms) and then the current limit set the
+      power. The rails charge with the surplus over the 20 W load.
+    - With Rcs 0.685 Ω the start clears the 30 ms minimum OLP blanking even at the minimum current
+      limit (26.0 ms).
+    - The Lp 650 µH / 0.75 Ω variant does not (31.3 ms). That is why the recommendation stays at
+      600 µH.
+  - In the real system the 20 W does not appear at t = 0: the gate drivers, the DAB and the other
+    large loads start after the rails, under MCU control. Keep it that way (enable the large 15 V /
+    15V_ISO_SEC loads after 5V is up), and the start-up margin is large.
+- **Load steps, all rails nominal → full20 → nominal** (`step100`, `step450`):
+  - 5V −80 / +68 mV at 100 V and −75 / +61 mV at 450 V, back within 1 % in < 0.1 ms;
+  - 15V −0.12 / +0.18 V; 5V_ISOL −0.20 / +0.12 V; −80 V +0.17 V;
+  - FB 1.39 → 1.74 V (max 1.95 V, below OLP); no ringing.
+- **5V step 0.1 ↔ 0.2 A at 400 V** (`step_lean`, as 13.4): −30 / +30 mV (4780BZS: −28 / +27 mV).
+- **Light load at 400 V** (`light_lean`, ABM option 2): bursts every 1.24 ms (4780BZS 1.3 ms). Ripple pp:
+  - 5V 35 mV, 15V 134 mV, 15V_ISO_SEC 65 mV, 5V_ISOL 13 mV, −5V 10 mV, −80 V 0.44 V;
+  - 4780BZS: 31 / 114 / 57 / 13 / 11 mV / 0.40 V.
+  - The larger burst packets (0.32 A instead of 0.28 A) add ≈ 15 % ripple. Harmless.
+- **RAM note:** with the 0680AG's 24 pF drain node, the full-resolution `step` / `light` checks
+  need ≈ 2 GB each. Use the `save_step` variants (`step_lean`, `light_lean`, `step100`, `step450`,
+  `startup*`: ≤ 0.1 GB).
+
+### 14.8 Losses, transformer temperature, CoolMOS Tj
+
+Windings and core: `losses.py` on the simulated winding currents of `eel19_wide600_0680`. MKF upper
+bound as in sections 5 / 12. Core: iGSE with the case's DC+. The Lp 650 µH variant is in brackets.
+
+| case | winding W | core W | total W | ΔT K (section 5 formula) | Bpk T (MKF) |
+|---|---|---|---|---|---|
+| nom (400 V) | 0.47 | 0.06 | 0.53 | 16 | 0.12 |
+| full15 (400 V) | 1.21 | 0.13 | 1.33 | 34 (34) | 0.15 |
+| full20 (400 V) | 1.69 | 0.17 | 1.86 | 44 (42) | 0.16 |
+| **full20_100** | **1.91** | **0.14** | **2.06** | **48 (45)** | 0.16 |
+| full20_200 | 1.76 | 0.16 | 1.92 | 46 (43) | 0.16 |
+| full20_450 | 1.69 | 0.17 | 1.86 | 44 (43) | 0.16 |
+
+- The synthetic sweep gave 46 / 41 K. The simulation adds the ringing, and at ≥ 200 V the 91 kHz
+  frequency reduction raises the peak current.
+- Today's TIW build at 15 W / 400 V had 1.65 W / 41 K (section 12.2). **The new build carries 20 W
+  at 100 V with ≈ 7 K more than today's build at 15 W.**
+- Surface ≤ 98 °C at 50 °C ambient, against the 120 °C TEX-E class.
+
+CoolMOS: switch loss from the model. The 10 ns gate RC overstates the turn-off overlap; the 2 ns
+runs bound it from below. Controller 0.02 W, Ta 50 °C:
+
+| case | conduction (Irms² · 1.27 Ω) | switch total, 10 ns RC | switch total, 2 ns RC | Rcs | clamp (R72 + R45) | Tj at 94 K/W (min Cu), 2 ns … 10 ns | Tj at ≈ 70 K/W (≈ 3 cm² drain Cu) |
+|---|---|---|---|---|---|---|---|
+| full20_100 | 0.17 W | 0.46 W | 0.21 W | 0.09 W | 0.08 W | 72 … 95 °C | 66 … 84 °C |
+| full20 (400 V) | 0.05 W | 0.47 W | – | 0.03 W | 0.09 W | … 97 °C | … 85 °C |
+| full20_450 | 0.04 W | 0.60 W | 0.12 W | 0.03 W | 0.09 W | 63 … 108 °C | 60 … 93 °C |
+
+- At high line most of the switch loss is the turn-on of the drain capacitance:
+  - Co(er) 24 pF + 10 pF transformer / layout. The 0680AG's larger CoolMOS has 24 pF against 3 pF
+    for the 4780BZS;
+  - hand estimate ½ · 34 pF · (450 V)² · 91 kHz ≈ 0.31 W if the ring has decayed to DC+;
+  - plus the turn-off overlap.
+  - The 2 ns run turns on part-way down the DCM ring and gives less (0.12 W). The 10 ns run adds a
+    pessimistic turn-off overlap.
+  - Realistic ≈ 0.3–0.45 W at 450 V → **Tj ≈ 80–95 °C with minimum copper**.
+- The conduction loss is small (1.27 Ω hot instead of 8.7 Ω): 0.17 W at 100 V.
+- **Tj stays below 125 °C even with minimum drain copper and the pessimistic 10 ns model (108 °C
+  at 450 V).** With ≈ 3 cm² drain copper it stays below 95 °C. The datasheet's own rating
+  (40 W at 85–300 VAC, Ta 50 °C, Tj 125 °C, minimum copper) points the same way.
+
+### 14.9 Schematic and layout consequences (list only; kicad_next / tools not edited)
+
+| item | 5.2 today (ICE5AR4780BZS, DIP-7) | for 100–450 V with the ICE5AR0680AG |
+|---|---|---|
+| PWM2 | ICE5AR4780BZS, `Package_DIP:DIP-8-N6_W7.62mm` | **ICE5AR0680AG, PG-DSO-12**. Body 3.8–4.0 × 9.8–10.0 mm, lead span 5.8–6.2 mm, pitch 1.27 mm = an SO-16 narrow land pattern with two positions missing per side (datasheet figure 39: b1 = 3.81 mm gap). **Not** a wide SOIC-12 and **not** KiCad's `Infineon_PG-DSO-12-9/-11` (those are the 7.5 mm exposed-pad power packages). New footprint from `SOIC-16_3.9x9.9mm_P1.27mm` with SO-16 pads 5, 6, 11, 12 removed and renumbered: bottom row 1 VIN, 2 VERR, 3 FB, 4 CS, (gap), 5 DRAIN, 6 DRAIN; top row 7 DRAIN, 8 DRAIN, (gap), 9 NC, 10 GATE, 11 VCC, 12 GND. Symbol: new pin map (VIN added, 4 DRAIN pins, NC) |
+| drain copper | pin 5 copper area (DIP-7) | pins 5–8 sit together at one end: one F.Cu (+ B.Cu, stitched) area joining 5/6 and 7/8 around the package end, ≈ 2–3 cm² (RthJA 94 K/W with minimum copper; ≈ 70 K/W assumed with this area). It is FLY_C (0 ↔ 620 V, 100 kHz): keep it compact, away from the TR1 slot / isolated side and from FB / VERR; no inner-layer copper on it. Keep pin 9 (NC) unconnected: it is the low-voltage pin next to the 3.81 mm drain gap |
+| Rcs (R8 ‖ R9) | 2 × 1.6 Ω = 0.8 Ω | **2 × 1.37 Ω 1 % 1206 = 0.685 Ω** (current limit 1.04–1.30 A over VCS_N 0.72–0.88 V and ±1 %; ≈ 0.09 W at 100 V / 20 W) |
+| VIN pin (line OVP) | – (DIP-7 has none) | **divider DC+ → 3 × 10 MΩ 1206 (the start-up resistor part, 150 V each at 450 V) → VIN, 178 kΩ 1 % VIN → GND, 470 pF VIN → GND**: VVIN_LOVP 2.85 V (2.75–2.95) → trip **483 V** nominal (≈ 460–505 V with tolerances), 15 µA, 7 mW. Above the trip the IC stops switching (non-switch auto restart, 250 µs blanking). Alternative: **VIN to GND** (LOVP disabled) if the PFC's own OVP is trusted; VDS at a 505 V bus would be ≈ 660–670 V, still < 800 V |
+| clamp D7 / R72 / R45 / C12 | S1M, 100R, 1M ‖ 470p | unchanged (VDS 622–626 V at 450 V / 20 W, clamp ≈ 100 V above DC+); keep the 2 × 100k / 1 nF bench fallback |
+| start-up R114–R116 | 3 × 10 MΩ to GATE | unchanged; the datasheet characterises the start-up with 50 MΩ at VDRAIN = 90 V, so 30 MΩ still starts at 100 V (IVCC_Charge 1–5 mA from the drain through the cascode) |
+| VCC (R142 10R, D10, C58 22 µF) | from 15V | unchanged: VCC = 15V − 0.35 V over 100–450 V (the 15V rail does not depend on DC+), see 14.6 |
+| VERR / FB (R138 / R139, R140 / C138, C139, R141) | 88.7k / 49.9k, 4.7k + 10n, 2.2n, 750k | unchanged (14.7: loop and ABM option 2 checked at 100 and 450 V) |
+| TR1 | 600 µH, S15 2 × TEX-E 0.30, S5 / SN5 3 × 0.30, A5 8 × AWG30, A15 3 × AWG30 | same turns, **same Lp 600 µH** and gap; TEX-E 0.20 for every isolated winding, AWG32 for every enamel winding (14.4); footprint and slot unchanged |
+| D8 (−80 V) | 1000 V fitted | V_R 446 V at 450 V (+ ringing): unchanged |
+| D4 / D5 / D6 / D14 / D29 | ES1D 200 V | V_R ≤ 85 V (15 V rails) / 31 V (5 V rails) at 450 V: unchanged; 0.41 A average at 20 W is within ES1x 1 A |
+| output capacitors | – | 20 W raises the ripple current of C1 / C2 (15V, 15V_ISO_SEC, 220 µF) to ≈ 0.6 A rms (winding rms 0.73 A at 0.41 A DC, any DC+): check the electrolytics' ripple rating at 100 kHz (or add a second one); same for the 5 V rails' ceramics / C71 |
+
+### 14.10 How to rerun
+
+```
+cd /home/jari/dev/tube_psu_kicad
+python3 simulation/flyback/wide_input.py check                       # synthetic vs simulated losses (today's build, full15)
+python3 simulation/flyback/wide_input.py sweep                       # first sweep (Np 104-164), ~15 min, ~1 GB (MKF)
+python3 simulation/flyback/wide_input.py sweep 52,700,32 52,700,32,t 40,420,32 44,500,32 48,600,32 52,650,32 \
+    56,800,32 52,700,33 52,700,30 52,600,32,t 48,600,32,t 52,650,32,t 52,550,32,t 52,500,32,t
+python3 simulation/flyback/wide_input.py table eel19w_n52_l600_a32 eel19w_n52_l600_a32_t ...    # out/wide/table.json
+python3 simulation/flyback/wide_input.py derate eel19w_n52_l600_a32_t 0.685 34                  # Pmax vs DC+ (out/wide/derate.json)
+python3 simulation/flyback/wide_input.py derate eel19w_n52_l550_a32_t flux 34                   # Rcs at the flux limit
+python3 simulation/flyback/run_flyback.py --om-only eel19_wide                                  # mas/tr1_eel19_wide.json
+python3 simulation/flyback/run_flyback.py eel19_wide600_0680 --jobs 2                           # 29 cases, ~16 min, 0.45 GB
+python3 simulation/flyback/ice5ar_checks.py ccm100 startup100_full20_csmin startup100_full20 step100 step450 \
+    light_lean step_lean --option eel19_wide600_0680 --tag _w600_0680 --jobs 2                  # ~35 min, <= 0.2 GB
+python3 simulation/flyback/losses.py eel19_wide600_0680 --case full20_100                       # also nom, full15, full20, full20_200, full20_450
+python3 simulation/flyback/run_flyback.py eel19_wide_0680 --jobs 2                              # Lp 650 uH / 0.75 ohm variant (checks: --tag _0680)
+python3 simulation/flyback/wide_report.py                                                       # wide_results.md
+```
+
+Candidate names: `eel19w_n<turns per half>_l<Lp µH>_a<AWG>[_t]` (`options.eel19_wide`, registered
+on the fly). `_t` = thin strands. The ICE5AR0680AG variant of an option: `options._ice0680(base,
+name, rcs)`, which adds ice5ar_sim overrides RDS(on) 1.27 Ω and Co(er) 24 pF, the Rcs and the wide
+cases. The ICE5AR4780BZS results of section 13 and their netlists are unchanged.

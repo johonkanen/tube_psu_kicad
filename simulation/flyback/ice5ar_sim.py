@@ -133,8 +133,10 @@ def netlist(res: dict, spice_map: dict, case: dict, cscale=0.1, tstop=9e-3, twin
             k = L[i][j] / math.sqrt(L[i][i] * L[j][j])
             out.append(f"K{names[i]}_{names[j]} L{names[i]} L{names[j]} {k:.9f}")
     cdrain = p["coss"] + p["cstray"]
+    # gate RC 10 ns (default); ICE["tgate"] = 2e-9 gives the fast-switching bound of the switch loss
+    cgf = "10p" if p.get("tgate", 10e-9) == 10e-9 else f"{p['tgate'] / 1e3:.3e}"
     out += [f"Ccol col 0 {cdrain:.3e} IC={vin}",
-            "Rgf gate gf 1k", "Cgf gf 0 10p",
+            "Rgf gate gf 1k", f"Cgf gf 0 {cgf}",
             f"Bsw col es I = v(col,es) * (min(1, max(0, v(gf))) / {p['ron']} + 1e-8)",
             f"Rsense es 0 {rcs}",
             "Rcsf es csf 10k", "Ccsf csf 0 1p",          # internal CS filter
@@ -298,7 +300,14 @@ def netlist(res: dict, spice_map: dict, case: dict, cscale=0.1, tstop=9e-3, twin
     if startup:
         sv.append("v(vcc)")
     out.append("save " + " ".join(sv))
-    out.append(f"tran 10n {tstop} {t0 if not save_file else case.get('tsave', 0)} 10n uic")
+    if case.get("save_step"):
+        # long real-capacitor checks (start-up, load steps): keep the 10 ns maximum internal step but
+        # store only every save_step (interpolated), which cuts the memory ~50x; the peak values
+        # (VDS, reverse voltages) of such a run are then not accurate, the slow waveforms are
+        out.append(".options interp")
+        out.append(f"tran {case['save_step']} {tstop} {t0 if not save_file else case.get('tsave', 0)} 10n uic")
+    else:
+        out.append(f"tran 10n {tstop} {t0 if not save_file else case.get('tsave', 0)} 10n uic")
     out += ["let pin = -v(dcp)*i(vin)", "let vclamp = v(sn2)-v(dcp)", "let pr45 = vclamp*vclamp/1e6",
             "let pr72 = (v(sn1)-v(sn2))*(v(sn1)-v(sn2))/100",
             f"let prcs = v(es)*v(es)/{rcs}"]

@@ -37,7 +37,10 @@ def last_period(name, case="nom", npts=400):
     return om, tt - tt[0], cur, vcol
 
 
-def analyse(name, case="nom", temperature=60.0, vin=400.0):
+def analyse(name, case="nom", temperature=60.0, vin=None):
+    if vin is None:                 # DC+ of the case (run_flyback cases; 400 V unless the case says otherwise)
+        import run_flyback as rf
+        vin = next((c.get("vin", 400.0) for c in rf.all_cases() if c["name"] == case), 400.0)
     om, tt, cur, vcol = last_period(name, case)
     opt = opts.get(name)
     m.use_core(opt.get("core"))             # EF20 (default) or EEL19

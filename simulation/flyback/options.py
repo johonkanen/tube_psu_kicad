@@ -486,6 +486,86 @@ OPTIONS.update({
     "eel19_tiw_sandwich_s_pre3_ice_prenone": lambda: dict(_ice("eel19_tiw_sandwich_s_pre3", "eel19_tiw_sandwich_s_pre3_ice_prenone",
                                                                note=" (no preloads)"), preload=None),
 })
+# ---------------------------------------------------------------------------------------
+# Wide input range 100-450 V DC with the ICE5AR0680AG (DSO-12, 800 V CoolMOS 0.71 ohm / 1.27 ohm at
+# 125 degC, Co(er) 24 pF, 100 kHz; 2026-11-18, EEL19_DESIGN.md section 14). The TIW sandwich_s build
+# with only the primary changed: nh turns per half (Vor = 2 nh x 0.935 V), AWG<wire> spread over the
+# full width, Lp from the gap fit. Secondary turns, TEX-E wires, order and preloads unchanged.
+# wide_input.py sweeps these candidates (registered on the fly); the chosen one is named below.
+# ---------------------------------------------------------------------------------------
+WIDE_WIRES = {"32": W32, "31": "Round 31.0 - Heavy Build", "30": W30, "33": "Round 33.0 - Heavy Build"}
+
+
+# secondary / aux strand sets: "std" = eel19_tiw_sandwich_s_pre3 (S15 2 x TEX-E 0.30, S5 / SN5 3 x 0.30
+# each, A5 8 x AWG30, A15 3 x AWG30); "t" = thin strands against the gap-fringing proximity loss
+# (S15 3 x TEX-E 0.20, S5 / SN5 4 x 0.20 each, A5 10 x AWG32, A15 4 x AWG32; SHV TEX-E 0.20 as before)
+WIDE_SEC = {
+    "std": {},
+    "t": {"S15": (3, TEX20), "S5": (4, TEX20), "SN5": (4, TEX20), "A5": (10, W32), "A15": (4, W32)},
+}
+
+
+def wide_name(nh, lp_uh, wire="32", sec="std"):
+    return f"eel19w_n{nh}_l{int(round(lp_uh))}_a{wire}" + ("" if sec == "std" else f"_{sec}")
+
+
+def eel19_wide(nh, lp_uh, wire="32", sec="std"):
+    """eel19_tiw_sandwich_s_pre3 with P1 = P2 = nh turns of AWG<wire> spread over the full width, Lp lp_uh,
+    and the secondary / aux strand set `sec` (WIDE_SEC)."""
+    o = eel19_tiw_sandwich_spread()
+    for s in o["sections"]:
+        if s["windings"][0][0] in ("P1", "P2"):
+            w = s["windings"][0]
+            s["windings"] = [(w[0], nh, 1, WIDE_WIRES[wire], w[4])]
+            s["align"] = "spread"
+        else:
+            s["windings"] = [(w[0], w[1], *WIDE_SEC[sec].get(w[0], (w[2], w[3])), w[4]) for w in s["windings"]]
+    o["name"] = wide_name(nh, lp_uh, wire, sec)
+    o["lp"] = lp_uh * 1e-6
+    o["title"] = (f"EEL19 wide input: P1 {nh} | S15 16 | SHV 84 | S5+SN5 6+6 | A5 6 | A15 16 | P2 {nh}, "
+                  f"AWG{wire} spread, Lp {lp_uh:.0f} uH, strands {sec} (TEX-E secondaries, spacer gap)")
+    return o
+
+
+def register_wide(nh, lp_uh, wire="32", sec="std"):
+    n = wide_name(nh, lp_uh, wire, sec)
+    if n not in OPTIONS:
+        OPTIONS[n] = lambda nh=nh, lp_uh=lp_uh, wire=wire, sec=sec: eel19_wide(nh, lp_uh, wire, sec)
+    return n
+
+
+# ICE5AR0680AG power stage (ice5ar_sim.ICE overrides) and the controller variant of a winding option
+ICE0680 = {"ron": 1.27, "coss": 24e-12}
+
+
+def _ice0680(base, name, rcs, note=""):
+    o = OPTIONS[base]()
+    o.update(name=name, controller="ice5ar", om_from=base, write_mas=False, ice=dict(ICE0680), rcs=rcs,
+             wide_cases=True, title=o["title"] + f" | ICE5AR0680AG, Rcs {rcs:.3g} ohm" + note)
+    return o
+
+
+# chosen wide-input design (EEL19_DESIGN.md 14): same turns (P1 52 | ... | P2 52, Vor 97 V) and the same
+# Lp 600 uH as today, thin strands (TEX-E 0.20 for every isolated winding, AWG32 for every enamel winding),
+# Rcs 0.685 ohm (2 x 1.37 ohm; Bpk 0.32 T at the maximum current limit, 19 % current-limit margin at
+# 100 V / 20 W, so a full-load start at 100 V clears the OLP timer even at VCS_N min).
+# eel19_wide650_0680 (Lp 650 uH, Rcs 0.75 ohm) was the first choice: 1 K cooler, but at VCS_N min a
+# 20 W start at 100 V needs 31 ms against the 30 ms minimum OLP blanking.
+WIDE_CHOSEN = (52, 600, "32", "t")
+WIDE_RCS = 0.685
+register_wide(*WIDE_CHOSEN)
+register_wide(52, 650, "32", "t")
+OPTIONS.update({
+    "eel19_wide": lambda: dict(eel19_wide(*WIDE_CHOSEN), name="eel19_wide", write_mas=True,   # MAS file only
+                               title=eel19_wide(*WIDE_CHOSEN)["title"] + " = the 100-450 V recommendation"),
+    "eel19_wide600_0680": lambda: _ice0680(wide_name(*WIDE_CHOSEN), "eel19_wide600_0680", WIDE_RCS),
+    "eel19_wide_0680": lambda: _ice0680(wide_name(52, 650, "32", "t"), "eel19_wide_0680", 0.75,
+                                        " (Lp 650 uH variant, first choice)"),
+    # reference: today's TIW transformer (Np 104, Lp 600 uH, std strands) with the ICE5AR0680AG, Rcs 0.75 ohm
+    "eel19_tiw_sandwich_s_pre3_0680": lambda: _ice0680("eel19_tiw_sandwich_s_pre3", "eel19_tiw_sandwich_s_pre3_0680", 0.75),
+})
+WIDE_ICE_OPTIONS = ["eel19_wide600_0680", "eel19_wide_0680", "eel19_tiw_sandwich_s_pre3_0680"]
+
 EEL19_ICE_OPTIONS = ["eel19_tiw_sandwich_s_pre3_ice", "eel19_sandwich_b_pre3_ice",
                      "eel19_tiw_sandwich_s_pre3_ice_abm1", "eel19_tiw_sandwich_s_pre3_ice_abm3",
                      "eel19_tiw_sandwich_s_pre3_ice_prehalf", "eel19_tiw_sandwich_s_pre3_ice_prenone"]

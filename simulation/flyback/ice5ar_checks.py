@@ -42,6 +42,23 @@ CHECKS = {
     "startup": dict(case="nom", tstop=60e-3, twin=5e-3, startup=True),
     "startup_full15": dict(case="full15", tstop=60e-3, twin=5e-3, startup=True),
     "light325": dict(case="light", vin=325.0, tstop=80e-3, twin=40e-3, t_beb=3e-3),
+    # wide input range (EEL19_DESIGN.md 14, ICE5AR0680AG options): start-up at DC+ = 100 V against the
+    # OLP timer, CCM operation at 100 V with the real capacitors and FB network (cycle-by-cycle
+    # peak current from the saved primary current -> subharmonic check), load step at 100 V
+    # (save_step: decimated storage, the full-resolution 80 ms start-up needed > 1.7 GB)
+    "startup100": dict(case="nom100", tstop=60e-3, twin=5e-3, startup=True, save_step=0.5e-6),
+    "startup100_full15": dict(case="full15_100", tstop=70e-3, twin=5e-3, startup=True, save_step=0.5e-6),
+    "startup100_full20": dict(case="full20_100", tstop=70e-3, twin=5e-3, startup=True, save_step=0.5e-6),
+    "startup100_full20_csmin": dict(case="full20_100_csmin", tstop=80e-3, twin=5e-3, startup=True, save_step=0.5e-6),
+    "startup100_full15_csmin": dict(case="full15_100", tstop=70e-3, twin=5e-3, startup=True, save_step=0.5e-6,
+                                    ice={"vcs_n": 0.72}),
+    "startup450_full20": dict(case="full20_450", tstop=60e-3, twin=5e-3, startup=True, save_step=0.5e-6),
+    "ccm100": dict(case="full20_100", tstop=30e-3, twin=2e-3, ipk_wave=True),
+    "ccm200": dict(case="full20_200", tstop=30e-3, twin=2e-3, ipk_wave=True),
+    "light_lean": dict(case="light", tstop=80e-3, twin=40e-3, t_beb=3e-3, save_step=0.5e-6),
+    "step_lean": dict(case="nom", tstop=34e-3, step={"rail": "5V", "di": 0.1, "t1": 14e-3, "t2": 24e-3}, save_step=0.5e-6),
+    "step100": dict(case="nom100", tstop=40e-3, stepall=True, t1=14e-3, t2=27e-3, target="FULL20", save_step=0.5e-6),
+    "step450": dict(case="nom450", tstop=40e-3, stepall=True, t1=14e-3, t2=27e-3, target="FULL20", save_step=0.5e-6),
 }
 
 
@@ -63,11 +80,17 @@ def run_check(n, option, comp, extra_tag=""):
     case["preload"] = opt.get("preload")
     case["comp"] = {**(opt.get("comp") or {}), **comp}
     case["comp_scale"] = 1.0
+    if opt.get("ice") or case.get("ice") or cfg.get("ice"):   # ICE5AR0680AG options (power stage, Rcs)
+        case["ice"] = {**(opt.get("ice") or {}), **(case.get("ice") or {}), **(cfg.get("ice") or {})}
+    if opt.get("rcs"):
+        case["rcs"] = opt["rcs"]
     vin = cfg.get("vin", case.get("vin", 400.0))
     if "t_beb" in cfg:
         case["t_beb"] = cfg["t_beb"]
     if cfg.get("step"):
         case["step"] = cfg["step"]
+    if cfg.get("save_step"):
+        case["save_step"] = cfg["save_step"]
     tag = f"ice_{n}{extra_tag}"
     case["name"] = tag
     nom = os.path.join(fs.OUT, "results", f"{option}__nom.json")
@@ -81,13 +104,14 @@ def run_check(n, option, comp, extra_tag=""):
         ic = {k: 0.0 for k in fs.RAILS}
     os.makedirs(os.path.join(fs.OUT, "checks"), exist_ok=True)
     wave = os.path.join(fs.OUT, "checks", f"{tag}.txt")
+    ipkw = os.path.join(fs.OUT, "checks", f"{tag}_ipk.txt") if cfg.get("ipk_wave") else None
     net = ice.netlist(res, opt["spice"], case, cscale=1.0, tstop=cfg["tstop"], twin=cfg.get("twin", 4e-3),
-                      vin=vin, ic=ic, save_file=wave)
+                      vin=vin, ic=ic, save_file=None if ipkw else wave, wave_file=ipkw)
     if cfg.get("stepall"):
         # every rail steps from nom to full15 at t1 and back at t2
         import re
         for rail, (node, sign, caps, bleed) in fs.RAILS.items():
-            di = rf.FULL15[rail] - case["loads"][rail]
+            di = getattr(rf, cfg.get("target", "FULL15"))[rail] - case["loads"][rail]
             net = re.sub(rf"(BL_{node} \S+ \S+ I = )([0-9.e+-]+)( \*)",
                          lambda m: f"{m.group(1)}({m.group(2)} + {di} * stp(time - {cfg['t1']}, 2e-6) * stp({cfg['t2']} - time, 2e-6)){m.group(3)}", net)
     t = time.time()
@@ -97,6 +121,8 @@ def run_check(n, option, comp, extra_tag=""):
     r["case"] = case
     r["config"] = {k: v for k, v in cfg.items()}
     r.update(analyse_wave(wave, cfg))
+    if ipkw:
+        r.update(analyse_ipk(ipkw, res))
     with open(os.path.join(fs.OUT, "checks", f"{tag}.json"), "w") as f:
         json.dump(r, f, indent=1)
     print(f"{tag}: " + " ".join(f"{rf.SHORT[k]}={r[k]:.3f}[{r[k + ' min']:.3f}..{r[k + ' max']:.3f}]" for k in fs.RAILS)
@@ -166,6 +192,36 @@ def analyse_wave(path, cfg):
             v = w[n][tw]
             out[f"w_{n}_pp_mV"] = round(float((np.max(v) - np.min(v)) * 1e3), 1)
     return out
+
+
+def analyse_ipk(path, res):
+    """Cycle-by-cycle primary peak current and on-time from the saved window (wrdata of i(L*),
+    v(col), v(gate)): a subharmonic oscillation shows as alternating peaks / on-times."""
+    d = np.loadtxt(path)
+    t = d[:, 0]
+    cols = d[:, 1::2]
+    names = res["names"]
+    ip = cols[:, names.index("P1") if "P1" in names else 0]
+    gate = cols[:, len(names) + 1]
+    on = np.where((gate[1:] > 0.5) & (gate[:-1] <= 0.5))[0]
+    off = np.where((gate[1:] <= 0.5) & (gate[:-1] > 0.5))[0]
+    pk, ton, imin = [], [], []
+    for a in on:
+        b = off[off > a]
+        if not len(b):
+            break
+        b = b[0]
+        pk.append(float(np.max(ip[a:b + 1])))
+        imin.append(float(ip[min(a + 30, b)]))           # ~0.3 us after turn-on (after the edge spike)
+        ton.append(float(t[b] - t[a]))
+    pk, ton = np.array(pk), np.array(ton)
+    if len(pk) < 4:
+        return {"w_cycles": int(len(pk))}
+    alt = np.abs(np.diff(pk))
+    return {"w_cycles": int(len(pk)), "w_ipk_mean": round(float(pk.mean()), 4), "w_ipk_min": round(float(pk.min()), 4),
+            "w_ipk_max": round(float(pk.max()), 4), "w_ipk_cycle_to_cycle_max": round(float(alt.max()), 4),
+            "w_ton_mean_us": round(float(ton.mean() * 1e6), 3), "w_ton_min_us": round(float(ton.min() * 1e6), 3),
+            "w_ton_max_us": round(float(ton.max() * 1e6), 3), "w_i_after_turn_on_mean": round(float(np.mean(imin)), 4)}
 
 
 def main(argv=None):

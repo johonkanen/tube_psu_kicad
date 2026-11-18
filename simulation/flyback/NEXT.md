@@ -1,3 +1,69 @@
+# TR1 flyback study – session 6 (2026-11-18): 100–450 V input, ICE5AR0680AG
+
+Task: full power from 100 V to 450 V DC+ (rectified mains before the PFC starts), 15–20 W, EEL19
+kept, controller **ICE5AR0680AG** (PG-DSO-12, 0.71 / 1.27 Ω, Co(er) 24 pF). Details:
+[EEL19_DESIGN.md](EEL19_DESIGN.md) section 14, tables [wide_results.md](wide_results.md), MAS
+[mas/tr1_eel19_wide.json](mas/tr1_eel19_wide.json).
+
+- **20 W from 100 to 450 V works on the EEL19, with no derating.**
+  - The design is `eel19_wide` / `eel19_wide600_0680`: the same turns (104 / 16 / 6 ‖ 16 / 6 / 6 /
+    84, Vor 97 V), the same order and pins, and the **same Lp 600 µH** as section 12.3.
+  - Changes:
+    - **thin strands**: S15 3 × TEX-E 0.20, S5 / SN5 4 × 0.20 each, A5 10 × AWG32, A15 4 × AWG32. The
+      whole transformer then uses only TEX-E 0.20 and AWG32;
+    - **Rcs 0.685 Ω** (2 × 1.37 Ω).
+- **Higher Vor (120–150 V) is worse on this core: +6…+20 K.** The winding loss is gap-fringing
+  proximity loss in every winding (MKF), not primary DC loss. At the flux limit the gap grows
+  with Np·Ilim, and that grows with Np.
+- **Transformer at 20 W** (losses.py on the simulated currents, MKF upper bound):
+  - 2.06 W / ΔT 48 K at 100 V;
+  - 1.86–1.92 W / 44–46 K at 200–450 V.
+- **Flux:** Bpk 0.16 T (MKF) / 0.22 T (hand) at 20 W, 0.32 T at the worst-case current limit of
+  1.30 A.
+- **Power vs DC+:**
+  - current limit (with 10 % margin) 22.7 W at 100 V and 23.1 W above;
+  - thermal limit 25.1 W at 100 V.
+  - The most the EEL19 can do continuously is ≈ 24.5 W at 100 V (Lp 550 µH, Rcs 0.63 Ω, ΔT 60 K).
+- **Simulation (ICE5AR model with the 0680AG power stage, 29 cases):**
+  - rails as in section 13 (15V 14.17–15.20, 15V_ISO_SEC 14.50–17.34, 5V_ISOL 4.76–5.36, −80 V 80.2–84.3);
+  - at 20 W every rail within 15 mV from 100 V (CCM, D 0.51) to 450 V (DCM);
+  - Ipk 0.88 A against a minimum current limit of 1.04 A;
+  - VDS 622 V at 450 V; VCC 13.8–14.9 V; D8 447 V;
+  - CoolMOS Tj ≤ 108 °C (pessimistic, minimum copper), ≈ 80–95 °C realistic.
+- **Checks with the real capacitors and the schematic FB network:**
+  - CCM at 100 V: stable, cycle-to-cycle Ipk ≤ 0.7 %, no subharmonics. At D ≈ 0.5 no slope
+    compensation is needed.
+  - 20 W start at 100 V: FB below the OLP level after 21.3 ms, 26.0 ms at VCS_N min (30 ms minimum
+    blanking).
+  - Load step nom ↔ 20 W at 100 / 450 V: 5V −80 / +68 mV.
+  - 5V step: ±30 mV.
+  - Light-load bursts every 1.24 ms; 5V ripple 35 mV, −80 V 0.44 V pp.
+- **Lp 650 µH / Rcs 0.75 Ω** (`eel19_wide_0680`, the first choice, fully simulated) is 1–3 K cooler.
+  At VCS_N min, though, a 20 W start at 100 V needs 31.3 ms against the 30 ms minimum OLP blanking.
+  Hence Lp 600 µH / 0.685 Ω.
+- **Schematic (list only, section 14.9):**
+  - PWM2 → ICE5AR0680AG, PG-DSO-12. This is an SO-16-narrow land pattern with 2 positions removed
+    per side, not a wide SOIC-12 and not KiCad's `Infineon_PG-DSO-12-9/-11`.
+  - Drain pins 5–8 copper ≈ 2–3 cm²; pin 9 NC left open.
+  - Rcs 0.685 Ω.
+  - VIN: 3 × 10 MΩ + 178 kΩ + 470 pF → LOVP trip 483 V (460–505 V). Or tie VIN to GND.
+  - Clamp, start-up, VCC path and VERR / FB unchanged.
+  - TR1: thin strands only.
+  - Check the 15V / 15V_ISO_SEC electrolytics' ripple current (≈ 0.6 A rms at 20 W).
+- **Open / bench:**
+  - Lp 600 µH as before;
+  - temperature rise at 20 W, 100 V DC+ (expect ≤ 48 K, MKF upper bound);
+  - VDS at 450 V (expect ≈ 620 V);
+  - a 20 W start at 100 V (FB below 2.73 V before 30 ms);
+  - case temperature of the DSO-12 drain copper.
+  - Decide LOVP divider or VIN = GND.
+- **Tooling notes:**
+  - `ice5ar_sim` now has `ice["tgate"]` and `case["save_step"]`; the existing netlists are unchanged.
+  - The full-resolution `step` / `light` checks of a 0680AG option need ≈ 2 GB each. Run them one
+    at a time, or use `step_lean` / `light_lean`.
+
+---
+
 # TR1 flyback study – session 5 (2026-11-18): ICE5AR4780BZS controller
 
 PWM2 is now the **Infineon ICE5AR4780BZS** (5.2 schematic, commit 009a237). The new ngspice model
