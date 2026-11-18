@@ -8,13 +8,15 @@ phase_deg) and out/spice/<id>_op.json (operating point, DC gain from a two-point
     python3 simulation/spice/run_ac.py              # all circuits, one ngspice at a time
     python3 simulation/spice/run_ac.py c1 c5        # some
     python3 simulation/spice/run_ac.py --no-run     # netlists only
+    python3 simulation/spice/run_ac.py --rev 5.2    # 5.2 (kicad_next/) -> out/5.2/spice
 
 ngspice: --ngspice PATH, $NGSPICE, or PATH (same lookup as hVHDL_ode fc_5level.py).
 
 Netlist rules:
   * all R / C of the circuit with the schematic values; not-fitted parts (value 'na') left out
   * circuits 1-5 share +1V65_BIAS: their netlists hold all five circuits and the bias network
-    (REF1 = ideal source on its VOUT net, value set for 1.65 V on the loaded bias node);
+    (5.1: REF1 = ideal source on its VOUT net, value set for 1.65 V on the loaded bias node;
+    5.2: REF1 = ideal 2.5 V, divider + C128, U9 follower macromodel, R131, C48);
     only the circuit under test is driven, the other inputs sit at their DC value
   * op-amps: the macromodel of circuits.OPAMPS (spice/models/opamp_macro.lib), no rails
   * group B: C_PAR_PER_MOHM across every 1 Mohm resistor of the chains
@@ -38,7 +40,7 @@ sys.path.insert(0, str(HERE))
 import circuits as C  # noqa: E402
 import extract as X  # noqa: E402
 
-OUTDIR = SIM / "out/spice"
+OUTDIR = C.SPICE_OUT
 MODEL_LIB = HERE / "models/opamp_macro.lib"
 
 
@@ -60,6 +62,21 @@ def model_lib():
                   "R1 x 0 1k",
                   f"C1 x 0 {m['a0'] / (2 * math.pi * m['gbw'] * 1e3):.10g}",
                   "E1 o 0 x 0 1",
+                  f"Ro o out {m['rout']:.10g}",
+                  ".ends", ""]
+    lines += ["* _sr variants (transient studies: shunt_esl.py, mux_settling.py): the gm stage current",
+              "* limited to SR * C1 (slew rate, input-stage saturation at SR / (2 pi GBW)) and the",
+              "* output buffer clamped to the 0 .. 3.3 V rails (40 mV headroom)"]
+    for part, m in C.OPAMPS.items():
+        if "sr" not in m:
+            continue
+        c1 = m["a0"] / (2 * math.pi * m["gbw"] * 1e3)
+        imax = m["sr"] * c1
+        lines += [f".subckt opamp_{part}_sr inp inn out",
+                  f"B1 0 x I = max(min({m['a0'] / 1e3:.10g} * V(inp, inn), {imax:.6g}), {-imax:.6g})",
+                  "R1 x 0 1k",
+                  f"C1 x 0 {c1:.10g}",
+                  "B2 o 0 V = max(min(V(x), 3.26), 0.04)",
                   f"Ro o out {m['rout']:.10g}",
                   ".ends", ""]
     return "\n".join(lines)
@@ -91,7 +108,7 @@ def netlist(nl, c, dc_step=None):
     bias = X.bias_network(nl) if c["ref"] == "bias" else None
     if bias:
         b = C.BIAS_REFS
-        refs += [b["r_top"], b["r_bot"], b["c_bias"], b["c_ref"]]
+        refs += [b[k] for k in ("r_top", "r_bot", "c_bias", "c_ref", "c_div", "buf", "r_buf") if k in b]
     chain_1m = set()
     for cc in group:
         if cc["group"] == "B":
@@ -111,7 +128,11 @@ def netlist(nl, c, dc_step=None):
                 out.append(f"CPAR_{r} {nodes(a)} {nodes(bnet)} {C.C_PAR_PER_MOHM * v / 1e6:.10g}")
         elif part in C.OPAMPS:
             pins = nl.pins[r]
+            used = {cc["opamp"][1] for cc in group if cc["opamp"] and cc["opamp"][0] == r}
             for unit, (p, m, o) in C.OPAMPS[part]["pins"].items():
+                if used and unit not in used:
+                    out.append(f"* {r}{unit} not part of this circuit")
+                    continue
                 out.append(f"X{r}{unit} {nodes(pins[p])} {nodes(pins[m])} {nodes(pins[o])} opamp_{part}")
         elif r.startswith("AD"):
             out.append(f"* {r} ({part}) input not loaded")
@@ -120,7 +141,7 @@ def netlist(nl, c, dc_step=None):
     if bias:
         ref_out = nl.pins[C.BIAS_REFS["ref"]]["3"]
         out.append(f"* REF1 {nl.value[C.BIAS_REFS['ref']]}: ideal source, {bias['vref']:.6f} V "
-                   f"-> {C.BIAS_VOLTAGE} V on the loaded {C.BIAS_NET}")
+                   f"-> {bias['v_bias']:.5f} V on the loaded {C.BIAS_NET}")
         out.append(f"VREF1 {nodes(ref_out)} 0 DC {bias['vref']:.10g}")
     for cc in group:
         inp = cc["input"]
@@ -182,7 +203,8 @@ def run(nl, c, ngspice, do_run=True):
         fo.write("frequency,magnitude_db,phase_deg\n")
         for row in zip(f, mag, ph):
             fo.write("{:.10g},{:.10g},{:.10g}\n".format(*row))
-    res = dict(id=c["id"], out_op=op[1], bias_op=op[2] if len(op) > 2 else None,
+    bias_exp = X.bias_network(nl)["v_bias"] if c["ref"] == "bias" else None
+    res = dict(id=c["id"], out_op=op[1], bias_op=op[2] if len(op) > 2 else None, bias_expected=bias_exp,
                dc_gain=(dc[1][1] - dc[0][1]) / info["dv"], input_dc=c["input"]["dc"],
                expected_dc_gain=X.expected_dc_gain(nl, c))
     (OUTDIR / f"{c['id']}_op.json").write_text(json.dumps(res, indent=1))
@@ -194,6 +216,7 @@ def main(argv=None):
     ap.add_argument("ids", nargs="*")
     ap.add_argument("--ngspice")
     ap.add_argument("--no-run", action="store_true")
+    ap.add_argument("--rev", help="board revision 5.1 / 5.2 (read by circuits.py)")
     a = ap.parse_args(argv)
     nl = X.Netlist()
     ngspice = None if a.no_run else find_ngspice(a.ngspice)

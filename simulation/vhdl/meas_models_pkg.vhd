@@ -10,18 +10,25 @@
 --   output: VO --[r_o]-- OUT --[c_o]-- 0          (c_o = 0: OUT = VO, r_o unloaded)
 --   REF   : the +1V65_BIAS node (vref -[r_btop]- REF -[r_bbot || c_bias]- 0, plus the
 --           other circuits' + legs as one resistance r_bother) or ground
+--           5.2 (has_buf): vref = divider voltage at the + input of a follower (the same
+--           macromodel: a0_b, gbw_b, rout_b; feedback from its output pin), output
+--           -[r_btop = R131]- REF -[c_bias]- 0, plus r_bother (r_bbot unused)
 --
 --   group A shunt diff amp: IN = in_scale * u (u = shunt current, in_scale = R_shunt;
 --           the 4 mohm shunt's loading by the 330 ohm input, 1.2e-5, is neglected)
 --   group B HV diff amp   : 3 x 1M with c_par across each section
 --   group C divider + RC  : has_opamp = false, OUT = NP
 --   group D non-inverting : - leg one R to ground, c_f = 0
+--   group E follower      : + leg as group C, follower = true (NN = VO, no - leg)
 --
 -- The capacitor voltages are the states (one per capacitor). The node voltages
--- without a capacitor are solved algebraically inside the derivative. The one
--- capacitor-only loop (group B with c_ref_p, circuit 8: source - 3 x c_par - C27)
--- takes the input slope du/dt; the testbench drives a first-order-hold input,
--- so du/dt is finite (piecewise constant).
+-- without a capacitor are solved algebraically inside the derivative. The
+-- capacitor-only loop (group B with c_ref_p: source - 3 x c_par - c_ref_p - REF,
+-- with REF = ground (5.1 circuit 8, 5.2 circuits 6, 8) or the bias capacitor
+-- (5.2 circuit 5)) takes the input slope du/dt; the testbench drives a
+-- first-order-hold input, so du/dt is finite (piecewise constant). A - leg made
+-- only of capacitive sections (group B with c_f, 5.2) fixes VO by its states;
+-- the leg current then follows from the op-amp output resistance.
 --
 -- The op-amp is the same macromodel as simulation/spice/run_ac.py (no rails).
 library ieee;
@@ -34,6 +41,8 @@ package meas_models_pkg is
     type meas_params_t is record
         has_opamp : boolean;
         has_bias  : boolean;
+        follower  : boolean;  -- group E: NN = VO
+        has_buf   : boolean;  -- bias follower (5.2)
         in_scale  : real;     -- IN = in_scale * u
         n_in_p    : positive;
         r_in_p    : r3_t;
@@ -54,6 +63,9 @@ package meas_models_pkg is
         r_bbot    : real;
         c_bias    : real;
         r_bother  : real;
+        a0_b      : real;     -- bias follower macromodel
+        gbw_b     : real;
+        rout_b    : real;
         u0        : real;     -- input DC level of the run
         u_amp     : real;     -- dither amplitude (uniform, +-u_amp)
     end record;
@@ -74,7 +86,8 @@ package meas_models_pkg is
     constant VN1      : natural := 6;   -- 6..8 - chain section capacitors
     constant V_CF     : natural := 9;   -- c_f
     constant V_CO     : natural := 10;  -- c_o
-    constant N_STATES : natural := 11;
+    constant X_BUF    : natural := 11;  -- bias follower gain-stage voltage
+    constant N_STATES : natural := 12;
 
     subtype meas_state_t is real_vector(0 to N_STATES - 1);
 
@@ -101,6 +114,21 @@ package body meas_models_pkg is
             acc := acc + r(k);
         end loop;
         return acc;
+    end function;
+
+    -- bias follower output pin voltage (feedback node), loaded by r_btop into REF
+    function buf_out(p : meas_params_t; s : real_vector) return real is
+    begin
+        return (s(X_BUF) * p.r_btop + p.rout_b * s(V_B)) / (p.r_btop + p.rout_b);
+    end function;
+
+    -- current into the bias node from its source and the other circuits' + legs
+    function bias_in(p : meas_params_t; s : real_vector) return real is
+    begin
+        if p.has_buf then
+            return (buf_out(p, s) - s(V_B)) / p.r_btop - s(V_B) / p.r_bother;
+        end if;
+        return (p.vref - s(V_B)) / p.r_btop - s(V_B) / p.r_bbot - s(V_B) / p.r_bother;
     end function;
 
     function meas_nodes (p : meas_params_t; u, dudt : real; s : real_vector) return meas_nodes_t is
@@ -136,20 +164,55 @@ package body meas_models_pkg is
             nd.np := up - acc;
             nd.ip := (nd.np - ref) / p.r_ref_p;
         else
-            -- capacitor loop: sum of the section voltages = up - ref (ref = ground)
-            assert not p.has_bias report "capacitor loop with the bias node as reference" severity failure;
+            -- capacitor loop: sum of the section voltages + v(c_ref_p) + REF = up; with the
+            -- bias node as REF its capacitor is part of the loop (its other currents bias_in)
             acc   := s(V_CREF) / (p.r_ref_p * p.c_ref_p);
             inv_c := 1.0 / p.c_ref_p;
             for k in 1 to p.n_in_p loop
                 acc   := acc + s(VP1 + k - 1) / (p.r_in_p(k) * p.c_par);
                 inv_c := inv_c + 1.0 / p.c_par;
             end loop;
+            if p.has_bias then
+                acc   := acc - bias_in(p, s) / p.c_bias;
+                inv_c := inv_c + 1.0 / p.c_bias;
+            end if;
             nd.ip := (dup + acc) / inv_c;
-            nd.np := s(V_CREF);
+            nd.np := ref + s(V_CREF);
         end if;
 
         if not p.has_opamp then
             nd.y := nd.np;
+            return nd;
+        end if;
+
+        if p.c_o > 0.0 then
+            go := 1.0 / p.r_o;
+        end if;
+        if p.follower then
+            nd.vo  := (s(X_OA) + p.rout * go * s(V_CO)) / (1.0 + p.rout * go);
+            nd.i_f := 0.0;
+            nd.nn  := nd.vo;
+            if p.c_o > 0.0 then
+                nd.y := s(V_CO);
+            else
+                nd.y := nd.vo;
+            end if;
+            return nd;
+        end if;
+        if p.c_par > 0.0 and p.c_f > 0.0 then
+            -- all - leg sections capacitive: VO from the states, current from rout
+            af := 0.0;
+            for k in 1 to p.n_g loop
+                af := af + s(VN1 + k - 1);
+            end loop;
+            nd.nn  := af;
+            nd.vo  := af + s(V_CF);
+            nd.i_f := (s(X_OA) - nd.vo) / p.rout - go * (nd.vo - s(V_CO));
+            if p.c_o > 0.0 then
+                nd.y := s(V_CO);
+            else
+                nd.y := nd.vo;
+            end if;
             return nd;
         end if;
 
@@ -162,15 +225,11 @@ package body meas_models_pkg is
             af := s(V_CF);
             gf := 1.0 / rg;
         else
-            assert p.c_f = 0.0 report "c_f with a c_par chain not modelled" severity failure;
             af := 0.0;
             for k in 1 to p.n_g loop
                 af := af + s(VN1 + k - 1);
             end loop;
             gf := 1.0 / p.r_f;
-        end if;
-        if p.c_o > 0.0 then
-            go := 1.0 / p.r_o;
         end if;
         nd.vo  := (s(X_OA) + p.rout * (gf * af + go * s(V_CO))) / (1.0 + p.rout * (gf + go));
         nd.i_f := gf * (nd.vo - af);
@@ -197,8 +256,11 @@ package body meas_models_pkg is
         nd := meas_nodes(p, u, dudt, s);
 
         if p.has_bias then
-            d(V_B) := ((p.vref - s(V_B)) / p.r_btop - s(V_B) / p.r_bbot
-                       - s(V_B) / p.r_bother + nd.ip) / p.c_bias;
+            d(V_B) := (bias_in(p, s) + nd.ip) / p.c_bias;
+            if p.has_buf then
+                wp       := math_2_pi * p.gbw_b / p.a0_b;
+                d(X_BUF) := wp * (p.a0_b * (p.vref - buf_out(p, s)) - s(X_BUF));
+            end if;
         end if;
 
         if p.c_ref_p > 0.0 then
@@ -213,11 +275,12 @@ package body meas_models_pkg is
         if p.has_opamp then
             wp        := math_2_pi * p.gbw / p.a0;
             d(X_OA)   := wp * (p.a0 * (nd.np - nd.nn) - s(X_OA));
-            if p.c_par > 0.0 then
+            if p.c_par > 0.0 and not p.follower then
                 for k in 1 to p.n_g loop
                     d(VN1 + k - 1) := (nd.i_f - s(VN1 + k - 1) / p.r_g(k)) / p.c_par;
                 end loop;
-            elsif p.c_f > 0.0 then
+            end if;
+            if p.c_f > 0.0 and not p.follower then
                 d(V_CF) := (nd.i_f - s(V_CF) / p.r_f) / p.c_f;
             end if;
             if p.c_o > 0.0 then

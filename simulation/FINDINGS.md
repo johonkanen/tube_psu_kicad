@@ -264,6 +264,130 @@ switch, keep 100 Ω / 100 pF (1 nF rings). Slew (5–8 V/µs) is not modelled (�
   the flyback (cross regulation, see `flyback/`). No change needed unless the flyback study
   shows the rail exceeding 18.7 V.
 
+## 11. 5.2 circuits (phase 4a, 2026-11-18)
+
+Board tube_power 5.2 (`kicad_next/tube_psu_5_2.kicad_sch`, values per
+[kicad_next/CHANGES_5_2.md](../kicad_next/CHANGES_5_2.md) section 4). Rerun:
+`python3 simulation/run_sim.py --rev 5.2` (golden check against `circuits.GOLDEN_52`, ngspice,
+hVHDL_ode, output `out/5.2/`), then `spice/bias_buffer.py`, `spice/shunt_esl.py`,
+`spice/mux_settling.py --rev 5.2`, `spice/ranges_5_2.py` (result tables `out/5.2/*_results.md`).
+The 5.1 flow is unchanged and still reproduces sections 1–10 (`run_sim.py` without `--rev`).
+
+**Models.** Op-amp macromodels (A0, one pole, Rout; same in ngspice and VHDL): LMH6643 57 MHz,
+96 dB, Rout 75 Ω; TLV9062 10 MHz, 118 dB, 100 Ω; TLV316 unchanged (10 MHz, 250 Ω). The TI vendor
+models are now downloaded and run in ngspice (`spice/vendor_models.py`, not committed; PLAN step 5
+partly done): TLV316 110 dB / 16.5 MHz unity gain / Zo 253 Ω / 6 V/µs, TLV9062 118 dB / 9.8 MHz /
+99 Ω / 6.1 V/µs, LMH6643 (NSC 2005 transistor model) 114 dB / 85 MHz / Zo 73 Ω above 100 kHz. For
+transients a slew-limited variant (`opamp_<part>_sr`: gm current limited to SR·C1, rails 0.04–3.26 V;
+LMH6643 120 V/µs, TLV316 6 V/µs, TLV9062 6.5 V/µs) is used. The VHDL model gained a follower
+(group E: AUX, 5V_MEAS), the U9 bias follower as a state, a − leg that is only capacitive sections
+(Cf with the 1 MΩ parasitics) and the capacitor loop with the bias capacitor (VAC + leg: 3 × 0.2 pF +
+C126 + C48).
+
+### 11.1 AC responses: all 10 channels pass (hVHDL_ode vs ngspice)
+
+[out/5.2/report.md](out/5.2/report.md): 0.007–0.027 dB / 0.04–0.19° RMS, DC gains identical
+(5V_MEAS −0.004 %: VHDL DC point not fully settled, 0.6 ms τ), −3 dB within 1.1 %.
+
+| channel (J2, ADC) | DC gain | −3 dB | note |
+|---|---|---|---|
+| PFC_I1 (J2-42, A) / PFC_I2 (J2-44, A) | 82.41 mV/A | 825 kHz | 5.1: 993 kHz (LMH6643 lower GBW) |
+| DHB_I (J2-38, A) | 181.7 mV/A | 517 kHz | balanced 12p/12p |
+| HEATER_I (J2-45, B) | 399.4 mV/A (−0.16 %) | 342 kHz | 5.6p/5.6p; op-amp limited (noise gain 101) |
+| VAC (J2-47, B) | 0.0040072 (+0.18 %) | 13.3 kHz | −33 / −38 / −50 dB rel. DC at 1 / 10 / 50 MHz (5.1: +22 dB) |
+| DC_LINK (J2-41, B) | 0.0050 | 10.6 kHz | −35 / −40 / −52 dB at 1 / 10 / 50 MHz |
+| AUX (J2-43, B) | 0.17603 | 411 Hz | C61 100n behind the follower |
+| 5V_MEAS (J2-49, B) | 0.4000 | 265 Hz | new |
+| AD2 420 V / AD1 6V3 | 0.0050 / 0.4533 | 8.86 kHz / 1.82 MHz | unchanged |
+
+### 11.2 Ranges ([out/5.2/ranges_results.md](out/5.2/ranges_results.md))
+
+Bias node 1.6418 V (divider 1.6554 V − 13.6 mV over R131 at 0.62 mA of + leg loads; ±14 mV from
+the REF3325 / 1 % divider tolerances, common to all channels → zero calibration). Output range taken
+0.04–3.26 V.
+
+| channel | range | LMH6643 Vos 3.4 / 5 / 7 mV (25 °C max / task / temp. max) | range after 7 mV | 1 LSB |
+|---|---|---|---|---|
+| PFC_I1/I2 | −19.4 / +19.6 A | 0.89 / 1.31 / 1.84 A | ±17.6 A | 2.4 mA |
+| DHB_I | −8.8 / +8.9 A | 0.87 / 1.28 / 1.79 A | ±7.0 A | 1.1 mA |
+| HEATER_I | −4.0 / +4.1 A | 0.86 / 1.26 / 1.77 A | ±2.2 A | 0.5 mA |
+
+(Vos × noise gain / channel gain; the datasheet's 5 mV column is the LMH6642/44, the LMH6643 is
+3.4 mV at 25 °C and 7 mV over temperature.) VAC: 0.146–3.138 V at 264 V rms (373 V peak), clips at
+400 V peak (283 V rms) – the 12 k change works. DC_LINK full scale 652 V (2.00 V at 400 V). AUX full
+scale 18.5 V (2.64 V at 15 V). 5V_MEAS 2.000 V at 5.0 V, full scale 8.15 V, 0.5 mV/LSB, ±0.08 % from
+the 0.1 % divider. LMH6643 inputs at 1.57–1.63 V, inside its common-mode range (≤ 1.9 V over
+temperature at 3.3 V).
+
+### 11.3 Bias buffer U9 stability ([out/5.2/bias_buffer_results.md](out/5.2/bias_buffer_results.md))
+
+U9 drives 22 Ω + 100 nF with the feedback from its output pin: the 22 Ω sets an HF loop attenuation
+22 / (Zo + 22) and a pole/zero pair at 5.9 / 72 kHz, far below the crossover.
+
+| op-amp model | crossover | phase margin | gain margin | 10 mV step overshoot (U9 out / bias) |
+|---|---|---|---|---|
+| macromodel, 1 pole | 0.81 MHz | 85° | – | 5.8 % / 0 % |
+| 2 poles (+30 MHz) + Zo 250 Ω | 0.81 MHz | 84° | – | 5.8 % / 0 % |
+| **TI TLV316 vendor model** | **0.87 MHz** | **84°** | **35 dB** | **5.5 % / 0 %** |
+| (feedback from the bias node instead) | 0.24 MHz | 1° | – | oscillates (vendor) |
+
+**Stable as built.** Do not move the feedback to the bias node. Side effect of the output-pin
+feedback: the bias source impedance is 22 Ω up to ≈ 50 kHz, so the VAC + leg (3.012 MΩ from AC2)
+still injects 7.3·10⁻⁶ V/V into the bias (5.1: 4.7·10⁻⁵): 2.4 mV peak at 325 V peak = **29 mA on
+PFC_I, 13 mA DHB_I, 6 mA HEATER_I** at line frequency (VAC gain +0.18 %); a 1 mA load step moves
+the bias by 22 mV. Options if that matters: firmware subtracts k·VAC (k from the 22 Ω, fixed), or
+split feedback (100 kΩ bias node → IN−, 1 nF U9 out → IN−, PM 84°, vendor model): coupling
+2.3·10⁻⁷, the 13.6 mV DC drop gone; two parts, not required.
+
+### 11.4 Shunt ESL compensation ([out/5.2/shunt_esl_results.md](out/5.2/shunt_esl_results.md))
+
+4 mΩ + L, 0 → 3 A in 20 ns (raw spike L·dI/dt = 75 / 120 / 180 mV at 0.5 / 0.8 / 1.2 nH against
+12 mV of signal), both feedback caps swept, LMH6643 slew-limited (slew not reached: identical to the
+linear model). Overshoot above the final value with the 5.2 caps, and the smallest C that keeps the
+overshoot ≤ 1 %:
+
+| channel | 5.2 C (τ = Rf·C) | overshoot at L 0 / 0.5 / 0.8 / 1.2 nH | C for ≤ 1 % at 0.5 / 0.8 / 1.2 nH | first-order L/(R·Rf) |
+|---|---|---|---|---|
+| PFC (6.8k) | 20p (136 ns) | 0 / 0 / 2.8 % (84 mA) / 44 % (1.3 A) | 10 / 21 / 38 pF | 18 / 29 / 44 pF |
+| DHB (15k) | 12p (180 ns) | 0 / 0 / 0 / 0 | 3.9 / 4.6 / 11.7 pF | 8.3 / 13 / 20 pF |
+| HEATER (33k) | 5.6p (185 ns) | 0 / 0 / 0 / 0 | ≤ 1 pF at every L | 3.8 / 6.1 / 9.1 pF |
+
+The op-amp's closed-loop pole adds to Rf·Cf, so less C than L/(R·Rf) is enough; HEATER at noise gain
+101 is filtered by the LMH6643 itself (≈ 0.56 MHz) and needs no ESL cap (its 5.6p only sets the
+342 kHz bandwidth). **Recommendation: keep 20p / 12p / 5.6p** (no spike up to 0.8 nH on any channel;
+DHB is clean up to 1.2 nH). If the bench shows a spike on PFC_I (loop inductance ≥ 1 nH), go to 27–33p
+(C113/C106, C112/C107 together). DHB 12p is the 1.2 nH value: at the typical 0.5 nH it is
+over-compensated (−23 % at 300 ns, 1 % after 1.3 µs instead of 0.7 µs with 3.9p) – lower it on the
+bench to 5.6–8.2p if a faster edge is wanted.
+
+### 11.5 ADC mux leakage ([out/5.2/mux_results.md](out/5.2/mux_results.md))
+
+TMUX1308 RON 350 Ω, 45 pF, node precharged to the farther rail, slew-limited op-amps; LSB per 3.3 V
+difference at the planned dwell (A 1 µs, B 2 µs), target < 0.5 LSB:
+
+| output | ADC | macromodel (datasheet GBW) 1 / 1.5 / 2 / 3 µs | vendor LMH6643 model at the dwell | at planned dwell |
+|---|---|---|---|---|
+| PFC_I1, PFC_I2 | A | 0.62 / 0.05 / 0 / 0 | 0.02 (1 µs) | **0.62 (macro) / 0.02 (vendor)** |
+| DHB_I | A | 2.98 / 0.58 / 0.11 / 0 | 0.15 (1 µs) | **2.98 / 0.15** |
+| HEATER_I | B | 8.2 / 2.8 / 0.95 / 0.11 | 0.04 (2 µs) | **0.95 / 0.04** |
+| VAC, DC_LINK | B | 0.02 from 0.4 µs | – | 0.02 |
+| AUX, 5V_MEAS | B | 0 from 0.4 µs | – | 0 |
+
+Charge injection ≤ 0.03 LSB everywhere. The LMH6643 recovers from the mux charge kick more slowly
+than the LMH6658 of 5.1 (57 vs 140 MHz, Zo 75 vs 10 Ω): the dip decays with Rf·Cf. The macromodel
+with the datasheet GBW and the vendor Zo is the conservative bound, the vendor model (85 MHz) the
+optimistic one. C26 / C10 = 1 nF does not help (3.9 / 0.96 LSB). **Recommended dwell: ADC A ≥ 2 µs
+(DHB 0.11, PFC 0 LSB; A has 2.38 µs per channel at 140 kHz with three channels), ADC B ≥ 3 µs before
+HEATER_I (0.11 LSB)**, ≥ 0.5 µs for the TLV316 / TLV9062 channels. No hardware change. (NR 4c.4
+still says A ≥ 1 µs / B ≥ 2 µs – to update there.)
+
+### 11.6 Summary – schematic changes needed
+
+None required. Optional: U9 split feedback (100k + 1n) against the 29 mA line-frequency term on
+PFC_I (11.3); PFC ESL caps 27–33p only if the bench shows a spike (11.4). Firmware: zero
+calibration (Vos up to 1.8 A input-referred over temperature, bias tolerance), mux dwell A ≥ 2 µs /
+B ≥ 3 µs before HEATER_I (11.5).
+
 ## Next steps
 
 1. Re-run fixes 1–3 with the TI vendor models (TLV316, LMH6658) for stability and

@@ -7,6 +7,8 @@ Runs separately (not from tools/check_all.sh):
     python3 simulation/run_sim.py '*c5*'           # VUnit test pattern (one circuit)
     python3 simulation/run_sim.py --no-spice ...   # reuse out/spice (no ngspice run)
     python3 simulation/run_sim.py --compile        # compile only
+    python3 simulation/run_sim.py --rev 5.2        # board 5.2 (kicad_next/): 10 circuits,
+                                                   # output simulation/out/5.2/
 
 Steps: golden check of the netlist extraction against INVENTORY.md (spice/extract.py),
 regenerate vhdl/meas_params_pkg.vhd (gen_params.py), the compare.py analytic self-test,
@@ -24,6 +26,10 @@ sys.path.insert(0, str(SIM / "spice"))
 ODE = SIM / "hVHDL_ode"
 
 argv = sys.argv[1:]
+if "--rev" in argv:
+    i = argv.index("--rev")
+    os.environ["MEAS_SIM_REV"] = argv[i + 1]
+    argv = argv[:i] + argv[i + 2:]
 no_spice = "--no-spice" in argv
 argv = [a for a in argv if a != "--no-spice"]
 # memory rule: never several simulations at once
@@ -40,14 +46,15 @@ for a in argv:
         continue
     clean.append(a)
 argv = clean + ["-p", "1"]
+sys.argv = sys.argv[:1]          # circuits.py reads --rev from the environment only now
+import circuits as C  # noqa: E402
 if "-o" not in argv and "--output-path" not in argv:
-    argv += ["--output-path", str(SIM / "out/vunit_out")]
+    argv += ["--output-path", str(C.OUT / "vunit_out")]
 os.environ.setdefault("VUNIT_SIMULATOR", "nvc")
 
 if not (ODE / "ode_solvers/ode_pkg.vhd").exists():
     raise SystemExit("simulation/hVHDL_ode missing: git submodule update --init simulation/hVHDL_ode")
 
-import circuits as C  # noqa: E402
 import compare  # noqa: E402
 import extract  # noqa: E402
 import gen_params  # noqa: E402
@@ -74,7 +81,9 @@ for f in ("write_pkg.vhd", "ode_solvers/real_vector_pkg.vhd", "ode_solvers/linal
     ode.add_source_files(ODE / f)
 
 meas = VU.add_library("meas")
-meas.add_source_files(SIM / "vhdl/*.vhd")
+meas.add_source_files(SIM / "vhdl/meas_models_pkg.vhd")
+meas.add_source_files(SIM / "vhdl/meas_circuit_tb.vhd")
+meas.add_source_files(C.PARAMS_VHD)
 tb = meas.test_bench("meas_circuit_tb")
 for i, c in enumerate(C.CIRCUITS, start=1):
     for b, band in enumerate(C.BANDS):

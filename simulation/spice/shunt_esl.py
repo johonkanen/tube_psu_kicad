@@ -1,0 +1,171 @@
+#!/usr/bin/env python3
+"""5.2 shunt ESL compensation (NR 4.11): pulse response of the current channels.
+
+Shunt model: 4 mOhm in series with L_ESL (0 / 0.5 / 0.8 / 1.2 nH: KRL2012 ESL + Kelvin loop).
+Input: a 0 -> 3 A current edge in 20 ns (0.15 A/ns, MOSFET switching). The shunt voltage is
+I*R + L*dI/dt: 75 / 120 / 180 mV spike during the edge against 12 mV of signal. The balanced
+feedback capacitors give the difference amplifier the transfer (Rf/Rg) / (1 + s*Rf*Cf), which
+cancels the shunt zero (1 + s*L/R) when Rf*Cf = L/R (PFC 6.8k, DHB 15k, HEATER 33k feedback; the
+op-amp, LMH6643 57 MHz at noise gains 21.6 / 46 / 101, adds its own lag).
+
+Netlists: the 5.2 references out/5.2/spice/c1|c3|c4.cir (run `run_sim.py --rev 5.2` or
+`run_ac.py --rev 5.2` first) with the shunt split into R + L, the input a PWL edge and both
+feedback capacitors of the channel (C113/C106, C63/C122, C11/C123) set to the swept value.
+The op-amps are the slew-limited macromodels (opamp_<part>_sr of run_ac.py: LMH6643 120 V/us,
+input stage saturating at SR / (2 pi GBW) = 0.34 V, rails 0.04 .. 3.26 V); `--linear` uses the
+linear macromodel instead.
+Metrics (output normalised to the ideal final step gain * 3 A): overshoot (peak above the final
+value, % and A-equivalent), the error 300 ns / 1 us after the edge start, and the 1 % settling
+time. "C cancel": the smallest feedback C with overshoot <= 1 % (interpolated in the sweep);
+"C best": the swept C with the shortest 1 % settling time (the cleanest edge).
+
+    python3 simulation/spice/shunt_esl.py      # -> out/5.2/shunt_esl_results.md (one ngspice at a time)
+"""
+import math
+import os
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+os.environ["MEAS_SIM_REV"] = "5.2"
+sys.path.insert(0, str(HERE.parent))
+import circuits as C  # noqa: E402
+
+SRC = C.SPICE_OUT
+LINEAR = "--linear" in sys.argv
+WORK = C.OUT / ("shunt_esl_linear" if LINEAR else "shunt_esl")
+I_STEP, T_EDGE, T0 = 3.0, 20e-9, 1e-6
+L_LIST = [0.0, 0.5e-9, 0.8e-9, 1.2e-9]
+R_SHUNT = 0.004
+CHANNELS = [
+    # id, label, shunt, input source, output node, feedback caps, Rf, 5.2 value, sweep [pF]
+    ("c1", "PFC_I1", "R93", "I_c1", "n_PFC_I1_MEAS", ("C113", "C106"), 6800, 20,
+     [10, 12, 15, 18, 20, 22, 27, 33, 39, 47, 56]),
+    ("c3", "DHB_I", "R83", "I_c3", "n_DHB_I_MEAS", ("C63", "C122"), 15000, 12,
+     [3.9, 4.7, 5.6, 6.8, 8.2, 10, 12, 15, 18, 22, 27]),
+    ("c4", "HEATER_I", "R30", "I_c4", "n_HEATER_I_MEAS", ("C11", "C123"), 33000, 5.6,
+     [1.0, 1.5, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2, 10, 12]),
+]
+
+
+def netlist(cid, shunt, src, out, caps, c_pf, l_esl):
+    txt = (SRC / f"{cid}.cir").read_text()
+    txt = txt[:txt.index(".control")]
+    m = re.search(rf"^{shunt} (\S+) 0 (\S+)$", txt, re.M)
+    node = m.group(1)
+    txt = txt.replace(m.group(0), f"{shunt} {node} n_esl {m.group(2)}\nLESL n_esl 0 {l_esl:g}"
+                      if l_esl else m.group(0))
+    txt = re.sub(rf"^{src} 0 (\S+) DC \S+ AC 1$",
+                 lambda mm: f"{src} 0 {mm.group(1)} PWL(0 0 {T0:g} 0 {T0 + T_EDGE:g} {I_STEP:g})",
+                 txt, flags=re.M)
+    if not LINEAR:
+        txt = re.sub(r"^(X.*) (opamp_\S+)$", r"\1 \2_sr", txt, flags=re.M)
+    for cref in caps:
+        txt = re.sub(rf"^({cref} \S+ \S+) \S+$", rf"\g<1> {c_pf * 1e-12:g}", txt, flags=re.M)
+    return txt + f"""
+.include opamp_macro.lib
+.control
+set wr_singlescale
+set wr_vecnames
+tran 0.2n {T0 + 4e-6:g} 0 0.2n
+wrdata out.txt v({out})
+.endc
+.end
+"""
+
+
+def run(name, text):
+    d = WORK / name
+    d.mkdir(parents=True, exist_ok=True)
+    (d / "opamp_macro.lib").write_text((SRC / "opamp_macro.lib").read_text())
+    (d / "c.cir").write_text(text)
+    (d / "out.txt").unlink(missing_ok=True)
+    r = subprocess.run(["ngspice", "-b", "c.cir"], cwd=d, capture_output=True, text=True, timeout=600)
+    (d / "c.log").write_text(r.stdout + r.stderr)
+    if r.returncode != 0 or not (d / "out.txt").exists():
+        raise SystemExit(f"ngspice failed: {d / 'c.log'}")
+    rows = [l.split() for l in (d / "out.txt").read_text().splitlines()[1:] if l.strip()]
+    return [(float(a), float(b)) for a, b in rows]
+
+
+def metrics(data, gain):
+    v0 = min(data, key=lambda r: abs(r[0] - T0 * 0.9))[1]
+    full = gain * I_STEP
+    after = [(t - T0, (v - v0) / full) for t, v in data if t >= T0]
+    final = after[-1][1]
+    peak = max(y for _, y in after)
+    over = (peak - final) * 100
+    at = lambda tt: min(after, key=lambda r: abs(r[0] - tt))[1]
+    settle = 0.0
+    for t, y in after:
+        if abs(y - final) > 0.01:
+            settle = t
+    return dict(over=over, over_a=over / 100 * I_STEP, e300=(at(300e-9) - final) * 100,
+                e1u=(at(1e-6) - final) * 100, settle=settle)
+
+
+def main():
+    WORK.mkdir(parents=True, exist_ok=True)
+    gains = {"c1": 0.004 * 6800 / 330, "c3": 0.004 * 15000 / 330, "c4": 0.004 * 33000 / 330}
+    lines = ["# 5.2 shunt ESL compensation (generated by simulation/spice/shunt_esl.py"
+             + (" --linear)" if LINEAR else ")"), "",
+             "Op-amp model: " + ("linear macromodel" if LINEAR else
+                                 "slew-limited macromodel (LMH6643 120 V/us, rails)"), "",
+             f"Edge 0 -> {I_STEP:g} A in {T_EDGE * 1e9:g} ns into 4 mOhm + L. Overshoot = peak above "
+             "the final value (% of the step, and in A); err 300 ns / 1 us = deviation from the final "
+             "value at that time after the edge start (% of the step, negative = still rising); "
+             "settle = last time outside +-1 %. Both feedback caps of the channel set to C.", ""]
+    summary = ["", "## Summary", "",
+               "C cancel = smallest C with <= 1 % overshoot; C best = shortest 1 % settling; "
+               "L/(R*Rf) = the first-order cancellation value.", "",
+               "| channel | Rf | 5.2 C (tau) | L 0.5 nH: C cancel / best / L/(R Rf) | L 0.8 nH | L 1.2 nH | "
+               "5.2 C: overshoot (settle) at 0 / 0.5 / 0.8 / 1.2 nH |",
+               "|---|---|---|---|---|---|---|"]
+    for cid, label, shunt, src, out, caps, rf, c52, sweep in CHANNELS:
+        lines += [f"## {label} ({cid}, Rf {rf / 1e3:g}k, 5.2: {c52:g} pF = {rf * c52 * 1e-3:.0f} ns)", "",
+                  "| L | C | tau Rf*C | overshoot | err 300 ns | err 1 us | settle 1 % |",
+                  "|---|---|---|---|---|---|---|"]
+        cancel, at52, best = {}, {}, {}
+        for l_esl in L_LIST:
+            res = []
+            for c_pf in sorted(set(sweep + [c52])):
+                m = metrics(run(f"{cid}_L{l_esl * 1e12:.0f}p_C{c_pf:g}p",
+                                netlist(cid, shunt, src, out, caps, c_pf, l_esl)), gains[cid])
+                res.append((c_pf, m))
+                mark = " **(5.2)**" if c_pf == c52 else ""
+                lines.append(f"| {l_esl * 1e9:g} nH | {c_pf:g} pF{mark} | {rf * c_pf * 1e-3:.0f} ns | "
+                             f"{m['over']:.1f} % ({m['over_a'] * 1e3:.0f} mA) | {m['e300']:+.1f} % | "
+                             f"{m['e1u']:+.2f} % | {m['settle'] * 1e9:.0f} ns |")
+                if c_pf == c52:
+                    at52[l_esl] = m
+            print(f"{label} L {l_esl * 1e9:g} nH: " + ", ".join(f"{c:g}p {m['over']:.1f}%" for c, m in res),
+                  flush=True)
+            cc = None
+            for (c1, m1), (c2, m2) in zip(res, res[1:]):
+                if m1["over"] > 1.0 >= m2["over"]:
+                    cc = c1 + (c2 - c1) * (m1["over"] - 1.0) / (m1["over"] - m2["over"])
+                    break
+            if res[0][1]["over"] <= 1.0:
+                cc = res[0][0]
+            cancel[l_esl] = cc
+            best[l_esl] = min(res, key=lambda r: r[1]["settle"])
+        lines.append("")
+        cells = []
+        for l_esl in L_LIST[1:]:
+            ideal = l_esl / R_SHUNT / rf * 1e12
+            cc = cancel[l_esl]
+            cs = f"{cc:.1f}" if cc else f"> {sweep[-1]}"
+            bc, bm = best[l_esl]
+            cells.append(f"{cs} / {bc:g} ({bm['settle'] * 1e9:.0f} ns) / {ideal:.1f} pF")
+        summary.append(f"| {label} | {rf / 1e3:g}k | {c52:g} pF ({rf * c52 * 1e-3:.0f} ns) | " + " | ".join(cells)
+                       + " | " + " / ".join(f"{at52[l]['over']:.1f} % ({at52[l]['settle'] * 1e9:.0f} ns)"
+                                            for l in L_LIST) + " |")
+    (C.OUT / ("shunt_esl_linear_results.md" if LINEAR else "shunt_esl_results.md")).write_text("\n".join(lines + summary) + "\n")
+    print("\n".join(summary))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

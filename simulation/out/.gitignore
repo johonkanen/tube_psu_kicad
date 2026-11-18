@@ -3,3 +3,8 @@
 !.gitignore
 !report.md
 !*.png
+!5.2/
+5.2/*
+!5.2/report.md
+!5.2/*.png
+!5.2/*_results.md

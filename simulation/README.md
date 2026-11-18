@@ -4,7 +4,8 @@
 `dab/` — DAB transformer TR3 on EC42x15, rerun with `python3 simulation/dab/run_dab.py`,
 see dab/DAB_TRANSFORMER.md.)
 
-The 9 ADC measurement paths of tube_power_5_1, simulated twice and compared:
+The 9 ADC measurement paths of tube_power_5_1 (and the 10 of 5.2 with `--rev 5.2`), simulated
+twice and compared:
 
 - **ngspice** `.ac` 1 Hz – 50 MHz: the reference (`spice/run_ac.py`), netlists cut out of
   the KiCad schematic.
@@ -28,6 +29,29 @@ python3 simulation/compare.py --analytic-selftest
 python3 simulation/hVHDL_ode/python/test_plot.py --freq-only out/spice/c1_spice.csv out/c1_vhdl.csv
 ```
 
+### Board 5.2 (kicad_next/)
+
+```
+python3 simulation/run_sim.py --rev 5.2               # 10 circuits (+ 5V_MEAS) x 4 bands, ~95 s
+python3 simulation/spice/extract.py --rev 5.2 --check # golden check vs circuits.GOLDEN_52
+python3 simulation/spice/run_ac.py --rev 5.2 [c1 ...] # ngspice only -> out/5.2/spice
+python3 simulation/spice/vendor_models.py             # fetch + characterise the TI models
+python3 simulation/spice/bias_buffer.py               # U9 bias buffer stability
+python3 simulation/spice/shunt_esl.py [--linear]      # shunt ESL vs feedback caps
+python3 simulation/spice/mux_settling.py --rev 5.2    # ADC mux leakage, every J2 output
+python3 simulation/spice/ranges_5_2.py                # gains / offsets / J2 ranges
+```
+
+The revision is chosen by `--rev 5.2` (or `MEAS_SIM_REV=5.2`); it selects the schematic, the
+circuit list (`circuits.CIRCUITS_52`), the bias network (REF3325 → divider → U9 follower → 22 Ω →
+C48), the parameter package `vhdl/rev5_2/meas_params_pkg.vhd` and the output folder
+`out/5.2/` (report.md, Bode PNGs and the `*_results.md` tables are committed). The scripts after
+run_sim.py read `out/5.2/spice/*.cir`, so run run_sim.py (or run_ac.py) first. 5.2 has no hand
+inventory: the golden check compares every part value with `circuits.GOLDEN_52` (from
+kicad_next/CHANGES_5_2.md), checks the bias-buffer wiring and the role topology. The TI vendor
+models are downloaded from ti.com/lit/zip into `out/vendor/` (not committed) and run with
+`ngspice -D ngbehavior=psa`. Results: FINDINGS.md section 11. ngspice runs one at a time.
+
 Not part of `tools/check_all.sh` (user decision). Needs ngspice (`$NGSPICE`, `--ngspice`
 in run_ac.py, or PATH; tested with ngspice 47), NVC (VUnit simulator, set by run_sim.py),
 VUnit, numpy, scipy, pandas, matplotlib, and `tools/p2k/bin/kicad-cli` for the netlist export.
@@ -50,7 +74,13 @@ peak RSS 250 MB; `out/vunit_out` 323 MB (each `meas.dat` 7.5 MB, band 3 15 MB).
 | `vhdl/meas_models_pkg.vhd` | the model: one parameterised topology, derivative, output, initial state |
 | `vhdl/meas_circuit_tb.vhd` | one testbench, generics `g_circuit`, `g_band` |
 | `compare.py` | Welch H1 per band, stitching, checks, `out/report.md`, Bode PNGs, `out/<id>_vhdl.csv` |
-| `run_sim.py` | the whole flow |
+| `run_sim.py` | the whole flow (`--rev 5.2` for the next board) |
+| `vhdl/rev5_2/meas_params_pkg.vhd` | 5.2 parameter sets (generated, committed) |
+| `spice/vendor_models.py` | TI vendor models: download, ngspice characterisation |
+| `spice/bias_buffer.py` | 5.2 U9 bias buffer: loop gain, phase margin, step, bias-node impedance |
+| `spice/shunt_esl.py` | 5.2 shunt ESL (0.5–1.2 nH) vs the feedback caps, 3 A / 20 ns edge |
+| `spice/mux_settling.py` | ADC mux leakage (5.1 fixes; `--rev 5.2`: every J2 output, slew-limited op-amps) |
+| `spice/ranges_5_2.py` | 5.2 gains, offsets (LMH6643 Vos), J2 output ranges |
 
 ## How the models are built
 
@@ -61,7 +91,7 @@ circuits 1–9 and the bias network with INVENTORY.md (73 R/C, 26 IC pins, 36 un
 mapped one-to-one), and the topology check confirms each role sits between the right
 nets (e.g. the + leg chain runs from the input net to the op-amp + pin).
 
-**One topology** covers all four groups of PLAN.md (see the header of
+**One topology** covers all four groups of PLAN.md (plus group E, divider + follower, in 5.2) (see the header of
 `vhdl/meas_models_pkg.vhd`): a + leg (input → 1–3 series sections, optionally with a parasitic C
 across each → NP → R ‖ C to the reference), a − leg (ground → 1–3 sections → NN → R ‖ C
 → VO), the op-amp, and an output R + C. The reference is either ground or the
