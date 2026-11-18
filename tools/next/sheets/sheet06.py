@@ -4,9 +4,9 @@ HEATER_CURRENT) driving the primary of TR2 through the resonance caps C49/C42 (D
 C41/C22 (shunt side) with the HEATER_CAP_MEAS node at TR2 pins 4/5; the synchronous rectifiers
 Q1 / Q2 on the secondary (Q14_DRAIN / Q13_DRAIN, sources on HT_GND); the 6V3 heater rail with its
 capacitor bank, the divider R54 / R55 -> HEATER_VOLTAGE_MEAS and the terminals HT_6V3 / HT_GND;
-the isolated high-side driver DRV3 (Si8271, EPWM5A -> HEATER_HI_GATE, bootstrap D11 / R99 / C25
-from 15V), the low-side driver DRV9 (IXDD609, EPWM6A -> HEATER_LOW_GATE through R37 and R31 + D33)
-and the rectifier gate driver DRV4 (IXDD604 on 6V3, EPWM6A_ISO / EPWM5A_ISO -> HEATER_SYNC_GATE_1/2).
+5.2: the half-bridge driver DRV3 (UCC21520, EPWM5A / EPWM6A -> HEATER_HI_GATE / HEATER_LOW_GATE, bootstrap
+D11 / R99 / C25 from 15V; replaces the 5.1 Si8271 DRV3 + IXDD609 DRV9) and the rectifier gate driver DRV4
+(UCC27524A on 6V3, EPWM6A_ISO / EPWM5A_ISO -> HEATER_SYNC_GATE_1/2; was IXDD604). Q10 / Q11 = IPD60R280P7S (DPAK).
 
 PDF: DC- = GND, HT_AUX = 6V3, heater_current / heater_cap_meas / q13_drain / EPWMxA_iso = the IPC
 names. The PDF transformer symbol has centre-tap pins on both windings that have no footprint pad
@@ -142,72 +142,52 @@ power_at(sh, "HT_GND", rb2, "down")
 glabel_right(sh, "HEATER_VOLTAGE_MEAS", node, 4)
 sh.text("6V3 and HT_GND enter the board through the terminals HT_6V3 / HT_GND: PWR_FLAGs here (moved from sheet 3).", X0 - g(4), GR + g(16))
 
-# --- DRV3: Si8271 isolated high-side driver ---------------------------------------------------
-DX, DY = g(74), g(110)
-d3 = sh.place("SI8271", "DRV3", DX, DY, value=sh_value("DRV3"))
-VDD1, VIN, EN, GND1 = d3.pin(2), d3.pin(1), d3.pin(4), d3.pin(3)
-VDD2, OUTP, OUTM, GND2 = d3.pin(8), d3.pin(7), d3.pin(6), d3.pin(5)
-xs = DX - g(12)
-sh.wire(VDD1, (xs, VDD1[1]), (xs, VDD1[1] - g(4)))
-power_at(sh, "5V", (xs, VDD1[1] - g(4)), "up")
-sh.wire(EN, left(EN, 2))
-power_at(sh, "5V", left(EN, 2), "left")
-sh.wire(GND1, (xs, GND1[1]))
-power_at(sh, "GND", (xs, GND1[1]), "down")
-sh.wire(VIN, (DX - g(32), VIN[1]))
-sh.glabel("EPWM5A", DX - g(32), VIN[1], 180)
-_, rt, rb = vert2(sh, "R", "R78", DX - g(28), VIN[1] + g(3), sh_value("R78"), top=2)   # pin 2 = EPWM5A
-sh.junction(*rt)
-power_at(sh, "GND", rb, "down")
-for x, ref, net in ((DX - g(44), "C53", "5V"), (DX - g(54), "C18", "15V")):           # decoupling, standalone pairs
-    _, ct, cb = vert2(sh, "C", ref, x, DY - g(1), sh_value(ref), top=1, text="left")   # pin 1 = rail
-    sh.wire(ct, up(ct, 2))
-    power_at(sh, net, up(ct, 2), "up")
-    power_at(sh, "GND", cb, "down")
-# bootstrap: 15V -> D11 -> R99 -> VDD2, C25 VDD2 - GND2 (= HEATER_HI_SOURCE)
-BR = DY - g(14)
-sh.wire((DX - g(8), BR), (DX - g(5), BR))
-power_at(sh, "15V", (DX - g(8), BR), "up")
-_, da, dc = horiz2(sh, "D", "D11", DX - g(2), BR, sh_value("D11"), left="A")
-_, r2, r1 = horiz2(sh, "R", "R99", DX + g(8), BR, sh_value("R99"), left=2)             # pin 1 = VDD2 side
-sh.wire(dc, r2)
-xb, xc = DX + g(14), DX + g(48)
-sh.wire(r1, (xb, BR), (xb, VDD2[1]), VDD2)
-sh.wire((xb, BR), (xc, BR))
-sh.junction(xb, BR)
-sh.pwr_flag(DX + g(30), BR, 0)                      # permanent: VDD2 fed through D11 / R99 only
-sh.junction(DX + g(30), BR)
-_, ct, cb = vert2(sh, "C", "C25", xc, DY - g(2), sh_value("C25"), top=1)              # pin 1 = VDD2
-sh.wire((xc, BR), ct)
-BOT = DY + g(8)
-sh.wire(cb, (xc, BOT), (xb, BOT), (xb, GND2[1]), GND2)
-sh.wire((xc, BOT), (xc + g(4), BOT))
-sh.junction(xc, BOT)
-sh.label("HEATER_HI_SOURCE", xc + g(4), BOT, 0)
-sh.pwr_flag(DX + g(30), BOT, 180)                   # permanent: the high-side return is a MOSFET node
-sh.junction(DX + g(30), BOT)
-# outputs: OUT+ -> R24, OUT- -> R59, joined into HEATER_HI_GATE
-_, pl, pr = horiz2(sh, "R", "R24", DX + g(20), OUTP[1], sh_value("R24"), left=1, text="above")   # pin 1 = OUT+
-_, ml, mr = horiz2(sh, "R", "R59", DX + g(20), OUTM[1], sh_value("R59"), left=1, text="below")   # pin 1 = OUT-
-sh.wire(OUTP, pl)
-sh.wire(OUTM, ml)
-xo = DX + g(26)
-sh.wire(pr, (xo, OUTP[1]), (xo, OUTM[1]))
-sh.wire(mr, (DX + g(30), OUTM[1]))
-sh.junction(xo, OUTM[1])
-sh.label("HEATER_HI_GATE", DX + g(30), OUTM[1], 0)
-sh.text("Si8271: PWR_FLAGs on VDD2 (bootstrap through D11 / R99) and on the high-side return HEATER_HI_SOURCE.", DX - g(40), BOT + g(8))
+# --- DRV3: UCC21520 isolated half-bridge driver for Q11 (high) / Q10 (low) - 5.2, NR 3a ----------------
+# Replaces the 5.1 pair DRV3 (Si8271, high side) + DRV9 (IXDD609, low side). INA = EPWM5A -> OUTA (high
+# side, bootstrap D11 / R99 / C25 from 15V on VDDA / VSSA = HEATER_HI_SOURCE), INB = EPWM6A -> OUTB (low
+# side, VDDB = 15V, VSSB = GND); DISABLE tied low; dead time R130 10k = 100 ns backstop.
+ucc21520_cell(sh, "DRV3", g(90), g(124), vdd="5V", gnd="GND",
+              pwm=("EPWM5A", ("R78", "10k")), nc1=("EPWM6A", ("R77", "10k")), dt=("R130", "10k", "C121", "100p"),
+              cdec=("C53", "100n", 1), boot=(("D11", sh_value("D11")), ("R99", sh_value("R99")), ("C25", "1u", 1)),
+              rail="15V", railcaps=[("C52", "4.7u", 1), ("C18", "10u", 1)], boot_side="A",
+              vo_hi="HEATER_HI_DRV", src_hi="HEATER_HI_SOURCE", vo_lo="HEATER_LOW_DRV", local=True)
 
-# --- DRV9: IXDD609 low-side driver (EPWM6A -> HEATER_LOW_GATE via R37 and R31 + D33) ----------
-ixdd609_cell(sh, "DRV9", g(74), g(154), vcc="15V", gnd="GND", in_label="EPWM6A", r_in=("R77", "10k"),
-             cdec=("C52", "4.7u", 1), r_out=[("R37", "10R"), ("R31", "3.3R")], out_label="HEATER_LOW_GATE",
-             r_gate=("R66", "10k"), diode=("D33", "ZLLS400TA"), local=True, r_gate_top=1)
 
-# --- DRV4: IXDD604 dual driver on 6V3 for the synchronous rectifiers ---------------------------
+def gate_pair(x, y, drv, r_on, r_off, d, gate, pull=None):
+    """Driver output label `drv` at (x, y) -> r_on (turn-on) || r_off + Schottky d (cathode at r_off,
+    anode at the gate: turn-off path) -> gate label; optional pull-down (rref, rval) gate - GND."""
+    sh.label(drv, x, y, 180)
+    _, al, ar = horiz2(sh, "R", r_on, x + g(8), y, sh_value(r_on), left=1, text="above")       # pin 1 = driver
+    rowb = y + g(5)
+    _, bl, br = horiz2(sh, "R", r_off, x + g(8), rowb, sh_value(r_off), left=1, text="below")  # pin 1 = driver
+    _, dc, da = horiz2(sh, "D_Schottky", d, x + g(15), rowb, sh_value(d), left="C", text="below")
+    xj = x + g(20)
+    sh.wire((x, y), al)
+    sh.wire((x + g(2), y), (x + g(2), rowb), bl)
+    sh.junction(x + g(2), y)
+    sh.wire(br, dc)
+    sh.wire(ar, (xj, y), (xj + g(8), y))
+    sh.wire(da, (xj, rowb), (xj, y))
+    sh.junction(xj, y)
+    sh.label(gate, xj + g(8), y, 0)
+    if pull:
+        rref, rval = pull
+        _, rt, rb = vert2(sh, "R", rref, xj + g(4), y + g(3), rval, top=1, text="right")   # pin 1 = gate
+        sh.junction(*rt)
+        power_at(sh, "GND", rb, "down")
+
+
+# gate networks (5.1: the Si8271 split outputs OUT+ R24 / OUT- R59, the IXDD609 R37 || R31 + D33, R66)
+gate_pair(g(160), g(150), "HEATER_HI_DRV", "R24", "R59", "D35", "HEATER_HI_GATE")
+gate_pair(g(160), g(166), "HEATER_LOW_DRV", "R37", "R31", "D33", "HEATER_LOW_GATE", pull=("R66", "10k"))
+sh.text("5.2: DRV3 = UCC21520DWR drives both heater LLC switches (Q10 / Q11 = IPD60R280P7S DPAK, NR 5.4); DRV9 removed.", g(150), g(180))
+sh.text("High side: R24 turn-on, D35 + R59 turn-off (was the Si8271 OUT+ / OUT- pair); low side as the 5.1 IXDD609 output network.", g(150), g(183))
+
+# --- DRV4: UCC27524A dual low-side driver on 6V3 for the synchronous rectifiers (5.2, NR 3a; was IXDD604) ---------------------------
 DX, DY = g(236), g(120)
-d4 = sh.place("IXDD604", "DRV4", DX, DY, value=sh_value("DRV4"))
-VCC, ENA, INA, INB, ENB = (d4.pin(n) for n in (6, 1, 2, 3, 4))
-OUTA, OUTB, GNDP, TAB = (d4.pin(n) for n in (8, 5, 7, 9))
+d4 = sh.place("UCC27524A", "DRV4", DX, DY, value=sh_value("DRV4"))
+VCC, ENA, INA, INB, ENB = (d4.pin(n) for n in (6, 1, 2, 4, 8))
+OUTA, OUTB, GNDP = (d4.pin(n) for n in (7, 5, 3))
 xs = DX - g(12)
 sh.wire(VCC, (xs, VCC[1]), (xs, VCC[1] - g(8)))
 power_at(sh, "6V3", (xs, VCC[1] - g(8)), "up")
@@ -238,10 +218,8 @@ sh.wire(OUTB, bl)
 sh.wire(br, (DX + g(32), OUTB[1]))
 sh.label("HEATER_SYNC_GATE_2", DX + g(32), OUTB[1], 0)
 xgb = DX + g(10)
-sh.wire(GNDP, (xgb, GNDP[1]), (xgb, TAB[1] + g(4)))
-sh.wire(TAB, (xgb, TAB[1]))
-sh.junction(xgb, TAB[1])
-power_at(sh, "HT_GND", (xgb, TAB[1] + g(4)), "down")
+sh.wire(GNDP, (xgb, GNDP[1]), (xgb, GNDP[1] + g(6)))
+power_at(sh, "HT_GND", (xgb, GNDP[1] + g(6)), "down")
 
 sh.text("PDF aliases: DC- = GND, HT_AUX = 6V3, heater_current / heater_cap_meas / q13_drain / EPWM5A_iso / EPWM6A_iso = IPC names.", g(36), g(190))
 sh.save()

@@ -1,18 +1,20 @@
 #!/usr/bin/env python3
-"""Sheet 9 - AC measurement (PDF page 9): the two PFC MOSFET drivers DRV1 / DRV2 (IXDD609,
+"""Sheet 9 - AC measurement (PDF page 9): the two PFC MOSFET drivers DRV1 / DRV2 (5.2: UCC27511A; 5.1 IXDD609,
 PFC_PWM1/2 -> GATE1/2) and the mains voltage difference amplifier U8 (TLV316) from AC1 / AC2
 through 3 x 1M per leg, biased at +1V65_BIAS, output VAC_MEAS."""
 from _common import *  # noqa: F401,F403
 
 sh = sheet("09_ac_measurement.kicad_sch")
 
-# PDF labels pfc_pwm1/2 and gate1/2 = IPC nets PFC_PWM1/2 and GATE1/2
-ixdd609_cell(sh, "DRV1", g(60), g(40), vcc="15V", gnd="GND", in_label="PFC_PWM1", r_in=("R71", "10k"),
-             cdec=("C79", "4.7u", 1), r_out=[("R14", "5R"), ("R1", "5R")], out_label="GATE1",
-             r_gate=("R43", "10k"))
-ixdd609_cell(sh, "DRV2", g(170), g(40), vcc="15V", gnd="GND", in_label="PFC_PWM2", r_in=("R69", "10k"),
-             cdec=("C80", "4.7u", 1), r_out=[("R20", "5R"), ("R19", "5R")], out_label="GATE2",
-             r_gate=("R7", "10k"))
+# PDF labels pfc_pwm1/2 and gate1/2 = IPC nets PFC_PWM1/2 and GATE1/2.
+# 5.2 (NR 3a): DRV1 / DRV2 = UCC27511ADBVR (SOT-23-6, split outputs: R14 / R20 turn-on on OUTH, R1 / R19
+# turn-off on OUTL; was the IXDD609 with both resistors in parallel).
+ucc27511_cell(sh, "DRV1", g(60), g(40), vcc="15V", gnd="GND", in_label="PFC_PWM1", r_in=("R71", "10k"),
+              cdec=("C79", "4.7u", 1), r_on=("R14", "5R"), r_off=("R1", "5R"), out_label="GATE1",
+              r_gate=("R43", "10k"))
+ucc27511_cell(sh, "DRV2", g(170), g(40), vcc="15V", gnd="GND", in_label="PFC_PWM2", r_in=("R69", "10k"),
+              cdec=("C80", "4.7u", 1), r_on=("R20", "5R"), r_off=("R19", "5R"), out_label="GATE2",
+              r_gate=("R7", "10k"))
 
 # --- difference amplifier -----------------------------------------------------------------
 AX, AY = g(100), g(120)

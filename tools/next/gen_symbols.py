@@ -135,8 +135,9 @@ def build():
             [(5, "C", PAS), (6, "C", PAS), (4, "NC", NC), None, (3, "GND", PI), (8, "GND", PI)],
             desc="Flyback controller with integrated 800 V BJT, SO-10 batwing (iW1819-00, NR 1.5)"),
         # UCC21520 (TI SLUSCJ9): same SOIC-16W pin positions as the Si8275 (5 = DISABLE, 6 = DT).
-        box("UCC21520", "DRV", [(3, "VCCI", PI), (8, "VCCI", PI), (1, "INA", IN), (2, "INB", IN), (5, "DIS", IN),
-                                (6, "DT", PAS), (4, "GND", PI), (7, "NC", NC)],
+        # (left pin order as on the 5.1 SI8275 symbol, so the sheet-2 driver cell keeps its geometry)
+        box("UCC21520", "DRV", [(3, "VCCI", PI), (8, "VCCI", PI), (1, "INA", IN), (5, "DIS", IN), (6, "DT", PAS),
+                                (4, "GND", PI), (2, "INB", IN), (7, "NC", NC)],
             [(16, "VDDA", PI), (15, "OUTA", OUT), (14, "VSSA", PI), (13, "NC", NC), (12, "NC", NC),
              (11, "VDDB", PI), (10, "OUTB", OUT), (9, "VSSB", PI)],
             desc="Isolated dual gate driver 4 A / 6 A, 5.7 kVrms reinforced, SOIC-16W (UCC21520DWR, NR 3a)"),

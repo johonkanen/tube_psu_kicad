@@ -138,20 +138,19 @@ D32,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extend
 D33,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extended,5662,0.2931,2026-11-17,exact,,
 D34,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extended,5662,0.2931,2026-11-17,exact,,
 DB1,TBS22K,tube_psu:D_Bridge_TBS,,,,,,,2026-11-17,missing,not available,TBS22K not stocked at JLC (TBS22K-TP 0); no same-footprint TBS bridge >=100 stock; consign or global sourcing
-DRV1,IXDD609D2TR,tube_psu:DFN-8-1EP_P0.95mm_IXDD60xD2,,,,,,,2026-11-17,missing,not available,IXDD609D2TR (DFN-8) 0 stock; only SOIC-8 / DIP IXDD609/IXDN609 stocked (footprint change); consign or global sourcing
-DRV2,IXDD609D2TR,tube_psu:DFN-8-1EP_P0.95mm_IXDD60xD2,,,,,,,2026-11-17,missing,not available,IXDD609D2TR (DFN-8) 0 stock; only SOIC-8 / DIP IXDD609/IXDN609 stocked (footprint change); consign or global sourcing
-DRV3,SI8271,tube_psu:SOIC-8_3.9x4.9mm_P1.27mm_Proteus,C461855,SI8271DB-ISR,SKYWORKS/SILICON LABS,extended,3365,2.0215,2026-11-17,changed,"Si8271 grade not given: DB chosen, verify UVLO","Schematic SI8271 (no grade) -> SI8271DB-ISR, the only stocked grade (3365); check the UVLO grade suits the 15 V bootstrap supply"
-DRV4,IXDD604D2TR,tube_psu:DFN-8-1EP_P0.95mm_IXDD60xD2,,,,,,,2026-11-17,missing,not available,IXDD604D2TR (DFN-8) 0 stock; consign or global sourcing
-DRV5,SI8275BB,tube_psu:SOIC-16_3.9x9.9mm_P1.27mm_Proteus,,,,,,,2026-11-17,missing,not available,"Si8275BB-IS1 0 stock (GB-IS1 9, ABD/GBD < 40); consign or global sourcing"
-DRV6,SI8275BB,tube_psu:SOIC-16_3.9x9.9mm_P1.27mm_Proteus_KiCadPads,,,,,,,2026-11-17,missing,not available,"Si8275BB-IS1 0 stock (GB-IS1 9, ABD/GBD < 40); consign or global sourcing"
-DRV9,IXDD609D2TR,tube_psu:DFN-8-1EP_P0.95mm_IXDD60xD2,,,,,,,2026-11-17,missing,not available,IXDD609D2TR (DFN-8) 0 stock; only SOIC-8 / DIP IXDD609/IXDN609 stocked (footprint change); consign or global sourcing
+DRV1,UCC27511ADBVR,Package_TO_SOT_SMD:SOT-23-6,C2676982,UCC27511ADBVR,Texas Instruments,extended,6178,0.3895,2026-11-18,changed,,5.2: IXDD609D2TR (0 stock) -> UCC27511ADBVR 4 A / 8 A split outputs (NR 3a)
+DRV2,UCC27511ADBVR,Package_TO_SOT_SMD:SOT-23-6,C2676982,UCC27511ADBVR,Texas Instruments,extended,6178,0.3895,2026-11-18,changed,,5.2: IXDD609D2TR (0 stock) -> UCC27511ADBVR 4 A / 8 A split outputs (NR 3a)
+DRV3,UCC21520DWR,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,C601651,UCC21520DWR,Texas Instruments,extended,41923,0.9418,2026-11-18,changed,,5.2: Si8271 DRV3 + IXDD609 DRV9 -> one UCC21520DWR for the heater LLC half-bridge Q11 / Q10 (NR 3a)
+DRV4,UCC27524ADR,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,C185857,UCC27524ADR,Texas Instruments,extended,20290,0.249,2026-11-18,changed,,5.2: IXDD604D2TR (0 stock) -> UCC27524ADR dual 5 A low-side on 6V3 (NR 3a)
+DRV5,UCC21520DWR,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,C601651,UCC21520DWR,Texas Instruments,extended,41923,0.9418,2026-11-18,changed,,"5.2: Si8275BB (0 stock) -> UCC21520DWR isolated dual driver, 5.7 kVrms reinforced, 8 V UVLO, DT + DISABLE (NR 3a)"
+DRV6,UCC21520DWR,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,C601651,UCC21520DWR,Texas Instruments,extended,41923,0.9418,2026-11-18,changed,,5.2: Si8275BB (0 stock) -> UCC21520DWR (NR 3a); input side on the secondary via ISO2 as in 5.1
 GND,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
 HT_6V3,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
 HT_GND,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
 IN1,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
 IN2,PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
-ISO1,SI8661,tube_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,,,,,,,2026-11-17,missing,not available,"Si8661BD wide-body: 2 in stock (SI8661BD-B-ISR C25490831); candidate Chipanalog CA-IS3761LW C528659 (SOIC-16W, claimed Si866x pin-compatible, not verified); consign or global sourcing"
-ISO2,SI8661,tube_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,,,,,,,2026-11-17,missing,not available,"Si8661BD wide-body: 2 in stock (SI8661BD-B-ISR C25490831); candidate Chipanalog CA-IS3761LW C528659 (SOIC-16W, claimed Si866x pin-compatible, not verified); consign or global sourcing"
+ISO1,CA-IS3761LW,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,C528659,CA-IS3761LW,Chipanalog,extended,2315,1.8524,2026-11-18,changed,reinforced certificate to confirm,"5.2: Si8661BD (2 pcs) -> CA-IS3761LW, same pinout (1 VDDA, 2-6 in, 7 out, 8/9 GND, 10 in, 11-15 out, 16 VDDB; checked), default low, VIOWM 1000 Vrms (WB); datasheet 2019 lists VDE/UL/CQC as pending"
+ISO2,CA-IS3761LW,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,C528659,CA-IS3761LW,Chipanalog,extended,2315,1.8524,2026-11-18,changed,reinforced certificate to confirm,"5.2: Si8661BD (2 pcs) -> CA-IS3761LW, same pinout (1 VDDA, 2-6 in, 7 out, 8/9 GND, 10 in, 11-15 out, 16 VDDB; checked), default low, VIOWM 1000 Vrms (WB); datasheet 2019 lists VDE/UL/CQC as pending"
 J2,50 PIN HEADER 50TH,tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus,C69941,1.27-2*25PPin,BOOMELE(Boom Precision Elec),extended,2834,0.3033,2026-11-17,equivalent,J2 generic header: check gender / height,THT. 2x25 1.27 mm pin header (BOOMELE); check gender/height against the mating board
 J4,66226-003,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,C49257,2.54-1*3PPin,BOOMELE(Boom Precision Elec),extended,209824,0.029,2026-11-17,equivalent,,THT. 1x3 2.54 mm pin header for FCI 66226-003
 L1,200u,tube_psu:L_RM8_Proteus,,,,,,,2026-11-17,consigned,,RM8 inductors wound by the user
@@ -171,8 +170,8 @@ Q6,C2M0160120D,Package_TO_SOT_THT:TO-247-3_Vertical,,,,,,,2026-11-17,missing,not
 Q7,STF7N60M2,Package_TO_SOT_THT:TO-220-3_Vertical,,,,,,,2026-11-17,missing,not available,THT. STF7N60M2 2 in stock; consign or global sourcing
 Q8,STF7N60M2,Package_TO_SOT_THT:TO-220-3_Vertical,,,,,,,2026-11-17,missing,not available,THT. STF7N60M2 2 in stock; consign or global sourcing
 Q9,2n7000,tube_psu:SOT-23_Proteus,C82045,BSS138LT1G,onsemi,extended,304242,0.0413,2026-11-17,changed,value 2n7000 -> BSS138 (layout device),"schematic value 2n7000 (TO-92 part) on a SOT-23 footprint; Proteus layout device BSS138 -> onsemi BSS138LT1G (logic-level, 3.3 V GPIO drive of the relay)"
-Q10,IPA60R280CFD7XKSA1,Package_TO_SOT_THT:TO-220-3_Vertical,C536369,IPA60R280CFD7,Infineon Technologies,extended,15,1.4727,2026-11-17,exact,LOW STOCK 15 (< 100): 7 boards max,THT. IPA60R280CFD7 (Infineon; XKSA1 = packing suffix)
-Q11,IPA60R280CFD7XKSA1,Package_TO_SOT_THT:TO-220-3_Vertical,C536369,IPA60R280CFD7,Infineon Technologies,extended,15,1.4727,2026-11-17,exact,LOW STOCK 15 (< 100): 7 boards max,THT. IPA60R280CFD7 (Infineon; XKSA1 = packing suffix)
+Q10,IPD60R280P7S,Package_TO_SOT_SMD:TO-252-2,C536813,IPD60R280P7S,Infineon Technologies,extended,6503,1.0106,2026-11-18,changed,,"5.2: IPA60R280CFD7 (TO-220FP, 15 pcs) -> IPD60R280P7S DPAK (NR 5.4; standard body diode, check LLC commutation)"
+Q11,IPD60R280P7S,Package_TO_SOT_SMD:TO-252-2,C536813,IPD60R280P7S,Infineon Technologies,extended,6503,1.0106,2026-11-18,changed,,"5.2: IPA60R280CFD7 (TO-220FP, 15 pcs) -> IPD60R280P7S DPAK (NR 5.4; standard body diode, check LLC commutation)"
 Q19,STF7N60M2,Package_TO_SOT_THT:TO-220-3_Vertical,,,,,,,2026-11-17,missing,not available,THT. STF7N60M2 2 in stock; consign or global sourcing
 Q21,STF7N60M2,Package_TO_SOT_THT:TO-220-3_Vertical,,,,,,,2026-11-17,missing,not available,THT. STF7N60M2 2 in stock; consign or global sourcing
 R1,5R,Resistor_SMD:R_1206_3216Metric,C2999547,FRC1206F4R99TS,FOJAN,extended,50427,0.0051,2026-11-17,equivalent,"5 Ω -> 4.99 Ω (E96, -0.2 %)",4.99 Ω 1 % 1206 (E96) for 5 Ω gate resistors
@@ -199,7 +198,6 @@ R21,4m,tube_psu:R_0508_1220Metric_KRL2012,,,,,,,2026-11-17,missing,4 mΩ shunt n
 R22,10k,Resistor_SMD:R_0603_1608Metric,C25804,0603WAF1002T5E,UNI-ROYAL(Uniroyal Elec),basic,44852996,0.0019,2026-11-17,equivalent,,10 kΩ 1 % 0603
 R23,1M,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C17514,0805W8F1004T5E,UNI-ROYAL(Uniroyal Elec),basic,1523445,0.0044,2026-11-17,equivalent,,"1 MΩ 1 % 0805 (dividers: <= 140 V per resistor, 0805 rated 150 V; R23/R34/R39 on 420V are at the limit)"
 R24,10R,Resistor_SMD:R_1206_3216Metric,C17903,1206W4F100JT5E,UNI-ROYAL(Uniroyal Elec),basic,1331047,0.0061,2026-11-17,equivalent,,10 Ω 1 % 1206
-R25,82k,Resistor_SMD:R_0603_1608Metric,C23254,0603WAF8202T5E,UNI-ROYAL(Uniroyal Elec),basic,902328,0.0027,2026-11-17,equivalent,,82 kΩ 1 % 0603 (on the Si8275 NC pin 6)
 R26,40R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C2933439,FRC0805F40R2TS,FOJAN,extended,32581,0.0026,2026-11-17,equivalent,"40 Ω -> 40.2 Ω (E96, +0.5 %)",40.2 Ω 1 % 0805 (E96) for 40 Ω
 R27,47R,Resistor_THT:R_Radial_Power_L13.0mm_W9.0mm_P5.00mm,,,,,,,2026-11-17,missing,not available,THT. Ohmite TWW10 47 Ω 10 W radial (TWW10J47RE) not stocked; consign
 R28,4.7R,tube_psu:R_0805_2012Metric_Proteus2.13,C17675,0805W8F470KT5E,UNI-ROYAL(Uniroyal Elec),basic,157492,0.0154,2026-11-17,equivalent,,4.7 Ω 1 % 0805 (footprint 0805; Proteus device says RES 1206)
@@ -214,7 +212,6 @@ R36,10k,Resistor_SMD:R_0603_1608Metric,C25804,0603WAF1002T5E,UNI-ROYAL(Uniroyal 
 R37,10R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C17415,0805W8F100JT5E,UNI-ROYAL(Uniroyal Elec),basic,4820165,0.004,2026-11-17,equivalent,,10 Ω 1 % 0805
 R38,15k,Resistor_SMD:R_0603_1608Metric,C22809,0603WAF1502T5E,UNI-ROYAL(Uniroyal Elec),basic,3013077,0.0029,2026-11-17,equivalent,,15 kΩ 1 % 0603
 R39,1M,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C17514,0805W8F1004T5E,UNI-ROYAL(Uniroyal Elec),basic,1523445,0.0044,2026-11-17,equivalent,,"1 MΩ 1 % 0805 (dividers: <= 140 V per resistor, 0805 rated 150 V; R23/R34/R39 on 420V are at the limit)"
-R40,82k,tube_psu:R_0603_1608Metric_Proteus1.73,C23254,0603WAF8202T5E,UNI-ROYAL(Uniroyal Elec),basic,902328,0.0027,2026-11-17,equivalent,,82 kΩ 1 % 0603 (on the Si8275 NC pin 6)
 R41,2R,Resistor_SMD:R_1206_3216Metric,C2907381,FRC1206F2R00TS,FOJAN,extended,1911485,0.0065,2026-11-17,equivalent,,2 Ω 1 % 1206
 R42,33,Resistor_SMD:R_0603_1608Metric,C23140,0603WAF330JT5E,UNI-ROYAL(Uniroyal Elec),basic,3006500,0.0024,2026-11-17,equivalent,,33 Ω 1 % 0603
 R43,10k,Resistor_SMD:R_0603_1608Metric,C25804,0603WAF1002T5E,UNI-ROYAL(Uniroyal Elec),basic,44852996,0.0019,2026-11-17,equivalent,,10 kΩ 1 % 0603
@@ -318,3 +315,12 @@ V3,MIC5205,tube_psu:SOT-23-5_Proteus,C37970,MIC5205-3.3YM5-TR,Microchip Tech,ext
 V4,TPS73033,tube_psu:SOT-23-5_Proteus,C57424,TPS73033DBVR,Texas Instruments,extended,3588,0.6111,2026-11-17,exact,,TPS73033DBVR
 R125,2.2k,Resistor_SMD:R_1206_3216Metric,C17948,1206W4F2201T5E,UNI-ROYAL(Uniroyal Elec),extended,207003,0.0053,2026-11-18,exact,,"new: 15V preload 2.2 kOhm 1206 0.25 W (NR 1.7, 102 mW)"
 R126,1k,Resistor_SMD:R_0805_2012Metric,C17513,0805W8F1001T5E,UNI-ROYAL(Uniroyal Elec),basic,39104446,0.0035,2026-11-18,exact,,"new: 5V preload 1 kOhm 0805 (NR 1.7, 25 mW)"
+R127,10k,Resistor_SMD:R_0603_1608Metric,C25804,0603WAF1002T5E,UNI-ROYAL(Uniroyal Elec),basic,44852996,0.0019,2026-11-18,equivalent,,new: UCC21520 dead-time resistor 10k = 100 ns (NR 3a)
+R128,10k,Resistor_SMD:R_0603_1608Metric,C25804,0603WAF1002T5E,UNI-ROYAL(Uniroyal Elec),basic,44852996,0.0019,2026-11-18,equivalent,,new: UCC21520 dead-time resistor 10k = 100 ns (NR 3a)
+R130,10k,Resistor_SMD:R_0603_1608Metric,C25804,0603WAF1002T5E,UNI-ROYAL(Uniroyal Elec),basic,44852996,0.0019,2026-11-18,equivalent,,new: UCC21520 dead-time resistor 10k = 100 ns (NR 3a)
+C118,100p,Capacitor_SMD:C_0603_1608Metric,C14858,CL10C101JB8NNNC,Samsung Electro-Mechanics,basic,3243973,0.0085,2026-11-18,equivalent,,new: UCC21520 DT noise cap 100 pF C0G (datasheet <= 1 nF)
+C119,100p,Capacitor_SMD:C_0603_1608Metric,C14858,CL10C101JB8NNNC,Samsung Electro-Mechanics,basic,3243973,0.0085,2026-11-18,equivalent,,new: UCC21520 DT noise cap 100 pF C0G (datasheet <= 1 nF)
+C121,100p,Capacitor_SMD:C_0603_1608Metric,C14858,CL10C101JB8NNNC,Samsung Electro-Mechanics,basic,3243973,0.0085,2026-11-18,equivalent,,new: UCC21520 DT noise cap 100 pF C0G (datasheet <= 1 nF)
+R129,10k,Resistor_SMD:R_0603_1608Metric,C25804,0603WAF1002T5E,UNI-ROYAL(Uniroyal Elec),basic,44852996,0.0019,2026-11-18,equivalent,,"new: DAB_DIS pull-down (DRV5 DISABLE, NR 3.3)"
+C120,1n,Capacitor_SMD:C_0603_1608Metric,C106246,CC0603JRNPO9BN102,YAGEO,extended,456648,0.0056,2026-11-18,equivalent,,new: DRV5 DISABLE bypass 1 nF C0G (UCC21520 datasheet)
+D35,ZLLS400TA,tube_psu:D_SOD-323_AC,C460267,ZLLS400TA,Diodes Incorporated,extended,5662,0.2931,2026-11-18,exact,,new: heater high-side turn-off diode (UCC21520 has one output per channel)

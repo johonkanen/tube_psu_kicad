@@ -564,6 +564,10 @@
       },
       {
         "netclass": "HV_PRIMARY",
+        "pattern": "/06 Heaters/HEATER_HI_DRV"
+      },
+      {
+        "netclass": "HV_PRIMARY",
         "pattern": "/06 Heaters/HEATER_HI_GATE"
       },
       {
@@ -616,19 +620,15 @@
       },
       {
         "netclass": "HV_PRIMARY",
+        "pattern": "Net-(D35-K)"
+      },
+      {
+        "netclass": "HV_PRIMARY",
         "pattern": "Net-(D7-K)"
       },
       {
         "netclass": "HV_PRIMARY",
-        "pattern": "Net-(DRV3-OUT+)"
-      },
-      {
-        "netclass": "HV_PRIMARY",
-        "pattern": "Net-(DRV3-OUT-)"
-      },
-      {
-        "netclass": "HV_PRIMARY",
-        "pattern": "Net-(DRV3-VDD2)"
+        "pattern": "Net-(DRV3-VDDA)"
       },
       {
         "netclass": "HV_PRIMARY",
@@ -796,6 +796,10 @@
       },
       {
         "netclass": "SECONDARY_LV",
+        "pattern": "DAB_DIS_SEC"
+      },
+      {
+        "netclass": "SECONDARY_LV",
         "pattern": "DHB_LOW_GATE_SEC"
       },
       {
@@ -836,7 +840,7 @@
       },
       {
         "netclass": "SECONDARY_LV",
-        "pattern": "Net-(DRV6-NC6)"
+        "pattern": "Net-(DRV6-DT)"
       },
       {
         "netclass": "SECONDARY_LV",
@@ -868,19 +872,15 @@
       },
       {
         "netclass": "SECONDARY_LV",
-        "pattern": "unconnected-(DRV6-NC12-Pad12)"
+        "pattern": "unconnected-(DRV6-NC-Pad12)"
       },
       {
         "netclass": "SECONDARY_LV",
-        "pattern": "unconnected-(DRV6-NC13-Pad13)"
+        "pattern": "unconnected-(DRV6-NC-Pad13)"
       },
       {
         "netclass": "SECONDARY_LV",
-        "pattern": "unconnected-(DRV6-NC7-Pad7)"
-      },
-      {
-        "netclass": "SECONDARY_LV",
-        "pattern": "unconnected-(ISO2-VO_C-Pad13)"
+        "pattern": "unconnected-(DRV6-NC-Pad7)"
       },
       {
         "netclass": "SIGNAL",
@@ -929,10 +929,6 @@
       {
         "netclass": "SIGNAL",
         "pattern": "/04 MCU connector/EPWM1A"
-      },
-      {
-        "netclass": "SIGNAL",
-        "pattern": "/04 MCU connector/F16"
       },
       {
         "netclass": "SIGNAL",
@@ -992,6 +988,10 @@
       },
       {
         "netclass": "SIGNAL",
+        "pattern": "/06 Heaters/HEATER_LOW_DRV"
+      },
+      {
+        "netclass": "SIGNAL",
         "pattern": "/06 Heaters/HEATER_LOW_GATE"
       },
       {
@@ -1005,6 +1005,10 @@
       {
         "netclass": "SIGNAL",
         "pattern": "CUK_SDATA"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "DAB_DIS"
       },
       {
         "netclass": "SIGNAL",
@@ -1100,19 +1104,27 @@
       },
       {
         "netclass": "SIGNAL",
-        "pattern": "Net-(DRV1-OUTA)"
+        "pattern": "Net-(DRV1-OUTH)"
       },
       {
         "netclass": "SIGNAL",
-        "pattern": "Net-(DRV2-OUTA)"
+        "pattern": "Net-(DRV1-OUTL)"
       },
       {
         "netclass": "SIGNAL",
-        "pattern": "Net-(DRV5-NC6)"
+        "pattern": "Net-(DRV2-OUTH)"
       },
       {
         "netclass": "SIGNAL",
-        "pattern": "Net-(DRV9-OUTA)"
+        "pattern": "Net-(DRV2-OUTL)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "Net-(DRV3-DT)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "Net-(DRV5-DT)"
       },
       {
         "netclass": "SIGNAL",
@@ -1244,15 +1256,27 @@
       },
       {
         "netclass": "SIGNAL",
-        "pattern": "unconnected-(DRV5-NC12-Pad12)"
+        "pattern": "unconnected-(DRV3-NC-Pad12)"
       },
       {
         "netclass": "SIGNAL",
-        "pattern": "unconnected-(DRV5-NC13-Pad13)"
+        "pattern": "unconnected-(DRV3-NC-Pad13)"
       },
       {
         "netclass": "SIGNAL",
-        "pattern": "unconnected-(DRV5-NC7-Pad7)"
+        "pattern": "unconnected-(DRV3-NC-Pad7)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "unconnected-(DRV5-NC-Pad12)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "unconnected-(DRV5-NC-Pad13)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "unconnected-(DRV5-NC-Pad7)"
       },
       {
         "netclass": "SIGNAL",

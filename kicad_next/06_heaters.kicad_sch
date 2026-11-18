@@ -2050,7 +2050,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "tube_psu_next:SI8271"
+		(symbol "tube_psu_next:UCC21520"
 			(pin_names
 				(offset 1.016)
 			)
@@ -2058,7 +2058,7 @@
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "DRV"
-				(at -7.62 8.89 0)
+				(at -7.62 13.97 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2066,8 +2066,8 @@
 					(justify left)
 				)
 			)
-			(property "Value" "SI8271"
-				(at -7.62 -6.35 0)
+			(property "Value" "UCC21520"
+				(at -7.62 -11.43 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2093,7 +2093,7 @@
 					)
 				)
 			)
-			(property "Description" "Isolated single gate driver SOIC-8"
+			(property "Description" "Isolated dual gate driver 4 A / 6 A, 5.7 kVrms reinforced, SOIC-16W (UCC21520DWR, NR 3a)"
 				(at 0 0 0)
 				(hide yes)
 				(effects
@@ -2102,10 +2102,10 @@
 					)
 				)
 			)
-			(symbol "SI8271_0_1"
+			(symbol "UCC21520_0_1"
 				(rectangle
-					(start -7.62 7.62)
-					(end 7.62 -5.08)
+					(start -7.62 12.7)
+					(end 7.62 -10.16)
 					(stroke
 						(width 0.254)
 						(type default)
@@ -2115,65 +2115,11 @@
 					)
 				)
 			)
-			(symbol "SI8271_1_1"
+			(symbol "UCC21520_1_1"
 				(pin power_in line
-					(at -10.16 5.08 0)
+					(at -10.16 10.16 0)
 					(length 2.54)
-					(name "VDD1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -10.16 2.54 0)
-					(length 2.54)
-					(name "Vin"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -10.16 0 0)
-					(length 2.54)
-					(name "EN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at -10.16 -2.54 0)
-					(length 2.54)
-					(name "GND1"
+					(name "VCCI"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2189,9 +2135,9 @@
 					)
 				)
 				(pin power_in line
-					(at 10.16 5.08 180)
+					(at -10.16 7.62 0)
 					(length 2.54)
-					(name "VDD2"
+					(name "VCCI"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2206,17 +2152,17 @@
 						)
 					)
 				)
-				(pin output line
-					(at 10.16 2.54 180)
+				(pin input line
+					(at -10.16 5.08 0)
 					(length 2.54)
-					(name "OUT+"
+					(name "INA"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "7"
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2224,10 +2170,28 @@
 						)
 					)
 				)
-				(pin output line
-					(at 10.16 0 180)
+				(pin input line
+					(at -10.16 2.54 0)
 					(length 2.54)
-					(name "OUT-"
+					(name "DIS"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -10.16 0 0)
+					(length 2.54)
+					(name "DT"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2243,16 +2207,196 @@
 					)
 				)
 				(pin power_in line
-					(at 10.16 -2.54 180)
+					(at -10.16 -2.54 0)
 					(length 2.54)
-					(name "GND2"
+					(name "GND"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "5"
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -5.08 0)
+					(length 2.54)
+					(name "INB"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at -10.16 -7.62 0)
+					(length 2.54)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 10.16 10.16 180)
+					(length 2.54)
+					(name "VDDA"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 10.16 7.62 180)
+					(length 2.54)
+					(name "OUTA"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 10.16 5.08 180)
+					(length 2.54)
+					(name "VSSA"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 10.16 2.54 180)
+					(length 2.54)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 10.16 0 180)
+					(length 2.54)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 10.16 -2.54 180)
+					(length 2.54)
+					(name "VDDB"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 10.16 -5.08 180)
+					(length 2.54)
+					(name "OUTB"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 10.16 -7.62 180)
+					(length 2.54)
+					(name "VSSB"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2381,145 +2525,6 @@
 				)
 			)
 			(symbol "5V_1_1"
-				(pin power_in line
-					(at 0 0 90)
-					(length 0)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "tube_psu_next:15V"
-			(power global)
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "#PWR"
-				(at 0 -3.81 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "15V"
-				(at 0 3.556 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Power symbol for net \"15V\" (IPC net name)"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "global power"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "15V_0_1"
-				(polyline
-					(pts
-						(xy -0.762 1.27) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "15V_1_1"
 				(pin power_in line
 					(at 0 0 90)
 					(length 0)
@@ -2707,33 +2712,45 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "tube_psu_next:IXDD609"
+		(symbol "tube_psu_next:15V"
+			(power global)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 1.016)
+				(offset 0)
+				(hide yes)
 			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "DRV"
-				(at -7.62 8.89 0)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
 				)
 			)
-			(property "Value" "IXDD609"
-				(at -7.62 -8.89 0)
+			(property "Value" "15V"
+				(at 0 3.556 0)
+				(show_name no)
+				(do_not_autoplace no)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
 				)
 			)
 			(property "Footprint" ""
 				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
 				(hide yes)
 				(effects
 					(font
@@ -2743,6 +2760,8 @@
 			)
 			(property "Datasheet" ""
 				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
 				(hide yes)
 				(effects
 					(font
@@ -2750,8 +2769,10 @@
 					)
 				)
 			)
-			(property "Description" "9 A gate driver DFN-8 with thermal pad"
+			(property "Description" "Power symbol for net \"15V\" (IPC net name)"
 				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
 				(hide yes)
 				(effects
 					(font
@@ -2759,24 +2780,60 @@
 					)
 				)
 			)
-			(symbol "IXDD609_0_1"
-				(rectangle
-					(start -7.62 7.62)
-					(end 7.62 -7.62)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "15V_0_1"
+				(polyline
+					(pts
+						(xy -0.762 1.27) (xy 0 2.54)
+					)
 					(stroke
-						(width 0.254)
+						(width 0)
 						(type default)
 					)
 					(fill
-						(type background)
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
 					)
 				)
 			)
-			(symbol "IXDD609_1_1"
+			(symbol "15V_1_1"
 				(pin power_in line
-					(at -10.16 5.08 0)
-					(length 2.54)
-					(name "VCC"
+					(at 0 0 90)
+					(length 0)
+					(name ""
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2784,150 +2841,6 @@
 						)
 					)
 					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at -10.16 2.54 0)
-					(length 2.54)
-					(name "VCC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -10.16 0 0)
-					(length 2.54)
-					(name "IN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -10.16 -2.54 0)
-					(length 2.54)
-					(name "EN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 10.16 5.08 180)
-					(length 2.54)
-					(name "OUTA"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 10.16 2.54 180)
-					(length 2.54)
-					(name "OUTB"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 10.16 0 180)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 10.16 -2.54 180)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 10.16 -5.08 180)
-					(length 2.54)
-					(name "TAB"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3104,7 +3017,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "tube_psu_next:IXDD604"
+		(symbol "tube_psu_next:UCC27524A"
 			(pin_names
 				(offset 1.016)
 			)
@@ -3120,7 +3033,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "IXDD604"
+			(property "Value" "UCC27524A"
 				(at -7.62 -8.89 0)
 				(effects
 					(font
@@ -3147,7 +3060,7 @@
 					)
 				)
 			)
-			(property "Description" "Dual 4 A gate driver DFN-8 with thermal pad"
+			(property "Description" "Dual 5 A low-side gate driver, SOIC-8 (UCC27524ADR, NR 3a)"
 				(at 0 0 0)
 				(hide yes)
 				(effects
@@ -3156,7 +3069,7 @@
 					)
 				)
 			)
-			(symbol "IXDD604_0_1"
+			(symbol "UCC27524A_0_1"
 				(rectangle
 					(start -7.62 7.62)
 					(end 7.62 -7.62)
@@ -3169,11 +3082,11 @@
 					)
 				)
 			)
-			(symbol "IXDD604_1_1"
+			(symbol "UCC27524A_1_1"
 				(pin power_in line
 					(at -10.16 5.08 0)
 					(length 2.54)
-					(name "VCC"
+					(name "VDD"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3234,7 +3147,7 @@
 							)
 						)
 					)
-					(number "3"
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3252,7 +3165,7 @@
 							)
 						)
 					)
-					(number "4"
+					(number "8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3270,7 +3183,7 @@
 							)
 						)
 					)
-					(number "8"
+					(number "7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3306,25 +3219,7 @@
 							)
 						)
 					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 10.16 -5.08 180)
-					(length 2.54)
-					(name "TAB"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "9"
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3354,7 +3249,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "IPA60R280CFD7XKSA1"
+		(property "Value" "IPD60R280P7S"
 			(at 68.58 43.18 0)
 			(effects
 				(font
@@ -3363,7 +3258,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
+		(property "Footprint" "Package_TO_SOT_SMD:TO-252-2"
 			(at 68.58 48.26 0)
 			(effects
 				(font
@@ -3390,7 +3285,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C536369"
+		(property "LCSC" "C536813"
 			(at 63.5 50.8 0)
 			(effects
 				(font
@@ -3435,7 +3330,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "IPA60R280CFD7XKSA1"
+		(property "Value" "IPD60R280P7S"
 			(at 68.58 63.5 0)
 			(effects
 				(font
@@ -3444,7 +3339,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
+		(property "Footprint" "Package_TO_SOT_SMD:TO-252-2"
 			(at 68.58 68.58 0)
 			(effects
 				(font
@@ -3471,7 +3366,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C536369"
+		(property "LCSC" "C536813"
 			(at 63.5 71.12 0)
 			(effects
 				(font
@@ -6974,8 +6869,8 @@
 		(uuid "e58cc7f5-013c-5a39-94b0-cd2b1b8ce290")
 	)
 	(symbol
-		(lib_id "tube_psu_next:SI8271")
-		(at 93.98 139.7 0)
+		(lib_id "tube_psu_next:UCC21520")
+		(at 114.3 157.48 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6983,7 +6878,7 @@
 		(dnp no)
 		(uuid "68c63669-93bd-5d9f-9a9e-5ae90c39edea")
 		(property "Reference" "DRV3"
-			(at 86.36 130.81 0)
+			(at 106.68 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6991,8 +6886,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "SI8271"
-			(at 86.36 146.05 0)
+		(property "Value" "UCC21520DWR"
+			(at 106.68 168.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7000,8 +6895,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "tube_psu:SOIC-8_3.9x4.9mm_P1.27mm_Proteus"
-			(at 93.98 139.7 0)
+		(property "Footprint" "Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm"
+			(at 114.3 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7010,7 +6905,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 93.98 139.7 0)
+			(at 114.3 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7018,8 +6913,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Isolated single gate driver SOIC-8"
-			(at 93.98 139.7 0)
+		(property "Description" "Isolated dual gate driver 4 A / 6 A, 5.7 kVrms reinforced, SOIC-16W (UCC21520DWR, NR 3a)"
+			(at 114.3 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7027,23 +6922,14 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C461855"
-			(at 93.98 139.7 0)
+		(property "LCSC" "C601651"
+			(at 114.3 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
 			)
-		)
-		(pin "2"
-			(uuid "9837140c-232a-551d-9b7f-038d9289ef3a")
-		)
-		(pin "1"
-			(uuid "e02548cb-1a3c-5135-a101-7baf9c7f2204")
-		)
-		(pin "4"
-			(uuid "55847007-ecbf-5725-acc0-0eb172e25ea3")
 		)
 		(pin "3"
 			(uuid "d4832696-2638-5ef9-b117-9b0aefd6d2a4")
@@ -7051,14 +6937,47 @@
 		(pin "8"
 			(uuid "2e4453f6-3bd3-5e49-af8d-1d46d6355731")
 		)
-		(pin "7"
-			(uuid "224790f2-f4ff-58f0-ac41-d9ea404d1f8f")
+		(pin "1"
+			(uuid "e02548cb-1a3c-5135-a101-7baf9c7f2204")
+		)
+		(pin "5"
+			(uuid "63cd8fb6-daad-5c05-a4da-85ab2ce40dc1")
 		)
 		(pin "6"
 			(uuid "73b2799b-b959-52b5-821d-8c42ed6b8e80")
 		)
-		(pin "5"
-			(uuid "63cd8fb6-daad-5c05-a4da-85ab2ce40dc1")
+		(pin "4"
+			(uuid "55847007-ecbf-5725-acc0-0eb172e25ea3")
+		)
+		(pin "2"
+			(uuid "9837140c-232a-551d-9b7f-038d9289ef3a")
+		)
+		(pin "7"
+			(uuid "224790f2-f4ff-58f0-ac41-d9ea404d1f8f")
+		)
+		(pin "16"
+			(uuid "8eaac08b-0982-5619-a61e-08b5c4aba281")
+		)
+		(pin "15"
+			(uuid "5e87df1d-7f7f-5d34-84ef-3ae2b698fd3f")
+		)
+		(pin "14"
+			(uuid "b9b4f4bb-f092-52c9-9b35-cfc0bd711395")
+		)
+		(pin "13"
+			(uuid "66a1e3a1-8fab-56ec-af5e-b45ec4aee95c")
+		)
+		(pin "12"
+			(uuid "e87daaa1-ae57-55f3-a0e7-6af05aaefb72")
+		)
+		(pin "11"
+			(uuid "e482c92b-b7ce-54de-8f5d-02deea5b3f14")
+		)
+		(pin "10"
+			(uuid "297d974a-b28c-587d-8416-a528c6c7ecfa")
+		)
+		(pin "9"
+			(uuid "b2451053-7bbb-59a7-b8e9-e07a1066761e")
 		)
 		(instances
 			(project "tube_psu_5_2"
@@ -7069,29 +6988,57 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 83.82 134.62) (xy 78.74 134.62)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
+	(no_connect
+		(at 104.14 165.1)
 		(uuid "46dc44f6-3b52-5149-97a6-2e865987a16b")
+	)
+	(no_connect
+		(at 124.46 154.94)
+		(uuid "9cc881f0-112c-5d16-b1d0-64fe3a4d1916")
+	)
+	(no_connect
+		(at 124.46 157.48)
+		(uuid "e8544554-2a01-507b-9522-c4e27920c412")
 	)
 	(wire
 		(pts
-			(xy 78.74 134.62) (xy 78.74 129.54)
+			(xy 104.14 147.32) (xy 99.06 147.32)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "9cc881f0-112c-5d16-b1d0-64fe3a4d1916")
+		(uuid "4e20880f-5ea8-5fa1-994e-7cb2571d6d28")
+	)
+	(wire
+		(pts
+			(xy 104.14 149.86) (xy 99.06 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cc26376d-3781-5c48-9ce2-fff914e3fd78")
+	)
+	(wire
+		(pts
+			(xy 99.06 137.16) (xy 99.06 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "28559a97-b2e7-5f4d-875b-0bf24a196ba7")
+	)
+	(junction
+		(at 99.06 147.32)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3951f80e-48b5-599b-b9ea-9cbc5e8a9e31")
 	)
 	(symbol
 		(lib_id "tube_psu_next:5V")
-		(at 78.74 129.54 0)
+		(at 99.06 137.16 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7099,7 +7046,7 @@
 		(dnp no)
 		(uuid "9b7fb7af-ef5e-5e00-ab59-95fb99c10340")
 		(property "Reference" "#PWR012"
-			(at 78.74 133.35 0)
+			(at 99.06 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7108,7 +7055,7 @@
 			)
 		)
 		(property "Value" "5V"
-			(at 78.74 125.984 0)
+			(at 99.06 133.604 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7116,7 +7063,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 78.74 129.54 0)
+			(at 99.06 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7125,7 +7072,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 78.74 129.54 0)
+			(at 99.06 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7134,7 +7081,7 @@
 			)
 		)
 		(property "Description" "Power symbol for net \"5V\" (IPC net name)"
-			(at 78.74 129.54 0)
+			(at 99.06 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7154,339 +7101,9 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 83.82 139.7) (xy 81.28 139.7)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e8544554-2a01-507b-9522-c4e27920c412")
-	)
-	(symbol
-		(lib_id "tube_psu_next:5V")
-		(at 81.28 139.7 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "84a81fd6-96c5-50c0-a6ff-919063b54bcb")
-		(property "Reference" "#PWR013"
-			(at 85.09 139.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "5V"
-			(at 77.98 139.7 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 81.28 139.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 81.28 139.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol for net \"5V\" (IPC net name)"
-			(at 81.28 139.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "7ed22fcc-b7c6-54fb-9540-4b7bb8782f26")
-		)
-		(instances
-			(project "tube_psu_5_2"
-				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#PWR013")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 83.82 142.24) (xy 78.74 142.24)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4e20880f-5ea8-5fa1-994e-7cb2571d6d28")
-	)
-	(symbol
-		(lib_id "tube_psu_next:GND")
-		(at 78.74 142.24 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "dd34be62-7f6a-5f94-a706-755a5062dac9")
-		(property "Reference" "#PWR014"
-			(at 78.74 148.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 78.74 146.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 78.74 142.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 78.74 142.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
-			(at 78.74 142.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "9ca1de6f-c0e2-5f34-aef0-5277dd704897")
-		)
-		(instances
-			(project "tube_psu_5_2"
-				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#PWR014")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 83.82 137.16) (xy 53.34 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cc26376d-3781-5c48-9ce2-fff914e3fd78")
-	)
-	(global_label "EPWM5A"
-		(shape passive)
-		(at 53.34 137.16 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "28559a97-b2e7-5f4d-875b-0bf24a196ba7")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 53.34 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(symbol
-		(lib_id "tube_psu_next:R")
-		(at 58.42 140.97 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "0c2e046b-528e-5548-8219-34011426559b")
-		(property "Reference" "R78"
-			(at 62.61 139.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10k"
-			(at 62.61 142.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 60.198 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 58.42 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 58.42 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C25804"
-			(at 58.42 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "6cec572d-4105-5d26-9f33-088a12a1e13e")
-		)
-		(pin "2"
-			(uuid "4f29467b-016f-55f0-890f-e464639050cd")
-		)
-		(instances
-			(project "tube_psu_5_2"
-				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "R78")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(junction
-		(at 58.42 137.16)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "3951f80e-48b5-599b-b9ea-9cbc5e8a9e31")
-	)
-	(symbol
-		(lib_id "tube_psu_next:GND")
-		(at 58.42 144.78 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "a92e7511-c6cc-5e41-94d2-ca86371ae529")
-		(property "Reference" "#PWR015"
-			(at 58.42 151.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 58.42 148.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 58.42 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 58.42 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
-			(at 58.42 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "07cd46a3-dad7-5a3c-bf04-4474f01e38e2")
-		)
-		(instances
-			(project "tube_psu_5_2"
-				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#PWR015")
-					(unit 1)
-				)
-			)
-		)
-	)
 	(symbol
 		(lib_id "tube_psu_next:C")
-		(at 38.1 138.43 0)
+		(at 88.9 140.97 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7494,7 +7111,7 @@
 		(dnp no)
 		(uuid "e2979868-9ea4-55aa-a995-9af3399aee0d")
 		(property "Reference" "C53"
-			(at 33.91 137.16 0)
+			(at 93.09 139.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7502,7 +7119,7 @@
 			)
 		)
 		(property "Value" "100n"
-			(at 33.36 139.7 0)
+			(at 93.64 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7510,7 +7127,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 39.0652 142.24 0)
+			(at 89.8652 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7519,7 +7136,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 38.1 138.43 0)
+			(at 88.9 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7528,7 +7145,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 38.1 138.43 0)
+			(at 88.9 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7537,7 +7154,7 @@
 			)
 		)
 		(property "LCSC" "C14663"
-			(at 38.1 138.43 0)
+			(at 88.9 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7562,7 +7179,7 @@
 	)
 	(wire
 		(pts
-			(xy 38.1 134.62) (xy 38.1 132.08)
+			(xy 99.06 137.16) (xy 88.9 137.16)
 		)
 		(stroke
 			(width 0)
@@ -7570,17 +7187,23 @@
 		)
 		(uuid "9d76bd5d-8162-59d6-98d5-a6fe0e6e2589")
 	)
+	(junction
+		(at 99.06 137.16)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ef9a1cd8-f96c-5101-aa22-592f1d10e417")
+	)
 	(symbol
-		(lib_id "tube_psu_next:5V")
-		(at 38.1 132.08 0)
+		(lib_id "tube_psu_next:GND")
+		(at 88.9 144.78 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "44a68f4a-a594-5d97-8444-7c41200d2d17")
-		(property "Reference" "#PWR016"
-			(at 38.1 135.89 0)
+		(uuid "84a81fd6-96c5-50c0-a6ff-919063b54bcb")
+		(property "Reference" "#PWR013"
+			(at 88.9 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7588,8 +7211,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "5V"
-			(at 38.1 128.524 0)
+		(property "Value" "GND"
+			(at 88.9 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7597,7 +7220,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 38.1 132.08 0)
+			(at 88.9 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7606,7 +7229,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 38.1 132.08 0)
+			(at 88.9 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7614,8 +7237,462 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"5V\" (IPC net name)"
-			(at 38.1 132.08 0)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 88.9 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7ed22fcc-b7c6-54fb-9540-4b7bb8782f26")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
+					(reference "#PWR013")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 104.14 154.94) (xy 101.6 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "74386972-1490-58be-8c74-584dc74b54d9")
+	)
+	(symbol
+		(lib_id "tube_psu_next:GND")
+		(at 101.6 154.94 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "dd34be62-7f6a-5f94-a706-755a5062dac9")
+		(property "Reference" "#PWR014"
+			(at 95.25 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 98.3 154.94 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 101.6 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 101.6 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 101.6 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9ca1de6f-c0e2-5f34-aef0-5277dd704897")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
+					(reference "#PWR014")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 104.14 152.4) (xy 53.34 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2e9355de-e220-5895-8e15-345248f11722")
+	)
+	(global_label "EPWM5A"
+		(shape passive)
+		(at 53.34 152.4 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "e1429ae2-2f2e-5468-a4cd-6c71dc781ece")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 53.34 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_psu_next:R")
+		(at 58.42 156.21 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0c2e046b-528e-5548-8219-34011426559b")
+		(property "Reference" "R78"
+			(at 62.61 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 62.61 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 60.198 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 58.42 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 58.42 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C25804"
+			(at 58.42 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6cec572d-4105-5d26-9f33-088a12a1e13e")
+		)
+		(pin "2"
+			(uuid "4f29467b-016f-55f0-890f-e464639050cd")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
+					(reference "R78")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(junction
+		(at 58.42 152.4)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a9ae2377-67e8-58c1-bf49-a251bbac5731")
+	)
+	(symbol
+		(lib_id "tube_psu_next:GND")
+		(at 58.42 160.02 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a92e7511-c6cc-5e41-94d2-ca86371ae529")
+		(property "Reference" "#PWR015"
+			(at 58.42 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 58.42 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 58.42 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 58.42 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 58.42 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "07cd46a3-dad7-5a3c-bf04-4474f01e38e2")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
+					(reference "#PWR015")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 104.14 162.56) (xy 101.6 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cf593212-57e2-5071-b820-d621e81770a6")
+	)
+	(wire
+		(pts
+			(xy 101.6 162.56) (xy 101.6 175.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6372d015-bb03-507c-8947-9851183be835")
+	)
+	(wire
+		(pts
+			(xy 101.6 175.26) (xy 53.34 175.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d86353e1-2bde-5b9e-8f62-afe0d8c7ba19")
+	)
+	(global_label "EPWM6A"
+		(shape passive)
+		(at 53.34 175.26 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "177f6a61-c398-5ae5-8088-31805ef4f3af")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 53.34 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_psu_next:R")
+		(at 58.42 179.07 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "89238c12-187b-5991-873e-ab89ad0ee97a")
+		(property "Reference" "R77"
+			(at 62.61 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 62.61 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 60.198 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 58.42 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 58.42 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C25804"
+			(at 58.42 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f800306c-e9f6-537a-a238-3d24335d1261")
+		)
+		(pin "2"
+			(uuid "a20e3409-a614-5117-8375-b97e80d9caab")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
+					(reference "R77")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(junction
+		(at 58.42 175.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b9f67105-7e89-5f96-8ef3-f92ca420b7b5")
+	)
+	(symbol
+		(lib_id "tube_psu_next:GND")
+		(at 58.42 182.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "44a68f4a-a594-5d97-8444-7c41200d2d17")
+		(property "Reference" "#PWR016"
+			(at 58.42 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 58.42 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 58.42 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 58.42 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 58.42 182.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7635,34 +7712,43 @@
 			)
 		)
 	)
+	(wire
+		(pts
+			(xy 104.14 157.48) (xy 88.9 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5fafb04d-f3f3-5cf7-9da2-46db537e0500")
+	)
 	(symbol
-		(lib_id "tube_psu_next:GND")
-		(at 38.1 142.24 0)
+		(lib_id "tube_psu_next:R")
+		(at 88.9 161.29 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "08ac2c8a-f196-5b6b-83ff-f38b4da59407")
-		(property "Reference" "#PWR017"
-			(at 38.1 148.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 38.1 146.05 0)
+		(uuid "671a9a96-c897-5407-9c60-24c0eaff27e5")
+		(property "Reference" "R130"
+			(at 93.64 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 38.1 142.24 0)
+		(property "Value" "10k"
+			(at 93.09 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 87.122 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7671,7 +7757,228 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 38.1 142.24 0)
+			(at 88.9 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 88.9 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C25804"
+			(at 88.9 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7ba1979b-318f-57c5-ad26-4e4f678eea4a")
+		)
+		(pin "2"
+			(uuid "063a3f49-74f4-5b07-b18f-e75446e5df6b")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
+					(reference "R130")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_psu_next:C")
+		(at 93.98 161.29 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3b7d4b9b-f463-5bb7-be17-d037bc17d4b3")
+		(property "Reference" "C121"
+			(at 98.72 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100p"
+			(at 98.72 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 94.9452 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 93.98 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 93.98 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C14858"
+			(at 93.98 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a093f189-d49b-5798-bfcb-fe3b40150a73")
+		)
+		(pin "2"
+			(uuid "c666575e-5608-513b-8bc0-24af4de73c18")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
+					(reference "C121")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(junction
+		(at 93.98 157.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f6140706-47ca-55cc-8160-bc1c07e6b5df")
+	)
+	(wire
+		(pts
+			(xy 93.98 165.1) (xy 88.9 165.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "12b366f4-04c1-5046-aa71-4dc991e6f657")
+	)
+	(junction
+		(at 88.9 165.1)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "97697388-6f61-50e4-8a58-a8aafc1cd48d")
+	)
+	(wire
+		(pts
+			(xy 88.9 165.1) (xy 88.9 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "747850f5-af91-5d39-9598-8b270b684291")
+	)
+	(wire
+		(pts
+			(xy 88.9 167.64) (xy 96.52 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b4ef0099-ecc6-5347-8840-a698a0c9efb8")
+	)
+	(wire
+		(pts
+			(xy 104.14 160.02) (xy 96.52 160.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a9a83ebb-38f5-59af-9ebf-8fa0b3a17e0a")
+	)
+	(wire
+		(pts
+			(xy 96.52 160.02) (xy 96.52 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d90feaf4-a130-570d-bc90-b1d76c0223be")
+	)
+	(junction
+		(at 96.52 167.64)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b361914c-c796-5aa2-a079-e66e83431aeb")
+	)
+	(symbol
+		(lib_id "tube_psu_next:GND")
+		(at 96.52 167.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "08ac2c8a-f196-5b6b-83ff-f38b4da59407")
+		(property "Reference" "#PWR017"
+			(at 96.52 173.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 96.52 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 96.52 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 96.52 167.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7680,7 +7987,7 @@
 			)
 		)
 		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
-			(at 38.1 142.24 0)
+			(at 96.52 167.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7701,299 +8008,8 @@
 		)
 	)
 	(symbol
-		(lib_id "tube_psu_next:C")
-		(at 25.4 138.43 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "7ea91980-7ef4-5c0d-876b-860845ea099f")
-		(property "Reference" "C18"
-			(at 21.21 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10u"
-			(at 21.21 139.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 26.3652 142.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 25.4 138.43 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 25.4 138.43 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C13585"
-			(at 25.4 138.43 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "fea2d6f9-7f77-5679-99fc-0a8d51a95e02")
-		)
-		(pin "2"
-			(uuid "5e8dbda8-860a-58cf-9b34-3351955a3a14")
-		)
-		(instances
-			(project "tube_psu_5_2"
-				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "C18")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 25.4 134.62) (xy 25.4 132.08)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ef9a1cd8-f96c-5101-aa22-592f1d10e417")
-	)
-	(symbol
-		(lib_id "tube_psu_next:15V")
-		(at 25.4 132.08 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "991fde89-6c98-5d03-970d-5e0596c45fda")
-		(property "Reference" "#PWR018"
-			(at 25.4 135.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "15V"
-			(at 25.4 128.524 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 25.4 132.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 25.4 132.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol for net \"15V\" (IPC net name)"
-			(at 25.4 132.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f52098b2-c3f5-5164-9c87-10228701aeae")
-		)
-		(instances
-			(project "tube_psu_5_2"
-				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#PWR018")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "tube_psu_next:GND")
-		(at 25.4 142.24 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "fa587e48-163e-536b-b0b3-c88bbe016567")
-		(property "Reference" "#PWR019"
-			(at 25.4 148.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 25.4 146.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 25.4 142.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 25.4 142.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
-			(at 25.4 142.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "4a3f3220-e942-5003-bcbc-6a17d4a79546")
-		)
-		(instances
-			(project "tube_psu_5_2"
-				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#PWR019")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 83.82 121.92) (xy 87.63 121.92)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "74386972-1490-58be-8c74-584dc74b54d9")
-	)
-	(symbol
-		(lib_id "tube_psu_next:15V")
-		(at 83.82 121.92 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "3a7d49ef-766d-5bb3-a266-f59687a5365a")
-		(property "Reference" "#PWR020"
-			(at 83.82 125.73 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "15V"
-			(at 83.82 118.364 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 83.82 121.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 83.82 121.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol for net \"15V\" (IPC net name)"
-			(at 83.82 121.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ee25a58a-e1e6-51b0-b2bd-aa43c5b50793")
-		)
-		(instances
-			(project "tube_psu_5_2"
-				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#PWR020")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "tube_psu_next:D")
-		(at 91.44 121.92 180)
+		(at 160.02 132.08 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8001,7 +8017,7 @@
 		(dnp no)
 		(uuid "19bd8a23-01ab-5a0b-8676-2cc147c8e9e2")
 		(property "Reference" "D11"
-			(at 91.44 119.38 0)
+			(at 160.02 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8009,7 +8025,7 @@
 			)
 		)
 		(property "Value" "S1M"
-			(at 91.44 124.46 0)
+			(at 160.02 134.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8017,7 +8033,7 @@
 			)
 		)
 		(property "Footprint" "tube_psu:D_SMA_AC"
-			(at 91.44 121.92 0)
+			(at 160.02 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8026,7 +8042,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 91.44 121.92 0)
+			(at 160.02 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8035,7 +8051,7 @@
 			)
 		)
 		(property "Description" "Diode, pins A/C as in Proteus"
-			(at 91.44 121.92 0)
+			(at 160.02 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8044,7 +8060,7 @@
 			)
 		)
 		(property "LCSC" "C64915"
-			(at 91.44 121.92 0)
+			(at 160.02 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8069,7 +8085,7 @@
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
-		(at 104.14 121.92 270)
+		(at 172.72 132.08 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8077,7 +8093,7 @@
 		(dnp no)
 		(uuid "4685a408-fe1a-52aa-959d-3d1d30074b71")
 		(property "Reference" "R99"
-			(at 104.14 119.38 90)
+			(at 172.72 129.54 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8085,7 +8101,7 @@
 			)
 		)
 		(property "Value" "2R"
-			(at 104.14 124.46 90)
+			(at 172.72 134.62 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8093,7 +8109,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
-			(at 104.14 120.142 0)
+			(at 172.72 133.858 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8102,7 +8118,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 104.14 121.92 0)
+			(at 172.72 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8111,7 +8127,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 104.14 121.92 0)
+			(at 172.72 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8120,7 +8136,7 @@
 			)
 		)
 		(property "LCSC" "C2907381"
-			(at 104.14 121.92 0)
+			(at 172.72 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8145,81 +8161,45 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 121.92) (xy 100.33 121.92)
+			(xy 163.83 132.08) (xy 168.91 132.08)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "2e9355de-e220-5895-8e15-345248f11722")
+		(uuid "8285a52d-01a7-5e0a-bf14-353b88393a63")
 	)
 	(wire
 		(pts
-			(xy 107.95 121.92) (xy 111.76 121.92)
+			(xy 127 132.08) (xy 156.21 132.08)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e1429ae2-2f2e-5468-a4cd-6c71dc781ece")
+		(uuid "77b05cef-4c4f-5368-a230-e1b66ee36387")
 	)
 	(wire
 		(pts
-			(xy 111.76 121.92) (xy 111.76 121.92)
+			(xy 156.21 132.08) (xy 156.21 132.08)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "a9ae2377-67e8-58c1-bf49-a251bbac5731")
-	)
-	(wire
-		(pts
-			(xy 111.76 121.92) (xy 111.76 134.62)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cf593212-57e2-5071-b820-d621e81770a6")
-	)
-	(wire
-		(pts
-			(xy 111.76 134.62) (xy 104.14 134.62)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6372d015-bb03-507c-8947-9851183be835")
-	)
-	(wire
-		(pts
-			(xy 111.76 121.92) (xy 154.94 121.92)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d86353e1-2bde-5b9e-8f62-afe0d8c7ba19")
-	)
-	(junction
-		(at 111.76 121.92)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "177f6a61-c398-5ae5-8088-31805ef4f3af")
+		(uuid "5b0ca590-9f35-5231-8922-d040be90f071")
 	)
 	(symbol
-		(lib_id "tube_psu_next:PWR_FLAG")
-		(at 132.08 121.92 0)
+		(lib_id "tube_psu_next:15V")
+		(at 127 132.08 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "dce87595-b0ab-5364-8fa9-7db3dc332885")
-		(property "Reference" "#FLG021"
-			(at 132.08 120.015 0)
+		(uuid "991fde89-6c98-5d03-970d-5e0596c45fda")
+		(property "Reference" "#PWR018"
+			(at 127 135.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8227,8 +8207,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "PWR_FLAG"
-			(at 132.08 118.11 0)
+		(property "Value" "15V"
+			(at 127 128.524 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8236,7 +8216,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 132.08 121.92 0)
+			(at 127 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8245,7 +8225,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 132.08 121.92 0)
+			(at 127 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8253,8 +8233,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 132.08 121.92 0)
+		(property "Description" "Power symbol for net \"15V\" (IPC net name)"
+			(at 127 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8263,50 +8243,44 @@
 			)
 		)
 		(pin "1"
-			(uuid "08731785-9f6f-537d-8bfc-d2d9b08c7d24")
+			(uuid "f52098b2-c3f5-5164-9c87-10228701aeae")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#FLG021")
+					(reference "#PWR018")
 					(unit 1)
 				)
 			)
 		)
 	)
-	(junction
-		(at 132.08 121.92)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b9f67105-7e89-5f96-8ef3-f92ca420b7b5")
-	)
 	(symbol
 		(lib_id "tube_psu_next:C")
-		(at 154.94 137.16 0)
+		(at 134.62 135.89 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "475163c3-0c10-5d7c-ab3a-db2b3d577bfe")
-		(property "Reference" "C25"
-			(at 159.13 135.89 0)
+		(uuid "d398de9c-06db-5cf8-a304-ff75c2660c33")
+		(property "Reference" "C52"
+			(at 138.81 134.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "1u"
-			(at 158.58 138.43 0)
+		(property "Value" "4.7u"
+			(at 139.36 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "tube_psu:C_1206_3216Metric_Proteus3.15"
-			(at 155.9052 140.97 0)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 135.5852 139.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8315,7 +8289,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 154.94 137.16 0)
+			(at 134.62 135.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8324,7 +8298,561 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 154.94 137.16 0)
+			(at 134.62 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C6119856"
+			(at 134.62 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d18a5c91-a04d-5c46-9e53-b72304650ece")
+		)
+		(pin "2"
+			(uuid "5abf724d-ca3d-529a-bd12-0e2dea451776")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
+					(reference "C52")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(junction
+		(at 134.62 132.08)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2c2dddbe-912e-556f-8c97-8ba2d277654b")
+	)
+	(symbol
+		(lib_id "tube_psu_next:GND")
+		(at 134.62 139.7 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "fa587e48-163e-536b-b0b3-c88bbe016567")
+		(property "Reference" "#PWR019"
+			(at 134.62 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 134.62 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 134.62 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 134.62 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 134.62 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4a3f3220-e942-5003-bcbc-6a17d4a79546")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
+					(reference "#PWR019")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_psu_next:C")
+		(at 144.78 135.89 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7ea91980-7ef4-5c0d-876b-860845ea099f")
+		(property "Reference" "C18"
+			(at 148.97 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10u"
+			(at 148.97 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 145.7452 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 144.78 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 144.78 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C13585"
+			(at 144.78 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fea2d6f9-7f77-5679-99fc-0a8d51a95e02")
+		)
+		(pin "2"
+			(uuid "5e8dbda8-860a-58cf-9b34-3351955a3a14")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
+					(reference "C18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(junction
+		(at 144.78 132.08)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e0bc03ef-780f-5528-8d7d-067ccb9924cd")
+	)
+	(symbol
+		(lib_id "tube_psu_next:GND")
+		(at 144.78 139.7 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3a7d49ef-766d-5bb3-a266-f59687a5365a")
+		(property "Reference" "#PWR020"
+			(at 144.78 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 144.78 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 144.78 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 144.78 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 144.78 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ee25a58a-e1e6-51b0-b2bd-aa43c5b50793")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
+					(reference "#PWR020")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 176.53 132.08) (xy 176.53 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4fe41fab-7867-5145-9078-b710be9a3a9d")
+	)
+	(wire
+		(pts
+			(xy 176.53 147.32) (xy 124.46 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0b478047-89be-501f-a72f-2cd9d8c26372")
+	)
+	(wire
+		(pts
+			(xy 124.46 149.86) (xy 127 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1af98b15-9187-53cb-8e87-78b7d8b35396")
+	)
+	(label "HEATER_HI_DRV"
+		(at 127 149.86 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "41fd6f12-8298-5c91-967f-b5ffb55535a3")
+	)
+	(wire
+		(pts
+			(xy 124.46 152.4) (xy 147.32 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b86e7502-6ef3-5432-9ba6-b0a68c644bf0")
+	)
+	(wire
+		(pts
+			(xy 147.32 152.4) (xy 147.32 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4786ecef-1dd0-5682-a118-2a88e8525d50")
+	)
+	(wire
+		(pts
+			(xy 147.32 154.94) (xy 162.56 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f12914ec-0f85-5d30-922e-fb2ad568fd6b")
+	)
+	(label "HEATER_HI_SOURCE"
+		(at 162.56 154.94 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5dfda7db-463f-51ef-88a3-2043717da9a0")
+	)
+	(wire
+		(pts
+			(xy 124.46 160.02) (xy 132.08 160.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1e1a59a6-12b0-590f-a539-71ee45bc3993")
+	)
+	(symbol
+		(lib_id "tube_psu_next:15V")
+		(at 132.08 160.02 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b266b450-7fac-5eda-a4fe-c86ba87bd5ca")
+		(property "Reference" "#PWR021"
+			(at 132.08 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "15V"
+			(at 132.08 156.464 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 132.08 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 132.08 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"15V\" (IPC net name)"
+			(at 132.08 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ff93d66f-cf0d-5415-952a-f7192d5d1277")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
+					(reference "#PWR021")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 124.46 162.56) (xy 127 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6d7c86c7-4f7d-54ba-9d4a-e2636c77e1b1")
+	)
+	(label "HEATER_LOW_DRV"
+		(at 127 162.56 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "74d898a2-16c4-5a94-afbe-e35db28d069e")
+	)
+	(wire
+		(pts
+			(xy 124.46 165.1) (xy 129.54 165.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "10c70868-4afd-5e07-a0c4-b606bf0a1e32")
+	)
+	(wire
+		(pts
+			(xy 129.54 165.1) (xy 129.54 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "597c9a03-3299-5154-9d10-142c712a3866")
+	)
+	(symbol
+		(lib_id "tube_psu_next:GND")
+		(at 129.54 167.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "616e54ff-f7ce-592c-ba15-28f05d121020")
+		(property "Reference" "#PWR022"
+			(at 129.54 173.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 129.54 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 129.54 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 129.54 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 129.54 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cc1bccbf-7729-5f2f-ab75-c565435e5133")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
+					(reference "#PWR022")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_psu_next:C")
+		(at 152.4 151.13 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "475163c3-0c10-5d7c-ab3a-db2b3d577bfe")
+		(property "Reference" "C25"
+			(at 156.59 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1u"
+			(at 156.04 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "tube_psu:C_1206_3216Metric_Proteus3.15"
+			(at 153.3652 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 152.4 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 152.4 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8333,7 +8861,7 @@
 			)
 		)
 		(property "LCSC" "C1848"
-			(at 154.94 137.16 0)
+			(at 152.4 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8356,93 +8884,29 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 154.94 121.92) (xy 154.94 133.35)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5fafb04d-f3f3-5cf7-9da2-46db537e0500")
-	)
-	(wire
-		(pts
-			(xy 154.94 140.97) (xy 154.94 149.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f6140706-47ca-55cc-8160-bc1c07e6b5df")
-	)
-	(wire
-		(pts
-			(xy 154.94 149.86) (xy 111.76 149.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "12b366f4-04c1-5046-aa71-4dc991e6f657")
-	)
-	(wire
-		(pts
-			(xy 111.76 149.86) (xy 111.76 142.24)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "97697388-6f61-50e4-8a58-a8aafc1cd48d")
-	)
-	(wire
-		(pts
-			(xy 111.76 142.24) (xy 104.14 142.24)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "747850f5-af91-5d39-9598-8b270b684291")
-	)
-	(wire
-		(pts
-			(xy 154.94 149.86) (xy 160.02 149.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b4ef0099-ecc6-5347-8840-a698a0c9efb8")
-	)
 	(junction
-		(at 154.94 149.86)
+		(at 152.4 147.32)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "a9a83ebb-38f5-59af-9ebf-8fa0b3a17e0a")
+		(uuid "79feb8db-54a2-5179-b688-a7b5d8e3e5b7")
 	)
-	(label "HEATER_HI_SOURCE"
-		(at 160.02 149.86 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d90feaf4-a130-570d-bc90-b1d76c0223be")
+	(junction
+		(at 152.4 154.94)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c8c74844-6d58-5e93-a2c6-26cb7f9ced33")
 	)
 	(symbol
 		(lib_id "tube_psu_next:PWR_FLAG")
-		(at 132.08 149.86 180)
+		(at 165.1 147.32 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "561ba660-f4a6-5ec8-8f6b-a57d72dfff65")
-		(property "Reference" "#FLG022"
-			(at 132.08 151.765 0)
+		(uuid "9934a2d2-b490-5638-a6ef-2a4d6af04b9b")
+		(property "Reference" "#FLG023"
+			(at 165.1 145.415 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8451,7 +8915,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 132.08 153.67 0)
+			(at 165.1 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8459,7 +8923,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 132.08 149.86 0)
+			(at 165.1 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8468,7 +8932,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 132.08 149.86 0)
+			(at 165.1 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8477,7 +8941,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 132.08 149.86 0)
+			(at 165.1 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8486,50 +8950,51 @@
 			)
 		)
 		(pin "1"
-			(uuid "189cf228-cf78-57ba-beb2-8afcdfb4f0b3")
+			(uuid "5d9cbe6c-e0b0-5693-843a-d499e789bc31")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#FLG022")
+					(reference "#FLG023")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(junction
-		(at 132.08 149.86)
+		(at 165.1 147.32)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "b361914c-c796-5aa2-a079-e66e83431aeb")
+		(uuid "ad05ec54-e930-51df-8e4b-6916044bcb4a")
 	)
 	(symbol
-		(lib_id "tube_psu_next:R")
-		(at 119.38 137.16 90)
+		(lib_id "tube_psu_next:PWR_FLAG")
+		(at 157.48 154.94 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "4f29c28b-10c5-50d6-98c3-c23856fd92a5")
-		(property "Reference" "R24"
-			(at 119.38 133.35 270)
+		(uuid "f148a08e-d73b-5e1b-822e-d9e1de213e2a")
+		(property "Reference" "#FLG024"
+			(at 157.48 156.845 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 157.48 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "10R"
-			(at 119.38 135.13 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
-			(at 119.38 138.938 0)
+		(property "Footprint" ""
+			(at 157.48 154.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8538,7 +9003,87 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 119.38 137.16 0)
+			(at 157.48 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 157.48 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "94298f1d-c69e-578f-88a4-bb1b5f4c7315")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
+					(reference "#FLG024")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(junction
+		(at 157.48 154.94)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a8f3d08a-d8d3-5265-a8e9-c04c7a05c544")
+	)
+	(label "HEATER_HI_DRV"
+		(at 203.2 190.5 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3c548863-45e6-517f-9f00-f8afcd8fe592")
+	)
+	(symbol
+		(lib_id "tube_psu_next:R")
+		(at 213.36 190.5 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4f29c28b-10c5-50d6-98c3-c23856fd92a5")
+		(property "Reference" "R24"
+			(at 213.36 186.69 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10R"
+			(at 213.36 188.47 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 213.36 192.278 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 213.36 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8547,7 +9092,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 119.38 137.16 0)
+			(at 213.36 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8556,7 +9101,7 @@
 			)
 		)
 		(property "LCSC" "C17903"
-			(at 119.38 137.16 0)
+			(at 213.36 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8581,7 +9126,7 @@
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
-		(at 119.38 139.7 90)
+		(at 213.36 196.85 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8589,7 +9134,7 @@
 		(dnp no)
 		(uuid "1884156f-5523-500e-9e1e-a4200fef11e3")
 		(property "Reference" "R59"
-			(at 119.38 141.73 270)
+			(at 213.36 198.88 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8597,7 +9142,7 @@
 			)
 		)
 		(property "Value" "3.3R"
-			(at 119.38 143.51 270)
+			(at 213.36 200.66 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8605,7 +9150,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
-			(at 119.38 141.478 0)
+			(at 213.36 198.628 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8614,7 +9159,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 119.38 139.7 0)
+			(at 213.36 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8623,7 +9168,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 119.38 139.7 0)
+			(at 213.36 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8632,7 +9177,7 @@
 			)
 		)
 		(property "LCSC" "C2930397"
-			(at 119.38 139.7 0)
+			(at 213.36 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8655,112 +9200,33 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 104.14 137.16) (xy 115.57 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8285a52d-01a7-5e0a-bf14-353b88393a63")
-	)
-	(wire
-		(pts
-			(xy 104.14 139.7) (xy 115.57 139.7)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "77b05cef-4c4f-5368-a230-e1b66ee36387")
-	)
-	(wire
-		(pts
-			(xy 123.19 137.16) (xy 127 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5b0ca590-9f35-5231-8922-d040be90f071")
-	)
-	(wire
-		(pts
-			(xy 127 137.16) (xy 127 139.7)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2c2dddbe-912e-556f-8c97-8ba2d277654b")
-	)
-	(wire
-		(pts
-			(xy 123.19 139.7) (xy 132.08 139.7)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e0bc03ef-780f-5528-8d7d-067ccb9924cd")
-	)
-	(junction
-		(at 127 139.7)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "4fe41fab-7867-5145-9078-b710be9a3a9d")
-	)
-	(label "HEATER_HI_GATE"
-		(at 132.08 139.7 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0b478047-89be-501f-a72f-2cd9d8c26372")
-	)
-	(text "Si8271: PWR_FLAGs on VDD2 (bootstrap through D11 / R99) and on the high-side return HEATER_HI_SOURCE."
-		(exclude_from_sim no)
-		(at 43.18 160.02 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1af98b15-9187-53cb-8e87-78b7d8b35396")
-	)
 	(symbol
-		(lib_id "tube_psu_next:IXDD609")
-		(at 93.98 195.58 0)
+		(lib_id "tube_psu_next:D_Schottky")
+		(at 222.25 196.85 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "d721e333-ed07-58b3-a601-d2731298bbd3")
-		(property "Reference" "DRV9"
-			(at 86.36 186.69 0)
+		(uuid "0486efe7-2f86-512b-9d13-bee7729e28ae")
+		(property "Reference" "D35"
+			(at 222.25 198.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
-		(property "Value" "IXDD609D2TR"
-			(at 86.36 204.47 0)
+		(property "Value" "ZLLS400TA"
+			(at 222.25 200.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
-		(property "Footprint" "tube_psu:DFN-8-1EP_P0.95mm_IXDD60xD2"
-			(at 93.98 195.58 0)
+		(property "Footprint" "tube_psu:D_SOD-323_AC"
+			(at 222.25 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8769,7 +9235,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 93.98 195.58 0)
+			(at 222.25 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8777,8 +9243,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "9 A gate driver DFN-8 with thermal pad"
-			(at 93.98 195.58 0)
+		(property "Description" "Schottky diode, pins A/C"
+			(at 222.25 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8786,8 +9252,8 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
-			(at 93.98 195.58 0)
+		(property "LCSC" "C460267"
+			(at 222.25 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8795,37 +9261,16 @@
 				(hide yes)
 			)
 		)
-		(pin "1"
-			(uuid "32b9b8b2-c6e7-56f6-a90d-4df8474b254c")
+		(pin "C"
+			(uuid "1f1209f0-f276-5ac8-afee-447a562a313e")
 		)
-		(pin "8"
-			(uuid "6aee708f-bb79-5b26-ad59-b8d789bd5d0c")
-		)
-		(pin "2"
-			(uuid "83eb64f4-68d8-5c41-b47e-a4cfdf46982d")
-		)
-		(pin "3"
-			(uuid "2d37e6ae-efd2-50d7-9fc4-5c6dc8f0a474")
-		)
-		(pin "7"
-			(uuid "02e5b367-6f50-57a6-8e32-ec56a72457fe")
-		)
-		(pin "6"
-			(uuid "b5fa5c01-f2d5-5ab1-88fb-9bf0f522a33a")
-		)
-		(pin "4"
-			(uuid "2f1d721e-c71e-5de0-bc10-05689c9b3a99")
-		)
-		(pin "5"
-			(uuid "800d6d15-6f2e-5643-9027-30628f547c80")
-		)
-		(pin "9"
-			(uuid "de71442d-4874-557b-9681-f05d1924bc8d")
+		(pin "A"
+			(uuid "426f11ae-1603-53f7-a759-28531e221ebb")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "DRV9")
+					(reference "D35")
 					(unit 1)
 				)
 			)
@@ -8833,637 +9278,17 @@
 	)
 	(wire
 		(pts
-			(xy 83.82 190.5) (xy 78.74 190.5)
+			(xy 203.2 190.5) (xy 209.55 190.5)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "41fd6f12-8298-5c91-967f-b5ffb55535a3")
-	)
-	(wire
-		(pts
-			(xy 83.82 193.04) (xy 78.74 193.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b86e7502-6ef3-5432-9ba6-b0a68c644bf0")
-	)
-	(wire
-		(pts
-			(xy 78.74 180.34) (xy 78.74 193.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4786ecef-1dd0-5682-a118-2a88e8525d50")
-	)
-	(junction
-		(at 78.74 190.5)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f12914ec-0f85-5d30-922e-fb2ad568fd6b")
-	)
-	(symbol
-		(lib_id "tube_psu_next:15V")
-		(at 78.74 180.34 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "fd6a488e-082b-50ed-a004-b295a9c50e11")
-		(property "Reference" "#PWR023"
-			(at 78.74 184.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "15V"
-			(at 78.74 176.784 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 78.74 180.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 78.74 180.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol for net \"15V\" (IPC net name)"
-			(at 78.74 180.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "1b1ad6b6-e330-537d-9bf7-d30824829c3a")
-		)
-		(instances
-			(project "tube_psu_5_2"
-				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#PWR023")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "tube_psu_next:C")
-		(at 68.58 184.15 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "d398de9c-06db-5cf8-a304-ff75c2660c33")
-		(property "Reference" "C52"
-			(at 72.77 182.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "4.7u"
-			(at 73.32 185.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 69.5452 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 68.58 184.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 68.58 184.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C6119856"
-			(at 68.58 184.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "d18a5c91-a04d-5c46-9e53-b72304650ece")
-		)
-		(pin "2"
-			(uuid "5abf724d-ca3d-529a-bd12-0e2dea451776")
-		)
-		(instances
-			(project "tube_psu_5_2"
-				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "C52")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 78.74 180.34) (xy 68.58 180.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5dfda7db-463f-51ef-88a3-2043717da9a0")
-	)
-	(junction
-		(at 78.74 180.34)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "1e1a59a6-12b0-590f-a539-71ee45bc3993")
-	)
-	(symbol
-		(lib_id "tube_psu_next:GND")
-		(at 68.58 187.96 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "b7c2b4aa-3110-5c4b-97ab-1424b763bdb7")
-		(property "Reference" "#PWR024"
-			(at 68.58 194.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 68.58 191.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 68.58 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 68.58 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
-			(at 68.58 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c6d74029-cce7-5f32-8462-685bb15fe5ab")
-		)
-		(instances
-			(project "tube_psu_5_2"
-				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#PWR024")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 83.82 198.12) (xy 81.28 198.12)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6d7c86c7-4f7d-54ba-9d4a-e2636c77e1b1")
-	)
-	(symbol
-		(lib_id "tube_psu_next:15V")
-		(at 81.28 198.12 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "85021ee7-d70c-571f-9918-dd7abd728c9e")
-		(property "Reference" "#PWR025"
-			(at 85.09 198.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "15V"
-			(at 77.98 198.12 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 81.28 198.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 81.28 198.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol for net \"15V\" (IPC net name)"
-			(at 81.28 198.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "5bd08f51-bbba-5b77-9d34-67096135d4be")
-		)
-		(instances
-			(project "tube_psu_5_2"
-				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#PWR025")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 83.82 195.58) (xy 53.34 195.58)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "74d898a2-16c4-5a94-afbe-e35db28d069e")
-	)
-	(global_label "EPWM6A"
-		(shape passive)
-		(at 53.34 195.58 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "10c70868-4afd-5e07-a0c4-b606bf0a1e32")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 53.34 195.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(symbol
-		(lib_id "tube_psu_next:R")
-		(at 58.42 199.39 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "89238c12-187b-5991-873e-ab89ad0ee97a")
-		(property "Reference" "R77"
-			(at 62.61 198.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10k"
-			(at 62.61 200.66 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 60.198 199.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 58.42 199.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 58.42 199.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C25804"
-			(at 58.42 199.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f800306c-e9f6-537a-a238-3d24335d1261")
-		)
-		(pin "2"
-			(uuid "a20e3409-a614-5117-8375-b97e80d9caab")
-		)
-		(instances
-			(project "tube_psu_5_2"
-				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "R77")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(junction
-		(at 58.42 195.58)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "597c9a03-3299-5154-9d10-142c712a3866")
-	)
-	(symbol
-		(lib_id "tube_psu_next:GND")
-		(at 58.42 203.2 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1575a4d6-bded-5332-912e-75847f4e2bd4")
-		(property "Reference" "#PWR026"
-			(at 58.42 209.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 58.42 207.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 58.42 203.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 58.42 203.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
-			(at 58.42 203.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f700640b-f7d1-5ddd-95ee-f8e1aa1e02df")
-		)
-		(instances
-			(project "tube_psu_5_2"
-				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#PWR026")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 104.14 195.58) (xy 106.68 195.58)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "79feb8db-54a2-5179-b688-a7b5d8e3e5b7")
-	)
-	(wire
-		(pts
-			(xy 104.14 198.12) (xy 106.68 198.12)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c8c74844-6d58-5e93-a2c6-26cb7f9ced33")
-	)
-	(wire
-		(pts
-			(xy 104.14 200.66) (xy 106.68 200.66)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ad05ec54-e930-51df-8e4b-6916044bcb4a")
-	)
-	(wire
-		(pts
-			(xy 106.68 195.58) (xy 106.68 205.74)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a8f3d08a-d8d3-5265-a8e9-c04c7a05c544")
-	)
-	(junction
-		(at 106.68 198.12)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "3c548863-45e6-517f-9f00-f8afcd8fe592")
-	)
-	(junction
-		(at 106.68 200.66)
-		(diameter 0)
-		(color 0 0 0 0)
 		(uuid "179de085-9899-5535-b384-158deb100ab6")
 	)
-	(symbol
-		(lib_id "tube_psu_next:GND")
-		(at 106.68 205.74 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "8ccbf2b1-1b6d-5e8f-8d61-e4a8de997a92")
-		(property "Reference" "#PWR027"
-			(at 106.68 212.09 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 106.68 209.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 106.68 205.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 106.68 205.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
-			(at 106.68 205.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "b6ae26cd-9eda-5017-a5cd-97e5ba64715a")
-		)
-		(instances
-			(project "tube_psu_5_2"
-				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#PWR027")
-					(unit 1)
-				)
-			)
-		)
-	)
 	(wire
 		(pts
-			(xy 104.14 190.5) (xy 109.22 190.5)
+			(xy 205.74 190.5) (xy 205.74 196.85)
 		)
 		(stroke
 			(width 0)
@@ -9473,7 +9298,7 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 190.5) (xy 109.22 193.04)
+			(xy 205.74 196.85) (xy 209.55 196.85)
 		)
 		(stroke
 			(width 0)
@@ -9481,25 +9306,91 @@
 		)
 		(uuid "28d62656-dd88-5706-9508-8c04220dcd57")
 	)
+	(junction
+		(at 205.74 190.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fc4f45e2-cb82-5962-afc3-d4232fe4d09f")
+	)
 	(wire
 		(pts
-			(xy 104.14 193.04) (xy 114.3 193.04)
+			(xy 217.17 196.85) (xy 218.44 196.85)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "fc4f45e2-cb82-5962-afc3-d4232fe4d09f")
+		(uuid "84e80156-9a51-5dc8-ad3b-81b696babca7")
+	)
+	(wire
+		(pts
+			(xy 217.17 190.5) (xy 228.6 190.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70d13985-7a9e-5dac-ad38-6a15b272877c")
+	)
+	(wire
+		(pts
+			(xy 228.6 190.5) (xy 238.76 190.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fad4cc49-34e6-524e-b69c-4a0743cc94c8")
+	)
+	(wire
+		(pts
+			(xy 226.06 196.85) (xy 228.6 196.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "266cc300-e76f-5faf-b021-8bfc4573d3ad")
+	)
+	(wire
+		(pts
+			(xy 228.6 196.85) (xy 228.6 190.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "76b8b351-b4d6-570c-ab9e-4705ce9a26ec")
 	)
 	(junction
-		(at 109.22 193.04)
+		(at 228.6 190.5)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "84e80156-9a51-5dc8-ad3b-81b696babca7")
+		(uuid "181ba37c-f890-54af-ada2-aa30488542e2")
+	)
+	(label "HEATER_HI_GATE"
+		(at 238.76 190.5 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bfda777a-2958-5207-9f00-bd52f3347dd6")
+	)
+	(label "HEATER_LOW_DRV"
+		(at 203.2 210.82 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "fd0c8eae-f23e-5c8b-96e5-0cdf911a9970")
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
-		(at 121.92 185.42 90)
+		(at 213.36 210.82 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9507,7 +9398,7 @@
 		(dnp no)
 		(uuid "57b8f3c1-4542-57a1-b32d-765cf447e439")
 		(property "Reference" "R37"
-			(at 121.92 181.61 270)
+			(at 213.36 207.01 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9515,7 +9406,7 @@
 			)
 		)
 		(property "Value" "10R"
-			(at 121.92 183.39 270)
+			(at 213.36 208.79 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9523,7 +9414,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 121.92 187.198 0)
+			(at 213.36 212.598 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9532,7 +9423,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 121.92 185.42 0)
+			(at 213.36 210.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9541,7 +9432,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 121.92 185.42 0)
+			(at 213.36 210.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9550,7 +9441,7 @@
 			)
 		)
 		(property "LCSC" "C17415"
-			(at 121.92 185.42 0)
+			(at 213.36 210.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9575,7 +9466,7 @@
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
-		(at 121.92 193.04 90)
+		(at 213.36 217.17 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9583,7 +9474,7 @@
 		(dnp no)
 		(uuid "e44194bb-e43b-56b0-9ae8-2cfc5c87bb40")
 		(property "Reference" "R31"
-			(at 121.92 195.07 270)
+			(at 213.36 219.2 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9591,7 +9482,7 @@
 			)
 		)
 		(property "Value" "3.3R"
-			(at 121.92 196.85 270)
+			(at 213.36 220.98 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9599,7 +9490,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 121.92 194.818 0)
+			(at 213.36 218.948 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9608,7 +9499,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 121.92 193.04 0)
+			(at 213.36 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9617,7 +9508,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 121.92 193.04 0)
+			(at 213.36 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9626,7 +9517,7 @@
 			)
 		)
 		(property "LCSC" "C22356719"
-			(at 121.92 193.04 0)
+			(at 213.36 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9649,45 +9540,9 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 114.3 193.04) (xy 114.3 185.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "70d13985-7a9e-5dac-ad38-6a15b272877c")
-	)
-	(wire
-		(pts
-			(xy 114.3 185.42) (xy 118.11 185.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fad4cc49-34e6-524e-b69c-4a0743cc94c8")
-	)
-	(wire
-		(pts
-			(xy 114.3 193.04) (xy 118.11 193.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "266cc300-e76f-5faf-b021-8bfc4573d3ad")
-	)
-	(junction
-		(at 114.3 193.04)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "76b8b351-b4d6-570c-ab9e-4705ce9a26ec")
-	)
 	(symbol
 		(lib_id "tube_psu_next:D_Schottky")
-		(at 132.08 193.04 0)
+		(at 222.25 217.17 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9695,7 +9550,7 @@
 		(dnp no)
 		(uuid "701a2140-4c85-50aa-bc50-4b56f50b1133")
 		(property "Reference" "D33"
-			(at 132.08 195.07 0)
+			(at 222.25 219.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9703,7 +9558,7 @@
 			)
 		)
 		(property "Value" "ZLLS400TA"
-			(at 132.08 196.85 0)
+			(at 222.25 220.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9711,7 +9566,7 @@
 			)
 		)
 		(property "Footprint" "tube_psu:D_SOD-323_AC"
-			(at 132.08 193.04 0)
+			(at 222.25 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9720,7 +9575,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 132.08 193.04 0)
+			(at 222.25 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9729,7 +9584,7 @@
 			)
 		)
 		(property "Description" "Schottky diode, pins A/C"
-			(at 132.08 193.04 0)
+			(at 222.25 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9738,7 +9593,7 @@
 			)
 		)
 		(property "LCSC" "C460267"
-			(at 132.08 193.04 0)
+			(at 222.25 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9763,37 +9618,7 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 193.04) (xy 128.27 193.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "181ba37c-f890-54af-ada2-aa30488542e2")
-	)
-	(wire
-		(pts
-			(xy 125.73 185.42) (xy 139.7 185.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bfda777a-2958-5207-9f00-bd52f3347dd6")
-	)
-	(wire
-		(pts
-			(xy 139.7 185.42) (xy 139.7 193.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fd0c8eae-f23e-5c8b-96e5-0cdf911a9970")
-	)
-	(wire
-		(pts
-			(xy 135.89 193.04) (xy 152.4 193.04)
+			(xy 203.2 210.82) (xy 209.55 210.82)
 		)
 		(stroke
 			(width 0)
@@ -9801,25 +9626,101 @@
 		)
 		(uuid "aeebf05d-e271-5470-8191-0f6c31599689")
 	)
-	(junction
-		(at 139.7 193.04)
-		(diameter 0)
-		(color 0 0 0 0)
+	(wire
+		(pts
+			(xy 205.74 210.82) (xy 205.74 217.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
 		(uuid "c88623c4-ee06-539a-a60d-df9430d2be40")
 	)
+	(wire
+		(pts
+			(xy 205.74 217.17) (xy 209.55 217.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "18cba44d-120a-573c-8f0e-c25ff7764ef8")
+	)
+	(junction
+		(at 205.74 210.82)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a033a3b6-3564-5ae0-b43e-ab1bf293b9e4")
+	)
+	(wire
+		(pts
+			(xy 217.17 217.17) (xy 218.44 217.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "08cb7857-97bb-5125-82aa-cdf2e657f143")
+	)
+	(wire
+		(pts
+			(xy 217.17 210.82) (xy 228.6 210.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1cc694d4-fee3-52f8-a045-3100b1910fca")
+	)
+	(wire
+		(pts
+			(xy 228.6 210.82) (xy 238.76 210.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f99f8d97-5509-5f83-a295-79fe958b81ef")
+	)
+	(wire
+		(pts
+			(xy 226.06 217.17) (xy 228.6 217.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a476af37-1769-52ac-a888-2341e98381af")
+	)
+	(wire
+		(pts
+			(xy 228.6 217.17) (xy 228.6 210.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "842de163-8178-5727-a4c3-d83b55b27e6b")
+	)
+	(junction
+		(at 228.6 210.82)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1bf0e037-f66e-5d8c-b616-7a2576e12458")
+	)
 	(label "HEATER_LOW_GATE"
-		(at 152.4 193.04 0)
+		(at 238.76 210.82 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "18cba44d-120a-573c-8f0e-c25ff7764ef8")
+		(uuid "2c0184a7-373a-5e84-901d-81e386e01c03")
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
-		(at 147.32 196.85 0)
+		(at 233.68 214.63 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9827,7 +9728,7 @@
 		(dnp no)
 		(uuid "06a0f167-7a12-5e3e-8fd5-492ab7ee2762")
 		(property "Reference" "R66"
-			(at 143.13 195.58 0)
+			(at 237.87 213.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9835,7 +9736,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 143.13 198.12 0)
+			(at 237.87 215.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9843,7 +9744,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 145.542 196.85 0)
+			(at 231.902 214.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9852,7 +9753,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 147.32 196.85 0)
+			(at 233.68 214.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9861,7 +9762,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 147.32 196.85 0)
+			(at 233.68 214.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9870,7 +9771,7 @@
 			)
 		)
 		(property "LCSC" "C25804"
-			(at 147.32 196.85 0)
+			(at 233.68 214.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9894,22 +9795,22 @@
 		)
 	)
 	(junction
-		(at 147.32 193.04)
+		(at 233.68 210.82)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "a033a3b6-3564-5ae0-b43e-ab1bf293b9e4")
+		(uuid "d9f251a4-1f8e-526e-96db-6b7ba7c01a65")
 	)
 	(symbol
 		(lib_id "tube_psu_next:GND")
-		(at 147.32 200.66 0)
+		(at 233.68 218.44 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "5d759ab2-8e2d-5c10-acde-90056381203c")
-		(property "Reference" "#PWR028"
-			(at 147.32 207.01 0)
+		(uuid "85021ee7-d70c-571f-9918-dd7abd728c9e")
+		(property "Reference" "#PWR025"
+			(at 233.68 224.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9918,7 +9819,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 147.32 204.47 0)
+			(at 233.68 222.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9926,7 +9827,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 147.32 200.66 0)
+			(at 233.68 218.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9935,7 +9836,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 147.32 200.66 0)
+			(at 233.68 218.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9944,7 +9845,7 @@
 			)
 		)
 		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
-			(at 147.32 200.66 0)
+			(at 233.68 218.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9953,19 +9854,41 @@
 			)
 		)
 		(pin "1"
-			(uuid "2cb24365-d09c-5695-b445-57aa997dd18c")
+			(uuid "5bd08f51-bbba-5b77-9d34-67096135d4be")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#PWR028")
+					(reference "#PWR025")
 					(unit 1)
 				)
 			)
 		)
 	)
+	(text "5.2: DRV3 = UCC21520DWR drives both heater LLC switches (Q10 / Q11 = IPD60R280P7S DPAK, NR 5.4); DRV9 removed."
+		(exclude_from_sim no)
+		(at 190.5 228.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9eed1f7a-05f5-520a-befc-ee3350d14045")
+	)
+	(text "High side: R24 turn-on, D35 + R59 turn-off (was the Si8271 OUT+ / OUT- pair); low side as the 5.1 IXDD609 output network."
+		(exclude_from_sim no)
+		(at 190.5 232.41 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7ed79adf-afc1-5554-beff-0cfaf4c37a15")
+	)
 	(symbol
-		(lib_id "tube_psu_next:IXDD604")
+		(lib_id "tube_psu_next:UCC27524A")
 		(at 299.72 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -9982,7 +9905,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "IXDD604D2TR"
+		(property "Value" "UCC27524ADR"
 			(at 292.1 161.29 0)
 			(effects
 				(font
@@ -9991,7 +9914,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "tube_psu:DFN-8-1EP_P0.95mm_IXDD60xD2"
+		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 			(at 299.72 152.4 0)
 			(effects
 				(font
@@ -10009,7 +9932,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Dual 4 A gate driver DFN-8 with thermal pad"
+		(property "Description" "Dual 5 A low-side gate driver, SOIC-8 (UCC27524ADR, NR 3a)"
 			(at 299.72 152.4 0)
 			(effects
 				(font
@@ -10018,7 +9941,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C185857"
 			(at 299.72 152.4 0)
 			(effects
 				(font
@@ -10036,23 +9959,20 @@
 		(pin "2"
 			(uuid "e1c6c30a-154c-57da-8e9b-198ff7b615bc")
 		)
-		(pin "3"
-			(uuid "92f4f870-7875-561f-a74c-9f3b0d9ed6a5")
-		)
 		(pin "4"
 			(uuid "84f9b1f5-43ee-5182-82cd-c0624ca98af9")
 		)
 		(pin "8"
 			(uuid "55779daf-5969-5996-80b2-d1ef1d32afcc")
 		)
-		(pin "5"
-			(uuid "33086f93-c14e-597d-a88c-01a85175a1b6")
-		)
 		(pin "7"
 			(uuid "8c3d417c-1785-5a7e-9f39-c9e5e007caa0")
 		)
-		(pin "9"
-			(uuid "93f3779c-0fde-5b46-aee7-63207d048e88")
+		(pin "5"
+			(uuid "33086f93-c14e-597d-a88c-01a85175a1b6")
+		)
+		(pin "3"
+			(uuid "92f4f870-7875-561f-a74c-9f3b0d9ed6a5")
 		)
 		(instances
 			(project "tube_psu_5_2"
@@ -10071,7 +9991,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "08cb7857-97bb-5125-82aa-cdf2e657f143")
+		(uuid "456a08c8-eea6-5167-bee7-a2166e723b66")
 	)
 	(wire
 		(pts
@@ -10081,7 +10001,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1cc694d4-fee3-52f8-a045-3100b1910fca")
+		(uuid "e64f86e4-51f7-5660-97bf-26922120a8ef")
 	)
 	(symbol
 		(lib_id "tube_psu_next:6V3")
@@ -10091,8 +10011,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "f262109c-c161-5139-8fb1-6d2d90a762cc")
-		(property "Reference" "#PWR029"
+		(uuid "1575a4d6-bded-5332-912e-75847f4e2bd4")
+		(property "Reference" "#PWR026"
 			(at 284.48 140.97 0)
 			(effects
 				(font
@@ -10137,12 +10057,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "5e1b663c-69b9-547e-82dd-56b4f6ed7a74")
+			(uuid "f700640b-f7d1-5ddd-95ee-f8e1aa1e02df")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#PWR029")
+					(reference "#PWR026")
 					(unit 1)
 				)
 			)
@@ -10232,13 +10152,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f99f8d97-5509-5f83-a295-79fe958b81ef")
+		(uuid "bad82f43-3d37-57dd-8c80-8cefcd300287")
 	)
 	(junction
 		(at 284.48 137.16)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "a476af37-1769-52ac-a888-2341e98381af")
+		(uuid "50bfb36e-b184-5c8c-a71b-cce9aa0be61a")
 	)
 	(symbol
 		(lib_id "tube_psu_next:HT_GND")
@@ -10248,8 +10168,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "0b179024-84fb-5c8f-95e5-c23bf5c2defb")
-		(property "Reference" "#PWR030"
+		(uuid "8ccbf2b1-1b6d-5e8f-8d61-e4a8de997a92")
+		(property "Reference" "#PWR027"
 			(at 269.24 151.13 0)
 			(effects
 				(font
@@ -10294,12 +10214,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "303904d6-b2e1-5d4f-aa77-6b2c9bcf8113")
+			(uuid "b6ae26cd-9eda-5017-a5cd-97e5ba64715a")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#PWR030")
+					(reference "#PWR027")
 					(unit 1)
 				)
 			)
@@ -10313,7 +10233,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "842de163-8178-5727-a4c3-d83b55b27e6b")
+		(uuid "ef2ce435-6329-536d-b205-cbdbf99e67ba")
 	)
 	(symbol
 		(lib_id "tube_psu_next:6V3")
@@ -10323,8 +10243,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "33c03304-b735-5ec4-b15c-d541a64f2c34")
-		(property "Reference" "#PWR031"
+		(uuid "5d759ab2-8e2d-5c10-acde-90056381203c")
+		(property "Reference" "#PWR028"
 			(at 290.83 149.86 0)
 			(effects
 				(font
@@ -10370,12 +10290,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "e6c5e538-aea0-5ea9-b7c9-8693d305c4ff")
+			(uuid "2cb24365-d09c-5695-b445-57aa997dd18c")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#PWR031")
+					(reference "#PWR028")
 					(unit 1)
 				)
 			)
@@ -10389,7 +10309,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1bf0e037-f66e-5d8c-b616-7a2576e12458")
+		(uuid "aebb9dd5-6107-5efc-ad34-a4b73da10965")
 	)
 	(symbol
 		(lib_id "tube_psu_next:6V3")
@@ -10399,8 +10319,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "99a227fe-1d72-5f4d-8380-80760d140c6b")
-		(property "Reference" "#PWR032"
+		(uuid "f262109c-c161-5139-8fb1-6d2d90a762cc")
+		(property "Reference" "#PWR029"
 			(at 290.83 157.48 0)
 			(effects
 				(font
@@ -10446,12 +10366,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "1fa05c73-ca91-5672-8a22-05bc6d6944a4")
+			(uuid "5e1b663c-69b9-547e-82dd-56b4f6ed7a74")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#PWR032")
+					(reference "#PWR029")
 					(unit 1)
 				)
 			)
@@ -10465,7 +10385,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2c0184a7-373a-5e84-901d-81e386e01c03")
+		(uuid "a3c98082-e777-58ce-b8b9-29c304191861")
 	)
 	(global_label "EPWM6A_ISO"
 		(shape passive)
@@ -10477,7 +10397,7 @@
 			)
 			(justify right)
 		)
-		(uuid "d9f251a4-1f8e-526e-96db-6b7ba7c01a65")
+		(uuid "4b0d0ca5-00bd-5e97-8184-54fbb0561443")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 264.16 152.4 0)
 			(effects
@@ -10569,7 +10489,7 @@
 		(at 269.24 152.4)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "9eed1f7a-05f5-520a-befc-ee3350d14045")
+		(uuid "cf92c0af-fe66-5fa2-adfb-5a35afbd8ceb")
 	)
 	(symbol
 		(lib_id "tube_psu_next:HT_GND")
@@ -10579,8 +10499,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "93bdbb02-3dda-566d-855d-b8c9c3a164c9")
-		(property "Reference" "#PWR033"
+		(uuid "0b179024-84fb-5c8f-95e5-c23bf5c2defb")
+		(property "Reference" "#PWR030"
 			(at 269.24 166.37 0)
 			(effects
 				(font
@@ -10625,12 +10545,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "f0ec38be-cdc1-591d-8fa7-f4ab29cdb4b5")
+			(uuid "303904d6-b2e1-5d4f-aa77-6b2c9bcf8113")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#PWR033")
+					(reference "#PWR030")
 					(unit 1)
 				)
 			)
@@ -10644,7 +10564,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7ed79adf-afc1-5554-beff-0cfaf4c37a15")
+		(uuid "64bbd3a1-d2f8-52f5-a512-f9b8769d46ae")
 	)
 	(wire
 		(pts
@@ -10654,7 +10574,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "456a08c8-eea6-5167-bee7-a2166e723b66")
+		(uuid "239a6fd2-5aad-540a-9921-4eb7d1943c54")
 	)
 	(wire
 		(pts
@@ -10664,7 +10584,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e64f86e4-51f7-5660-97bf-26922120a8ef")
+		(uuid "157f89ed-8d55-506d-8d51-2a0a18777cc3")
 	)
 	(global_label "EPWM5A_ISO"
 		(shape passive)
@@ -10676,7 +10596,7 @@
 			)
 			(justify right)
 		)
-		(uuid "bad82f43-3d37-57dd-8c80-8cefcd300287")
+		(uuid "76fd8708-f807-5869-b397-5bf182840a49")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 264.16 167.64 0)
 			(effects
@@ -10768,7 +10688,7 @@
 		(at 269.24 167.64)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50bfb36e-b184-5c8c-a71b-cce9aa0be61a")
+		(uuid "ddb64705-cf48-5bbc-b389-ad08af499a0f")
 	)
 	(symbol
 		(lib_id "tube_psu_next:HT_GND")
@@ -10778,8 +10698,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "e76cbc83-57af-5b7d-8de2-5a83bacd46ff")
-		(property "Reference" "#PWR034"
+		(uuid "33c03304-b735-5ec4-b15c-d541a64f2c34")
+		(property "Reference" "#PWR031"
 			(at 269.24 181.61 0)
 			(effects
 				(font
@@ -10824,12 +10744,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "72c8a011-0cb0-572b-bec4-8706966fc930")
+			(uuid "e6c5e538-aea0-5ea9-b7c9-8693d305c4ff")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#PWR034")
+					(reference "#PWR031")
 					(unit 1)
 				)
 			)
@@ -10995,7 +10915,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ef2ce435-6329-536d-b205-cbdbf99e67ba")
+		(uuid "931a6922-52f0-512b-9cf3-50d13de93802")
 	)
 	(wire
 		(pts
@@ -11005,7 +10925,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "aebb9dd5-6107-5efc-ad34-a4b73da10965")
+		(uuid "f64bdc8c-1692-5a85-82dc-763ca063c933")
 	)
 	(label "HEATER_SYNC_GATE_1"
 		(at 340.36 147.32 0)
@@ -11015,7 +10935,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "a3c98082-e777-58ce-b8b9-29c304191861")
+		(uuid "b59e8c4c-e71c-5107-bfae-33365d6db56c")
 	)
 	(wire
 		(pts
@@ -11025,7 +10945,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "4b0d0ca5-00bd-5e97-8184-54fbb0561443")
+		(uuid "26a16a9e-692e-502d-ba9f-38469a01e6b6")
 	)
 	(wire
 		(pts
@@ -11035,7 +10955,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "cf92c0af-fe66-5fa2-adfb-5a35afbd8ceb")
+		(uuid "7b0ab61b-c414-5bbc-bd8b-e4e843bec4fe")
 	)
 	(label "HEATER_SYNC_GATE_2"
 		(at 340.36 149.86 0)
@@ -11045,7 +10965,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "64bbd3a1-d2f8-52f5-a512-f9b8769d46ae")
+		(uuid "1ac7db55-7b85-57a8-90d1-37031b26904b")
 	)
 	(wire
 		(pts
@@ -11055,7 +10975,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "239a6fd2-5aad-540a-9921-4eb7d1943c54")
+		(uuid "760d4506-0269-58c5-9a27-baa88e4723e1")
 	)
 	(wire
 		(pts
@@ -11065,23 +10985,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "157f89ed-8d55-506d-8d51-2a0a18777cc3")
-	)
-	(wire
-		(pts
-			(xy 309.88 157.48) (xy 312.42 157.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "76fd8708-f807-5869-b397-5bf182840a49")
-	)
-	(junction
-		(at 312.42 157.48)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ddb64705-cf48-5bbc-b389-ad08af499a0f")
+		(uuid "31bb5747-b2b6-5f95-9385-766d8ff1f1cc")
 	)
 	(symbol
 		(lib_id "tube_psu_next:HT_GND")
@@ -11091,8 +10995,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "8e07ebea-9e71-509a-b2b9-89397a088315")
-		(property "Reference" "#PWR035"
+		(uuid "99a227fe-1d72-5f4d-8380-80760d140c6b")
+		(property "Reference" "#PWR032"
 			(at 312.42 168.91 0)
 			(effects
 				(font
@@ -11137,12 +11041,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "9842b619-b5dd-5482-8828-e8f3a54a1239")
+			(uuid "1fa05c73-ca91-5672-8a22-05bc6d6944a4")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/4416e662-eba0-45a4-b6fd-17fcd8a13965"
-					(reference "#PWR035")
+					(reference "#PWR032")
 					(unit 1)
 				)
 			)
@@ -11157,7 +11061,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "931a6922-52f0-512b-9cf3-50d13de93802")
+		(uuid "ab1b0092-0439-59d1-9740-25306334e047")
 	)
 	(embedded_fonts no)
 )

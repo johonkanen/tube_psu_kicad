@@ -17,7 +17,7 @@ J2_PINS = [
     (5, "EPWM5A", "A13"), (6, "B12", "B12"), (7, "$HT_CS", "A14"), (8, "$CUK_CS", "B13"),
     (9, "SYNCH_2", "A15"), (10, "EPWM2A", "B14"), (11, "HT_SDATA", "C15"), (12, "EPWM2B", "B16"),
     (13, "SYNCH_1", "D16"), (14, "CUK_CLK", "C16"), (15, "HT_CLK", "F15"), (16, "CUK_SDATA", "D15"),
-    (17, "GPIO_BYPASS_RLY", "G16"), (18, "F16", "F16"), (19, "PFC_PWM1", "J15"), (20, "G15", "G15"),
+    (17, "GPIO_BYPASS_RLY", "G16"), (18, "DAB_DIS", "F16"), (19, "PFC_PWM1", "J15"), (20, "G15", "G15"),
     (21, "K16", "K16"), (22, "EPWM1A", "J16"), (23, "L16", "L16"), (24, "RX", "K15"),
     (25, "N14", "N14"), (26, "TX", "L15"), (27, "N15", "N15"), (28, "N16", "N16"),
     (29, "P15", "P15"), (30, "P16", "P16"), (31, "T15", "T15"), (32, "R16", "R16"),
@@ -29,7 +29,7 @@ J2_PINS = [
     (50, "ADA0", "ADA0"),
 ]
 GLOBAL = {"EPWM6A", "PRI_DHB_HI", "EPWM5A", "B12", "$HT_CS", "$CUK_CS", "SYNCH_2", "EPWM2A", "HT_SDATA",
-          "EPWM2B", "SYNCH_1", "CUK_CLK", "HT_CLK", "CUK_SDATA", "GPIO_BYPASS_RLY", "PFC_PWM1", "PFC_PWM2",
+          "EPWM2B", "SYNCH_1", "CUK_CLK", "DAB_DIS", "HT_CLK", "CUK_SDATA", "GPIO_BYPASS_RLY", "PFC_PWM1", "PFC_PWM2",
           "DHB_I_MEAS", "PFC_I1_MEAS", "PFC_I2_MEAS", "HEATER_I_MEAS", "VAC_MEAS"}
 POWER = {"GND", "5V"}
 J2X, J2Y = g(270), g(100)

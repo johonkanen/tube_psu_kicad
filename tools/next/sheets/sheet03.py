@@ -165,8 +165,8 @@ def iso_channel(sh, IX, IY, iso, left_pins, out_pins, cdec, adc, c_vin, r_in, am
 
 # Secondary channel (PDF top): Cuk capacitor voltage, isolated 3.3 V rail AD2_3V3 from 5V_ISOL.
 iso_channel(sh, g(46), g(56), iso="ISO2",
-            left_pins={2: "EPWM2A", 3: "EPWM2B", 4: None, 5: "$CUK_CS", 6: "CUK_CLK", 7: "CUK_SDATA"},
-            out_pins={15: "ISO_SEC_DHB_HI", 14: "ISO_SEC_DHB_LO", 13: None}, cdec="C98",
+            left_pins={2: "EPWM2A", 3: "EPWM2B", 4: "DAB_DIS", 5: "$CUK_CS", 6: "CUK_CLK", 7: "CUK_SDATA"},
+            out_pins={15: "ISO_SEC_DHB_HI", 14: "ISO_SEC_DHB_LO", 13: "DAB_DIS_SEC"}, cdec="C98",
             adc="AD2", c_vin="C5", r_in="R13", amp="U3", inp="CUK_CAP_MEAS2", inn=("label", "CUK_CAP_MEAS-"),
             r_fb="R113", gnd="ISO_GND", rail_power="AD2_3V3", rail_caps=["C103", "C105", "C57"],
             reg="V2", c_nr="C34", c_in="C21", vin=("power", "5V_ISOL"))
@@ -182,7 +182,7 @@ iso_channel(sh, g(46), g(126), iso="ISO1",
 sh.text("Primary (MCU side)", g(14), g(14), size=2.0)
 sh.text("Secondary (isolated side)", g(120), g(14), size=2.0)
 sh.text("Pin compatible with MAX11110, ADS7886 S/H, ADS7883 S/H (PDF note on the ADC).", g(14), g(18))
-sh.text("V5.1 (PDF hand note).", g(14), g(21))
+sh.text("V5.1 (PDF hand note). 5.2: ISO1 / ISO2 = CA-IS3761LW (Si8661 pinout, default low); ISO2 channel C carries DAB_DIS -> DAB_DIS_SEC (DRV6 DISABLE).", g(14), g(21))
 sh.text("PDF aliases: SEC_GND = ISO_GND, HT_AUX = 6V3, AD2_3v3 = AD2_3V3; lowercase labels = IPC names.", g(14), g(160))
 sh.text("The HT rail (ISO1 VDD2, AD1 VA, U2 V+, V3 VOUT, C59/C104/C83) is an unnamed net in Proteus (#00086): plain wire.", g(14), g(163))
 # 6V3 and HT_GND enter through the terminals HT_6V3 / HT_GND on sheet 6, where their PWR_FLAGs are.

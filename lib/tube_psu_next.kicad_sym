@@ -7967,24 +7967,6 @@
 			(pin input line
 				(at -10.16 2.54 0)
 				(length 2.54)
-				(name "INB"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input line
-				(at -10.16 0 0)
-				(length 2.54)
 				(name "DIS"
 					(effects
 						(font
@@ -8001,7 +7983,7 @@
 				)
 			)
 			(pin passive line
-				(at -10.16 -2.54 0)
+				(at -10.16 0 0)
 				(length 2.54)
 				(name "DT"
 					(effects
@@ -8019,7 +8001,7 @@
 				)
 			)
 			(pin power_in line
-				(at -10.16 -5.08 0)
+				(at -10.16 -2.54 0)
 				(length 2.54)
 				(name "GND"
 					(effects
@@ -8029,6 +8011,24 @@
 					)
 				)
 				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -10.16 -5.08 0)
+				(length 2.54)
+				(name "INB"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
 					(effects
 						(font
 							(size 1.27 1.27)

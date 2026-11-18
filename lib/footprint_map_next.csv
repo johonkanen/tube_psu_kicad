@@ -137,20 +137,19 @@ D32,tube_psu:D_Schottky,tube_psu:D_SOD-323_AC,"SOD-323 (ZLLS400TA), pads A/C"
 D33,tube_psu:D_Schottky,tube_psu:D_SOD-323_AC,"SOD-323 (ZLLS400TA), pads A/C"
 D34,tube_psu:D_Schottky,tube_psu:D_SOD-323_AC,"SOD-323 (ZLLS400TA), pads A/C"
 DB1,tube_psu:TBS22K,tube_psu:D_Bridge_TBS,"TBS SMD bridge, Proteus land pattern"
-DRV1,tube_psu:IXDD609,tube_psu:DFN-8-1EP_P0.95mm_IXDD60xD2,"IXYS D2 DFN-8 with thermal pad 9, Proteus land pattern"
-DRV2,tube_psu:IXDD609,tube_psu:DFN-8-1EP_P0.95mm_IXDD60xD2,"IXYS D2 DFN-8 with thermal pad 9, Proteus land pattern"
-DRV3,tube_psu:SI8271,tube_psu:SOIC-8_3.9x4.9mm_P1.27mm_Proteus,"SOIC-8, Proteus pad rows 5.5 mm apart"
-DRV4,tube_psu:IXDD604,tube_psu:DFN-8-1EP_P0.95mm_IXDD60xD2,"IXYS D2 DFN-8 with thermal pad 9, Proteus land pattern"
-DRV5,tube_psu:SI8275,tube_psu:SOIC-16_3.9x9.9mm_P1.27mm_Proteus,"SOIC-16, Proteus pad rows 5.4 mm apart, Proteus pad size"
-DRV6,tube_psu:SI8275,tube_psu:SOIC-16_3.9x9.9mm_P1.27mm_Proteus_KiCadPads,"SOIC-16, Proteus pad rows 5.4 mm apart"
-DRV9,tube_psu:IXDD609,tube_psu:DFN-8-1EP_P0.95mm_IXDD60xD2,"IXYS D2 DFN-8 with thermal pad 9, Proteus land pattern"
+DRV1,tube_psu_next:UCC27511A,Package_TO_SOT_SMD:SOT-23-6,SOT-23-6 (KiCad library)
+DRV2,tube_psu_next:UCC27511A,Package_TO_SOT_SMD:SOT-23-6,SOT-23-6 (KiCad library)
+DRV3,tube_psu_next:UCC21520,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,SOIC-16W (KiCad library)
+DRV4,tube_psu_next:UCC27524A,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,SOIC-8 (KiCad library)
+DRV5,tube_psu_next:UCC21520,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,SOIC-16W (KiCad library)
+DRV6,tube_psu_next:UCC21520,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,SOIC-16W (KiCad library)
 GND,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
 HT_6V3,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
 HT_GND,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
 IN1,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
 IN2,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
-ISO1,tube_psu:SI8661,tube_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,"SOIC-16W, Proteus pad rows 9.4 mm apart"
-ISO2,tube_psu:SI8661,tube_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,"SOIC-16W, Proteus pad rows 9.4 mm apart"
+ISO1,tube_psu:SI8661,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,SOIC-16W (KiCad library)
+ISO2,tube_psu:SI8661,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,SOIC-16W (KiCad library)
 J2,tube_psu:HEADER_2X25_50MIL,tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus,2x25 1.27 mm header
 J4,tube_psu:CONN_01X03,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,1x3 2.54 mm (FCI 66226-003)
 L1,tube_psu:RM8_INDUCTOR,tube_psu:L_RM8_Proteus,"RM8 choke: winding pads pri1/pri2, bobbin pins 1/2 (no net); 45 deg on the board"
@@ -170,8 +169,8 @@ Q6,tube_psu:Q_NMOS_GDS,Package_TO_SOT_THT:TO-247-3_Vertical,"TO-247, 1=G 2=D 3=S
 Q7,tube_psu:Q_NMOS_GDS,Package_TO_SOT_THT:TO-220-3_Vertical,"TO-220(F), 1=G 2=D 3=S"
 Q8,tube_psu:Q_NMOS_GDS,Package_TO_SOT_THT:TO-220-3_Vertical,"TO-220(F), 1=G 2=D 3=S"
 Q9,tube_psu:Q_NMOS_DGS,tube_psu:SOT-23_Proteus,"SOT-23, Proteus pad numbering (Q9 2N7000)"
-Q10,tube_psu:Q_NMOS_GDS,Package_TO_SOT_THT:TO-220-3_Vertical,"TO-220(F), 1=G 2=D 3=S"
-Q11,tube_psu:Q_NMOS_GDS,Package_TO_SOT_THT:TO-220-3_Vertical,"TO-220(F), 1=G 2=D 3=S"
+Q10,tube_psu:Q_NMOS_GDS,Package_TO_SOT_SMD:TO-252-2,"DPAK, 1=G 2=D (tab) 3=S; >= 2 cm2 L1 copper + thermal vias (NR 5.4)"
+Q11,tube_psu:Q_NMOS_GDS,Package_TO_SOT_SMD:TO-252-2,"DPAK, 1=G 2=D (tab) 3=S; >= 2 cm2 L1 copper + thermal vias (NR 5.4)"
 Q19,tube_psu:Q_NMOS_GDS,Package_TO_SOT_THT:TO-220-3_Vertical,"TO-220(F), 1=G 2=D 3=S"
 Q21,tube_psu:Q_NMOS_GDS,Package_TO_SOT_THT:TO-220-3_Vertical,"TO-220(F), 1=G 2=D 3=S"
 R1,tube_psu:R,Resistor_SMD:R_1206_3216Metric,1206
@@ -198,7 +197,6 @@ R21,tube_psu:R,tube_psu:R_0508_1220Metric_KRL2012,"KRL2012 0508 shunt, long-side
 R22,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R23,tube_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
 R24,tube_psu:R,Resistor_SMD:R_1206_3216Metric,1206
-R25,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R26,tube_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
 R27,tube_psu:R,Resistor_THT:R_Radial_Power_L13.0mm_W9.0mm_P5.00mm,"TWW10 10 W wirewound, vertical"
 R28,tube_psu:R,tube_psu:R_0805_2012Metric_Proteus2.13,0805 (Proteus pads 2.13 mm apart)
@@ -213,7 +211,6 @@ R36,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R37,tube_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
 R38,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R39,tube_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
-R40,tube_psu:R,tube_psu:R_0603_1608Metric_Proteus1.73,"0603 (Proteus pads 1.73 mm apart), Proteus pad size"
 R41,tube_psu:R,Resistor_SMD:R_1206_3216Metric,1206
 R42,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
 R43,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
@@ -317,3 +314,12 @@ V3,tube_psu:TPS73033,tube_psu:SOT-23-5_Proteus,"SOT-23-5, Proteus pad rows 2.39 
 V4,tube_psu:TPS73033,tube_psu:SOT-23-5_Proteus,"SOT-23-5, Proteus pad rows 2.39 mm apart, Proteus pad size"
 R125,tube_psu:R,Resistor_SMD:R_1206_3216Metric,1206
 R126,tube_psu:R,Resistor_SMD:R_0805_2012Metric,0805
+R127,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
+R128,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
+R130,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
+C118,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+C119,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+C121,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+R129,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
+C120,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+D35,tube_psu:D_Schottky,tube_psu:D_SOD-323_AC,"SOD-323, pads A/C"

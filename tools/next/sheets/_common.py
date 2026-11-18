@@ -106,30 +106,31 @@ def _place_with_lcsc(self, name, ref, *args, **kw):
 Sheet.place = _place_with_lcsc
 
 
-def si8275_cell(sh, ref, UX, UY, vdd, gnd, pwm, nc1, dt, cdec, boot, rail, railcaps, boot_side,
-                vo_hi, src_hi, vo_lo):
-    """Si8275 isolated dual driver cell as on sheet 2 (DRV5 / DRV6), IC at (UX, UY). The Proteus
-    schematic says Si8274; the fitted part is the dual-input Si8275 (pin 1 VIA, pin 2 VIB, pin 6 NC).
+def ucc21520_cell(sh, ref, UX, UY, vdd, gnd, pwm, nc1, dt, cdec, boot, rail, railcaps, boot_side,
+                  vo_hi, src_hi, vo_lo, dis=None, local=False):
+    """UCC21520 isolated dual gate driver cell (5.2, NEXT_REVISION.md 3a), IC at (UX, UY). Forked from the 5.1
+    Si8275 cell: the UCC21520 has the same SOIC-16W pin positions (1 INA, 2 INB, 3/8 VCCI, 4 GND, 5 DISABLE,
+    6 DT, 9 VSSB, 10 OUTB, 11 VDDB, 14 VSSA, 15 OUTA, 16 VDDA; 7/12/13 NC); INA -> OUTA, INB -> OUTB.
 
-    Input side (left): vdd/gnd = power nets of VDD1 (3, 5, 8) / GND1 (4); pwm = (label, (rref,
-    rval)) on pin 1 VIA with its pull-down to gnd, nc1 = the same for pin 2 VIB; dt = (rref,
-    rval) the Proteus dead-time resistor pin 6 to gnd (pin 6 is NC on the Si8275, resistor harmless); cdec = (cref, cval, top)
-    decoupling cap vdd-gnd (`top` = pin on the vdd side).
-    Output side (right): `rail` = power net of the driver supply; railcaps = [(cref, cval, top)]
-    decoupling caps rail-gnd (`top` = pin on the rail side); boot = ((dref, dval), (rref, rval),
-    (cref, cval, top)) bootstrap diode (A on the rail), series resistor (pin 1 at the diode) and
-    bootstrap cap (`top` = pin on the VDD side). boot_side 'B' = bootstrap feeds VDDB/GNDB (pins
-    11/9, outputs VOB high side), 'A' = VDDA/GNDA (16/14). vo_hi / src_hi / vo_lo = global labels
-    of the high-side gate, high-side source and low-side gate."""
-    u = sh.place("SI8275", ref, UX, UY, value="SI8275BB")
-    VDD1a, VDD1b, PWM, EN, DT, GND1, NC1, NC2 = (u.pin(n) for n in (3, 8, 1, 5, 6, 4, 2, 7))
+    Input side (left): vdd/gnd = power nets of VCCI (3, 8) / GND (4); pwm = (label, (rref, rval)) on pin 1
+    INA with its pull-down to gnd, nc1 = the same for pin 2 INB; dt = (rref, rval, cref, cval): dead-time
+    resistor DT - GND (DT = 10 ns per kOhm, hardware backstop for the FPGA dead time) with its noise cap in
+    parallel (datasheet: <= 1 nF); cdec = (cref, cval, top) decoupling cap vdd-gnd. dis = None ties DISABLE
+    (pin 5) to gnd; dis = (label, (rref, rval) or None, (cref, cval) or None) brings it out to a global
+    label with an optional pull-down and bypass cap to gnd (high = both outputs off).
+    Output side (right): as the 5.1 cell - rail, railcaps, boot = ((dref, dval), (rref, rval), (cref, cval,
+    top)), boot_side 'B' = bootstrap on VDDB/VSSB (OUTB high side), 'A' = VDDA/VSSA; vo_hi / src_hi / vo_lo
+    = labels of the high-side gate, high-side source and low-side gate (global, or local with local=True)."""
+    lab_fn = sh.label if local else sh.glabel
+    u = sh.place("UCC21520", ref, UX, UY, value=sh_value(ref))
+    VDD1a, VDD1b, PWM, DIS, DT, GND1, NC1, NC2 = (u.pin(n) for n in (3, 8, 1, 5, 6, 4, 2, 7))
     VDDA, VOA, GNDA, NC3, NC4, VDDB, VOB, GNDB = (u.pin(n) for n in (16, 15, 14, 13, 12, 11, 10, 9))
     sh.no_connect(*NC2)
     sh.no_connect(*NC3)
     sh.no_connect(*NC4)
 
     # --- input side -------------------------------------------------------------------
-    xs = UX - g(12)                       # VDD1 bus (pins 3 and 8), fed from the top
+    xs = UX - g(12)                       # VCCI bus (pins 3 and 8), fed from the top
     sh.wire(VDD1a, (xs, VDD1a[1]))
     sh.wire(VDD1b, (xs, VDD1b[1]))
     top = (xs, UY - g(16))
@@ -142,18 +143,29 @@ def si8275_cell(sh, ref, UX, UY, vdd, gnd, pwm, nc1, dt, cdec, boot, rail, railc
     sh.wire(top, ct)
     sh.junction(*top)
     power_at(sh, gnd, cb, "down")
-    q = left(EN, 2)                       # EN tied to VDD1: own power symbol (the bus would cross PWM)
-    sh.wire(EN, q)
-    power_at(sh, vdd, q, "left")
-    # VIA (pin 1): label at the far left, pull-down beside it
+    xl, xr = UX - g(48), UX - g(44)
+    if dis is None:                       # DISABLE tied to the input ground (datasheet: tie low if unused)
+        q = left(DIS, 2)
+        sh.wire(DIS, q)
+        power_at(sh, gnd, q, "left")
+    else:
+        lab, pd, cap = dis
+        xq = UX - g(34)
+        sh.wire(DIS, (xq, DIS[1]))
+        sh.glabel(lab, xq, DIS[1], 180)
+        for x, part, sym in ((UX - g(26), pd, "R"), (UX - g(30), cap, "C")):
+            if part:
+                _, pt, pb = vert2(sh, sym, part[0], x, DIS[1] + g(3), part[1], top=1)
+                sh.junction(*pt)
+                power_at(sh, gnd, pb, "down")
+    # INA (pin 1): label at the far left, pull-down beside it
     lab, (rref, rval) = pwm
-    xl, xr = UX - g(40), UX - g(36)
     sh.wire(PWM, (xl, PWM[1]))
     sh.glabel(lab, xl, PWM[1], 180)
     _, rt, rb = vert2(sh, "R", rref, xr, PWM[1] + g(3), rval, top=2)
     sh.junction(*rt)
     power_at(sh, gnd, rb, "down")
-    # VIB (pin 2): leaves downwards (under the GND1 / DT wiring), label at the far left
+    # INB (pin 2): leaves downwards (under the GND / DT wiring), label at the far left
     lab, (rref, rval) = nc1
     row = UY + g(14)
     sh.wire(NC1, (UX - g(10), NC1[1]), (UX - g(10), row), (xl, row))
@@ -161,11 +173,15 @@ def si8275_cell(sh, ref, UX, UY, vdd, gnd, pwm, nc1, dt, cdec, boot, rail, railc
     _, rt, rb = vert2(sh, "R", rref, xr, row + g(3), rval, top=2)
     sh.junction(*rt)
     power_at(sh, gnd, rb, "down")
-    # DT resistor and GND1 share a ground symbol
-    rref, rval = dt
+    # DT resistor || cap and GND share a ground symbol
+    rref, rval, dcref, dcval = dt
     xd = UX - g(20)
     sh.wire(DT, (xd, DT[1]))
     _, rt, rb = vert2(sh, "R", rref, xd, UY + g(3), rval, top=1)
+    _, ct, cb = vert2(sh, "C", dcref, UX - g(16), UY + g(3), dcval, top=1, text="right")
+    sh.junction(*ct)
+    sh.wire(cb, rb)
+    sh.junction(*rb)
     grd = (UX - g(14), UY + g(8))
     sh.wire(rb, (xd, grd[1]), grd)
     sh.wire(GND1, (grd[0], GND1[1]), grd)
@@ -187,28 +203,34 @@ def si8275_cell(sh, ref, UX, UY, vdd, gnd, pwm, nc1, dt, cdec, boot, rail, railc
         sh.junction(x, RAIL)
         power_at(sh, gnd, cb, "down")
     xb = r2[0]                            # bootstrap column down from the resistor
+
+    def out(name, p):
+        q = right(p, 2)
+        sh.wire(p, q)
+        lab_fn(name, *q, 0)
+
     if boot_side == "B":
         sh.wire(VDDA, (xr0, VDDA[1]), (xr0, RAIL))
         sh.junction(xr0, RAIL)
-        glabel_right(sh, vo_lo, VOA, 2)
+        out(vo_lo, VOA)
         q = right(GNDA, 2)
         sh.wire(GNDA, q)
         power_at(sh, gnd, q, "right")
         sh.wire(r2, (xb, VDDB[1]), VDDB)
-        glabel_right(sh, vo_hi, VOB, 2)
+        out(vo_hi, VOB)
         bt, bb = VDDB[1], GNDB[1] + g(2)
         sh.wire(GNDB, (UX + g(26), GNDB[1]), (UX + g(26), bb), (UX + g(38), bb))
-        sh.glabel(src_hi, UX + g(38), bb, 0)
+        lab_fn(src_hi, UX + g(38), bb, 0)
     else:
         sh.wire(r2, (xb, VDDA[1]), VDDA)
-        glabel_right(sh, vo_hi, VOA, 2)
+        out(vo_hi, VOA)
         bt, bb = VDDA[1], GNDA[1] + g(2)
         sh.wire(GNDA, (UX + g(26), GNDA[1]), (UX + g(26), bb), (UX + g(38), bb))
-        sh.glabel(src_hi, UX + g(38), bb, 0)
+        lab_fn(src_hi, UX + g(38), bb, 0)
         q = right(VDDB, 6)
         sh.wire(VDDB, q)
         power_at(sh, rail, q, "up")
-        glabel_right(sh, vo_lo, VOB, 2)
+        out(vo_lo, VOB)
         q = (UX + g(12), GNDB[1] + g(2))
         sh.wire(GNDB, (q[0], GNDB[1]), q)
         power_at(sh, gnd, q, "down")
@@ -223,78 +245,51 @@ def si8275_cell(sh, ref, UX, UY, vdd, gnd, pwm, nc1, dt, cdec, boot, rail, railc
     return u
 
 
-def ixdd609_cell(sh, ref, UX, UY, vcc, gnd, in_label, r_in, cdec, r_out, out_label, r_gate,
-                 diode=None, local=False, r_gate_top=2):
-    """IXDD609 MOSFET driver cell as on sheet 9 (DRV1 / DRV2), IC at (UX, UY): VCC pins 1/8
-    on a bus fed by the `vcc` power symbol with decoupling cap cdec = (cref, cval, top), EN (3)
-    tied to vcc by its own symbol, IN (2) from global label in_label with pull-down r_in =
-    (rref, rval), GND pins 4/5/9 on a bus to `gnd`; OUTA/OUTB joined into the parallel gate
-    resistors r_out = [(rref, rval), (rref, rval)] (pin 1 on the driver side) and the gate node
-    with global label out_label and pull-down r_gate = (rref, rval).
-    Sheet 6 (DRV9): diode = (dref, dval) puts a Schottky diode in series with the second resistor
-    (cathode at the resistor, anode at the gate node: fast turn-off path), local = True makes the
-    gate label a local one (one-sheet net), r_gate_top = pin of the pull-down at the gate node."""
-    u = sh.place("IXDD609", ref, UX, UY, value=sh_value(ref))
-    VCC1, VCC8, IN, EN = u.pin(1), u.pin(8), u.pin(2), u.pin(3)
-    OUTA, OUTB, GND4, GND5, TAB = u.pin(7), u.pin(6), u.pin(4), u.pin(5), u.pin(9)
-    # VCC bus (pins 1 and 8) fed from the top, decoupling cap beside it
+def ucc27511_cell(sh, ref, UX, UY, vcc, gnd, in_label, r_in, cdec, r_on, r_off, out_label, r_gate):
+    """UCC27511A low-side gate driver cell (5.2, NEXT_REVISION.md 3a; replaces the 5.1 IXDD609 cell on
+    sheet 9), IC at (UX, UY): VDD (1) from the `vcc` power symbol with the decoupling cap cdec = (cref, cval,
+    top), IN+ (6) from global label in_label with the pull-down r_in = (rref, rval), IN- (5) and GND (4)
+    to gnd; the split outputs OUTH (2) / OUTL (3) through r_on / r_off = (rref, rval) (pin 1 on the driver
+    side: separate turn-on / turn-off resistors) into the gate node with the global label out_label and
+    the pull-down r_gate = (rref, rval)."""
+    u = sh.place("UCC27511A", ref, UX, UY, value=sh_value(ref))
+    VDD, INP, INN, OUTH, OUTL, GNDP = (u.pin(n) for n in (1, 6, 5, 2, 3, 4))
     xs = UX - g(12)
-    sh.wire(VCC1, (xs, VCC1[1]))
-    sh.wire(VCC8, (xs, VCC8[1]))
-    top = (xs, UY - g(12))
-    sh.wire(top, (xs, VCC8[1]))
-    sh.junction(xs, VCC1[1])
+    top = (xs, UY - g(10))
+    sh.wire(VDD, (xs, VDD[1]), top)
     power_at(sh, vcc, top, "up")
     cref, cval, ctop = cdec
-    _, ct, cb = vert2(sh, "C", cref, UX - g(20), UY - g(9), cval, top=ctop)
-    sh.wire(top, ct)
+    _, ct, cb = vert2(sh, "C", cref, UX - g(18), UY - g(7), cval, top=ctop)
+    sh.wire(top, (UX - g(18), top[1]), ct)
     sh.junction(*top)
     power_at(sh, gnd, cb, "down")
-    q = left(EN, 2)
-    sh.wire(EN, q)
-    power_at(sh, vcc, q, "left")
-    # IN with pull-down
-    xl = UX - g(32)
-    sh.wire(IN, (xl, IN[1]))
-    sh.glabel(in_label, xl, IN[1], 180)
+    xl = UX - g(28)
+    sh.wire(INP, (xl, INP[1]))
+    sh.glabel(in_label, xl, INP[1], 180)
     rref, rval = r_in
-    _, rt, rb = vert2(sh, "R", rref, UX - g(28), IN[1] + g(3), rval, top=2)
+    _, rt, rb = vert2(sh, "R", rref, UX - g(24), INP[1] + g(3), rval, top=2)
     sh.junction(*rt)
     power_at(sh, gnd, rb, "down")
-    # GND bus (4, 5, TAB)
-    xg = UX + g(10)
-    for p in (GND4, GND5, TAB):
-        sh.wire(p, (xg, p[1]))
-    gb = (xg, TAB[1] + g(4))
-    sh.wire((xg, GND4[1]), gb)
-    sh.junction(xg, GND5[1])
-    sh.junction(xg, TAB[1])
-    power_at(sh, gnd, gb, "down")
-    # outputs joined, two parallel gate resistors, gate node with pull-down
-    xo = UX + g(12)
-    sh.wire(OUTA, (xo, OUTA[1]), (xo, OUTB[1]))
-    sh.wire(OUTB, (UX + g(16), OUTB[1]))
-    sh.junction(xo, OUTB[1])
-    (ra, va), (rb_, vb) = r_out
-    rowa, rowb = OUTB[1] - g(6), OUTB[1]
-    _, al, ar = horiz2(sh, "R", ra, UX + g(22), rowa, va, left=1, text="above")
-    _, bl, br = horiz2(sh, "R", rb_, UX + g(22), rowb, vb, left=1, text="below")
-    sh.wire((UX + g(16), rowb), (UX + g(16), rowa), al)
-    sh.wire((UX + g(16), rowb), bl)
-    sh.junction(UX + g(16), rowb)
-    xj = UX + g(28)                       # column joining the two paths into the gate node
-    if diode:
-        dref, dval = diode
-        _, dc, da = horiz2(sh, "D_Schottky", dref, UX + g(30), rowb, dval, left="C", text="below")
-        sh.wire(br, dc)
-        br = da
-        xj = UX + g(36)
-    sh.wire(ar, (xj, rowa), (xj, rowb))
-    sh.wire(br, (xj + g(10), rowb))
-    sh.junction(xj, rowb)
-    (sh.label if local else sh.glabel)(out_label, xj + g(10), rowb, 0)
+    q = left(INN, 2)
+    sh.wire(INN, q)
+    power_at(sh, gnd, q, "left")
+    q = right(GNDP, 2)
+    sh.wire(GNDP, q)
+    power_at(sh, gnd, q, "down")
+    ya, yb = OUTH[1] - g(4), OUTL[1]
+    sh.wire(OUTH, (UX + g(10), OUTH[1]), (UX + g(10), ya))
+    (ra, va), (rb_, vb) = r_on, r_off
+    _, al, ar = horiz2(sh, "R", ra, UX + g(16), ya, va, left=1, text="above")
+    _, bl, br = horiz2(sh, "R", rb_, UX + g(16), yb, vb, left=1, text="below")
+    sh.wire((UX + g(10), ya), al)
+    sh.wire(OUTL, bl)
+    xj = UX + g(24)
+    sh.wire(ar, (xj, ya), (xj, yb))
+    sh.wire(br, (xj + g(10), yb))
+    sh.junction(xj, yb)
+    sh.glabel(out_label, xj + g(10), yb, 0)
     rref, rval = r_gate
-    _, rt, rb = vert2(sh, "R", rref, xj + g(6), rowb + g(3), rval, top=r_gate_top, text="left")
+    _, rt, rb = vert2(sh, "R", rref, xj + g(6), yb + g(3), rval, top=1, text="left")
     sh.junction(*rt)
     power_at(sh, gnd, rb, "down")
     return u
