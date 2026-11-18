@@ -580,10 +580,6 @@
       },
       {
         "netclass": "HV_PRIMARY",
-        "pattern": "/07 DHB/TRANS_PRI"
-      },
-      {
-        "netclass": "HV_PRIMARY",
         "pattern": "AC1"
       },
       {
@@ -1293,14 +1289,6 @@
       {
         "netclass": "SIGNAL",
         "pattern": "unconnected-(L2-NC-Pad2)"
-      },
-      {
-        "netclass": "SIGNAL",
-        "pattern": "unconnected-(L3-NC-Pad1)"
-      },
-      {
-        "netclass": "SIGNAL",
-        "pattern": "unconnected-(L3-NC-Pad2)"
       },
       {
         "netclass": "SIGNAL",

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Sheet 7 - DHB (PDF page 7): the dual half-bridge. Primary: Q19 / Q7 (DC+ -> DHB_HI_SOURCE ->
-DHB_CURRENT -> R83 4m -> GND), C47 / C54 with the DHB_CAP node -> L3 -> TR3 primary (TRANS_PRI),
+DHB_CURRENT -> R83 4m -> GND), C47 / C54 with the DHB_CAP node -> TR3 primary (5.2: EC42/15, L3 removed),
 C67 / C70 across DC+ - DHB_CURRENT. Secondary: Q21 / Q8 (420V -> DHB_HI_SOURCE_SEC -> ISO_GND), C16 /
 C55 with the TRANS_SEC node at TR3's secondary, C89 / C90 on 420V. Every MOSFET gate has the same
 network: global gate label -> 40R, with a Schottky diode + 3.3R turn-off path, optionally a 10k
@@ -78,17 +78,23 @@ _, ct, cb = vert2(sh, "C", "C54", xc, CAPR + g(19), sh_value("C54"), top=1)     
 sh.wire((xc, CAPR), ct)
 sh.wire(cb, (xc, HC))
 sh.junction(xc, HC)
-xL = xc + g(16)
-_, l1, l2 = horiz2(sh, "RM8_INDUCTOR", "L3", xL, CAPR, sh_value("L3"), left="pri1",             # pri1 = DHB_CAP
-                   ref_at=(xL, CAPR - g(4), 90, None), value_at=(xL, CAPR + g(3), 90, None))
-sh.wire((xc, CAPR), l1)
+# 5.2 (NR 2.1 / 2.4): TR3 = EC42/15 two-chamber, option B 20:21, two pins per winding end (1+2 primary
+# start (dot) = DHB_CAP, 7+8 primary finish = DHB_HI_SOURCE, 9+10 secondary start = TRANS_SEC, 15+16
+# secondary finish = DHB_HI_SOURCE_SEC; DAB_TRANSFORMER.md 5). L3 is removed: its leakage replaces it, DHB_CAP
+# goes straight to the primary (the 5.1 net TRANS_PRI disappears).
 sh.label("DHB_CAP", xc + g(2), CAPR, 0)
 TRX, TRY = g(108), CAPR + g(4)
-tr = sh.place("ETD34_TRAN_1P1S", "TR3", TRX, TRY, value=sh_value("TR3"))
-P1, P2, S1, S2 = (tr.pin(n) for n in ("1", "2", "3", "4"))
-sh.wire(l2, P1)
-sh.label("TRANS_PRI", l2[0] + g(3), CAPR, 0)
-sh.wire((XA, SR), P2)
+tr = sh.place("EC42_2CH", "TR3", TRX, TRY, value=sh_value("TR3"))
+P1, P2, P7, P8 = (tr.pin(n) for n in ("1", "2", "7", "8"))
+S1, S2, S15, S16 = (tr.pin(n) for n in ("9", "10", "15", "16"))
+xbus = P1[0] - g(2)
+sh.wire((xc, CAPR), (xbus, CAPR))
+sh.wire((xbus, CAPR), P1)
+sh.wire(P2, (xbus, P2[1]), (xbus, CAPR))
+sh.junction(xbus, CAPR)
+sh.wire((XA, SR), P8)
+sh.wire(P7, (xbus, P7[1]), (xbus, SR))
+sh.junction(xbus, SR)
 # C67 / C70 across DC+ - DHB_CURRENT, DHB_CURRENT label at the right end of the shunt row
 for i, ref in enumerate(("C67", "C70")):
     x = xc + g(12 + 8 * i)
@@ -119,9 +125,16 @@ sh.junction(xn, SR)
 gate_net(sh, q8.pin(1), "DHB_LOW_GATE_SEC", "R87", "R88", "D32")
 # TR3 secondary: TRANS_SEC node with C16 / C55 (column crosses the source row), S2 = DHB_HI_SOURCE_SEC
 xc2 = g(132)
-sh.wire(S1, (xc2, CAPR))
-sh.label("TRANS_SEC", S1[0] + g(2), CAPR, 0)
+xbr = S1[0] + g(2)
+sh.wire(S1, (xbr, CAPR))
+sh.wire((xbr, CAPR), (xc2, CAPR))
+sh.wire(S2, (xbr, S2[1]), (xbr, CAPR))
+sh.junction(xbr, CAPR)
+sh.label("TRANS_SEC", xbr + g(2), CAPR, 0)
 sh.junction(xc2, CAPR)
+sh.wire(S15, (xbr, S15[1]), (xbr, SR))
+sh.junction(xbr, SR)
+S2 = S16                                           # the secondary finish (15 + 16) = DHB_HI_SOURCE_SEC row
 _, ct, cb = vert2(sh, "C", "C16", xc2, V4R + g(3), sh_value("C16"), top=1)       # pin 1 = 420V
 sh.wire(cb, (xc2, CAPR))
 sh.wire((xc2, V4R), (XB, V4R))
@@ -147,6 +160,8 @@ sh.junction(*mid)
 power_at(sh, "ISO_GND", mid, "down")
 flagged_power(sh, "420V", xk + g(16), V4R)
 sh.text("V5.1 (PDF hand note). 1W core loss: ETD34 : 32, RM12 : 26 (PDF note).", g(30), g(86))
+sh.text("5.2: TR3 = EC42/15 PC40 two-chamber 20:21 (leakage ~41 uH = series L, Lm ~300 uH, gap 0.35 mm); L3 removed (NR 2.1 / 2.4).", g(30), g(80))
+sh.text("Layout: C47 / C54 at the TR3 primary pins (NR 2.5), C16 / C55 at the secondary pins; firmware dead time 150-200 ns (NR 2.7).", g(30), g(83))
 sh.text("The PDF joins the terminals SEC_GND and ISO_GND by a bare wire (one net, ISO_GND); terminal GND is on ISO_GND.", g(30), g(89))
 
 # --- 420V capacitor bank with the terminals +400V / GND, dividers -----------------------------------

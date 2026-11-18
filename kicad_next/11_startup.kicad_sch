@@ -870,8 +870,8 @@
 				)
 			)
 		)
-		(property "Value" "82u"
-			(at 85.47 67.31 0)
+		(property "Value" "82u 450V"
+			(at 88.22 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -966,8 +966,8 @@
 				)
 			)
 		)
-		(property "Value" "82u"
-			(at 100.71 67.31 0)
+		(property "Value" "82u 450V"
+			(at 103.46 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1062,8 +1062,8 @@
 				)
 			)
 		)
-		(property "Value" "82u"
-			(at 115.95 67.31 0)
+		(property "Value" "82u 450V"
+			(at 118.7 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1178,8 +1178,8 @@
 				)
 			)
 		)
-		(property "Value" "82u"
-			(at 131.19 67.31 0)
+		(property "Value" "82u 450V"
+			(at 133.94 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1632,7 +1632,7 @@
 			)
 		)
 	)
-	(text "Bulk capacitors of the DC link (C29/C56/C28/C37: EEE-FTE221XAP note in the PDF)."
+	(text "Bulk capacitors of the DC link (C29/C56/C28/C37: EEE-FTE221XAP note in the PDF). 5.2: Man Yue ERT 82 uF 450 V (NR 5.2b)."
 		(exclude_from_sim no)
 		(at 50.8 93.98 0)
 		(effects

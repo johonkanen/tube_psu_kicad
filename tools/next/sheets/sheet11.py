@@ -9,8 +9,8 @@ sh = sheet("11_startup.kicad_sch")
 TOP = g(40)     # DC+ rail
 BOT = g(64)     # GND rail
 X0 = g(40)      # rail start (power symbols)
-bank = [("C", "C73", "2.2u"), ("C_Polarized", "C29", "82u"), ("C_Polarized", "C56", "82u"),
-        ("C_Polarized", "C28", "82u"), ("C_Polarized", "C37", "82u")]
+bank = [("C", "C73", sh_value("C73")), ("C_Polarized", "C29", sh_value("C29")), ("C_Polarized", "C56", sh_value("C56")),
+        ("C_Polarized", "C28", sh_value("C28")), ("C_Polarized", "C37", sh_value("C37"))]   # 5.2: values from part_map_next.csv
 xs = [X0 + g(12 * (i + 1)) for i in range(len(bank))]
 for x, (sym, ref, val) in zip(xs, bank):
     _, pt, pb = vert2(sh, sym, ref, x, g(52), val, top=1)     # pin 1 = DC+ side
@@ -35,7 +35,7 @@ sh.junction(xs[-1], BOT)
 sh.wire(pt, (XC, g(40)))
 power_at(sh, "15V", (XC, g(40)), "up")   # 15V is generated on sheet 1 (AUX supply), PWR_FLAG there
 
-sh.text("Bulk capacitors of the DC link (C29/C56/C28/C37: EEE-FTE221XAP note in the PDF).", X0, g(74))
+sh.text("Bulk capacitors of the DC link (C29/C56/C28/C37: EEE-FTE221XAP note in the PDF). 5.2: Man Yue ERT 82 uF 450 V (NR 5.2b).", X0, g(74))
 sh.text("PDF terminal DC- = net GND. PWR_FLAGs: 15V on sheet 1 (AUX supply), DC+ and GND on sheet 5 (bridge DB1).", X0, g(78))
 sh.text("The PDF page also wires the terminals HT_AUX and 6V3 together: HT_AUX is an alias of the 6V3 net (no part here).", X0, g(86))
 sh.save()

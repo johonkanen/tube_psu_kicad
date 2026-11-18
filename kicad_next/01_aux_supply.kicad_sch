@@ -4903,7 +4903,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_1210_3225Metric"
 			(at 126.0348 111.76 0)
 			(effects
 				(font
@@ -4930,7 +4930,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C5448934"
+		(property "LCSC" "C692295"
 			(at 127 115.57 0)
 			(effects
 				(font
@@ -8750,7 +8750,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_1210_3225Metric"
 			(at 227.6348 147.32 0)
 			(effects
 				(font
@@ -8777,7 +8777,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C5448934"
+		(property "LCSC" "C692295"
 			(at 228.6 151.13 0)
 			(effects
 				(font

@@ -16,12 +16,12 @@ C11,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C12,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C13,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C14,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
-C15,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
+C15,tube_psu:C,Capacitor_SMD:C_1210_3225Metric,"1210 (5.2: >= 630 V, NR 5.6)"
 C16,tube_psu:C,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,2220
 C17,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C18,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C19,tube_psu:C_Polarized,Capacitor_THT:CP_Radial_D10.0mm_P5.00mm,"10 mm radial electrolytic, P5"
-C20,tube_psu:C,Capacitor_SMD:C_1206_3216Metric,1206 (3.0 mm pad spacing)
+C20,tube_psu:C,Capacitor_SMD:C_1210_3225Metric,"1210 (5.2: >= 630 V, NR 5.6)"
 C21,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C22,tube_psu:C,Capacitor_SMD:C_1206_3216Metric,1206 (3.0 mm pad spacing)
 C23,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
@@ -46,7 +46,7 @@ C41,tube_psu:C,Capacitor_SMD:C_1206_3216Metric,1206 (3.0 mm pad spacing)
 C42,tube_psu:C,Capacitor_SMD:C_1206_3216Metric,1206 (3.0 mm pad spacing)
 C43,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C44,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
-C45,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
+C45,tube_psu:C,Capacitor_SMD:C_1210_3225Metric,"1210 (5.2: >= 630 V, NR 5.6)"
 C46,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C47,tube_psu:C,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,2220
 C48,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
@@ -68,10 +68,10 @@ C63,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C64,tube_psu:C,Capacitor_THT:C_Rect_L13.0mm_W5.0mm_P10.00mm_FKS3_FKP3_MKS4,Kemet R46 X2 film P10 (WCAP-FTXX package)
 C65,tube_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"Y2 2n2 disc (DEBB), P7.5"
 C66,tube_psu:C,Capacitor_THT:C_Rect_L13.0mm_W5.0mm_P10.00mm_FKS3_FKP3_MKS4,Kemet R46 X2 film P10 (WCAP-FTXX package)
-C67,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
+C67,tube_psu:C,Capacitor_SMD:C_1210_3225Metric,"1210 (5.2: >= 630 V, NR 5.6)"
 C68,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C69,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
-C70,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
+C70,tube_psu:C,Capacitor_SMD:C_1210_3225Metric,"1210 (5.2: >= 630 V, NR 5.6)"
 C71,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C72,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C73,tube_psu:C,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,2220
@@ -90,9 +90,9 @@ C85,tube_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"Y2 2n2 disc (DEBB), 
 C86,tube_psu:C,Capacitor_THT:C_Rect_L26.5mm_W11.5mm_P22.50mm_MKS4,"X2 film P22.5, 11 mm wide"
 C87,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C88,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
-C89,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
-C90,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
-C91,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
+C89,tube_psu:C,Capacitor_SMD:C_1210_3225Metric,"1210 (5.2: >= 630 V, NR 5.6)"
+C90,tube_psu:C,Capacitor_SMD:C_1210_3225Metric,"1210 (5.2: >= 630 V, NR 5.6)"
+C91,tube_psu:C,Capacitor_SMD:C_1210_3225Metric,"1210 (5.2: >= 630 V, NR 5.6)"
 C92,tube_psu:C,tube_psu:C_1206_3216Metric_Proteus3.15,"1206, Proteus pad size"
 C93,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C94,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
@@ -100,9 +100,9 @@ C95,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C96,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C97,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C98,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
-C99,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
-C100,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
-C101,tube_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
+C99,tube_psu:C,Capacitor_SMD:C_1210_3225Metric,"1210 (5.2: >= 630 V, NR 5.6)"
+C100,tube_psu:C,Capacitor_SMD:C_1210_3225Metric,"1210 (5.2: >= 630 V, NR 5.6)"
+C101,tube_psu:C,Capacitor_SMD:C_1210_3225Metric,"1210 (5.2: >= 630 V, NR 5.6)"
 C102,tube_psu:C_Polarized,Capacitor_THT:CP_Radial_D10.0mm_P5.00mm,"10 mm radial electrolytic, P5"
 C103,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C104,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
@@ -154,7 +154,6 @@ J2,tube_psu:HEADER_2X25_50MIL,tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus,2
 J4,tube_psu:CONN_01X03,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,1x3 2.54 mm (FCI 66226-003)
 L1,tube_psu:RM8_INDUCTOR,tube_psu:L_RM8_Proteus,"RM8 choke: winding pads pri1/pri2, bobbin pins 1/2 (no net); 45 deg on the board"
 L2,tube_psu:RM8_INDUCTOR,tube_psu:L_RM8_Proteus,"RM8 choke: winding pads pri1/pri2, bobbin pins 1/2 (no net); 45 deg on the board"
-L3,tube_psu:RM8_INDUCTOR,tube_psu:L_RM8_Proteus,"RM8 choke: winding pads pri1/pri2, bobbin pins 1/2 (no net); 45 deg on the board"
 N5V_OUT,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
 N80V_OUT,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
 P15V_OUT,tube_psu:PIN,tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
@@ -302,7 +301,7 @@ SICD1,tube_psu:C3D02060A,tube_psu:TO-220-2_Vertical_AK,"TO-220-2, pads A/K"
 SICD2,tube_psu:C3D02060A,tube_psu:TO-220-2_Vertical_AK,"TO-220-2, pads A/K"
 TR1,tube_psu_next:EEL19_4P6,tube_psu_next:Transformer_EEL19_V_4+6_FlyLeads,"EEL19 vertical 4+6, fly-lead holes 11/12 (NR 1.2)"
 TR2,tube_psu:EF25_8PIN,tube_psu:Transformer_EF25_2x5_P5.08mm_8pin,"EF25, pads 1,2,4,5,6,7,9,10"
-TR3,tube_psu:ETD34_TRAN_1P1S,tube_psu:Transformer_ETD34_4x3pads,"ETD34, pins 1-4 with three pads each"
+TR3,tube_psu_next:EC42_2CH,tube_psu_next:Transformer_EC42x15_2Slot_2x8_P5mm,"EC42/15 2-chamber bobbin 2x8, P5, rows 40 mm; pads 1,2,7,8 / 9,10,15,16 (NR 2.2)"
 U1,tube_psu:LMH6658,Package_SO:TSSOP-8_3x3mm_P0.65mm,"TSSOP-8 (device OPA2353UA; the pads are TSSOP, not SO-8)"
 U2,tube_psu:TLV316IDBVR,tube_psu:SOT-23-5_Proteus,"SOT-23-5, Proteus pad rows 2.39 mm apart, Proteus pad size"
 U3,tube_psu:TLV316IDBVR,tube_psu:SOT-23-5_Proteus,"SOT-23-5, Proteus pad rows 2.39 mm apart, Proteus pad size"
