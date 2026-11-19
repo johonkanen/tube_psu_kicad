@@ -57,6 +57,11 @@ CHECKS = {
     "startup60": dict(case="nom60", tstop=60e-3, twin=5e-3, startup=True, save_step=0.5e-6),
     "startup60_idle_csmin": dict(case="idle60", tstop=60e-3, twin=5e-3, startup=True, save_step=0.5e-6,
                                  ice={"vcs_n": 0.72}),
+    # -15 V rail (EEL19_DESIGN.md 16, options with rail_map): burst ripple of -15V_SEC at 50 mA with
+    # every other rail light (real C44 / C40)
+    "light_SN15max_lean": dict(case="light_SN15max", tstop=80e-3, twin=40e-3, t_beb=3e-3, save_step=0.5e-6),
+    "idle_SN15mid_lean": dict(case="idle_SN15mid", tstop=80e-3, twin=40e-3, t_beb=3e-3, save_step=0.5e-6),
+    "idle_SN15max_lean": dict(case="idle_SN15max", tstop=80e-3, twin=40e-3, t_beb=3e-3, save_step=0.5e-6),
     "ccm100": dict(case="full20_100", tstop=30e-3, twin=2e-3, ipk_wave=True),
     "ccm200": dict(case="full20_200", tstop=30e-3, twin=2e-3, ipk_wave=True),
     "light_lean": dict(case="light", tstop=80e-3, twin=40e-3, t_beb=3e-3, save_step=0.5e-6),
@@ -80,7 +85,12 @@ def run_check(n, option, comp, extra_tag=""):
     res = rf.om_analysis(option)
     opt = opts.get(option)
     case = dict(next(c for c in rf.all_cases() if c["name"] == cfg["case"]))
+    case = rf.adapt_case(opt, case)               # -15 V options: -15V_SEC loads and rail set
     case["loads"] = dict(case["loads"])
+    for k in ("bleed", "caps", "rser"):
+        if opt.get(k):
+            case[k] = opt[k]
+    rails = list(fs.rails(case))
     case["preload"] = opt.get("preload")
     case["comp"] = {**(opt.get("comp") or {}), **comp}
     case["comp_scale"] = 1.0
@@ -101,11 +111,11 @@ def run_check(n, option, comp, extra_tag=""):
     ic = None
     if os.path.exists(nom):
         r0 = json.load(open(nom))
-        ic = {k: r0[k] for k in fs.RAILS if r0.get(k)}
+        ic = {k: r0[k] for k in rails if r0.get(k)}
     if cfg.get("startup"):
         case["startup"] = True
         case["vfb0"], case["abm0"] = 2.25, 0          # FB after the RSel detection (Isel x 750k)
-        ic = {k: 0.0 for k in fs.RAILS}
+        ic = {k: 0.0 for k in rails}
     os.makedirs(os.path.join(fs.OUT, "checks"), exist_ok=True)
     wave = os.path.join(fs.OUT, "checks", f"{tag}.txt")
     ipkw = os.path.join(fs.OUT, "checks", f"{tag}_ipk.txt") if cfg.get("ipk_wave") else None
@@ -114,8 +124,9 @@ def run_check(n, option, comp, extra_tag=""):
     if cfg.get("stepall"):
         # every rail steps from nom to full15 at t1 and back at t2
         import re
-        for rail, (node, sign, caps, bleed) in fs.RAILS.items():
-            di = getattr(rf, cfg.get("target", "FULL15"))[rail] - case["loads"][rail]
+        tgt = rf.adapt_case(opt, {"name": "target", "loads": getattr(rf, cfg.get("target", "FULL15"))})["loads"]
+        for rail, (node, sign, caps, bleed) in fs.rails(case).items():
+            di = tgt[rail] - case["loads"][rail]
             net = re.sub(rf"(BL_{node} \S+ \S+ I = )([0-9.e+-]+)( \*)",
                          lambda m: f"{m.group(1)}({m.group(2)} + {di} * stp(time - {cfg['t1']}, 2e-6) * stp({cfg['t2']} - time, 2e-6)){m.group(3)}", net)
     t = time.time()
@@ -124,12 +135,12 @@ def run_check(n, option, comp, extra_tag=""):
     r["seconds"] = time.time() - t
     r["case"] = case
     r["config"] = {k: v for k, v in cfg.items()}
-    r.update(analyse_wave(wave, cfg))
+    r.update(analyse_wave(wave, cfg, ice.save_rails(case)))
     if ipkw:
         r.update(analyse_ipk(ipkw, res))
     with open(os.path.join(fs.OUT, "checks", f"{tag}.json"), "w") as f:
         json.dump(r, f, indent=1)
-    print(f"{tag}: " + " ".join(f"{rf.SHORT[k]}={r[k]:.3f}[{r[k + ' min']:.3f}..{r[k + ' max']:.3f}]" for k in fs.RAILS)
+    print(f"{tag}: " + " ".join(f"{rf.SHORT[k]}={r[k]:.3f}[{r[k + ' min']:.3f}..{r[k + ' max']:.3f}]" for k in rails)
           + f" FB={r['fb']:.2f} ABM={r['abm']:.2f} Pin={r['pin']:.2f} W ({r['seconds']:.0f}s)", flush=True)
     for k, v in r.items():
         if k.startswith("w_"):
@@ -137,7 +148,7 @@ def run_check(n, option, comp, extra_tag=""):
     return r
 
 
-def analyse_wave(path, cfg):
+def analyse_wave(path, cfg, rails=None):
     """Step: undershoot / overshoot and settling of every rail; burst: period and ripple."""
     out = {}
     if not os.path.exists(path):
@@ -145,7 +156,7 @@ def analyse_wave(path, cfg):
     d = np.loadtxt(path)
     t = d[:, 0]
     cols = d[:, 1::2]
-    names = ["5V", "20V", "20V_ISO_SEC", "5V_ISOL", "-5V_SEC", "-100V BIAS", "fb", "abm", "ena"]
+    names = list(rails or ["5V", "20V", "20V_ISO_SEC", "5V_ISOL", "-5V_SEC", "-100V BIAS"]) + ["fb", "abm", "ena"]
     if cfg.get("startup"):
         names.append("vcc")
     w = {n: cols[:, k] for k, n in enumerate(names)}

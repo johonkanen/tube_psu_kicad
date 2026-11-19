@@ -106,11 +106,33 @@ RECT = {"20V": "a1", "5V": "a3", "20V_ISO_SEC": "s10", "5V_ISOL": "s7", "-5V_SEC
 GROUND = {"20V": "0", "5V": "0", "20V_ISO_SEC": "iso", "5V_ISOL": "iso", "-5V_SEC": "iso", "-100V BIAS": "iso"}
 NOMINAL_V = {"20V": 15.0, "5V": 5.0, "20V_ISO_SEC": 13.0, "5V_ISOL": 5.0, "-5V_SEC": 5.0, "-100V BIAS": 80.0}
 
+# Rails that only some options use (2026-11-19, EEL19_DESIGN.md 16): the SN5 winding (pin 8, D14)
+# feeds -15V_SEC instead of -5V_SEC (16 T instead of 6 T); C44 4.7 uF 50 V + C40 22 uF 25 V
+# (CL31A226KAHNNNE, replaces the 100 uF 10 V), bleeder R123 per option. An option selects its rail set
+# with case["rails"] (run_flyback.adapt_case); without it the netlists are the six RAILS above, unchanged.
+RAILS_EXTRA = {
+    "-15V_SEC":    ("vsn15", -1, [(4.7e-6, 0.005), (22e-6, 0.005)], BLEED),       # C44, C40, R123
+}
+ALL_RAILS = {**RAILS, **RAILS_EXTRA}
+RECT["-15V_SEC"] = "s8"
+GROUND["-15V_SEC"] = "iso"
+NOMINAL_V["-15V_SEC"] = 15.0
+
+
+def rails(case: dict) -> dict:
+    """Rails of one case: case["rails"] (names from ALL_RAILS, default the six RAILS), with the
+    per-case overrides case["bleed"] = {rail: ohms} and case["caps"] = {rail: [(C, ESR), ...]}."""
+    out = {}
+    for r in case.get("rails") or list(RAILS):
+        node, sign, caps, bleed = ALL_RAILS[r]
+        out[r] = (node, sign, (case.get("caps") or {}).get(r, caps), (case.get("bleed") or {}).get(r, bleed))
+    return out
+
 
 def expected_pout(case: dict) -> float:
     """Output power the case asks for (loads, bleeders, preloads, Vcc, dividers), W."""
     p = 0.0
-    for rail, (node, sign, caps, bleed) in RAILS.items():
+    for rail, (node, sign, caps, bleed) in rails(case).items():
         v = NOMINAL_V[rail]
         p += case["loads"].get(rail, 0.0) * v + (v * v / bleed if bleed else 0.0)
         pre = (case.get("preload") or {}).get(rail)
@@ -160,17 +182,22 @@ def netlist(res: dict, spice_map: dict, case: dict, cscale=0.1, tstop=16e-3, twi
             "R72 sn1 sn2 100", "R45 sn2 dcp 1Meg", "C12 sn2 dcp 470p",
             ]
     # rectifiers, caps, loads
-    for rail, (node, sign, caps, bleed) in RAILS.items():
+    rl = rails(case)
+    for rail, (node, sign, caps, bleed) in rl.items():
         end, g = RECT[rail], GROUND[rail]
         bv = (case.get("bv") or {}).get(rail, BV_DEFAULT)
         # ES1D class: Vf 0.92 V at 1 A, trr ~15-25 ns, Cj ~10 pF (ES1A-D datasheet class)
         # a modelled breakdown (case["bv"]) gets a soft knee (NBV) so the solver can follow it
         soft = " NBV=5" if bv < BV_DEFAULT else ""
         out.append(f".model DES1_{node} D(IS=2n N=1.7 RS=0.06 CJO=10p M=0.33 TT=20n BV={bv} IBV=10u{soft})")
+        rser = (case.get("rser") or {}).get(rail)
+        dn = f"rs_{node}" if rser else node        # optional series resistor rectifier -> rail
+        if rser:
+            out.append(f"Rser_{node} {dn} {node} {rser}")
         if sign > 0:
-            out.append(f"D_{node} {end} {node} DES1_{node}")
+            out.append(f"D_{node} {end} {dn} DES1_{node}")
         else:
-            out.append(f"D_{node} {node} {end} DES1_{node}")
+            out.append(f"D_{node} {dn} {end} DES1_{node}")
         # electrolytic/bulk caps scaled for fast settling; a rail with a small load settles
         # with C/I, so its caps are scaled further in proportion to its load (min 3 %)
         pre = (case.get("preload") or {}).get(rail)
@@ -203,7 +230,7 @@ def netlist(res: dict, spice_map: dict, case: dict, cscale=0.1, tstop=16e-3, twi
     # rectifier reverse voltage through a 50 ns RC: the on-time plateau plus the realistic
     # part of the turn-on ringing (the model switches on in ~10 ns from wherever the DCM ring
     # is, without valley switching or winding capacitance, so the raw peak is too high)
-    for rail, (node, sign, caps, bleed) in RAILS.items():
+    for rail, (node, sign, caps, bleed) in rl.items():
         end = RECT[rail]
         vr = f"v({node})-v({end})" if sign > 0 else f"v({end})-v({node})"
         out += [f"Bvr_{node} xvr_{node} 0 V = {vr}", f"Rvr_{node} xvr_{node} vrf_{node} 1k", f"Cvr_{node} vrf_{node} 0 50p"]
@@ -251,13 +278,13 @@ def netlist(res: dict, spice_map: dict, case: dict, cscale=0.1, tstop=16e-3, twi
     t0 = tstop - twin
     tstep = 10e-9
     meas = []
-    for rail, (node, sign, caps, bleed) in RAILS.items():
+    for rail, (node, sign, caps, bleed) in rl.items():
         g = GROUND[rail]
         expr = f"vr_{node}"
         meas.append(f"meas tran V_{node} avg {expr} from={t0} to={tstop}")
         meas.append(f"meas tran V1_{node} avg {expr} from={t0} to={t0 + twin / 2}")
         meas.append(f"meas tran V2_{node} avg {expr} from={t0 + twin / 2} to={tstop}")
-    for rail, (node, sign, caps, bleed) in RAILS.items():
+    for rail, (node, sign, caps, bleed) in rl.items():
         meas.append(f"meas tran VRMAX_{node} max vrev_{node} from={t0} to={tstop}")
         meas.append(f"meas tran VRF_{node} max v(vrf_{node}) from={t0} to={tstop}")
     meas += [f"meas tran VCOL max v(col) from={t0} to={tstop}",
@@ -273,13 +300,13 @@ def netlist(res: dict, spice_map: dict, case: dict, cscale=0.1, tstop=16e-3, twi
     out.append(".options method=gear reltol=1e-3 abstol=1e-9 vntol=1e-5 itl4=50")
     out.append(".control")
     sv = ["v(col)", "v(sn2)", "v(dcp)", "v(u)", "v(ul)", "v(hold)", "v(fsw)", "v(ipk)", "v(vsd)", "v(a3)", "i(Vin)", "v(gate)"]
-    sv += [f"v({RAILS[r][0]})" for r in RAILS] + ["v(iso)"] + [f"v({e})" for e in RECT.values()]
-    sv += [f"v(vrf_{RAILS[r][0]})" for r in RAILS]
+    sv += [f"v({rl[r][0]})" for r in rl] + ["v(iso)"] + [f"v({RECT[r]})" for r in rl]
+    sv += [f"v(vrf_{rl[r][0]})" for r in rl]
     sv += [f"i(L{n})" for n in names]
     out.append("save " + " ".join(sv))
     out.append(f"tran {tstep} {tstop} {t0} {tstep} uic")
     out += ["let pin = -v(dcp)*i(vin)", "let vclamp = v(sn2)-v(dcp)", "let pr45 = vclamp*vclamp/1e6"]
-    for rail, (node, sign, caps, bleed) in RAILS.items():
+    for rail, (node, sign, caps, bleed) in rl.items():
         g = "0" if GROUND[rail] == "0" else "v(iso)"
         out.append(f"let vr_{node} = v({node})-{g}" if sign > 0 else f"let vr_{node} = {g}-v({node})")
         end = RECT[rail]
@@ -314,7 +341,9 @@ def run(net: str, tag: str) -> dict:
 
 def summarise(vals: dict) -> dict:
     r = {}
-    for rail, (node, *_rest) in RAILS.items():
+    for rail, (node, *_rest) in ALL_RAILS.items():
+        if f"v_{node}" not in vals:
+            continue                            # rail not in this option's set (rails())
         r[rail] = vals.get(f"v_{node}")
         r[rail + " drift"] = vals.get(f"v2_{node}", 0) - vals.get(f"v1_{node}", 0)
         r[rail + " vrev_peak"] = vals.get(f"vrmax_{node}")      # raw (turn-on spike, overestimated)

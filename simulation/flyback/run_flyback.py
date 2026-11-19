@@ -100,17 +100,59 @@ WIDE_CASES = [
 ]
 
 
+# -15 V rail (user 2026-11-19, EEL19_DESIGN.md 16): options with "rail_map" {"-5V_SEC": "-15V_SEC"} feed
+# the SN5 winding (16 T) into -15V_SEC. Its loads replace the -5V_SEC ones in every case (adapt_case):
+# nominal 5 mA, maximum 50 mA (max_SN15, full*: JFET gate bias, mostly op-amp leakage), bleeder only
+# where -5V_SEC had no load (min_SN15, light, idle). SN15_CASES add the worst cases of the peak-charging
+# rise (-15 V on its bleeder with every other rail at 20 W) and of the sag (-15 V at 50 mA, rest light).
+SN15_NOM, SN15_MAX = 0.005, 0.05
+SHORT["-15V_SEC"] = "SN15"
+_FULL20_N15 = {**{k: v for k, v in FULL20.items() if k != "-5V_SEC"}, "-15V_SEC": 0.0}
+SN15_CASES = [
+    {"name": "full20_SN15min", "loads": dict(_FULL20_N15), "title": "20 W on the other rails, -15V_SEC bleeder only (400 V)"},
+    {"name": "full20_100_SN15min", "loads": dict(_FULL20_N15), "vin": 100.0, "title": "full20_SN15min at DC+ = 100 V"},
+    {"name": "full20_450_SN15min", "loads": dict(_FULL20_N15), "vin": 450.0, "title": "full20_SN15min at DC+ = 450 V"},
+    {"name": "light_SN15max", "loads": {**{r: 0.0 for r in NOM if r != "-5V_SEC"}, "-15V_SEC": SN15_MAX},
+     "title": "all rails bleeder only, -15V_SEC 50 mA"},
+    {"name": "idle_SN15mid", "loads": {**{r: 0.0 for r in NOM if r != "-5V_SEC"}, "5V": 0.05, "20V_ISO_SEC": 0.002,
+                                         "5V_ISOL": 0.005, "-15V_SEC": 0.02}, "title": "board idle, -15V_SEC 20 mA (ABM bursts)"},
+    {"name": "idle_SN15max", "loads": {**{r: 0.0 for r in NOM if r != "-5V_SEC"}, "5V": 0.05, "20V_ISO_SEC": 0.002,
+                                         "5V_ISOL": 0.005, "-15V_SEC": SN15_MAX}, "title": "board idle, -15V_SEC 50 mA"},
+]
+
+
+def adapt_case(opt, case):
+    """The case as the option sees it: with "rail_map" the -5V_SEC load becomes a -15V_SEC load
+    (0 -> bleeder only, >= 0.2 A -> SN15_MAX, otherwise SN15_NOM), the name _SN5 -> _SN15 and
+    case["rails"] the option's rail set. Cases that already name -15V_SEC (SN15_CASES) keep their load."""
+    rmap = opt.get("rail_map")
+    if not rmap:
+        return case
+    c = dict(case)
+    ld = dict(c["loads"])
+    v = ld.pop("-5V_SEC", 0.0)
+    if "-15V_SEC" not in ld:
+        ld["-15V_SEC"] = 0.0 if v == 0 else (SN15_MAX if v >= 0.2 else SN15_NOM)
+    c["loads"] = ld
+    c["name"] = c["name"].replace("_SN5", "_SN15")
+    c["rails"] = [rmap.get(r, r) for r in fs.RAILS]
+    return c
+
+
 def all_cases():
-    return cases() + FULL_CASES + WIDE_CASES
+    return cases() + FULL_CASES + WIDE_CASES + SN15_CASES
 
 
 def option_cases(opt, names=None):
     """Load cases of one option: the 16 standard cases, plus FULL_CASES when the option asks
-    for them (and WIDE_CASES for "wide_cases"); `names` (from --cases) selects from all of them."""
+    for them (and WIDE_CASES for "wide_cases", SN15_CASES for "rail_map"); `names` (from --cases)
+    selects from all of them (by the option's case names, e.g. min_SN15)."""
     if names:
-        pool = all_cases()
+        pool = all_cases() if opt.get("rail_map") else cases() + FULL_CASES + WIDE_CASES
     else:
-        pool = cases() + (FULL_CASES if opt.get("full_cases") else []) + (WIDE_CASES if opt.get("wide_cases") else [])
+        pool = cases() + (FULL_CASES if opt.get("full_cases") else []) + (WIDE_CASES if opt.get("wide_cases") else []) \
+            + (SN15_CASES if opt.get("rail_map") else [])
+    pool = [adapt_case(opt, c) for c in pool]
     return [c for c in pool if not names or c["name"] in names]
 
 
@@ -227,6 +269,9 @@ def run_case_ice(name, opt, res, case, path, vin, ic):
         case["ice"] = {**(opt.get("ice") or {}), **(case.get("ice") or {})}
     if opt.get("rcs"):
         case["rcs"] = opt["rcs"]
+    for k in ("bleed", "caps", "rser"):        # rail component overrides of the option (flyback_sim.rails)
+        if opt.get(k):
+            case[k] = opt[k]
     n = case["name"]
     wave = os.path.join(OUT, "spice", f"{name}__{n}_wave.txt") if (n in ("nom", "max_S15", "full10", "full15")
                                                                     or n.startswith("full20")) else None
@@ -314,11 +359,11 @@ class Pool:
 
 def show(n, c, r):
     if "abm" in r:          # ICE5AR model
-        print(f"  {n:>12} {c:>8}: " + " ".join(f"{SHORT[k]}={r[k]:.3f}" for k in fs.RAILS if r.get(k) is not None)
+        print(f"  {n:>12} {c:>8}: " + " ".join(f"{SHORT[k]}={r[k]:.3f}" for k in fs.ALL_RAILS if r.get(k) is not None)
               + f" Vds={r['vcol']:.0f} FB={r['fb']:.2f} f={r['fsw'] / 1e3:.0f}k ABM={r['abm']:.2f} Pin={r['pin']:.2f}"
               f" drift20={r['20V drift'] * 1e3:.0f}mV ({r['seconds']:.0f}s)", flush=True)
         return
-    print(f"  {n:>12} {c:>8}: " + " ".join(f"{SHORT[k]}={r[k]:.3f}" for k in fs.RAILS if r.get(k) is not None)
+    print(f"  {n:>12} {c:>8}: " + " ".join(f"{SHORT[k]}={r[k]:.3f}" for k in fs.ALL_RAILS if r.get(k) is not None)
           + f" Vcol={r['vcol']:.0f} VrD8={r['-100V BIAS vrev']:.0f} u={r['u']:.3f} drift20={r['20V drift'] * 1e3:.0f}mV ({r['seconds']:.0f}s)", flush=True)
 
 
@@ -359,7 +404,7 @@ def main(argv=None):
             if os.path.exists(p):
                 with open(p) as f:
                     r = json.load(f)
-                ics[n] = {k: r[k] for k in fs.RAILS if r.get(k)}
+                ics[n] = {k: r[k] for k in fs.ALL_RAILS if r.get(k)}
         rest = [(n, om[n], c, a.force, ics.get(n)) for n in names for c in sel_of[n] if c["name"] != "nom"]
         weight = {"idle": 0, "light": 1}
         order = sorted(range(len(rest)), key=lambda i: (weight.get(rest[i][2]["name"], 2 if rest[i][2]["name"].startswith("min") else 3), i))

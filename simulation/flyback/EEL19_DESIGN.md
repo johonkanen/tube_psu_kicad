@@ -1652,3 +1652,188 @@ Start-up from VCC_ON (real capacitors): nominal load: rails at 95 % in 15.6–16
 OLP level for 16.9 ms (< 30 ms minimum blanking), VCC min 14.5 V. Board idle at VCS_N min: 15.8 ms,
 VCC min 14.7 V. VDS ≈ 185–217 V. So the 2 W bench load (and anything up to ≈ 15 W) starts and
 regulates from 60 V.
+
+## 16. −5 V rail → −15 V (2026-11-19)
+
+**Requirement (user, NEXT_REVISION 1.13).** The −5 V rail (SN5, TR1 pin 8, D14, C44 + C40, R123,
+N5V_OUT) becomes **−15 V** for the JFET gate bias: ≤ 50 mA maximum, in practice op-amp leakage
+(0 – a few mA). Window: **−14 … −17 V** from 0 to 50 mA. Base: `eel19_wide600_0680` (section 14).
+Code: `options.py` (`eel19_wide_n15`, `eel19_wide600_0680_n15*`), the rail `-15V_SEC` in
+`flyback_sim.RAILS_EXTRA` (selected per case, so every older netlist is unchanged; checked
+byte-for-byte), `run_flyback.adapt_case` / `SN15_CASES`, `n15_report.py` → [n15_results.md](n15_results.md),
+MAS [mas/tr1_eel19_wide_n15.json](mas/tr1_eel19_wide_n15.json).
+
+> **Result:** SN5 **16 T × 1 TEX-E 0.20, wound in the S15 layer** (S15 2 strands + SN5 1 strand per
+> turn), S5 alone in its old layer. Same radial build, pins 7 / 8 / 9 / 10 unchanged.
+> - With **R123 4.7k**, −15V_SEC stays between **−14.2 and −16.3 V** for 0–50 mA, 60–450 V DC+ and
+>   0–20 W on the other rails: nominal −15.4 V.
+> - The other rails are within ±0.05 V of section 14, and 15V_ISO_SEC in min_S15 is better (16.4 V
+>   instead of 17.3 V).
+> - TR1 runs 1–5 K cooler at 20 W, because −15 V × 50 mA replaces −5 V × 0.27 A in the full-load pattern.
+> - C40 → **22 µF 25 V X5R 1206** (C12891). D14 ES1D: V_R 87 V at 450 V, OK.
+
+### 16.1 Turns
+
+- At the diode-drop level, S15 16 T gives 15V_ISO_SEC 15.0–15.1 V at 0.1–0.41 A. That is ≈ 0.99 V/turn
+  in the flyback interval, less a 0.8–0.9 V ES1D drop at those currents.
+- At 5–50 mA the ES1D drop is ≈ 0.6–0.7 V and the IR drop is ≈ 0. So 16 T gives ≈ 15.0–15.4 V, plus the
+  peak charging when the rail is lightly loaded.
+- 15 T would give ≈ 14.0–14.4 V and fall below −14 V at 50 mA.
+- 17 T would give ≈ 16.0–16.4 V nominal and ≈ 17.5 V when the rail carries only its bleeder.
+- **16 T** centres the window.
+
+### 16.2 Winding build: SN5 belongs with S15, not with S5
+
+The old S5+SN5 6+6 bifilar is not possible any more, because the turns now differ. Two builds were put
+through MKF and ngspice:
+
+| build | layer 4 (was S5+SN5) | S15 layer | P–SN5 / P–S5 / P–S15 leakage µH (ref. 104 T) | −15V all cases | 5V_ISOL std cases |
+|---|---|---|---|---|---|
+| a: S5 6 T × 4 + SN5 16 T × 1 side by side in one layer (16.0 of 21.2 mm) | S5 \| SN5 | S15 3 × 0.20 | **185 / 67** / 12 | 9.1–14.3 V ✗ | 5.50–5.97 V ✗ |
+| **c: SN5 in the S15 layer (chosen)** | S5 6 T × 4, spread | **S15 2 + SN5 1 strand, 16 T, 19.2 mm** | **13.9 / 13.0 / 12.4** | **14.2–16.8 V** (12.1k) | 4.71–5.32 V |
+| section 14 (today) | S5+SN5 6+6 bifilar | S15 3 × 0.20 | 13.2 / 13.1 / 11.9 | (−5 V 4.80–5.32) | 4.76–5.36 V |
+
+- **Build a fails because each winding covers only part of the width.** That creates radial stray
+  field: P–SN5 leakage 185 µH. 5V_ISOL rises to 6 V, and −15 V drops to 9–14 V.
+- **Build c keeps every winding full width.**
+  - SN5 lies strand-by-strand between the two S15 strands, so it couples to S15 tightly (SN5–S15
+    leakage 4.7 µH) and **tracks 15V_ISO_SEC**.
+  - S5 (24 wires) is spread alone over its layer.
+  - Radial build 3.00 mm, as today.
+- S15 drops from 3 to 2 strands (Rdc 90 → 136 mΩ at 60 °C). Its MKF loss nevertheless falls
+  (0.23 → 0.18 W at full20), because the third strand now carries the small SN5 current. SN5 Rdc is
+  271 mΩ: 0.7 mW at 50 mA DC.
+- TEX-E 0.20 per transformer: SHV ≈ 3.5 m, S15 + SN5 48 turns, S5 24 turns: **≈ 6.2 m** (was ≈ 7 m).
+
+**Winding spec (changes to 14.4 only; order P1 | S15+SN5 | SHV | S5 | A5 | A15 | P2):**
+
+| # | winding | turns | wire | layer | start → finish (pins) |
+|---|---|---|---|---|---|
+| 2 | **S15 + SN5** (trifilar bundle: S15, SN5, S15 strands side by side) | 16 | **S15 2 × TEX-E 0.20, SN5 1 × TEX-E 0.20** | 1, spread over 19.2 mm | S15: pin 9 → pin 10; **SN5: pin 8 → pin 9** |
+| 4 | **S5** | 6 | 4 × TEX-E 0.20 (unchanged) | 1, spread over the full width | pin 9 → pin 7 |
+
+- Wind all three strands from the same end of the layer, in the same direction. The start of each
+  winding is its dot, as in 12.3: S15 dot at pin 9, SN5 dot at pin 8.
+- SN5 + S15 then form one centre-tapped 32 T winding, 8 – 9 – 10, with the tap at ISO_GND. During the
+  flyback interval pin 10 is at +15 V and pin 8 at −15 V. D14 is connected as today (cathode at pin 8,
+  anode to the rail).
+- **Pins 7 / 8 / 9 / 10 and the footprint do not change.**
+  - Pin 9 now carries S15 start 2 + SN5 finish 1 + SHV finish 1 + S5 start 4 = 8 strands (was 12).
+  - Every TEX-E end still runs unbroken to its isolated-row pin (12.5).
+- Turns-ratio check: 104 : 16 (S15) : 16 (SN5) : 6 (S5) : 6 (A5) : 16 (A15) : 84.
+
+### 16.3 Regulation (ngspice, ICE5AR0680AG model)
+
+−15V_SEC loads:
+- **nominal 5 mA;**
+- **max_SN15 / full* 50 mA;**
+- **bleeder only** in min_SN15, light, idle and `*_SN15min` (every other rail at 20 W);
+- `light_SN15max` / `idle_SN15max` / `idle_SN15mid`: 50 / 50 / 20 mA with everything else light or idle.
+
+The full-load pattern now has −15 V × 50 mA (0.75 W) instead of −5 V × 0.27 A (1.35 W), so full20 is
+≈ 19.4 W out.
+
+| −15V_SEC, V | R123 12.1k | 6.8k | **4.7k** |
+|---|---|---|---|
+| nom (5 mA, 400 V) / nom60 / nom100 / nom450 | 15.41 / 15.40 / 15.40 / 15.41 | 15.39 | 15.37 |
+| max_SN15 (50 mA) / full20 at 100–450 V (50 mA) | 15.08 / 15.38–15.39 | 15.08 | 15.08 |
+| min_SN15 (bleeder only, rest nominal) | 15.90 | 15.64 | 15.53 |
+| light / idle / idle60 (bleeder only) | 15.13 / 15.75 / 15.69 | 15.02 / 15.63 / 15.58 | 14.95 / 15.54 / 15.50 |
+| **full20_SN15min** (bleeder only, rest 20 W) at 100 / 400 / 450 V | 16.66 / 16.79 / **16.80** | 16.38 / 16.47 / 16.48 | 16.17 / 16.24 / **16.25** |
+| idle_SN15mid (20 mA, board idle) | 15.14 | – | 15.12 |
+| idle_SN15max (50 mA, board idle) | 14.91 | – | – |
+| **light_SN15max** (50 mA, all else bleeder only) | **14.20** | 14.19 | **14.18** |
+| **range** | **14.20–16.80** | 14.19–16.48 | **14.18–16.25** |
+
+- **Line:** no effect. Across 60–450 V every case stays within 15 mV, as for the other rails (14.6).
+- **Load:** 50 mA costs 0.3 V against 5 mA.
+- **Light load:** the peak-charging rise is set by how hard the *other* rails drive the leakage
+  spike. The worst case is −15 V on its bleeder with 20 W elsewhere: +1.4 V at 12.1k, +0.9 V at 4.7k.
+  A heavier bleeder lowers the top end, while the bottom end (50 mA) stays put.
+- **Chosen R123 = 4.7k 1 % 1206** (UNI-ROYAL 1206W4F4701T5E, **LCSC C17936**, basic part):
+  - 3.2 mA, 48 mW at 15 V (250 mW part);
+  - **−14.2 … −16.3 V**, i.e. 15.2 V ± 7 %, with 0.18 V margin at the bottom and 0.75 V at the top of
+    the −14 … −17 V window.
+  - A series resistor would lower the peak but cost 0.5 V at 50 mA (10 Ω), where the margin is only
+    0.18 V. A zener or LDO is not needed.
+- **Other rails** against section 14 (same cases):
+  - 15V unchanged; −80 V within ±0.1 V;
+  - 5V_ISOL −0.05 V (it no longer has SN5 as its bifilar partner; max_S5 4.72 V, min_S5 5.32 V);
+  - 15V_ISO_SEC −0.05 V at load and **16.41 V instead of 17.34 V in min_S15**, because the SN5 strand
+    in its layer damps the peak charging;
+  - range over the 16 standard cases: 15V 14.16–15.19, 15V_ISO_SEC 14.45–16.41, 5V_ISOL 4.71–5.32,
+    −80 V 80.2–84.4.
+- **D14 reverse voltage:**
+  - **86.6 V at 450 V** (50 ns filtered, the same measure as D4's 84.7 V; formula 15 + 450 × 16/104 = 84 V);
+  - ES1D 200 V → **2.3× margin, unchanged part**;
+  - at a 505 V bus (LOVP upper end) ≈ 95 V.
+  - The raw model turn-on spike (219 V) is unphysical for every rectifier in this model (D8 shows 1086 V
+    raw). It comes from the 10 ns switch without valley switching or winding capacitance (14.6).
+    Check D14 / D4 on the bench at 450 V.
+- **VDS** unchanged (621 V at 450 V / 20 W).
+
+### 16.4 Real capacitors, burst mode, start-up (`ice5ar_checks.py --tag _n15…`)
+
+- **C40 → 22 µF 25 V X5R 1206, Samsung CL31A226KAHNNNE, LCSC C12891** (basic part, same footprint as
+  today's 100 µF 10 V).
+  - Effective at 15 V ≈ 9 µF; with C44 4.7 µF 50 V (≈ 3.3 µF at 15 V, unchanged) ≈ 12 µF.
+  - Board idle with −15 V at 20 / 50 mA (`idle_SN15mid/max_lean`, R123 4.7k, derated capacitors): the
+    converter does **not** burst (FB 0.92 / 0.99 V). −15.10 / −14.87 V, **ripple 42 / 93 mV pp**.
+  - 47 µF 25 V 1206 (C403725, extended) or two 47 µF parts give no benefit (see the next point).
+- **Corner: −15 V ≥ ≈ 20 mA with every other rail unloaded** (`light_SN15max_lean`, no MCU on 5V). The
+  ICE5AR enters Active Burst Mode (Pin ≈ 1.8 W is at the ABM entry level).
+  - −15 V then averages −13.9 V and **dips to −12.2 … −12.7 V** between bursts.
+  - This happens **for every C40 from 22 µF to 2 × 47 µF**: the burst period adapts, so the dip does not
+    scale with C. With 47 µF the same case happened not to enter ABM (−14.17 V).
+  - It cannot happen while the MCU board loads 5V (idle cases). If it matters for the JFET bias:
+    - ABM off: R141 100k, the schematic fallback, section 13;
+    - or a ≥ 20 mA preload elsewhere.
+  - At the real load (leakage, ≤ a few mA) the burst dip is < 0.2 V.
+- **Start-up:**
+  - 100 V / 20 W at VCS_N min (`startup100_full20_csmin`): FB below the OLP level after **25.0 ms**
+    (section 14: 26.0 ms; < 30 ms minimum blanking); −15 V t95 22.6 ms, overshoot 0.5 %; VCC min 14.5 V.
+  - 60 V bench supply, nominal load (`startup60`): 16.8 ms, −15 V t95 16.1 ms, no overshoot.
+
+### 16.5 TR1 losses (losses.py, MKF upper bound)
+
+| case | section 14 (−5 V): winding / core / ΔT | −15 V build c: winding / core / ΔT |
+|---|---|---|
+| nom | 0.47 / 0.06 W / 16 K | 0.37 / 0.05 W / 13 K |
+| full15 (400 V) | 1.21 / 0.13 W / 34 K | 1.18 / 0.13 W / 33 K |
+| full20 (400 V) | 1.69 / 0.17 W / 44 K | 1.59 / 0.16 W / 42 K |
+| **full20_100** | **1.91 / 0.14 W / 48 K** | **1.65 / 0.12 W / 43 K** |
+| full20_450 | 1.69 / 0.17 W / 44 K | 1.61 / 0.17 W / 43 K |
+
+The −15 V build costs nothing thermally. The reduction is mostly the 0.6 W lower full20 output and
+S15's lower proximity loss. Bpk 0.16 T as before.
+
+### 16.6 Schematic / BOM changes (list only; kicad_next not edited)
+
+| item | 5.2 today | new |
+|---|---|---|
+| TR1 winding spec | S15 3 × TEX-E 0.20 16 T (9 → 10); S5 + SN5 6 + 6 T, 4 + 4 × TEX-E 0.20 bifilar | **S15 2 × + SN5 1 × TEX-E 0.20, 16 T, one trifilar layer** (S15 9 → 10, **SN5 8 → 9**); **S5 6 T 4 × TEX-E 0.20 alone**, spread; order P1 \| S15+SN5 \| SHV \| S5 \| A5 \| A15 \| P2; footprint / pins / slot unchanged (16.2) |
+| net -5V_SEC | −5 V | **rename -15V_SEC** |
+| terminal N5V_OUT | | **rename N15V_OUT** (and any label / silkscreen "−5V") |
+| C40 | 100 µF 10 V X5R 1206 | **22 µF 25 V X5R 1206, CL31A226KAHNNNE, C12891** |
+| C44 | 4.7 µF 50 V 1206 | unchanged |
+| R123 | 12.1k 1206 | **4.7k 1 % 1206, 1206W4F4701T5E, C17936** (48 mW) |
+| D14 | ES1D 200 V | unchanged (V_R 87 V at 450 V) |
+| loads on −15V_SEC | | ≤ 50 mA; check that every part on the old −5 V net is rated for −15 V (op-amp V− pins, JFET gate network, any ≤ 10 V capacitors on the net) |
+
+### 16.7 How to rerun
+
+```
+cd /home/jari/dev/tube_psu_kicad
+python3 simulation/flyback/run_flyback.py --om-only eel19_wide_n15                         # MAS file
+python3 simulation/flyback/run_flyback.py eel19_wide600_0680_n15 --jobs 4                  # 39 cases, ~12 min, 0.6 GB
+python3 simulation/flyback/run_flyback.py eel19_wide600_0680_n15_b4k7 eel19_wide600_0680_n15_b6k8 --jobs 4 \
+    --cases nom min_SN15 max_SN15 idle light full20_SN15min full20_450_SN15min full20_100_SN15min light_SN15max idle60 idle_SN15mid
+python3 simulation/flyback/run_flyback.py eel19_wide600_0680_n15a --jobs 4 \
+    --cases nom min_SN15 max_SN15 min_S5 max_S5 light idle full20 full20_SN15min light_SN15max   # rejected build a
+python3 simulation/flyback/ice5ar_checks.py startup100_full20_csmin startup60 light_SN15max_lean idle_SN15max_lean \
+    --option eel19_wide600_0680_n15 --tag _n15 --jobs 4                                    # ~15 min, < 0.3 GB
+python3 simulation/flyback/ice5ar_checks.py light_SN15max_lean idle_SN15mid_lean idle_SN15max_lean \
+    --option eel19_wide600_0680_n15_b4k7_c22d --tag _n15_b4k7_c22d --jobs 3                # also _c47d / _c2x47d / _b4k7
+python3 simulation/flyback/losses.py eel19_wide600_0680_n15 --case full20_100              # nom, full15, full20, full20_200, full20_450
+python3 simulation/flyback/n15_report.py                                                    # n15_results.md
+```

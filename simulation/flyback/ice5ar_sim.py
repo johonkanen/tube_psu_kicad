@@ -98,7 +98,7 @@ def vfb_of_p(pin, lp, vin, p=ICE, rcs=RCS):
 
 def expected_pout(case: dict) -> float:
     p = 0.0
-    for rail, (node, sign, caps, bleed) in fs.RAILS.items():
+    for rail, (node, sign, caps, bleed) in fs.rails(case).items():
         v = fs.NOMINAL_V[rail]
         p += case["loads"].get(rail, 0.0) * v + (v * v / bleed if bleed else 0.0)
         pre = (case.get("preload") or {}).get(rail)
@@ -144,12 +144,17 @@ def netlist(res: dict, spice_map: dict, case: dict, cscale=0.1, tstop=9e-3, twin
             "R72 sn1 sn2 100", "R45 sn2 dcp 1Meg", "C12 sn2 dcp 470p"]
     vcc_load = case.get("vcc", VCC_LOAD)
     step = case.get("step")
-    for rail, (node, sign, caps, bleed) in fs.RAILS.items():
+    rl = fs.rails(case)
+    for rail, (node, sign, caps, bleed) in rl.items():
         end, g = fs.RECT[rail], fs.GROUND[rail]
         bv = (case.get("bv") or {}).get(rail, fs.BV_DEFAULT)
         soft = " NBV=5" if bv < fs.BV_DEFAULT else ""
         out.append(f".model DES1_{node} D(IS=2n N=1.7 RS=0.06 CJO=10p M=0.33 TT=20n BV={bv} IBV=10u{soft})")
-        out.append(f"D_{node} {end} {node} DES1_{node}" if sign > 0 else f"D_{node} {node} {end} DES1_{node}")
+        rser = (case.get("rser") or {}).get(rail)
+        dn = f"rs_{node}" if rser else node        # optional series resistor rectifier -> rail
+        if rser:
+            out.append(f"Rser_{node} {dn} {node} {rser}")
+        out.append(f"D_{node} {end} {dn} DES1_{node}" if sign > 0 else f"D_{node} {dn} {end} DES1_{node}")
         pre = (case.get("preload") or {}).get(rail)
         il_tot = case["loads"].get(rail, 0.0) + (fs.NOMINAL_V[rail] / bleed if bleed else 0.0) \
             + (vcc_load + fs.NOMINAL_V[rail] / fs.R_AUX_MEAS if rail == "20V" else 0.0) \
@@ -183,7 +188,7 @@ def netlist(res: dict, spice_map: dict, case: dict, cscale=0.1, tstop=9e-3, twin
                 out.append(f"BL_{node} {node} {g} I = {ilx} * min(1, max(0, v({node},{g}) / {0.2 * vn}))")
             else:
                 out.append(f"BL_{node} {g} {node} I = {ilx} * min(1, max(0, v({g},{node}) / {0.2 * vn}))")
-    for rail, (node, sign, caps, bleed) in fs.RAILS.items():
+    for rail, (node, sign, caps, bleed) in rl.items():
         end = fs.RECT[rail]
         vr = f"v({node})-v({end})" if sign > 0 else f"v({end})-v({node})"
         out += [f"Bvr_{node} xvr_{node} 0 V = {vr}", f"Rvr_{node} xvr_{node} vrf_{node} 1k", f"Cvr_{node} vrf_{node} 0 50p"]
@@ -266,7 +271,7 @@ def netlist(res: dict, spice_map: dict, case: dict, cscale=0.1, tstop=9e-3, twin
             f"Bpsw psw 0 V = v(col,es) * v(col,es) * (min(1, max(0, v(gf))) / {p['ron']} + 1e-8)"]
     t0 = tstop - twin
     meas = []
-    for rail, (node, sign, caps, bleed) in fs.RAILS.items():
+    for rail, (node, sign, caps, bleed) in rl.items():
         meas.append(f"meas tran V_{node} avg vr_{node} from={t0} to={tstop}")
         meas.append(f"meas tran V1_{node} avg vr_{node} from={t0} to={t0 + twin / 2}")
         meas.append(f"meas tran V2_{node} avg vr_{node} from={t0 + twin / 2} to={tstop}")
@@ -294,8 +299,8 @@ def netlist(res: dict, spice_map: dict, case: dict, cscale=0.1, tstop=9e-3, twin
     out.append(".control")
     sv = ["v(col)", "v(sn1)", "v(sn2)", "v(dcp)", "v(es)", "v(gf)", "v(fb)", "v(verr)", "v(abm)", "v(ena)", "v(fsw)", "v(psw)",
           "i(Vin)", "v(gate)"]
-    sv += [f"v({fs.RAILS[r][0]})" for r in fs.RAILS] + ["v(iso)"] + [f"v({e})" for e in fs.RECT.values()]
-    sv += [f"v(vrf_{fs.RAILS[r][0]})" for r in fs.RAILS]
+    sv += [f"v({rl[r][0]})" for r in rl] + ["v(iso)"] + [f"v({fs.RECT[r]})" for r in rl]
+    sv += [f"v(vrf_{rl[r][0]})" for r in rl]
     sv += [f"i(L{n})" for n in names]
     if startup:
         sv.append("v(vcc)")
@@ -311,7 +316,7 @@ def netlist(res: dict, spice_map: dict, case: dict, cscale=0.1, tstop=9e-3, twin
     out += ["let pin = -v(dcp)*i(vin)", "let vclamp = v(sn2)-v(dcp)", "let pr45 = vclamp*vclamp/1e6",
             "let pr72 = (v(sn1)-v(sn2))*(v(sn1)-v(sn2))/100",
             f"let prcs = v(es)*v(es)/{rcs}"]
-    for rail, (node, sign, caps, bleed) in fs.RAILS.items():
+    for rail, (node, sign, caps, bleed) in rl.items():
         g = "0" if fs.GROUND[rail] == "0" else "v(iso)"
         out.append(f"let vr_{node} = v({node})-{g}" if sign > 0 else f"let vr_{node} = {g}-v({node})")
         end = fs.RECT[rail]
@@ -322,12 +327,20 @@ def netlist(res: dict, spice_map: dict, case: dict, cscale=0.1, tstop=9e-3, twin
         out.append(f"wrdata {wave_file} " + " ".join(f"i(L{n})" for n in names) + " v(col) v(gate)")
     if save_file:
         # slow signals for plots (step response, burst ripple, start-up), decimated by linearize
+        # columns: the rails in save_rails() order (5V, 15V, 15V_ISO_SEC, 5V_ISOL, -5V / -15V, -80V)
         x = " v(vcc)" if startup else ""
-        out.append(f"linearize vr_v5 vr_v20 vr_vs20 vr_vs5 vr_vsn5 vr_vshv v(fb) v(abm) v(ena){x}")
-        out.append(f"wrdata {save_file} vr_v5 vr_v20 vr_vs20 vr_vs5 vr_vsn5 vr_vshv v(fb) v(abm) v(ena){x}")
+        cols = " ".join(f"vr_{rl[r][0]}" for r in save_rails(case))
+        out.append(f"linearize {cols} v(fb) v(abm) v(ena){x}")
+        out.append(f"wrdata {save_file} {cols} v(fb) v(abm) v(ena){x}")
     out.append(".endc")
     out.append(".end")
     return "\n".join(out) + "\n"
+
+
+def save_rails(case: dict) -> list:
+    """Rail order of the save_file columns: 5V, 15V, 15V_ISO_SEC, 5V_ISOL, the SN5 rail, -80V."""
+    rl = list(fs.rails(case))
+    return ["5V", "20V", "20V_ISO_SEC", "5V_ISOL", next(r for r in rl if r in ("-5V_SEC", "-15V_SEC")), "-100V BIAS"]
 
 
 def summarise(vals: dict) -> dict:
@@ -337,7 +350,9 @@ def summarise(vals: dict) -> dict:
         if a in vals:
             vals[b] = vals.pop(a)
     r = fs.summarise(vals)
-    for rail, (node, *_rest) in fs.RAILS.items():
+    for rail, (node, *_rest) in fs.ALL_RAILS.items():
+        if rail not in r:
+            continue
         r[rail + " min"] = vals.get(f"vmin_{node}")
         r[rail + " max"] = vals.get(f"vmax_{node}")
     for k in ("fb", "fbmin", "fbmax", "verr", "abm", "ena", "duty", "ipri", "psw", "prcs", "pr72"):

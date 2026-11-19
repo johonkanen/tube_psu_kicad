@@ -319,10 +319,26 @@ run_flyback.py processes on top of the pool). Cached results: `out/results/<opti
 > if new bench data arrive, and finalise the rewind spec (FLYBACK_DESIGN.md 5,
 > mas/tr1_recommended.json). The user has no triple-insulated wire: enamel + 3 mm margins.
 
-## To do (user 2026-11-19): −5 V winding → −15 V
+## Done (2026-11-19): −5 V winding → −15 V (EEL19_DESIGN.md 16, n15_results.md)
 
-NEXT_REVISION.md 1.13. SN5 becomes ≈ 16 T (like S15) instead of 6 T: new option derived from
-eel19_wide600_0680 with SN5 16 T (TEX-E), check the 4+6 window fill and the S5/SN5/ISO_GND pin
-pairing, rerun the wide cases + 60 V cases for cross regulation and losses, then change the
-schematic (C40 ≥ 25 V, R123, rename -5V_SEC → -15V_SEC, N5V_OUT → N15V_OUT). Load (user):
-≤ 50 mA max, normally only JFET-gate / op-amp leakage (check the bleeder-only rise).
+NEXT_REVISION 1.13. Option `eel19_wide600_0680_n15` (MAS `eel19_wide_n15`):
+- **SN5 16 T × 1 TEX-E 0.20 wound in the S15 layer** (trifilar: S15 2 strands + SN5 1 strand, 16 T,
+  19.2 mm). S5 6 T × 4 TEX-E 0.20 alone in its old layer.
+  - Order P1 | S15+SN5 | SHV | S5 | A5 | A15 | P2; radial build 3.00 mm unchanged.
+  - Pins unchanged: S15 9 → 10, SN5 8 → 9, S5 9 → 7.
+  - S5 and SN5 side by side in one layer (`_n15a`) was rejected: P–SN5 leakage 185 µH, −15 V 9–14 V,
+    5V_ISOL 6 V.
+- **−15V_SEC −14.2 … −16.3 V** with R123 4.7k, for 0–50 mA, 60–450 V and 0–20 W elsewhere
+  (nominal −15.4 V; −14.2 … −16.8 V with 12.1k).
+  - The other rails are within ±0.05 V of section 14 (15V_ISO_SEC min_S15 16.4 V instead of 17.3 V).
+  - TR1 ΔT 43 K at 100 V / 20 W (was 48 K).
+  - Start-up at 100 V / 20 W, csmin: 25.0 ms.
+  - D14 V_R 87 V at 450 V (ES1D OK).
+- **Schematic (to apply, list in 16.6):**
+  - TR1 spec;
+  - C40 → 22 µF 25 V 1206 CL31A226KAHNNNE (C12891);
+  - R123 → 4.7k 1206 (C17936);
+  - rename -5V_SEC → -15V_SEC, N5V_OUT → N15V_OUT;
+  - check the ratings of the parts on that net.
+- **Open:** with −15 V ≥ 20 mA and every other rail unloaded (no MCU), ABM bursts dip −15 V to
+  −12.2 V for any C40. This does not happen at board idle. Fix if needed: R141 100k (ABM off).

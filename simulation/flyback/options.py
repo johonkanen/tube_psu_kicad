@@ -566,6 +566,69 @@ OPTIONS.update({
 })
 WIDE_ICE_OPTIONS = ["eel19_wide600_0680", "eel19_wide_0680", "eel19_tiw_sandwich_s_pre3_0680"]
 
+# ---------------------------------------------------------------------------------------
+# -15 V instead of -5 V (user 2026-11-19, NEXT_REVISION 1.13, EEL19_DESIGN.md 16): the SN5 winding
+# (pin 8 -> D14, other end pin 9 = ISO_GND) becomes 16 T and feeds -15V_SEC (<= 50 mA, JFET gate bias).
+# eel19_wide (chosen 100-450 V build) with only the S5 / SN5 layer changed:
+#   "c" (chosen): SN5 16 T x 1 TEX-E 0.20 wound multifilar with S15 (S15 2 + SN5 1 strand per turn,
+#        48 wires = 19.2 of 21.2 mm, spread), S5 6 T x 4 TEX-E 0.20 alone in the old S5+SN5 layer
+#        (spread); same radial build (3.00 mm), every winding still full width (P-SN5 leakage 14 uH);
+#   "a": S5 6 T x 4 and SN5 16 T x 1 side by side in ONE layer (consecutive, 24 + 16 wires = 16.0 mm):
+#        each winding covers only part of the width -> P-SN5 leakage 185 uH, P-S5 67 uH (rejected).
+# ---------------------------------------------------------------------------------------
+def eel19_wide_n15(variant="a"):
+    o = eel19_wide(*WIDE_CHOSEN)
+    for s in o["sections"]:
+        names = [w[0] for w in s["windings"]]
+        if names == ["S5", "SN5"]:
+            if variant == "a":
+                s["windings"] = [("S5", 6, 4, TEX20, SEC), ("SN5", 16, 1, TEX20, SEC)]
+            else:
+                s["windings"] = [("S5", 6, 4, TEX20, SEC)]
+            s["mode"] = "consecutive"
+            s["align"] = "spread"
+        elif names == ["S15"] and variant == "c":
+            s["windings"] = [("S15", 16, 2, TEX20, SEC), ("SN5", 16, 1, TEX20, SEC)]
+            s["mode"] = "multifilar"
+            s["align"] = "spread"
+    o["name"] = wide_name(*WIDE_CHOSEN) + f"_sn15{variant}"
+    o["title"] = o["title"].replace("S5+SN5 6+6", "S5 6 + SN5 16 (one layer)" if variant == "a" else "S5 6").replace(
+        "S15 16", "S15 16" if variant == "a" else "S15+SN5 16 (2 + 1 strands)") + " | SN5 16 T -> -15V_SEC"
+    return o
+
+
+# R123 bleeder of the -15 V rail (12.1k in the 5.2 schematic); variants for the bleeder study
+N15_RAIL = {"-5V_SEC": "-15V_SEC"}
+
+
+def _n15(base_variant, name, bleed=None, rser=None, note=""):
+    o = _ice0680(wide_name(*WIDE_CHOSEN) + f"_sn15{base_variant}", name, WIDE_RCS, note)
+    o["rail_map"] = dict(N15_RAIL)
+    if bleed:
+        o["bleed"] = {"-15V_SEC": bleed}
+    if rser:
+        o["rser"] = {"-15V_SEC": rser}
+    return o
+
+
+OPTIONS.update({
+    "eel19w_n52_l600_a32_t_sn15a": lambda: eel19_wide_n15("a"),
+    "eel19w_n52_l600_a32_t_sn15c": lambda: eel19_wide_n15("c"),
+    "eel19_wide_n15": lambda: dict(eel19_wide_n15("c"), name="eel19_wide_n15", write_mas=True,     # MAS file only
+                                   title=eel19_wide_n15("c")["title"] + " = the -15 V recommendation"),
+    "eel19_wide600_0680_n15": lambda: _n15("c", "eel19_wide600_0680_n15", note=" | -15V_SEC (SN5 with S15), R123 12.1k"),
+    # R123 bleeder study (12.1k = 1.2 mA at 15 V): 6.8k 2.2 mA, 4.7k 3.2 mA
+    "eel19_wide600_0680_n15_b6k8": lambda: _n15("c", "eel19_wide600_0680_n15_b6k8", bleed=6.8e3, note=" | -15V_SEC, R123 6.8k"),
+    "eel19_wide600_0680_n15_b4k7": lambda: _n15("c", "eel19_wide600_0680_n15_b4k7", bleed=4.7e3, note=" | -15V_SEC, R123 4.7k"),
+    # burst-ripple study (light_SN15max_lean): C44 + C40 at their DC-bias capacitance at 15 V (C44 4.7 uF 50 V
+    # -> 3.3 uF; C40 22 uF 25 V 1206 -> 9 uF, 47 uF 25 V 1206 -> 16 uF, 2 x 47 uF -> 32 uF), R123 4.7k
+    **{f"eel19_wide600_0680_n15_b4k7_{tag}": (lambda tag=tag, c40=c40: dict(
+        _n15("c", f"eel19_wide600_0680_n15_b4k7_{tag}", bleed=4.7e3, note=f" | -15V_SEC, R123 4.7k, C40 eff. {c40 * 1e6:.0f} uF"),
+        caps={"-15V_SEC": [(3.3e-6, 0.005), (c40, 0.005)]}))
+       for tag, c40 in (("c22d", 9e-6), ("c47d", 16e-6), ("c2x47d", 32e-6))},
+    "eel19_wide600_0680_n15a": lambda: _n15("a", "eel19_wide600_0680_n15a", note=" | -15V_SEC (S5 + SN5 side by side), R123 12.1k"),
+})
+
 EEL19_ICE_OPTIONS = ["eel19_tiw_sandwich_s_pre3_ice", "eel19_sandwich_b_pre3_ice",
                      "eel19_tiw_sandwich_s_pre3_ice_abm1", "eel19_tiw_sandwich_s_pre3_ice_abm3",
                      "eel19_tiw_sandwich_s_pre3_ice_prehalf", "eel19_tiw_sandwich_s_pre3_ice_prenone"]

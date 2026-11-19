@@ -1,0 +1,124 @@
+#!/usr/bin/env python3
+"""Tables for the -15 V rail study (EEL19_DESIGN.md section 16): the SN5 winding becomes 16 T and feeds
+-15V_SEC. Compares the ngspice cases of the -15 V options (run_flyback.py, ICE5AR model with the 0680AG
+power stage) with eel19_wide600_0680 (-5 V), the bleeder / series-R variants, the real-capacitor checks
+(ice5ar_checks.py --tag _n15) and the losses (losses.py). Writes n15_results.md.
+
+    python3 simulation/flyback/n15_report.py
+"""
+from __future__ import annotations
+
+import json
+import os
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+import flyback_sim as fs  # noqa: E402
+import options as opts  # noqa: E402
+import run_flyback as rf  # noqa: E402
+
+OUT = os.path.join(HERE, "out")
+REF = "eel19_wide600_0680"
+MAIN = "eel19_wide600_0680_n15"
+DN = {"20V": "15V", "5V": "5V", "20V_ISO_SEC": "15V_ISO_SEC", "5V_ISOL": "5V_ISOL", "-5V_SEC": "−5V",
+      "-15V_SEC": "−15V", "-100V BIAS": "−80V"}
+
+
+def f2(x, d=2):
+    return "–" if x is None else f"{x:.{d}f}"
+
+
+def load(name):
+    opt = opts.get(name)
+    res = {}
+    for c in rf.option_cases(opt, [x["name"] for x in rf.all_cases()] +
+                             [x["name"].replace("_SN5", "_SN15") for x in rf.all_cases()]):
+        p = os.path.join(OUT, "results", f"{name}__{c['name']}.json")
+        if os.path.exists(p):
+            res[c["name"]] = (c, json.load(open(p)))
+    return res
+
+
+def rails_of(res):
+    c, r = next(iter(res.values()))
+    return [k for k in fs.ALL_RAILS if r.get(k) is not None]
+
+
+def case_table(name, title):
+    res = load(name)
+    if not res:
+        return []
+    rl = rails_of(res)
+    sn = "-15V_SEC" if "-15V_SEC" in rl else "-5V_SEC"
+    s = [f"## {title}", "", f"`{opts.get(name)['title']}`", "",
+         "| case | DC+ V | " + " | ".join(DN[k] for k in rl) + f" | {DN[sn]} min–max | {DN[sn]} load mA | D14 V_R V | "
+         "FB V | f kHz | Pin W | VDS pk V |", "|---|---|" + "---|" * (len(rl) + 7)]
+    for n, (c, r) in res.items():
+        cells = [f"{r[k]:.{1 if k == '-100V BIAS' else 2}f}" for k in rl]
+        s.append(f"| {n} | {c.get('vin', 400):.0f} | " + " | ".join(cells) +
+                 f" | {f2(r.get(sn + ' min'))}–{f2(r.get(sn + ' max'))} | {c['loads'].get(sn, 0) * 1e3:.0f} | "
+                 f"{f2(r.get(sn + ' vrev'), 0)} | {r['fb']:.2f} | {r['fsw'] / 1e3:.0f} | {r['pin']:.2f} | {r['vcol']:.0f} |")
+    std = [rf.adapt_case(opts.get(name), c)["name"] for c in rf.cases()]
+    s += ["", "Range over the standard cases run (all 16 for the main options, a subset for the variants): " + ", ".join(
+        f"{DN[k]} {min(res[c][1][k] for c in std if c in res):.2f}–{max(res[c][1][k] for c in std if c in res):.2f}"
+        for k in rl if any(c in res for c in std)) + ".",
+        f"Range over all cases: {DN[sn]} {min(r[sn] for c, r in res.values()):.2f}–{max(r[sn] for c, r in res.values()):.2f} V.", ""]
+    return s
+
+
+def loss_table(names, cases=("nom", "full15", "full20", "full20_100", "full20_200", "full20_450")):
+    s = ["## Transformer losses (losses.py on the simulated currents, MKF upper bound, 60 °C windings)", "",
+         "| option | case | winding W | core W (iGSE) | total W | ΔT K (section 5) | SN5 W | S15 W | S5 W |", "|---|---|---|---|---|---|---|---|---|"]
+    for n in names:
+        for c in cases:
+            p = os.path.join(OUT, "losses", f"{n}.json" if c == "nom" else f"{n}__{c}.json")
+            if not os.path.exists(p):
+                continue
+            lo = json.load(open(p))
+            w, co = lo.get("winding_losses_W"), lo.get("core_losses_W_IGSE")
+            if w is None or co is None:
+                continue
+            per = lo.get("per_winding_W") or {}
+            dt = ((w + co) * 1e3 / 19.6) ** 0.833
+            s.append(f"| {n} | {c} | {w:.2f} | {co:.3f} | {w + co:.2f} | {dt:.0f} | {f2(per.get('SN5'), 3)} | "
+                     f"{f2(per.get('S15'), 3)} | {f2(per.get('S5'), 3)} |")
+    return s + [""]
+
+
+def checks(tag="_n15"):
+    d = os.path.join(OUT, "checks")
+    fs_ = sorted(f for f in os.listdir(d) if f.startswith("ice_") and f.endswith(f"{tag}.json")) if os.path.isdir(d) else []
+    if not fs_:
+        return []
+    s = [f"## Checks with the real capacitors and the real FB network (`ice5ar_checks.py --tag {tag}`)", ""]
+    for f in fs_:
+        r = json.load(open(os.path.join(d, f)))
+        rl = [k for k in fs.ALL_RAILS if r.get(k) is not None]
+        s.append(f"- **{f[:-5]}** (case {r['config']['case']}): " +
+                 ", ".join(f"{DN[k]} {r[k]:.3f} [{r[k + ' min']:.3f}–{r[k + ' max']:.3f}]" for k in rl) +
+                 f"; FB {r['fb']:.2f} V, Pin {r['pin']:.2f} W")
+        for k, v in r.items():
+            if k.startswith("w_"):
+                s.append(f"  - {k[2:]}: {v}")
+    return s + [""]
+
+
+def main():
+    s = ["# TR1 with a −15 V rail (SN5 16 T) – result tables", "",
+         "Generated by `python3 simulation/flyback/n15_report.py` (EEL19_DESIGN.md section 16). Voltages are "
+         "magnitudes; 15V = net `20V` in the scripts. −15V loads: nominal 5 mA, max_SN15 / full* 50 mA, "
+         "min_SN15 / light / idle / *_SN15min bleeder only.", ""]
+    s += case_table(MAIN, f"{MAIN} – chosen build (SN5 wound with S15), R123 12.1k")
+    for n in sorted(o for o in opts.OPTIONS if o.startswith(MAIN) and o != MAIN):
+        s += case_table(n, n)
+    s += case_table(REF, f"{REF} – reference (−5 V, section 14)")
+    s += loss_table([REF, MAIN])
+    s += checks()
+    with open(os.path.join(HERE, "n15_results.md"), "w") as f:
+        f.write("\n".join(s) + "\n")
+    print("wrote n15_results.md")
+
+
+if __name__ == "__main__":
+    main()
