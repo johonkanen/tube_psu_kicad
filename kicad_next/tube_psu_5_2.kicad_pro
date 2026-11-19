@@ -676,6 +676,14 @@
       },
       {
         "netclass": "HV_PRIMARY",
+        "pattern": "Net-(R151-Pad2)"
+      },
+      {
+        "netclass": "HV_PRIMARY",
+        "pattern": "Net-(R152-Pad2)"
+      },
+      {
+        "netclass": "HV_PRIMARY",
         "pattern": "Net-(R4-Pad1)"
       },
       {
@@ -1140,6 +1148,10 @@
       },
       {
         "netclass": "SIGNAL",
+        "pattern": "Net-(PWM2-VIN)"
+      },
+      {
+        "netclass": "SIGNAL",
         "pattern": "Net-(Q7-G)"
       },
       {
@@ -1301,6 +1313,10 @@
       {
         "netclass": "SIGNAL",
         "pattern": "unconnected-(DRV5-NC-Pad7)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "unconnected-(PWM2-NC-Pad9)"
       },
       {
         "netclass": "SIGNAL",

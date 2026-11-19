@@ -129,14 +129,19 @@ def build():
     ]
     # --- 5.2 additions -------------------------------------------------------------------------------
     syms += [
-        # ICE5AR4780BZS (Infineon datasheet V2.3, PG-DIP-7, NR 1.5): fixed-frequency CoolSET with integrated
-        # 800 V CoolMOS in cascode; 1 VERR (error-amplifier input, non-isolated mode), 2 FB (compensation /
-        # ABM selection RSel), 3 CS, 4 GATE (cascode gate: start-up resistor from the bus), 5 DRAIN,
-        # 7 VCC, 8 GND; pin 6 absent.
-        # (left pin order GATE / VCC / VERR / FB / CS: lets the sheet-1 networks leave the pins without crossings)
-        box("ICE5AR", "PWM", [(4, "GATE", PAS), (7, "VCC", PI), (1, "VERR", IN), (2, "FB", PAS), (3, "CS", IN)],
-            [(5, "DRAIN", PAS), None, None, None, (8, "GND", PI)],
-            desc="Fixed-frequency 100 kHz current-mode CoolSET, 800 V CoolMOS, error amplifier, DIP-7 (ICE5AR4780BZS, NR 1.5)"),
+        # ICE5AR0680AG (Infineon datasheet V2.3 "Fixed Frequency 700 V/800 V CoolSET in DSO-12", PG-DSO-12,
+        # NR 1.5, EEL19_DESIGN.md 14): fixed-frequency CoolSET with integrated 800 V CoolMOS in cascode;
+        # 1 VIN (line OVP divider; GND = LOVP off), 2 VERR (error-amplifier input, non-isolated mode), 3 FB
+        # (compensation / ABM selection RSel), 4 CS, 5-8 DRAIN, 9 NC, 10 GATE (cascode gate: start-up
+        # resistor from the bus), 11 VCC, 12 GND.
+        # (left pin order GATE / VCC / VERR / FB / CS as on the 5.2 DIP-7 symbol: the sheet-1 networks leave the
+        # pins without crossings; the four DRAIN pins are wired together on the sheet)
+        box("ICE5AR", "PWM", [(10, "GATE", PAS), (11, "VCC", PI), (2, "VERR", IN), (3, "FB", PAS), (4, "CS", IN),
+                              (9, "NC", NC)],
+            [(5, "DRAIN", PAS), (6, "DRAIN", PAS), (7, "DRAIN", PAS), (8, "DRAIN", PAS), (1, "VIN", IN),
+             (12, "GND", PI)],
+            desc="Fixed-frequency 100 kHz current-mode CoolSET, 800 V CoolMOS, error amplifier, line OVP, "
+                 "PG-DSO-12 (ICE5AR0680AG, NR 1.5)"),
         # UCC21520 (TI SLUSCJ9): same SOIC-16W pin positions as the Si8275 (5 = DISABLE, 6 = DT).
         # (left pin order as on the 5.1 SI8275 symbol, so the sheet-2 driver cell keeps its geometry)
         box("UCC21520", "DRV", [(3, "VCCI", PI), (8, "VCCI", PI), (1, "INA", IN), (5, "DIS", IN), (6, "DT", PAS),

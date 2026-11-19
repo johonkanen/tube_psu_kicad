@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Sheet 1 - AUX supply (PDF page 1): the flyback auxiliary supply. 5.2: PWM2 = ICE5AR4780BZS (NR 1.5, DIP-7
+"""Sheet 1 - AUX supply (PDF page 1): the flyback auxiliary supply. 5.2: PWM2 = ICE5AR0680AG (NR 1.5, PG-DSO-12
 CoolSET, 800 V CoolMOS) switches the primary of TR1 (EEL19, fly leads FL_DC = DC+ / FL_C = FLY_C) from DC+ with
 the RCD clamp D7 / R72 / R45 || C12; its VCC comes from 15V through R142 / D10 (C58 / C51), the cascode
-start-up through R116 / R115 / R114 from DC+ to GATE, the current sense from Rcs = R8 || R9; the integrated
+start-up through R116 / R115 / R114 from DC+ to GATE, the current sense from Rcs = R8 || R9, the line OVP
+divider R151-R153 / R154 || C140 from DC+ to VIN; the integrated
 error amplifier regulates the primary-side 5V rail directly (VERR divider R138 / R139, FB network R140 + C138,
 C139, RSel R141). Primary-side windings: 1 -> D5 -> 15V (C1, C39), 3 -> D6 -> 5V
 (C36, C6, C71). Secondary windings: 10 -> D4 -> 15V_ISO_SEC (C3, C2), 8 -> D14 -> -5V_SEC (C44, C40),
@@ -70,13 +71,24 @@ sh.wire(P5, (xcol, P5[1]), (xcol, CROW))
 sh.label("FLY_C", xcol, CROW, 0)                                 # 5.2: named collector node (HV net class)
 
 # --- PWM2 with the Vcc network, the clamp, the shunt, the start-up chain and the feedback network --------
-PX, PY = g(70), g(116)              # 5.2: DRAIN (right row 0 of 5) on CROW
-# 5.2: ICE5AR4780BZS (NR 1.5, Infineon datasheet V2.3, non-isolated application figure 2): 5 DRAIN = FLY_C,
-# 8 GND, 3 CS (Rcs R8 || R9), 4 GATE (cascode start-up R116 / R115 / R114 from DC+), 7 VCC (15V via R142 / D10,
-# C58 / C51), 1 VERR (5V divider R138 / R139), 2 FB (R140 + C138, C139, RSel R141 to GND)
+PX, PY = g(70), g(118)              # 5.2: DRAIN (right row 0 of 6) on CROW
+# 5.2: ICE5AR0680AG (NR 1.5, Infineon datasheet V2.3 PG-DSO-12, non-isolated application figure 2,
+# EEL19_DESIGN.md 14): 5-8 DRAIN = FLY_C, 12 GND, 4 CS (Rcs R8 || R9), 10 GATE (cascode start-up R116 / R115 /
+# R114 from DC+), 11 VCC (15V via R142 / D10, C58 / C51), 2 VERR (5V divider R138 / R139), 3 FB (R140 + C138,
+# C139, RSel R141 to GND), 1 VIN (line OVP: DC+ -> R151-R153 -> VIN, R154 || C140 to GND), 9 NC
 pwm = sh.place("ICE5AR", "PWM2", PX, PY, value=sh_value("PWM2"))
-GATE, VCC, VERR, FB, CS, DRAIN, PGND = (pwm.pin(n) for n in (4, 7, 1, 2, 3, 5, 8))
+GATE, VCC, VERR, FB, CS, DRAIN, PGND = (pwm.pin(n) for n in (10, 11, 2, 3, 4, 5, 12))
+VIN = pwm.pin(1)
 sh.wire(DRAIN, (xcol, DRAIN[1]))                                 # drain row = CROW
+# DRAIN pins 6 / 7 / 8 joined to pin 5 by a short bus right of the symbol
+xdb = DRAIN[0] + g(2)
+for n in (6, 7, 8):
+    p = pwm.pin(n)
+    sh.wire(p, (xdb, p[1]))
+sh.wire((xdb, DRAIN[1]), (xdb, pwm.pin(8)[1]))
+for n in (5, 6, 7):
+    sh.junction(xdb, pwm.pin(n)[1])
+sh.no_connect(*pwm.pin(9))                                       # pin 9 NC (next to the drain gap)
 sh.wire(PGND, right(PGND, 2))
 power_at(sh, "GND", right(PGND, 2), "down")
 # clamp: D7 (A at the drain) -> R72 -> node -> R45 || C12 -> DC+
@@ -92,6 +104,24 @@ sh.wire(rt, ct)
 sh.junction(*node)
 sh.junction(*rt)
 power_at(sh, "DC+", rt, "up")
+# VIN: line OVP divider DC+ -> R151 -> R152 -> R153 -> VIN, R154 (178k) || C140 (470p) to GND: trip 2.85 V x
+# 30.178 / 0.178 = 483 V (EEL19_DESIGN.md 14). R151-R153 DNP leaves VIN at GND through R154 = LOVP disabled.
+VR = VIN[1]
+xvn = VIN[0] + g(14)
+sh.wire(VIN, (xvn, VR))
+_, ct, cb = vert2(sh, "C", "C140", VIN[0] + g(6), VR + g(3), sh_value("C140"), top=1, text="right")
+sh.junction(*ct)
+power_at(sh, "GND", cb, "down")
+_, rt, rb = vert2(sh, "R", "R154", xvn, VR + g(3), sh_value("R154"), top=1, text="right")   # pin 1 = VIN
+power_at(sh, "GND", rb, "down")
+prev = (xvn, VR)
+for i, r in enumerate(("R153", "R152", "R151")):
+    _, rl, rr = horiz2(sh, "R", r, xvn + g(6) + g(8) * i, VR, sh_value(r), left=2, text="above")  # pin 1 = DC+ side
+    sh.wire(prev, rl)
+    prev = rr
+sh.junction(xvn, VR)
+sh.wire(prev, right(prev, 2))
+power_at(sh, "DC+", right(prev, 2), "up")
 # C15: DC+ decoupling (standalone pair)
 _, ct, cb = vert2(sh, "C", "C15", g(100), g(91), sh_value("C15"), top=2)           # pin 2 = DC+
 power_at(sh, "DC+", ct, "up")
@@ -150,9 +180,10 @@ power_at(sh, "5V", rt, "up")
 _, rt2, rb2 = vert2(sh, "R", "R139", xd, VERR[1] + g(3), sh_value("R139"), top=1, text="left")  # pin 1 = VERR
 power_at(sh, "GND", rb2, "down")
 sh.junction(xd, VERR[1])
-sh.text("PWM2 ICE5AR4780BZS (NR 1.5): 5V = 1.80 V x (1 + R138 / R139) = 5.00 V; RSel R141 750k = ABM option 2 (entry VFB 0.93 V, VCS 0.22 V);", g(16), g(146))
-sh.text("Rcs R8 || R9 = 0.8R (Ipk limit 1.0 A at VCS_N 0.8 V); start-up 3 x 4.7M from DC+ to GATE (starts from 60 V); VCC 14-15 V from 15V via R142 / D10.", g(16), g(149))
-sh.text("Layout: DRAIN pin 5 copper area for cooling (HV_PRIMARY, FLY_C); VERR / FB parts close to pins 1 / 2, Rcs return to pin 8.", g(16), g(152))
+sh.text("PWM2 ICE5AR0680AG (NR 1.5, PG-DSO-12, 100-450 V DC+): 5V = 1.80 V x (1 + R138 / R139) = 5.00 V; RSel R141 750k = ABM option 2 (entry VFB 0.93 V, VCS 0.22 V);", g(16), g(146))
+sh.text("Rcs R8 || R9 = 2 x 1.37R = 0.685R (Ipk limit 1.04-1.30 A at VCS_N 0.72-0.88 V); start-up 3 x 4.7M from DC+ to GATE (starts from 60 V); VCC 14-15 V from 15V via R142 / D10.", g(16), g(149))
+sh.text("VIN line OVP: 3 x 10M / 178k = trip 483 V (R151-R153 DNP: VIN at GND, LOVP off). Layout: DRAIN pins 5-8 one F.Cu + B.Cu area 2-3 cm2 (HV_PRIMARY, FLY_C),", g(16), g(152))
+sh.text("away from FB / VERR and the TR1 slot, pin 9 NC unconnected; VERR / FB parts close to pins 2 / 3, Rcs return to pin 12.", g(16), g(155))
 
 # --- secondary rectifier groups, fanned out on separate rows (nested columns, no crossings) ------
 sh.wire(P9, right(P9, 4))
@@ -207,7 +238,7 @@ sh.text("Terminals +15V OUT / -5V OUT / -80V OUT / +5V OUT / SEC GND = P15V_OUT 
 sh.text("the PDF joins the terminals RET_iso and ISO_GND by a bare wire (one net ISO_GND, no part).", g(100), g(203))
 
 # --- PDF notes ----------------------------------------------------------------------------------
-sh.text("5.2: TR1 = EEL19 4+6 (fly leads FL_DC / FL_C, pins 4 / 6 clipped), PWM2 = ICE5AR4780BZS (5V regulated through VERR); R8 || R9 = 1.6R || 1.6R = 0.8R.", g(16), g(37))
+sh.text("5.2: TR1 = EEL19 4+6 (fly leads FL_DC / FL_C, pins 4 / 6 clipped), PWM2 = ICE5AR0680AG (5V regulated through VERR); R8 || R9 = 1.37R || 1.37R = 0.685R.", g(16), g(37))
 sh.text("5.1 PDF notes (IW1818 Vsense / Isense values, EF20 winding variants) dropped in 5.2: PWM2 and TR1 replaced (NR 1.1, 1.5).", g(16), g(20))
 sh.text("PWR_FLAGs: 15V, 5V, 15V_ISO_SEC, -5V_SEC, 5V_ISOL, -100V BIAS (rectifier outputs), ISO_GND (SEC GND terminal), PWM2 Vcc (fed through D10 only): permanent.", g(16), g(34))
 sh.save()

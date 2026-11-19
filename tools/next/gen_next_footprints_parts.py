@@ -8,6 +8,8 @@ Kept apart from tools/next/gen_next_footprints.py (transformers, toroids, heatsi
       the body, for the isolators that straddle a reinforced barrier: ISO1 (primary <-> heater 8.0 mm),
       U11 (primary <-> UART 8.0 mm), ISO2 (primary <-> DAB secondary 11.1 mm). Pads, silk, fab and the
       3D model are the KiCad library footprint's; the courtyard grows over the slot ends.
+  PG-DSO-12_3.9x9.9mm_P1.27mm   Infineon PG-DSO-12 (ICE5AR0680AG, PWM2): KiCad SOIC-16 narrow with SO-16
+      positions 5, 6, 11, 12 removed and the pads renumbered 1-12 (datasheet figure 39: e 1.27, b1 3.81 BSC)
   CP_Radial_*_H<height>mm        KiCad CP_Radial footprints with a 3D model of the real can height (the
       library models are 8 / 10 / 12.5 mm tall; the 5.2 parts are 18-50 mm)
   forks of lib/tube_psu.pretty footprints that have no (or a missing) 3D model: same name, pads and
@@ -184,6 +186,39 @@ def soic16w_slot(creep):
                   add=(slot_lines(0, -ys, ys, w), court, note))
 
 
+# --- Infineon PG-DSO-12 (ICE5AR0680AG) ------------------------------------------------------------------
+# Datasheet V2.3 figure 39: body D 9.8-10.0 x E1 3.8-4.0 mm, lead span E 5.8-6.2 mm, b 0.35-0.51, L 0.39-0.89,
+# e 1.27 mm, b1 = 3.81 mm (BSC) from pin 4 to pin 5 (and 9 to 8) = an SO-16 narrow (JEDEC MS-012 AC) body with
+# two lead positions missing per side. Not KiCad's Infineon_PG-DSO-12-9 / -11 (7.5 mm exposed-pad packages).
+# KiCad SOIC-16 pad -> PG-DSO-12 pin (None = no pad): left column 1-8 top to bottom, right 9-16 bottom to top.
+# Pins 5-8 (DRAIN) sit at the pin-5/6 end; the nearest other pads are 4 (CS) and 9 (NC) across the 3.81 mm
+# gap (3.21 mm copper to copper).
+DSO12_MAP = {1: 1, 2: 2, 3: 3, 4: 4, 5: None, 6: None, 7: 5, 8: 6,
+             9: 7, 10: 8, 11: None, 12: None, 13: 9, 14: 10, 15: 11, 16: 12}
+
+
+def pg_dso12():
+    src = kicad_fp("Package_SO", "SOIC-16_3.9x9.9mm_P1.27mm")
+    head, kids, tail = blocks(src)
+    out = []
+    for b in kids:
+        m = re.match(r'\t\(pad "(\d+)"', b)
+        if m:
+            new = DSO12_MAP[int(m.group(1))]
+            if new is None:
+                continue
+            b = b.replace(f'(pad "{m.group(1)}"', f'(pad "{new}"', 1)
+        if b.startswith("\t(descr"):
+            b = ('\t(descr "Infineon PG-DSO-12, 12 pins, SO-16 narrow body (JEDEC MS-012 AC) with lead positions 5, 6, '
+                 '11, 12 empty (ICE5AR0680AG datasheet V2.3 figure 39)")\n')
+        if b.startswith("\t(tags"):
+            b = '\t(tags "PG-DSO-12 DSO-12 ICE5AR0680AG CoolSET SOIC-16 narrow")\n'
+        out.append(b)
+    return derive(head + "".join(out) + tail, "PG-DSO-12_3.9x9.9mm_P1.27mm",
+                  "pads = KiCad SOIC-16_3.9x9.9mm_P1.27mm without 5, 6, 11, 12, renumbered 1-12, 5-8 = DRAIN; "
+                  "3D model = KiCad SOIC-16 (16 leads drawn) (tube_psu_next_parts)")
+
+
 # --- electrolytics: KiCad footprint, model of the real height ----------------------------------------
 # (refdes, part): C19/C30 KCXE5002W680MF 10x50, C102 KCXE1802E560MF 10x18, C29 (C28/C37/C56 Proteus pads)
 # ERT826M2WI45RRS0F-R 12.5x45, C31/C32 10ZLH1500MEFCT78X20 8x20 (JLC package strings, 2026-11-18)
@@ -221,7 +256,7 @@ def fork(name):
                   model=model_block(FORKS[name]))
 
 
-FOOTPRINTS = {}      # name -> function returning the .kicad_mod text
+FOOTPRINTS = {"PG-DSO-12_3.9x9.9mm_P1.27mm": pg_dso12}      # name -> function returning the .kicad_mod text
 for _c in SOIC_SLOTS:
     FOOTPRINTS[f"SOIC-16W_7.5x10.3mm_P1.27mm_Slot{_c}"] = (lambda c=_c: soic16w_slot(c))
 for _n in CP_VARIANTS:

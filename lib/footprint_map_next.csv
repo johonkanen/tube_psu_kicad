@@ -158,7 +158,7 @@ P15V_OUT,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm
 P400V,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
 P5V_OUT,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
 PE,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
-PWM2,tube_psu_next:ICE5AR,Package_DIP:DIP-8-N6_W7.62mm,PG-DIP-7 = DIP-8 without pin 6 (KiCad std); drain pin 5 copper for cooling
+PWM2,tube_psu_next:ICE5AR,tube_psu_next_parts:PG-DSO-12_3.9x9.9mm_P1.27mm,PG-DSO-12 = SO-16 narrow without positions 5/6/11/12 (tube_psu_next_parts); drain pins 5-8 copper for cooling
 Q1,tube_psu:Q_NMOS_SGD,tube_psu:LFPAK56_Proteus,"LFPAK56, three source pads numbered 1, 2 = G, 3 = D tab"
 Q2,tube_psu:Q_NMOS_SGD,tube_psu:LFPAK56_Proteus,"LFPAK56, three source pads numbered 1, 2 = G, 3 = D tab"
 Q5,tube_psu:Q_NMOS_GDS,Package_TO_SOT_THT:TO-247-3_Vertical,"TO-247, 1=G 2=D 3=S (KiCad pitch 5.45, Proteus 5.461)"
@@ -357,3 +357,8 @@ R149,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, split-c
 R150,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, split-cap balancing)"
 C138,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C139,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+R151,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, line-OVP divider on DC+)"
+R152,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, line-OVP divider on DC+)"
+R153,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, line-OVP divider on DC+)"
+R154,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
+C140,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603

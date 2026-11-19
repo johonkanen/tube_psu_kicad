@@ -1662,3 +1662,20 @@ tracking V420·20/21 or burst at light load, frequency soft-start 420 → 140 kH
 (sheet 07; secondary half bridge moved right for room), mid nets HV_PRIMARY / HV_SECONDARY. Checks:
 `tools/next/check_next.sh` ALL 5.2 CHECKS PASSED (ERC 0 errors / 14 warnings, 229 nets in one domain each),
 `tools/check_all.sh` ALL CHECKS PASSED.
+
+## 5.2: PWM2 → ICE5AR0680AG, 100–450 V input (2026-11-19)
+
+The user bought the Infineon **ICE5AR0680AG** (PG-DSO-12, C17699638 ICE5AR0680AGXUMA1, JLC stock 3): it replaces the
+ICE5AR4780BZS (DIP-7) for 100–450 V DC+ at 20 W (`simulation/flyback/EEL19_DESIGN.md` 14, 15; details
+`kicad_next/CHANGES_5_2.md` item 1.5). Symbol `ICE5AR` re-made (VIN, four DRAIN pins wired together, NC with a
+no-connect flag); new footprint **`tube_psu_next_parts:PG-DSO-12_3.9x9.9mm_P1.27mm`** (`gen_next_footprints_parts.py`:
+KiCad SOIC-16 narrow without SO-16 pads 5, 6, 11, 12, renumbered; checked against datasheet figure 39; stock SOIC-16
+3D model). **R8 / R9 → 1.37R** (C3000600, Rcs 0.685 Ω, current limit 1.04–1.30 A). New **line OVP on VIN:
+R151–R153 3 × 10M 1206 (C26119) from DC+, R154 178k (C22823) ‖ C140 470p (C1620) to GND, trip 483 V**; DNP of
+R151–R153 leaves VIN at GND = LOVP off. Divider mid nets Net-(R151-Pad2) / Net-(R152-Pad2) HV_PRIMARY. VERR / FB /
+RSel / VCC / start-up (3 × 4.7M) / clamp unchanged. TR1 keeps turns, Lp and footprint (thinner strands = winding spec
+only). Drain pins 5–8 need ≈ 2–3 cm² copper: placement constraint 8 in NEXT_REVISION_PLAN.md phase 5. C1 / C2
+ripple (NR 1.11): ≈ 0.6 A rms at 20 W against a 600 mA rating – kept (fallback EEEFT1E471AP, C178591). Board
+skeleton unchanged (no footprints before phase 5). Checks: `tools/next/check_next.sh` ALL 5.2 CHECKS PASSED (ERC 0
+errors / 14 warnings, 233 nets in one domain each, 19/19 rule tests, 362 parts in the CSVs), `tools/check_all.sh`
+ALL CHECKS PASSED.

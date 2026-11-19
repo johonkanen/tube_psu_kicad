@@ -153,6 +153,13 @@ placement constraints:
    UART header at the board edge on its island; fly-lead holes per the EEL19 footprint.
 7. Assembly: SMD on L1 where possible (JLC single-side assembly is cheaper), bottom side only for
    small passives; JLC part orientation / fiducials / tooling holes.
+8. PWM2 (ICE5AR0680AG, PG-DSO-12, NR 1.5 / simulation/flyback/EEL19_DESIGN.md 14.9): the DRAIN pins 5–8
+   (FLY_C, HV_PRIMARY, 0 ↔ 620 V at 100 kHz) sit together at one package end and need **≈ 2–3 cm² of
+   drain copper** for cooling (RthJA 94 K/W with minimum copper, ≈ 70 K/W assumed with the area; Tj ≤ 95 °C
+   at 450 V / 20 W): one compact F.Cu area joining 5/6 and 7/8 around the package end, the same on B.Cu
+   stitched with vias, **no inner-layer copper on it**; keep it away from the TR1 slot / isolated side and
+   from FB / VERR (pins 2 / 3 parts); pin 9 (NC) stays unconnected (it is the low-voltage pad next to the
+   3.81 mm drain gap). Leave room on the board for this area when placing PWM2, TR1 and the clamp.
 
 Deliverable: a placed board (no routing), a placement report with a screenshot per region, the
 barrier distances and the list of constraint trade-offs. Claude reviews it against the constraints

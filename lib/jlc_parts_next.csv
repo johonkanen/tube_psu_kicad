@@ -159,7 +159,7 @@ P15V_OUT,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,20
 P400V,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
 P5V_OUT,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
 PE,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
-PWM2,ICE5AR4780BZS,Package_DIP:DIP-8-N6_W7.62mm,C3094802,ICE5AR4780BZS,Infineon Technologies,extended,173,1.2595,2026-11-18,changed,,5.2 NR 1.5: replaces the iW1819-00 (0 stock); CoolSET 800 V 100 kHz DIP-7 THT
+PWM2,ICE5AR0680AG,tube_psu_next_parts:PG-DSO-12_3.9x9.9mm_P1.27mm,C17699638,ICE5AR0680AGXUMA1,Infineon Technologies,extended,3,2.0512,2026-11-19,changed,LOW STOCK 3: user has the parts (consign if JLC is short),"5.2 NR 1.5: replaces the ICE5AR4780BZS (DIP-7); CoolSET 800 V 0.71 Ohm 100 kHz PG-DSO-12 (JLC package string BSOP-12-EP-300mil is wrong: datasheet figure 39 = 3.9 mm SO-16 body, no exposed pad), 100-450 V input (EEL19_DESIGN.md 14)"
 Q1,BUK9Y15-60E,tube_psu:LFPAK56_Proteus,C458196,"BUK9Y15-60E,115",Nexperia,extended,1485,0.2638,2026-11-17,exact,,"BUK9Y15-60E,115"
 Q2,BUK9Y15-60E,tube_psu:LFPAK56_Proteus,C458196,"BUK9Y15-60E,115",Nexperia,extended,1485,0.2638,2026-11-17,exact,,"BUK9Y15-60E,115"
 Q5,C2M0160120D,Package_TO_SOT_THT:TO-247-3_Vertical,,,,,,,2026-11-17,missing,not available,THT. C2M0160120D (Wolfspeed) 0 stock; only clone-branded parts < 100; consign
@@ -178,8 +178,8 @@ R4,470k,Resistor_SMD:R_1206_3216Metric,C17997,1206W4F4703T5E,UNI-ROYAL(Uniroyal 
 R5,470k,Resistor_SMD:R_1206_3216Metric,C17997,1206W4F4703T5E,UNI-ROYAL(Uniroyal Elec),extended,134282,0.0051,2026-11-17,equivalent,,"470 kΩ 1 % 1206 (mains divider, ~110 V per resistor)"
 R6,470k,Resistor_SMD:R_1206_3216Metric,C17997,1206W4F4703T5E,UNI-ROYAL(Uniroyal Elec),extended,134282,0.0051,2026-11-17,equivalent,,"470 kΩ 1 % 1206 (mains divider, ~110 V per resistor)"
 R7,10k,Resistor_SMD:R_0603_1608Metric,C25804,0603WAF1002T5E,UNI-ROYAL(Uniroyal Elec),basic,44852996,0.0019,2026-11-17,equivalent,,10 kΩ 1 % 0603
-R8,1.6R,Resistor_SMD:R_1206_3216Metric,C17897,1206W4F160KT5E,UNI-ROYAL(Uniroyal Elec),extended,8086,0.0076,2026-11-18,changed,,"1.6 Ohm 1 % 1206 (NR 1.5: Rcs 0.8 Ohm with R9, Ipk limit 1.0 A at VCS_N 0.8 V)"
-R9,1.6R,Resistor_SMD:R_1206_3216Metric,C17897,1206W4F160KT5E,UNI-ROYAL(Uniroyal Elec),extended,8086,0.0076,2026-11-18,changed,,1.6 Ohm 1 % 1206 (NR 1.5: Rcs 0.8 Ohm with R8)
+R8,1.37R,Resistor_SMD:R_1206_3216Metric,C3000600,FRC1206F1R37TS,FOJAN,extended,39395,0.0046,2026-11-19,changed,,"1.37 Ohm 1 % 1206 (NR 1.5: Rcs 0.685 Ohm with R9, current limit 1.04-1.30 A over VCS_N 0.72-0.88 V, EEL19_DESIGN.md 14)"
+R9,1.37R,Resistor_SMD:R_1206_3216Metric,C3000600,FRC1206F1R37TS,FOJAN,extended,39395,0.0046,2026-11-19,changed,,"1.37 Ohm 1 % 1206 (NR 1.5: Rcs 0.685 Ohm with R8, current limit 1.04-1.30 A over VCS_N 0.72-0.88 V, EEL19_DESIGN.md 14)"
 R10,1M,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C17514,0805W8F1004T5E,UNI-ROYAL(Uniroyal Elec),basic,1523445,0.0044,2026-11-17,equivalent,,"1 MΩ 1 % 0805 (dividers: <= 140 V per resistor, 0805 rated 150 V; R23/R34/R39 on 420V are at the limit)"
 R11,22k,Resistor_SMD:R_0603_1608Metric,C31850,0603WAF2202T5E,UNI-ROYAL(Uniroyal Elec),basic,2328671,0.0042,2026-11-17,equivalent,,22 kΩ 1 % 0603
 R12,4.7k,Resistor_SMD:R_0603_1608Metric,C23162,0603WAF4701T5E,UNI-ROYAL(Uniroyal Elec),basic,15102746,0.0028,2026-11-17,equivalent,,4.7 kΩ 1 % 0603
@@ -358,3 +358,8 @@ R149,220k,Resistor_SMD:R_1206_3216Metric,C17956,1206W4F2203T5E,UNI-ROYAL(Uniroya
 R150,220k,Resistor_SMD:R_1206_3216Metric,C17956,1206W4F2203T5E,UNI-ROYAL(Uniroyal Elec),extended,143771,0.0049,2026-11-18,exact,,"new: 220k 1 % 1206 200 V, split-cap balancing across C55 (2 in series, <= 105 V each) (NR 2.8)"
 C138,10n,Capacitor_SMD:C_0603_1608Metric,C57112,0603B103K500NT,FH (Guangdong Fenghua Advanced Tech),basic,5007218,0.0103,2026-11-18,exact,,new: PWM2 FB compensation C1 10 nF X7R 50 V (NR 1.5)
 C139,2.2n,Capacitor_SMD:C_0603_1608Metric,C1604,0603B222K500NT,FH (Guangdong Fenghua Advanced Tech),basic,864981,0.0109,2026-11-18,exact,,new: PWM2 FB HF pole C2 2.2 nF X7R 50 V (NR 1.5)
+R151,10M,Resistor_SMD:R_1206_3216Metric,C26119,1206W4F1005T5E,UNI-ROYAL(Uniroyal Elec),extended,146664,0.0056,2026-11-19,exact,,"new: 10 MOhm 1 % 1206 200 V, PWM2 line-OVP divider DC+ -> VIN (3 in series, <= 150 V each at 450 V) (NR 1.5)"
+R152,10M,Resistor_SMD:R_1206_3216Metric,C26119,1206W4F1005T5E,UNI-ROYAL(Uniroyal Elec),extended,146664,0.0056,2026-11-19,exact,,"new: 10 MOhm 1 % 1206 200 V, PWM2 line-OVP divider DC+ -> VIN (3 in series, <= 150 V each at 450 V) (NR 1.5)"
+R153,10M,Resistor_SMD:R_1206_3216Metric,C26119,1206W4F1005T5E,UNI-ROYAL(Uniroyal Elec),extended,146664,0.0056,2026-11-19,exact,,"new: 10 MOhm 1 % 1206 200 V, PWM2 line-OVP divider DC+ -> VIN (3 in series, <= 150 V each at 450 V) (NR 1.5)"
+R154,178k,Resistor_SMD:R_0603_1608Metric,C22823,0603WAF1783T5E,UNI-ROYAL(Uniroyal Elec),extended,5407,0.0026,2026-11-19,exact,,"new: 178k 1 % PWM2 VIN -> GND, LOVP trip 2.85 V x (30.178 / 0.178) = 483 V (NR 1.5)"
+C140,470p,Capacitor_SMD:C_0603_1608Metric,C1620,0603B471K500NT,FH (Guangdong Fenghua Advanced Tech),basic,823360,0.0045,2026-11-19,exact,,new: PWM2 VIN filter 470 pF X7R 50 V (NR 1.5)
