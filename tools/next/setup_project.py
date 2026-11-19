@@ -49,6 +49,7 @@ HV_NETS = {
         "Net-(R51-Pad2)", "Net-(R109-Pad1)", "Net-(R111-Pad1)",
         "Net-(R143-Pad2)", "Net-(R145-Pad2)",                     # C47 / C54 balancing mid nodes (NR 2.8)
         "Net-(R151-Pad2)", "Net-(R152-Pad2)",                     # PWM2 line-OVP divider DC+ -> VIN (NR 1.5)
+        "Net-(R155-Pad2)", "Net-(R157-Pad2)",                     # heater LLC resonance split-cap balancing mid nodes (NR 2.8)
     },
     "SECONDARY": {
         "420V", "/07 DHB/TRANS_SEC", "DHB_HI_SOURCE_SEC", "DHB_HI_GATE_SEC", "Net-(Q21-G)",

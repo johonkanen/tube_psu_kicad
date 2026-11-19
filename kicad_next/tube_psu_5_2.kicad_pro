@@ -684,6 +684,14 @@
       },
       {
         "netclass": "HV_PRIMARY",
+        "pattern": "Net-(R155-Pad2)"
+      },
+      {
+        "netclass": "HV_PRIMARY",
+        "pattern": "Net-(R157-Pad2)"
+      },
+      {
+        "netclass": "HV_PRIMARY",
         "pattern": "Net-(R4-Pad1)"
       },
       {

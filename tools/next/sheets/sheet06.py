@@ -83,6 +83,18 @@ sh.wire((xj, DCP), (xc20, DCP))
 _, ct, cb = vert2(sh, "C", "C20", xc20, DCP + g(3), sh_value("C20"), top=1)      # pin 1 = DC+
 sh.wire(cb, (xc20, HC), (XA, HC))
 sh.text("20n resonance cap, note X7R cap voltage bias (PDF note).", QX - g(14), HC + g(12))
+# 5.2: balancing resistors across the resonance split caps (user 2026-11-19, as R143-R150 on the DAB):
+# R155 + R156 across C49 || C42 (DC+ - HEATER_CAP_MEAS), R157 + R158 across C41 || C22 (HEATER_CAP_MEAS -
+# HEATER_CURRENT), 2 x 220k 1206 each = 100 V per resistor at a 400 V bus, 0.45 mA / 0.18 W in total.
+xb1, xb2, yb = g(28), g(34), g(88)
+_, rt, rb = vert2(sh, "R", "R155", xb1, yb + g(3), sh_value("R155"), top=1, text="left")    # pin 1 = DC+
+power_at(sh, "DC+", rt, "up")
+_, rt, rb = vert2(sh, "R", "R156", xb1, yb + g(9), sh_value("R156"), top=1, text="left")
+sh.wire(rb, (xb2, rb[1]))
+sh.label("HEATER_CAP_MEAS", xb2, rb[1], 0)
+_, rt, rb = vert2(sh, "R", "R157", xb2, yb + g(15), sh_value("R157"), top=1)                # pin 1 = HEATER_CAP_MEAS
+_, rt, rb = vert2(sh, "R", "R158", xb2, yb + g(21), sh_value("R158"), top=1)
+sh.glabel("HEATER_CURRENT", xb2, rb[1], 0)
 sh.text("E25 : 64/2/2, check primary turns! (PDF note). V5.1 (PDF hand note).", QX - g(14), HC + g(15))
 sh.text("TR2 centre taps (PDF: primary 'ct1' dangling, secondary wired to 6V3) have no footprint pad: not drawn.", QX - g(14), HC + g(18))
 

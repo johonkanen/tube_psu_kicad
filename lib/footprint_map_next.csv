@@ -361,4 +361,8 @@ R151,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, line-OV
 R152,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, line-OVP divider on DC+)"
 R153,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, line-OVP divider on DC+)"
 R154,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
+R155,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, split-cap balancing)"
+R156,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, split-cap balancing)"
+R157,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, split-cap balancing)"
+R158,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, split-cap balancing)"
 C140,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
