@@ -1581,7 +1581,7 @@ runs bound it from below. Controller 0.02 W, Ta 50 °C:
 | Rcs (R8 ‖ R9) | 2 × 1.6 Ω = 0.8 Ω | **2 × 1.37 Ω 1 % 1206 = 0.685 Ω** (current limit 1.04–1.30 A over VCS_N 0.72–0.88 V and ±1 %; ≈ 0.09 W at 100 V / 20 W) |
 | VIN pin (line OVP) | – (DIP-7 has none) | **divider DC+ → 3 × 10 MΩ 1206 (the start-up resistor part, 150 V each at 450 V) → VIN, 178 kΩ 1 % VIN → GND, 470 pF VIN → GND**: VVIN_LOVP 2.85 V (2.75–2.95) → trip **483 V** nominal (≈ 460–505 V with tolerances), 15 µA, 7 mW. Above the trip the IC stops switching (non-switch auto restart, 250 µs blanking). Alternative: **VIN to GND** (LOVP disabled) if the PFC's own OVP is trusted; VDS at a 505 V bus would be ≈ 660–670 V, still < 800 V |
 | clamp D7 / R72 / R45 / C12 | S1M, 100R, 1M ‖ 470p | unchanged (VDS 622–626 V at 450 V / 20 W, clamp ≈ 100 V above DC+); keep the 2 × 100k / 1 nF bench fallback |
-| start-up R114–R116 | 3 × 10 MΩ to GATE | unchanged; the datasheet characterises the start-up with 50 MΩ at VDRAIN = 90 V, so 30 MΩ still starts at 100 V (IVCC_Charge 1–5 mA from the drain through the cascode) |
+| start-up R114–R116 | 3 × 10 MΩ to GATE | **3 × 4.7 MΩ** (2026-11-19, section 15): starts from DC+ = 60 V |
 | VCC (R142 10R, D10, C58 22 µF) | from 15V | unchanged: VCC = 15V − 0.35 V over 100–450 V (the 15V rail does not depend on DC+), see 14.6 |
 | VERR / FB (R138 / R139, R140 / C138, C139, R141) | 88.7k / 49.9k, 4.7k + 10n, 2.2n, 750k | unchanged (14.7: loop and ABM option 2 checked at 100 and 450 V) |
 | TR1 | 600 µH, S15 2 × TEX-E 0.30, S5 / SN5 3 × 0.30, A5 8 × AWG30, A15 3 × AWG30 | same turns, **same Lp 600 µH** and gap; TEX-E 0.20 for every isolated winding, AWG32 for every enamel winding (14.4); footprint and slot unchanged |
@@ -1613,3 +1613,42 @@ Candidate names: `eel19w_n<turns per half>_l<Lp µH>_a<AWG>[_t]` (`options.eel19
 on the fly). `_t` = thin strands. The ICE5AR0680AG variant of an option: `options._ice0680(base,
 name, rcs)`, which adds ice5ar_sim overrides RDS(on) 1.27 Ω and Co(er) 24 pF, the Rcs and the wide
 cases. The ICE5AR4780BZS results of section 13 and their netlists are unchanged.
+
+## 15. Bench start-up from a 60 V lab supply (2026-11-19)
+
+Goal: the board starts and runs from a ≤ 60 V lab supply on DC+, so that the control card and the
+boost converter can be brought up before the HV bus is applied. The measured aux load in this state
+is ≈ 2 W (5.1 with the iW1818 starts at ≈ 90 V).
+
+**Start-up path (ICE5AR0680AG datasheet 3.1).** There is no brown-in: VIN only senses line OVP
+(VVIN_LOVP 2.85 V, disabled with VIN at GND). R114–R116 only charge the CoolMOS Ciss; once the
+gate is high enough the CoolMOS conducts and the IC charges the VCC capacitor from the drain through
+Lp with IVCC_Charge1 (0.09–0.35 mA, to VCC_SCP) and IVCC_Charge3 (1–5 mA, to VVCC_ON 16 V). The
+drain only has to be above ≈ VVCC_ON + Vth ≈ 20 V. The resistor current is the only datasheet
+reference: start-up is characterised at RStartUp 50 MΩ and VDRAIN 90 V, ≈ (90 − 20) / 50 MΩ = 1.4 µA.
+
+| start-up chain | gate current at DC+ = 60 V | at 450 V | dissipation at 450 V |
+|---|---|---|---|
+| 3 × 10 MΩ (sections 13–14) | 1.3 µA (= the datasheet point, no margin) | 14 µA | 6.8 mW |
+| **3 × 4.7 MΩ (chosen)** | **2.8 µA (2 × the datasheet point)** | 30 µA | 14 mW (4.8 mW each, ≤ 150 V each) |
+
+R114–R116 → 4.7M 1206 200 V, JLC C37800 (1206W4F4704T5E, extended). VCC pre-charge time with C58
+22 µF is ≈ 0.1–0.35 s and does not depend on DC+.
+
+**Regulation at low DC+.** DMAX 0.70–0.80; with Vor 97 V the CCM duty reaches 0.70 at DC+ ≈ 42 V,
+so the converter regulates well below 60 V (lower still in DCM at light load).
+
+**Simulation (eel19_wide600_0680, ICE5AR model, cases idle60 / nom60 / full15_60 / full15_60_csmin
+in run_flyback.py, checks startup60 / startup60_idle_csmin in ice5ar_checks.py):**
+
+| case at DC+ = 60 V | Pin | 15V | 5V | 15V_ISO_SEC | 5V_ISOL | −80 V | f |
+|---|---|---|---|---|---|---|---|
+| board idle | 1.37 W | 14.94 | 5.00 | 15.55 | 5.21 | 82.9 | 43 kHz |
+| nominal | 6.50 W | 14.70 | 5.00 | 15.05 | 4.96 | 83.0 | 43 kHz |
+| 15 W | 17.39 W | 14.74 | 5.00 | 15.10 | 4.96 | 83.5 | 94 kHz |
+| 15 W, VCS_N min 0.72 V | 17.42 W | 14.74 | 5.00 | 15.10 | 4.96 | 83.5 | 94 kHz |
+
+Start-up from VCC_ON (real capacitors): nominal load: rails at 95 % in 15.6–16.5 ms, FB above the
+OLP level for 16.9 ms (< 30 ms minimum blanking), VCC min 14.5 V. Board idle at VCS_N min: 15.8 ms,
+VCC min 14.7 V. VDS ≈ 185–217 V. So the 2 W bench load (and anything up to ≈ 15 W) starts and
+regulates from 60 V.

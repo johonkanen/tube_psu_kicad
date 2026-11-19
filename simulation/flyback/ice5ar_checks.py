@@ -53,6 +53,10 @@ CHECKS = {
     "startup100_full15_csmin": dict(case="full15_100", tstop=70e-3, twin=5e-3, startup=True, save_step=0.5e-6,
                                     ice={"vcs_n": 0.72}),
     "startup450_full20": dict(case="full20_450", tstop=60e-3, twin=5e-3, startup=True, save_step=0.5e-6),
+    # bench start-up from a 60 V lab supply (EEL19_DESIGN.md 15)
+    "startup60": dict(case="nom60", tstop=60e-3, twin=5e-3, startup=True, save_step=0.5e-6),
+    "startup60_idle_csmin": dict(case="idle60", tstop=60e-3, twin=5e-3, startup=True, save_step=0.5e-6,
+                                 ice={"vcs_n": 0.72}),
     "ccm100": dict(case="full20_100", tstop=30e-3, twin=2e-3, ipk_wave=True),
     "ccm200": dict(case="full20_200", tstop=30e-3, twin=2e-3, ipk_wave=True),
     "light_lean": dict(case="light", tstop=80e-3, twin=40e-3, t_beb=3e-3, save_step=0.5e-6),

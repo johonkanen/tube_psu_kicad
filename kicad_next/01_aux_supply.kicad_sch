@@ -4913,8 +4913,8 @@
 				)
 			)
 		)
-		(property "Value" "10M"
-			(at 75.31 135.89 0)
+		(property "Value" "4.7M"
+			(at 75.86 135.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4948,7 +4948,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C26119"
+		(property "LCSC" "C37800"
 			(at 71.12 134.62 0)
 			(effects
 				(font
@@ -4999,8 +4999,8 @@
 				)
 			)
 		)
-		(property "Value" "10M"
-			(at 75.31 125.73 0)
+		(property "Value" "4.7M"
+			(at 75.86 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5034,7 +5034,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C26119"
+		(property "LCSC" "C37800"
 			(at 71.12 124.46 0)
 			(effects
 				(font
@@ -5085,8 +5085,8 @@
 				)
 			)
 		)
-		(property "Value" "10M"
-			(at 75.31 115.57 0)
+		(property "Value" "4.7M"
+			(at 75.86 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5120,7 +5120,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C26119"
+		(property "LCSC" "C37800"
 			(at 71.12 114.3 0)
 			(effects
 				(font
@@ -6981,7 +6981,7 @@
 		)
 		(uuid "595540e7-b904-5878-a63d-19cc564b7e21")
 	)
-	(text "Rcs R8 || R9 = 0.8R (Ipk limit 1.0 A at VCS_N 0.8 V); start-up 3 x 10M from DC+ to GATE; VCC 14-15 V from 15V via R142 / D10."
+	(text "Rcs R8 || R9 = 0.8R (Ipk limit 1.0 A at VCS_N 0.8 V); start-up 3 x 4.7M from DC+ to GATE (starts from 60 V); VCC 14-15 V from 15V via R142 / D10."
 		(exclude_from_sim no)
 		(at 20.32 189.23 0)
 		(effects

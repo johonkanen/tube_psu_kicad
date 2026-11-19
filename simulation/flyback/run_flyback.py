@@ -90,6 +90,13 @@ WIDE_CASES = [
      "title": "full20_100 with a 2 ns gate RC"},
     {"name": "full20_450_fast", "loads": dict(FULL20), "vin": 450.0, "ice": {"tgate": 2e-9},
      "title": "full20_450 with a 2 ns gate RC"},
+    # bench test from a 60 V lab supply on DC+ (EEL19_DESIGN.md 15)
+    {"name": "idle60", "loads": {**{r: 0.0 for r in NOM}, "5V": 0.05, "20V_ISO_SEC": 0.002, "5V_ISOL": 0.005},
+     "vin": 60.0, "title": "board idle at DC+ = 60 V (lab supply)"},
+    {"name": "nom60", "loads": dict(NOM), "vin": 60.0, "title": "nominal at DC+ = 60 V (lab supply)"},
+    {"name": "full15_60", "loads": dict(FULL15), "vin": 60.0, "title": "15 W at DC+ = 60 V"},
+    {"name": "full15_60_csmin", "loads": dict(FULL15), "vin": 60.0, "ice": {"vcs_n": 0.72},
+     "title": "15 W at 60 V with the minimum current limit VCS_N 0.72 V"},
 ]
 
 

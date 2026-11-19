@@ -96,7 +96,7 @@ power_at(sh, "DC+", rt, "up")
 _, ct, cb = vert2(sh, "C", "C15", g(100), g(91), sh_value("C15"), top=2)           # pin 2 = DC+
 power_at(sh, "DC+", ct, "up")
 power_at(sh, "GND", cb, "down")
-# GATE: cascode start-up chain R114 / R115 / R116 (3 x 10M 1206) from DC+
+# GATE: cascode start-up chain R114 / R115 / R116 (3 x 4.7M 1206) from DC+ (starts from 60 V)
 xg = PX - g(14)
 sh.wire(GATE, (xg, GATE[1]))
 prev = (xg, GATE[1])
@@ -151,7 +151,7 @@ _, rt2, rb2 = vert2(sh, "R", "R139", xd, VERR[1] + g(3), sh_value("R139"), top=1
 power_at(sh, "GND", rb2, "down")
 sh.junction(xd, VERR[1])
 sh.text("PWM2 ICE5AR4780BZS (NR 1.5): 5V = 1.80 V x (1 + R138 / R139) = 5.00 V; RSel R141 750k = ABM option 2 (entry VFB 0.93 V, VCS 0.22 V);", g(16), g(146))
-sh.text("Rcs R8 || R9 = 0.8R (Ipk limit 1.0 A at VCS_N 0.8 V); start-up 3 x 10M from DC+ to GATE; VCC 14-15 V from 15V via R142 / D10.", g(16), g(149))
+sh.text("Rcs R8 || R9 = 0.8R (Ipk limit 1.0 A at VCS_N 0.8 V); start-up 3 x 4.7M from DC+ to GATE (starts from 60 V); VCC 14-15 V from 15V via R142 / D10.", g(16), g(149))
 sh.text("Layout: DRAIN pin 5 copper area for cooling (HV_PRIMARY, FLY_C); VERR / FB parts close to pins 1 / 2, Rcs return to pin 8.", g(16), g(152))
 
 # --- secondary rectifier groups, fanned out on separate rows (nested columns, no crossings) ------
