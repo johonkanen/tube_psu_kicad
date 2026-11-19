@@ -270,6 +270,8 @@ def main():
                  cy, cy_base, cy_new, changed_coll, changed_coll_new, geo)
     if os.path.exists(os.path.join(D, "placement_p1.json")) and os.path.exists(os.path.join(D, "drc_p1.json")):
         write_p1(build, drc, base)
+    if os.path.exists(os.path.join(D, "placement_p2.json")) and os.path.exists(os.path.join(D, "drc_p2.json")):
+        write_p2()
 
 
 # ------------------------------------------------------------------------------------------- drawing
@@ -1044,6 +1046,255 @@ split caps, the moved gate-drive groups' outside connections – 58 copper items
 Q21 / Q8, under the transformer – check the EC42 stray field at the driver, or move DRV6 + its parts into the
 row once the TO row is regrouped); (5) the 5.1 F.Cu pours around the old C16 / C55 / TR3 area still follow the
 old shapes and must be redrawn for the new pins.
+"""
+
+# ------------------------------------------------------------------------------------------- placement step 2
+P2_AREAS = {   # name: (title, refs that span the zoom box, margin)
+    "uart_island": ("UART island J4 / U11 / U12 (top edge)", ["U11", "J4", "C47", "U12", "C137", "H2"], 9.0),
+    "to_row_slot": ("TO row Q19 / Q21 slot", ["Q7", "Q19", "Q21", "Q8", "ISO2"], 4.0),
+    "iso2_tr1": ("ISO2, D4 / D5, TR1, PWM2, C102", ["ISO2", "TR1", "PWM2", "C102", "D4", "R8", "R72"], 3.0),
+    "drv5_drv6": ("DRV5 / DRV6 gate drive (bottom)", ["DRV5", "DRV6", "C95", "C92", "C46", "C93", "C94"], 4.0),
+    "drv3_drv4": ("DRV3 / DRV4 (heater)", ["DRV3", "DRV4", "C18", "C25", "D11", "R99", "C53", "R63", "C17", "Q1"], 4.0),
+}
+P2_COL = {"PRI-SEC": "#ff0000", "HEATER-PRI": "#00a000", "PRI-UART": "#0050ff", "SEC-UART": "#8000ff",
+          "HEATER-SEC": "#ff8000", "PE-PRI": "#00b0b0", "PE-SEC": "#00b0b0"}
+
+
+def area_iso(drc, box, dom):
+    c = collections.Counter()
+    for i in iso_points(drc, dom):
+        if i["cross"] and box[0] <= i["x"] <= box[2] and box[1] <= i["y"] <= box[3]:
+            c[i["pair"]] += 1
+    return c
+
+
+def cy_pairs_in(drc, refs):
+    out = set()
+    for v in drc["violations"]:
+        if v["type"] == "courtyards_overlap":
+            p = frozenset(item_ref(i) for i in v["items"])
+            if p & set(refs):
+                out.add(p)
+    return out
+
+
+def shorts_of(drc, refs):
+    out = set()
+    for v in drc["violations"]:
+        if v["type"] in ("shorting_items", "solder_mask_bridge"):
+            rr = [item_ref(i) for i in v["items"]]
+            if set(rr) & set(refs):
+                out.add((v["type"], "/".join(sorted(r or "?" for r in rr))))
+    return out
+
+
+def write_p2():
+    dom, _ = net_domains()
+    p1, drc1 = load("placement_p1.json"), load("drc_p1.json")
+    p2, drc2 = load("placement_p2.json"), load("drc_p2.json")
+    g1, g2 = p1["geometry"], p2["geometry"]
+    s1, s2 = summary(drc1, g1, dom), summary(drc2, g2, dom)
+    moved = sorted(set(p2["place"]) | {r for v in p2["groups"].values() for r in v["refs"]})
+    iso2 = iso_points(drc2, dom)
+    cy_new = {frozenset(p) for p in s2["courtyard_pairs"]} - {frozenset(p) for p in s1["courtyard_pairs"]}
+    for f in os.listdir(D):
+        if f.startswith("zoom_p2_") and f.endswith(".png"):
+            os.remove(os.path.join(D, f))
+    boxes = {}
+    for name, (title, refs, margin) in P2_AREAS.items():
+        bx = refs_box(g2, refs, margin)
+        boxes[name] = bx
+        fig, ax = base_axes(g2, f"step 2 – {title}",
+                            figsize=(12, 12 * (bx[3] - bx[1]) / (bx[2] - bx[0]) + 0.6), box=bx)
+        draw_copper(ax, g2, dom, alpha=0.5)
+        draw_fps(ax, g2, dom, highlight=set(moved),
+                 label_set={r for r, fp in g2["fps"].items() if bx[0] < fp["x"] < bx[2] and bx[1] < fp["y"] < bx[3]}, fs=6)
+        for d in p2["deleted_items"]:
+            for x, y in d["pts"]:
+                if bx[0] < x < bx[2] and bx[1] < y < bx[3]:
+                    ax.plot(x, y, "+", ms=4, color="#606060", mew=0.6)
+        for sl in p2["slots"].values():
+            ax.add_patch(Polygon(sl["poly"], closed=True, fc="#000000", ec="#000000"))
+        for k in p2["keepouts"].values():
+            ax.add_patch(plt.Rectangle((k["x0"], k["y0"]), k["x1"] - k["x0"], k["y1"] - k["y0"], fill=False, ec="#00a0c0",
+                                       ls="--", lw=1.2))
+        for i in iso2:
+            if i["cross"] and bx[0] < i["x"] < bx[2] and bx[1] < i["y"] < bx[3]:
+                ax.plot(i["x"], i["y"], marker="x" if i["type"] != "creepage" else "o", ms=7, mfc="none",
+                        color=P2_COL.get(i["pair"], "#000"), mew=1.2)
+        for v in drc2["violations"]:
+            if v["type"] == "courtyards_overlap" and frozenset(item_ref(i) for i in v["items"]) in cy_new:
+                a, b = v["items"][0]["pos"], v["items"][1]["pos"]
+                ax.plot([(a["x"] + b["x"]) / 2], [(a["y"] + b["y"]) / 2], "s", ms=8, mfc="none", color="#0050ff")
+        if "TR3" in g2["fps"]:   # TR3 barrier band (x -7 ... +5 about the core centre, over the TR3 courtyard)
+            t = g2["fps"]["TR3"]
+            ax.add_patch(plt.Rectangle((t["x"] - 7.0, t["y"] - 21.5), 12.0, 43.0, fc="#00a0a0", ec="none", alpha=0.08))
+        fig.tight_layout()
+        fig.savefig(os.path.join(D, f"zoom_p2_{name}.png"), dpi=120)
+        plt.close(fig)
+
+    L = []
+    w = L.append
+    w("")
+    w("## After placement step 2")
+    w("")
+    w("Applied by `tools/p2k/bin/kipy tools/next/trial_placement_p2.py` (moves as data: `PLACE`, `AUTO` = two-pad parts "
+      "placed by centre / axis with the orientation that puts each pad next to its pin, `GROUPS`, `SLOTS`, the UART "
+      "pour keep-out) on the step-1 board → `tube_psu_5_2_trial_p2.kicad_pcb`, DRC `drc_p2.json` (same split passes: "
+      + ", ".join(f"{k} {v}" for k, v in drc2.get("passes", {}).items()) + "), `placement_p2.json` (moves, slot, "
+      "keep-out and every deleted track / via with net, layer and end points, so the routing can redo it). Nothing "
+      "is routed.")
+    w("")
+    w("**Moves**")
+    w("")
+    rows = [[r, d["side"], f"{d['old'][0]}, {d['old'][1]} / {d['old'][2]:g}°", f"{d['new'][0]}, {d['new'][1]} / {d['new'][2]:g}°"]
+            for r, d in sorted(p2["place"].items())]
+    for gname, d in p2["groups"].items():
+        rows.append([gname + ": " + ", ".join(d["refs"]), "–", "–", f"shift {d['dx']:+g}, {d['dy']:+g} mm "
+                     f"({d['tracks_moved']} copper items moved along)"])
+    w(table(rows, ["part / group", "side", "step 1 (x, y / rot)", "step 2"]))
+    w("")
+    for name, sl in p2["slots"].items():
+        w(f"**Slot** {name}: Edge.Cuts polygon {', '.join(f'({x:.2f}, {y:.2f})' for x, y in sl['poly'])} "
+          f"({sl['width']} mm wide; legs " + ", ".join(f"x {r[0]:.2f} … {r[2]:.2f} / y {r[1]:.2f} … {r[3]:.2f}" for r in sl["rects"]) + ").")
+    for name, k in p2["keepouts"].items():
+        w(f"**Keep-out** {name}: rule area x {k['x0']:.1f} … {k['x1']:.1f}, y {k['y0']:.1f} … {k['y1']:.1f}, {k['layers']}, "
+          f"{k['what']}.")
+    w(f"**Pads without unused inner-layer rings:** {', '.join(p2['pads_inner_removed'])} (KiCad 'remove unconnected "
+      "layers, keep start / end').")
+    w("")
+    dl = p2["deleted"]
+    w(f"**Copper deleted by step 2:** {sum(dl.values())} items ({', '.join(f'{k} {v}' for k, v in sorted(dl.items()))}); "
+      f"by part: {', '.join(f'{k} {v}' for k, v in p2['deleted_by_ref'].items())}. Nets of the deleted copper (to re-route): "
+      + ", ".join(f"{n} {c}" for n, c in collections.Counter(d["net"] for d in p2["deleted_items"]).most_common(25)) + ".")
+    w("")
+    w("### DRC delta step 1 → step 2")
+    w("")
+    keys = sorted(set(s1["types"]) | set(s2["types"]), key=lambda k: -max(s1["types"].get(k, 0), s2["types"].get(k, 0)))
+    rows = [[k, s1["types"].get(k, 0), s2["types"].get(k, 0), f"{s2['types'].get(k, 0) - s1['types'].get(k, 0):+d}"] for k in keys]
+    a, b = sum(s1["iso"].values()), sum(s2["iso"].values())
+    rows.append(["**isolation, between two domains (on the board)**", a, b, f"{b - a:+d}"])
+    for pr in sorted(set(s1["iso"]) | set(s2["iso"])):
+        a, b = s1["iso"].get(pr, 0), s2["iso"].get(pr, 0)
+        rows.append([f"  {pr}", a, b, f"{b - a:+d}"])
+    a, b = s1["unconnected"], s2["unconnected"]
+    rows.append(["**unconnected items**", a, b, f"{b - a:+d}"])
+    w(table(rows, ["type", "step 1", "step 2", "delta"]))
+    w("")
+    c1 = {frozenset(p) for p in s1["courtyard_pairs"]}
+    c2 = {frozenset(p) for p in s2["courtyard_pairs"]}
+    gone = sorted("/".join(sorted(p)) for p in c1 - c2)
+    new = sorted("/".join(sorted(p)) for p in c2 - c1)
+    w(f"Courtyard-overlap pairs: step 1 {len(c1)}, step 2 {len(c2)}; resolved ({len(gone)}): {', '.join(gone) or '–'}; "
+      f"new ({len(new)}): {', '.join(new) or '–'}.")
+    w("")
+    w("### Per area (step 1 → step 2)")
+    w("")
+    rows = []
+    for name, (title, refs, margin) in P2_AREAS.items():
+        bx = boxes[name]
+        i1, i2 = area_iso(drc1, bx, dom), area_iso(drc2, bx, dom)
+        v1, n1 = area_violations(drc1, bx)
+        v2, n2 = area_violations(drc2, bx)
+        prs = sorted(set(i1) | set(i2))
+        area_refs = [r for r, fp in g2["fps"].items() if bx[0] < fp["x"] < bx[2] and bx[1] < fp["y"] < bx[3]]
+        cyA, cyB = cy_pairs_in(drc1, area_refs), cy_pairs_in(drc2, area_refs)
+        shA, shB = shorts_of(drc1, area_refs), shorts_of(drc2, area_refs)
+        rows.append([title, f"x {bx[0]:.0f} … {bx[2]:.0f}, y {bx[1]:.0f} … {bx[3]:.0f}",
+                     ", ".join(f"{p} {i1.get(p, 0)} → {i2.get(p, 0)}" for p in prs) or "–",
+                     f"{len(cyA)} → {len(cyB)}", f"{sum(1 for t, _ in shA if t == 'shorting_items')} → "
+                     f"{sum(1 for t, _ in shB if t == 'shorting_items')}",
+                     f"{v1.get('clearance', 0)} → {v2.get('clearance', 0)}", f"{v1.get('creepage', 0)} → {v2.get('creepage', 0)}",
+                     f"{n1} → {n2}"])
+    w(table(rows, ["area", "box (mm)", "isolation violations by domain pair", "courtyard pairs", "shorts",
+                   "clearance (all)", "creepage (all)", "unconnected"]))
+    w("")
+    w("Zooms: copper by domain (red primary, orange secondary, green heater, blue UART), courtyards (magenta = moved by "
+      "step 2, dashed = bottom side), cross-domain isolation violations (x clearance / o creepage, coloured by pair), blue "
+      "squares = courtyard overlaps new vs step 1, black = new slot, cyan dashed = pour keep-outs, grey + = end points of "
+      "deleted copper, light band = TR3 barrier band.")
+    w("")
+    for name, (title, _, _) in P2_AREAS.items():
+        w(f"![{title}](zoom_p2_{name}.png)")
+        w("")
+    w(P2_NOTES)
+    with open(os.path.join(D, "REPORT.md"), "a") as f:
+        f.write("\n".join(L) + "\n")
+    print("trial_report: appended 'After placement step 2'")
+
+
+P2_NOTES = """### Notes on step 2
+
+Written after reviewing the step-2 numbers (2026-11-19); the tables above are regenerated, this text is not.
+
+**1. UART island – top edge, x −6 … 14, next to H2.** Candidates checked: (a) the old J4 place (x 49 … 61, y −30)
+is not at an edge – it lies inside the heatsink L next to the control card on J2, the 5.1 cable ran over the board;
+(b) the bottom edge next to J2's end (x 25 … 40), closest to the UART signals (TX / RX = J2 pins 26 / 24 at
+x 34.4, y −7 / −8): C29 (DC+ electrolytic) and the DC+ start-up chain R114 … R116 are 16 mm apart, so after 8 mm
+on each side nothing is left, and the AC-measurement amplifier U8 group sits there; (c) the bottom edge left of L1:
+mains input filter; (d) the right edge: secondary outputs (8.4 mm SEC-UART, and U11's primary side cannot reach
+primary copper there); (e) the top-left edge: heater island parts. The old L3 area left of TR3 was freed by step 1;
+it is outside the heatsink L (in the photo the board's right edge, open), so the cable reaches the edge, and the
+only neighbours are primary: Q10 / C22 / C42 / C49 on the left – faced by U11's primary pins 1–8, with the U11
+8 mm slot between – and C47 / C54 on the right (C47 / C54 0.55 mm closer to the TR3 pins, J4 8.1 mm from them).
+J4 stands at the top edge (pin 1 ISO_UART_GND at y −89, 2.4 mm from the edge) right of H2, U12 / C135–C137 /
+R136 / R137 between U11 and J4 below H2's screw head (Ø 5.5 mm). The bottom-side U1 current-measurement amplifier
+(12 parts + C87 on top) moved 8 mm down with its own copper (12 In4 segments of EPWM5A / EPWM6A / +3V3 /
+HEATER_CURRENT / DHB_CURRENT it landed on were deleted). Primary copper within 8 mm of an island pad: 6
+segments deleted; pour keep-out over the island + 8 mm on all six layers (no solid-insulation overlap either).
+Cost: TX / RX run about 80 mm from J2 to U11's primary pins (In2 / In3 routing). PRI-UART 259 → 0.
+
+**2. Q19 / Q21 – L-slot.** The heatsink footprint (`gen_next_footprints.py` `heatsink()`) is only an outline
+helper (plate 120 × 3 mm on the tab side, keep-off lines, no pads / holes): the 5.1 board has no bracket holes,
+the plate is held by the TO screws, and its hole pattern is the TO-row pitch (Q7 / Q19 / Q21 / Q8 at x 36.9 /
+48.2 / 59.8 / 71.4), so the TO parts stay. The tabs face +y; the plate face is at y −38.8. A 1.2 mm milled slot
+fits without touching the plate: vertical leg at x 51.4 (between Q19 pin 1 and Q21 pin 3, pad edges 1.8 mm away,
+inside the TR3 barrier band x 42.5 … 54.5) from y −62 (under TR3, where the band forbids copper anyway) down to
+the pins, then a horizontal leg in front of the plate face under the Q21 / Q8 pins (0.55 mm from their pads) to
+x 68.6, past the top of the ISO2 slot (2.85 mm bridge). Outer-layer creepage Q19 ↔ Q21 now goes round the slot
+(≥ 16 mm), and the ISO2 primary pins 1 / 2 (+3V3 / EPWM2A, 9.6 mm from the Q21 gate before) see Q21 / Q8 only
+round the slot end. Five inner-layer secondary / primary items within 11.1 mm of the Q19 / Q21 barrels were
+deleted, the Q19 / Q21 pads lost their unused inner rings. **Remaining (24 of the 26 PRI-SEC items): KiCad
+checks the plated barrels themselves on the inner layers** (Q19 pin 1 ↔ Q21 pin 1 10.5 mm, pin 1 ↔ pin 3 5.4 mm
+hole edge to hole edge) and the DRU gives no slot credit there. The slot does cut the laminate between the
+barrels (the through-laminate path goes round the slot ends like the surface path), so this needs a decision:
+(a) a DRU exception for barrels separated by a through-board slot (as for TR1's barrier pads, but with the slot
+argued as the barrier), or (b) 5.7 mm more pitch between Q19 and Q21 – a new plate hole pattern, which the fixed
+plate does not allow.
+
+**3. ISO2 / D4 / D5.** ISO2 stays: its slot already sits on the barrier line between TR1's slot and the TO row,
+and the L-slot now closes its top end. D4 (secondary 15V_ISO_SEC rectifier) moved out of the ISO2 slot to the
+right of ISO2 (x 76.8, y −19.2, cathode next to C2 / P15V_OUT), C2 / C3 0.6 mm right; D5 (primary 15 V) stays
+left of the barrier, 1 mm up for 11.1 mm to TR1 pin 10 through the 2.5 mm gap between the ISO2 and TR1 slots.
+The 5.1 F.Cu pours that bridged that gap (TR1-A15, TR1-S15, 15V, 15V_ISO_SEC) and the B.Cu GND / ISO_GND pours at
+the slot bridge are held off by pour keep-outs; 9 In4 items of the 5.1 ISO2 routing inside an 11.1 mm inner band
+on the ISO2 slot line were deleted. Area: PRI-SEC 58 → 2 (the 2 are TR1 pin 2 GND ↔ pin 9 ISO_GND barrels
+on the inner layers, already on step 1: the TR1 footprint keeps pin 2's inner ring where a GND pour connects –
+keep In1 / In4 GND off pin 2 when routing).
+
+**4. TR1 / PWM2 / flyback.** TR1 stays at its 5.1 origin and is free (no courtyard overlap, no part under its
+pins: D6 moved 1.5 mm left off pin 2). PWM2 4.7 mm left (its courtyard ends at TR1's), drain pins 5–8 at the
+left end (x 45.4 … 46.6) facing away from the TR1 slot and the FB / VERR pins; CS resistors R8 / R9 above it,
+VCC caps C58 / C51 (bottom) right of the drain end, clamp D7 / R72 left of the FLY_C fly lead. Drain copper room
+as placed: F.Cu x 41 … 46 between R114–R116 and the drain pins plus a strip along y 8 … 10.5 to D7 / TR1 pin 12,
+about 0.8 cm² per outer layer, i.e. **≈ 1.5 cm² F + B – short of the 2–3 cm² of NEXT_REVISION_PLAN phase 5 (8)**:
+gain it by moving the start-up chain R114–R116 1–2 mm left or C58 off the drain end on B.Cu when routing. The
+secondary parts right of TR1 moved 0.4 / 1.4 mm right, C102 1.85 mm right (pad 1 13.2 mm from the DC+ fly
+lead, barrel to barrel ≥ 11.1 mm); 3 secondary segments within 11.1 mm of the fly leads deleted and the pours
+at the TR1 slot end held off.
+
+**5. Gate drivers.** All bootstrap / decoupling parts sit outside the SOIC bodies next to their pins (orientation
+picked per part so that each pad faces its pin): DRV5 C94 left of pins 3 / 4, C95 below pins 14 / 16, C92 above
+pins 9 / 11; DRV6 C46 / R46 above pins 14 / 16 (C46 just right of the TR3 band), C93 below pin 8 (VCCI); DRV3
+C25 / R99 / D11 / R78 right of the package (pins 16 / 14 / 1), C18 above pins 9 / 11, C53 below pins 3 / 4;
+DRV4 turned 90° between C32 and Q1 (pins 5–8 on top: OUTA towards the Q1 gate, VDD), R63 / C17 above it. The
+DRV-area shorts 23 → 0, mask bridges 22 → 0, courtyard pairs with the drivers resolved (no new pair on the board).
+
+**Remaining after step 2** (beyond the routing itself, unconnected 303 → 346, dangling 78 → 110): the Q19 / Q21
+barrel decision (24); TR1 pin 2 / 9 inner barrels (2); HEATER-PRI 36 at ISO1 / TR2 and PE-PRI 22 at the PFC
+Y caps / RL1 (not in this step); PWM2 drain area (above); C2 / R123 courtyard touch 0.76 mm² (5.1 pair, was
+0.55); 17 silk-to-edge warnings at the new slot / U11 / J4 (reference texts to move); `lib_footprint_mismatch`
+Q19 / Q21 (board pads without unused inner rings – put it in a footprint copy if kept).
 """
 
 if __name__ == "__main__":
