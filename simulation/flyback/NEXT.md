@@ -324,5 +324,5 @@ run_flyback.py processes on top of the pool). Cached results: `out/results/<opti
 NEXT_REVISION.md 1.13. SN5 becomes ≈ 16 T (like S15) instead of 6 T: new option derived from
 eel19_wide600_0680 with SN5 16 T (TEX-E), check the 4+6 window fill and the S5/SN5/ISO_GND pin
 pairing, rerun the wide cases + 60 V cases for cross regulation and losses, then change the
-schematic (C40 ≥ 25 V, R123, rename -5V_SEC → -15V_SEC, N5V_OUT → N15V_OUT). The −15 V load
-current is still to be given by the user.
+schematic (C40 ≥ 25 V, R123, rename -5V_SEC → -15V_SEC, N5V_OUT → N15V_OUT). Load (user):
+≤ 50 mA max, normally only JFET-gate / op-amp leakage (check the bleeder-only rise).
