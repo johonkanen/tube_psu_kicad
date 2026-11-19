@@ -1260,7 +1260,13 @@ hole edge to hole edge) and the DRU gives no slot credit there. The slot does cu
 barrels (the through-laminate path goes round the slot ends like the surface path), so this needs a decision:
 (a) a DRU exception for barrels separated by a through-board slot (as for TR1's barrier pads, but with the slot
 argued as the barrier), or (b) 5.7 mm more pitch between Q19 and Q21 – a new plate hole pattern, which the fixed
-plate does not allow.
+plate does not allow. **User decision 2026-11-19: (a).** `tube_psu_5_2.kicad_dru` rule "PRI-SEC inner layers,
+Q19/Q21 across the barrier slot": inner-layer clearance / hole clearance 4.0 mm (reinforced air clearance across
+the slot) for Q19 ↔ Q21 pairs only; the laminate path round the slot ends has the same plan geometry as the
+outer surface path that the 11.1 mm creepage rule checks (with the larger outer pads), and that check passes.
+DRC re-run with the rule: Q19 ↔ Q21 24 → 0 (PRI-SEC 26 → 2, the TR1 pin 2 / 9 barrels). The re-run's
+creepage pass also reported 2 old 5.1 B.Cu tracks at mounting holes (H4 ↔ 15V 2.2 mm of 3.2, H5 ↔
+CUK_CAP_MEAS- 3.45 mm of 4.2) that the first run had not listed – unrelated to the rule, fixed when routing.
 
 **3. ISO2 / D4 / D5.** ISO2 stays: its slot already sits on the barrier line between TR1's slot and the TO row,
 and the L-slot now closes its top end. D4 (secondary 15V_ISO_SEC rectifier) moved out of the ISO2 slot to the
@@ -1291,7 +1297,7 @@ DRV4 turned 90° between C32 and Q1 (pins 5–8 on top: OUTA towards the Q1 gate
 DRV-area shorts 23 → 0, mask bridges 22 → 0, courtyard pairs with the drivers resolved (no new pair on the board).
 
 **Remaining after step 2** (beyond the routing itself, unconnected 303 → 346, dangling 78 → 110): the Q19 / Q21
-barrel decision (24); TR1 pin 2 / 9 inner barrels (2); HEATER-PRI 36 at ISO1 / TR2 and PE-PRI 22 at the PFC
+barrels (24) are resolved by decision (a) above; TR1 pin 2 / 9 inner barrels (2); HEATER-PRI 36 at ISO1 / TR2 and PE-PRI 22 at the PFC
 Y caps / RL1 (not in this step); PWM2 drain area (above); C2 / R123 courtyard touch 0.76 mm² (5.1 pair, was
 0.55); 17 silk-to-edge warnings at the new slot / U11 / J4 (reference texts to move); `lib_footprint_mismatch`
 Q19 / Q21 (board pads without unused inner rings – put it in a footprint copy if kept).

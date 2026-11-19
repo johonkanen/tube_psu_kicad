@@ -400,9 +400,9 @@ Copper deleted by step 1: 58 items (segment: touches old pad of moved part 26, s
 | nonmirrored_text_on_back_layer | 10 | 10 | 10 | +0 |
 | silk_edge_clearance | 7 | 6 | 6 | -1 |
 | isolated_copper | 1 | 1 | 7 | +6 |
-| npth_inside_courtyard | 2 | 0 | 0 | -2 |
-| items_not_allowed | 2 | 2 | 0 | -2 |
 | copper_edge_clearance | 2 | 1 | 1 | -1 |
+| items_not_allowed | 2 | 2 | 0 | -2 |
+| npth_inside_courtyard | 2 | 0 | 0 | -2 |
 | text_height | 1 | 1 | 1 | +0 |
 | text_thickness | 1 | 1 | 1 | +0 |
 | **isolation, between two domains (on the board)** | 417 | 418 | 419 | +2 |
@@ -486,7 +486,7 @@ old shapes and must be redrawn for the new pins.
 
 ## After placement step 2
 
-Applied by `tools/p2k/bin/kipy tools/next/trial_placement_p2.py` (moves as data: `PLACE`, `AUTO` = two-pad parts placed by centre / axis with the orientation that puts each pad next to its pin, `GROUPS`, `SLOTS`, the UART pour keep-out) on the step-1 board → `tube_psu_5_2_trial_p2.kicad_pcb`, DRC `drc_p2.json` (same split passes: refill peak RSS 2161 MB, main peak RSS 2147 MB, creepage F.Cu peak RSS 2455 MB, creepage B.Cu peak RSS 2572 MB), `placement_p2.json` (moves, slot, keep-out and every deleted track / via with net, layer and end points, so the routing can redo it). Nothing is routed.
+Applied by `tools/p2k/bin/kipy tools/next/trial_placement_p2.py` (moves as data: `PLACE`, `AUTO` = two-pad parts placed by centre / axis with the orientation that puts each pad next to its pin, `GROUPS`, `SLOTS`, the UART pour keep-out) on the step-1 board → `tube_psu_5_2_trial_p2.kicad_pcb`, DRC `drc_p2.json` (same split passes: refill peak RSS 2159 MB, main peak RSS 2136 MB, creepage F.Cu peak RSS 2320 MB, creepage B.Cu peak RSS 2558 MB), `placement_p2.json` (moves, slot, keep-out and every deleted track / via with net, layer and end points, so the routing can redo it). Nothing is routed.
 
 **Moves**
 
@@ -550,11 +550,11 @@ Applied by `tools/p2k/bin/kipy tools/next/trial_placement_p2.py` (moves as data:
 
 | type | step 1 | step 2 | delta |
 |---|---|---|---|
-| clearance | 337 | 207 | -130 |
+| clearance | 337 | 183 | -154 |
 | silk_over_copper | 191 | 199 | +8 |
 | silk_overlap | 199 | 199 | +0 |
 | courtyards_overlap | 165 | 133 | -32 |
-| creepage | 164 | 47 | -117 |
+| creepage | 164 | 49 | -115 |
 | hole_clearance | 138 | 32 | -106 |
 | track_dangling | 78 | 110 | +32 |
 | lib_footprint_issues | 96 | 96 | +0 |
@@ -566,13 +566,13 @@ Applied by `tools/p2k/bin/kipy tools/next/trial_placement_p2.py` (moves as data:
 | isolated_copper | 7 | 4 | -3 |
 | pth_inside_courtyard | 6 | 3 | -3 |
 | lib_footprint_mismatch | 0 | 2 | +2 |
+| copper_edge_clearance | 1 | 0 | -1 |
 | text_height | 1 | 1 | +0 |
 | text_thickness | 1 | 1 | +0 |
-| copper_edge_clearance | 1 | 0 | -1 |
-| **isolation, between two domains (on the board)** | 419 | 84 | -335 |
+| **isolation, between two domains (on the board)** | 419 | 60 | -359 |
 |   HEATER-PRI | 37 | 36 | -1 |
 |   PE-PRI | 22 | 22 | +0 |
-|   PRI-SEC | 101 | 26 | -75 |
+|   PRI-SEC | 101 | 2 | -99 |
 |   PRI-UART | 259 | 0 | -259 |
 | **unconnected items** | 303 | 346 | +43 |
 
@@ -583,8 +583,8 @@ Courtyard-overlap pairs: step 1 165, step 2 133; resolved (32): C102/TR1, C14/TR
 | area | box (mm) | isolation violations by domain pair | courtyard pairs | shorts | clearance (all) | creepage (all) | unconnected |
 |---|---|---|---|---|---|---|---|
 | UART island J4 / U11 / U12 (top edge) | x -15 … 35, y -100 … -62 | PRI-SEC 1 → 0 | 9 → 7 | 2 → 0 | 1 → 0 | 2 → 1 | 21 → 47 |
-| TO row Q19 / Q21 slot | x 25 … 78, y -47 … -13 | PRI-SEC 78 → 24, PRI-UART 256 → 0 | 34 → 29 | 2 → 0 | 160 → 64 | 103 → 0 | 37 → 40 |
-| ISO2, D4 / D5, TR1, PWM2, C102 | x 42 … 85, y -40 … 20 | PRI-SEC 58 → 2, PRI-UART 256 → 0 | 35 → 18 | 5 → 0 | 136 → 26 | 102 → 4 | 52 → 61 |
+| TO row Q19 / Q21 slot | x 25 … 78, y -47 … -13 | PRI-SEC 78 → 0, PRI-UART 256 → 0 | 34 → 29 | 2 → 0 | 160 → 40 | 103 → 0 | 37 → 40 |
+| ISO2, D4 / D5, TR1, PWM2, C102 | x 42 … 85, y -40 … 20 | PRI-SEC 58 → 2, PRI-UART 256 → 0 | 35 → 18 | 5 → 0 | 136 → 26 | 102 → 5 | 52 → 60 |
 | DRV5 / DRV6 gate drive (bottom) | x 8 … 71, y -69 … -42 | PRI-SEC 8 → 0, PRI-UART 3 → 0 | 21 → 16 | 3 → 0 | 32 → 29 | 10 → 0 | 46 → 55 |
 | DRV3 / DRV4 (heater) | x -61 … -4, y -79 … -43 | HEATER-PRI 37 → 36, PE-PRI 1 → 1 | 29 → 19 | 8 → 0 | 45 → 38 | 18 → 17 | 57 → 75 |
 
@@ -637,7 +637,13 @@ hole edge to hole edge) and the DRU gives no slot credit there. The slot does cu
 barrels (the through-laminate path goes round the slot ends like the surface path), so this needs a decision:
 (a) a DRU exception for barrels separated by a through-board slot (as for TR1's barrier pads, but with the slot
 argued as the barrier), or (b) 5.7 mm more pitch between Q19 and Q21 – a new plate hole pattern, which the fixed
-plate does not allow.
+plate does not allow. **User decision 2026-11-19: (a).** `tube_psu_5_2.kicad_dru` rule "PRI-SEC inner layers,
+Q19/Q21 across the barrier slot": inner-layer clearance / hole clearance 4.0 mm (reinforced air clearance across
+the slot) for Q19 ↔ Q21 pairs only; the laminate path round the slot ends has the same plan geometry as the
+outer surface path that the 11.1 mm creepage rule checks (with the larger outer pads), and that check passes.
+DRC re-run with the rule: Q19 ↔ Q21 24 → 0 (PRI-SEC 26 → 2, the TR1 pin 2 / 9 barrels). The re-run's
+creepage pass also reported 2 old 5.1 B.Cu tracks at mounting holes (H4 ↔ 15V 2.2 mm of 3.2, H5 ↔
+CUK_CAP_MEAS- 3.45 mm of 4.2) that the first run had not listed – unrelated to the rule, fixed when routing.
 
 **3. ISO2 / D4 / D5.** ISO2 stays: its slot already sits on the barrier line between TR1's slot and the TO row,
 and the L-slot now closes its top end. D4 (secondary 15V_ISO_SEC rectifier) moved out of the ISO2 slot to the
@@ -668,7 +674,7 @@ DRV4 turned 90° between C32 and Q1 (pins 5–8 on top: OUTA towards the Q1 gate
 DRV-area shorts 23 → 0, mask bridges 22 → 0, courtyard pairs with the drivers resolved (no new pair on the board).
 
 **Remaining after step 2** (beyond the routing itself, unconnected 303 → 346, dangling 78 → 110): the Q19 / Q21
-barrel decision (24); TR1 pin 2 / 9 inner barrels (2); HEATER-PRI 36 at ISO1 / TR2 and PE-PRI 22 at the PFC
+barrels (24) are resolved by decision (a) above; TR1 pin 2 / 9 inner barrels (2); HEATER-PRI 36 at ISO1 / TR2 and PE-PRI 22 at the PFC
 Y caps / RL1 (not in this step); PWM2 drain area (above); C2 / R123 courtyard touch 0.76 mm² (5.1 pair, was
 0.55); 17 silk-to-edge warnings at the new slot / U11 / J4 (reference texts to move); `lib_footprint_mismatch`
 Q19 / Q21 (board pads without unused inner rings – put it in a footprint copy if kept).

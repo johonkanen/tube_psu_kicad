@@ -204,6 +204,13 @@ netlist). Count after phase 2: primary 156 nets (HV_PRIMARY 43, PRIMARY_LV 5, SI
 | Mounting holes H1–H8 (screws bonded to the earthed chassis, user 2026-11-17) ↔ primary / secondary | basic (PE) | 318 / 420 Vrms | **3.2 / 4.2 mm** | 2.0 / 1.5 mm | 3.2 / 4.2 mm (hole clearance) |
 | Inside a domain: HV nets (DC+, mains, switch nodes, 420V, −100 V) | functional | ≤ 500 V | – | outer 1.2 mm (tracks / zones; pad pairs exempt), inner 0.5 mm | 0.5 mm |
 
+**Exception, DAB bridge Q19 (primary) ↔ Q21 (secondary)** (user 2026-11-19): the two TO-220s sit on the
+fixed heatsink plate pitch with a 1.2 mm L-shaped barrier slot (Edge.Cuts) between them. The slot cuts the
+laminate, so their drill barrels are checked on the inner layers at 4.0 mm (air across the slot) instead of
+11.1 mm; the path round the slot ends is covered by the outer-layer 11.1 mm creepage check, which follows the
+slot. Rule "PRI-SEC inner layers, Q19/Q21 across the barrier slot" in `tube_psu_5_2.kicad_dru`; it is valid
+only while the slot stays between the two parts.
+
 **Alternative if ISO_GND may float** (IEC 62368-1 5.4.1.8: a floating circuit is assumed earthed at the
 point giving the highest working voltage): with the 420V rail earthed, −80/−100 V vs DC+ reaches
 900 Vpk / ≈ 800 Vrms → reinforced creepage 2 × 8.0 = **16 mm**, clearance unchanged (4.0 mm; required

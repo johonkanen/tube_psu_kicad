@@ -56,6 +56,20 @@
 	(constraint clearance (min 11.1mm))
 	(constraint hole_clearance (min 11.1mm)))
 
+# Exception (user decision 2026-11-19, option (a) of kicad_next/trial_from_51/REPORT.md step 2): the DAB
+# bridge TO-220s Q19 (primary) and Q21 (secondary) sit on the fixed heatsink plate pitch, separated by the
+# 1.2 mm L-shaped Edge.Cuts barrier slot (x 51.4 / y -40.4...-39.2). The slot cuts the full laminate between
+# the two drill barrels, so on the inner layers there is no straight path through the material: what
+# remains is (1) air across the slot -> reinforced clearance 4.0 mm, and (2) the laminate path around the
+# slot ends, which is the same plan geometry as the outer-layer surface path that "PRI-SEC reinforced
+# creepage" (11.1 mm, follows slots) checks against the larger outer pads. Valid only while the slot stays
+# between the two parts; it applies to Q19 <-> Q21 pairs only (later rules override earlier ones).
+(rule "PRI-SEC inner layers, Q19/Q21 across the barrier slot"
+	(layer inner)
+	(condition "(A.memberOfFootprint('Q19') && B.memberOfFootprint('Q21')) || (A.memberOfFootprint('Q21') && B.memberOfFootprint('Q19'))")
+	(constraint clearance (min 4.0mm))
+	(constraint hole_clearance (min 4.0mm)))
+
 # ---------------------------------------------------------------------------------------------------
 # Primary <-> heater and primary <-> UART island: REINFORCED. Working voltage 318 Vrms / 400 Vpk
 # (domain earthed; the heater may sit at the -100 V bias: sqrt(318^2 + 100^2) = 333 Vrms -> 6.7 mm):
