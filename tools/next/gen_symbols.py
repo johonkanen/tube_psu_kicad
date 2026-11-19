@@ -26,7 +26,7 @@ LIB = os.path.join(ROOT, "lib", "tube_psu_next.kicad_sym")
 
 GROUNDS = ["GND", "ISO_GND", "HT_GND", "ISO_UART_GND"]       # ISO_UART_GND: 5.2 UART island (NR 3b)
 SUPPLIES = ["DC+", "420V", "15V", "15V_ISO_SEC", "6V3", "5V", "5V_ISOL", "+3V3", "AD2_3V3",
-            "+1V65_BIAS", "-15V_SEC", "-100V BIAS", "UART_5V", "UART_3V3"]
+            "+1V65_BIAS", "-15V_SEC", "-100V BIAS", "UART_3V3"]
 
 NC = "no_connect"
 
@@ -80,8 +80,8 @@ def build():
         from_std("Amplifier_Operational", "LM2904", "TLV9062", "U",
                  desc="Dual RRIO op-amp TLV9062IDGKR VSSOP-8, standard dual pinout (AUX / 5V_MEAS followers, NR 4b/4c)"),
         from_std("Device", "L", "L_TOROID", "L", desc="PFC choke on a sendust toroid, two leads (NR 5.2)"),
-        from_std("Connector_Generic", "Conn_01x06", "CONN_01X06", "J",
-                 desc="6-pin 2.54 mm header, FTDI TTL-232R-3V3 pinout (NR 3b)"),
+        from_std("Connector_Generic", "Conn_01x04", "CONN_01X04", "J",
+                 desc="4-pin 2.54 mm UART header: GND, 3V3 in, TXD in, RXD out (NR 3b)"),
     ]
 
     syms += [

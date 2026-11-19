@@ -705,7 +705,7 @@ most of the board survives; the rework is concentrated in five spots along the b
    more spacing in the row, and no secondary copper on In1 / In4 within 11.1 mm of the primary barrels. The
    heatsink is primary / earthed, so the secondary devices need reinforced insulation to the plate. The
    remaining markers there are HV-functional 1.2 mm nudges of the gate tracks (R22 / R53 / R57 / R58).
-3. **J4 / UART island – right centre.** J4 is now the isolated FTDI header (UART island behind U11, which is still
+3. **J4 / UART island – right centre.** J4 is now the isolated UART header (UART island behind U11, which is still
    off-board) but sits inside primary copper: 258 PRI-UART markers (8 mm creepage, 8 mm inner clearance and hole
    clearance to ~150 primary vias). It also overlaps the larger ISO2. → Move J4 + U11 to a board edge, U11's 8 mm
    slot on the island boundary, island copper (ISO_UART_GND / UART nets) separate, primary vias and pours pulled
@@ -729,7 +729,7 @@ most of the board survives; the rework is concentrated in five spots along the b
    WP4 within 8 mm of primary vias and pours at ISO1 and TR2. ISO1's slot footprint fits in place. → Local re-route
    and pour pull-back along an 8 mm barrier between TR2 / ISO1; DRV3 (now SOIC-16W, collides with C18 / C25 / C53 /
    D11 / R99) and DRV4 (SOIC-8, collides with Q1 / C17 / R63) need their bootstrap / decoupling parts re-placed.
-8. **Added parts (58)**: U9 (bias buffer), U10 (AUX op-amp), U11 (UART isolator), U12, R125–R154, C118–C140, D35 –
+8. **Added parts (58)**: U9 (bias buffer), U10 (AUX op-amp), U11 (UART isolator), U12 (LDO; removed again 2026-11-19 with C136 / C137), R125–R154, C118–C140, D35 –
    most of the 287 unrouted connections; the C47 / C54 / C16 / C55 balancing resistors R143–R150 go with TR3.
 
 **For reinforced isolation (beyond moving parts):**
@@ -1052,7 +1052,7 @@ old shapes and must be redrawn for the new pins.
 
 # ------------------------------------------------------------------------------------------- placement step 2
 P2_AREAS = {   # name: (title, refs that span the zoom box, margin)
-    "uart_island": ("UART island J4 / U11 / U12 (top edge)", ["U11", "J4", "C47", "U12", "C137", "H2"], 9.0),
+    "uart_island": ("UART island J4 / U11 (top edge)", ["U11", "J4", "C47", "C135", "R136", "H2"], 9.0),
     "to_row_slot": ("TO row Q19 / Q21 slot", ["Q7", "Q19", "Q21", "Q8", "ISO2"], 4.0),
     "iso2_tr1": ("ISO2, D4 / D5, TR1, PWM2, C102", ["ISO2", "TR1", "PWM2", "C102", "D4", "R8", "R72"], 3.0),
     "drv5_drv6": ("DRV5 / DRV6 gate drive (bottom)", ["DRV5", "DRV6", "C95", "C92", "C46", "C93", "C94"], 4.0),
@@ -1239,8 +1239,9 @@ primary copper there); (e) the top-left edge: heater island parts. The old L3 ar
 it is outside the heatsink L (in the photo the board's right edge, open), so the cable reaches the edge, and the
 only neighbours are primary: Q10 / C22 / C42 / C49 on the left – faced by U11's primary pins 1–8, with the U11
 8 mm slot between – and C47 / C54 on the right (C47 / C54 0.55 mm closer to the TR3 pins, J4 8.1 mm from them).
-J4 stands at the top edge (pin 1 ISO_UART_GND at y −89, 2.4 mm from the edge) right of H2, U12 / C135–C137 /
-R136 / R137 between U11 and J4 below H2's screw head (Ø 5.5 mm). The bottom-side U1 current-measurement amplifier
+J4 stands at the top edge (pin 1 ISO_UART_GND at y −89, 2.4 mm from the edge) right of H2, C135 /
+R136 / R137 between U11 and J4 (J4 = 4-pin GND / 3V3 / TXD / RXD header since 2026-11-19: the minimodule
+powers U11 side 2, the U12 LDO and C136 / C137 are gone) below H2's screw head (Ø 5.5 mm). The bottom-side U1 current-measurement amplifier
 (12 parts + C87 on top) moved 8 mm down with its own copper (12 In4 segments of EPWM5A / EPWM6A / +3V3 /
 HEATER_CURRENT / DHB_CURRENT it landed on were deleted). Primary copper within 8 mm of an island pad: 6
 segments deleted; pour keep-out over the island + 8 mm on all six layers (no solid-insulation overlap either).

@@ -1368,18 +1368,6 @@
       },
       {
         "netclass": "UART_ISO",
-        "pattern": "UART_5V"
-      },
-      {
-        "netclass": "UART_ISO",
-        "pattern": "unconnected-(J4-Pin_2-Pad2)"
-      },
-      {
-        "netclass": "UART_ISO",
-        "pattern": "unconnected-(J4-Pin_6-Pad6)"
-      },
-      {
-        "netclass": "UART_ISO",
         "pattern": "unconnected-(U11-NC-Pad10)"
       },
       {

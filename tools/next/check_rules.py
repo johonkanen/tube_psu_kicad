@@ -41,7 +41,7 @@ CASES = [
     ("/05 PFC/PE", "GND", "F", 2.5, {"creepage"}),                 # PE-PRI basic creepage 3.2
     ("GND", "ISO_UART_GND", "In2", 7.0, {"clearance"}),            # PRI-UART inner 8.0 (5.2 island)
     ("UART_3V3", "HT_GND", "F", 0.8, {"clearance"}),               # HEATER-UART functional 1.0
-    ("+3V3", "UART_5V", "F", 7.0, {"creepage"}),                   # PRI-UART reinforced creepage 8.0
+    ("+3V3", "UART_3V3", "F", 7.0, {"creepage"}),                   # PRI-UART reinforced creepage 8.0
     ("ISO_GND", "ISO_UART_GND", "F", 8.0, {"creepage"}),           # SEC-UART reinforced creepage 8.4
 ]
 # The four extra slots (5.2 UART cases): KiCad 10 reported no creepage violation for test tracks at

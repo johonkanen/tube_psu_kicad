@@ -149,7 +149,7 @@ IN2,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"bla
 ISO1,tube_psu:SI8661,tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0,"SOIC-16W + 1 x 14.5 mm creepage slot (8.0 mm reinforced, primary <-> heater; phase 3)"
 ISO2,tube_psu:SI8661,tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot11.1,"SOIC-16W + 1 x 19.5 mm creepage slot (11.1 mm reinforced, primary <-> DAB secondary; phase 3)"
 J2,tube_psu:HEADER_2X25_50MIL,tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus,2x25 1.27 mm header
-J4,tube_psu_next:CONN_01X06,Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical,"1x6 2.54 mm, FTDI TTL-232R-3V3 pinout (NR 3b.2)"
+J4,tube_psu_next:CONN_01X04,Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical,"1x4 2.54 mm: 1 GND, 2 3V3 in, 3 TXD in, 4 RXD out (NR 3b.2)"
 L1,tube_psu_next:L_TOROID,tube_psu_next:L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_45deg,"sendust toroid OD 31.5 x 16.7 standing upright as built on the 5.1 board: leads in the 5.1 RM8 winding holes pri1/pri2 (RM8 at 45 deg), place at 0 deg on the 5.1 RM8 origin; body position from the photo (2026-11-19)"
 L2,tube_psu_next:L_TOROID,tube_psu_next:L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_315deg,"sendust toroid OD 31.5 x 16.7 standing upright as built on the 5.1 board: leads in the 5.1 RM8 winding holes pri1/pri2 (RM8 at -45 deg), place at 0 deg on the 5.1 RM8 origin; body position from the photo (2026-11-19)"
 N15V_OUT,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
@@ -335,11 +335,8 @@ C132,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 R135,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
 C133,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 U11,tube_psu_next:SI8621,tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0,"SOIC-16W + 1 x 14.5 mm creepage slot (8.0 mm reinforced, primary <-> UART; phase 3)"
-U12,tube_psu_next:XC6206,Package_TO_SOT_SMD:SOT-23,"SOT-23 (1 GND, 2 VOUT, 3 VIN)"
 C134,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C135,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
-C136,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
-C137,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 R136,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
 R137,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603
 R138,tube_psu:R,Resistor_SMD:R_0603_1608Metric,0603

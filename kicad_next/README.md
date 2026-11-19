@@ -261,7 +261,7 @@ KiCad AppImage with --version.
 
 Work sheet by sheet (NEXT_REVISION_PLAN.md phase 2 table): TR1 -> EEL19 4+6 + fly leads and PWM2 ->
 iW1819-00 (new symbols, Vcc / Vsense / Rsense rechecked, preloads, D8/D4/D5 ratings, C102); sheet 2 R40/R25
-DNP; sheet 4 J2 channel map + UART island (Si8621BD, LDO, FTDI 6-pin header; nets in a new UART domain);
+DNP; sheet 4 J2 channel map + UART island (CA-IS3721HW, 4-pin header GND / 3V3 / TXD / RXD powered from the minimodule; nets in a new UART domain);
 measurement fixes (bias buffer, VAC / DC_LINK Cf, R49/R80, AUX + 5V_MEAS followers); sheet 7 TR3 -> EC42
 two-chamber option B 20:21, L3 removed; sheets 8 / 10 LMH6643 with feedback caps on both legs; sheet 5
 L1/L2 toroids; LCSC field for every new part; root title block rev V5.2 (gen_schematic.py ROOT_EDITS).

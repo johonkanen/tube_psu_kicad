@@ -29,6 +29,15 @@
 	(constraint hole_size (min 0.5mm)))
 
 # ---------------------------------------------------------------------------------------------------
+# Fine-pitch ICs (U10 VSSOP-8, 0.65 mm pitch: pad gap 0.15 mm): pads of the same footprint on low-voltage
+# nets may be 0.15 mm apart (JLC minimum pad spacing; the net class clearances 0.2 mm of PRIMARY_LV /
+# SECONDARY_LV / HEATER stay for everything else). HV classes keep their class clearance. Tested by
+# tools/next/check_rules.py (PAD_TESTS).
+(rule "Same-footprint pad gap, low-voltage classes"
+	(condition "A.Type == 'Pad' && B.Type == 'Pad' && A.Parent == B.Parent && !A.hasNetclass('HV_PRIMARY') && !A.hasNetclass('HV_SECONDARY') && !B.hasNetclass('HV_PRIMARY') && !B.hasNetclass('HV_SECONDARY') && !A.hasNetclass('PE_EARTH') && !B.hasNetclass('PE_EARTH')")
+	(constraint clearance (min 0.15mm)))
+
+# ---------------------------------------------------------------------------------------------------
 # Functional spacing inside a domain: HV nets on the outer layers (tracks / zones; pad-to-pad gaps are
 # set by the parts, e.g. TO-220 / TO-247 pin pitch). Inner layers: net class clearance 0.5 mm.
 (rule "HV functional, outer layers"

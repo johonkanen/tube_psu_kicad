@@ -13,10 +13,10 @@ Output: tube_psu_5_2_trial_p2.kicad_pcb (+ .kicad_pro / .kicad_dru copies), drc_
         shorts of the moved parts (no DRC, nothing written). kicad_next/tube_psu_5_2.kicad_pcb is not touched.
 
 Step 2 (moves as data below; nothing is routed, only copper that violates or is orphaned is deleted):
- 1. UART island (J4 isolated FTDI header, U11 CA-IS3721HW slot footprint, U12 XC6206, C134-C137, R136 / R137) at
+ 1. UART island (J4 isolated 4-pin header GND / 3V3 / TXD / RXD, U11 CA-IS3721HW slot footprint, C134 / C135, R136 / R137) at
     the top board edge left of TR3 (old L3 area, outside the heatsink L, so the cable reaches the edge): U11 at 0 deg
     with its primary pins 1-8 facing the primary Q10 / heater-LLC side and its 8 mm slot between, the island side
-    (J4, U12, caps, series resistors) between U11 and C47, next to H2. Primary copper: tracks / vias of a primary net
+    (J4, cap, series resistors) between U11 and C47, next to H2. Primary copper: tracks / vias of a primary net
     within 8.0 mm of an island pad are deleted on every layer, and a copper-pour keep-out (rule area, all copper
     layers) covers the island + 8 mm. C47 / C54 move 1.2 mm right (towards the TR3 pins, still 1.9 mm from them) and
     the bottom-side current-measurement amplifier U1 with its parts (+ C87 on top) 8 mm down to make the 8 mm.
@@ -58,13 +58,12 @@ NAME2 = R.NAME + "_p2"
 OUT2 = os.path.join(R.OUTDIR, NAME2 + ".kicad_pcb")
 
 # --- 1. UART island -----------------------------------------------------------------------------------
-ISLAND = ["J4", "U11", "U12", "C134", "C135", "C136", "C137", "R136", "R137"]
+ISLAND = ["J4", "U11", "C134", "C135", "R136", "R137"]   # U12 / C136 / C137 LDO removed 2026-11-19 (3V3 from the minimodule)
 # --- the moves (board mm, KiCad orientation in degrees) ------------------------------------------------
 PLACE = {   # ref: (x, y, orientation) - absolute
     # 1. UART island (top edge, x -6 ... 13.8)
     "U11": (0.0, -78.0, 0.0),        # pins 1-8 (primary) at x -4.65, pins 9-16 (island) at x 4.65, slot x 0
-    "J4": (11.4, -89.0, 0.0),        # pin 1 (ISO_UART_GND) at the top edge, pins down to y -76.3
-    "U12": (7.95, -73.0, 0.0),       # SOT-23: VIN (pin 3) towards J4, GND / VOUT towards U11
+    "J4": (11.4, -89.0, 0.0),        # 1x4: pin 1 (ISO_UART_GND) at the top edge, pins down to y -81.4
     "C47": (23.05, -86.5, -90.0),    # 0.55 mm right (courtyard to the TR3 courtyard): 8.1 mm from J4
     "C54": (23.05, -78.5, -90.0),
     # 2. -
@@ -92,10 +91,8 @@ PLACE = {   # ref: (x, y, orientation) - absolute
 AUTO = {
     # 1. UART island
     "C135": (7.0, -81.2, "v", {"1": ("U11", "14"), "2": ("U11", "16")}),
-    "R137": (7.6, -78.2, "h", {"1": ("U11", "13"), "2": ("J4", "5")}),
-    "R136": (7.6, -76.4, "h", {"1": ("U11", "12"), "2": ("J4", "4")}),
-    "C136": (9.0, -70.3, "h", {"1": ("U12", "3"), "2": ("U12", "1")}),
-    "C137": (10.9, -73.0, "v", {"1": ("U12", "2"), "2": ("U12", "1")}),
+    "R137": (7.6, -78.2, "h", {"1": ("U11", "13"), "2": ("J4", "4")}),
+    "R136": (7.6, -76.4, "h", {"1": ("U11", "12"), "2": ("J4", "3")}),
     "C134": (-7.3, -81.0, "v", {"1": ("U11", "3"), "2": ("U11", "1")}),
     # 5. DRV5 (bottom, rot 0, pins 1-8 x 15.55, 9-16 x 24.85)
     "C94": (13.0, -52.6, "v", {"1": ("DRV5", "3"), "2": ("DRV5", "4")}),

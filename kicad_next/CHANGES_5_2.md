@@ -8,7 +8,7 @@ Checks: `tools/next/check_next.sh` (ERC 0 errors, every net in one isolation dom
 netlist / CSV check). The generated netlist diff 5.1 → 5.2 is at the end of this file
 (`python3 tools/next/netlist_diff.py --update`).
 
-New refdes (next free numbers of 5.1): R125–R158, C118–C140, D35, U9–U12. Removed: DRV9, L3, R40, R25, C4, and with the
+New refdes (next free numbers of 5.1): R125–R158, C118–C140, D35, U9–U11 (U12 / C136 / C137 added and removed again 2026-11-19). Removed: DRV9, L3, R40, R25, C4, and with the
 ICE5AR change (1.5) R64, R81, R84, R85, R86, C50.
 
 ## 1. Auxiliary flyback (sheet 1)
@@ -68,9 +68,9 @@ ICE5AR change (1.5) R64, R81, R84, R85, R86, C50.
 | NR | Done | Refdes / value / nets |
 |---|---|---|
 | 3b.1 | yes, part changed | **U11 = CA-IS3721HW** (C5337993, symbol `SI8621`). **Si8621BD is default-LOW** (Skyworks ordering guide: Bx = low, Ex = high), so with no cable the FPGA RX would read a break; the default-high Si8621**ED** has 0 JLC stock, the Chipanalog CA-IS3721HW has the **same WB SOIC-16 pinout** (1/7 GND1, 3 VDD1, 4 A1 in → 13 B1 out, 12 B2 in → 5 A2 out, 9/16 GND2, 14 VDD2) and default-high outputs, 1358 pcs. Side 1: +3V3 / GND, A1 ← **TX** (J2-26), A2 → **RX** (J2-24), C134 100n; side 2: UART_3V3 / ISO_UART_GND, C135 100n |
-| 3b.2 | yes | **J4 → 1×6 2.54 mm FTDI header** (C492405): 1 ISO_UART_GND, 2 CTS n.c., 3 **UART_5V**, 4 TXD → **R136 47R** → B2, 5 RXD ← **R137 47R** ← B1, 6 RTS n.c. |
-| 3b.3 | yes | **U12 XC6206P332MR** (C5446, SOT-23) UART_5V → UART_3V3, **C136 / C137 1µ** |
-| 3b.4 | rules | new domain **UART** (ground ISO_UART_GND, barrier U11) in `setup_project.py`: nets ISO_UART_GND, UART_5V, UART_3V3, UART_TXD, UART_RXD, U11-B1/B2, unconnected U11 / J4 pins → class **UART_ISO** (12 nets); rules PRI-UART 8.0 mm / SEC-UART 8.4 mm / HEATER-UART 1.0 mm were already in the `.kicad_dru`, now tested by 4 new cases in `check_rules.py` (19/19 pass). Layout (slot under U11, island keep-out) phase 5 |
+| 3b.2 | yes | **J4 → 1×4 2.54 mm UART header** (PZ254V-11-04P, C2691448; user 2026-11-19, was a 6-pin FTDI header): 1 ISO_UART_GND, 2 **UART_3V3 in** (the USB-UART minimodule's 3.3 V powers U11 side 2), 3 TXD in → **R136 47R** → B2, 4 RXD out ← **R137 47R** ← B1 |
+| 3b.3 | removed (user 2026-11-19) | ~~U12 XC6206P332MR LDO UART_5V → UART_3V3, C136 / C137 1µ~~: the minimodule supplies 3.3 V on J4 pin 2; C135 100n stays as U11 side-2 decoupling. Refdes U12, C136, C137 unused |
+| 3b.4 | rules | new domain **UART** (ground ISO_UART_GND, barrier U11) in `setup_project.py`: nets ISO_UART_GND, UART_3V3, UART_TXD, UART_RXD, U11-B1/B2, unconnected U11 pins → class **UART_ISO** (9 nets; 12 before U12 / UART_5V / the J4 n.c. pins were removed); rules PRI-UART 8.0 mm / SEC-UART 8.4 mm / HEATER-UART 1.0 mm were already in the `.kicad_dru`, now tested by 4 new cases in `check_rules.py` (19/19 pass). Layout (slot under U11, island keep-out) phase 5 |
 
 ## 4. Measurements (sheets 4, 8, 9, 10)
 
@@ -143,11 +143,11 @@ Reviewed against the items above: every difference is one of the listed changes 
 re-symbolled parts – PWM2, DRV1–DRV4, TR1, TR3, J4, L1/L2 – show as + / − pins of the same net).
 
 <!-- netlist_diff.py begin -->
-Parts: 5.1 315, 5.2 366; removed 12, added 63.
+Parts: 5.1 315, 5.2 363; removed 12, added 60.
 
 **Removed parts:** C4 (1n), C50 (22pf), DRV9 (IXDD609D2TR), L3 (70u), N5V_OUT (PIN), R25 (82k), R40 (82k), R64 (39k), R81 (15k), R84 (33k), R85 (4.7k), R86 (1k)
 
-**Added parts:** C118 (100p), C119 (100p), C120 (1n), C121 (100p), C122 (12p), C123 (5.6p), C124 (100n), C125 (1u), C126 (1n), C127 (1n), C128 (100n), C129 (100n), C130 (1n), C131 (1n), C132 (100n), C133 (100n), C134 (100n), C135 (100n), C136 (1u), C137 (1u), C138 (10n), C139 (2.2n), C140 (470p), D35 (ZLLS400TA), N15V_OUT (PIN), R125 (2.2k), R126 (1k), R127 (10k), R128 (10k), R129 (10k), R130 (10k), R131 (22R), R132 (100R), R133 (15k 0.1%), R134 (10k 0.1%), R135 (100R), R136 (47R), R137 (47R), R138 (88.7k 0.1%), R139 (49.9k 0.1%), R140 (4.7k), R141 (750k), R142 (10R), R143 (220k), R144 (220k), R145 (220k), R146 (220k), R147 (220k), R148 (220k), R149 (220k), R150 (220k), R151 (10M), R152 (10M), R153 (10M), R154 (178k), R155 (220k), R156 (220k), R157 (220k), R158 (220k), U9 (TLV316IDBVR), U10 (TLV9062IDGKR), U11 (CA-IS3721HW), U12 (XC6206P332MR)
+**Added parts:** C118 (100p), C119 (100p), C120 (1n), C121 (100p), C122 (12p), C123 (5.6p), C124 (100n), C125 (1u), C126 (1n), C127 (1n), C128 (100n), C129 (100n), C130 (1n), C131 (1n), C132 (100n), C133 (100n), C134 (100n), C135 (100n), C138 (10n), C139 (2.2n), C140 (470p), D35 (ZLLS400TA), N15V_OUT (PIN), R125 (2.2k), R126 (1k), R127 (10k), R128 (10k), R129 (10k), R130 (10k), R131 (22R), R132 (100R), R133 (15k 0.1%), R134 (10k 0.1%), R135 (100R), R136 (47R), R137 (47R), R138 (88.7k 0.1%), R139 (49.9k 0.1%), R140 (4.7k), R141 (750k), R142 (10R), R143 (220k), R144 (220k), R145 (220k), R146 (220k), R147 (220k), R148 (220k), R149 (220k), R150 (220k), R151 (10M), R152 (10M), R153 (10M), R154 (178k), R155 (220k), R156 (220k), R157 (220k), R158 (220k), U9 (TLV316IDBVR), U10 (TLV9062IDGKR), U11 (CA-IS3721HW)
 
 **Changed parts** (value / symbol / footprint, 5.1 -> 5.2):
 
@@ -200,7 +200,7 @@ Parts: 5.1 315, 5.2 366; removed 12, added 63.
 | IN2 |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
 | ISO1 | SI8661 -> CA-IS3761LW |  | tube_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus -> tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0 |
 | ISO2 | SI8661 -> CA-IS3761LW |  | tube_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus -> tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot11.1 |
-| J4 | 66226-003 -> FTDI 1x6 | CONN_01X03 -> CONN_01X06 | Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical -> Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical |
+| J4 | 66226-003 -> UART 1x4 | CONN_01X03 -> CONN_01X04 | Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical -> Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical |
 | L1 | 200u -> TBD (measured) | RM8_INDUCTOR -> L_TOROID | tube_psu:L_RM8_Proteus -> tube_psu_next:L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_45deg |
 | L2 | 200u -> TBD (measured) | RM8_INDUCTOR -> L_TOROID | tube_psu:L_RM8_Proteus -> tube_psu_next:L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_315deg |
 | N80V_OUT |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
@@ -236,11 +236,11 @@ Parts: 5.1 315, 5.2 366; removed 12, added 63.
 | U1 | LMH6658 -> LMH6643 | LMH6658 -> LMH6643 |  |
 | U4 | LMH6658 -> LMH6643 | LMH6658 -> LMH6643 |  |
 
-Nets: 5.1 208, 5.2 235 (with at least one part pin).
+Nets: 5.1 208, 5.2 232 (with at least one part pin).
 
 **5.1 nets gone** (no pin left in any 5.2 net): /04 MCU connector/ADA0, /04 MCU connector/ADA1, /04 MCU connector/ADA2, /04 MCU connector/ADA4, /04 MCU connector/CUK_CAP_MEAS_RAW, /04 MCU connector/HEATER_CAP_AD_MEAS, /07 DHB/TRANS_PRI, Net-(C50-Pad2), Net-(DRV3-OUT-), Net-(DRV5-NC6), Net-(DRV6-NC6), Net-(PWM2-Vsense), unconnected-(DRV5-NC12-Pad12), unconnected-(DRV5-NC13-Pad13), unconnected-(DRV5-NC7-Pad7), unconnected-(DRV6-NC12-Pad12), unconnected-(DRV6-NC13-Pad13), unconnected-(DRV6-NC7-Pad7), unconnected-(L1-NC-Pad1), unconnected-(L1-NC-Pad2), unconnected-(L2-NC-Pad1), unconnected-(L2-NC-Pad2), unconnected-(L3-NC-Pad1), unconnected-(L3-NC-Pad2)
 
-**New 5.2 nets** (only new part pins): ISO_UART_GND, Net-(C138-Pad1), Net-(D10-PadA), Net-(D35-K), Net-(DRV3-DT), Net-(DRV5-DT), Net-(DRV6-DT), Net-(PWM2-FB), Net-(PWM2-GATE), Net-(PWM2-VERR), Net-(PWM2-VIN), Net-(R143-Pad2), Net-(R145-Pad2), Net-(R147-Pad2), Net-(R149-Pad2), Net-(R151-Pad2), Net-(R152-Pad2), Net-(R155-Pad2), Net-(R157-Pad2), Net-(U10A-+), Net-(U10A--), Net-(U10B-+), Net-(U10B--), Net-(U11-B1), Net-(U11-B2), Net-(U9-+), Net-(U9--), UART_3V3, UART_5V, /04 MCU connector/UART_RXD, /04 MCU connector/UART_TXD, unconnected-(DRV3-NC-Pad12), unconnected-(DRV3-NC-Pad13), unconnected-(DRV3-NC-Pad7), unconnected-(DRV5-NC-Pad12), unconnected-(DRV5-NC-Pad13), unconnected-(DRV5-NC-Pad7), unconnected-(DRV6-NC-Pad12), unconnected-(DRV6-NC-Pad13), unconnected-(DRV6-NC-Pad7), unconnected-(J4-Pin_2-Pad2), unconnected-(J4-Pin_6-Pad6), unconnected-(PWM2-NC-Pad9), unconnected-(U11-NC-Pad10), unconnected-(U11-NC-Pad11), unconnected-(U11-NC-Pad15), unconnected-(U11-NC-Pad2), unconnected-(U11-NC-Pad6), unconnected-(U11-NC-Pad8)
+**New 5.2 nets** (only new part pins): ISO_UART_GND, Net-(C138-Pad1), Net-(D10-PadA), Net-(D35-K), Net-(DRV3-DT), Net-(DRV5-DT), Net-(DRV6-DT), Net-(PWM2-FB), Net-(PWM2-GATE), Net-(PWM2-VERR), Net-(PWM2-VIN), Net-(R143-Pad2), Net-(R145-Pad2), Net-(R147-Pad2), Net-(R149-Pad2), Net-(R151-Pad2), Net-(R152-Pad2), Net-(R155-Pad2), Net-(R157-Pad2), Net-(U10A-+), Net-(U10A--), Net-(U10B-+), Net-(U10B--), Net-(U11-B1), Net-(U11-B2), Net-(U9-+), Net-(U9--), UART_3V3, /04 MCU connector/UART_RXD, /04 MCU connector/UART_TXD, unconnected-(DRV3-NC-Pad12), unconnected-(DRV3-NC-Pad13), unconnected-(DRV3-NC-Pad7), unconnected-(DRV5-NC-Pad12), unconnected-(DRV5-NC-Pad13), unconnected-(DRV5-NC-Pad7), unconnected-(DRV6-NC-Pad12), unconnected-(DRV6-NC-Pad13), unconnected-(DRV6-NC-Pad7), unconnected-(PWM2-NC-Pad9), unconnected-(U11-NC-Pad10), unconnected-(U11-NC-Pad11), unconnected-(U11-NC-Pad15), unconnected-(U11-NC-Pad2), unconnected-(U11-NC-Pad6), unconnected-(U11-NC-Pad8)
 
 **5.1 nets split in 5.2:** Net-(DRV1-OUTA), Net-(DRV2-OUTA)
 

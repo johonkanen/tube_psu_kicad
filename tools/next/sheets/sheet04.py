@@ -264,9 +264,10 @@ sh.text("DC-link measurement (PDF: 663/3V3); 5.2: C130 / C131 1 nF across R17 / 
 
 # --- J4: isolated UART (5.2, NR 3b) ------------------------------------------------------------------
 # U11 = CA-IS3721HW (Si8621 WB SOIC-16 pinout, default-high outputs: idle UART with no cable), side 1 on
-# +3V3 / GND (A1 <- TX from J2-26, A2 -> RX to J2-24), side 2 on the cable: UART_3V3 from U12 (XC6206, 3.3 V
-# from the cable 5 V), ISO_UART_GND; J4 = 6-pin FTDI TTL-232R-3V3 header (1 GND, 2 CTS n.c., 3 VCC 5 V,
-# 4 TXD -> R136 -> B2, 5 RXD <- R137 <- B1, 6 RTS n.c.). Island ISO_UART_GND: reinforced >= 8 mm to primary.
+# +3V3 / GND (A1 <- TX from J2-26, A2 -> RX to J2-24), side 2 on the cable: UART_3V3 = the 3.3 V of the USB-UART
+# minimodule (user 2026-11-19: no LDO / 5 V on the island), ISO_UART_GND; J4 = 4-pin header (1 GND, 2 3V3 in,
+# 3 TXD in (module TX) -> R136 -> B2, 4 RXD out (module RX) <- R137 <- B1). Island ISO_UART_GND: reinforced
+# >= 8 mm to primary.
 UX_, UY_ = g(190), g(176)
 u11 = sh.place("SI8621", "U11", UX_, UY_, value=sh_value("U11"))
 power_at(sh, "+3V3", left(u11.pin(3), 2), "left")
@@ -289,31 +290,18 @@ for x, ref_, rail, gnd in ((UX_ - g(24), "C134", "+3V3", "GND"), (UX_ + g(28), "
     _, ct, cb = vert2(sh, "C", ref_, x, UY_ + g(14), sh_value(ref_), top=1)     # decoupling, standalone pairs
     power_at(sh, rail, ct, "up")
     power_at(sh, gnd, cb, "down")
-# U12: 3.3 V LDO on the cable 5 V
-LX, LY = g(226), g(150)
-u12 = sh.place("XC6206", "U12", LX, LY, value=sh_value("U12"))
-power_at(sh, "ISO_UART_GND", u12.pin(1), "down")
-for x, ref_, rail, pin in ((LX - g(16), "C136", "UART_5V", 3), (LX + g(16), "C137", "UART_3V3", 2)):
-    sh.wire(u12.pin(pin), (x, LY))
-    power_at(sh, rail, (x, LY), "up")
-    _, ct, cb = vert2(sh, "C", ref_, x, LY + g(4), sh_value(ref_), top=1)
-    sh.wire((x, LY), ct)
-    sh.junction(x, LY)
-    power_at(sh, "ISO_UART_GND", cb, "down")
-# J4: FTDI 6-pin header on the island; UART_5V and ISO_UART_GND enter here (PWR_FLAGs)
+# J4: 4-pin UART header on the island; UART_3V3 and ISO_UART_GND enter here from the minimodule (PWR_FLAGs)
 JX, JY = g(256), g(176)
-j4 = sh.place("CONN_01X06", "J4", JX, JY, value=sh_value("J4"))
+j4 = sh.place("CONN_01X04", "J4", JX, JY, value=sh_value("J4"))
 q = left(j4.pin(1), 6)
 sh.wire(j4.pin(1), q)
 flagged_power(sh, "ISO_UART_GND", *q)
-sh.no_connect(*j4.pin(2))
-q = left(j4.pin(3), 14)
-sh.wire(j4.pin(3), q)
-flagged_power(sh, "UART_5V", *q)
-label_left(sh, "UART_TXD", j4.pin(4), 4)
-label_left(sh, "UART_RXD", j4.pin(5), 4)
-sh.no_connect(*j4.pin(6))
-sh.text("J4: FTDI TTL-232R-3V3 (1 GND, 2 CTS, 3 VCC 5 V, 4 TXD, 5 RXD, 6 RTS); island ISO_UART_GND, >= 8 mm to primary on all layers (NR 3b).", g(150), g(200))
+q = left(j4.pin(2), 14)
+sh.wire(j4.pin(2), q)
+flagged_power(sh, "UART_3V3", *q)
+label_left(sh, "UART_TXD", j4.pin(3), 4)
+label_left(sh, "UART_RXD", j4.pin(4), 4)
+sh.text("J4: UART minimodule 3.3 V (1 GND, 2 3V3 in - powers U11 side 2, 3 TXD in, 4 RXD out); island ISO_UART_GND, >= 8 mm to primary on all layers (NR 3b).", g(150), g(200))
 
 sh.save()
 print("sheet04: written")
