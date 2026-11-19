@@ -6,7 +6,10 @@ generates for the 1:1 migration of tube_power_5_1 (tools/check_all.sh checks tha
 
   Transformer_EEL19_V_4+6_FlyLeads   new TR1, aux flyback (simulation/flyback/EEL19_DESIGN.md 6a)
   Transformer_EC42x15_2Slot_2x8_P5mm new TR3, DAB (simulation/dab/DAB_TRANSFORMER.md 5, 8)
-  L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm[_TieSlots]  L1 / L2 sendust PFC toroids, flat (NR 5.2)
+  L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm[_TieSlots]  sendust PFC toroid lying flat (NR 5.2; not used since
+                                     2026-11-19)
+  L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_45deg / _315deg  L1 / L2: upright toroid on the 5.1 RM8 winding holes
+                                     (as built on the 5.1 board, user decision 2026-11-19)
   Heatsink_Plate_Keepout_L120mm      outline helper for the PFC + DAB bent-plate heatsink (NR 5.5)
 
 3D models: lib/tube_psu_next.3dshapes/<name>.step (tools/next/gen_next_3d.py, CadQuery), referenced
@@ -95,6 +98,22 @@ TOROID = {"od": 31.5, "h": 16.7, "id": 13.0, "pitch": 16.7, "lead_y": 11.8, "dri
           "court_d": 32.5, "wire": 1.0,
           # optional cable-tie hold-down: one slot inside the toroid hole, two outside the rim (x axis)
           "tie_w": 1.5, "tie_l": 4.0, "tie_r": 18.5}
+
+# L1 / L2 as built on the 5.1 board (user decision 2026-11-19, photo of the built board): the toroids STAND
+# UPRIGHT on edge, ring plane along the board's long axis (x), the two winding leads (0.8 mm wire, ~8 mm)
+# soldered into the RM8 winding holes pri1 / pri2 of the 5.1 footprint tube_psu:L_RM8_Proteus. The 5.1 RM8
+# footprints sit at +45 deg (L1) and -45 deg (L2), so the pad pair is on opposite diagonals: one footprint
+# per RM8 rotation, origin = the 5.1 RM8 origin, placed at rotation 0 on the 5.1 RM8 position -> pads 1 / 2
+# land exactly on pri1 / pri2 (schematic: RM8 pri1 / pri2 = toroid pins 1 / 2). Body: 31.5 (OD) along x by
+# 16.7 (thickness) along y; centre offset from the pad midpoint by body_dx along x and body_dy away from
+# the board centre line (L1 towards the bottom board edge, L2 towards -y), read off the photo (the toroid's
+# +x end stops at the heatsink / H7 standoff, the leads come down from its lower +x side) - about +-3 mm,
+# confirm on the built board. Courtyard = body + margin, extended over the pads that lie outside it.
+RM8_PADS = {"1": (5.2001, 4.5912), "2": (5.1994, -3.8283)}   # tube_psu:L_RM8_Proteus pri1, pri2 (local)
+TOROID_V = {"od": 31.5, "w": 16.7, "id": 13.0, "drill": 1.3, "pad": 2.6, "wire": 0.8, "margin": 1.0,
+            "body_dx": -12.0, "body_dy": 8.0,
+            # RM8 rotation on the 5.1 board -> sign of body_dy (+1 = towards +y)
+            "variants": {45: 1, 315: -1}}
 
 # PFC + DAB heatsink (NR 5.5, D3): a new bent aluminium plate, redesigned in the placement. The 5.1
 # board has no holes or pads for the bracket (only H1-H8; H4 sits next to the TO row), so this is only
@@ -304,6 +323,68 @@ def toroid(ties=False):
                        models=model(toroid_name()))
 
 
+def toroid_v_name(rot):
+    t = TOROID_V
+    return f"L_Toroid_D{t['od']:g}mm_W{t['w']:g}mm_Vertical_RM8_{rot}deg"
+
+
+def toroid_v_geometry(rot):
+    """(pads [(num, x, y)], body centre (x, y)) in footprint coordinates for the 5.1 RM8 rotation rot
+    (KiCad orientation, counter-clockwise on screen, y down)."""
+    import math
+    t = TOROID_V
+    a = math.radians(rot)
+    pads = []
+    for num, (x, y) in RM8_PADS.items():
+        pads.append((int(num), round(x * math.cos(a) + y * math.sin(a), 4), round(-x * math.sin(a) + y * math.cos(a), 4)))
+    mx = sum(p[1] for p in pads) / 2
+    my = sum(p[2] for p in pads) / 2
+    return pads, (round(mx + t["body_dx"], 4), round(my + t["variants"][rot] * t["body_dy"], 4))
+
+
+def toroid_v(rot):
+    """Upright toroid (ring plane along x) on the two RM8 winding holes of the 5.1 board (TOROID_V)."""
+    t = TOROID_V
+    pads, (cx, cy) = toroid_v_geometry(rot)
+    ro, ri, hw = t["od"] / 2, t["id"] / 2, t["w"] / 2
+    body = rect(cx - ro, cy - hw, cx + ro, cy + hw, "F.Fab", 0.1)
+    # ring hole seen from above: the inner diameter as dashed-free lines across the width
+    body += line(cx - ri, cy - hw, cx - ri, cy + hw, "F.Fab", 0.1) + line(cx + ri, cy - hw, cx + ri, cy + hw, "F.Fab", 0.1)
+    s = 0.15
+    body += rect(cx - ro - s, cy - hw - s, cx + ro + s, cy + hw + s, "F.SilkS", 0.12)
+    # courtyard: body + margin, with a tab over the pads outside it
+    m = t["margin"]
+    x0, x1, y0, y1 = cx - ro - m, cx + ro + m, cy - hw - m, cy + hw + m
+    r = t["pad"] / 2 + 0.25
+    out = [(x, y) for _, x, y in pads if not (x0 + r <= x <= x1 - r and y0 + r <= y <= y1 - r)]
+    pts = [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
+    if out:
+        tx0, tx1 = min(x for x, _ in out) - r, max(x for x, _ in out) + r
+        if all(y < y0 + r for _, y in out):          # tab above (-y)
+            ty = min(y for _, y in out) - r
+            pts = [(x0, y0), (tx0, y0), (tx0, ty), (tx1, ty), (tx1, y0), (x1, y0), (x1, y1), (x0, y1)]
+        elif all(y > y1 - r for _, y in out):        # tab below (+y)
+            ty = max(y for _, y in out) + r
+            pts = [(x0, y0), (x1, y0), (x1, y1), (tx1, y1), (tx1, ty), (tx0, ty), (tx0, y1), (x0, y1)]
+        else:
+            raise ValueError("toroid_v: pads outside the courtyard on both sides")
+    body += poly(pts, "F.CrtYd", 0.05)
+    for n, x, y in pads:
+        body += pad(n, x, y, t["pad"], t["drill"], "rect" if n == 1 else "circle")
+    body += line(0, -0.6, 0, 0.6, "F.Fab", 0.05) + line(-0.6, 0, 0.6, 0, "F.Fab", 0.05)
+    body += text("user", "origin = 5.1 RM8 origin", 0, 1.2, "F.Fab", 0.5)
+    body += text("user", "upright toroid, ring plane along x", cx, cy - 1.0, "F.Fab", 0.7)
+    body += text("user", "body position from the 5.1 photo +-3 mm", cx, cy + 1.0, "F.Fab", 0.6)
+    descr = (f"Sendust toroid OD {t['od']:g} x {t['w']:g} mm mounted upright (on edge, ring plane along x) as on the built "
+             f"5.1 board: the two winding leads ({t['wire']:g} mm wire) go into the RM8 winding holes pri1 / pri2 of "
+             f"tube_psu:L_RM8_Proteus placed at {rot} deg (origin = RM8 origin, place this footprint at 0 deg on the RM8 "
+             f"position); drill {t['drill']:g} mm; body centre offset from the pad midpoint ({t['body_dx']:g}, "
+             f"{t['variants'][rot] * t['body_dy']:g}) mm read off the photo (+-3 mm) (L1 / L2 PFC chokes, tube_psu_next NR 5.2)")
+    return footprint_x(toroid_v_name(rot), descr, "inductor toroid sendust PFC vertical upright RM8", body,
+                       y0 - 1.2 if cy < 0 else y1 + 1.2, y1 + 2.4 if cy < 0 else y0 - 2.4,
+                       models=model(toroid_v_name(rot)))
+
+
 def heatsink():
     """Outline helper for the bent-plate heatsink (HEATSINK): origin = centre of the plate's device-side
     face, the plate extends to +y (away from the TO tabs). No pads; board-only."""
@@ -331,6 +412,7 @@ def main():
              "Transformer_EC42x15_2Slot_2x8_P5mm.kicad_mod": ec42(),
              toroid_name() + ".kicad_mod": toroid(),
              toroid_name(True) + ".kicad_mod": toroid(True),
+             **{toroid_v_name(r) + ".kicad_mod": toroid_v(r) for r in TOROID_V["variants"]},
              f"Heatsink_Plate_Keepout_L{HEATSINK['l']:g}mm.kicad_mod": heatsink()}
     if "--check" in sys.argv:
         bad = [n for n, t in files.items()

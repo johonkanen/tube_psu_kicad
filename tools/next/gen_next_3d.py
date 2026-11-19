@@ -76,6 +76,22 @@ def toroid():
     return [(ring, COPPER), (pins([(x, y) for _, x, y in gfp.toroid_pads()], t["wire"], z1=3.0), COPPER)]
 
 
+def toroid_v(rot):
+    """Upright toroid (ring plane along x, standing on the board) with its two leads into the RM8 holes."""
+    t = gfp.TOROID_V
+    pads, (cx, cy) = gfp.toroid_v_geometry(rot)
+    ro, ri = t["od"] / 2, t["id"] / 2
+    ring = (cq.Workplane("XZ").circle(ro).circle(ri).extrude(t["w"] / 2, both=True)
+            .edges().fillet(2.0).translate((cx, -cy, ro)))
+    leads = None
+    for _, x, y in pads:
+        dx = min(abs(x - cx), ro - 0.5)
+        z1 = ro - (ro * ro - dx * dx) ** 0.5 + 1.0          # up into the winding above the hole
+        c = cyl(x, y, -3.5, z1, t["wire"])
+        leads = c if leads is None else leads.union(c)
+    return [(ring, COPPER), (leads, COPPER)]
+
+
 def heatsink():
     h = gfp.HEATSINK
     return [(box(-h["l"] / 2, 0, 0, h["l"] / 2, h["t"], h["h"]), ALU)]
@@ -110,6 +126,9 @@ MODELS = {
                                            (pins([(-2.5, 0), (2.5, 0)], 1.2, z1=0.1), PIN)],
     "Transformer_EF25_2x5_P5.08mm_8pin": lambda: [(box(-8.65, -13.84, 0.4, 8.35, 14.16, 4.0), BLACK),
                                                   (box(-8.0, -12.5, 4.0, 7.7, 12.5, 22.0), GREY)],  # height 22 assumed
+    # L1 / L2 upright on the 5.1 RM8 holes (2026-11-19); last in the dict: OCC numbers the assembly
+    # occurrences per process, so models added in front would renumber (and rewrite) every later file
+    **{gfp.toroid_v_name(r): (lambda r=r: toroid_v(r)) for r in gfp.TOROID_V["variants"]},
 }
 
 

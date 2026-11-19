@@ -5698,7 +5698,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tube_psu_next:L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm"
+		(property "Footprint" "tube_psu_next:L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_315deg"
 			(at 254 88.9 0)
 			(effects
 				(font
@@ -6218,7 +6218,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tube_psu_next:L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm"
+		(property "Footprint" "tube_psu_next:L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_45deg"
 			(at 254 152.4 0)
 			(effects
 				(font
@@ -6815,7 +6815,7 @@
 		)
 		(uuid "b85d6238-2076-5966-870f-8f9aec012147")
 	)
-	(text "5.2: L1 / L2 = sendust toroids (OD 31.5 x 16.7 mm, 2 leads, NR 5.2); value = measured L at 0 A / PFC peak (TBD), footprint phase 3."
+	(text "5.2: L1 / L2 = sendust toroids (OD 31.5 x 16.7 mm, 2 leads, NR 5.2) standing upright on the 5.1 RM8 holes; value = measured L at 0 A / PFC peak (TBD)."
 		(exclude_from_sim no)
 		(at 228.6 194.31 0)
 		(effects

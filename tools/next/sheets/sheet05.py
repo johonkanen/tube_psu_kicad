@@ -175,7 +175,7 @@ sh.wire((XDC, AC2R), (XDC, TOPR), (XDC, TOPR - g(6)))
 sh.junction(XDC, TOPR)
 power_at(sh, "DC+", (XDC, TOPR - g(6)), "up")
 sh.text("PFC drain 1 / pfc drain 2 (PDF labels) are the wired nodes L2-Q5-SICD1 / L1-Q6-SICD2.", g(180), g(150))
-sh.text("5.2: L1 / L2 = sendust toroids (OD 31.5 x 16.7 mm, 2 leads, NR 5.2); value = measured L at 0 A / PFC peak (TBD), footprint phase 3.", g(180), g(153))
+sh.text("5.2: L1 / L2 = sendust toroids (OD 31.5 x 16.7 mm, 2 leads, NR 5.2) standing upright on the 5.1 RM8 holes; value = measured L at 0 A / PFC peak (TBD).", g(180), g(153))
 
 # --- bridge rectifier DB1 (standalone, as in the PDF): generates DC+ and GND -> permanent PWR_FLAGs
 DBX, DBY = g(270), g(40)

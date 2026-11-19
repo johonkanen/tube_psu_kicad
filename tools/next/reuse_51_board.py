@@ -29,13 +29,17 @@ Steps:
       unchanged footprint ID           kept as is (position, orientation, tracks)
       new ID, same pads (library copy with a 3D model / real can height)   replaced by the 5.2
                                        footprint at the same place; pad positions verified, tracks kept
-      new ID, different pads ("changed")  5.2 footprint at the old position / rotation / side
+      new ID, different pads ("changed")  5.2 footprint at the old position / rotation / side (rotation
+                                       overridden by NEW_ORIENTATION: L1 / L2 upright toroids at 0 deg)
       not in 5.2 (removed)             deleted (board-only footprints WP1-WP4 are kept and re-netted)
       new in 5.2 (added)               placed off-board below the outline, one row block per sheet
     Every pad gets the net of the 5.2 netlist (renamed nets follow), fields value / path / sheet too.
  4. Copper: old net -> new net by the pads of kept footprints (majority; identical name preferred).
     Deleted: tracks / vias whose net has no 5.2 counterpart, and every segment / via that touches a
-    pad of a changed or removed footprint or a pad whose 5.2 net differs from the mapped track net.
+    pad of a changed or removed footprint or a pad whose 5.2 net differs from the mapped track net -
+    except at a pad of a changed footprint that has a new pad at the same place with the mapped net
+    (L1 / L2: the toroid leads sit in the RM8 winding holes, their tracks stay).
+Placement step 1 (TR3, split caps, DRV5 / DRV6 groups) is tools/next/trial_placement.py on this board.
     Zones are kept and re-netted the same way (zones without a 5.2 net are deleted); kicad-cli refills
     them with the 5.2 rules (net classes of the copied .kicad_pro, clearances of the .kicad_dru).
 """
@@ -75,6 +79,10 @@ LAYER_MAP = {pcbnew.F_Cu: pcbnew.F_Cu, pcbnew.In1_Cu: pcbnew.In1_Cu, pcbnew.In2_
              pcbnew.B_Cu: pcbnew.B_Cu}
 MM = 1e6
 TOL = 2000  # nm, pad position / size match of library copies
+# changed footprints placed at another orientation than the 5.1 part (default: the 5.1 orientation).
+# L1 / L2: the upright-toroid footprints are drawn in board orientation with origin = the 5.1 RM8 origin;
+# at 0 deg their pads 1 / 2 land on the RM8 winding holes pri1 / pri2 (lib: gen_next_footprints.py TOROID_V)
+NEW_ORIENTATION = {"L1": 0.0, "L2": 0.0}
 
 
 def mm(v):
@@ -186,7 +194,10 @@ def replace_fp(b, old, fpid, ref):
     new.SetPosition(pos)
     if old.IsFlipped():
         new.Flip(pos, pcbnew.FLIP_DIRECTION_LEFT_RIGHT)
-    new.SetOrientation(old.GetOrientation())
+    if ref in NEW_ORIENTATION:
+        new.SetOrientationDegrees(NEW_ORIENTATION[ref])
+    else:
+        new.SetOrientation(old.GetOrientation())
     new.SetReference(ref)
     for src, dst in ((old.Reference(), new.Reference()), (old.Value(), new.Value())):
         dst.SetPosition(src.GetPosition())
@@ -290,12 +301,12 @@ def cli(args):
     return pr.returncode, peak
 
 
-def project_copy(tmp, severities=None, zones_on=None):
+def project_copy(tmp, severities=None, zones_on=None, name=NAME):
     """copy of the trial board / project / rules in tmp; severities: {check: severity} (others 'ignore'
     when given); zones_on: keep only the copper zones on this layer (None = all)"""
     for ext in (".kicad_pro", ".kicad_dru", ".kicad_pcb"):
-        shutil.copy(os.path.join(OUTDIR, NAME + ext), tmp)
-    pro_path = os.path.join(tmp, NAME + ".kicad_pro")
+        shutil.copy(os.path.join(OUTDIR, name + ext), tmp)
+    pro_path = os.path.join(tmp, name + ".kicad_pro")
     if severities is not None:
         with open(pro_path) as f:
             pro = json.load(f)
@@ -304,18 +315,21 @@ def project_copy(tmp, severities=None, zones_on=None):
             rs[k] = severities.get(k, "ignore")
         with open(pro_path, "w") as f:
             json.dump(pro, f, indent=2)
-    pcb = os.path.join(tmp, NAME + ".kicad_pcb")
+    pcb = os.path.join(tmp, name + ".kicad_pcb")
     if zones_on is not None:
-        b = pcbnew.LoadBoard(pcb)
-        for z in list(b.Zones()):
-            if not z.GetIsRuleArea() and not z.GetLayerSet().Contains(zones_on):
-                b.Remove(z)
-        pcbnew.SaveBoard(pcb, b)
-        del b
+        # in a fresh interpreter: after a LoadBoard / SaveBoard / del of a board in a deleted temporary
+        # project, the next pcbnew.LoadBoard in the same process can return a bare SwigPyObject
+        subprocess.run([sys.executable, "-c", "import sys, pcbnew\n"
+                        "b = pcbnew.LoadBoard(sys.argv[1])\n"
+                        "for z in list(b.Zones()):\n"
+                        "    if not z.GetIsRuleArea() and not z.GetLayerSet().Contains(int(sys.argv[2])):\n"
+                        "        b.Remove(z)\n"
+                        "pcbnew.SaveBoard(sys.argv[1], b)\n", pcb, str(zones_on)],
+                       check=True, capture_output=True)
     return pcb
 
 
-def run_drc():
+def run_drc(name=NAME, out_json="drc.json"):
     """kicad-cli's creepage test on the whole board needs > 3 GB (the 5.1 pours on F / B / In1 / In4);
     the DRC is therefore split into passes, each a separate kicad-cli run (peak about 2.5 GB):
       0  refill the zones with the 5.2 rules, save the board (all checks off)
@@ -325,15 +339,15 @@ def run_drc():
     drc.json = pass 1 + the creepage violations of passes 2 / 3 (duplicates by item uuids removed)."""
     peaks = {}
     with tempfile.TemporaryDirectory() as tmp:
-        pcb = project_copy(tmp, severities={})
+        pcb = project_copy(tmp, severities={}, name=name)
         rc, peaks["refill"] = cli(["pcb", "drc", "--format", "json", "--refill-zones", "--save-board",
                                    "-o", os.path.join(tmp, "d.json"), pcb])
         if rc != 0:
             sys.exit("reuse_51_board: zone refill failed")
-        shutil.copy(pcb, OUT)
+        shutil.copy(pcb, os.path.join(OUTDIR, name + ".kicad_pcb"))
     with tempfile.TemporaryDirectory() as tmp:
-        pcb = project_copy(tmp)
-        pro_path = os.path.join(tmp, NAME + ".kicad_pro")
+        pcb = project_copy(tmp, name=name)
+        pro_path = os.path.join(tmp, name + ".kicad_pro")
         with open(pro_path) as f:
             pro = json.load(f)
         pro["board"]["design_settings"]["rule_severities"]["creepage"] = "ignore"
@@ -344,11 +358,11 @@ def run_drc():
         with open(out) as f:
             drc = json.load(f)
     seen = set()
-    for name, layer in (("creepage F.Cu", pcbnew.F_Cu), ("creepage B.Cu", pcbnew.B_Cu)):
+    for pname, layer in (("creepage F.Cu", pcbnew.F_Cu), ("creepage B.Cu", pcbnew.B_Cu)):
         with tempfile.TemporaryDirectory() as tmp:
-            pcb = project_copy(tmp, severities={"creepage": "error"}, zones_on=layer)
+            pcb = project_copy(tmp, severities={"creepage": "error"}, zones_on=layer, name=name)
             out = os.path.join(tmp, "c.json")
-            rc, peaks[name] = cli(["pcb", "drc", "--format", "json", "--severity-all", "-o", out, pcb])
+            rc, peaks[pname] = cli(["pcb", "drc", "--format", "json", "--severity-all", "-o", out, pcb])
             with open(out) as f:
                 c = json.load(f)
         for v in c["violations"]:
@@ -359,7 +373,7 @@ def run_drc():
                 seen.add(key)
                 drc["violations"].append(v)
     drc["passes"] = {k: f"peak RSS {v // 1024} MB" for k, v in peaks.items()}
-    with open(os.path.join(OUTDIR, "drc.json"), "w") as f:
+    with open(os.path.join(OUTDIR, out_json), "w") as f:
         json.dump(drc, f, indent=1)
     print("reuse_51_board: DRC passes " + ", ".join(f"{k} {v // 1024} MB" for k, v in peaks.items()))
 
@@ -441,10 +455,6 @@ def main(argv):
             rot=o.GetOrientationDegrees(), side="B" if o.IsFlipped() else "F",
             old_court=[mm(ob.GetWidth()), mm(ob.GetHeight())], new_court=[mm(nb.GetWidth()), mm(nb.GetHeight())])
 
-    # pads that make tracks go: every pad of a removed or changed footprint (old geometry)
-    kill_pads = []
-    for ref in removed + changed:
-        kill_pads += list(old_fps[ref].Pads())
     rec["old_courtyards"] = {ref: dict(side="B" if old_fps[ref].IsFlipped() else "F", court=courtyards(old_fps[ref]))
                              for ref in removed + changed}
 
@@ -477,6 +487,23 @@ def main(argv):
     rec["renamed"] = {o: n for o, n in netmap.items() if n and n != o}
     rec["unmapped_nets"] = sorted(o for o, n in netmap.items() if n is None)
     rec["split_nets"] = ambiguous
+
+    # pads that make tracks go: every pad of a removed or changed footprint (old geometry) - except a pad of a
+    # changed footprint that has a new pad at the same place with the same net (L1 / L2 toroid leads in the RM8
+    # holes): its tracks stay
+    kill_pads, kept_pads = [], []
+    for ref in removed + changed:
+        new_at = [(q, pins.get(ref, {}).get(q.GetNumber(), "")) for q in newfps[ref].Pads()] if ref in changed else []
+        for p in old_fps[ref].Pads():
+            pp = p.GetPosition()
+            hit = next(((q, n) for q, n in new_at if abs(q.GetPosition().x - pp.x) <= TOL
+                        and abs(q.GetPosition().y - pp.y) <= TOL), None)
+            if hit and hit[1] and hit[1] == (netmap.get(p.GetNetname()) or ""):
+                kept_pads.append((ref, p.GetNumber(), hit[0]))
+            else:
+                kill_pads.append(p)
+    rec["kept_pads"] = [(r, n, q.GetNumber()) for r, n, q in kept_pads]
+    kept_new = {(r, q.GetNumber()) for r, _, q in kept_pads}
 
     # --- delete removed footprints (after their pads were recorded), old copies of replaced ones
     netinfo = {}
@@ -515,7 +542,8 @@ def main(argv):
     checks = [(p, "removed/changed fp " + p.GetParentFootprint().GetReference()) for p in kill_pads] + \
              [(p, "net changed " + r) for r, _, _, _, p in netchg_pads]
     boxes = [(p, why, p.GetBoundingBox()) for p, why in checks]
-    new_boxes = [(p, "under changed fp " + ref, p.GetBoundingBox()) for ref in changed for p in newfps[ref].Pads()]
+    new_boxes = [(p, "under changed fp " + ref, p.GetBoundingBox()) for ref in changed for p in newfps[ref].Pads()
+                 if (ref, p.GetNumber()) not in kept_new]
     kill = []
     for t in b.GetTracks():
         o = t.GetNetname()
@@ -629,7 +657,9 @@ def main(argv):
     print(f"reuse_51_board: changed footprints ({len(changed)}): {' '.join(sorted(changed))}")
     print(f"reuse_51_board: deleted copper {dict(deleted)}; zones deleted {zones_deleted}")
     if "--no-report" not in argv:
-        subprocess.run(["python3", os.path.join(HERE, "trial_report.py")], check=True)
+        # system python (matplotlib / shapely), without the AppImage's PYTHONHOME / PYTHONPATH
+        env = {k: v for k, v in os.environ.items() if k not in ("PYTHONHOME", "PYTHONPATH")}
+        subprocess.run(["python3", os.path.join(HERE, "trial_report.py")], check=True, env=env)
     return 0
 
 

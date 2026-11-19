@@ -150,8 +150,8 @@ ISO1,tube_psu:SI8661,tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0,"SO
 ISO2,tube_psu:SI8661,tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot11.1,"SOIC-16W + 1 x 19.5 mm creepage slot (11.1 mm reinforced, primary <-> DAB secondary; phase 3)"
 J2,tube_psu:HEADER_2X25_50MIL,tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus,2x25 1.27 mm header
 J4,tube_psu_next:CONN_01X06,Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical,"1x6 2.54 mm, FTDI TTL-232R-3V3 pinout (NR 3b.2)"
-L1,tube_psu_next:L_TOROID,tube_psu_next:L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm,"sendust toroid OD 31.5 x H 16.7 flat, 2 leads P16.7 under the rim (guess - confirm with calipers), courtyard D32.5; _TieSlots variant for a cable-tie hold-down (phase 3)"
-L2,tube_psu_next:L_TOROID,tube_psu_next:L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm,"sendust toroid OD 31.5 x H 16.7 flat, 2 leads P16.7 under the rim (guess - confirm with calipers), courtyard D32.5; _TieSlots variant for a cable-tie hold-down (phase 3)"
+L1,tube_psu_next:L_TOROID,tube_psu_next:L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_45deg,"sendust toroid OD 31.5 x 16.7 standing upright as built on the 5.1 board: leads in the 5.1 RM8 winding holes pri1/pri2 (RM8 at 45 deg), place at 0 deg on the 5.1 RM8 origin; body position from the photo (2026-11-19)"
+L2,tube_psu_next:L_TOROID,tube_psu_next:L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_315deg,"sendust toroid OD 31.5 x 16.7 standing upright as built on the 5.1 board: leads in the 5.1 RM8 winding holes pri1/pri2 (RM8 at -45 deg), place at 0 deg on the 5.1 RM8 origin; body position from the photo (2026-11-19)"
 N5V_OUT,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
 N80V_OUT,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
 P15V_OUT,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"

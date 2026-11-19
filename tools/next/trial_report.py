@@ -268,6 +268,8 @@ def main():
     draw(build, iso, unc, cy, cy_new, drc)
     write_report(build, drc, base, types, sev, base_types, iso, cross, same, unc, unc_sheet, unc_net,
                  cy, cy_base, cy_new, changed_coll, changed_coll_new, geo)
+    if os.path.exists(os.path.join(D, "placement_p1.json")) and os.path.exists(os.path.join(D, "drc_p1.json")):
+        write_p1(build, drc, base)
 
 
 # ------------------------------------------------------------------------------------------- drawing
@@ -460,7 +462,7 @@ def write_report(build, drc, base, types, sev, base_types, iso, cross, same, unc
       f"removed {c.get('removed', 0)}, added {c.get('added', 0)} (placed off-board below the outline, grouped by sheet), "
       f"mounting holes {c.get('hole', 0)}, board-only free pads WP1–WP4 {c.get('board only', 0)} (kept, re-netted).")
     w("")
-    w(f"- changed (new 5.2 footprint at the 5.1 position / rotation / side): {', '.join(sorted(build['changed']))}")
+    w(f"- changed (new 5.2 footprint at the 5.1 position / rotation / side; L1 / L2 at 0°, `reuse_51_board.NEW_ORIENTATION`): {', '.join(sorted(build['changed']))}")
     w(f"- removed: {', '.join(sorted(build['removed']))}")
     w(f"- added: {', '.join(build['added'])}")
     w("")
@@ -656,7 +658,10 @@ def write_report(build, drc, base, types, sev, base_types, iso, cross, same, unc
 
 REWORK = """## Rework estimate
 
-Written after reviewing the numbers above (they are regenerated; this text is not).
+Written after reviewing the numbers of the first trial (commit d3f1063, L1 / L2 still the flat-lying toroid
+footprint at the RM8 place); the tables above are regenerated, this text is not. Since 2026-11-19 L1 / L2 are the
+upright toroids on the RM8 holes (item 6 is superseded) and TR3 / the split caps / DRV5 / DRV6 have a first
+placement (item 1): see **After placement step 1** at the end.
 
 **Overall.** 273 of the 315 5.1 parts stay where they are with their tracks (243 unchanged footprints + 30 library
 copies with identical pads); 31 footprints changed (the 16 listed parts plus 15 passives that only grew a size:
@@ -710,7 +715,7 @@ most of the board survives; the rework is concentrated in five spots along the b
    around TR1. The fit search finds TR1 free at its 5.1 origin once these ~12 loop parts move. 14 PRI-SEC markers
    at C102 (secondary −100 V bias cap) next to the primary fly-lead pins at y ≈ 11. → Re-place PWM2, clamp and
    rectifier parts around the EEL19, move C102 (or the fly-lead side) to keep 11.1 mm.
-6. **PFC chokes L1 / L2 (toroids Ø 32.6 mm courtyard vs RM8 22 × 22).** L1 crosses the board edge at its 5.1
+6. **(superseded 2026-11-19: upright toroids on the RM8 holes, see step 1)** **PFC chokes L1 / L2 (toroids Ø 32.6 mm courtyard vs RM8 22 × 22).** L1 crosses the board edge at its 5.1
    place and within ±25 mm never gets below 225 mm² overlap (CM4, C117, C66); L2 overlaps 191 mm² in place (C117,
    C64, Q5, CM4); H4 / H7 mounting holes fall inside the courtyards; the toroid lead pads short R19 / R51 on the
    bottom. → Re-place the PFC input block (L1, L2, C117, CM4, C64 / C66, Q5 / Q6 surroundings) or mount the
@@ -745,6 +750,300 @@ of 700–900 track segments re-drawn (the 644 deleted plus the barrier spots). T
 not a drop-in: the L1 / L2 toroids and the TR3 / gate-driver stack-up are the decisions to make first, because
 they set where the rest of the barrier can run. Then In2 / In3 (empty here) take the re-routed signals and the
 power pours.
+"""
+
+# ------------------------------------------------------------------------------------------- placement step 1
+FIRST_TRIAL = "d3f1063"   # commit of the first trial (flat L1 / L2 toroids, nothing moved)
+P1_ZOOM = {"tr3_dab": ["TR3", "C16", "C55", "C47", "C54", "Q7", "Q8", "DRV5"],
+           "l1_l2_pfc": ["L1", "L2"]}
+
+
+def summary(drc, g, dom):
+    """counts for the delta table: violation types, cross-domain isolation by pair (on the board), unconnected,
+    courtyard pairs"""
+    ex = [p for seg in g["edge"] for p in seg]
+    bx0, bx1 = min(p[0] for p in ex), max(p[0] for p in ex)
+    by0, by1 = min(p[1] for p in ex), max(p[1] for p in ex)
+    pairs = collections.Counter()
+    for v in drc["violations"]:
+        if v["type"] not in ISO_TYPES:
+            continue
+        its = v["items"]
+        if not its:
+            continue
+        doms = {dom.get(item_net(i), "") for i in its} - {""}
+        x = sum(i["pos"]["x"] for i in its) / len(its)
+        y = sum(i["pos"]["y"] for i in its) / len(its)
+        if len(doms) > 1 and bx0 <= x <= bx1 and by0 <= y <= by1:
+            pairs["-".join(sorted(doms))] += 1
+    cy = sorted(sorted(item_ref(i) for i in v["items"]) for v in drc["violations"] if v["type"] == "courtyards_overlap")
+    return dict(types=dict(collections.Counter(v["type"] for v in drc["violations"])), iso=dict(pairs),
+                unconnected=len(drc["unconnected_items"]), courtyard_pairs=cy)
+
+
+def first_trial_summary(dom):
+    """summary of the first trial (git FIRST_TRIAL), cached in first_trial_summary.json"""
+    path = os.path.join(D, "first_trial_summary.json")
+    if os.path.exists(path):
+        return load("first_trial_summary.json")
+    import subprocess
+    show = lambda f: json.loads(subprocess.run(["git", "-C", ROOT, "show", f"{FIRST_TRIAL}:kicad_next/trial_from_51/{f}"],  # noqa: E731
+                                               check=True, capture_output=True, text=True).stdout)
+    s = summary(show("drc.json"), show("build.json")["geometry"], dom)
+    s["commit"] = FIRST_TRIAL
+    with open(path, "w") as f:
+        json.dump(s, f, indent=1)
+    return s
+
+
+def iso_points(drc, dom):
+    out = []
+    for v in drc["violations"]:
+        if v["type"] not in ISO_TYPES:
+            continue
+        its = v["items"]
+        if not its:
+            continue
+        doms = [dom.get(item_net(i), "") for i in its]
+        ds = {d for d in doms if d}
+        out.append(dict(type=v["type"], x=sum(i["pos"]["x"] for i in its) / len(its),
+                        y=sum(i["pos"]["y"] for i in its) / len(its), cross=len(ds) > 1, pair="-".join(sorted(ds))))
+    return out
+
+
+def area_violations(drc, box):
+    c = collections.Counter()
+    for v in drc["violations"]:
+        its = v["items"]
+        if not its:
+            continue
+        x = sum(i["pos"]["x"] for i in its) / len(its)
+        y = sum(i["pos"]["y"] for i in its) / len(its)
+        if box[0] <= x <= box[2] and box[1] <= y <= box[3]:
+            c[v["type"]] += 1
+    nu = 0
+    for u in drc["unconnected_items"]:
+        if any(box[0] <= i["pos"]["x"] <= box[2] and box[1] <= i["pos"]["y"] <= box[3] for i in u["items"]):
+            nu += 1
+    return c, nu
+
+
+def refs_box(g, refs, margin=3.0):
+    pts = [p for r in refs if r in g["fps"] for c in g["fps"][r]["court"] for p in c]
+    return (min(p[0] for p in pts) - margin, min(p[1] for p in pts) - margin,
+            max(p[0] for p in pts) + margin, max(p[1] for p in pts) + margin)
+
+
+def under_pins(g, ref):
+    """parts on the other side whose courtyard contains a THT pad of ref (pad + 0.5 mm)"""
+    from shapely.geometry import Polygon as SPoly, box
+    from shapely.ops import unary_union
+    me = g["fps"][ref]
+    pads = [box(x - w / 2 - 0.5, y - h / 2 - 0.5, x + w / 2 + 0.5, y + h / 2 + 0.5) for x, y, w, h, _ in me["pads"]]
+    out = []
+    for r, f in g["fps"].items():
+        if r == ref or f["side"] == me["side"] or not f["court"]:
+            continue
+        P = unary_union([SPoly(c).buffer(0) for c in f["court"] if len(c) > 2])
+        if any(P.intersects(q) for q in pads):
+            out.append(r)
+    return sorted(out)
+
+
+def write_p1(build0, drc0, base):
+    dom, _ = net_domains()
+    p1, drc1 = load("placement_p1.json"), load("drc_p1.json")
+    g0, g1 = build0["geometry"], p1["geometry"]
+    s_first = first_trial_summary(dom)
+    s0, s1 = summary(drc0, g0, dom), summary(drc1, g1, dom)
+    moved = sorted(set(p1["place"]) | {r for v in p1["groups"].values() for r in v["refs"]})
+
+    # drawings
+    pcol = {"PRI-SEC": "#ff0000", "HEATER-PRI": "#00a000", "PRI-UART": "#0050ff", "SEC-UART": "#8000ff",
+            "HEATER-SEC": "#ff8000", "PE-PRI": "#00b0b0", "PE-SEC": "#00b0b0"}
+    iso1 = iso_points(drc1, dom)
+    cy_new1 = {frozenset(p) for p in s1["courtyard_pairs"]} - {frozenset(p) for p in s0["courtyard_pairs"]}
+    for f in os.listdir(D):
+        if f.startswith("zoom_p1_") and f.endswith(".png"):
+            os.remove(os.path.join(D, f))
+    for name, refs in P1_ZOOM.items():
+        bx = refs_box(g1, refs, 8.0)
+        fig, ax = base_axes(g1, f"step 1 {name}: copper by domain, courtyards (magenta = moved / L1 / L2, dashed = "
+                                "bottom), isolation violations (x clearance / o creepage), blue squares = courtyard "
+                                "overlaps new vs step 0",
+                            figsize=(12, 12 * (bx[3] - bx[1]) / (bx[2] - bx[0]) + 0.6), box=bx)
+        draw_copper(ax, g1, dom, alpha=0.5)
+        hl = set(moved) | {"L1", "L2"}
+        draw_fps(ax, g1, dom, highlight=hl,
+                 label_set={r for r, fp in g1["fps"].items() if bx[0] < fp["x"] < bx[2] and bx[1] < fp["y"] < bx[3]}, fs=6)
+        for i in iso1:
+            if i["cross"] and bx[0] < i["x"] < bx[2] and bx[1] < i["y"] < bx[3]:
+                ax.plot(i["x"], i["y"], marker="x" if i["type"] != "creepage" else "o", ms=7, mfc="none",
+                        color=pcol.get(i["pair"], "#000"), mew=1.2)
+        for v in drc1["violations"]:
+            if v["type"] == "courtyards_overlap" and frozenset(item_ref(i) for i in v["items"]) in cy_new1:
+                a, b = v["items"][0]["pos"], v["items"][1]["pos"]
+                ax.plot([(a["x"] + b["x"]) / 2], [(a["y"] + b["y"]) / 2], "s", ms=8, mfc="none", color="#0050ff")
+        if name == "tr3_dab":   # TR3 barrier band and pin rows
+            t = g1["fps"]["TR3"]
+            ax.axvspan(t["x"] - 7.0, t["x"] + 5.0, ymin=0, ymax=1, color="#00a0a0", alpha=0.08)
+        fig.tight_layout()
+        fig.savefig(os.path.join(D, f"zoom_p1_{name}.png"), dpi=120)
+        plt.close(fig)
+
+    L = []
+    w = L.append
+    w("")
+    w("## After placement step 1")
+    w("")
+    w("User decisions of 2026-11-19, applied reproducibly: **A** (L1 / L2) in the footprint and in step 0 "
+      "(`reuse_51_board.py`, `NEW_ORIENTATION`), **B** (TR3, split caps, gate-drive clusters) by "
+      "`tools/p2k/bin/kipy tools/next/trial_placement.py` (moves as data in `PLACE` / `GROUPS`) on the step-0 board → "
+      "`tube_psu_5_2_trial_p1.kicad_pcb`, DRC `drc_p1.json` (same split passes: "
+      + ", ".join(f"{k} {v}" for k, v in drc1.get("passes", {}).items()) + "), `placement_p1.json`.")
+    w("")
+    w("**A. L1 / L2 – upright toroids on the RM8 holes.** Footprints `tube_psu_next:L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_45deg` "
+      "(L1) / `…_315deg` (L2) (`gen_next_footprints.py` `TOROID_V`): pads 1 / 2 = the 5.1 RM8 winding holes pri1 / pri2, origin = "
+      "the 5.1 RM8 origin, placed at 0° on the RM8 position, so the step-0 board keeps the 5.1 tracks on both leads "
+      f"(kept pads: {', '.join(f'{r} {n}→{q}' for r, n, q in build0.get('kept_pads', [])) or 'none'}). Body 31.5 × 16.7 mm "
+      "standing on edge, ring plane along x (photo), centre (−12, ±8) mm from the pad midpoint (outer side of the pad pair, "
+      "+x end at the heatsink / H7), courtyard body + 1 mm.")
+    w("")
+    rows = []
+    for r in ("L1", "L2"):
+        f = g1["fps"][r]
+        xs = [p[0] for c in f["court"] for p in c]
+        ys = [p[1] for c in f["court"] for p in c]
+        ov = court_overlaps(g1["fps"], [r])[r]
+        rows.append([r, f"{f['x']}, {f['y']}", f"x {min(xs):.1f} … {max(xs):.1f}, y {min(ys):.1f} … {max(ys):.1f}",
+                     ", ".join(f"{p[0]} ({p[4]})" for p in [(round(q[0], 2), q[1], q[2], q[3], q[4]) for q in f["pads"]]),
+                     ", ".join(f"{o} {a}" for o, sd, a in ov if sd == f["side"]) or "–",
+                     ", ".join(o for o, sd, a in ov if sd != f["side"]) or "–"])
+    w(table(rows, ["ref", "origin (mm)", "courtyard", "pads x (net)", "same-side overlap (mm²)", "other side under it"]))
+    w("")
+    w("**B. Moves** (absolute place of single parts; rigid shift of the bottom-side gate-drive groups – their own "
+      "tracks / vias move with them):")
+    w("")
+    rows = [[r, d["side"], f"{d['old'][0]}, {d['old'][1]} / {d['old'][2]:g}°", f"{d['new'][0]}, {d['new'][1]} / {d['new'][2]:g}°"]
+            for r, d in sorted(p1["place"].items())]
+    for gname, d in p1["groups"].items():
+        rows.append([gname + ": " + ", ".join(d["refs"]), "B", "–", f"shift {d['dx']:+g}, {d['dy']:+g} mm "
+                     f"({d['tracks_moved']} copper items moved along)"])
+    w(table(rows, ["part / group", "side", "step 0 (x, y / rot)", "step 1"]))
+    w("")
+    dl = p1["deleted"]
+    w(f"Copper deleted by step 1: {sum(dl.values())} items ({', '.join(f'{k} {v}' for k, v in sorted(dl.items()))}); "
+      f"by part: {', '.join(f'{k} {v}' for k, v in p1['deleted_by_ref'].items())}.")
+    w("")
+    w("### DRC delta")
+    w("")
+    keys = sorted(set(s_first["types"]) | set(s0["types"]) | set(s1["types"]),
+                  key=lambda k: -max(s_first["types"].get(k, 0), s1["types"].get(k, 0)))
+    rows = []
+    for k in keys:
+        a, b, c = s_first["types"].get(k, 0), s0["types"].get(k, 0), s1["types"].get(k, 0)
+        rows.append([k, a, b, c, f"{c - a:+d}"])
+    a, b, c = (sum(x["iso"].values()) for x in (s_first, s0, s1))
+    rows.append(["**isolation, between two domains (on the board)**", a, b, c, f"{c - a:+d}"])
+    for pr in sorted(set(s_first["iso"]) | set(s1["iso"])):
+        a, b, c = s_first["iso"].get(pr, 0), s0["iso"].get(pr, 0), s1["iso"].get(pr, 0)
+        rows.append([f"  {pr}", a, b, c, f"{c - a:+d}"])
+    a, b, c = s_first["unconnected"], s0["unconnected"], s1["unconnected"]
+    rows.append(["**unconnected items**", a, b, c, f"{c - a:+d}"])
+    w(table(rows, [f"type", f"first trial ({s_first.get('commit', '')}, flat L1 / L2)", "step 0 (upright L1 / L2)",
+                   "step 1 (+ TR3 / caps / DRV moves)", "step 1 − first"]))
+    w("")
+    cyf = {frozenset(p) for p in s_first["courtyard_pairs"]}
+    cy1 = {frozenset(p) for p in s1["courtyard_pairs"]}
+    gone = sorted("/".join(sorted(p)) for p in cyf - cy1)
+    new = sorted("/".join(sorted(p)) for p in cy1 - cyf)
+    w(f"Courtyard-overlap pairs: first trial {len(cyf)}, step 1 {len(cy1)}; resolved ({len(gone)}): {', '.join(gone) or '–'}; "
+      f"new ({len(new)}): {', '.join(new) or '–'}.")
+    w("")
+    w("### What remains around TR3 and L1 / L2")
+    w("")
+    rows = []
+    for name, refs in (("TR3 + split caps + DRV5 / DRV6", ["TR3", "C16", "C55", "C47", "C54", "DRV5", "DRV6"]),
+                       ("L1", ["L1"]), ("L2", ["L2"])):
+        bx = refs_box(g1, refs, 3.0)
+        c1, n1 = area_violations(drc1, bx)
+        cf, nf = area_violations(drc0, bx)
+        rows.append([name, f"x {bx[0]:.0f} … {bx[2]:.0f}, y {bx[1]:.0f} … {bx[3]:.0f}",
+                     ", ".join(f"{k} {n}" for k, n in cf.most_common()) + f"; unconnected {nf}",
+                     ", ".join(f"{k} {n}" for k, n in c1.most_common()) + f"; unconnected {n1}"])
+    w(table(rows, ["area", "box (mm)", "step 0", "step 1"]))
+    w("")
+    order = ["TR3"] + sorted(set(p1["place"]) - {"TR3"})
+    ov = court_overlaps(g1["fps"], order)
+    rows = []
+    for r in order:
+        side = g1["fps"][r]["side"]
+        rows.append([r, side, ", ".join(f"{o} {a}" for o, sd, a in ov[r] if sd == side) or "–",
+                     (", ".join(under_pins(g1, r)) or "none") if r == "TR3" else "– (SMD)"])
+    for gname, d in p1["groups"].items():
+        ovg = court_overlaps(g1["fps"], d["refs"])
+        inner = sorted({f"{r}/{o}" if r < o else f"{o}/{r}" for r in d["refs"] for o, sd, a in ovg[r]
+                        if sd == "B" and o in d["refs"]})
+        outer = sorted({f"{r}/{o} {a}" for r in d["refs"] for o, sd, a in ovg[r] if sd == "B" and o not in d["refs"]})
+        rows.append([gname, "B", "inside the group (5.1 SOIC-16 → 5.2 SOIC-16W): " + (", ".join(inner) or "–")
+                     + "; with others: " + (", ".join(outer) or "–"), "–"])
+    w(table(rows, ["part", "side", "same-side courtyard overlap (mm²)", "bottom-side parts under its THT pins"]))
+    w("")
+    w("![tr3 step 1](zoom_p1_tr3_dab.png)")
+    w("")
+    w("![l1 l2 step 1](zoom_p1_l1_l2_pfc.png)")
+    w("")
+    w(P1_NOTES)
+    with open(os.path.join(D, "REPORT.md"), "a") as f:
+        f.write("\n".join(L) + "\n")
+    print("trial_report: appended 'After placement step 1'")
+
+
+P1_NOTES = """### Notes on step 1
+
+Written after reviewing the step-1 numbers (2026-11-19); the tables above are regenerated, this text is not.
+
+**L1 / L2 orientation (photo).** In the photo of the built 5.1 board the board's long axis runs top–bottom, mains
+input at the top (= KiCad left edge, IN1 / IN2 / PE), the heatsink plate lower left (= KiCad TO row at y ≈ −42).
+Mapping: photo down = KiCad +x, photo left = KiCad +y (bottom edge). The two taped toroids stand on edge with their
+ring planes along the photo's vertical, i.e. **along KiCad x** (the board's long axis); the left one (= L1, at the
+KiCad bottom edge y = 18.75) and the right one (= L2) flank the two common-mode chokes (CM1 / CM4, KiCad y −8 … −34),
+their lower (+x) ends stop just short of the heatsink / H7 standoff, right where the RM8 pri1 / pri2 holes are –
+the leads come down from the lower +x side of each ring. Hence: body centre 12 mm towards −x and 8 mm outwards (L1
++y, L2 −y) from the pad pair; this is also the only place near the RM8s where an upright 31.5 × 16.7 body is free
+(the fit scan over the offsets gives ≤ 5 mm² overlap only here; at the pad midpoint it would hit Q5 / Q6, C117,
+CM4, H4 / H7). L1's courtyard ends 1.0 mm inside the bottom edge – the photo shows the toroid flush with the edge;
+its top only appears to overhang by perspective, so no overhang is drawn. The body position is a photo estimate
+(±3 mm): measure it on the built board. Step 0 already resolves all L1 / L2 collisions of the first trial except
+small courtyard touches (SICD2 4.8, C117 1.3 / 1.5, H7 0.4 mm²), keeps the 5.1 tracks on all four leads, and the
+L1 / L2 area has no new DRC items (the remaining ones there are the 5.1 PE-PRI / clearance items of the PFC block).
+
+**TR3 / split caps / gate drive (B).** TR3 at (49.5, −69.3), 0°, winding axis along x (plan phase 5.6): pin rows
+x 29.5 (primary) / 69.5 (secondary), courtyard 0.55 mm inside the top edge; its 12 mm barrier band x 42.5 … 54.5
+continues the primary / secondary line of the TO row (Q19 gate pad x 48.2 | Q21 source pad x 54.7), so one straight
+barrier runs from the top edge through TR3 down to the heatsink. Why not further right / at the 5.1 origin: the
+secondary split caps then have no F.Cu room next to pins 9 / 10 (C19 / the output terminals take x ≥ 79), and the
+EC42 numbering puts the secondary cap pins 9 / 10 at the TO-row end, so C16 / C55 belong at x ≈ 76, y −59 … −47
+(TRANS_SEC pads 6 mm from the pins, ISO_GND end towards Q8, 420V end towards C19). C47 / C54 sit in the old L3
+area next to primary pins 1 / 2 (DHB_CAP pads facing each other 2.6 mm apart); their DC+ / DHB_CURRENT ends need
+a run to the TO row (C67 / C70 stay there as the HF decoupling of the primary half-bridge). C89 moved above C90.
+DRV5 + 6 parts moved 4.5 mm left (out of the primary pin row, still left of Q7); DRV6 + 7 parts moved under the
+TR3 body between the band and the secondary row (the only free bottom-side room on the secondary side). No
+bottom-side part is under a TR3 pin; TR3, the split caps and C89 have no courtyard overlap left; the TR3-area
+shorts / mask bridges dropped from 12 / 12 to 5 / 4 (the rest are the DRV5 / DRV6 groups' own 5.1-SOIC-16 →
+SOIC-16W overlaps: C92 / C94 / C95 at DRV5, C46 / C93 at DRV6 – their bootstrap / decoupling parts must be
+re-placed around the wider package) and the TR3-area clearances from 38 to 23.
+
+**What remains around TR3:** (1) the TO-row barrier (rework item 2): the Q19 gate track and the Q21 / Q8 copper
+are within 11.1 mm across x ≈ 51 (creepage marker Q19 gate ↔ DRV6 pad 9 now that DRV6 sits right of the band) –
+needs the Q19 / Q21 slot or more spacing in the row, unchanged by this step; (2) a 5.1 DHB_HI_SOURCE_SEC F.Cu
+track and the primary DHB_HI_SOURCE F.Cu pour near the band, a primary +3V3 via inside the 420V pour at x ≈ 71
+(5.1 leftovers to delete when routing); (3) 59 unconnected items in the TR3 box (both half-bridge loops, the
+split caps, the moved gate-drive groups' outside connections – 58 copper items were deleted by the moves,
+63 moved along with the groups); (4) the gate-drive groups are now further from the TO row (DRV6 ≈ 10 mm above
+Q21 / Q8, under the transformer – check the EC42 stray field at the driver, or move DRV6 + its parts into the
+row once the TO row is regrouped); (5) the 5.1 F.Cu pours around the old C16 / C55 / TR3 area still follow the
+old shapes and must be redrawn for the new pins.
 """
 
 if __name__ == "__main__":

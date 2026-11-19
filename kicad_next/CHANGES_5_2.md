@@ -93,7 +93,7 @@ ICE5AR change (1.5) R64, R81, R84, R85, R86, C50.
 
 | NR | Done | Refdes / value / nets |
 |---|---|---|
-| 5.2 | partly | L1, L2 → symbol `L_TOROID` (two leads; 5.1 RM8 pri1 / pri2 = 1 / 2), value **`TBD (measured)`**, footprint (phase 3) `tube_psu_next:L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm` (lead spacing to confirm with calipers; RM8 dropped). PFC drain nodes named **PFC_DRAIN_1 / PFC_DRAIN_2** |
+| 5.2 | partly | L1, L2 → symbol `L_TOROID` (two leads; 5.1 RM8 pri1 / pri2 = 1 / 2), value **`TBD (measured)`**, footprint (2026-11-19, user decision: the toroids stand **upright** as on the built 5.1 board, ring plane along the board's long axis, the two winding leads in the RM8 winding holes) `tube_psu_next:L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_45deg` (L1) / `…_315deg` (L2): pads 1 / 2 = the 5.1 RM8 pri1 / pri2 holes (one footprint per 5.1 RM8 rotation +45 / −45°, origin = the RM8 origin, placed at 0°), body 31.5 × 16.7 mm off the pad pair as in the photo (±3 mm, kicad_next/README.md); the flat-lying `L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm` of phase 3 is no longer used (RM8 dropped). PFC drain nodes named **PFC_DRAIN_1 / PFC_DRAIN_2** |
 | 5.2b | yes | C28 / C29 / C37 / C56 value `82u 450V` (Man Yue ERT826M2WI45RRS0F-R C51890374), C19 / C30 **39u → 68u** (Ymin KCXE5002W680MF C913388, stock 103), C102 (see 1) |
 | 5.4 | yes | Q10, Q11 → **IPD60R280P7S** DPAK (C536813), footprint `Package_TO_SOT_SMD:TO-252-2` (1 G, 2 D tab, 3 S = the Q_NMOS_GDS pins) |
 | 5.5 | layout | heatsink / bracket – phase 5 |
@@ -127,7 +127,7 @@ PFC_DRAIN_1/2, HEATER_HI_DRV, Net-(D35-K), Net-(DRV3-VDDA); TRANS_PRI removed).
    model in phase 4; the 22R drop (≈ 13 mV) shifts the bias of all channels equally.
 7. **ESL caps** 12p / 5.6p are calculated start values (τ ≈ 180 ns ↔ 0.72 nH at 4 mΩ); HEATER at noise gain 101 is
    limited by the LMH6643 (≈ 0.56 MHz), tune on the bench. If the shunts become 5 mΩ (KRL2012E, NR 5.6) rescale.
-8. **L1 / L2**: value after measuring the toroids (NR 5.2); footprint done in phase 3 (lead spacing / position to confirm with calipers, kicad_next/README.md).
+8. **L1 / L2**: value after measuring the toroids (NR 5.2); footprint = upright toroid on the 5.1 RM8 holes (2026-11-19); confirm the body position on the built board (kicad_next/README.md).
 9. **Q10 / Q11 P7** standard body diode – LLC start-up / overload commutation in the phase-4 simulation (NR 5.4).
 10. **C73** (2.2 µF 450 V X6S 2220 on DC+) left as is (NR 5.6 asks for ≥ 630 V; no stocked 2.2 µF part).
 11. **R124 2.61k** low JLC stock (75 / 43 pcs).
@@ -199,8 +199,8 @@ Parts: 5.1 315, 5.2 362; removed 11, added 58.
 | ISO1 | SI8661 -> CA-IS3761LW |  | tube_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus -> tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0 |
 | ISO2 | SI8661 -> CA-IS3761LW |  | tube_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus -> tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot11.1 |
 | J4 | 66226-003 -> FTDI 1x6 | CONN_01X03 -> CONN_01X06 | Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical -> Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical |
-| L1 | 200u -> TBD (measured) | RM8_INDUCTOR -> L_TOROID | tube_psu:L_RM8_Proteus -> tube_psu_next:L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm |
-| L2 | 200u -> TBD (measured) | RM8_INDUCTOR -> L_TOROID | tube_psu:L_RM8_Proteus -> tube_psu_next:L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm |
+| L1 | 200u -> TBD (measured) | RM8_INDUCTOR -> L_TOROID | tube_psu:L_RM8_Proteus -> tube_psu_next:L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_45deg |
+| L2 | 200u -> TBD (measured) | RM8_INDUCTOR -> L_TOROID | tube_psu:L_RM8_Proteus -> tube_psu_next:L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_315deg |
 | N5V_OUT |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
 | N80V_OUT |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
 | P15V_OUT |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
