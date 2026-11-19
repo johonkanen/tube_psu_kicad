@@ -5,7 +5,7 @@ tube_power_5_1 board (verified against the Proteus CADCAM files by `tools/check_
 the changes below is in it yet. Each item points to the study that backs it.
 
 Priority: **H** = fix / required for the new parts, **M** = should do, **L** = documentation or
-optional. "Decided" = the user has agreed; "to confirm" = needs an answer or a measurement first.
+optional. Deferred optional improvements (after layout / bench): [OPTIONAL_IMPROVEMENTS.md](OPTIONAL_IMPROVEMENTS.md). "Decided" = the user has agreed; "to confirm" = needs an answer or a measurement first.
 
 ## 1. Auxiliary flyback (sheet 1) – new TR1 on EEL19, 12 W continuous
 
