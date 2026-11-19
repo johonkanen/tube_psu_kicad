@@ -1665,7 +1665,7 @@ tracking V420·20/21 or burst at light load, frequency soft-start 420 → 140 kH
 
 ## 5.2: PWM2 → ICE5AR0680AG, 100–450 V input (2026-11-19)
 
-The user bought the Infineon **ICE5AR0680AG** (PG-DSO-12, C17699638 ICE5AR0680AGXUMA1, JLC stock 3): it replaces the
+The user bought the Infineon **ICE5AR0680AG** (PG-DSO-12, C17699638 ICE5AR0680AGXUMA1, JLC public stock 3; 10 pcs bought into the user's JLC parts stock): it replaces the
 ICE5AR4780BZS (DIP-7) for 100–450 V DC+ at 20 W (`simulation/flyback/EEL19_DESIGN.md` 14, 15; details
 `kicad_next/CHANGES_5_2.md` item 1.5). Symbol `ICE5AR` re-made (VIN, four DRAIN pins wired together, NC with a
 no-connect flag); new footprint **`tube_psu_next_parts:PG-DSO-12_3.9x9.9mm_P1.27mm`** (`gen_next_footprints_parts.py`:

@@ -47,7 +47,6 @@ delivers 20 W at 100 V, at ΔT ≈ 56 K (4 K below the limit).
 
 | # | Item | When | Cost | Ref |
 |---|---|---|---|---|
-| 4.1 | PWM2 ICE5AR0680AG: JLC had **3 pcs** (C17699638) – consign the bought parts | at order time | – | jlc_parts_next.csv |
-| 4.2 | R124 2.61k low JLC stock (75 / 43 pcs) – pick an alternative value/series | at order time | value | CHANGES open question 11 |
-| 4.3 | C73 (2.2 µF 450 V X6S 2220 on DC+): ≥ 630 V part when one is stocked | stock appears | part | NR 5.6 |
-| 4.4 | CA-IS3761LW / CA-IS3721HW: get current VDE/UL certificates for the 552 Vrms reinforced barrier; fall back to Si8661BD/Si8621 if not certified | before ordering | part swap (same pinout) | CHANGES open question 2 |
+| 4.1 | R124 2.61k low JLC stock (75 / 43 pcs) – pick an alternative value/series | at order time | value | CHANGES open question 11 |
+| 4.2 | C73 (2.2 µF 450 V X6S 2220 on DC+): ≥ 630 V part when one is stocked | stock appears | part | NR 5.6 |
+| 4.3 | CA-IS3761LW / CA-IS3721HW: get current VDE/UL certificates for the 552 Vrms reinforced barrier; fall back to Si8661BD/Si8621 if not certified | before ordering | part swap (same pinout) | CHANGES open question 2 |
