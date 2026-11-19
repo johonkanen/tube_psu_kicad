@@ -134,6 +134,7 @@ PFC_DRAIN_1/2, HEATER_HI_DRV, Net-(D35-K), Net-(DRV3-VDDA); TRANS_PRI removed).
 12. **R99 pin orientation** changed by the shared driver cell (pin 1 now at D11) – electrically identical.
 13. ~~Phase-1 findings: slots under the SOIC-16W isolators (ISO1, ISO2, U11) and the EEL19 TR1 row
     spacing vs 11.1 mm creepage (phase 3/5).~~ **Done in phase 3** (slot footprints, TR1 slot + fly-lead holes; kicad_next/README.md).
+14. **−5 V → −15 V winding (user 2026-11-19, NR 1.13):** not yet in the 5.2 schematic. SN5 6 → ≈ 16 T, C40 needs ≥ 25 V, R123 bleeder re-picked, rename -5V_SEC / N5V_OUT; TR1 build and cross regulation to re-simulate.
 
 ## Netlist diff 5.1 → 5.2 (generated)
 
