@@ -109,16 +109,16 @@ All clearance / hole-clearance / creepage violations on the board by rule (sheet
 | PRI-HEATER/UART inner layers | clearance | 69 | 04 MCU connector 57, 03 Isolated measurements 42, 06 Heaters 10 |
 | PRI-SEC inner layers | clearance | 49 | 07 DHB 28, 01 AUX supply 15, 03 Isolated measurements 7 |
 | PRI-SEC reinforced creepage | creepage | 43 | 01 AUX supply 22, 07 DHB 19, 03 Isolated measurements 15 |
-| net class clearance (PRIMARY_LV) | clearance | 35 | 06 Heaters 11, 08 Current measurement 7, 04 MCU connector 4 |
+| net class clearance (PRIMARY_LV) | clearance | 35 | 06 Heaters 11, 08 Current measurement 7, 02 DHB gate drive 4 |
 | PRI-HEATER/UART reinforced clearance | clearance | 27 | 04 MCU connector 27, 03 Isolated measurements 23 |
 | PE-PRI basic | creepage | 13 | 05 PFC 13, 08 Current measurement 1 |
 | net class clearance (HV_PRIMARY) | clearance | 12 | 06 Heaters 3, 07 DHB 3, 02 DHB gate drive 3 |
 | Mounting hole - primary | hole_clearance | 12 | board-only items 12, 09 AC measurement 5 |
 | Mounting hole - primary | creepage | 12 | board-only items 12, 09 AC measurement 6, 05 PFC 2 |
 | PE-PRI basic, inner layers | clearance | 8 | 05 PFC 8 |
-| PRI-SEC inner layers | hole_clearance | 8 | 04 MCU connector 8, 07 DHB 8 |
+| PRI-SEC inner layers | hole_clearance | 8 | 07 DHB 8, 04 MCU connector 8 |
 | Mounting hole - secondary | creepage | 7 | board-only items 7, 03 Isolated measurements 3, 01 AUX supply 1 |
-| Mounting hole - secondary | hole_clearance | 5 | board-only items 5, 03 Isolated measurements 5 |
+| Mounting hole - secondary | hole_clearance | 5 | 03 Isolated measurements 5, board-only items 5 |
 | Mounting hole - primary | clearance | 5 | board-only items 5, 09 AC measurement 1 |
 | net class clearance (SECONDARY_LV) | clearance | 4 | 02 DHB gate drive 2, 07 DHB 1, 03 Isolated measurements 1 |
 | net class clearance (HEATER) | clearance | 2 | 03 Isolated measurements 2, 06 Heaters 1 |
@@ -403,8 +403,8 @@ Copper deleted by step 1: 58 items (segment: touches old pad of moved part 26, s
 | copper_edge_clearance | 2 | 1 | 1 | -1 |
 | items_not_allowed | 2 | 2 | 0 | -2 |
 | npth_inside_courtyard | 2 | 0 | 0 | -2 |
-| text_height | 1 | 1 | 1 | +0 |
 | text_thickness | 1 | 1 | 1 | +0 |
+| text_height | 1 | 1 | 1 | +0 |
 | **isolation, between two domains (on the board)** | 417 | 418 | 419 | +2 |
 |   HEATER-PRI | 36 | 37 | 37 | +1 |
 |   PE-PRI | 22 | 22 | 22 | +0 |
@@ -551,8 +551,8 @@ Applied by `tools/p2k/bin/kipy tools/next/trial_placement_p2.py` (moves as data:
 | type | step 1 | step 2 | delta |
 |---|---|---|---|
 | clearance | 337 | 183 | -154 |
-| silk_over_copper | 191 | 199 | +8 |
 | silk_overlap | 199 | 199 | +0 |
+| silk_over_copper | 191 | 199 | +8 |
 | courtyards_overlap | 165 | 133 | -32 |
 | creepage | 164 | 49 | -115 |
 | hole_clearance | 138 | 32 | -106 |
@@ -566,9 +566,9 @@ Applied by `tools/p2k/bin/kipy tools/next/trial_placement_p2.py` (moves as data:
 | isolated_copper | 7 | 4 | -3 |
 | pth_inside_courtyard | 6 | 3 | -3 |
 | lib_footprint_mismatch | 0 | 2 | +2 |
-| copper_edge_clearance | 1 | 0 | -1 |
-| text_height | 1 | 1 | +0 |
 | text_thickness | 1 | 1 | +0 |
+| text_height | 1 | 1 | +0 |
+| copper_edge_clearance | 1 | 0 | -1 |
 | **isolation, between two domains (on the board)** | 419 | 60 | -359 |
 |   HEATER-PRI | 37 | 36 | -1 |
 |   PE-PRI | 22 | 22 | +0 |
@@ -678,4 +678,236 @@ barrels (24) are resolved by decision (a) above; TR1 pin 2 / 9 inner barrels (2)
 Y caps / RL1 (not in this step); PWM2 drain area (above); C2 / R123 courtyard touch 0.76 mm² (5.1 pair, was
 0.55); 17 silk-to-edge warnings at the new slot / U11 / J4 (reference texts to move); `lib_footprint_mismatch`
 Q19 / Q21 (board pads without unused inner rings – put it in a footprint copy if kept).
+
+
+## After placement step 3
+
+Applied by `tools/p2k/bin/kipy tools/next/trial_placement_p3.py` (moves as data: `PLACE` = 5.1 parts moved, `NEW` = 5.2 parts taken from the off-board grid with their side, `GROUPS`, `SLOTS`, `KEEPOUTS`, the deletion rules and `DELETE`, `TEXTS`) on the step-2 board → `tube_psu_5_2_trial_p3.kicad_pcb`, DRC `drc_p3.json` (same split passes: refill peak RSS 2162 MB, main peak RSS 2150 MB, creepage F.Cu peak RSS 2374 MB, creepage B.Cu peak RSS 2551 MB), `placement_p3.json` (moves, slot, keep-outs and every deleted track / via with net, layer and end points, so the routing can redo it). Nothing is routed.
+
+**5.1 parts moved**
+
+| part / group | side | step 2 (x, y / rot) | step 3 |
+|---|---|---|---|
+| C35 | B | -48.916, -42.318 / -90° | -65.3, -31.9 / 90° |
+| C85 | F | -50.147, -38.999 / -90° | -50.147, -40.6 / -90° |
+| Q9 | B | -51.261, -42.356 / 180° | -62.6, -31.9 / 0° |
+| R32 | B | -45.461, -42.41 / 90° | -65.3, -26.9 / 90° |
+| R44 | B | -47.265, -42.318 / -90° | -63.55, -28.4 / -90° |
+| WP4 (Q14_DRAIN wire pad) away from the new slot: WP4 | – | – | shift +0, -1 mm (16 copper items moved along) |
+
+**5.2 parts placed from the off-board grid** (54; still off-board: none)
+
+| ref | sheet | side | x, y / rot | nets |
+|---|---|---|---|---|
+| C118 | 02 DHB gate drive | B | 11.35, -53.1 / -90° | Net-(DRV5-DT), GND |
+| C119 | 02 DHB gate drive | B | 69.26, -48.8 / 0° | Net-(DRV6-DT), ISO_GND |
+| C120 | 02 DHB gate drive | B | 12.55, -48.83 / 180° | DAB_DIS, GND |
+| C121 | 06 Heaters | B | -22.98, -46.4 / 0° | Net-(DRV3-DT), GND |
+| C122 | 08 Current measurement | B | -0.05, -62.3 / 90° | +1V65_BIAS, Net-(U1B-+) |
+| C123 | 08 Current measurement | B | 2.1, -54.4 / 0° | +1V65_BIAS, Net-(U1A-+) |
+| C124 | 08 Current measurement | B | 8.8, -60.8 / 0° | +3V3, GND |
+| C125 | 08 Current measurement | B | 0.4, -58.4 / -90° | +3V3, GND |
+| C126 | 09 AC measurement | B | 30.11, 10.0 / -90° | +1V65_BIAS, Net-(U8-+) |
+| C127 | 09 AC measurement | B | 29.51, 13.4 / 0° | Net-(C127-Pad1), Net-(U8--) |
+| C128 | 04 MCU connector | B | 27.77, -29.6 / 180° | Net-(U9-+), GND |
+| C129 | 04 MCU connector | B | 25.02, -27.26 / 90° | +3V3, GND |
+| C130 | 04 MCU connector | B | 23.02, 5.44 / -90° | Net-(U6-+), GND |
+| C131 | 04 MCU connector | B | 16.73, 6.04 / -90° | Net-(U6--), Net-(C131-Pad2) |
+| C132 | 04 MCU connector | B | 41.73, -9.11 / 0° | Net-(U10B-+), GND |
+| C133 | 04 MCU connector | B | 43.08, -4.31 / -90° | +3V3, GND |
+| C138 | 01 AUX supply | F | 47.2, -3.8 / -90° | Net-(C138-Pad1), GND |
+| C139 | 01 AUX supply | B | 49.3, 0.03 / -90° | Net-(PWM2-FB), GND |
+| C140 | 01 AUX supply | F | 54.24, -3.27 / 90° | Net-(PWM2-VIN), GND |
+| D35 | 06 Heaters | B | -14.47, -65.71 / 90° | HEATER_HI_GATE, Net-(D35-K) |
+| R125 | 01 AUX supply | B | 56.0, -19.9 / -90° | 15V, GND |
+| R126 | 01 AUX supply | F | 52.0, -9.3 / 0° | 5V, GND |
+| R127 | 02 DHB gate drive | B | 13.45, -55.8 / -90° | Net-(DRV5-DT), GND |
+| R128 | 02 DHB gate drive | B | 66.26, -49.1 / 180° | Net-(DRV6-DT), ISO_GND |
+| R129 | 02 DHB gate drive | B | 12.55, -50.33 / 180° | DAB_DIS, GND |
+| R130 | 06 Heaters | B | -22.98, -47.9 / 0° | Net-(DRV3-DT), GND |
+| R131 | 04 MCU connector | B | 26.82, -22.94 / -90° | Net-(U9--), +1V65_BIAS |
+| R132 | 04 MCU connector | B | 39.17, 1.11 / 180° | Net-(U10A--), AUX_MEAS |
+| R133 | 04 MCU connector | B | 38.73, -7.61 / 0° | 5V, Net-(U10B-+) |
+| R134 | 04 MCU connector | B | 41.73, -7.61 / 0° | Net-(U10B-+), GND |
+| R135 | 04 MCU connector | B | 36.98, -4.61 / 180° | Net-(U10B--), 5V_MEAS |
+| R138 | 01 AUX supply | B | 48.77, -2.98 / -90° | 5V, Net-(PWM2-VERR) |
+| R139 | 01 AUX supply | B | 51.17, -2.67 / 180° | Net-(PWM2-VERR), GND |
+| R140 | 01 AUX supply | B | 47.2, -3.58 / 90° | Net-(PWM2-FB), Net-(C138-Pad1) |
+| R141 | 01 AUX supply | B | 45.7, -3.58 / 90° | Net-(PWM2-FB), GND |
+| R142 | 01 AUX supply | B | 37.26, 3.8 / 90° | 15V, Net-(D10-PadA) |
+| R143 | 07 DHB | B | 23.05, -87.42 / -90° | DC+, Net-(R143-Pad2) |
+| R144 | 07 DHB | B | 23.05, -82.66 / -90° | Net-(R143-Pad2), DHB_CAP |
+| R145 | 07 DHB | B | 23.05, -77.84 / -90° | DHB_CAP, Net-(R145-Pad2) |
+| R146 | 07 DHB | B | 24.25, -74.28 / 0° | Net-(R145-Pad2), DHB_CURRENT |
+| R147 | 07 DHB | B | 76.1, -59.52 / -90° | 420V, Net-(R147-Pad2) |
+| R148 | 07 DHB | B | 76.1, -54.76 / -90° | Net-(R147-Pad2), TRANS_SEC |
+| R149 | 07 DHB | B | 76.1, -49.94 / -90° | TRANS_SEC, Net-(R149-Pad2) |
+| R150 | 07 DHB | B | 78.2, -46.37 / 0° | Net-(R149-Pad2), ISO_GND |
+| R151 | 01 AUX supply | B | 40.7, 15.86 / 0° | DC+, Net-(R151-Pad2) |
+| R152 | 01 AUX supply | B | 45.46, 15.86 / 0° | Net-(R151-Pad2), Net-(R152-Pad2) |
+| R153 | 01 AUX supply | B | 47.83, 12.26 / 90° | Net-(R152-Pad2), Net-(PWM2-VIN) |
+| R154 | 01 AUX supply | F | 53.95, -6.28 / 90° | Net-(PWM2-VIN), GND |
+| R155 | 06 Heaters | B | -11.14, -86.38 / 90° | DC+, Net-(R155-Pad2) |
+| R156 | 06 Heaters | B | -14.7, -87.88 / 180° | Net-(R155-Pad2), HEATER_CAP_MEAS |
+| R157 | 06 Heaters | B | -8.0, -86.38 / -90° | HEATER_CAP_MEAS, Net-(R157-Pad2) |
+| R158 | 06 Heaters | B | -8.0, -81.61 / -90° | Net-(R157-Pad2), HEATER_CURRENT |
+| U9 | 04 MCU connector | B | 27.77, -26.6 / -90° | Net-(U9--), GND, Net-(U9-+), +3V3 |
+| U10 | 04 MCU connector | B | 40.3, -3.4 / 90° | Net-(U10A--), Net-(U10A-+), GND, Net-(U10B-+), Net-(U10B--), +3V3 |
+
+**Slot** ISO1 / TR2 heater barrier slot: Edge.Cuts polygon (-45.50, -64.10), (-31.00, -64.10), (-31.00, -63.10), (-45.50, -63.10) (1.0 mm wide).
+**Keep-out** heater barrier pour keep-out: ISO1 primary pins / new slot / TR2 pad 10: rule area x -47.5 … -27.0, y -66.0 … -59.0, all copper, no copper pour.
+**Keep-out** heater barrier pour keep-out: below the heater island (ISO1 pin 16, C59, R91 / R117): rule area x -60.5 … -40.0, y -50.0 … -41.8, all copper, no copper pour.
+**Keep-out** heater barrier pour keep-out: between the TR2 pin rows: rule area x -35.0 … -25.1, y -91.3 … -62.0, all copper, no copper pour.
+**Keep-outs round earthed parts** (all copper layers, no copper pour): 8 circles round the mounting holes (radius 5.0 mm primary side H1 / H2 / H4 / H6 / H7, 6.0 mm secondary side H3 / H5 / H8 = ring + creepage), 4 polygon(s) = PE pads and PE tracks + 3.25 mm.
+**Reference texts moved:** C13 → (-44.2, -61.3), ISO1 → (-45.7, -48.7), ISO2 → (63.4, -33.3), J4 → (14.3, -86.8), U11 → (-3.2, -84.5).
+
+**Copper deleted by step 3:** 68 items (segment: PE track within 3.2 mm of a primary pad 6, segment: heater track within 8.0 mm of R27 pad 1 (RL1-COM, mains) 3, segment: primary copper within 8 mm of a heater barrel (inner layer) 3, segment: primary copper within 8 mm of the heater island 6, segment: touches old pad of moved part 18, segment: within 1.25 mm of a new pad of a moved part 1, segment: within 3.2 mm of a PE pad 1, segment: within 3.2 mm of a mounting hole (earthed) 20, segment: within 4.2 mm of a mounting hole (earthed) 8, via: primary copper within 8 mm of a heater barrel (inner layer) 1, via: within 3.2 mm of a PE pad 1); by part / reason key: C35 3, C65 1, C82 1, C85 4, CM1 6, H4 15, H5 8, H7 5, Net-(AD1-VA) 4, Q9 4, R117 4, R32 8, R91 1, TR2.10 4. Nets of the deleted copper (to re-route): GND 14, /05 PFC/PE 8, GPIO_BYPASS_RLY 7, HT_SDATA 5, CUK_CAP_MEAS- 4, Net-(Q9-G) 3, Net-(AD1-VA) 3, 5V 2, 420V 2, +3V3 2, Net-(AD2-CLK) 2, SYNCH_1 2, SYNCH_2 2, HT_CLK 2, 15V 2, Net-(R51-Pad2) 2, Net-(R48-Pad2) 2, Net-(RL1-COM) 1, Net-(Q9-D) 1, /05 PFC/IN2 1, Net-(R47-Pad2) 1.
+
+### DRC delta step 2 → step 3
+
+| type | step 2 | step 3 | delta |
+|---|---|---|---|
+| silk_overlap | 199 | 199 | +0 |
+| silk_over_copper | 199 | 199 | +0 |
+| clearance | 183 | 145 | -38 |
+| track_dangling | 110 | 140 | +30 |
+| courtyards_overlap | 133 | 131 | -2 |
+| lib_footprint_issues | 96 | 96 | +0 |
+| creepage | 49 | 4 | -45 |
+| hole_clearance | 32 | 11 | -21 |
+| via_dangling | 18 | 18 | +0 |
+| silk_edge_clearance | 17 | 14 | -3 |
+| nonmirrored_text_on_back_layer | 10 | 10 | +0 |
+| isolated_copper | 4 | 4 | +0 |
+| pth_inside_courtyard | 3 | 3 | +0 |
+| lib_footprint_mismatch | 2 | 2 | +0 |
+| text_thickness | 1 | 1 | +0 |
+| text_height | 1 | 1 | +0 |
+| **all violations** | 1057 | 978 | -79 |
+| **isolation, between two domains (on the board)** | 60 | 2 | -58 |
+|   HEATER-PRI | 36 | 0 | -36 |
+|   PE-PRI | 22 | 0 | -22 |
+|   PRI-SEC | 2 | 2 | +0 |
+|   PRI-UART | 0 | 0 | +0 |
+| **mounting-hole rules (H1–H8 as PE)** | 48 | 14 | -34 |
+| **unconnected items** | 346 | 359 | +13 |
+
+Courtyard-overlap pairs: step 2 133, step 3 131; resolved (2): C35/Q9, C85/CM1; new (0): –.
+
+### Per area (step 2 → step 3)
+
+| area | box (mm) | isolation violations by domain pair | courtyard pairs | shorts | clearance (all) | creepage (all) | hole clearance | unconnected |
+|---|---|---|---|---|---|---|---|---|
+| Heater barrier ISO1 / TR2 pad 10 / WP4, relay driver under RL1 | x -72 … -30, y -74 … -26 | HEATER-PRI 35 → 0, PE-PRI 15 → 0 | 21 → 19 | 0 → 0 | 26 → 5 | 22 → 0 | 8 → 0 | 27 → 41 |
+| PFC Y caps / RL1 / CM1 (PE) | x -74 … -31, y -46 … 12 | PE-PRI 21 → 0 | 16 → 14 | 0 → 0 | 11 → 1 | 13 → 0 | 0 → 0 | 1 → 17 |
+| Flyback control parts at PWM2, U10 | x 33 … 58, y -13 … 20 | – | 9 → 9 | 0 → 0 | 9 → 11 | 0 → 0 | 0 → 0 | 51 → 75 |
+| Heater LLC split-cap balancing R155-R158, D35, DRV3 dead time | x -27 … -4, y -92 … -43 | HEATER-PRI 1 → 0, PE-PRI 1 → 0 | 4 → 4 | 0 → 0 | 21 → 21 | 2 → 0 | 0 → 0 | 54 → 62 |
+| DAB primary: balancing R143-R146, DRV5 dead time / DAB_DIS, U1 parts | x -4 … 30, y -93 … -45 | – | 9 → 9 | 0 → 0 | 6 → 4 | 2 → 0 | 0 → 0 | 61 → 79 |
+| DAB secondary: balancing R147-R150, DRV6 dead time | x 52 … 83, y -65 … -42 | – | 7 → 7 | 0 → 0 | 11 → 11 | 0 → 0 | 0 → 0 | 36 → 43 |
+| U9 bias buffer, U8 / U6 filter capacitors | x 13 … 34, y -33 … 17 | – | 30 → 30 | 0 → 0 | 37 → 37 | 0 → 0 | 0 → 0 | 28 → 33 |
+
+Zooms: as step 2 (magenta = moved / placed by step 3, dashed courtyard = bottom side, black = slots, cyan dashed = step-3 pour keep-outs, pale = step-2 keep-outs, grey + = end points of deleted copper).
+
+![Heater barrier ISO1 / TR2 pad 10 / WP4, relay driver under RL1](zoom_p3_heater_iso1.png)
+
+![PFC Y caps / RL1 / CM1 (PE)](zoom_p3_pe_ycaps.png)
+
+![Flyback control parts at PWM2, U10](zoom_p3_flyback.png)
+
+![Heater LLC split-cap balancing R155-R158, D35, DRV3 dead time](zoom_p3_heater_split.png)
+
+![DAB primary: balancing R143-R146, DRV5 dead time / DAB_DIS, U1 parts](zoom_p3_dab_pri.png)
+
+![DAB secondary: balancing R147-R150, DRV6 dead time](zoom_p3_dab_sec.png)
+
+![U9 bias buffer, U8 / U6 filter capacitors](zoom_p3_analog.png)
+
+### Notes on step 3
+
+Written after reviewing the step-3 numbers (2026-11-19); the tables above are regenerated, this text is not.
+
+**0. KiCad's creepage DRC does not list every pair.** Step 2 reported one B.Cu pair below the heater island
+(Net-(AD1-VA) ↔ 5V, 5.62 mm), but the GND / Q9 gate tracks and the Q9 / C35 / R44 / R32 pads next to that 5V track
+are 6.0 … 7.9 mm from the same heater track / R91 / R117 pads and were not listed. The areas of this step were
+therefore also checked with a straight-line same-layer scan of pads, tracks, vias and the refilled zone copper
+(scratch script, no slot credit, pad bounding boxes): after step 3 the only heater ↔ primary pairs under 8.0 mm
+are the ones with a slot between them (the two ISO1 pin rows; ISO1 pins 6–8 ↔ TR2 pad 10 / WP4 / the Q14_DRAIN
+and GND pours across the new slot), and no PE pad / track is closer than 3.2 mm (round-pad distance) to primary
+copper. "0 creepage violations" in the tables means "none reported", not a proof – a domain-distance script in
+`check_next.sh` style would be worth having before the real layout.
+
+**1. Heater barrier at ISO1 / TR2 (HEATER-PRI 36 → 0).** Three spots, three fixes:
+(a) *Top end of ISO1.* The ISO1 primary pins 5–8 (x −37.7, pin 8 = GND at y −59.3) look straight at the heater
+pins TR2 pad 10 (5.4 mm) and WP4 (5.2 mm) and at the Q14_DRAIN pours (4.0 mm): the ISO1 footprint slot ends at
+y −62.1 and only separates its own pin rows. New 1.0 mm routed slot x −45.5 … −31.0, y −64.1 … −63.1 across the top
+of the ISO1 slot, 1.0 mm above its end (1 × 1 mm web), 0.8 mm below TR2 pad 10: the surface path pin 8 → pad 10
+now goes round the right end (≥ 10 mm) or over the ISO1 slot end and round the left end (≥ 14 mm). WP4 moved 1.0 mm
+up with its spokes (pad edge 1.3 mm from the slot). Inner layers get no slot credit, so the primary copper within
+8.0 mm of the pad 10 / WP4 barrels went: the GND via at ISO1 pin 8 and three In4 HT_SDATA segments (pin 8 / pin 7
+must be fanned out downwards). Pour keep-out x −47.5 … −27.0, y −66 … −59 on all layers (heater pours stay above
+the slot, primary pours 8 mm from pad 10 where the slot does not shield), and one between the TR2 pin rows
+(Q14_DRAIN / HEATER_HI_SOURCE pours were 6.6 mm apart). *Rejected:* a T-slot merged with the ISO1 slot – KiCad
+reports the overlapping Edge.Cuts shapes as a self-intersecting outline (tested); a separate slot right of the ISO1
+slot end – the 1 mm gap between the two slots leaves a 7.9 mm path; moving ISO1 2.7 mm down – all 16 pins lose their
+routing and the heater side comes closer to the mains copper below (spot b), which is already too tight.
+(b) *Below the heater island (bottom side).* The relay driver Q9 / C35 / R44 / R32 with its 5V / GND / gate tracks
+sat 5.6 … 8 mm below ISO1 pin 16 / C59 / R91 / R117 and at the same time 3.0 mm above the PE pad of C82: the
+primary strip left between "8 mm from the heater" and "3.2 mm from PE" is 0 … 1.7 mm high there. The four parts
+moved to the free bottom side under the relay RL1 between its coil pins and D9 / D28 (Q9 drain 2.7 mm from D9's
+anode, ≥ 1.9 mm from the mains pins of RL1 – HV functional 1.2 mm); their copper and 6 more primary segments within
+8 mm of the island were deleted; GPIO_BYPASS_RLY (In4) now needs a ≈ 20 mm longer run to R44 / R32. Pour keep-out
+x −60.5 … −40, y −50 … −41.8 (the RL1-COM mains pour was 4.1 mm from C59). Three heater Net-(AD1-VA) B.Cu segments
+7.4 … 7.7 mm from R27 pad 1 (RL1-COM) deleted: re-route them above y −52.6. *Rejected:* shifting the Q9 group
+down (blocked by the PE pad of C82) or the heater parts up (packed island).
+(c) *TR2.* Nothing to move: the pin rows are 10.4 mm apart; only the pours were too close (keep-out).
+
+**2. PE ↔ primary at the Y capacitors / RL1 (PE-PRI 22 → 0).** C85 1.6 mm up: its PE pad is now 3.4 mm from RL1
+pin 1 (was 2.58 mm; moving it right is blocked by C81 / C82). Six 2 mm wide PE B.Cu segments passing CM1 pads 2 / 3 /
+4 and RL1 pin 1 at 1.4 … 3.0 mm, the IN2 F.Cu sense track 3.06 mm from C65's PE pad and the GPIO_BYPASS_RLY via at
+C82 were deleted (PE net to re-route ≥ 3.2 mm from the CM1 pins, e.g. 1.0 mm wide or 1 mm further left). The zone
+filler only keeps the 2.0 mm clearance, so a pour keep-out of PE copper + 3.25 mm (all layers, 4 polygons) holds
+the IN2 / L1_PRI2 / RL1-COM / RES_IN / GND pours back; it is computed from the PE pads and the PE tracks that are
+left, so it must be re-made when PE is routed. *Rejected:* a slot at the Y caps (the pad pairs are THT discs with
+7.5 mm pitch, there is no pad pair that needs one once the pours are held off); moving C65 / CM1.
+Mounting holes (PE): keep-out circles round H1–H8 (pours were 2.95 mm from the rings), and all tracks inside the
+hole spacing deleted – the two B.Cu tracks of the step-2 notes (H4 ↔ 15V, 2 segments; H5 ↔ CUK_CAP_MEAS-, 4
+segments) and 22 more: 19 In4 segments (GPIO_BYPASS_RLY, +3V3, HT_CLK, HT_SDATA, SYNCH_1, SYNCH_2 next to H4;
+Net-(R48-Pad2) / Net-(R51-Pad2) next to H7; Net-(AD2-CLK) next to H5), 2 F.Cu 420V segments at H5 (4.12 of 4.2 mm)
+and the B.Cu track between R47 and R48 at H7. Mounting-hole markers 48 → 14; the 14 left are pads, not
+tracks: R47 / R48 (B, 2.5 … 2.8 mm from H7), R14 pad 2 (B, 2.84 mm from H4), C102 pad 2 (step-2 place, 2.9 mm of
+4.2 mm from H8) – see decisions.
+
+**3. The 54 added parts are all on the board** (none left in the grid, no new courtyard pair, no pad short, no
+isolation marker; placed by a nearest-free-spot search, 0.3 mm from foreign copper, 1.25 mm for HV net pads, so no
+5.1 track was deleted for them):
+- *Heater LLC split-cap balancing R155–R158* (bottom side under C42 / C49 / C22, DC+ pad of R155 under C42's DC+
+  pad; chain DC+ → HEATER_CAP_MEAS → HEATER_CURRENT, all pads ≥ 1.25 mm from other copper, 12 mm from the UART
+  island). *DAB primary R143–R146* bottom side under C47 / C54 (same order as the caps), *DAB secondary R147–R150*
+  bottom side under C16 / C55. Bottom side because the top side next to the 1210 caps is taken by TR3 / J4 / Q10;
+  each chain needs one via per cap terminal.
+- *Dead-time parts:* R127 / C118 and R129 / C120 (DAB_DIS) left of DRV5 pins 5 / 6, R128 / C119 below DRV6 pin 6
+  (secondary side, 6 mm from the pin – nothing closer is free under TR3), R130 / C121 below DRV3 pin 6. D35 (heater
+  high-side turn-off diode) between R36 and R59.
+- *Flyback (PWM2):* C140 / R154 (VIN) and C138 on top above pins 1–4, R138 / R139 (VERR), C139 / R140 / R141 (FB)
+  on the bottom side under pins 1–4; the line-OVP chain R151–R153 on the bottom side from R116's DC+ pad along the
+  board edge to R153 (VIN run of ≈ 13 mm to pin 1 – low impedance at the pin through C140); R142 under D10;
+  bleeders R125 (15V, bottom, at D5) and R126 (5V, top, above R8).
+- *Analog:* U9 + C128 / C129 / R131 at R3 / R110 (bottom), U10 + C132 / C133 / R132–R135 under R11 / R12
+  (bottom, AUX_MEAS divider; outputs 6 / 13 mm from J2 pins 43 / 49), C122–C125 at U1, C126 / C127 at U8, C130 / C131
+  at U6.
+
+**4. Leftovers of step 2.** *PWM2 drain copper:* the added parts keep x 40.6 … 47.7, y −2 … 6.6 free on both outer
+layers and the strip y 7.2 … 10.6 to D7 / TR1 pin 12 on F.Cu. Room as placed: F.Cu ≈ 0.5 cm² at the pins + 0.5 cm²
+strip, B.Cu ≈ 0.5 cm² under it + 0.4 cm² below (x 40.6 … 46.3, y 6.6 … 14, where the 5.1 GND pour has to give
+way) = **≈ 1.9 cm²**, i.e. the lower end of the 2–3 cm² target without moving anything; moving R114–R116 1 mm left
+would add only ≈ 0.08 cm² per layer (a 5.1 track at x 36.7 limits it) and C58 cannot move right (C51), so neither
+was moved. *Texts:* J4, ISO2, ISO1, U11 and C13 references moved off the slots / the edge (silk-to-edge 17 → 14);
+the rest are footprint silk lines that cross a slot (Q21 / Q8 / TR3 over the L-slot, TR1, TR2 over the new slot,
+one line each of ISO1 / ISO2 / U11) – fix in the footprints.
+
+**Remaining after step 3** (beyond routing: unconnected 346 → 359, dangling tracks 110 → 140 from the deleted
+copper): PRI-SEC 2 (TR1 pin 2 / 9 inner barrels, as step 2); 14 mounting-hole markers at pads (above); the 1 mm
+web between the ISO1 slot and the new slot (ask JLC, or draw one T-shaped slot in a board-specific ISO1 footprint
+variant); TR2 silk over the new slot; 2 new net-class markers inside U10 itself (VSSOP-8 pad gap 0.15 mm vs the
+PRIMARY_LV class clearance 0.2 mm on pins 3 / 4 and 7 / 8 – a rule / footprint question, not placement); HV-functional / net-class clearances inside one domain (145, routing).
 

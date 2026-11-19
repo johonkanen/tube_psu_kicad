@@ -272,6 +272,8 @@ def main():
         write_p1(build, drc, base)
     if os.path.exists(os.path.join(D, "placement_p2.json")) and os.path.exists(os.path.join(D, "drc_p2.json")):
         write_p2()
+    if os.path.exists(os.path.join(D, "placement_p3.json")) and os.path.exists(os.path.join(D, "drc_p3.json")):
+        write_p3()
 
 
 # ------------------------------------------------------------------------------------------- drawing
@@ -1301,6 +1303,268 @@ barrels (24) are resolved by decision (a) above; TR1 pin 2 / 9 inner barrels (2)
 Y caps / RL1 (not in this step); PWM2 drain area (above); C2 / R123 courtyard touch 0.76 mm² (5.1 pair, was
 0.55); 17 silk-to-edge warnings at the new slot / U11 / J4 (reference texts to move); `lib_footprint_mismatch`
 Q19 / Q21 (board pads without unused inner rings – put it in a footprint copy if kept).
+"""
+
+# ------------------------------------------------------------------------------------------- placement step 3
+P3_AREAS = {   # name: (title, refs that span the zoom box, margin)
+    "heater_iso1": ("Heater barrier ISO1 / TR2 pad 10 / WP4, relay driver under RL1", ["ISO1", "WP4", "R27", "C97", "Q9", "C35", "C85"], 4.0),
+    "pe_ycaps": ("PFC Y caps / RL1 / CM1 (PE)", ["RL1", "C85", "C81", "C82", "C84", "C65", "CM1", "PE"], 3.0),
+    "flyback": ("Flyback control parts at PWM2, U10", ["PWM2", "R116", "R126", "R151", "R135", "D7", "C132"], 3.0),
+    "heater_split": ("Heater LLC split-cap balancing R155-R158, D35, DRV3 dead time", ["C41", "R158", "D35", "R130", "C121", "Q10"], 3.0),
+    "dab_pri": ("DAB primary: balancing R143-R146, DRV5 dead time / DAB_DIS, U1 parts", ["C47", "R146", "DRV5", "C118", "C120", "C122", "C125"], 3.0),
+    "dab_sec": ("DAB secondary: balancing R147-R150, DRV6 dead time", ["C16", "C55", "R150", "DRV6", "C119"], 3.0),
+    "analog": ("U9 bias buffer, U8 / U6 filter capacitors", ["U9", "R131", "C128", "C126", "C127", "C130", "C131"], 3.0),
+}
+
+
+def hole_count(drc):
+    return sum(1 for v in drc["violations"] if v["type"] in ISO_TYPES and "Mounting hole" in rule_of(v))
+
+
+def write_p3():
+    dom, _ = net_domains()
+    p2, drc2 = load("placement_p2.json"), load("drc_p2.json")
+    p3, drc3 = load("placement_p3.json"), load("drc_p3.json")
+    g2, g3 = p2["geometry"], p3["geometry"]
+    s2, s3 = summary(drc2, g2, dom), summary(drc3, g3, dom)
+    moved = sorted(set(p3["place"]) | set(p3["new"]) | {r for v in p3["groups"].values() for r in v["refs"]})
+    iso3 = iso_points(drc3, dom)
+    cy_new = {frozenset(p) for p in s3["courtyard_pairs"]} - {frozenset(p) for p in s2["courtyard_pairs"]}
+    for f in os.listdir(D):
+        if f.startswith("zoom_p3_") and f.endswith(".png"):
+            os.remove(os.path.join(D, f))
+    boxes = {}
+    for name, (title, refs, margin) in P3_AREAS.items():
+        bx = refs_box(g3, refs, margin)
+        boxes[name] = bx
+        fig, ax = base_axes(g3, f"step 3 – {title}",
+                            figsize=(12, 12 * (bx[3] - bx[1]) / (bx[2] - bx[0]) + 0.6), box=bx)
+        draw_copper(ax, g3, dom, alpha=0.5)
+        draw_fps(ax, g3, dom, highlight=set(moved),
+                 label_set={r for r, fp in g3["fps"].items() if bx[0] < fp["x"] < bx[2] and bx[1] < fp["y"] < bx[3]}, fs=6)
+        for d in p3["deleted_items"]:
+            for x, y in d["pts"]:
+                if bx[0] < x < bx[2] and bx[1] < y < bx[3]:
+                    ax.plot(x, y, "+", ms=4, color="#606060", mew=0.6)
+        for sl in list(p2["slots"].values()) + list(p3["slots"].values()):
+            ax.add_patch(Polygon(sl["poly"], closed=True, fc="#000000", ec="#000000"))
+        for k in p2["keepouts"].values():
+            ax.add_patch(plt.Rectangle((k["x0"], k["y0"]), k["x1"] - k["x0"], k["y1"] - k["y0"], fill=False, ec="#a0c8d0",
+                                       ls="--", lw=0.8))
+        for k in p3["keepouts"].values():
+            ax.add_patch(Polygon(k["pts"], closed=True, fill=False, ec="#00a0c0", ls="--", lw=1.2))
+        for i in iso3:
+            if i["cross"] and bx[0] < i["x"] < bx[2] and bx[1] < i["y"] < bx[3]:
+                ax.plot(i["x"], i["y"], marker="x" if i["type"] != "creepage" else "o", ms=7, mfc="none",
+                        color=P2_COL.get(i["pair"], "#000"), mew=1.2)
+        for v in drc3["violations"]:
+            if v["type"] == "courtyards_overlap" and frozenset(item_ref(i) for i in v["items"]) in cy_new:
+                a, b = v["items"][0]["pos"], v["items"][1]["pos"]
+                ax.plot([(a["x"] + b["x"]) / 2], [(a["y"] + b["y"]) / 2], "s", ms=8, mfc="none", color="#0050ff")
+        fig.tight_layout()
+        fig.savefig(os.path.join(D, f"zoom_p3_{name}.png"), dpi=120)
+        plt.close(fig)
+
+    L = []
+    w = L.append
+    w("")
+    w("## After placement step 3")
+    w("")
+    w("Applied by `tools/p2k/bin/kipy tools/next/trial_placement_p3.py` (moves as data: `PLACE` = 5.1 parts moved, `NEW` = "
+      "5.2 parts taken from the off-board grid with their side, `GROUPS`, `SLOTS`, `KEEPOUTS`, the deletion rules and "
+      "`DELETE`, `TEXTS`) on the step-2 board → `tube_psu_5_2_trial_p3.kicad_pcb`, DRC `drc_p3.json` (same split passes: "
+      + ", ".join(f"{k} {v}" for k, v in drc3.get("passes", {}).items()) + "), `placement_p3.json` (moves, slot, "
+      "keep-outs and every deleted track / via with net, layer and end points, so the routing can redo it). Nothing "
+      "is routed.")
+    w("")
+    w("**5.1 parts moved**")
+    w("")
+    rows = [[r, d["side"], f"{d['old'][0]}, {d['old'][1]} / {d['old'][2]:g}°", f"{d['new'][0]}, {d['new'][1]} / {d['new'][2]:g}°"]
+            for r, d in sorted(p3["place"].items())]
+    for gname, d in p3["groups"].items():
+        rows.append([gname + ": " + ", ".join(d["refs"]), "–", "–", f"shift {d['dx']:+g}, {d['dy']:+g} mm "
+                     f"({d['tracks_moved']} copper items moved along)"])
+    w(table(rows, ["part / group", "side", "step 2 (x, y / rot)", "step 3"]))
+    w("")
+    w(f"**5.2 parts placed from the off-board grid** ({len(p3['new'])}; still off-board: "
+      f"{', '.join(p3['offboard']) or 'none'})")
+    w("")
+    rows = []
+    for r, d in sorted(p3["new"].items(), key=lambda kv: (re.sub(r"\d", "", kv[0]), int(re.sub(r"\D", "", kv[0])))):
+        fp = g3["fps"][r]
+        nets = ", ".join(f"{n.split('/')[-1]}" for n in dict.fromkeys(pd[4] for pd in fp["pads"]))
+        rows.append([r, fp.get("sheet", ""), d["side"], f"{d['new'][0]}, {d['new'][1]} / {d['new'][2]:g}°", nets])
+    w(table(rows, ["ref", "sheet", "side", "x, y / rot", "nets"]))
+    w("")
+    if p3["unplaced"]:
+        w("**Not placed** (left in the off-board grid): " + "; ".join(f"{r}: {why}" for r, why in sorted(p3["unplaced"].items())) + ".")
+        w("")
+    for name, sl in p3["slots"].items():
+        w(f"**Slot** {name}: Edge.Cuts polygon {', '.join(f'({x:.2f}, {y:.2f})' for x, y in sl['poly'])} "
+          f"({sl['width']} mm wide).")
+    kk = p3["keepouts"]
+    for name, k in kk.items():
+        if not name.startswith(("mounting hole", "PE pour")):
+            w(f"**Keep-out** {name}: rule area x {k['x0']:.1f} … {k['x1']:.1f}, y {k['y0']:.1f} … {k['y1']:.1f}, {k['layers']}, "
+              f"{k['what']}.")
+    nh = sum(1 for n in kk if n.startswith("mounting hole"))
+    npe = sum(1 for n in kk if n.startswith("PE pour"))
+    w(f"**Keep-outs round earthed parts** (all copper layers, no copper pour): {nh} circles round the mounting holes "
+      f"(radius 5.0 mm primary side H1 / H2 / H4 / H6 / H7, 6.0 mm secondary side H3 / H5 / H8 = ring + creepage), "
+      f"{npe} polygon(s) = PE pads and PE tracks + 3.25 mm.")
+    w("**Reference texts moved:** " + ", ".join(f"{r} → ({d['new'][0]}, {d['new'][1]})" for r, d in sorted(p3["texts"].items())) + ".")
+    w("")
+    dl = p3["deleted"]
+    w(f"**Copper deleted by step 3:** {sum(dl.values())} items ({', '.join(f'{k} {v}' for k, v in sorted(dl.items()))}); "
+      f"by part / reason key: {', '.join(f'{k} {v}' for k, v in p3['deleted_by_ref'].items())}. Nets of the deleted copper "
+      "(to re-route): "
+      + ", ".join(f"{n} {c}" for n, c in collections.Counter(d["net"] for d in p3["deleted_items"]).most_common(40)) + ".")
+    w("")
+    w("### DRC delta step 2 → step 3")
+    w("")
+    keys = sorted(set(s2["types"]) | set(s3["types"]), key=lambda k: -max(s2["types"].get(k, 0), s3["types"].get(k, 0)))
+    rows = [[k, s2["types"].get(k, 0), s3["types"].get(k, 0), f"{s3['types'].get(k, 0) - s2['types'].get(k, 0):+d}"] for k in keys]
+    a, b = sum(s2["types"].values()), sum(s3["types"].values())
+    rows.append(["**all violations**", a, b, f"{b - a:+d}"])
+    a, b = sum(s2["iso"].values()), sum(s3["iso"].values())
+    rows.append(["**isolation, between two domains (on the board)**", a, b, f"{b - a:+d}"])
+    for pr in sorted(set(s2["iso"]) | set(s3["iso"]) | {"HEATER-PRI", "PE-PRI", "PRI-SEC", "PRI-UART"}):
+        a, b = s2["iso"].get(pr, 0), s3["iso"].get(pr, 0)
+        rows.append([f"  {pr}", a, b, f"{b - a:+d}"])
+    a, b = hole_count(drc2), hole_count(drc3)
+    rows.append(["**mounting-hole rules (H1–H8 as PE)**", a, b, f"{b - a:+d}"])
+    a, b = s2["unconnected"], s3["unconnected"]
+    rows.append(["**unconnected items**", a, b, f"{b - a:+d}"])
+    w(table(rows, ["type", "step 2", "step 3", "delta"]))
+    w("")
+    c2 = {frozenset(p) for p in s2["courtyard_pairs"]}
+    c3 = {frozenset(p) for p in s3["courtyard_pairs"]}
+    gone = sorted("/".join(sorted(p)) for p in c2 - c3)
+    new = sorted("/".join(sorted(p)) for p in c3 - c2)
+    w(f"Courtyard-overlap pairs: step 2 {len(c2)}, step 3 {len(c3)}; resolved ({len(gone)}): {', '.join(gone) or '–'}; "
+      f"new ({len(new)}): {', '.join(new) or '–'}.")
+    w("")
+    w("### Per area (step 2 → step 3)")
+    w("")
+    rows = []
+    for name, (title, refs, margin) in P3_AREAS.items():
+        bx = boxes[name]
+        i2, i3 = area_iso(drc2, bx, dom), area_iso(drc3, bx, dom)
+        v2, n2 = area_violations(drc2, bx)
+        v3, n3 = area_violations(drc3, bx)
+        prs = sorted(set(i2) | set(i3))
+        area_refs = [r for r, fp in g3["fps"].items() if bx[0] < fp["x"] < bx[2] and bx[1] < fp["y"] < bx[3]]
+        cyA, cyB = cy_pairs_in(drc2, area_refs), cy_pairs_in(drc3, area_refs)
+        shA, shB = shorts_of(drc2, area_refs), shorts_of(drc3, area_refs)
+        rows.append([title, f"x {bx[0]:.0f} … {bx[2]:.0f}, y {bx[1]:.0f} … {bx[3]:.0f}",
+                     ", ".join(f"{p} {i2.get(p, 0)} → {i3.get(p, 0)}" for p in prs) or "–",
+                     f"{len(cyA)} → {len(cyB)}", f"{sum(1 for t, _ in shA if t == 'shorting_items')} → "
+                     f"{sum(1 for t, _ in shB if t == 'shorting_items')}",
+                     f"{v2.get('clearance', 0)} → {v3.get('clearance', 0)}", f"{v2.get('creepage', 0)} → {v3.get('creepage', 0)}",
+                     f"{v2.get('hole_clearance', 0)} → {v3.get('hole_clearance', 0)}", f"{n2} → {n3}"])
+    w(table(rows, ["area", "box (mm)", "isolation violations by domain pair", "courtyard pairs", "shorts",
+                   "clearance (all)", "creepage (all)", "hole clearance", "unconnected"]))
+    w("")
+    w("Zooms: as step 2 (magenta = moved / placed by step 3, dashed courtyard = bottom side, black = slots, cyan dashed = "
+      "step-3 pour keep-outs, pale = step-2 keep-outs, grey + = end points of deleted copper).")
+    w("")
+    for name, (title, _, _) in P3_AREAS.items():
+        w(f"![{title}](zoom_p3_{name}.png)")
+        w("")
+    w(P3_NOTES)
+    with open(os.path.join(D, "REPORT.md"), "a") as f:
+        f.write("\n".join(L) + "\n")
+    print("trial_report: appended 'After placement step 3'")
+
+
+P3_NOTES = """### Notes on step 3
+
+Written after reviewing the step-3 numbers (2026-11-19); the tables above are regenerated, this text is not.
+
+**0. KiCad's creepage DRC does not list every pair.** Step 2 reported one B.Cu pair below the heater island
+(Net-(AD1-VA) ↔ 5V, 5.62 mm), but the GND / Q9 gate tracks and the Q9 / C35 / R44 / R32 pads next to that 5V track
+are 6.0 … 7.9 mm from the same heater track / R91 / R117 pads and were not listed. The areas of this step were
+therefore also checked with a straight-line same-layer scan of pads, tracks, vias and the refilled zone copper
+(scratch script, no slot credit, pad bounding boxes): after step 3 the only heater ↔ primary pairs under 8.0 mm
+are the ones with a slot between them (the two ISO1 pin rows; ISO1 pins 6–8 ↔ TR2 pad 10 / WP4 / the Q14_DRAIN
+and GND pours across the new slot), and no PE pad / track is closer than 3.2 mm (round-pad distance) to primary
+copper. "0 creepage violations" in the tables means "none reported", not a proof – a domain-distance script in
+`check_next.sh` style would be worth having before the real layout.
+
+**1. Heater barrier at ISO1 / TR2 (HEATER-PRI 36 → 0).** Three spots, three fixes:
+(a) *Top end of ISO1.* The ISO1 primary pins 5–8 (x −37.7, pin 8 = GND at y −59.3) look straight at the heater
+pins TR2 pad 10 (5.4 mm) and WP4 (5.2 mm) and at the Q14_DRAIN pours (4.0 mm): the ISO1 footprint slot ends at
+y −62.1 and only separates its own pin rows. New 1.0 mm routed slot x −45.5 … −31.0, y −64.1 … −63.1 across the top
+of the ISO1 slot, 1.0 mm above its end (1 × 1 mm web), 0.8 mm below TR2 pad 10: the surface path pin 8 → pad 10
+now goes round the right end (≥ 10 mm) or over the ISO1 slot end and round the left end (≥ 14 mm). WP4 moved 1.0 mm
+up with its spokes (pad edge 1.3 mm from the slot). Inner layers get no slot credit, so the primary copper within
+8.0 mm of the pad 10 / WP4 barrels went: the GND via at ISO1 pin 8 and three In4 HT_SDATA segments (pin 8 / pin 7
+must be fanned out downwards). Pour keep-out x −47.5 … −27.0, y −66 … −59 on all layers (heater pours stay above
+the slot, primary pours 8 mm from pad 10 where the slot does not shield), and one between the TR2 pin rows
+(Q14_DRAIN / HEATER_HI_SOURCE pours were 6.6 mm apart). *Rejected:* a T-slot merged with the ISO1 slot – KiCad
+reports the overlapping Edge.Cuts shapes as a self-intersecting outline (tested); a separate slot right of the ISO1
+slot end – the 1 mm gap between the two slots leaves a 7.9 mm path; moving ISO1 2.7 mm down – all 16 pins lose their
+routing and the heater side comes closer to the mains copper below (spot b), which is already too tight.
+(b) *Below the heater island (bottom side).* The relay driver Q9 / C35 / R44 / R32 with its 5V / GND / gate tracks
+sat 5.6 … 8 mm below ISO1 pin 16 / C59 / R91 / R117 and at the same time 3.0 mm above the PE pad of C82: the
+primary strip left between "8 mm from the heater" and "3.2 mm from PE" is 0 … 1.7 mm high there. The four parts
+moved to the free bottom side under the relay RL1 between its coil pins and D9 / D28 (Q9 drain 2.7 mm from D9's
+anode, ≥ 1.9 mm from the mains pins of RL1 – HV functional 1.2 mm); their copper and 6 more primary segments within
+8 mm of the island were deleted; GPIO_BYPASS_RLY (In4) now needs a ≈ 20 mm longer run to R44 / R32. Pour keep-out
+x −60.5 … −40, y −50 … −41.8 (the RL1-COM mains pour was 4.1 mm from C59). Three heater Net-(AD1-VA) B.Cu segments
+7.4 … 7.7 mm from R27 pad 1 (RL1-COM) deleted: re-route them above y −52.6. *Rejected:* shifting the Q9 group
+down (blocked by the PE pad of C82) or the heater parts up (packed island).
+(c) *TR2.* Nothing to move: the pin rows are 10.4 mm apart; only the pours were too close (keep-out).
+
+**2. PE ↔ primary at the Y capacitors / RL1 (PE-PRI 22 → 0).** C85 1.6 mm up: its PE pad is now 3.4 mm from RL1
+pin 1 (was 2.58 mm; moving it right is blocked by C81 / C82). Six 2 mm wide PE B.Cu segments passing CM1 pads 2 / 3 /
+4 and RL1 pin 1 at 1.4 … 3.0 mm, the IN2 F.Cu sense track 3.06 mm from C65's PE pad and the GPIO_BYPASS_RLY via at
+C82 were deleted (PE net to re-route ≥ 3.2 mm from the CM1 pins, e.g. 1.0 mm wide or 1 mm further left). The zone
+filler only keeps the 2.0 mm clearance, so a pour keep-out of PE copper + 3.25 mm (all layers, 4 polygons) holds
+the IN2 / L1_PRI2 / RL1-COM / RES_IN / GND pours back; it is computed from the PE pads and the PE tracks that are
+left, so it must be re-made when PE is routed. *Rejected:* a slot at the Y caps (the pad pairs are THT discs with
+7.5 mm pitch, there is no pad pair that needs one once the pours are held off); moving C65 / CM1.
+Mounting holes (PE): keep-out circles round H1–H8 (pours were 2.95 mm from the rings), and all tracks inside the
+hole spacing deleted – the two B.Cu tracks of the step-2 notes (H4 ↔ 15V, 2 segments; H5 ↔ CUK_CAP_MEAS-, 4
+segments) and 22 more: 19 In4 segments (GPIO_BYPASS_RLY, +3V3, HT_CLK, HT_SDATA, SYNCH_1, SYNCH_2 next to H4;
+Net-(R48-Pad2) / Net-(R51-Pad2) next to H7; Net-(AD2-CLK) next to H5), 2 F.Cu 420V segments at H5 (4.12 of 4.2 mm)
+and the B.Cu track between R47 and R48 at H7. Mounting-hole markers 48 → 14; the 14 left are pads, not
+tracks: R47 / R48 (B, 2.5 … 2.8 mm from H7), R14 pad 2 (B, 2.84 mm from H4), C102 pad 2 (step-2 place, 2.9 mm of
+4.2 mm from H8) – see decisions.
+
+**3. The 54 added parts are all on the board** (none left in the grid, no new courtyard pair, no pad short, no
+isolation marker; placed by a nearest-free-spot search, 0.3 mm from foreign copper, 1.25 mm for HV net pads, so no
+5.1 track was deleted for them):
+- *Heater LLC split-cap balancing R155–R158* (bottom side under C42 / C49 / C22, DC+ pad of R155 under C42's DC+
+  pad; chain DC+ → HEATER_CAP_MEAS → HEATER_CURRENT, all pads ≥ 1.25 mm from other copper, 12 mm from the UART
+  island). *DAB primary R143–R146* bottom side under C47 / C54 (same order as the caps), *DAB secondary R147–R150*
+  bottom side under C16 / C55. Bottom side because the top side next to the 1210 caps is taken by TR3 / J4 / Q10;
+  each chain needs one via per cap terminal.
+- *Dead-time parts:* R127 / C118 and R129 / C120 (DAB_DIS) left of DRV5 pins 5 / 6, R128 / C119 below DRV6 pin 6
+  (secondary side, 6 mm from the pin – nothing closer is free under TR3), R130 / C121 below DRV3 pin 6. D35 (heater
+  high-side turn-off diode) between R36 and R59.
+- *Flyback (PWM2):* C140 / R154 (VIN) and C138 on top above pins 1–4, R138 / R139 (VERR), C139 / R140 / R141 (FB)
+  on the bottom side under pins 1–4; the line-OVP chain R151–R153 on the bottom side from R116's DC+ pad along the
+  board edge to R153 (VIN run of ≈ 13 mm to pin 1 – low impedance at the pin through C140); R142 under D10;
+  bleeders R125 (15V, bottom, at D5) and R126 (5V, top, above R8).
+- *Analog:* U9 + C128 / C129 / R131 at R3 / R110 (bottom), U10 + C132 / C133 / R132–R135 under R11 / R12
+  (bottom, AUX_MEAS divider; outputs 6 / 13 mm from J2 pins 43 / 49), C122–C125 at U1, C126 / C127 at U8, C130 / C131
+  at U6.
+
+**4. Leftovers of step 2.** *PWM2 drain copper:* the added parts keep x 40.6 … 47.7, y −2 … 6.6 free on both outer
+layers and the strip y 7.2 … 10.6 to D7 / TR1 pin 12 on F.Cu. Room as placed: F.Cu ≈ 0.5 cm² at the pins + 0.5 cm²
+strip, B.Cu ≈ 0.5 cm² under it + 0.4 cm² below (x 40.6 … 46.3, y 6.6 … 14, where the 5.1 GND pour has to give
+way) = **≈ 1.9 cm²**, i.e. the lower end of the 2–3 cm² target without moving anything; moving R114–R116 1 mm left
+would add only ≈ 0.08 cm² per layer (a 5.1 track at x 36.7 limits it) and C58 cannot move right (C51), so neither
+was moved. *Texts:* J4, ISO2, ISO1, U11 and C13 references moved off the slots / the edge (silk-to-edge 17 → 14);
+the rest are footprint silk lines that cross a slot (Q21 / Q8 / TR3 over the L-slot, TR1, TR2 over the new slot,
+one line each of ISO1 / ISO2 / U11) – fix in the footprints.
+
+**Remaining after step 3** (beyond routing: unconnected 346 → 359, dangling tracks 110 → 140 from the deleted
+copper): PRI-SEC 2 (TR1 pin 2 / 9 inner barrels, as step 2); 14 mounting-hole markers at pads (above); the 1 mm
+web between the ISO1 slot and the new slot (ask JLC, or draw one T-shaped slot in a board-specific ISO1 footprint
+variant); TR2 silk over the new slot; 2 new net-class markers inside U10 itself (VSSOP-8 pad gap 0.15 mm vs the
+PRIMARY_LV class clearance 0.2 mm on pins 3 / 4 and 7 / 8 – a rule / footprint question, not placement); HV-functional / net-class clearances inside one domain (145, routing).
 """
 
 if __name__ == "__main__":

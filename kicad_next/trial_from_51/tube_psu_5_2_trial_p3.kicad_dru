@@ -1,0 +1,180 @@
+(version 1)
+# tube_power 5.2 custom design rules (KiCad 10). Derivation: kicad_next/README.md "Isolation domains".
+# Net classes per domain are assigned by tools/next/setup_project.py (every net has exactly one):
+#   primary   = HV_PRIMARY | PRIMARY_LV | SIGNAL      (mains-referenced, DC+ 400 V)
+#   secondary = HV_SECONDARY | SECONDARY_LV           (DAB secondary: ISO_GND, 420V, -80/-100 V, 15V_ISO_SEC, 5V_ISOL)
+#   heater    = HEATER                                (HT_GND, 6V3)
+#   uart      = UART_ISO                              (UART island, referenced to the PC / earth; phase 2)
+#   earth     = PE_EARTH                              (protective earth, Y capacitors)
+#   holes     = mounting holes H1-H8 (no-net copper ring on every layer; screws bonded to the earthed chassis)
+# Every rule is written for both orders of A and B. Outer layers: clearance (air) + creepage (surface,
+# KiCad follows slots in Edge.Cuts). Inner layers: no creepage in the laminate is claimed (no cemented-
+# joint qualification of the JLC laminate), so the inner-layer spacing equals the outer creepage.
+# Distance through insulation (layer to layer) is not checked by KiCad: no copper of one domain may
+# overlap copper of another domain on any other layer (barrier keep-out, phase 5/6).
+
+# ---------------------------------------------------------------------------------------------------
+# JLC 6-layer manufacturing limits that the board minimums (kicad_pro) cannot express
+# (jlcpcb.com/capabilities/pcb-capabilities, read 2026-11-17)
+(rule "JLC PTH pad annular ring >= 0.15 mm"
+	(condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole'")
+	(constraint annular_width (min 0.15mm)))
+
+(rule "JLC pad hole to pad hole >= 0.45 mm"
+	(condition "A.Type == 'Pad' && B.Type == 'Pad'")
+	(constraint hole_to_hole (min 0.45mm)))
+
+(rule "JLC NPTH >= 0.5 mm"
+	(condition "A.Type == 'Pad' && A.Pad_Type == 'NPTH, mechanical'")
+	(constraint hole_size (min 0.5mm)))
+
+# ---------------------------------------------------------------------------------------------------
+# Functional spacing inside a domain: HV nets on the outer layers (tracks / zones; pad-to-pad gaps are
+# set by the parts, e.g. TO-220 / TO-247 pin pitch). Inner layers: net class clearance 0.5 mm.
+(rule "HV functional, outer layers"
+	(layer outer)
+	(condition "(A.hasNetclass('HV_PRIMARY') || A.hasNetclass('HV_SECONDARY') || B.hasNetclass('HV_PRIMARY') || B.hasNetclass('HV_SECONDARY')) && !(A.Type == 'Pad' && B.Type == 'Pad') && A.Net != B.Net")
+	(constraint clearance (min 1.2mm)))
+
+# ---------------------------------------------------------------------------------------------------
+# Primary <-> DAB secondary: REINFORCED. Working voltage 552 Vrms / 778 Vpk (ISO_GND is always earthed
+# via the amplifier chassis - confirmed by the user 2026-11-17): creepage 2 x 5.52 mm (IEC 60664-1 Table F.5 / IEC 62368-1 Table 17, PD2, MG III,
+# interpolated) -> 11.1 mm; clearance: reinforced for 2500 V mains transient = 3.0 mm, 4.0 mm used.
+(rule "PRI-SEC reinforced clearance"
+	(layer outer)
+	(condition "((A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')) && (B.hasNetclass('HV_SECONDARY') || B.hasNetclass('SECONDARY_LV'))) || ((B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL')) && (A.hasNetclass('HV_SECONDARY') || A.hasNetclass('SECONDARY_LV')))")
+	(constraint clearance (min 4.0mm)))
+
+(rule "PRI-SEC reinforced creepage"
+	(layer outer)
+	(condition "((A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')) && (B.hasNetclass('HV_SECONDARY') || B.hasNetclass('SECONDARY_LV'))) || ((B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL')) && (A.hasNetclass('HV_SECONDARY') || A.hasNetclass('SECONDARY_LV')))")
+	(constraint creepage (min 11.1mm)))
+
+(rule "PRI-SEC inner layers"
+	(layer inner)
+	(condition "((A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')) && (B.hasNetclass('HV_SECONDARY') || B.hasNetclass('SECONDARY_LV'))) || ((B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL')) && (A.hasNetclass('HV_SECONDARY') || A.hasNetclass('SECONDARY_LV')))")
+	(constraint clearance (min 11.1mm))
+	(constraint hole_clearance (min 11.1mm)))
+
+# Exception (user decision 2026-11-19, option (a) of kicad_next/trial_from_51/REPORT.md step 2): the DAB
+# bridge TO-220s Q19 (primary) and Q21 (secondary) sit on the fixed heatsink plate pitch, separated by the
+# 1.2 mm L-shaped Edge.Cuts barrier slot (x 51.4 / y -40.4...-39.2). The slot cuts the full laminate between
+# the two drill barrels, so on the inner layers there is no straight path through the material: what
+# remains is (1) air across the slot -> reinforced clearance 4.0 mm, and (2) the laminate path around the
+# slot ends, which is the same plan geometry as the outer-layer surface path that "PRI-SEC reinforced
+# creepage" (11.1 mm, follows slots) checks against the larger outer pads. Valid only while the slot stays
+# between the two parts; it applies to Q19 <-> Q21 pairs only (later rules override earlier ones).
+(rule "PRI-SEC inner layers, Q19/Q21 across the barrier slot"
+	(layer inner)
+	(condition "(A.memberOfFootprint('Q19') && B.memberOfFootprint('Q21')) || (A.memberOfFootprint('Q21') && B.memberOfFootprint('Q19'))")
+	(constraint clearance (min 4.0mm))
+	(constraint hole_clearance (min 4.0mm)))
+
+# ---------------------------------------------------------------------------------------------------
+# Primary <-> heater and primary <-> UART island: REINFORCED. Working voltage 318 Vrms / 400 Vpk
+# (domain earthed; the heater may sit at the -100 V bias: sqrt(318^2 + 100^2) = 333 Vrms -> 6.7 mm):
+# creepage 8.0 mm used (= reinforced for 400 Vrms; UART user-touchable, plan target >= 8 mm). Clearance 4.0 mm as above.
+(rule "PRI-HEATER/UART reinforced clearance"
+	(layer outer)
+	(condition "((A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')) && (B.hasNetclass('HEATER') || B.hasNetclass('UART_ISO'))) || ((B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL')) && (A.hasNetclass('HEATER') || A.hasNetclass('UART_ISO')))")
+	(constraint clearance (min 4.0mm)))
+
+(rule "PRI-HEATER/UART reinforced creepage"
+	(layer outer)
+	(condition "((A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')) && (B.hasNetclass('HEATER') || B.hasNetclass('UART_ISO'))) || ((B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL')) && (A.hasNetclass('HEATER') || A.hasNetclass('UART_ISO')))")
+	(constraint creepage (min 8.0mm)))
+
+(rule "PRI-HEATER/UART inner layers"
+	(layer inner)
+	(condition "((A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')) && (B.hasNetclass('HEATER') || B.hasNetclass('UART_ISO'))) || ((B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL')) && (A.hasNetclass('HEATER') || A.hasNetclass('UART_ISO')))")
+	(constraint clearance (min 8.0mm))
+	(constraint hole_clearance (min 8.0mm)))
+
+# ---------------------------------------------------------------------------------------------------
+# DAB secondary <-> UART island: REINFORCED (420 V ES3 to a user-touchable circuit). 420 Vrms (DC):
+# creepage 2 x 4.2 = 8.4 mm; clearance reinforced for a 1500 V transient (secondary behind reinforced
+# insulation, one OVC step lower) = 1.5 mm, 3.0 mm used.
+(rule "SEC-UART reinforced clearance"
+	(layer outer)
+	(condition "((A.hasNetclass('HV_SECONDARY') || A.hasNetclass('SECONDARY_LV')) && B.hasNetclass('UART_ISO')) || ((B.hasNetclass('HV_SECONDARY') || B.hasNetclass('SECONDARY_LV')) && A.hasNetclass('UART_ISO'))")
+	(constraint clearance (min 3.0mm)))
+
+(rule "SEC-UART reinforced creepage"
+	(layer outer)
+	(condition "((A.hasNetclass('HV_SECONDARY') || A.hasNetclass('SECONDARY_LV')) && B.hasNetclass('UART_ISO')) || ((B.hasNetclass('HV_SECONDARY') || B.hasNetclass('SECONDARY_LV')) && A.hasNetclass('UART_ISO'))")
+	(constraint creepage (min 8.4mm)))
+
+(rule "SEC-UART inner layers"
+	(layer inner)
+	(condition "((A.hasNetclass('HV_SECONDARY') || A.hasNetclass('SECONDARY_LV')) && B.hasNetclass('UART_ISO')) || ((B.hasNetclass('HV_SECONDARY') || B.hasNetclass('SECONDARY_LV')) && A.hasNetclass('UART_ISO'))")
+	(constraint clearance (min 8.4mm))
+	(constraint hole_clearance (min 8.4mm)))
+
+# ---------------------------------------------------------------------------------------------------
+# DAB secondary <-> heater: FUNCTIONAL (user 2026-11-17: the heater supply is tied to the negative bias
+# supply (-100V BIAS) or to signal ground through 100 ohm, i.e. referenced to the earthed secondary).
+# Largest difference: heater at -100 V vs 420V = 520 V -> creepage 5.2 mm (IEC 60664-1 Table F.5,
+# PD2, MG III, 500-630 V rows interpolated), clearance 1.5 mm. To the low-voltage secondary nets
+# (ISO_GND, 15V_ISO_SEC, 5V_ISOL): <= 115 V -> 1.5 mm creepage, 1.0 mm clearance.
+(rule "SEC(HV)-HEATER functional"
+	(layer outer)
+	(condition "(A.hasNetclass('HV_SECONDARY') && B.hasNetclass('HEATER')) || (B.hasNetclass('HV_SECONDARY') && A.hasNetclass('HEATER'))")
+	(constraint clearance (min 1.5mm))
+	(constraint creepage (min 5.2mm)))
+
+(rule "SEC(HV)-HEATER inner layers"
+	(layer inner)
+	(condition "(A.hasNetclass('HV_SECONDARY') && B.hasNetclass('HEATER')) || (B.hasNetclass('HV_SECONDARY') && A.hasNetclass('HEATER'))")
+	(constraint clearance (min 5.2mm))
+	(constraint hole_clearance (min 5.2mm)))
+
+(rule "SEC(LV)-HEATER functional"
+	(condition "(A.hasNetclass('SECONDARY_LV') && B.hasNetclass('HEATER')) || (B.hasNetclass('SECONDARY_LV') && A.hasNetclass('HEATER'))")
+	(constraint clearance (min 1.0mm))
+	(constraint creepage (min 1.5mm)))
+
+# Heater <-> UART: functional (both ELV, earthed).
+(rule "HEATER-UART functional"
+	(condition "(A.hasNetclass('HEATER') && B.hasNetclass('UART_ISO')) || (B.hasNetclass('HEATER') && A.hasNetclass('UART_ISO'))")
+	(constraint clearance (min 1.0mm)))
+
+# ---------------------------------------------------------------------------------------------------
+# Protective earth (Y capacitors): BASIC to primary (318 Vrms -> creepage 3.2 mm, clearance 2.0 mm),
+# BASIC to the DAB secondary (420 Vrms -> 4.2 mm, 1.5 mm).
+(rule "PE-PRI basic"
+	(layer outer)
+	(condition "(A.hasNetclass('PE_EARTH') && (B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL'))) || (B.hasNetclass('PE_EARTH') && (A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')))")
+	(constraint clearance (min 2.0mm))
+	(constraint creepage (min 3.2mm)))
+
+(rule "PE-PRI basic, inner layers"
+	(layer inner)
+	(condition "(A.hasNetclass('PE_EARTH') && (B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL'))) || (B.hasNetclass('PE_EARTH') && (A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')))")
+	(constraint clearance (min 3.2mm)))
+
+(rule "PE-SEC basic"
+	(layer outer)
+	(condition "(A.hasNetclass('PE_EARTH') && (B.hasNetclass('HV_SECONDARY') || B.hasNetclass('SECONDARY_LV'))) || (B.hasNetclass('PE_EARTH') && (A.hasNetclass('HV_SECONDARY') || A.hasNetclass('SECONDARY_LV')))")
+	(constraint clearance (min 1.5mm))
+	(constraint creepage (min 4.2mm)))
+
+(rule "PE-SEC basic, inner layers"
+	(layer inner)
+	(condition "(A.hasNetclass('PE_EARTH') && (B.hasNetclass('HV_SECONDARY') || B.hasNetclass('SECONDARY_LV'))) || (B.hasNetclass('PE_EARTH') && (A.hasNetclass('HV_SECONDARY') || A.hasNetclass('SECONDARY_LV')))")
+	(constraint clearance (min 4.2mm)))
+
+# ---------------------------------------------------------------------------------------------------
+# Mounting holes H1-H8: the screws bond the board to the chassis, which is earthed (user 2026-11-17),
+# so they are protective earth: BASIC like PE above - primary 318 Vrms: creepage 3.2 mm, clearance
+# 2.0 mm; DAB secondary 420 Vrms: 4.2 mm / 1.5 mm.
+(rule "Mounting hole - primary"
+	(condition "(A.memberOfFootprint('H?') && (B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL'))) || (B.memberOfFootprint('H?') && (A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')))")
+	(constraint clearance (min 2.0mm))
+	(constraint creepage (min 3.2mm))
+	(constraint hole_clearance (min 3.2mm)))
+
+(rule "Mounting hole - secondary"
+	(condition "(A.memberOfFootprint('H?') && (B.hasNetclass('HV_SECONDARY') || B.hasNetclass('SECONDARY_LV'))) || (B.memberOfFootprint('H?') && (A.hasNetclass('HV_SECONDARY') || A.hasNetclass('SECONDARY_LV')))")
+	(constraint clearance (min 1.5mm))
+	(constraint creepage (min 4.2mm))
+	(constraint hole_clearance (min 4.2mm)))
