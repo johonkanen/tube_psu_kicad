@@ -6,16 +6,16 @@ start-up through R116 / R115 / R114 from DC+ to GATE, the current sense from Rcs
 divider R151-R153 / R154 || C140 from DC+ to VIN; the integrated
 error amplifier regulates the primary-side 5V rail directly (VERR divider R138 / R139, FB network R140 + C138,
 C139, RSel R141). Primary-side windings: 1 -> D5 -> 15V (C1, C39), 3 -> D6 -> 5V
-(C36, C6, C71). Secondary windings: 10 -> D4 -> 15V_ISO_SEC (C3, C2), 8 -> D14 -> -5V_SEC (C44, C40),
+(C36, C6, C71). Secondary windings: 10 -> D4 -> 15V_ISO_SEC (C3, C2), 8 -> D14 -> -15V_SEC (C44, C40),
 7 -> D29 -> 5V_ISOL (C114, C115), 5 -> D8 -> -100V BIAS (C45, C102); pin 9 = ISO_GND. The outputs go
-to the terminals +15V OUT / -5V OUT / -80V OUT / +5V OUT / SEC GND (KiCad refdes P15V_OUT, N5V_OUT,
+to the terminals +15V OUT / -15V OUT / -80V OUT / +5V OUT / SEC GND (KiCad refdes P15V_OUT, N15V_OUT,
 N80V_OUT, P5V_OUT, SEC_GND) with the bleeders R124 / R123 / R68 / R67.
 
 PDF: DC- = GND, RET_iso / RET_ISO / ISO_GND = ISO_GND (the page joins the terminals RET_iso and
 ISO_GND by a bare wire, no part), 20V_ISO_sec = 15V_ISO_SEC, 5v_isol = 5V_ISOL, -100V bias = -100V
 BIAS; the PDF net labels d5_A, Sec11, d14_k, d15_K (IPC D5_A, SEC11, D14_K, D15_K) are the winding
 ends, wired directly here; the 5.1 aux_fb net (IW1818 knee sensing) is gone in 5.2. This sheet
-generates 15V, 5V, 15V_ISO_SEC, -5V_SEC, 5V_ISOL, -100V BIAS and ISO_GND (terminal SEC GND): their
+generates 15V, 5V, 15V_ISO_SEC, -15V_SEC, 5V_ISOL, -100V BIAS and ISO_GND (terminal SEC GND): their
 permanent PWR_FLAGs are here; PWM2 VCC (fed through D10 only) has one too."""
 from _common import *  # noqa: F401,F403
 
@@ -191,7 +191,7 @@ power_at(sh, "ISO_GND", right(P9, 4), "right")
 XN = TX + g(26)                                                 # rail start column
 groups = [  # pin, column offset, row, diode (ref, pin at the transformer side), rail net, caps (ref, sym, top), cap text
     (P10, 2, g(52), ("D4", "A"), "15V_ISO_SEC", [("C3", "C", 1), ("C2", "C_Polarized", 1)]),
-    (P8, 6, g(84), ("D14", "C"), "-5V_SEC", [("C44", "C", 2), ("C40", "C", 2)]),
+    (P8, 6, g(84), ("D14", "C"), "-15V_SEC", [("C44", "C", 2), ("C40", "C", 2)]),
     (P7, 4, g(100), ("D29", "A"), "5V_ISOL", [("C114", "C", 1), ("C115", "C", 1)]),
     (P6, 2, g(116), ("D8", "C"), "-100V BIAS", [("C45", "C", 2), ("C102", "C_Polarized", 2)]),
 ]
@@ -225,7 +225,7 @@ y = g(136)
 terminal(sh, "SEC_GND", XT, y, "right")
 sh.wire((XT - g(20), y), (XT, y))
 flagged_power(sh, "ISO_GND", XT - g(20), y)
-for i, (tref, rail, rref) in enumerate((("P15V_OUT", "15V_ISO_SEC", "R124"), ("N5V_OUT", "-5V_SEC", "R123"),
+for i, (tref, rail, rref) in enumerate((("P15V_OUT", "15V_ISO_SEC", "R124"), ("N15V_OUT", "-15V_SEC", "R123"),
                                          ("N80V_OUT", "-100V BIAS", "R68"), ("P5V_OUT", "5V_ISOL", "R67"))):
     y = g(148 + 12 * i)
     terminal(sh, tref, XT, y, "right")
@@ -234,12 +234,12 @@ for i, (tref, rail, rref) in enumerate((("P15V_OUT", "15V_ISO_SEC", "R124"), ("N
     _, rt, rb = vert2(sh, "R", rref, XT - g(20), y + g(3), sh_value(rref), top=2)   # pin 2 = rail, pin 1 = ISO_GND
     sh.junction(XT - g(20), y)
     power_at(sh, "ISO_GND", rb, "down")
-sh.text("Terminals +15V OUT / -5V OUT / -80V OUT / +5V OUT / SEC GND = P15V_OUT / N5V_OUT / N80V_OUT / P5V_OUT / SEC_GND;", g(100), g(200))
+sh.text("Terminals +15V OUT / -15V OUT / -80V OUT / +5V OUT / SEC GND = P15V_OUT / N15V_OUT / N80V_OUT / P5V_OUT / SEC_GND;", g(100), g(200))
 sh.text("the PDF joins the terminals RET_iso and ISO_GND by a bare wire (one net ISO_GND, no part).", g(100), g(203))
 
 # --- PDF notes ----------------------------------------------------------------------------------
 sh.text("5.2: TR1 = EEL19 4+6 (fly leads FL_DC / FL_C, pins 4 / 6 clipped), PWM2 = ICE5AR0680AG (5V regulated through VERR); R8 || R9 = 1.37R || 1.37R = 0.685R.", g(16), g(37))
 sh.text("5.1 PDF notes (IW1818 Vsense / Isense values, EF20 winding variants) dropped in 5.2: PWM2 and TR1 replaced (NR 1.1, 1.5).", g(16), g(20))
-sh.text("PWR_FLAGs: 15V, 5V, 15V_ISO_SEC, -5V_SEC, 5V_ISOL, -100V BIAS (rectifier outputs), ISO_GND (SEC GND terminal), PWM2 Vcc (fed through D10 only): permanent.", g(16), g(34))
+sh.text("PWR_FLAGs: 15V, 5V, 15V_ISO_SEC, -15V_SEC, 5V_ISOL, -100V BIAS (rectifier outputs), ISO_GND (SEC GND terminal), PWM2 Vcc (fed through D10 only): permanent.", g(16), g(34))
 sh.save()
 print("sheet01: written")

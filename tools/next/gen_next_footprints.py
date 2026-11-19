@@ -177,7 +177,7 @@ def eel19():
     """EEL19 vertical bobbin 4+6 (seller: 4-pin row pitch 3.5 mm, 6-pin row pitch 2.7 mm, rows
     12.5 mm apart). Left row = primary side: 1 A15 finish (15V), 2 GND, 3 A5 finish (AUX_FB),
     pin 4 = P1-P2 crossover post, clipped, no pad. Right row = isolated, upwards from the bottom:
-    5 SHV (-80 V), pin 6 spare (clipped, no pad), 7 S5 (5V_ISOL), 8 SN5 (-5V_SEC), 9 ISO_GND,
+    5 SHV (-80 V), pin 6 spare (clipped, no pad), 7 S5 (5V_ISOL), 8 SN5 (-15V_SEC), 9 ISO_GND,
     10 S15 (15V_ISO_SEC). Fly leads below the body at the pin-4 end: 11 = FL_DC (P1 start, DC+),
     12 = FL_C (P2 finish, collector)."""
     xr = 12.5 / 2

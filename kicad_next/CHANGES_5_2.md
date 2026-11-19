@@ -134,7 +134,7 @@ PFC_DRAIN_1/2, HEATER_HI_DRV, Net-(D35-K), Net-(DRV3-VDDA); TRANS_PRI removed).
 12. **R99 pin orientation** changed by the shared driver cell (pin 1 now at D11) – electrically identical.
 13. ~~Phase-1 findings: slots under the SOIC-16W isolators (ISO1, ISO2, U11) and the EEL19 TR1 row
     spacing vs 11.1 mm creepage (phase 3/5).~~ **Done in phase 3** (slot footprints, TR1 slot + fly-lead holes; kicad_next/README.md).
-14. **−5 V → −15 V winding (user 2026-11-19, NR 1.13):** not yet in the 5.2 schematic. SN5 6 → ≈ 16 T, C40 needs ≥ 25 V, R123 bleeder re-picked, rename -5V_SEC / N5V_OUT; TR1 build and cross regulation to re-simulate.
+14. ~~−5 V → −15 V winding~~ **Done (NR 1.13, 2026-11-19):** net -5V_SEC → -15V_SEC, terminal N5V_OUT → N15V_OUT (reuse_51_board.py maps the 5.1 refdes), C40 100 µF 10 V → 22 µF 25 V X5R 1206 (C12891), R123 12.1k → 4.7k (C17936); TR1 winding spec in simulation/flyback/EEL19_DESIGN.md 16 (SN5 16 T in the S15 layer, pins unchanged). Was: SN5 6 → ≈ 16 T, C40 needs ≥ 25 V, R123 bleeder re-picked, rename -5V_SEC / N5V_OUT; TR1 build and cross regulation to re-simulate.
 
 ## Netlist diff 5.1 → 5.2 (generated)
 
@@ -142,11 +142,11 @@ Reviewed against the items above: every difference is one of the listed changes 
 re-symbolled parts – PWM2, DRV1–DRV4, TR1, TR3, J4, L1/L2 – show as + / − pins of the same net).
 
 <!-- netlist_diff.py begin -->
-Parts: 5.1 315, 5.2 362; removed 11, added 58.
+Parts: 5.1 315, 5.2 362; removed 12, added 59.
 
-**Removed parts:** C4 (1n), C50 (22pf), DRV9 (IXDD609D2TR), L3 (70u), R25 (82k), R40 (82k), R64 (39k), R81 (15k), R84 (33k), R85 (4.7k), R86 (1k)
+**Removed parts:** C4 (1n), C50 (22pf), DRV9 (IXDD609D2TR), L3 (70u), N5V_OUT (PIN), R25 (82k), R40 (82k), R64 (39k), R81 (15k), R84 (33k), R85 (4.7k), R86 (1k)
 
-**Added parts:** C118 (100p), C119 (100p), C120 (1n), C121 (100p), C122 (12p), C123 (5.6p), C124 (100n), C125 (1u), C126 (1n), C127 (1n), C128 (100n), C129 (100n), C130 (1n), C131 (1n), C132 (100n), C133 (100n), C134 (100n), C135 (100n), C136 (1u), C137 (1u), C138 (10n), C139 (2.2n), C140 (470p), D35 (ZLLS400TA), R125 (2.2k), R126 (1k), R127 (10k), R128 (10k), R129 (10k), R130 (10k), R131 (22R), R132 (100R), R133 (15k 0.1%), R134 (10k 0.1%), R135 (100R), R136 (47R), R137 (47R), R138 (88.7k 0.1%), R139 (49.9k 0.1%), R140 (4.7k), R141 (750k), R142 (10R), R143 (220k), R144 (220k), R145 (220k), R146 (220k), R147 (220k), R148 (220k), R149 (220k), R150 (220k), R151 (10M), R152 (10M), R153 (10M), R154 (178k), U9 (TLV316IDBVR), U10 (TLV9062IDGKR), U11 (CA-IS3721HW), U12 (XC6206P332MR)
+**Added parts:** C118 (100p), C119 (100p), C120 (1n), C121 (100p), C122 (12p), C123 (5.6p), C124 (100n), C125 (1u), C126 (1n), C127 (1n), C128 (100n), C129 (100n), C130 (1n), C131 (1n), C132 (100n), C133 (100n), C134 (100n), C135 (100n), C136 (1u), C137 (1u), C138 (10n), C139 (2.2n), C140 (470p), D35 (ZLLS400TA), N15V_OUT (PIN), R125 (2.2k), R126 (1k), R127 (10k), R128 (10k), R129 (10k), R130 (10k), R131 (22R), R132 (100R), R133 (15k 0.1%), R134 (10k 0.1%), R135 (100R), R136 (47R), R137 (47R), R138 (88.7k 0.1%), R139 (49.9k 0.1%), R140 (4.7k), R141 (750k), R142 (10R), R143 (220k), R144 (220k), R145 (220k), R146 (220k), R147 (220k), R148 (220k), R149 (220k), R150 (220k), R151 (10M), R152 (10M), R153 (10M), R154 (178k), U9 (TLV316IDBVR), U10 (TLV9062IDGKR), U11 (CA-IS3721HW), U12 (XC6206P332MR)
 
 **Changed parts** (value / symbol / footprint, 5.1 -> 5.2):
 
@@ -162,6 +162,7 @@ Parts: 5.1 315, 5.2 362; removed 11, added 58.
 | C31 |  |  | Capacitor_THT:CP_Radial_D8.0mm_P3.50mm -> tube_psu_next_parts:CP_Radial_D8.0mm_P3.50mm_H20mm |
 | C32 |  |  | Capacitor_THT:CP_Radial_D8.0mm_P3.50mm -> tube_psu_next_parts:CP_Radial_D8.0mm_P3.50mm_H20mm |
 | C37 | 82u -> 82u 450V |  | tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus -> tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_Proteus_H45mm |
+| C40 | 100u -> 22u 25V |  |  |
 | C45 |  |  | Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder -> Capacitor_SMD:C_1210_3225Metric |
 | C56 | 82u -> 82u 450V |  | tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus -> tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_Proteus_H45mm |
 | C58 | 4.7u -> 22u 35V | C -> C_Polarized | Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder -> Capacitor_SMD:CP_Elec_5x5.4 |
@@ -201,7 +202,6 @@ Parts: 5.1 315, 5.2 362; removed 11, added 58.
 | J4 | 66226-003 -> FTDI 1x6 | CONN_01X03 -> CONN_01X06 | Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical -> Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical |
 | L1 | 200u -> TBD (measured) | RM8_INDUCTOR -> L_TOROID | tube_psu:L_RM8_Proteus -> tube_psu_next:L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_45deg |
 | L2 | 200u -> TBD (measured) | RM8_INDUCTOR -> L_TOROID | tube_psu:L_RM8_Proteus -> tube_psu_next:L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_315deg |
-| N5V_OUT |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
 | N80V_OUT |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
 | P15V_OUT |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
 | P400V |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
@@ -224,6 +224,7 @@ Parts: 5.1 315, 5.2 362; removed 11, added 58.
 | R114 | 1M -> 4.7M |  | Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder -> Resistor_SMD:R_1206_3216Metric |
 | R115 | 1M -> 4.7M |  | Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder -> Resistor_SMD:R_1206_3216Metric |
 | R116 | 1M -> 4.7M |  | Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder -> Resistor_SMD:R_1206_3216Metric |
+| R123 | 12.1K -> 4.7K |  |  |
 | R124 | 12.1K -> 2.61k |  |  |
 | REF1 | ISL21010CFH315Z-TK -> REF3325AIDBZR |  |  |
 | RL1 |  |  | tube_psu:Relay_Songle_SRD_5pin -> tube_psu_next_parts:Relay_Songle_SRD_5pin |
@@ -242,7 +243,7 @@ Nets: 5.1 208, 5.2 233 (with at least one part pin).
 
 **5.1 nets split in 5.2:** Net-(DRV1-OUTA), Net-(DRV2-OUTA)
 
-**Renamed nets** (same pins, new name): /04 MCU connector/ADB0 -> /04 MCU connector/5V_MEAS; /04 MCU connector/F16 -> DAB_DIS; unconnected-(ISO2-VO_C-Pad13) -> DAB_DIS_SEC; Net-(D7-PadA) -> /01 AUX supply/FLY_C; Net-(DRV3-OUT+) -> /06 Heaters/HEATER_HI_DRV; Net-(DRV9-OUTA) -> /06 Heaters/HEATER_LOW_DRV; Net-(R49-Pad1) -> Net-(C127-Pad1); Net-(R2-Pad2) -> Net-(C131-Pad2); Net-(DRV1-OUTA) -> Net-(DRV1-OUTH); Net-(DRV1-OUTA) -> Net-(DRV1-OUTL); Net-(DRV2-OUTA) -> Net-(DRV2-OUTH); Net-(DRV2-OUTA) -> Net-(DRV2-OUTL); Net-(DRV3-VDD2) -> Net-(DRV3-VDDA); Net-(PWM2-E) -> Net-(PWM2-CS); Net-(D5-PadA) -> Net-(TR1-A15); /01 AUX supply/AUX_FB -> Net-(TR1-A5); Net-(D4-PadA) -> Net-(TR1-S15); Net-(D29-PadA) -> Net-(TR1-S5); Net-(L2-2) -> /05 PFC/PFC_DRAIN_1; Net-(L1-1) -> /05 PFC/PFC_DRAIN_2
+**Renamed nets** (same pins, new name): -5V_SEC -> -15V_SEC; /04 MCU connector/ADB0 -> /04 MCU connector/5V_MEAS; /04 MCU connector/F16 -> DAB_DIS; unconnected-(ISO2-VO_C-Pad13) -> DAB_DIS_SEC; Net-(D7-PadA) -> /01 AUX supply/FLY_C; Net-(DRV3-OUT+) -> /06 Heaters/HEATER_HI_DRV; Net-(DRV9-OUTA) -> /06 Heaters/HEATER_LOW_DRV; Net-(R49-Pad1) -> Net-(C127-Pad1); Net-(R2-Pad2) -> Net-(C131-Pad2); Net-(DRV1-OUTA) -> Net-(DRV1-OUTH); Net-(DRV1-OUTA) -> Net-(DRV1-OUTL); Net-(DRV2-OUTA) -> Net-(DRV2-OUTH); Net-(DRV2-OUTA) -> Net-(DRV2-OUTL); Net-(DRV3-VDD2) -> Net-(DRV3-VDDA); Net-(PWM2-E) -> Net-(PWM2-CS); Net-(D5-PadA) -> Net-(TR1-A15); /01 AUX supply/AUX_FB -> Net-(TR1-A5); Net-(D4-PadA) -> Net-(TR1-S15); Net-(D29-PadA) -> Net-(TR1-S5); Net-(L2-2) -> /05 PFC/PFC_DRAIN_1; Net-(L1-1) -> /05 PFC/PFC_DRAIN_2
 
 **Changed connections** (+ pin joined, - pin left; pins of added / removed parts summarised):
 
@@ -250,6 +251,7 @@ Nets: 5.1 208, 5.2 233 (with at least one part pin).
 |---|---|
 | +1V65_BIAS | -R3.1 R110.1; new parts C122 C123 C126 R131 |
 | +3V3 | new parts C124 C125 C129 C133 C134 U9 U10 U11 |
+| -5V_SEC -> -15V_SEC | new parts N15V_OUT; removed parts N5V_OUT |
 | 15V | +DRV3.11; -D10.A DRV1.3 DRV1.8 DRV2.3 DRV2.8; new parts R125 R142; removed parts DRV9 |
 | 420V | new parts R147 |
 | 5V | +DRV3.3 DRV3.8; -DRV3.2 DRV3.4 DRV5.5; new parts R126 R133 R138 |

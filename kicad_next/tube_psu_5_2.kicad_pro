@@ -792,7 +792,7 @@
       },
       {
         "netclass": "SECONDARY_LV",
-        "pattern": "-5V_SEC"
+        "pattern": "-15V_SEC"
       },
       {
         "netclass": "SECONDARY_LV",

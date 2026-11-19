@@ -2250,7 +2250,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "tube_psu_next:-5V_SEC"
+		(symbol "tube_psu_next:-15V_SEC"
 			(power global)
 			(pin_numbers
 				(hide yes)
@@ -2275,7 +2275,7 @@
 					)
 				)
 			)
-			(property "Value" "-5V_SEC"
+			(property "Value" "-15V_SEC"
 				(at 0 3.556 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2307,7 +2307,7 @@
 					)
 				)
 			)
-			(property "Description" "Power symbol for net \"-5V_SEC\" (IPC net name)"
+			(property "Description" "Power symbol for net \"-15V_SEC\" (IPC net name)"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2329,7 +2329,7 @@
 					)
 				)
 			)
-			(symbol "-5V_SEC_0_1"
+			(symbol "-15V_SEC_0_1"
 				(polyline
 					(pts
 						(xy -0.762 1.27) (xy 0 2.54)
@@ -2367,7 +2367,7 @@
 					)
 				)
 			)
-			(symbol "-5V_SEC_1_1"
+			(symbol "-15V_SEC_1_1"
 				(pin power_in line
 					(at 0 0 90)
 					(length 0)
@@ -8630,8 +8630,8 @@
 				)
 			)
 		)
-		(property "Value" "100u"
-			(at 243.5 111.76 0)
+		(property "Value" "22u 25V"
+			(at 245.15 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8665,7 +8665,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C6119961"
+		(property "LCSC" "C12891"
 			(at 238.76 110.49 0)
 			(effects
 				(font
@@ -8777,7 +8777,7 @@
 		)
 	)
 	(symbol
-		(lib_id "tube_psu_next:-5V_SEC")
+		(lib_id "tube_psu_next:-15V_SEC")
 		(at 261.62 106.68 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -8794,7 +8794,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "-5V_SEC"
+		(property "Value" "-15V_SEC"
 			(at 261.62 103.124 0)
 			(effects
 				(font
@@ -8820,7 +8820,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"-5V_SEC\" (IPC net name)"
+		(property "Description" "Power symbol for net \"-15V_SEC\" (IPC net name)"
 			(at 261.62 106.68 0)
 			(effects
 				(font
@@ -10903,8 +10903,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "42cf54bd-bf82-589e-982d-6caba94b5dfb")
-		(property "Reference" "N5V_OUT"
+		(uuid "20dbec37-db5e-51db-b541-95c9fa3d3cdf")
+		(property "Reference" "N15V_OUT"
 			(at 375.92 201.93 90)
 			(effects
 				(font
@@ -10959,12 +10959,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "974d990f-57ed-58f0-9cc3-df78e8eae2b0")
+			(uuid "c67fb019-b1a3-5731-979a-501cc4f9319c")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/415f4607-59f6-4888-a9c9-16076e86f54c"
-					(reference "N5V_OUT")
+					(reference "N15V_OUT")
 					(unit 1)
 				)
 			)
@@ -10981,7 +10981,7 @@
 		(uuid "76f9bb7c-5ca8-5e93-bf83-d9619704d667")
 	)
 	(symbol
-		(lib_id "tube_psu_next:-5V_SEC")
+		(lib_id "tube_psu_next:-15V_SEC")
 		(at 320.04 203.2 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -10998,7 +10998,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "-5V_SEC"
+		(property "Value" "-15V_SEC"
 			(at 316.74 203.2 90)
 			(effects
 				(font
@@ -11025,7 +11025,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"-5V_SEC\" (IPC net name)"
+		(property "Description" "Power symbol for net \"-15V_SEC\" (IPC net name)"
 			(at 320.04 203.2 0)
 			(effects
 				(font
@@ -11063,8 +11063,8 @@
 				)
 			)
 		)
-		(property "Value" "12.1K"
-			(at 350.73 208.28 0)
+		(property "Value" "4.7K"
+			(at 350.18 208.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11098,7 +11098,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C247391"
+		(property "LCSC" "C17936"
 			(at 345.44 207.01 0)
 			(effects
 				(font
@@ -11789,7 +11789,7 @@
 			)
 		)
 	)
-	(text "Terminals +15V OUT / -5V OUT / -80V OUT / +5V OUT / SEC GND = P15V_OUT / N5V_OUT / N80V_OUT / P5V_OUT / SEC_GND;"
+	(text "Terminals +15V OUT / -15V OUT / -80V OUT / +5V OUT / SEC GND = P15V_OUT / N15V_OUT / N80V_OUT / P5V_OUT / SEC_GND;"
 		(exclude_from_sim no)
 		(at 127 254 0)
 		(effects
@@ -11833,7 +11833,7 @@
 		)
 		(uuid "a8942af5-f806-525b-b6e6-3604ea472067")
 	)
-	(text "PWR_FLAGs: 15V, 5V, 15V_ISO_SEC, -5V_SEC, 5V_ISOL, -100V BIAS (rectifier outputs), ISO_GND (SEC GND terminal), PWM2 Vcc (fed through D10 only): permanent."
+	(text "PWR_FLAGs: 15V, 5V, 15V_ISO_SEC, -15V_SEC, 5V_ISOL, -100V BIAS (rectifier outputs), ISO_GND (SEC GND terminal), PWM2 Vcc (fed through D10 only): permanent."
 		(exclude_from_sim no)
 		(at 20.32 43.18 0)
 		(effects

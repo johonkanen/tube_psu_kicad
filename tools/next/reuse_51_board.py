@@ -85,6 +85,9 @@ TOL = 2000  # nm, pad position / size match of library copies
 NEW_ORIENTATION = {"L1": 0.0, "L2": 0.0}
 
 
+# 5.1 refdes -> 5.2 refdes (NR 1.13: the -5 V terminal became the -15 V terminal)
+REF_RENAME_51 = {"N5V_OUT": "N15V_OUT"}
+
 def mm(v):
     return round(v / MM, 3)
 
@@ -403,6 +406,11 @@ def main(argv):
     if make_board.outline(b) != make_board.outline(shell) or make_board.holes(b) != make_board.holes(shell):
         sys.exit("reuse_51_board: 5.1 outline / holes differ from kicad_next/tube_psu_5_2.kicad_pcb")
     del shell
+
+    # --- refdes renamed in 5.2 (same footprint, same place): rename the 5.1 footprint first
+    for fp in b.GetFootprints():
+        if fp.GetReference() in REF_RENAME_51:
+            fp.SetReference(REF_RENAME_51[fp.GetReference()])
 
     # --- old pad nets (before any change), keyed by (ref, pad number, position)
     old_fps = {fp.GetReference(): fp for fp in b.GetFootprints()}

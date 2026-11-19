@@ -12504,7 +12504,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(symbol "-5V_SEC"
+	(symbol "-15V_SEC"
 		(power global)
 		(pin_numbers
 			(hide yes)
@@ -12529,7 +12529,7 @@
 				)
 			)
 		)
-		(property "Value" "-5V_SEC"
+		(property "Value" "-15V_SEC"
 			(at 0 3.556 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12561,7 +12561,7 @@
 				)
 			)
 		)
-		(property "Description" "Power symbol for net \"-5V_SEC\" (IPC net name)"
+		(property "Description" "Power symbol for net \"-15V_SEC\" (IPC net name)"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12583,7 +12583,7 @@
 				)
 			)
 		)
-		(symbol "-5V_SEC_0_1"
+		(symbol "-15V_SEC_0_1"
 			(polyline
 				(pts
 					(xy -0.762 1.27) (xy 0 2.54)
@@ -12621,7 +12621,7 @@
 				)
 			)
 		)
-		(symbol "-5V_SEC_1_1"
+		(symbol "-15V_SEC_1_1"
 			(pin power_in line
 				(at 0 0 90)
 				(length 0)

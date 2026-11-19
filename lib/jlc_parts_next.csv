@@ -41,7 +41,7 @@ C36,22u,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C12891,CL31A22
 C37,82u 450V,tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_Proteus_H45mm,C51890374,ERT826M2WI45RRS0F-R,Man Yue Tech,extended,2870,0.9993,2026-11-18,exact,,Man Yue ERT826M2WI45RRS0F-R 82 uF 450 V D12.5x45 P5 on DC+ (NR 5.2b; 5.1 UPZ2W820MNY9 not stocked)
 C38,470nF,Capacitor_THT:C_Rect_L26.5mm_W6.0mm_P22.50mm_MKS4,C3297747,R46KN347000P1K,KEMET,extended,805,0.4882,2026-11-17,equivalent,X2 body width vs 6 mm outline,THT. X2 470 nF 275 VAC P22.5 KEMET R46; verify the body width against the 6 mm footprint outline
 C39,4.7u,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C29823,1206B475K500NT,FH (Guangdong Fenghua Advanced Tech),basic,540274,0.0797,2026-11-17,equivalent,,4.7 uF X7R 50 V 1206 (15 V / PWM2 Vcc / -5 V)
-C40,100u,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C6119961,CGA1206X5R107M100NT,HRE,extended,45088,0.1691,2026-11-17,equivalent,,100 uF X5R 10 V 1206 (5 V / -5 V rails; 10 V for DC-bias margin)
+C40,22u 25V,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,C12891,CL31A226KAHNNNE,Samsung Electro-Mechanics,basic,2656274,0.1029,2026-11-19,changed,,"22 uF X5R 25 V 1206 (NR 1.13: -15V_SEC rail, was 100 uF 10 V; ~9 uF effective at 15 V, EEL19_DESIGN.md 16)"
 C41,4.7n,Capacitor_SMD:C_1206_3216Metric,C342746,C3216C0G2J472JT000N,TDK,extended,5833,0.3434,2026-11-17,equivalent,,"4.7 nF C0G 630 V 1206 (heater resonant split caps, up to 400 V)"
 C42,4.7n,Capacitor_SMD:C_1206_3216Metric,C342746,C3216C0G2J472JT000N,TDK,extended,5833,0.3434,2026-11-17,equivalent,,"4.7 nF C0G 630 V 1206 (heater resonant split caps, up to 400 V)"
 C43,1u,Capacitor_SMD:C_0603_1608Metric,C15849,CL10A105KB8NNNC,Samsung Electro-Mechanics,basic,12659428,0.0145,2026-11-17,equivalent,,1 uF X5R 50 V 0603 (C43 on 15V_ISO_SEC)
@@ -153,7 +153,7 @@ J2,50 PIN HEADER 50TH,tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus,C69941,1.
 J4,FTDI 1x6,Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical,C492405,PZ254V-11-06P,XFCN,extended,72868,0.0431,2026-11-18,changed,,5.2: 3-pin 66226-003 -> 6-pin FTDI header on the UART island (NR 3b)
 L1,TBD (measured),tube_psu_next:L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_45deg,,,,,,,2026-11-18,consigned,value to measure,5.2: PFC choke = sendust ring OD 31.5 x 16.7 mm (NR 5.2); listing 3 mH at 0 A - measure L at 0 A and at the PFC peak current; schematic 5.1 said 200 uH (RM8)
 L2,TBD (measured),tube_psu_next:L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_315deg,,,,,,,2026-11-18,consigned,value to measure,5.2: PFC choke = sendust ring OD 31.5 x 16.7 mm (NR 5.2); listing 3 mH at 0 A - measure L at 0 A and at the PFC peak current; schematic 5.1 said 200 uH (RM8)
-N5V_OUT,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
+N15V_OUT,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
 N80V_OUT,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
 P15V_OUT,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
 P400V,PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,,,,,,,2026-11-17,consigned,,"blade (faston) terminals: hardware, fitted by hand"
@@ -286,7 +286,7 @@ R119,1M,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C17514,0805W8F1
 R120,1M,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,C17514,0805W8F1004T5E,UNI-ROYAL(Uniroyal Elec),basic,1523445,0.0044,2026-11-17,equivalent,,"1 MΩ 1 % 0805 (dividers: <= 140 V per resistor, 0805 rated 150 V; R23/R34/R39 on 420V are at the limit)"
 R121,15k,Resistor_SMD:R_0603_1608Metric,C22809,0603WAF1502T5E,UNI-ROYAL(Uniroyal Elec),basic,3013077,0.0029,2026-11-17,equivalent,,15 kΩ 1 % 0603
 R122,6.8k,Resistor_SMD:R_0603_1608Metric,C23212,0603WAF6801T5E,UNI-ROYAL(Uniroyal Elec),basic,956944,0.0023,2026-11-17,equivalent,,6.8 kΩ 1 % 0603
-R123,12.1K,Resistor_SMD:R_1206_3216Metric,C247391,1206W4F1212T5E,UNI-ROYAL(Uniroyal Elec),extended,4303,0.0045,2026-11-17,equivalent,,12.1 kΩ 1 % 1206
+R123,4.7K,Resistor_SMD:R_1206_3216Metric,C17936,1206W4F4701T5E,UNI-ROYAL(Uniroyal Elec),basic,1983432,0.0077,2026-11-19,changed,,"4.7 kOhm 1 % 1206 (NR 1.13: -15V_SEC bleeder, 48 mW; keeps the bleeder-only rise at -16.25 V)"
 R124,2.61k,Resistor_SMD:R_1206_3216Metric,C245506,CR1206F2K61P05Z,Ever Ohms Tech,extended,75,0.0077,2026-11-18,changed,stock 75,"2.61 kOhm 1 % 1206 (NR 1.8, 15V_ISO_SEC bleeder); alt. AC1206FR-072K61L C229516 (43)"
 REF1,REF3325AIDBZR,tube_psu:SOT-23_Proteus,C69039,REF3325AIDBZR,Texas Instruments,extended,13320,0.7043,2026-11-18,changed,,5.2: 2.5 V series reference (same SOT-23 pinout 1 IN / 2 OUT / 3 GND as the ISL21010); 5.1 value ISL21010CFH315Z was the 1.5 V part (NR 4.8); ISL21010CFH325Z (2.5 V) 0 stock
 RL1,SONGLE RELAY,tube_psu_next_parts:Relay_Songle_SRD_5pin,C35449,SRD-05VDC-SL-C,Ningbo Songle Relay,extended,84108,0.444,2026-11-17,exact,,THT. SRD-05VDC-SL-C (5 V coil)
