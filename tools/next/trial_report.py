@@ -1602,7 +1602,7 @@ layers and the strip y 7.2 … 10.6 to D7 / TR1 pin 12 on F.Cu. Room as placed: 
 strip, B.Cu ≈ 0.5 cm² under it + 0.4 cm² below (x 40.6 … 46.3, y 6.6 … 14, where the 5.1 GND pour has to give
 way) = **≈ 1.9 cm²**, i.e. the lower end of the 2–3 cm² target without moving anything; moving R114–R116 1 mm left
 would add only ≈ 0.08 cm² per layer (a 5.1 track at x 36.7 limits it) and C58 cannot move right (C51), so neither
-was moved. *Texts:* J4, ISO2, ISO1, U11 and C13 references moved off the slots / the edge (silk-to-edge 17 → 15 with the TR2 line over the T bar);
+was moved. *Texts:* J4, ISO2, ISO1, U11 and C13 references moved off the slots / the edge (silk-to-edge 17 → 14 at 6d8c3a9, 15 after the follow-up: the extra one is a single-item marker at the board corner x −71.9 / y 18.7, not traced yet);
 the rest are footprint silk lines that cross a slot (Q21 / Q8 / TR3 over the L-slot, TR1, TR2 over the new slot,
 one line each of ISO1 / ISO2 / U11) – fix in the footprints.
 

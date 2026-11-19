@@ -109,7 +109,7 @@ All clearance / hole-clearance / creepage violations on the board by rule (sheet
 | PRI-HEATER/UART inner layers | clearance | 69 | 04 MCU connector 57, 03 Isolated measurements 42, 06 Heaters 10 |
 | PRI-SEC inner layers | clearance | 49 | 07 DHB 28, 01 AUX supply 15, 03 Isolated measurements 7 |
 | PRI-SEC reinforced creepage | creepage | 43 | 01 AUX supply 22, 07 DHB 19, 03 Isolated measurements 15 |
-| net class clearance (PRIMARY_LV) | clearance | 35 | 06 Heaters 11, 08 Current measurement 7, 02 DHB gate drive 4 |
+| net class clearance (PRIMARY_LV) | clearance | 35 | 06 Heaters 11, 08 Current measurement 7, 04 MCU connector 4 |
 | PRI-HEATER/UART reinforced clearance | clearance | 27 | 04 MCU connector 27, 03 Isolated measurements 23 |
 | PE-PRI basic | creepage | 13 | 05 PFC 13, 08 Current measurement 1 |
 | net class clearance (HV_PRIMARY) | clearance | 12 | 06 Heaters 3, 07 DHB 3, 02 DHB gate drive 3 |
@@ -118,7 +118,7 @@ All clearance / hole-clearance / creepage violations on the board by rule (sheet
 | PE-PRI basic, inner layers | clearance | 8 | 05 PFC 8 |
 | PRI-SEC inner layers | hole_clearance | 8 | 04 MCU connector 8, 07 DHB 8 |
 | Mounting hole - secondary | creepage | 7 | board-only items 7, 03 Isolated measurements 3, 01 AUX supply 1 |
-| Mounting hole - secondary | hole_clearance | 5 | 03 Isolated measurements 5, board-only items 5 |
+| Mounting hole - secondary | hole_clearance | 5 | board-only items 5, 03 Isolated measurements 5 |
 | Mounting hole - primary | clearance | 5 | board-only items 5, 09 AC measurement 1 |
 | net class clearance (SECONDARY_LV) | clearance | 4 | 02 DHB gate drive 2, 07 DHB 1, 03 Isolated measurements 1 |
 | net class clearance (HEATER) | clearance | 2 | 03 Isolated measurements 2, 06 Heaters 1 |
@@ -400,9 +400,9 @@ Copper deleted by step 1: 58 items (segment: touches old pad of moved part 26, s
 | nonmirrored_text_on_back_layer | 10 | 10 | 10 | +0 |
 | silk_edge_clearance | 7 | 6 | 6 | -1 |
 | isolated_copper | 1 | 1 | 7 | +6 |
-| npth_inside_courtyard | 2 | 0 | 0 | -2 |
-| items_not_allowed | 2 | 2 | 0 | -2 |
 | copper_edge_clearance | 2 | 1 | 1 | -1 |
+| items_not_allowed | 2 | 2 | 0 | -2 |
+| npth_inside_courtyard | 2 | 0 | 0 | -2 |
 | text_height | 1 | 1 | 1 | +0 |
 | text_thickness | 1 | 1 | 1 | +0 |
 | **isolation, between two domains (on the board)** | 417 | 418 | 419 | +2 |
@@ -551,8 +551,8 @@ Applied by `tools/p2k/bin/kipy tools/next/trial_placement_p2.py` (moves as data:
 | type | step 1 | step 2 | delta |
 |---|---|---|---|
 | clearance | 337 | 183 | -154 |
-| silk_over_copper | 191 | 199 | +8 |
 | silk_overlap | 199 | 199 | +0 |
+| silk_over_copper | 191 | 199 | +8 |
 | courtyards_overlap | 165 | 133 | -32 |
 | creepage | 164 | 49 | -115 |
 | hole_clearance | 138 | 32 | -106 |
@@ -772,8 +772,8 @@ Applied by `tools/p2k/bin/kipy tools/next/trial_placement_p3.py` (moves as data:
 
 | type | step 2 | step 3 | delta |
 |---|---|---|---|
-| silk_over_copper | 199 | 199 | +0 |
 | silk_overlap | 199 | 199 | +0 |
+| silk_over_copper | 199 | 199 | +0 |
 | clearance | 183 | 143 | -40 |
 | track_dangling | 110 | 144 | +34 |
 | courtyards_overlap | 133 | 131 | -2 |
@@ -924,7 +924,7 @@ layers and the strip y 7.2 … 10.6 to D7 / TR1 pin 12 on F.Cu. Room as placed: 
 strip, B.Cu ≈ 0.5 cm² under it + 0.4 cm² below (x 40.6 … 46.3, y 6.6 … 14, where the 5.1 GND pour has to give
 way) = **≈ 1.9 cm²**, i.e. the lower end of the 2–3 cm² target without moving anything; moving R114–R116 1 mm left
 would add only ≈ 0.08 cm² per layer (a 5.1 track at x 36.7 limits it) and C58 cannot move right (C51), so neither
-was moved. *Texts:* J4, ISO2, ISO1, U11 and C13 references moved off the slots / the edge (silk-to-edge 17 → 15 with the TR2 line over the T bar);
+was moved. *Texts:* J4, ISO2, ISO1, U11 and C13 references moved off the slots / the edge (silk-to-edge 17 → 14 at 6d8c3a9, 15 after the follow-up: the extra one is a single-item marker at the board corner x −71.9 / y 18.7, not traced yet);
 the rest are footprint silk lines that cross a slot (Q21 / Q8 / TR3 over the L-slot, TR1, TR2 over the new slot,
 one line each of ISO1 / ISO2 / U11) – fix in the footprints.
 
