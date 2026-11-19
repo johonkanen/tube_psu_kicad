@@ -45,6 +45,7 @@ step "Board skeleton: 6 layers, JLC stackup, 5.1 outline and holes" quiet tools/
 step "DRC of the board" drc
 step "Design rules parse and act (test tracks)" quiet tools/p2k/bin/kipy tools/next/check_rules.py
 step "Footprints load, pads = symbol pins, 3D models exist, barrier creepage (+ KiCad DRC)" quiet tools/p2k/bin/kipy tools/next/check_footprints.py
+step "Trial board (latest step): distances between isolation domains (pads, tracks, vias, zone copper, holes)" python3 tools/next/check_domains.py
 step "Netlist diff 5.1 -> 5.2 in kicad_next/CHANGES_5_2.md up to date, CSVs cover every part" python3 tools/next/netlist_diff.py --check
 
 echo

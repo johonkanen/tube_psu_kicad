@@ -15,8 +15,9 @@ Output: tube_psu_5_2_trial_p3.kicad_pcb (+ .kicad_pro / .kicad_dru copies), drc_
         kicad_next/tube_psu_5_2.kicad_pcb is not touched.
 
 Step 3 (moves as data below; nothing is routed, only copper that violates or is orphaned is deleted):
- 1. Heater barrier at ISO1 / TR2 (primary <-> heater 8.0 mm): a 1.0 mm routed slot (board Edge.Cuts) across the top
-    end of the ISO1 slot, between the ISO1 primary pins 5-8 and the heater pins TR2 pad 10 / WP4 (Q14_DRAIN); WP4
+ 1. Heater barrier at ISO1 / TR2 (primary <-> heater 8.0 mm): ISO1 gets its board-specific footprint with a T slot
+    (FOOTPRINTS) - the footprint slot plus a 1.0 mm cross slot past its top end, between the ISO1 primary pins 5-8
+    and the heater pins TR2 pad 10 / WP4 (Q14_DRAIN); WP4
     1 mm up; the primary via / inner tracks within 8.0 mm of the TR2 pad 10 / WP4 barrels deleted (inner layers have
     no slot credit); pour keep-outs at the slot, between the TR2 pin rows and below the heater island; the relay
     driver Q9 / C35 / R44 / R32 (bottom side, 5.6 ... 8 mm below the heater island and 3.0 mm from the PE pad of
@@ -24,7 +25,8 @@ Step 3 (moves as data below; nothing is routed, only copper that violates or is 
  2. PE (Y capacitors) <-> primary 3.2 mm: C85 1.6 mm up (pad 2 PE to RL1 pin 1), primary tracks / vias within
     3.2 mm of a PE pad and PE tracks within 3.2 mm of a primary pad deleted, a pour keep-out of 3.25 mm around the
     PE pads / tracks (all copper layers) and of the creepage distance around the earthed mounting holes H1-H8;
-    tracks / vias inside the mounting-hole spacing deleted (among them the two B.Cu tracks of the step-2 notes).
+    tracks / vias inside the mounting-hole spacing deleted (among them the two B.Cu tracks of the step-2 notes);
+    the pads inside it moved (R47 / R48 at H7, R14 at H4, C102 turned at H8).
  3. The 5.2 parts still in the off-board grid placed next to their circuits (NEW; side F / B), each inside its own
     isolation domain; parts without a sensible free place are listed in UNPLACED with the reason.
  4. Leftovers of step 2: reference texts moved off the slots / the board edge (TEXTS).
@@ -63,6 +65,10 @@ PLACE = {
     "C35": (-65.3, -31.9, 90.0),
     "R44": (-63.55, -28.4, -90.0),
     "R32": (-65.3, -26.9, 90.0),
+    # 2. pads inside the mounting-hole spacing (H1-H8 earthed: primary 3.2 mm, secondary 4.2 mm creepage); see GROUPS
+    "R68": (75.165, 11.2, 0.0),      # -100 V bleeder (bottom) 2.3 mm down, between C102's new pads (left is too close to the DC+ fly lead)
+    "C102": (77.0, 13.85, 90.0),     # turned about its body centre (77, 11.35): pads at x 77, 7.2 mm from H8 (4.2 +
+                                     # ring 1.75 + pad 1.0 = 6.95 needed), 15.7 mm from the DC+ fly lead
 }
 # --- 5.2 parts taken from the off-board grid: ref: (x, y, orientation, side) -------------------------------
 NEW = {
@@ -125,17 +131,26 @@ UNPLACED = {   # ref: reason (stays in the off-board grid)
 }
 GROUPS = {  # name: (refs, dx, dy) - rigid translation with the group's own copper
     "WP4 (Q14_DRAIN wire pad) away from the new slot": (["WP4"], 0.0, -1.0),
+    # 2. pads inside the mounting-hole spacing: both AC-measurement divider rows 0.9 mm up (R47 / R48 pads 3.4 mm from
+    #    the H7 ring, was 2.5 ... 2.9; R50 / R51 sit 2.1 mm above them), the Q5 gate resistors 0.45 mm down (R14 pad 2
+    #    3.29 mm from the H4 ring, was 2.84; R1 / R43 sit right below it)
+    "AC-measurement dividers at H7": (["R47", "R48", "R50", "R51"], 0.0, -0.9),
+    "DRV1 gate resistors at H4": (["R14", "R1", "R43"], 0.0, 0.45),
 }
-# --- 1. routed slots (board Edge.Cuts, closed polygons) ----------------------------------------------------
-# ISO1 (rot 180): primary pins 1-8 at x -37.7 (pin 8 GND y -59.29 ... pin 5 y -55.48), slot x -42.86 ... -41.86 with
-# its top end at y -62.1. TR2 pad 10 (Q14_DRAIN, heater) at (-36.4, -66.08), WP4 at (-42.8, -66.4): 5.4 / 5.2 mm from
-# pin 8. The slot crosses 1.0 mm above the ISO1 slot end (a merged T is rejected by KiCad as a self-intersecting
-# outline) from left of the ISO1 slot line to 4.4 mm right of TR2 pad 10, so the surface path pin 8 -> pad 10
-# goes round its right end (>= 10 mm) or over the ISO1 slot end and round the left end (>= 14 mm).
-HS_Y0, HS_Y1 = -64.1, -63.1
-SLOTS = {
-    "ISO1 / TR2 heater barrier slot": (
-        [(-45.5, HS_Y0), (-31.0, HS_Y0), (-31.0, HS_Y1), (-45.5, HS_Y1)], [(-45.5, HS_Y0, -31.0, HS_Y1)], 1.0),
+# --- 1. ISO1 footprint variant with a T slot (user decision 2026-11-19; follow-up of step 3) ----------------
+# ISO1 (rot 180 at -42.359, -54.845): primary pins 1-8 at x -37.7 (pin 8 GND y -59.29 ... pin 5 y -55.48), slot
+# x -42.86 ... -41.86. TR2 pad 10 (Q14_DRAIN, heater) at (-36.4, -66.08), WP4 at (-42.8, -66.4): 5.4 / 5.2 mm from
+# pin 8. The board-specific footprint tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0_T_ISO1
+# (gen_next_footprints_parts.py SOIC_T, checked by check_footprints.py BOARD_VARIANTS) continues the slot past the
+# pin 8 / 9 end into a cross slot x -45.51 ... -31.01, y -64.10 ... -63.10 (one outline, no web), so the surface
+# path pin 8 -> pad 10 goes round the right end of the bar (>= 10 mm); to the left the bar and the stem are one cut.
+FOOTPRINTS = {"ISO1": "tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0_T_ISO1"}
+HS_Y0, HS_Y1 = -64.095, -63.095
+SLOTS = {   # name: (outline for the drawings, rectangles of new slot area: copper crossing them is deleted, width)
+    "ISO1 T slot (footprint variant): cross bar + stem extension": (
+        [(-45.509, HS_Y0), (-31.009, HS_Y0), (-31.009, HS_Y1), (-41.859, HS_Y1), (-41.859, -62.095), (-42.859, -62.095),
+         (-42.859, HS_Y1), (-45.509, HS_Y1)],
+        [(-45.509, HS_Y0, -31.009, HS_Y1), (-42.859, HS_Y1, -41.859, -62.095)], 1.0),
 }
 # --- copper-pour keep-outs (rule areas, every copper layer) ------------------------------------------------
 KEEPOUTS = {
@@ -231,8 +246,23 @@ def build(write=True):
     dom_of = P2.domains()
     with open(os.path.join(R.OUTDIR, R.NAME + "_p2.kicad_pro")) as f:
         cls_of = {p["pattern"]: p["netclass"] for p in json.load(f)["net_settings"]["netclass_patterns"]}
+    comps = R.netlist()[0] if FOOTPRINTS else {}
+    swapped = {}
+    for ref, fpid in FOOTPRINTS.items():   # same pads: nets by pad number, tracks stay
+        old = fps[ref]
+        new = R.replace_fp(b, old, fpid, ref)
+        R.set_fields(new, comps[ref])
+        onet = {p.GetNumber(): p.GetNet() for p in old.Pads()}
+        for p in new.Pads():
+            q = next(o for o in old.Pads() if o.GetNumber() == p.GetNumber())
+            if abs(q.GetPosition().x - p.GetPosition().x) > 2000 or abs(q.GetPosition().y - p.GetPosition().y) > 2000:
+                sys.exit(f"trial_placement_p3: {ref} pad {p.GetNumber()} of {fpid} is not at the old pad")
+            p.SetNet(onet[p.GetNumber()])
+        swapped[ref] = dict(old=old.GetFPIDAsString(), new=fpid)
+        b.Remove(old)
+        fps[ref] = new
     tracks = list(b.GetTracks())
-    rec = {"place": {}, "new": {}, "groups": {}, "deleted": collections.Counter(), "deleted_by_ref": collections.Counter(),
+    rec = {"footprints": swapped, "place": {}, "new": {}, "groups": {}, "deleted": collections.Counter(), "deleted_by_ref": collections.Counter(),
            "deleted_items": [], "slots": {}, "keepouts": {}, "texts": {}, "unplaced": dict(UNPLACED)}
     off0 = offboard(b, fps)
     moved = set(PLACE) | set(NEW) | {r for refs, _, _ in GROUPS.values() for r in refs}
@@ -308,9 +338,9 @@ def build(write=True):
     before = set(P2.check(b, fps, on_board))
     kill = {}
 
-    def mark(t, why, ref):
+    def mark(t, why, ref, force=False):
         k = t.m_Uuid.AsString()
-        if k not in kill and k not in internal:
+        if k not in kill and (force or k not in internal):
             kill[k] = (t, why, ref)
 
     # copper on the old pads of the moved 5.1 parts
@@ -361,6 +391,31 @@ def build(write=True):
                 c = max(clr, HV_CLEAR) if cls_of.get(t.GetNetname(), "").startswith("HV_") else clr
                 if T.near(p, t, nm(c)):
                     mark(t, f"within {c:g} mm of a new pad of a moved part", r)
+
+    # copper moved with a group: where it now comes too close to a pad of another net it is deleted itself, other
+    # copper of another net too close to it is deleted (HV net involved: 1.25 mm, else 0.25 mm)
+    def hv(n):
+        return cls_of.get(n, "").startswith("HV_")
+    gpads = [(r, p) for r, fp in fps.items() if r not in off0 or r in NEW for p in fp.Pads() if p.GetNetCode() > 0]
+    for gt in [t for t in tracks if t.m_Uuid.AsString() in internal]:
+        gname = internal[gt.m_Uuid.AsString()].split(" ")[0]
+        gb = gt.GetBoundingBox()
+        gb.Inflate(nm(HV_CLEAR))
+        for r, p in gpads:
+            if p.GetNetCode() == gt.GetNetCode() or not gb.Intersects(p.GetBoundingBox()):
+                continue
+            c = HV_CLEAR if hv(gt.GetNetname()) or hv(p.GetNetname()) else 0.25
+            if pad_near(p, gt, c, P2.COPPER):
+                mark(gt, f"moved with its group to within {c:g} mm of a pad of another net", r, force=True)
+                break
+        if gt.m_Uuid.AsString() in kill:
+            continue
+        for t in live():
+            if t.m_Uuid.AsString() in internal or t.GetNetCode() == gt.GetNetCode() or not gb.Intersects(t.GetBoundingBox()):
+                continue
+            c = HV_CLEAR if hv(gt.GetNetname()) or hv(t.GetNetname()) else 0.25
+            if tt_near(gt, t, c):
+                mark(t, f"within {c:g} mm of copper moved with a group", gname)
 
     # explicit deletions
     for net, layer, (px, py), why in DELETE:
@@ -452,7 +507,6 @@ def build(write=True):
             for r, p in all_pads:   # a pad in the slot cannot be fixed by deleting copper
                 if any(p.IsOnLayer(l) for l in P2.COPPER) and p.GetBoundingBox().Intersects(sb):
                     sys.exit(f"trial_placement_p3: pad {r}.{p.GetNumber()} in the slot '{name}'")
-        P2.add_slot(b, poly)
         rec["slots"][name] = dict(poly=poly, rects=rects, width=width)
 
     # pour keep-outs
@@ -509,8 +563,10 @@ def build(write=True):
             pcbnew.SaveBoard(sys.argv[sys.argv.index("--save") + 1], b)
         return rec
 
-    for ext in (".kicad_pro", ".kicad_dru"):   # the step-2 project / rules (with the Q19 / Q21 slot rule of 2026-11-19)
-        shutil.copy(os.path.join(R.OUTDIR, P2.NAME2 + ext), os.path.join(R.OUTDIR, NAME3 + ext))
+    # the step-2 project file; the rules are the current 5.2 rules (kicad_next/tube_psu_5_2.kicad_dru: Q19 / Q21 slot
+    # rule and same-footprint pad gap rule of 2026-11-19)
+    shutil.copy(os.path.join(R.OUTDIR, P2.NAME2 + ".kicad_pro"), os.path.join(R.OUTDIR, NAME3 + ".kicad_pro"))
+    shutil.copy(os.path.join(R.PROJ, "tube_psu_5_2.kicad_dru"), os.path.join(R.OUTDIR, NAME3 + ".kicad_dru"))
     pro_path = os.path.join(R.OUTDIR, NAME3 + ".kicad_pro")
     with open(pro_path) as f:
         pro = json.load(f)

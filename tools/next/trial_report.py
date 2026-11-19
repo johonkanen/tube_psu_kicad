@@ -1317,6 +1317,27 @@ P3_AREAS = {   # name: (title, refs that span the zoom box, margin)
 }
 
 
+P3_FIRST = "6d8c3a9"   # first step-3 commit (separate board slot with a 1 x 1 mm web, hole pads not moved)
+
+
+def p3_first_summary(dom):
+    """summary of the first step-3 result (git P3_FIRST), cached in step3_first_summary.json"""
+    path = os.path.join(D, "step3_first_summary.json")
+    if os.path.exists(path):
+        return load("step3_first_summary.json")
+    import subprocess
+    show = lambda f: json.loads(subprocess.run(["git", "-C", ROOT, "show", f"{P3_FIRST}:kicad_next/trial_from_51/{f}"],  # noqa: E731
+                                               check=True, capture_output=True, text=True).stdout)
+    drc, pl = show("drc_p3.json"), show("placement_p3.json")
+    s = summary(drc, pl["geometry"], dom)
+    s["holes"] = hole_count(drc)
+    s["deleted"] = sum(pl["deleted"].values())
+    s["commit"] = P3_FIRST
+    with open(path, "w") as f:
+        json.dump(s, f, indent=1)
+    return s
+
+
 def hole_count(drc):
     return sum(1 for v in drc["violations"] if v["type"] in ISO_TYPES and "Mounting hole" in rule_of(v))
 
@@ -1399,8 +1420,10 @@ def write_p3():
     if p3["unplaced"]:
         w("**Not placed** (left in the off-board grid): " + "; ".join(f"{r}: {why}" for r, why in sorted(p3["unplaced"].items())) + ".")
         w("")
+    for r, d in sorted(p3.get("footprints", {}).items()):
+        w(f"**Footprint swapped** {r}: `{d['old']}` → `{d['new']}` (same pads, tracks kept).")
     for name, sl in p3["slots"].items():
-        w(f"**Slot** {name}: Edge.Cuts polygon {', '.join(f'({x:.2f}, {y:.2f})' for x, y in sl['poly'])} "
+        w(f"**New slot area** {name}: {', '.join(f'({x:.2f}, {y:.2f})' for x, y in sl['poly'])} "
           f"({sl['width']} mm wide).")
     kk = p3["keepouts"]
     for name, k in kk.items():
@@ -1443,6 +1466,28 @@ def write_p3():
     new = sorted("/".join(sorted(p)) for p in c3 - c2)
     w(f"Courtyard-overlap pairs: step 2 {len(c2)}, step 3 {len(c3)}; resolved ({len(gone)}): {', '.join(gone) or '–'}; "
       f"new ({len(new)}): {', '.join(new) or '–'}.")
+    w("")
+    f0 = p3_first_summary(dom)
+    w(f"### Step 3 follow-up: DRC delta {P3_FIRST} → now")
+    w("")
+    keys = sorted(set(f0["types"]) | set(s3["types"]), key=lambda k: -max(f0["types"].get(k, 0), s3["types"].get(k, 0)))
+    rows = [[k, f0["types"].get(k, 0), s3["types"].get(k, 0), f"{s3['types'].get(k, 0) - f0['types'].get(k, 0):+d}"]
+            for k in keys if f0["types"].get(k, 0) != s3["types"].get(k, 0)]
+    a, b = sum(f0["types"].values()), sum(s3["types"].values())
+    rows.append(["**all violations**", a, b, f"{b - a:+d}"])
+    a, b = sum(f0["iso"].values()), sum(s3["iso"].values())
+    rows.append(["**isolation, between two domains**", a, b, f"{b - a:+d}"])
+    a, b = f0["holes"], hole_count(drc3)
+    rows.append(["**mounting-hole rules**", a, b, f"{b - a:+d}"])
+    a, b = f0["unconnected"], s3["unconnected"]
+    rows.append(["**unconnected items**", a, b, f"{b - a:+d}"])
+    a, b = f0["deleted"], sum(p3["deleted"].values())
+    rows.append(["copper items deleted by step 3", a, b, f"{b - a:+d}"])
+    w(table(rows, ["type (only those that changed)", P3_FIRST, "now", "delta"]))
+    w("")
+    c0 = {frozenset(p) for p in f0["courtyard_pairs"]}
+    w(f"Courtyard pairs {len(c0)} → {len(c3)}; new: {', '.join(sorted('/'.join(sorted(p)) for p in c3 - c0)) or '–'}; "
+      f"resolved: {', '.join(sorted('/'.join(sorted(p)) for p in c0 - c3)) or '–'}.")
     w("")
     w("### Per area (step 2 → step 3)")
     w("")
@@ -1488,23 +1533,25 @@ therefore also checked with a straight-line same-layer scan of pads, tracks, via
 (scratch script, no slot credit, pad bounding boxes): after step 3 the only heater ↔ primary pairs under 8.0 mm
 are the ones with a slot between them (the two ISO1 pin rows; ISO1 pins 6–8 ↔ TR2 pad 10 / WP4 / the Q14_DRAIN
 and GND pours across the new slot), and no PE pad / track is closer than 3.2 mm (round-pad distance) to primary
-copper. "0 creepage violations" in the tables means "none reported", not a proof – a domain-distance script in
-`check_next.sh` style would be worth having before the real layout.
+copper. "0 creepage violations" in the tables means "none reported", not a proof – that scan is now
+`tools/next/check_domains.py` (true pad shapes, slot credit by the path round the slots; follow-up below).
 
 **1. Heater barrier at ISO1 / TR2 (HEATER-PRI 36 → 0).** Three spots, three fixes:
 (a) *Top end of ISO1.* The ISO1 primary pins 5–8 (x −37.7, pin 8 = GND at y −59.3) look straight at the heater
 pins TR2 pad 10 (5.4 mm) and WP4 (5.2 mm) and at the Q14_DRAIN pours (4.0 mm): the ISO1 footprint slot ends at
-y −62.1 and only separates its own pin rows. New 1.0 mm routed slot x −45.5 … −31.0, y −64.1 … −63.1 across the top
-of the ISO1 slot, 1.0 mm above its end (1 × 1 mm web), 0.8 mm below TR2 pad 10: the surface path pin 8 → pad 10
-now goes round the right end (≥ 10 mm) or over the ISO1 slot end and round the left end (≥ 14 mm). WP4 moved 1.0 mm
+y −62.1 and only separates its own pin rows. ISO1 now has a board-specific footprint
+(`SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0_T_ISO1`, follow-up below) whose slot is a T: the stem between the pin rows
+runs on into a 1.0 mm cross slot x −45.5 … −31.0, y −64.1 … −63.1, 0.8 mm below TR2 pad 10. The surface path pin 8
+→ pad 10 goes round the right end of the bar (12.0 mm, pin 7 12.8 mm, pin 8 → WP4 17.6 mm; to the left stem and bar are one cut). WP4 moved 1.0 mm
 up with its spokes (pad edge 1.3 mm from the slot). Inner layers get no slot credit, so the primary copper within
 8.0 mm of the pad 10 / WP4 barrels went: the GND via at ISO1 pin 8 and three In4 HT_SDATA segments (pin 8 / pin 7
 must be fanned out downwards). Pour keep-out x −47.5 … −27.0, y −66 … −59 on all layers (heater pours stay above
 the slot, primary pours 8 mm from pad 10 where the slot does not shield), and one between the TR2 pin rows
-(Q14_DRAIN / HEATER_HI_SOURCE pours were 6.6 mm apart). *Rejected:* a T-slot merged with the ISO1 slot – KiCad
-reports the overlapping Edge.Cuts shapes as a self-intersecting outline (tested); a separate slot right of the ISO1
-slot end – the 1 mm gap between the two slots leaves a 7.9 mm path; moving ISO1 2.7 mm down – all 16 pins lose their
-routing and the heater side comes closer to the mains copper below (spot b), which is already too tight.
+(Q14_DRAIN / HEATER_HI_SOURCE pours were 6.6 mm apart). *Rejected:* a board slot drawn over the footprint slot –
+KiCad reports two overlapping Edge.Cuts outlines as a self-intersecting outline (tested); a separate board slot
+1 mm above the ISO1 slot end (the first step-3 version) – works, but leaves a 1 × 1 mm web between two slots; a
+separate slot right of the ISO1 slot end – the gap between the slots leaves a 7.9 mm path; moving ISO1 2.7 mm
+down – all 16 pins lose their routing and the heater side comes closer to the mains copper below (spot b).
 (b) *Below the heater island (bottom side).* The relay driver Q9 / C35 / R44 / R32 with its 5V / GND / gate tracks
 sat 5.6 … 8 mm below ISO1 pin 16 / C59 / R91 / R117 and at the same time 3.0 mm above the PE pad of C82: the
 primary strip left between "8 mm from the heater" and "3.2 mm from PE" is 0 … 1.7 mm high there. The four parts
@@ -1528,9 +1575,8 @@ Mounting holes (PE): keep-out circles round H1–H8 (pours were 2.95 mm from the
 hole spacing deleted – the two B.Cu tracks of the step-2 notes (H4 ↔ 15V, 2 segments; H5 ↔ CUK_CAP_MEAS-, 4
 segments) and 22 more: 19 In4 segments (GPIO_BYPASS_RLY, +3V3, HT_CLK, HT_SDATA, SYNCH_1, SYNCH_2 next to H4;
 Net-(R48-Pad2) / Net-(R51-Pad2) next to H7; Net-(AD2-CLK) next to H5), 2 F.Cu 420V segments at H5 (4.12 of 4.2 mm)
-and the B.Cu track between R47 and R48 at H7. Mounting-hole markers 48 → 14; the 14 left are pads, not
-tracks: R47 / R48 (B, 2.5 … 2.8 mm from H7), R14 pad 2 (B, 2.84 mm from H4), C102 pad 2 (step-2 place, 2.9 mm of
-4.2 mm from H8) – see decisions.
+and the B.Cu track between R47 and R48 at H7. The pads inside the hole spacing moved in the follow-up (below): mounting-hole
+markers 48 → 0.
 
 **3. The 54 added parts are all on the board** (none left in the grid, no new courtyard pair, no pad short, no
 isolation marker; placed by a nearest-free-spot search, 0.3 mm from foreign copper, 1.25 mm for HV net pads, so no
@@ -1556,15 +1602,47 @@ layers and the strip y 7.2 … 10.6 to D7 / TR1 pin 12 on F.Cu. Room as placed: 
 strip, B.Cu ≈ 0.5 cm² under it + 0.4 cm² below (x 40.6 … 46.3, y 6.6 … 14, where the 5.1 GND pour has to give
 way) = **≈ 1.9 cm²**, i.e. the lower end of the 2–3 cm² target without moving anything; moving R114–R116 1 mm left
 would add only ≈ 0.08 cm² per layer (a 5.1 track at x 36.7 limits it) and C58 cannot move right (C51), so neither
-was moved. *Texts:* J4, ISO2, ISO1, U11 and C13 references moved off the slots / the edge (silk-to-edge 17 → 14);
+was moved. *Texts:* J4, ISO2, ISO1, U11 and C13 references moved off the slots / the edge (silk-to-edge 17 → 15 with the TR2 line over the T bar);
 the rest are footprint silk lines that cross a slot (Q21 / Q8 / TR3 over the L-slot, TR1, TR2 over the new slot,
 one line each of ISO1 / ISO2 / U11) – fix in the footprints.
 
-**Remaining after step 3** (beyond routing: unconnected 346 → 359, dangling tracks 110 → 140 from the deleted
-copper): PRI-SEC 2 (TR1 pin 2 / 9 inner barrels, as step 2); 14 mounting-hole markers at pads (above); the 1 mm
-web between the ISO1 slot and the new slot (ask JLC, or draw one T-shaped slot in a board-specific ISO1 footprint
-variant); TR2 silk over the new slot; 2 new net-class markers inside U10 itself (VSSOP-8 pad gap 0.15 mm vs the
-PRIMARY_LV class clearance 0.2 mm on pins 3 / 4 and 7 / 8 – a rule / footprint question, not placement); HV-functional / net-class clearances inside one domain (145, routing).
+**Remaining after step 3** (beyond routing – unconnected items and dangling tracks from the deleted copper):
+PRI-SEC 2 (TR1 pin 2 / 9 inner barrels, as step 2, on the `check_domains.py` allow list); footprint silk lines over
+slots (TR2 over the T bar, Q21 / Q8 / TR3 / TR1, one line each of ISO1 / ISO2 / U11); HV-functional / net-class
+clearances inside one domain (routing).
+
+### Step 3 follow-up (2026-11-19, user decisions on the first step-3 result 6d8c3a9)
+
+1. **T slot instead of slot + web.** `gen_next_footprints_parts.py` `SOIC_T` generates
+   `tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0_T_ISO1`: one closed Edge.Cuts outline = the 8.0 mm slot
+   plus the cross slot (footprint x −11.35 … 3.15, y 8.25 … 9.25; ISO1 sits at 180°). The schematic / footprint map
+   keep the plain `_Slot8.0` for ISO1 (steps 0–2 stay reproducible); step 3 swaps the footprint on the board
+   (`FOOTPRINTS`, same pads, tracks kept). `check_footprints.py` checks the variant through `BOARD_VARIANTS` (pads,
+   8.85 mm pin-row path, KiCad DRC) – its slot obstacles used to be convex hulls, a T is not convex, so non-convex
+   outlines are now tested exactly. The board has 5 internal cut-outs instead of 6, no web; surface path ISO1 pin 8
+   → TR2 pad 10 = 12.0 mm (8.0 needed), computed round the real slot outline. Courtyard of the
+   variant = body + stem only (the bar runs 6 mm under the edge of TR2's body; TR2 silk crosses it).
+2. **Pads at the mounting holes (14 markers → 0).** R47 / R48 and the row above them R50 / R51 0.9 mm up (R48 pad
+   1 3.4 mm from the H7 ring; the group's two vias ended up 1.1 mm from R19 pad 1 and were deleted, with two In4
+   stubs); R14 with R1 / R43 0.45 mm down (R14 pad 2 3.29 mm from the H4 ring); C102 turned 90° about its body
+   centre (pads at x 77.0, y 8.85 / 13.85: 7.2 / 7.3 mm from H8 where 6.95 mm is needed, 15.7 mm from the DC+ fly
+   lead) and the −100 V bleeder R68 (bottom) 2.3 mm down between the new C102 pads – 2 mm to the left it would be
+   10.99 mm round the TR1 slot from the DC+ fly lead (found by `check_domains.py`). L2 pad 2 is 3.3 … 3.5 mm from
+   the H4 ring (round pad; the 2.99 mm of the first report was a bounding-box figure) – not moved.
+3. **`tools/next/check_domains.py`** (in `check_next.sh`): straight same-layer distance between all copper of two
+   isolation domains (true pad shapes, tracks, vias, filled zones, holes as PE) against the `.kicad_dru` limits,
+   slot credit only where a slot blocks the straight line (then the path round the slots counts), `ALLOW` list for
+   the Q19 / Q21 slot rule and the TR1 pin 2 / 9 barrels. On this board: no pair below its limit; on the step-2
+   board it lists 163 HEATER-PRI creepage pairs where KiCad's DRC listed 16.
+4. **U10 pad gap.** `.kicad_dru` rule "Same-footprint pad gap, low-voltage classes" (0.15 mm between pads of one
+   footprint unless a HV or PE net is involved; `A.Parent == B.Parent`), proven by three pad tests in
+   `check_rules.py` (without the rule both low-voltage tests fail). The step-3 project now copies the current
+   `kicad_next/tube_psu_5_2.kicad_dru`.
+5. **Accepted:** the split-cap balancing resistors on the bottom side under their capacitors, and the 22 extra
+   track segments deleted inside the mounting-hole spacing. Via room at the balancing chains with 1.2 mm HV spacing
+   to all other copper (0.8 mm via, within 1 mm of the capacitor's top copper and 2 mm of the resistor pad): free
+   area 2.2 mm² (R155 DC+, the tightest) … 18 mm² at 11 of the 12 chain ends; the twelfth, R158 pad 2
+   (HEATER_CURRENT), needs no via – R30 pad 1 of the same net is 3 mm away on the bottom side.
 """
 
 if __name__ == "__main__":

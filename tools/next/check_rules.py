@@ -52,6 +52,15 @@ assert len(CASES) <= len(SLOTS), "add test positions to SLOTS"
 HOLE_TEST = ("GND", "F", 1.5, {"clearance", "creepage"})          # 1.5 mm from the H4 ring: 2.0 / 3.2 mm rule (earthed screws)
 
 
+# Pads of one fine-pitch footprint (VSSOP-8, pad gap 0.15 mm; U10): (nets on odd / even pads, position, expected).
+# Low-voltage classes: rule "Same-footprint pad gap, low-voltage classes" allows 0.15 mm; a HV net keeps its class
+# clearance (0.5 mm) - the control that the rule does not open the gap for HV nets.
+PAD_FP = ("Package_SO", "VSSOP-8_3x3mm_P0.65mm")
+PAD_TESTS = [("+3V3", "GND", (8, -12), set()),
+             ("ISO_GND", "5V_ISOL", (8, 3), set()),
+             ("DC+", "GND", (78, -25), {"clearance"})]
+
+
 def track(b, net, layer, x1, y, x2, w=0.3):
     t = pcbnew.PCB_TRACK(b)
     t.SetStart(pcbnew.VECTOR2I(pcbnew.FromMM(x1), pcbnew.FromMM(y)))
@@ -88,6 +97,15 @@ def main():
         yy = hy + 1.75 + gap + 0.15
         track(b, net(na), L[layer], hx - 3, yy, hx + 3)
         spots.append(((hx, hy + 2.5), f"{na} {gap} mm from the H4 ring on {layer}", exp))
+        lib = os.path.join(os.environ.get("KICAD_MOUNT", ""), "share", "kicad", "footprints", PAD_FP[0] + ".pretty")
+        for i, (na, nb, (x, y), exp) in enumerate(PAD_TESTS):
+            fp = pcbnew.FootprintLoad(lib, PAD_FP[1])
+            fp.SetReference(f"PADTEST{i + 1}")
+            fp.SetPosition(pcbnew.VECTOR2I(pcbnew.FromMM(x), pcbnew.FromMM(y)))
+            for p in fp.Pads():
+                p.SetNet(net(na if int(p.GetNumber()) % 2 else nb))
+            b.Add(fp)
+            spots.append(((x, y), f"{PAD_FP[1]} pads {na} / {nb} (gap 0.15 mm)", exp))
         pcbnew.SaveBoard(pcb, b)
         rpt = os.path.join(tmp, "drc.json")
         subprocess.run([CLI, "pcb", "drc", "--format", "json", "--severity-all", "-o", rpt, pcb],

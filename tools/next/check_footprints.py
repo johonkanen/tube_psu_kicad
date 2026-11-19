@@ -50,6 +50,9 @@ CREEPAGE = {frozenset(("PRIMARY", "SECONDARY")): 11.1, frozenset(("PRIMARY", "HE
             frozenset(("PRIMARY", "UART")): 8.0, frozenset(("SECONDARY", "UART")): 8.4,
             frozenset(("SECONDARY", "HEATER")): 5.2, frozenset(("HEATER", "UART")): 1.0,
             frozenset(("PRIMARY", "EARTH")): 3.2, frozenset(("SECONDARY", "EARTH")): 4.2}   # Y caps: basic
+# board-specific footprint variants that no schematic part uses (swapped in by the trial placement,
+# tools/next/trial_placement_p3.py): checked like the part's own footprint (pads, creepage, KiCad DRC)
+BOARD_VARIANTS = {"ISO1": "tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0_T_ISO1"}
 NEG_CONTROL = ("ISO2", "Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm")   # must fail the KiCad creepage check
 MM = 1e6
 
@@ -160,12 +163,102 @@ def edge_obstacles(fp):
             merged[1] += g[1]
             groups.remove(g)
         groups.append(merged)
-    return [hull(g[1]) for g in groups]
+    out = []
+    for g in groups:
+        ring = ring_of([s_ for s_ in segs if (round(s_[0][0], 3), round(s_[0][1], 3)) in g[0]])
+        out.append(hull(g[1]) if ring is None or is_convex(ring) else NonConvex(ring))
+    return out
+
+
+class NonConvex(list):
+    """Closed outline that is not convex (the T slot of the board-specific ISO1 footprint): vertex ring, arcs
+    inscribed. blocked() tests it exactly instead of through its convex hull (which would cover the pads)."""
+
+
+def ring_of(segs):
+    """Ordered vertex ring of a closed chain of segments (each a point list), None if it does not close."""
+    key = lambda q: (round(q[0], 3), round(q[1], 3))  # noqa: E731
+    left = [list(s_) for s_ in segs]
+    ring = left.pop(0)
+    while left:
+        end = key(ring[-1])
+        nxt = next((s_ for s_ in left if key(s_[0]) == end or key(s_[-1]) == end), None)
+        if nxt is None:
+            return None
+        left.remove(nxt)
+        ring += (nxt if key(nxt[0]) == end else nxt[::-1])[1:]
+    if key(ring[0]) != key(ring[-1]):
+        return None
+    return ring[:-1]
+
+
+def is_convex(ring):
+    sign = 0
+    n = len(ring)
+    for i in range(n):
+        o, a, b = ring[i], ring[(i + 1) % n], ring[(i + 2) % n]
+        c = (a[0] - o[0]) * (b[1] - a[1]) - (a[1] - o[1]) * (b[0] - a[0])
+        if abs(c) > 1e-9:
+            if sign and (c > 0) != (sign > 0):
+                return False
+            sign = c
+    return True
+
+
+def inside(pt, ring, tol=1e-6):
+    """Strictly inside the polygon (points within tol of its boundary are outside)."""
+    x, y = pt
+    n = len(ring)
+    for i in range(n):
+        c = seg_closest(pt, ring[i], ring[(i + 1) % n])
+        if math.hypot(c[0] - x, c[1] - y) <= tol:
+            return False
+    hit = False
+    for i in range(n):
+        (x0, y0), (x1, y1) = ring[i], ring[(i + 1) % n]
+        if (y0 > y) != (y1 > y) and x < x0 + (y - y0) * (x1 - x0) / (y1 - y0):
+            hit = not hit
+    return hit
+
+
+def blocked_nonconvex(p, q, ring):
+    """Segment p-q passes through the interior of the polygon: cut it at every crossing / touching point of the
+    outline and test the middle of each piece."""
+    dx, dy = q[0] - p[0], q[1] - p[1]
+    ts = [0.0, 1.0]
+    n = len(ring)
+    for i in range(n):
+        a, b = ring[i], ring[(i + 1) % n]
+        ex, ey = b[0] - a[0], b[1] - a[1]
+        den = dx * ey - dy * ex
+        if abs(den) > 1e-12:
+            t = ((a[0] - p[0]) * ey - (a[1] - p[1]) * ex) / den
+            u = ((a[0] - p[0]) * dy - (a[1] - p[1]) * dx) / den
+            if -1e-9 <= t <= 1 + 1e-9 and -1e-9 <= u <= 1 + 1e-9:
+                ts.append(min(1.0, max(0.0, t)))
+        else:                                   # parallel: the end points of the edge projected on p-q
+            l2 = dx * dx + dy * dy
+            if l2 > 0:
+                for v in (a, b):
+                    t = ((v[0] - p[0]) * dx + (v[1] - p[1]) * dy) / l2
+                    if 0 < t < 1:
+                        ts.append(t)
+    ts = sorted(set(ts))
+    for t0, t1 in zip(ts, ts[1:]):
+        if (t1 - t0) * math.hypot(dx, dy) > 1e-5:
+            tm = (t0 + t1) / 2
+            if inside((p[0] + tm * dx, p[1] + tm * dy), ring):
+                return True
+    return False
 
 
 def blocked(p, q, polys):
     """Segment p-q passes through the interior of a convex (ccw) polygon (Cyrus-Beck)."""
     for poly in polys:
+        if isinstance(poly, NonConvex):
+            if blocked_nonconvex(p, q, poly):
+                return True
+            continue
         t0, t1, n = 0.0, 1.0, len(poly)
         dx, dy = q[0] - p[0], q[1] - p[1]
         ok = True
@@ -256,8 +349,9 @@ def models_of(fp):
 def kicad_drc(barrier, comps, pins, netpins):
     """Place the barrier parts (and the negative control) on a copy of the board; DRC creepage / clearance."""
     place = {"TR3": (-40, -62), "TR1": (5, -65), "ISO1": (35, -75), "ISO2": (65, -75), "U11": (35, -45),
-             "TR2": (65, -40), NEG_CONTROL[0] + "_noslot": (-40, -10)}      # >= 25 mm apart, clear of H1-H8
-    items = [(r, comps[r]) for r in sorted(barrier)] + [(NEG_CONTROL[0] + "_noslot", NEG_CONTROL[1])]
+             "TR2": (65, -40), NEG_CONTROL[0] + "_noslot": (-40, -10), "ISO1_variant": (30, -10)}   # >= 25 mm apart, clear of H1-H8
+    items = [(r, comps[r]) for r in sorted(barrier)] + [(NEG_CONTROL[0] + "_noslot", NEG_CONTROL[1])] \
+        + [(r + "_variant", f) for r, f in sorted(BOARD_VARIANTS.items())]
     xs = [place[r] for r, _ in items]
     assert len(items) <= len(xs)
     with tempfile.TemporaryDirectory(dir=ROOT, prefix=".fpcheck_") as tmp:
@@ -357,8 +451,16 @@ def main(argv):
             multi[ref] = ds
     if {r for r, ds in multi.items() if "EARTH" not in ds} != setup_project.BARRIERS:
         bad.append(f"parts with pins in two domains {sorted(multi)} != BARRIERS {sorted(setup_project.BARRIERS)}")
-    for ref in sorted(multi):
-        fp = cache[comps[ref]]
+    for ref, fpid in sorted(BOARD_VARIANTS.items()):
+        fp = lib_fps.get(fpid)
+        if fp is None:
+            bad.append(f"{ref}: board variant {fpid} does not load")
+            continue
+        pads = {p.GetNumber() for p in fp.Pads() if p.GetNumber()}
+        if pads != set(pins.get(ref, {})):
+            bad.append(f"{ref} board variant ({fpid}): pads {sorted(pads)} != symbol pins")
+    for ref, fpid in [(r, comps[r]) for r in sorted(multi)] + sorted(BOARD_VARIANTS.items()):
+        fp = cache.get(fpid) or lib_fps[fpid]
         obst = edge_obstacles(fp)
         groups = {}
         for p in fp.Pads():
@@ -373,7 +475,7 @@ def main(argv):
                 ok = got >= req
                 if not ok:
                     bad.append(f"{ref}: creepage {ds[i]}-{ds[j]} {got:.2f} mm < {req} mm")
-                print(f"check_footprints: {'ok  ' if ok else 'FAIL'} {ref} {comps[ref].split(':')[1]}: {ds[i]}-{ds[j]} "
+                print(f"check_footprints: {'ok  ' if ok else 'FAIL'} {ref} {fpid.split(':')[1]}: {ds[i]}-{ds[j]} "
                       f"surface path {got:.2f} mm (required {req}){', slot' if obst else ''}")
     # 4: KiCad DRC on the placed barrier parts
     hits = kicad_drc(setup_project.BARRIERS, comps, pins, netpins)

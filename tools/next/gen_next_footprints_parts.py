@@ -4,6 +4,8 @@
 Writes lib/tube_psu_next_parts.pretty/ (library nickname tube_psu_next_parts in kicad_next/fp-lib-table).
 Kept apart from tools/next/gen_next_footprints.py (transformers, toroids, heatsink helper, lib/tube_psu_next.pretty).
 
+  SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0_T_ISO1       board-specific ISO1 variant: the slot as a T (cross slot past the
+      pin 8 / 9 end; trial placement step 3)
   SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0 / _Slot11.1   KiCad SOIC-16W + milled creepage slot (Edge.Cuts) under
       the body, for the isolators that straddle a reinforced barrier: ISO1 (primary <-> heater 8.0 mm),
       U11 (primary <-> UART 8.0 mm), ISO2 (primary <-> DAB secondary 11.1 mm). Pads, silk, fab and the
@@ -186,6 +188,60 @@ def soic16w_slot(creep):
                   add=(slot_lines(0, -ys, ys, w), court, note))
 
 
+# Board-specific variant for ISO1 (trial placement step 3, user decision 2026-11-19): the slot continues as a T
+# - a 1.0 mm cross slot past the pin-8 / pin-9 end, towards the pin 1-8 side - so that the surface path from the
+# primary pins 5-8 to the heater pins next to that end (TR2 pad 10, WP4) goes round the cross slot. One closed
+# Edge.Cuts outline (KiCad rejects two overlapping slot outlines as self-intersecting; a separate slot would
+# leave a 1 x 1 mm web). Footprint coordinates: stem x = +-0.5 from the tip at y = -7.25 to the bar, bar
+# y = 8.25 ... 9.25 from x = -11.35 (10.85 mm past the pin 1-8 pad row side) to x = 3.15; outer ends rounded by the
+# 1.0 mm cutter, the two inner corners are drawn sharp (the cutter leaves r >= 0.5 mm there, i.e. more slot).
+# ISO1 is placed at 180 deg: board x = x0 - x, y = y0 - y.
+SOIC_T = {"ISO1": dict(creep="8.0", bar_y0=8.25, bar_y1=9.25, bar_x0=-11.35, bar_x1=3.15)}
+
+
+def edge_line(x0, y0, x1, y1):
+    return (f"\t(fp_line\n\t\t(start {f(x0)} {f(y0)})\n\t\t(end {f(x1)} {f(y1)})\n\t\t(stroke\n"
+            f"\t\t\t(width 0.05)\n\t\t\t(type solid)\n\t\t)\n\t\t(layer \"Edge.Cuts\")\n\t)\n")
+
+
+def edge_arc(x0, y0, xm, ym, x1, y1):
+    return (f"\t(fp_arc\n\t\t(start {f(x0)} {f(y0)})\n\t\t(mid {f(xm)} {f(ym)})\n\t\t(end {f(x1)} {f(y1)})\n"
+            f"\t\t(stroke\n\t\t\t(width 0.05)\n\t\t\t(type solid)\n\t\t)\n\t\t(layer \"Edge.Cuts\")\n\t)\n")
+
+
+def soic16w_slot_t(ref):
+    t = SOIC_T[ref]
+    ys, w = SOIC_SLOTS[t["creep"]], SOIC_SLOT_W
+    r = w / 2
+    y0, y1, x0, x1 = t["bar_y0"], t["bar_y1"], t["bar_x0"], t["bar_x1"]
+    assert abs((y1 - y0) - w) < 1e-9 and y0 > ys
+    src = kicad_fp("Package_SO", "SOIC-16W_7.5x10.3mm_P1.27mm")
+    head, kids, tail = blocks(src)
+    kids2 = []
+    for b in kids:
+        if '(layer "F.CrtYd")' in b:
+            continue
+        kids2.extend(split_silk(b, w / 2 + 0.3) if b.startswith("\t(fp_line") else [b])
+    src = head + "".join(kids2) + tail
+    ym = (y0 + y1) / 2
+    outline = (edge_arc(-r, -ys + r, 0, -ys, r, -ys + r) + edge_line(r, -ys + r, r, y0)
+               + edge_line(r, y0, x1 - r, y0) + edge_arc(x1 - r, y0, x1, ym, x1 - r, y1)
+               + edge_line(x1 - r, y1, x0 + r, y1) + edge_arc(x0 + r, y1, x0, ym, x0 + r, y0)
+               + edge_line(x0 + r, y0, -r, y0) + edge_line(-r, y0, -r, -ys + r))
+    cx, cy, sx, sy, m = 5.93, 5.4, w / 2 + 0.25, ys + 0.25, 0.25
+    court = poly([(-cx, -cy), (-sx, -cy), (-sx, -sy), (sx, -sy), (sx, -cy), (cx, -cy), (cx, cy), (sx, cy),
+                  (sx, y1 + m), (-sx, y1 + m), (-sx, cy), (-cx, cy)], "F.CrtYd", 0.05)   # body + stem only: the bar runs
+    # under the edge of the neighbouring transformer (TR2), the board edge clearance keeps copper off it
+    note = ('\t(fp_text user "T slot %s (creepage %s)"\n\t\t(at 0 %s 90)\n\t\t(layer "F.Fab")\n\t\t(effects\n'
+            '\t\t\t(font\n\t\t\t\t(size 0.5 0.5)\n\t\t\t\t(thickness 0.08)\n\t\t\t)\n\t\t)\n\t)\n'
+            % (f"{w:g}", t["creep"], f(-ys + 2.5)))
+    return derive(src, f"SOIC-16W_7.5x10.3mm_P1.27mm_Slot{t['creep']}_T_{ref}",
+                  f"board-specific for {ref}: {w:g} mm milled T slot (Edge.Cuts) - the slot between the pad rows "
+                  f"(tip at y = {-ys:g}) plus a cross slot y {y0:g} ... {y1:g}, x {x0:g} ... {x1:g} past the pin 8 / 9 end, "
+                  f"for {t['creep']} mm reinforced creepage to the parts next to that end (tube_psu_next_parts, "
+                  "check_footprints.py)", add=(outline, court, note))
+
+
 # --- Infineon PG-DSO-12 (ICE5AR0680AG) ------------------------------------------------------------------
 # Datasheet V2.3 figure 39: body D 9.8-10.0 x E1 3.8-4.0 mm, lead span E 5.8-6.2 mm, b 0.35-0.51, L 0.39-0.89,
 # e 1.27 mm, b1 = 3.81 mm (BSC) from pin 4 to pin 5 (and 9 to 8) = an SO-16 narrow (JEDEC MS-012 AC) body with
@@ -259,6 +315,8 @@ def fork(name):
 FOOTPRINTS = {"PG-DSO-12_3.9x9.9mm_P1.27mm": pg_dso12}      # name -> function returning the .kicad_mod text
 for _c in SOIC_SLOTS:
     FOOTPRINTS[f"SOIC-16W_7.5x10.3mm_P1.27mm_Slot{_c}"] = (lambda c=_c: soic16w_slot(c))
+for _r in SOIC_T:
+    FOOTPRINTS[f"SOIC-16W_7.5x10.3mm_P1.27mm_Slot{SOIC_T[_r]['creep']}_T_{_r}"] = (lambda r=_r: soic16w_slot_t(r))
 for _n in CP_VARIANTS:
     FOOTPRINTS[_n] = (lambda n=_n: cp_variant(n))
 for _n in FORKS:
