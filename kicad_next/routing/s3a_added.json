@@ -1917,6 +1917,176 @@
   },
   {
    "kind": "track",
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "B.Cu",
+   "w": 0.75,
+   "a": [
+    68.88,
+    -41.95
+   ],
+   "b": [
+    68.88,
+    -44.4
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "B.Cu",
+   "w": 1.0,
+   "a": [
+    68.88,
+    -44.4
+   ],
+   "b": [
+    68.88,
+    -46.5
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "B.Cu",
+   "w": 1.0,
+   "a": [
+    68.88,
+    -46.5
+   ],
+   "b": [
+    62.8,
+    -46.5
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "B.Cu",
+   "w": 1.0,
+   "a": [
+    62.8,
+    -46.5
+   ],
+   "b": [
+    62.8,
+    -49.2
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "DHB_HI_SOURCE_SEC",
+   "x": 62.8,
+   "y": -49.2,
+   "d": 1.0,
+   "drill": 0.5
+  },
+  {
+   "kind": "track",
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "F.Cu",
+   "w": 1.2,
+   "a": [
+    62.8,
+    -49.2
+   ],
+   "b": [
+    62.4,
+    -49.6
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "F.Cu",
+   "w": 1.2,
+   "a": [
+    62.4,
+    -49.6
+   ],
+   "b": [
+    55.45,
+    -49.6
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "15V_ISO_SEC",
+   "layer": "B.Cu",
+   "w": 0.4,
+   "a": [
+    63.53,
+    -44.025
+   ],
+   "b": [
+    62.9,
+    -43.8
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "15V_ISO_SEC",
+   "layer": "B.Cu",
+   "w": 0.4,
+   "a": [
+    62.9,
+    -43.8
+   ],
+   "b": [
+    62.5,
+    -43.8
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "15V_ISO_SEC",
+   "x": 62.5,
+   "y": -43.8,
+   "d": 0.8,
+   "drill": 0.4
+  },
+  {
+   "kind": "track",
+   "net": "15V_ISO_SEC",
+   "layer": "In3.Power",
+   "w": 0.5,
+   "a": [
+    62.5,
+    -43.8
+   ],
+   "b": [
+    62.5,
+    -46.0
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "15V_ISO_SEC",
+   "layer": "In3.Power",
+   "w": 0.5,
+   "a": [
+    62.5,
+    -46.0
+   ],
+   "b": [
+    61.2,
+    -47.3
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "15V_ISO_SEC",
+   "layer": "In3.Power",
+   "w": 0.5,
+   "a": [
+    61.2,
+    -47.3
+   ],
+   "b": [
+    61.2,
+    -50.5
+   ]
+  },
+  {
+   "kind": "track",
    "net": "/06 Heaters/HEATER_HI_SOURCE",
    "layer": "F.Cu",
    "w": 1.0,
@@ -2051,100 +2221,172 @@
   },
   {
    "kind": "track",
-   "net": "HEATER_CURRENT",
+   "net": "DC+",
    "layer": "B.Cu",
-   "w": 0.25,
+   "w": 0.4,
    "a": [
     -8.0,
-    -80.1475
+    -84.92
    ],
    "b": [
-    -8.0,
-    -80.1
+    -8.4,
+    -83.6
    ]
   },
   {
    "kind": "track",
-   "net": "HEATER_CURRENT",
+   "net": "DC+",
    "layer": "B.Cu",
-   "w": 0.25,
+   "w": 0.4,
+   "a": [
+    -8.4,
+    -83.6
+   ],
+   "b": [
+    -8.4,
+    -82.8
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "DC+",
+   "x": -8.4,
+   "y": -82.8,
+   "d": 0.6,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "Net-(R155-Pad2)",
+   "layer": "B.Cu",
+   "w": 0.4,
    "a": [
     -8.0,
-    -80.1
+    -87.84
    ],
    "b": [
-    -9.4,
-    -78.7
+    -8.11,
+    -89.9
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "/06 Heaters/HEATER_CAP_MEAS",
+   "layer": "B.Cu",
+   "w": 0.4,
+   "a": [
+    -11.14,
+    -87.84
+   ],
+   "b": [
+    -11.03,
+    -89.9
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "/06 Heaters/HEATER_CAP_MEAS",
+   "layer": "B.Cu",
+   "w": 0.4,
+   "a": [
+    -11.03,
+    -89.9
+   ],
+   "b": [
+    -12.0,
+    -89.9
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "/06 Heaters/HEATER_CAP_MEAS",
+   "layer": "B.Cu",
+   "w": 0.4,
+   "a": [
+    -12.0,
+    -89.9
+   ],
+   "b": [
+    -12.6,
+    -89.6
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "/06 Heaters/HEATER_CAP_MEAS",
+   "x": -12.6,
+   "y": -89.6,
+   "d": 0.6,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "Net-(R157-Pad2)",
+   "layer": "B.Cu",
+   "w": 0.4,
+   "a": [
+    -11.14,
+    -84.92
+   ],
+   "b": [
+    -11.9,
+    -84.2
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(R157-Pad2)",
+   "layer": "B.Cu",
+   "w": 0.4,
+   "a": [
+    -11.9,
+    -84.2
+   ],
+   "b": [
+    -12.6,
+    -83.5
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(R157-Pad2)",
+   "layer": "B.Cu",
+   "w": 0.4,
+   "a": [
+    -12.6,
+    -83.5
+   ],
+   "b": [
+    -13.3,
+    -83.07
    ]
   },
   {
    "kind": "track",
    "net": "HEATER_CURRENT",
    "layer": "B.Cu",
-   "w": 0.25,
+   "w": 0.4,
    "a": [
-    -9.4,
-    -78.7
+    -13.3,
+    -80.15
    ],
    "b": [
-    -9.4,
-    -77.4
+    -12.6,
+    -79.45
    ]
   },
   {
    "kind": "track",
    "net": "HEATER_CURRENT",
    "layer": "B.Cu",
-   "w": 0.25,
+   "w": 0.4,
    "a": [
-    -9.4,
-    -77.4
+    -12.6,
+    -79.45
    ],
    "b": [
-    -9.7,
-    -77.1
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "HEATER_CURRENT",
-   "layer": "B.Cu",
-   "w": 0.25,
-   "a": [
-    -9.7,
-    -77.1
-   ],
-   "b": [
-    -10.9,
-    -77.1
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "HEATER_CURRENT",
-   "layer": "B.Cu",
-   "w": 0.25,
-   "a": [
-    -10.9,
-    -77.1
-   ],
-   "b": [
-    -11.2,
-    -77.4
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "HEATER_CURRENT",
-   "layer": "B.Cu",
-   "w": 0.25,
-   "a": [
-    -11.2,
-    -77.4
-   ],
-   "b": [
-    -11.2,
-    -79.6
+    -12.5,
+    -79.1
    ]
   },
   {
@@ -2154,11 +2396,11 @@
    "w": 0.5,
    "a": [
     -13.3,
-    -81.0
+    -80.15
    ],
    "b": [
-    -14.0,
-    -81.0
+    -14.2,
+    -80.6
    ]
   },
   {
@@ -2167,19 +2409,33 @@
    "layer": "B.Cu",
    "w": 0.5,
    "a": [
-    -14.0,
-    -81.0
+    -14.2,
+    -80.6
    ],
    "b": [
-    -14.5,
-    -81.5
+    -15.2,
+    -81.6
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "HEATER_CURRENT",
+   "layer": "B.Cu",
+   "w": 0.5,
+   "a": [
+    -15.2,
+    -81.6
+   ],
+   "b": [
+    -15.6,
+    -81.6
    ]
   },
   {
    "kind": "via",
    "net": "HEATER_CURRENT",
-   "x": -14.5,
-   "y": -81.5,
+   "x": -15.6,
+   "y": -81.6,
    "d": 0.8,
    "drill": 0.4
   },
@@ -2903,15 +3159,15 @@
     -50.6
    ],
    "b": [
-    63.825,
-    -50.6
+    64.825,
+    -51.6
    ]
   },
   {
    "kind": "via",
    "net": "ISO_GND",
-   "x": 63.825,
-   "y": -50.6,
+   "x": 64.825,
+   "y": -51.6,
    "d": 0.8,
    "drill": 0.4
   },
@@ -2925,17 +3181,23 @@
     -49.1
    ],
    "b": [
-    64.535,
-    -49.1
+    64.935,
+    -49.6
    ]
   },
   {
-   "kind": "via",
+   "kind": "track",
    "net": "ISO_GND",
-   "x": 64.535,
-   "y": -49.1,
-   "d": 0.8,
-   "drill": 0.4
+   "layer": "B.Cu",
+   "w": 0.4,
+   "a": [
+    64.935,
+    -49.6
+   ],
+   "b": [
+    64.935,
+    -51.4
+   ]
   },
   {
    "kind": "track",
@@ -2947,15 +3209,29 @@
     -48.8
    ],
    "b": [
+    70.435,
+    -49.2
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "w": 0.4,
+   "a": [
+    70.435,
+    -49.2
+   ],
+   "b": [
     71.035,
-    -48.8
+    -49.2
    ]
   },
   {
    "kind": "via",
    "net": "ISO_GND",
    "x": 71.035,
-   "y": -48.8,
+   "y": -49.2,
    "d": 0.8,
    "drill": 0.4
   },
@@ -3063,15 +3339,29 @@
     -47.9625
    ],
    "b": [
-    74.5,
-    -46.3625
+    75.1,
+    -47.9625
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_GND",
+   "layer": "F.Cu",
+   "w": 1.0,
+   "a": [
+    75.1,
+    -47.9625
+   ],
+   "b": [
+    73.6,
+    -49.4625
    ]
   },
   {
    "kind": "via",
    "net": "ISO_GND",
-   "x": 74.5,
-   "y": -46.3625,
+   "x": 73.6,
+   "y": -49.4625,
    "d": 0.8,
    "drill": 0.4
   },
@@ -4371,84 +4661,6 @@
   },
   {
    "kind": "track",
-   "net": "15V_ISO_SEC",
-   "layer": "B.Cu",
-   "w": 0.4,
-   "a": [
-    63.53,
-    -44.025
-   ],
-   "b": [
-    63.53,
-    -44.225
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "15V_ISO_SEC",
-   "layer": "B.Cu",
-   "w": 0.4,
-   "a": [
-    63.53,
-    -44.225
-   ],
-   "b": [
-    64.23,
-    -44.925
-   ]
-  },
-  {
-   "kind": "via",
-   "net": "15V_ISO_SEC",
-   "x": 64.23,
-   "y": -44.925,
-   "d": 0.8,
-   "drill": 0.4
-  },
-  {
-   "kind": "track",
-   "net": "15V_ISO_SEC",
-   "layer": "F.Cu",
-   "w": 0.4,
-   "a": [
-    64.23,
-    -44.925
-   ],
-   "b": [
-    71.13,
-    -44.925
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "15V_ISO_SEC",
-   "layer": "F.Cu",
-   "w": 0.4,
-   "a": [
-    71.13,
-    -44.925
-   ],
-   "b": [
-    73.53,
-    -42.525
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "15V_ISO_SEC",
-   "layer": "F.Cu",
-   "w": 0.4,
-   "a": [
-    73.53,
-    -42.525
-   ],
-   "b": [
-    73.53,
-    -41.125
-   ]
-  },
-  {
-   "kind": "track",
    "net": "5V_ISOL",
    "layer": "B.Cu",
    "w": 0.4,
@@ -4499,8 +4711,8 @@
     -48.0
    ],
    "b": [
-    74.675,
-    -47.9
+    69.975,
+    -48.0
    ]
   },
   {
@@ -4509,22 +4721,8 @@
    "layer": "In2.Signal_HV",
    "w": 0.3,
    "a": [
-    74.675,
-    -47.9
-   ],
-   "b": [
-    70.075,
-    -47.9
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "5V_ISOL",
-   "layer": "In2.Signal_HV",
-   "w": 0.3,
-   "a": [
-    70.075,
-    -47.9
+    69.975,
+    -48.0
    ],
    "b": [
     66.475,
@@ -6498,6 +6696,86 @@
    "group": "DAB secondary"
   },
   {
+   "step": "track (68.88, -41.95) ... (68.88, -44.4)",
+   "net": "DHB_HI_SOURCE_SEC",
+   "ok": true,
+   "w": 0.75,
+   "vias": 0,
+   "length": 2.45,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "DAB secondary"
+  },
+  {
+   "step": "track (68.88, -44.4) ... (62.8, -49.2)",
+   "net": "DHB_HI_SOURCE_SEC",
+   "ok": true,
+   "w": 1.0,
+   "vias": 0,
+   "length": 10.88,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "DAB secondary"
+  },
+  {
+   "step": "via (62.8, -49.2)",
+   "net": "DHB_HI_SOURCE_SEC",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "DAB secondary"
+  },
+  {
+   "step": "track (62.8, -49.2) ... (55.45, -49.6)",
+   "net": "DHB_HI_SOURCE_SEC",
+   "ok": true,
+   "w": 1.2,
+   "vias": 0,
+   "length": 7.52,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "DAB secondary"
+  },
+  {
+   "step": "track (63.53, -44.025) ... (62.5, -43.8)",
+   "net": "15V_ISO_SEC",
+   "ok": true,
+   "w": 0.4,
+   "vias": 0,
+   "length": 1.07,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "DAB secondary"
+  },
+  {
+   "step": "via (62.5, -43.8)",
+   "net": "15V_ISO_SEC",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "DAB secondary"
+  },
+  {
+   "step": "track (62.5, -43.8) ... (61.2, -50.5)",
+   "net": "15V_ISO_SEC",
+   "ok": true,
+   "w": 0.5,
+   "vias": 0,
+   "length": 7.24,
+   "layers": [
+    "In3.Power"
+   ],
+   "group": "DAB secondary"
+  },
+  {
    "step": "auto Q11.3 -> net",
    "net": "/06 Heaters/HEATER_HI_SOURCE",
    "ok": true,
@@ -6523,28 +6801,105 @@
    "group": "heater LLC"
   },
   {
-   "step": "auto R158.2 -> R30.1",
-   "net": "HEATER_CURRENT",
+   "step": "track (-8.0, -84.92) ... (-8.4, -82.8)",
+   "net": "DC+",
    "ok": true,
-   "w": 0.25,
-   "length": 7.58,
+   "w": 0.4,
    "vias": 0,
+   "length": 2.18,
    "layers": [
     "B.Cu"
    ],
    "group": "heater LLC"
   },
   {
-   "step": "auto (-13.3, -81.0, 'B.Cu') -> net",
+   "step": "via (-8.4, -82.8)",
+   "net": "DC+",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "heater LLC"
+  },
+  {
+   "step": "track (-8.0, -87.84) ... (-8.11, -89.9)",
+   "net": "Net-(R155-Pad2)",
+   "ok": true,
+   "w": 0.4,
+   "vias": 0,
+   "length": 2.06,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "heater LLC"
+  },
+  {
+   "step": "track (-11.14, -87.84) ... (-12.6, -89.6)",
+   "net": "/06 Heaters/HEATER_CAP_MEAS",
+   "ok": true,
+   "w": 0.4,
+   "vias": 0,
+   "length": 3.7,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "heater LLC"
+  },
+  {
+   "step": "via (-12.6, -89.6)",
+   "net": "/06 Heaters/HEATER_CAP_MEAS",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "heater LLC"
+  },
+  {
+   "step": "track (-11.14, -84.92) ... (-13.3, -83.07)",
+   "net": "Net-(R157-Pad2)",
+   "ok": true,
+   "w": 0.4,
+   "vias": 0,
+   "length": 2.86,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "heater LLC"
+  },
+  {
+   "step": "track (-13.3, -80.15) ... (-12.5, -79.1)",
+   "net": "HEATER_CURRENT",
+   "ok": true,
+   "w": 0.4,
+   "vias": 0,
+   "length": 1.35,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "heater LLC"
+  },
+  {
+   "step": "track (-13.3, -80.15) ... (-15.6, -81.6)",
    "net": "HEATER_CURRENT",
    "ok": true,
    "w": 0.5,
-   "length": 1.41,
-   "vias": 1,
+   "vias": 0,
+   "length": 2.82,
    "layers": [
-    "B.Cu",
-    "F.Cu"
+    "B.Cu"
    ],
+   "group": "heater LLC"
+  },
+  {
+   "step": "via (-15.6, -81.6)",
+   "net": "HEATER_CURRENT",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
    "group": "heater LLC"
   },
   {
@@ -6872,8 +7227,8 @@
    "net": "ISO_GND",
    "ok": true,
    "w": 0.4,
-   "length": 0.9,
-   "vias": 1,
+   "length": 2.51,
+   "vias": 0,
    "layers": [
     "B.Cu"
    ],
@@ -6884,7 +7239,7 @@
    "net": "ISO_GND",
    "ok": true,
    "w": 0.4,
-   "length": 1.0,
+   "length": 1.17,
    "vias": 1,
    "layers": [
     "B.Cu"
@@ -6932,7 +7287,7 @@
    "net": "ISO_GND",
    "ok": true,
    "w": 1.0,
-   "length": 2.26,
+   "length": 3.12,
    "vias": 1,
    "layers": [
     "F.Cu"
@@ -7446,19 +7801,6 @@
    "group": "supply rails"
   },
   {
-   "step": "auto C43.2 -> net",
-   "net": "15V_ISO_SEC",
-   "ok": true,
-   "w": 0.4,
-   "length": 12.88,
-   "vias": 1,
-   "layers": [
-    "B.Cu",
-    "F.Cu"
-   ],
-   "group": "supply rails"
-  },
-  {
    "step": "auto C93.1 -> DRV6.8",
    "net": "5V_ISOL",
    "ok": true,
@@ -7475,7 +7817,7 @@
    "net": "5V_ISOL",
    "ok": true,
    "w": 0.3,
-   "length": 10.49,
+   "length": 10.4,
    "vias": 1,
    "layers": [
     "B.Cu",

@@ -118,6 +118,8 @@ DAB_PRI = [
 ]
 
 # ------------------------------------------------------------------------------------------------ DAB secondary
+Q8_WHY = "room on B.Cu for the switch-node link of Q8 pin 2"
+Q8_OLD = "5.1 gate track of Q8 at the old place of R87 / R88 / D32 (gate loop: stage 3b)"
 DAB_SEC = [
     ("delzone", "Proteus F.Cu pour 26", OLD_TR3),
     # switch node: Q21 pin 3 -> TR3 pins 15, 16, right of the TR3 barrier band (x 54.5)
@@ -129,6 +131,29 @@ DAB_SEC = [
     a("420V", "C16.1", "net", F, 1.2, margin=6),
     a("420V", "R147.1", "C16.1", "FB", 0.4, via=VP), a(TSEC, "R148.2", "C16.2", "FB", 0.4, via=VP),
     a(TSEC, "R149.1", "C55.1", "FB", 0.4, via=VP), a("ISO_GND", "R150.2", "C55.2", "FB", 0.4, via=VP),
+    # stage 3a.3 (user 2026-11-20): Q8 pin 2 joins the switch node on the outer layers. Q8's gate parts make
+    # room on B.Cu (their 5.1 gate tracks go, stage 3b routes the gate loop again)
+    ("move", "R88", 72.23, -44.93, {}, Q8_WHY), ("move", "R87", 74.01, -44.93, {}, Q8_WHY),
+    ("move", "D32", 72.85, -48.02, dict(rot=180.0), Q8_WHY),
+    ("delete", "Net-(Q8-G)", B, 71.482, -43.93, 71.506, -43.93, Q8_OLD),
+    ("delete", "Net-(Q8-G)", B, 71.482, -42.0169, 71.482, -43.93, Q8_OLD),
+    ("delete", "Net-(Q8-G)", B, 69.728, -43.93, 71.482, -43.93, Q8_OLD),
+    ("delete", "Net-(D32-PadA)", B, 69.347, -46.311, 68.077, -46.311, Q8_OLD),
+    ("delete", "Net-(D32-PadA)", B, 69.728, -45.93, 69.347, -46.311, Q8_OLD),
+    ("delete", "DHB_LOW_GATE_SEC", B, 65.477, -46.311, 65.283, -46.505, Q8_OLD),
+    ("delete", "DHB_LOW_GATE_SEC", B, 71.506, -45.93, 71.506, -46.311, Q8_OLD),
+    ("delete", "DHB_LOW_GATE_SEC", B, 71.506, -46.311, 70.871, -46.946, Q8_OLD),
+    ("delete", "DHB_LOW_GATE_SEC", B, 70.871, -46.946, 70.363, -46.946, Q8_OLD),
+    ("delete", "15V_ISO_SEC", B, 63.505, -44.025, 63.505, -48.47, "dangling 5.1 15V_ISO_SEC stub above C43, in the way of the switch-node link"),
+    # B.Cu from the pin, through the freed band above C43, via, F.Cu above the 420V band to the Q21 - TR3 track
+    ("track", SWS, B, 0.75, [(68.88, -41.95), (68.88, -44.4)]),
+    ("track", SWS, B, 1.0, [(68.88, -44.4), (68.88, -46.5), (62.8, -46.5), (62.8, -49.2)]),
+    ("via", SWS, 62.8, -49.2, 1.0, 0.5),
+    ("track", SWS, F, 1.2, [(62.8, -49.2), (62.4, -49.6), (55.45, -49.6)]),
+    # C43 (15V_ISO_SEC): via at the pad, In3 track into the In3 pour (not through the 420V band on F.Cu)
+    ("track", "15V_ISO_SEC", B, 0.4, [(63.53, -44.025), (62.9, -43.8), (62.5, -43.8)]),
+    ("via", "15V_ISO_SEC", 62.5, -43.8, *VP),
+    ("track", "15V_ISO_SEC", "3", 0.5, [(62.5, -43.8), (62.5, -46.0), (61.2, -47.3), (61.2, -50.5)]),
 ]
 
 
@@ -147,6 +172,8 @@ FG = dict(foreign_gap=4.0)         # connection at a barrier part: slot credit, 
 
 # ------------------------------------------------------------------------------------------------ heater LLC
 HC = "HEATER_CURRENT"
+CAPM = "/06 Heaters/HEATER_CAP_MEAS"
+CH_WHY = "heater split-capacitor balancing chain re-placed: DC+ via for R155 pin 1, 1.2 mm between its nodes"
 HEATER_LLC = [
     # stage 3a.2 (user 2026-11-20): C134 leaves the DC+ neck between the Q10 tab and U11
     ("move", "C134", -5.2, -81.2, dict(side="B", rot=90.0), "frees the DC+ neck to the heater split capacitors C42 / C49 / C20"),
@@ -155,8 +182,20 @@ HEATER_LLC = [
     # high-side drain tab -> DC+ pour (the 5.1 pours have no pad connection, their spokes were segments)
     ("zone", "Q11_tab_DC", "DC+", F, [(-10.5, -67.5), (-8.0, -67.5), (-8.0, -62.2), (-10.5, -62.2)], dict(solid=True)),
     a(HC, "Q10.3", "R30.1", "FB", 0.8, via=VP, margin=4),  # low-side source -> shunt R30 (B.Cu)
-    a(HC, "R158.2", "R30.1", "FB", 0.25, via=VS, margin=5),
-    a(HC, (-13.3, -81.0, "B.Cu"), "net", "FB", 0.5, via=VP, margin=3),   # B.Cu pour 20 <-> F.Cu pour 24
+    # stage 3a.3 (user 2026-11-20): balancing chain DC+ - R155 - R156 - CAP_MEAS - R157 - R158 - HEATER_CURRENT
+    # re-placed on B.Cu: R155 / R157 swap places (DC+ end over the free DC+ copper right of C20), R156 lies above
+    # them, R158 goes left of the shunt R30; >= 1.2 mm between the chain nodes
+    ("move", "R155", -8.0, -86.38, {}, CH_WHY), ("move", "R157", -11.14, -86.38, {}, CH_WHY),
+    ("move", "R156", -9.57, -89.9, {}, CH_WHY), ("move", "R158", -13.3, -81.61, {}, CH_WHY),
+    ("track", "DC+", B, 0.4, [(-8.0, -84.92), (-8.4, -83.6), (-8.4, -82.8)]), ("via", "DC+", -8.4, -82.8, *VS),
+    ("track", "Net-(R155-Pad2)", B, 0.4, [(-8.0, -87.84), (-8.11, -89.9)]),
+    ("track", CAPM, B, 0.4, [(-11.14, -87.84), (-11.03, -89.9), (-12.0, -89.9), (-12.6, -89.6)]),
+    ("via", CAPM, -12.6, -89.6, *VS),
+    ("track", "Net-(R157-Pad2)", B, 0.4, [(-11.14, -84.92), (-11.9, -84.2), (-12.6, -83.5), (-13.3, -83.07)]),
+    ("track", HC, B, 0.4, [(-13.3, -80.15), (-12.6, -79.45), (-12.5, -79.1)]),
+    # HEATER_CURRENT B.Cu (R158 / R30 / pour 20) <-> F.Cu pour 24
+    ("track", HC, B, 0.5, [(-13.3, -80.15), (-14.2, -80.6), (-15.2, -81.6), (-15.6, -81.6)]),
+    ("via", HC, -15.6, -81.6, *VP),
 ]
 
 # ------------------------------------------------------------------------------------------------ flyback secondary
@@ -204,7 +243,7 @@ RAILS = [
     ("track", "+3V3", B, 0.3, [(-6.15, -79.91), (-5.7, -80.36), (-5.2, -80.42)]),
     *inner_end("+3V3", "C98.1", 38.03, -26.87, F, 0.3, margin=5, **FG),
     # secondary: 15V_ISO_SEC / 5V_ISOL (In3 pours), AD2 supply
-    pl("DRV6.11", "15V_ISO_SEC"), a("15V_ISO_SEC", "C43.2", "net", "FB", 0.4, margin=10),
+    pl("DRV6.11", "15V_ISO_SEC"),
     a("5V_ISOL", "C93.1", "DRV6.8", B, 0.4),     *inner_end("5V_ISOL", "C93.1", 74.81, -47.96, B, 0.3),
     a("5V_ISOL", (73.2, -37.3, "B.Cu"), "net", "FB", 0.4),
     *inner_end("5V_ISOL", (75.12, -40.72, "F.Cu"), 75.96, -39.58, F),

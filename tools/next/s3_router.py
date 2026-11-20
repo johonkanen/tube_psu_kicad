@@ -66,7 +66,7 @@ RELAX_GAP = 0.2               # spacing to the parts / nets named in a step's "r
 GRID = 0.1
 SLACK = 0.06                  # grid margin added to every spacing while routing
 OUTER = ("F.Cu", "B.Cu")
-LAYER_ALIAS = {"F": "F.Cu", "B": "B.Cu", "2": "In2.Signal_HV"}
+LAYER_ALIAS = {"F": "F.Cu", "B": "B.Cu", "2": "In2.Signal_HV", "3": "In3.Power"}
 
 
 def log(msg):

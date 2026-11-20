@@ -340,6 +340,9 @@ Same scripts: the moves are `("move", ref, x, y, {rot, side}, why)` steps of `ro
 | PE (earth terminal, 2 pins) | (−68.7, −3.8), F | (−46.6, 0.5), F, same rotation – pins at (−46.6, −2.0) / (−46.6, 3.0) | east of the discharge chain R4 – R6: between the PE pads of C84 and C65 (the area right of the chain is under C86). ≥ 3.3 mm to the C84.1 / C65.1 pads, 0.1 … 0.2 mm between its courtyard and those of C84 / C65 / CM1 |
 | C134 (U11 decoupling) | (−7.3, −81.0), F | (−5.2, −81.2), **B**, same rotation (2.1 mm + side) | out of the DC+ neck between the Q10 tab and U11 |
 
+The PE terminal spot is confirmed by the user (2026-11-20): the earth wire has a connector on both ends and can be
+extended.
+
 **C84 / C65 were not moved:** with the terminal between them PE no longer runs west of CM1 pin 3 (the 5.1 PE track
 (−50.9, −1.1) → (−56, −6.2) → (−56, −11.5) → (−53.4, −14.1) and its stub to the old terminal are deleted), so the
 neutral passes west of C84 instead of between the two PE pads.
@@ -366,7 +369,7 @@ Checks: `check_board.py`, `check_domains.py` (ALLOW: Q19 / Q21), `check_next.sh`
 (131); 357 segments / 91 vias from the script. **Unconnected 204 → 199, in the power / HV / ground nets 40 → 35**
 (353 / 189 before stage 3a). Planes: GND 5611, ISO_GND 2227, HT_GND 913 mm² per layer.
 
-Still open:
+Still open after 3a.2 (both done in stage 3a.3 below):
 - **Point 3 (Q8 pin 2 ↔ switch node) – not done, it cascades.** Moving only Q8's gate parts does not open a path:
   Q21 pin 2 (420V) is enclosed by the link (Q21.3 – link – Q8.2) and the slot, so either 420V or the link has to
   change layer at Q21, where B.Cu is full of Q21's gate parts (R56 above pin 2, R57 / R58 / D31) and inner copper is
@@ -378,6 +381,37 @@ Still open:
 - **R155 pin 1 (DC+ end of the heater balancing chain):** no legal via site – its pad lies under C42.1 / C20.1 and
   every free DC+ spot on F.Cu is within 1.2 mm of R157 / R158 pads on B.Cu. Needs R155 – R158 re-placed (4 parts).
 - Stage 3b, 33 items as listed above (the +3V3 feed of U11 now ends at the via of pin 3).
+
+### Stage 3a.3 (2026-11-20): Q8 pin 2 and the heater balancing chain (user decisions)
+
+| Part (all B.Cu, rotation kept unless noted) | From | To | Why |
+|---|---|---|---|
+| R88 | (69.73, −44.93) | (72.23, −44.93) | Q8's gate parts make room on B.Cu for the switch-node link |
+| R87 | (71.51, −44.93) | (74.01, −44.93) | same |
+| D32 | (66.78, −46.31), 0° | (72.85, −48.02), 180° (anode over R88) | same; 0.03 mm clear of the C119 and R149 courtyards |
+| R155 | (−11.14, −86.38) | (−8.0, −86.38) | balancing chain: its DC+ pad over the free DC+ copper right of C20 |
+| R157 | (−8.0, −86.38) | (−11.14, −86.38) | swaps with R155 |
+| R156 | (−14.7, −87.88) | (−9.57, −89.9) | lies above R155 / R157 (pads 0.5 mm from the board edge) |
+| R158 | (−8.0, −81.61) | (−13.3, −81.61) | left of the shunt R30, on the HEATER_CURRENT copper |
+
+- **Q8 pin 2 → switch node:** B.Cu 0.75 mm at the pins, 1.0 mm north to y −46.5 and west above C43 to x 62.8, via
+  1.0 / 0.5 at (62.8, −49.2), F.Cu 1.2 mm along y −49.6 above the 420V band to the Q21 – TR3 track (x 55.45); no inner
+  copper. Good for 3.3 A (2.3 A rms). Deleted: the nine 5.1 gate segments at the old places of R87 / R88 / D32 and
+  the dangling 15V_ISO_SEC stub above C43. C43 is now fed by a via at its pad and a 0.5 mm track on In3 into the
+  In3 pour (the F.Cu track of 5ebfa00 through the 420V band is gone).
+- **420V band (F.Cu, Q21 pin 2 → east):** 3.4 … 3.6 mm between the link and the gate pad of Q21 (x 60 … 64), 5.1 mm
+  east of x 65; one 2.1 mm neck (1.5 mm long) at the supply via of C43. Smallest width 2.1 mm ≈ 5.6 A against
+  ≈ 1.6 A rms.
+- **Heater balancing chain:** DC+ – R155 (via 0.6 / 0.3 at (−8.4, −82.8) in the DC+ island) – R156 – HEATER_CAP_MEAS (via at
+  (−12.6, −89.6) into the F.Cu pour) – R157 – R158 – HEATER_CURRENT (R158.2 on the B.Cu copper of the shunt R30, via
+  0.8 / 0.4 at (−15.6, −81.6) to the F.Cu pour). All B.Cu, 0.4 mm, ≥ 1.2 mm between the chain nodes and to other nets.
+- Checks: `check_board.py`, `check_domains.py` (ALLOW: Q19 / Q21), `check_next.sh` pass; courtyard overlaps
+  unchanged (131); one more silk-to-edge marker (R156 at the top edge, 15 → 16). 370 segments / 93 vias from the
+  script. **Unconnected 199 → 196, in the power / HV / ground nets 35 → 33.**
+
+Left for stage 3b from this step (signals): Q8's gate loop – Net-(Q8-G) (Q8.1 – R88.2 – R87.2), Net-(D32-PadA)
+(D32.A – R88.1), DHB_LOW_GATE_SEC (DRV6.10 – R87.1 – D32.C). The 33 items left in the power / HV / ground nets are
+the stage-3b list above (bootstrap / driver returns, dividers, In2 Kelvin tracks, U1 / U11 +3V3, small fragments).
 
 ## Footprints and 3D models (phase 3, 2026-11-18)
 

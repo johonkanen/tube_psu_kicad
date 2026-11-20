@@ -32,6 +32,118 @@
     "side": "F"
    },
    "why": "PE terminal east of R4 - R6, between the PE pads of C84 and C65"
+  },
+  {
+   "ref": "R88",
+   "frm": {
+    "x": 69.728,
+    "y": -44.93,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 72.23,
+    "y": -44.93,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "why": "room on B.Cu for the switch-node link of Q8 pin 2"
+  },
+  {
+   "ref": "R87",
+   "frm": {
+    "x": 71.506,
+    "y": -44.93,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 74.01,
+    "y": -44.93,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "why": "room on B.Cu for the switch-node link of Q8 pin 2"
+  },
+  {
+   "ref": "D32",
+   "frm": {
+    "x": 66.777,
+    "y": -46.311,
+    "rot": 0.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 72.85,
+    "y": -48.02,
+    "rot": 180.0,
+    "side": "B"
+   },
+   "why": "room on B.Cu for the switch-node link of Q8 pin 2"
+  },
+  {
+   "ref": "R155",
+   "frm": {
+    "x": -11.14,
+    "y": -86.38,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": -8.0,
+    "y": -86.38,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "why": "heater split-capacitor balancing chain re-placed: DC+ via for R155 pin 1, 1.2 mm between its nodes"
+  },
+  {
+   "ref": "R157",
+   "frm": {
+    "x": -8.0,
+    "y": -86.38,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": -11.14,
+    "y": -86.38,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "why": "heater split-capacitor balancing chain re-placed: DC+ via for R155 pin 1, 1.2 mm between its nodes"
+  },
+  {
+   "ref": "R156",
+   "frm": {
+    "x": -14.7,
+    "y": -87.88,
+    "rot": 180.0,
+    "side": "B"
+   },
+   "to": {
+    "x": -9.57,
+    "y": -89.9,
+    "rot": 180.0,
+    "side": "B"
+   },
+   "why": "heater split-capacitor balancing chain re-placed: DC+ via for R155 pin 1, 1.2 mm between its nodes"
+  },
+  {
+   "ref": "R158",
+   "frm": {
+    "x": -8.0,
+    "y": -81.61,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": -13.3,
+    "y": -81.61,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "why": "heater split-capacitor balancing chain re-placed: DC+ via for R155 pin 1, 1.2 mm between its nodes"
   }
  ]
 }

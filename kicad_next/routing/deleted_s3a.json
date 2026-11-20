@@ -279,6 +279,156 @@
    ],
    "width": 0.1524,
    "reason": "last 7.5 mm of the 5.1 GPIO_BYPASS_RLY track on In2, in the lanes of the relay driver's 5V / GND (3b: B.Cu)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q8-G)",
+   "layer": "B.Cu",
+   "start": [
+    71.482,
+    -43.93
+   ],
+   "end": [
+    71.506,
+    -43.93
+   ],
+   "width": 0.762,
+   "reason": "5.1 gate track of Q8 at the old place of R87 / R88 / D32 (gate loop: stage 3b)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q8-G)",
+   "layer": "B.Cu",
+   "start": [
+    71.482,
+    -42.0169
+   ],
+   "end": [
+    71.482,
+    -43.93
+   ],
+   "width": 0.762,
+   "reason": "5.1 gate track of Q8 at the old place of R87 / R88 / D32 (gate loop: stage 3b)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q8-G)",
+   "layer": "B.Cu",
+   "start": [
+    69.728,
+    -43.93
+   ],
+   "end": [
+    71.482,
+    -43.93
+   ],
+   "width": 1.016,
+   "reason": "5.1 gate track of Q8 at the old place of R87 / R88 / D32 (gate loop: stage 3b)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(D32-PadA)",
+   "layer": "B.Cu",
+   "start": [
+    69.347,
+    -46.311
+   ],
+   "end": [
+    68.077,
+    -46.311
+   ],
+   "width": 0.635,
+   "reason": "5.1 gate track of Q8 at the old place of R87 / R88 / D32 (gate loop: stage 3b)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(D32-PadA)",
+   "layer": "B.Cu",
+   "start": [
+    69.728,
+    -45.93
+   ],
+   "end": [
+    69.347,
+    -46.311
+   ],
+   "width": 0.635,
+   "reason": "5.1 gate track of Q8 at the old place of R87 / R88 / D32 (gate loop: stage 3b)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_LOW_GATE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    65.477,
+    -46.311
+   ],
+   "end": [
+    65.283,
+    -46.505
+   ],
+   "width": 0.635,
+   "reason": "5.1 gate track of Q8 at the old place of R87 / R88 / D32 (gate loop: stage 3b)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_LOW_GATE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    71.506,
+    -45.93
+   ],
+   "end": [
+    71.506,
+    -46.311
+   ],
+   "width": 0.635,
+   "reason": "5.1 gate track of Q8 at the old place of R87 / R88 / D32 (gate loop: stage 3b)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_LOW_GATE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    71.506,
+    -46.311
+   ],
+   "end": [
+    70.871,
+    -46.946
+   ],
+   "width": 0.635,
+   "reason": "5.1 gate track of Q8 at the old place of R87 / R88 / D32 (gate loop: stage 3b)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_LOW_GATE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    70.871,
+    -46.946
+   ],
+   "end": [
+    70.363,
+    -46.946
+   ],
+   "width": 0.635,
+   "reason": "5.1 gate track of Q8 at the old place of R87 / R88 / D32 (gate loop: stage 3b)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V_ISO_SEC",
+   "layer": "B.Cu",
+   "start": [
+    63.505,
+    -44.025
+   ],
+   "end": [
+    63.505,
+    -48.47
+   ],
+   "width": 0.635,
+   "reason": "dangling 5.1 15V_ISO_SEC stub above C43, in the way of the switch-node link"
   }
  ]
 }
