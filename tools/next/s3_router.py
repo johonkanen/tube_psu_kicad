@@ -8,7 +8,9 @@ A route script hands a list of STEPS to run(); every step is data:
   ("via",   net, x, y, diameter, drill)
   ("zone",  name, net, layer, [(x, y), ...], {options})  pour (name gets the prefix of the route script)
   ("auto",  net, start, target, {options})               routed by the local grid router (below)
-  ("delete", net, layer, x0, y0, x1, y1)                 remove one existing segment (end points, 5 um)
+  ("delete", net, layer, x0, y0, x1, y1, why)            remove one existing segment (end points, 5 um)
+  ("delzone", zone name, why)                            remove a 5.1 pour
+  ("move", ref, x, y, {rot, side}, why)                  move a footprint (absolute; logged in moves_<tag>.json)
 
 start / target of "auto":  "REF.PAD" | (x, y, "F.Cu") | "net" (any copper of the net that is not joined to the
 start inside the window) | "via:In1.GND" etc. (shortest track to a spot where a via lands in the filled zone of
@@ -147,6 +149,20 @@ def kipy_apply(board, job):
     lid = {b.GetLayerName(l): l for l in b.GetEnabledLayers().CuStack()}
     missing = []
     gone = []
+    moved = []
+    for a in j["add"]:
+        if a["kind"] == "move":
+            fp = b.FindFootprintByReference(a["ref"])
+            was = dict(x=round(fp.GetPosition().x / 1e6, 4), y=round(fp.GetPosition().y / 1e6, 4),
+                       rot=fp.GetOrientationDegrees(), side="B" if fp.IsFlipped() else "F")
+            to = dict(x=a["x"], y=a["y"], rot=a.get("rot", was["rot"]), side=a.get("side", was["side"]))
+            if (abs(was["x"] - to["x"]) > 1e-3 or abs(was["y"] - to["y"]) > 1e-3 or was["side"] != to["side"]
+                    or abs((was["rot"] - to["rot"] + 180) % 360 - 180) > 1e-3):
+                if was["side"] != to["side"]:
+                    fp.Flip(fp.GetPosition(), False)
+                fp.SetPosition(pcbnew.VECTOR2I(nm(to["x"]), nm(to["y"])))
+                fp.SetOrientationDegrees(to["rot"])
+                moved.append(dict(ref=a["ref"], frm=was, to=to, why=a["why"]))
     for a in j["add"]:
         if a["kind"] == "delzone":
             for z in list(b.Zones()):
@@ -167,7 +183,7 @@ def kipy_apply(board, job):
                 b.Delete(t)
             if not hit:
                 missing.append(a)
-    if any(a["kind"] in ("delete", "delzone") for a in j["add"]):
+    if any(a["kind"] in ("delete", "delzone", "move") for a in j["add"]):
         pcbnew.SaveBoard(board, b)
         b = pcbnew.LoadBoard(board)
         lid = {b.GetLayerName(l): l for l in b.GetEnabledLayers().CuStack()}
@@ -225,13 +241,13 @@ def kipy_apply(board, job):
                 for x, y in hole:
                     ol.Append(nm(x), nm(y), -1, h)
             b.Add(z)
-    if any(a["kind"] not in ("delete", "delzone") for a in j["add"]):
+    if any(a["kind"] not in ("delete", "delzone", "move") for a in j["add"]):
         # stale fills off: on loading, KiCad gives a via standing in the old fill of another net that net
         for z in b.Zones():
             if not z.GetIsRuleArea():
                 z.UnFill()
     pcbnew.SaveBoard(board, b)
-    print(json.dumps(dict(removed=n_rm, delete_missing=missing, gone=gone)))
+    print(json.dumps(dict(removed=n_rm, delete_missing=missing, gone=gone, moved=moved)))
 
 
 # =============================================================================================== world
@@ -479,7 +495,7 @@ class Router:
             for ar in w.areas:                         # rule areas "no tracks" (TR3 barrier band)
                 if ar["no_tracks"] and l in ar["layers"]:
                     f &= ~self._mask(Polygon(ar["pts"]).buffer(width / 2 + SLACK), X, Y)
-            for kx0, ky0, kx1, ky1 in opt.get("avoid", []):
+            for kx0, ky0, kx1, ky1 in opt.get("avoid", []) + opt.get("avoid_on", {}).get(l, []):
                 f &= ~((X >= kx0) & (X <= kx1) & (Y >= ky0) & (Y <= ky1))
             c = np.ones(X.shape)
             c[self._mask(soft, X, Y)] = opt.get("zone_cost", 4.0)
@@ -798,7 +814,12 @@ def run(tag, groups, argv, drop_areas=(), post=None):
                                     b=[s[5], s[6]], why=s[7]))
                 elif s[0] == "delzone":
                     pre.append(dict(kind="delzone", name=s[1], why=s[2]))
-        gone = apply(pre, [])["gone"] if pre else []
+                elif s[0] == "move":
+                    pre.append(dict(kind="move", ref=s[1], x=s[2], y=s[3], why=s[5], **s[4]))
+        res = apply(pre, []) if pre else dict(gone=[], moved=[])
+        gone, moved = res["gone"], res["moved"]
+        for m in moved:
+            log(f"moved {m['ref']} {m['frm']} -> {m['to']}: {m['why']}")
         for x in gone:
             log(f"deleted {x['kind']} [{x['net']}] {x['layer']} {x.get('zone', '')}{x.get('start', '')}: {x['reason']}")
         world = load_world(pcb, tmp)
@@ -830,7 +851,7 @@ def run(tag, groups, argv, drop_areas=(), post=None):
                 elif kind == "auto":
                     _, net, a, b, o = s
                     rt.auto(net, a, b, o)
-                elif kind in ("delete", "delzone"):
+                elif kind in ("delete", "delzone", "move"):
                     pass                                   # done before the board was read
                 else:
                     sys.exit(f"s3: unknown step {s!r}")
@@ -877,6 +898,21 @@ def run(tag, groups, argv, drop_areas=(), post=None):
         if newg or not os.path.exists(dlog):
             with open(dlog, "w") as f:
                 json.dump(dict(note=f"5.1 copper deleted by the {tag} route script (mm)", deleted=oldg + newg), f, indent=1)
+                f.write("\n")
+        mlog = os.path.join(PROJ, "routing", f"moves_{tag}.json")
+        oldm = []
+        if os.path.exists(mlog):
+            with open(mlog) as f:
+                oldm = json.load(f)["moves"]
+        if moved or not os.path.exists(mlog):
+            have = {m["ref"]: m for m in oldm}
+            for m in moved:                       # a part moved twice keeps its first "from"
+                if m["ref"] in have:
+                    have[m["ref"]].update(to=m["to"], why=m["why"])
+                else:
+                    oldm.append(m)
+            with open(mlog, "w") as f:
+                json.dump(dict(note=f"footprints moved by the {tag} route script (mm, degrees)", moves=oldm), f, indent=1)
                 f.write("\n")
         with open(added_log, "w") as f:
             json.dump(dict(note=f"copper added by tools/next/route_{tag}_*.py (removed and rebuilt on a re-run)",

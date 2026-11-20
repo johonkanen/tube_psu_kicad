@@ -293,7 +293,9 @@ starts; dangling tracks 145 → 124, dangling vias 22 → 20); `check_domains.py
 `ALLOW` unchanged (Q19 / Q21). Planes after the re-cut: GND 5619 mm², ISO_GND 2227 mm², HT_GND 914 mm² per layer
 (5653 / 2244 / 918 before). **Unconnected 353 → 204; in the power / HV / ground nets 189 → 40.**
 
-### Open points (decisions) and what is left in the power / HV / ground nets
+### Open points (decisions) and what is left in the power / HV / ground nets (state of 5ebfa00)
+
+Points 1, 2, 4 (neck), 5 and 6 are closed by stage 3a.2 below; 3 and the via of R155 are still open.
 
 1. **PE terminal ↔ Y capacitors cannot be routed.** The discharge chain RES_IN – R6 – R5 – R4 – IN2 (F.Cu, 1206, pad
    gaps 1.7 … 1.9 mm) lies between the PE terminal and everything else, with the RES_IN and IN2 pours on both sides:
@@ -327,6 +329,55 @@ dividers 420V – R23, AC1 / AC2 – R47 / R50; In2 Kelvin tracks DHB_CURRENT (2
 (C125, C87, two In2 pieces) and of U11 (with TX / RX on In2); AD2_3V3 and 5V at their In2 ends, DRV6 pin 3 (5V_ISOL),
 C103.2 and four 0.15 mm ISO_GND fragments at DRV6, the 15V_ISO_SEC stub at ISO2, one GND via next to an In2 end,
 two 5V fragments at DRV3.
+
+### Stage 3a.2 (2026-11-20): placement fixes for the open points (user decisions)
+
+Same scripts: the moves are `("move", ref, x, y, {rot, side}, why)` steps of `route_s3a_power.py`, logged in
+`routing/moves_s3a.json`; `S2_KO_PWM2_drain` changed in `route_s2_planes.py`.
+
+| Part | From | To | Why |
+|---|---|---|---|
+| PE (earth terminal, 2 pins) | (−68.7, −3.8), F | (−46.6, 0.5), F, same rotation – pins at (−46.6, −2.0) / (−46.6, 3.0) | east of the discharge chain R4 – R6: between the PE pads of C84 and C65 (the area right of the chain is under C86). ≥ 3.3 mm to the C84.1 / C65.1 pads, 0.1 … 0.2 mm between its courtyard and those of C84 / C65 / CM1 |
+| C134 (U11 decoupling) | (−7.3, −81.0), F | (−5.2, −81.2), **B**, same rotation (2.1 mm + side) | out of the DC+ neck between the Q10 tab and U11 |
+
+**C84 / C65 were not moved:** with the terminal between them PE no longer runs west of CM1 pin 3 (the 5.1 PE track
+(−50.9, −1.1) → (−56, −6.2) → (−56, −11.5) → (−53.4, −14.1) and its stub to the old terminal are deleted), so the
+neutral passes west of C84 instead of between the two PE pads.
+
+- **PE:** B.Cu 1.0 mm C84.2 – terminal – C65.2, the two terminal pins, C65.2 → x −44.2 (3.8 mm from CM1 pin 4) →
+  (−43.8, −14.1) → C81 / C82, C85 → C81. One keep-out `S3A_KO_PE_1` (485 mm², PE copper + 3.25 mm, all layers) replaces
+  the two of 5ebfa00. Two dangling ends of the 5.1 IN2 track CM1.3 – C84.1 (inside the PE spacing) are deleted.
+- **Mains neutral:** zone `S3A_IN2_neutral` (F.Cu, 64 mm²): CM1 pin 3 → 2.5 mm bar west → 3.8 mm bar south into the
+  IN2 pour at C86.2, 5.3 mm from the centre of C84's PE pad, 1.4 mm from the RES_IN pour.
+- **Relay driver (Q9 / C35 / R32):** 5V and GND on **In2**, 0.15 mm, round the north end of the PE net: along
+  y −41.9 / −41.55 (8.1 mm from the heater island), through the 1.3 mm gap between C85 pin 1 (0.5 mm inner-layer
+  clearance) and the PE pad of C82 (3.2 mm), then between the pads of C85 (y −38.7 / −38.3) and by a via each to
+  B.Cu. Both are drawn in the gap, with no via and nothing on B.Cu there: **GPIO_BYPASS_RLY has B.Cu through the gap**
+  (HV functional 1.2 mm to C85 pin 1 leaves 0.58 mm; a 0.15 mm test route from the In2 end to R44.2 succeeds with the
+  router's margins – not kept, stage 3b). The last 7.5 mm of the 5.1 GPIO_BYPASS_RLY track on In2 lay in these lanes
+  and are deleted (`deleted_s3a.json`).
+- **Heater LLC DC+:** zone `S3A_DC_neck_Q10_U11` (F.Cu, 1.15 × 9 mm ≈ 2.9 A) joins the DC+ pour to the island at
+  C42.1 / C49.1 / C20.1. U11's primary-side vias (GND pins 1 / 7, +3V3 pin 3; 0.6 / 0.3) stand 0.2 mm left of the pads so
+  that the neck keeps 1.2 mm to them; C134 is fed from the pin 1 / pin 3 vias on B.Cu.
+- **PWM2 drain:** B.Cu area and `S2_KO_PWM2_drain` 0.9 mm further left below the VCC / gate corridor (x 39.3 / 39.1,
+  y > 8.3 / 7.4; above it the U10 / R132 pads and the VCC via set the edge). **127.5 + 69.1 mm² = 1.97 cm².**
+
+Checks: `check_board.py`, `check_domains.py` (ALLOW: Q19 / Q21), `check_next.sh` pass; courtyard overlaps unchanged
+(131); 357 segments / 91 vias from the script. **Unconnected 204 → 199, in the power / HV / ground nets 40 → 35**
+(353 / 189 before stage 3a). Planes: GND 5611, ISO_GND 2227, HT_GND 913 mm² per layer.
+
+Still open:
+- **Point 3 (Q8 pin 2 ↔ switch node) – not done, it cascades.** Moving only Q8's gate parts does not open a path:
+  Q21 pin 2 (420V) is enclosed by the link (Q21.3 – link – Q8.2) and the slot, so either 420V or the link has to
+  change layer at Q21, where B.Cu is full of Q21's gate parts (R56 above pin 2, R57 / R58 / D31) and inner copper is
+  ruled out (switch node; 11.1 mm to Q19). The smallest fix found: R88 / R87 2.5 mm east (x 72.3 / 74.1), **D32 ≈ 6 mm**
+  to (72.9, −48) where it is 0.03 mm short of the courtyards of C119 / R149, the dangling 5.1 15V_ISO_SEC stub at
+  x 63.5 deleted; then B.Cu 1.0 mm Q8.2 → y −46.5 → x 63.2 → via at (63.2, −49.6) → F.Cu 1.2 mm along y −49.6 above
+  the 420V band (which loses 1.4 of 5.6 mm) to the switch-node track at x 55.45. Needs the decision (D32 > 3 mm,
+  three gate parts and their 5.1 tracks, 420V band narrowed).
+- **R155 pin 1 (DC+ end of the heater balancing chain):** no legal via site – its pad lies under C42.1 / C20.1 and
+  every free DC+ spot on F.Cu is within 1.2 mm of R157 / R158 pads on B.Cu. Needs R155 – R158 re-placed (4 parts).
+- Stage 3b, 33 items as listed above (the +3V3 feed of U11 now ends at the via of pin 3).
 
 ## Footprints and 3D models (phase 3, 2026-11-18)
 

@@ -122,7 +122,9 @@ KEEPOUTS = {
     # NEXT_REVISION_PLAN phase 5 (8): no inner-layer copper on the PWM2 drain (FLY_C, 0 <-> 620 V at 100 kHz):
     # the reserved drain copper F.Cu x 40.6...47.7 / y -2...6.6, the strip y 7.2...10.6 to D7 / TR1 pin 12 and
     # the B.Cu part x 40.6...46.3 / y 6.6...14 (trial REPORT.md step 3 note 4), + 0.6 mm
-    "S2_KO_PWM2_drain": (INNER, [[(40.0, -2.6), (48.3, -2.6), (48.3, 6.4), (58.6, 6.4), (58.6, 14.6), (40.0, 14.6)]]),
+    # (routing stage 3a.2: 0.9 mm further left below y 7.4, with the B.Cu area)
+    "S2_KO_PWM2_drain": (INNER, [[(40.0, -2.6), (48.3, -2.6), (48.3, 6.4), (58.6, 6.4), (58.6, 14.6), (39.1, 14.6),
+                                  (39.1, 7.4), (40.0, 7.4)]]),
     # TR1 pin 2 (GND) barrel is 11.01 mm from pin 9 (ISO_GND): nothing may connect to pin 2 on an inner layer
     # (its inner ring would then stay), check_board.py ACCEPTED / check_domains.py ALLOW
     "S2_KO_TR1_pin2": (INNER, [("circle", 57.3, -6.0, 2.2)]),

@@ -1,0 +1,37 @@
+{
+ "note": "footprints moved by the s3a route script (mm, degrees)",
+ "moves": [
+  {
+   "ref": "C134",
+   "frm": {
+    "x": -7.3,
+    "y": -81.0,
+    "rot": 90.0,
+    "side": "F"
+   },
+   "to": {
+    "x": -5.2,
+    "y": -81.2,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "why": "frees the DC+ neck to the heater split capacitors C42 / C49 / C20"
+  },
+  {
+   "ref": "PE",
+   "frm": {
+    "x": -68.7,
+    "y": -3.8,
+    "rot": -90.0,
+    "side": "F"
+   },
+   "to": {
+    "x": -46.6,
+    "y": 0.5,
+    "rot": -90.0,
+    "side": "F"
+   },
+   "why": "PE terminal east of R4 - R6, between the PE pads of C84 and C65"
+  }
+ ]
+}

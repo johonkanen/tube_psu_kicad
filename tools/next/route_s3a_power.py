@@ -68,7 +68,7 @@ FLYBACK = [
     ("zone", "PWM2_drain_F", FLY, F, [(41.3, -1.4), (48.9, -1.4), (48.9, 6.9), (57.7, 6.9), (57.7, 13.4),
                                       (51.9, 13.4), (51.9, 10.4), (41.3, 10.4)], dict(clearance=0.5, spoke=1.0)),
     ("zone", "PWM2_drain_B", FLY, B, [(40.2, -0.9), (47.4, -0.9), (47.4, 9.0), (46.0, 9.0), (46.0, 13.7),
-                                      (40.2, 13.7)], dict(clearance=0.5)),
+                                      (39.3, 13.7), (39.3, 8.3), (40.2, 8.3)], dict(clearance=0.5)),
 ] + [("via", FLY, x, y, *VP) for x in (42.6, 44.0) for y in (0.9, 2.4, 3.9)] + [
     ("via", FLY, 46.0, 2.2, *VP),
 ] + [("via", FLY, x, 9.5, *VP) for x in (42.2, 43.6, 45.0)] + [
@@ -148,6 +148,9 @@ FG = dict(foreign_gap=4.0)         # connection at a barrier part: slot credit, 
 # ------------------------------------------------------------------------------------------------ heater LLC
 HC = "HEATER_CURRENT"
 HEATER_LLC = [
+    # stage 3a.2 (user 2026-11-20): C134 leaves the DC+ neck between the Q10 tab and U11
+    ("move", "C134", -5.2, -81.2, dict(side="B", rot=90.0), "frees the DC+ neck to the heater split capacitors C42 / C49 / C20"),
+    ("zone", "DC_neck_Q10_U11", "DC+", F, [(-8.8, -81.6), (-7.6, -81.6), (-7.6, -72.5), (-8.8, -72.5)], dict(solid=True)),
     a(HHS, "Q11.3", "net", F, 1.0, margin=8),            # high-side source -> switch-node pour
     # high-side drain tab -> DC+ pour (the 5.1 pours have no pad connection, their spokes were segments)
     ("zone", "Q11_tab_DC", "DC+", F, [(-10.5, -67.5), (-8.0, -67.5), (-8.0, -62.2), (-10.5, -62.2)], dict(solid=True)),
@@ -196,7 +199,9 @@ RAILS = [
     a("+3V3", "C124.1", "net", B, 0.3, margin=3),
     a("+3V3", "ISO1.1", "net", F, 0.3, relax=("ISO1",)),
     a("+3V3", "ISO2.1", "net", F, 0.3, relax=("ISO2",), **FG),
-    a("+3V3", "U11.3", "C134.1", F, 0.3, relax=("U11",)),
+    ("track", "+3V3", F, 0.3, [(-4.65, -79.91), (-6.15, -79.91)], dict(relax=("U11",))),
+    ("via", "+3V3", -6.15, -79.91, *VS, dict(relax=("U11",))),
+    ("track", "+3V3", B, 0.3, [(-6.15, -79.91), (-5.7, -80.36), (-5.2, -80.42)]),
     *inner_end("+3V3", "C98.1", 38.03, -26.87, F, 0.3, margin=5, **FG),
     # secondary: 15V_ISO_SEC / 5V_ISOL (In3 pours), AD2 supply
     pl("DRV6.11", "15V_ISO_SEC"), a("15V_ISO_SEC", "C43.2", "net", "FB", 0.4, margin=10),
@@ -222,8 +227,12 @@ GROUNDS = [
     gnd("DRV3.9", layers=B, relax=("DRV3",)), gnd("C18.2", layers=B),
     gnd("DRV5.14", layers=B, relax=("DRV5",)), gnd("C95.1", layers=B),
     gnd("C124.2", layers=B), gnd("C87.2", layers=F),
-    gnd("C134.2", layers=F, relax=("U11",)), a("GND", "U11.1", "C134.2", F, 0.3, relax=("U11",)),
-    gnd("U11.7", layers=F, relax=("U11",), margin=5),
+    # U11 primary side: vias 0.2 mm left of the pads (the DC+ neck needs the rest), C134 on the bottom side
+    ("track", "GND", F, 0.3, [(-4.65, -82.44), (-5.65, -82.44), (-6.2, -81.89), (-6.2, -81.3)], dict(relax=("U11",))),
+    ("via", "GND", -6.2, -81.3, *VS, dict(relax=("U11",))),
+    ("track", "GND", B, 0.3, [(-6.2, -81.3), (-5.6, -81.9), (-5.2, -81.98)]),
+    ("track", "GND", F, 0.3, [(-4.65, -74.83), (-6.15, -74.83)], dict(relax=("U11",))),
+    ("via", "GND", -6.15, -74.83, *VS, dict(relax=("U11",))),
     a("GND", "C97.2", "ISO1.2", F, 0.3, relax=("ISO1",)), gnd("C97.2", layers=F),
     gnd("ISO1.8", layers=F, relax=("ISO1",), margin=10, **FG),
     a("GND", "ISO2.8", "net", F, 0.4, relax=("ISO2",), margin=7, **FG),
@@ -244,14 +253,43 @@ GROUNDS = [
 
 # ------------------------------------------------------------------------------------------------ mains / PE
 RLC = "Net-(RL1-COM)"
+IN2 = "/05 PFC/IN2"
+OLD_IN2 = "dangling ends of the 5.1 IN2 track CM1 pin 3 - C84 (cut in placement step 3), inside the PE spacing"
+OLD_PE = "PE route west of CM1 pin 3 to the old PE terminal position"
+OLD_GPIO = "last 7.5 mm of the 5.1 GPIO_BYPASS_RLY track on In2, in the lanes of the relay driver's 5V / GND (3b: B.Cu)"
+RLY_GAP = (-52.0, -45.0, -42.0, -35.0)
+RLY = dict(no_via=[RLY_GAP], avoid_on={"B.Cu": [RLY_GAP]})
 MAINS = [
     a(RLC, "C85.1", "net", F, 1.0, margin=5), a(RLC, (-58.68, -43.88, "F.Cu"), "net", F, 1.0, margin=6),
-    # PE: Y capacitors C84 / C65 / C81 / C82 / C85 (the link to the PE terminal: open, see README)
-    ("track", PE, B, 1.0, [(-68.7, -6.3), (-68.7, -1.3)]),
-    a(PE, "C65.2", "C84.2", B, 1.0, margin=5), a(PE, "C85.2", "C81.2", B, 1.0, margin=5),
-    a(PE, (-53.4, -14.1, "B.Cu"), (-43.8, -14.1, "B.Cu"), B, 1.0, margin=5),
-    a(PE, (-56.0, -11.5, "B.Cu"), (-56.0, -6.2, "B.Cu"), B, 1.0, margin=5),
+    # stage 3a.2 (user 2026-11-20): PE terminal east of the discharge chain R4 - R6, between C84 and C65; PE no
+    # longer runs west of CM1 pin 3, so the neutral reaches the IN2 pour west of C84 (C84 / C65 stay)
+    ("move", "PE", -46.6, 0.5, {}, "PE terminal east of R4 - R6, between the PE pads of C84 and C65"),
+    ("delete", PE, B, -50.9, -1.1, -56.0, -6.2, OLD_PE), ("delete", PE, B, -56.0, -6.2, -58.4, -3.8, OLD_PE),
+    ("delete", PE, B, -53.4, -14.1, -56.0, -11.5, OLD_PE), ("delete", PE, B, -68.7, -1.2, -68.7, -1.3, OLD_PE),
+    ("delete", IN2, F, -51.1854, -9.1945, -46.5, -9.1945, OLD_IN2), ("delete", IN2, F, -46.5, 4.0, -48.9, 6.4, OLD_IN2),
+    ("delete", IN2, F, -48.9, 6.4, -50.9, 6.4, OLD_IN2),
+    ("track", PE, B, 1.0, [(-50.9, -1.1), (-46.6, -2.0), (-42.37, -1.19)]),
+    ("track", PE, B, 1.0, [(-46.6, -2.0), (-46.6, 3.0)]),
+    ("track", PE, B, 1.0, [(-42.37, -1.19), (-44.2, -3.02), (-44.2, -13.7), (-43.8, -14.1)]),
+    a(PE, "C85.2", "C81.2", B, 1.0, margin=5),
     a(PE, (-43.3, -14.6, "B.Cu"), (-44.1, -26.75, "B.Cu"), B, 1.0, margin=5),
+    # mains neutral: CM1 pin 3 -> IN2 pour / C86.2, west of the PE pad of C84 (5.3 mm from its centre)
+    ("zone", "IN2_neutral", IN2, F, [(-60.0, -10.4), (-50.2, -10.4), (-50.2, -7.9), (-56.2, -7.9), (-56.2, 2.6),
+                                     (-60.0, 2.6)], dict(solid=True, clearance=0.5)),
+    # relay driver under RL1: GND and 5V on In2 round the north end of the PE net (between C85 pin 1 and the
+    # PE pad of C82, >= 8 mm from the heater island, then between the pads of C85)
+    # In2, drawn through the 1.2 mm gap (0.5 mm to C85 pin 1, 3.2 mm to the PE pad of C82, 0.4 mm apart); no via
+    # and nothing on B.Cu in the gap: B.Cu stays free there for GPIO_BYPASS_RLY (stage 3b)
+    ("delete", "GPIO_BYPASS_RLY", "2", -43.8, -41.61, -41.5, -41.61,
+     OLD_GPIO), ("delete", "GPIO_BYPASS_RLY", "2", -41.5, -41.61, -37.81, -45.3, OLD_GPIO),
+    ("track", "5V", "2", 0.15, [(-41.0, -41.9), (-48.6, -41.9), (-48.35, -40.6), (-48.58, -39.72), (-49.2, -38.9),
+                                (-49.6, -38.7), (-52.5, -38.7)]),
+    ("track", "GND", "2", 0.15, [(-42.0, -41.55), (-47.9, -41.55), (-47.95, -40.6), (-48.19, -39.5), (-48.9, -38.55),
+                                 (-49.5, -38.3), (-52.5, -38.3)]),
+    a("5V", (-37.2904, -44.4486, "B.Cu"), (-41.0, -41.9, "In2.Signal_HV"), "2B", 0.15, via=VS, margin=5, via_cost=5.0, **RLY),
+    a("GND", "C82.1", (-42.0, -41.55, "In2.Signal_HV"), "2B", 0.15, via=VS, margin=5, via_cost=5.0, **RLY),
+    a("GND", (-52.5, -38.3, "In2.Signal_HV"), "Q9.3", "2B", 0.15, via=VS, margin=5, via_cost=5.0, **RLY),
+    a("5V", (-52.5, -38.7, "In2.Signal_HV"), (-59.7, -37.6486, "B.Cu"), "2B", 0.15, via=VS, margin=5, via_cost=5.0, **RLY),
 ]
 
 GROUPS = [("flyback primary", FLYBACK), ("flyback secondary", FLY_SEC), ("DAB primary", DAB_PRI),
