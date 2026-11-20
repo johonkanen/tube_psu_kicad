@@ -212,19 +212,26 @@ FLY_SEC = [
 ]
 
 # ------------------------------------------------------------------------------------------------ supply rails
+DRV2_OLD = "5.1 15V track 0.13 mm from DRV2 pins 2 / 3; drawn again at x 13.95"
 RAILS = [
     # 15V (In3 pour: flyback output, spine below the TO row, DRV1 / DRV5 / DRV3)
     a("15V", "C14.1", "net", F, 0.4), pl("R125.1", "15V"),
     a("15V", "C18.1", "DRV3.11", B, 0.4), pl("C18.1", "15V"),
     a("15V", "C95.2", "DRV5.16", B, 0.4), pl("C95.2", "15V"),
     pl("DRV1.1", "15V"),
+    # stage 3c: the 5.1 15V track beside DRV2 (x 13.848, 0.13 mm from pins 2 / 3) 0.1 mm further right
+    ("delete", "15V", B, 13.848, 8.6526, 13.848, 10.5, DRV2_OLD), ("delete", "15V", B, 13.848, 10.5, 13.848, 11.4886, DRV2_OLD),
+    ("track", "15V", B, 0.381, [(13.95, 9.1), (13.95, 10.5), (14.2, 10.5)]),
     a("15V", "DRV2.1", "net", B, 0.4),
     pl((-7.24, -62.24, "B.Cu"), "15V"), pl((-9.36, -61.72, "B.Cu"), "15V"),
     pl((14.67, -36.28, "B.Cu"), "15V"), pl((15.23, -38.87, "B.Cu"), "15V"), pl((15.24, -35.02, "F.Cu"), "15V", layers=F),
     a("15V", (-7.41, -67.7, "B.Cu"), "net", "FB", 0.4, via=VS, margin=6),
     a("15V", (2.6, -49.3, "B.Cu"), "net", "FB", 0.4, via=VS, margin=8),
-    a("15V", (12.96, 14.14, "B.Cu"), "net", "FB", 0.4), a("15V", (13.85, 10.5, "B.Cu"), (13.16, 13.0, "F.Cu"), "FB", 0.4, via=VS),
+    a("15V", (12.96, 14.14, "B.Cu"), "net", "FB", 0.4), a("15V", (13.95, 10.5, "B.Cu"), (13.16, 13.0, "F.Cu"), "FB", 0.4, via=VS),
     ("delete", "15V", F, 37.315, -1.4499, 37.315, 2.546, "5.1 15V stub that ended on the D10 anode pad (moved)"),
+    # stage 3c: the 5.1 15V via 0.11 mm from the D10 anode pad (no longer 15V: R142 is in between) 0.44 mm lower
+    ("delvia", "15V", 36.661, 4.061, "5.1 15V via 0.11 mm from the D10 anode pad; moved 0.44 mm"),
+    ("via", "15V", 36.66, 4.5, *VS), ("track", "15V", B, 0.381, [(36.661, 4.061), (36.66, 4.5)]),
     a("15V", (37.315, -1.4499, "F.Cu"), "net", "FB", 0.4, via=VS, margin=8),
     # 5V (In3 pour at the flyback output and J2)
     pl("R126.1", "5V", layers=F), pl("D6.C", "5V"), pl("C6.2", "5V"), a("5V", "R138.1", "D6.C", B, 0.3),
@@ -277,7 +284,7 @@ GROUNDS = [
     gnd("ISO1.8", layers=F, relax=("ISO1",), margin=10, **FG),
     a("GND", "ISO2.8", "net", F, 0.4, relax=("ISO2",), margin=7, **FG),
     gnd("C98.2", layers=F, margin=7, **FG), gnd("R125.2", layers=B),
-    gnd((56.5, -17.0, "F.Cu"), layers=F), gnd((20.9, -12.36, "B.Cu"), layers=B),
+    gnd((56.5, -17.0, "F.Cu"), layers=F), gnd((20.9, -12.36, "B.Cu"), layers=B, w=0.3),
     gnd((-10.85, -70.17, "B.Cu"), layers=B),
     # relay driver under RL1 (no plane over the mains input): tracks
     a("GND", "Q9.3", "C35.2", B, 0.4), a("GND", "C35.2", "R32.2", B, 0.4),

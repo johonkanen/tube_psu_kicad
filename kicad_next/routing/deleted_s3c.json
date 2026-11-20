@@ -1,0 +1,1685 @@
+{
+ "note": "5.1 copper deleted by the s3c route script (mm)",
+ "deleted": [
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu",
+   "start": [
+    33.7254,
+    -41.9499
+   ],
+   "end": [
+    34.335,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "reason": "5.1 thermal-spoke segment inside its own pad, 0.9 mm from the next pin of the TO-220 / part"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu",
+   "start": [
+    34.9446,
+    -41.9499
+   ],
+   "end": [
+    34.335,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "reason": "5.1 thermal-spoke segment inside its own pad, 0.9 mm from the next pin of the TO-220 / part"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu",
+   "start": [
+    43.6846,
+    -41.9499
+   ],
+   "end": [
+    43.075,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "reason": "5.1 thermal-spoke segment inside its own pad, 0.9 mm from the next pin of the TO-220 / part"
+  },
+  {
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    45.0054,
+    -41.9499
+   ],
+   "end": [
+    45.615,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "reason": "5.1 thermal-spoke segment inside its own pad, 0.9 mm from the next pin of the TO-220 / part"
+  },
+  {
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    46.2246,
+    -41.9499
+   ],
+   "end": [
+    45.615,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "reason": "5.1 thermal-spoke segment inside its own pad, 0.9 mm from the next pin of the TO-220 / part"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "F.Cu",
+   "start": [
+    32.4046,
+    -41.9499
+   ],
+   "end": [
+    31.795,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "reason": "5.1 thermal-spoke segment inside its own pad, 0.9 mm from the next pin of the TO-220 / part"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "B.Cu",
+   "start": [
+    32.4046,
+    -41.9499
+   ],
+   "end": [
+    31.795,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "reason": "5.1 thermal-spoke segment inside its own pad, 0.9 mm from the next pin of the TO-220 / part"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu",
+   "start": [
+    34.335,
+    -41.9499
+   ],
+   "end": [
+    34.335,
+    -43.517
+   ],
+   "width": 1.778,
+   "reason": "5.1 track wider than the pin pitch allows (< 1.2 mm to the next pin); drawn again 0.75 mm at the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu",
+   "start": [
+    34.335,
+    -43.517
+   ],
+   "end": [
+    35.224,
+    -44.406
+   ],
+   "width": 1.778,
+   "reason": "5.1 track wider than the pin pitch allows (< 1.2 mm to the next pin); drawn again 0.75 mm at the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu",
+   "start": [
+    35.224,
+    -44.406
+   ],
+   "end": [
+    35.315,
+    -44.406
+   ],
+   "width": 0.1524,
+   "reason": "5.1 track wider than the pin pitch allows (< 1.2 mm to the next pin); drawn again 0.75 mm at the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu",
+   "start": [
+    35.315,
+    -44.406
+   ],
+   "end": [
+    37.3543,
+    -44.406
+   ],
+   "width": 0.1524,
+   "reason": "5.1 track wider than the pin pitch allows (< 1.2 mm to the next pin); drawn again 0.75 mm at the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu",
+   "start": [
+    37.3543,
+    -44.406
+   ],
+   "end": [
+    41.297,
+    -44.406
+   ],
+   "width": 1.778,
+   "reason": "5.1 track wider than the pin pitch allows (< 1.2 mm to the next pin); drawn again 0.75 mm at the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu",
+   "start": [
+    41.297,
+    -44.406
+   ],
+   "end": [
+    42.8641,
+    -42.8389
+   ],
+   "width": 1.778,
+   "reason": "5.1 track wider than the pin pitch allows (< 1.2 mm to the next pin); drawn again 0.75 mm at the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu",
+   "start": [
+    42.8641,
+    -42.8389
+   ],
+   "end": [
+    43.075,
+    -41.9499
+   ],
+   "width": 1.778,
+   "reason": "5.1 track wider than the pin pitch allows (< 1.2 mm to the next pin); drawn again 0.75 mm at the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    41.315,
+    -41.9499
+   ],
+   "end": [
+    43.075,
+    -41.9499
+   ],
+   "width": 1.016,
+   "reason": "5.1 track wider than the pin pitch allows (< 1.2 mm to the next pin); drawn again 0.75 mm at the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q7-G)",
+   "layer": "B.Cu",
+   "start": [
+    36.875,
+    -41.9499
+   ],
+   "end": [
+    36.875,
+    -44.707
+   ],
+   "width": 1.016,
+   "reason": "5.1 track wider than the pin pitch allows (< 1.2 mm to the next pin); drawn again 0.75 mm at the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    39.049,
+    -49.486
+   ],
+   "end": [
+    36.935,
+    -51.6
+   ],
+   "width": 0.762,
+   "reason": "5.1 high-side gate track < 1.2 mm from the low-side gate track and D34"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    36.935,
+    -51.6
+   ],
+   "end": [
+    36.2175,
+    -51.6
+   ],
+   "width": 0.762,
+   "reason": "5.1 high-side gate track < 1.2 mm from the low-side gate track and D34"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    36.2175,
+    -51.6
+   ],
+   "end": [
+    35.2175,
+    -52.6
+   ],
+   "width": 0.762,
+   "reason": "5.1 high-side gate track < 1.2 mm from the low-side gate track and D34"
+  },
+  {
+   "kind": "segment",
+   "net": "420V",
+   "layer": "F.Cu",
+   "start": [
+    56.6054,
+    -41.9499
+   ],
+   "end": [
+    57.215,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "reason": "5.1 thermal-spoke segment inside its own pad, 0.9 mm from the next pin of the TO-220 / part"
+  },
+  {
+   "kind": "segment",
+   "net": "420V",
+   "layer": "F.Cu",
+   "start": [
+    57.8246,
+    -41.9499
+   ],
+   "end": [
+    57.215,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "reason": "5.1 thermal-spoke segment inside its own pad, 0.9 mm from the next pin of the TO-220 / part"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "start": [
+    67.0208,
+    -41.9499
+   ],
+   "end": [
+    66.335,
+    -41.9499
+   ],
+   "width": 0.254,
+   "reason": "5.1 thermal-spoke segment inside its own pad, 0.9 mm from the next pin of the TO-220 / part"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "F.Cu",
+   "start": [
+    54.675,
+    -46.215
+   ],
+   "end": [
+    54.675,
+    -41.9499
+   ],
+   "width": 1.778,
+   "reason": "5.1 track wider than the pin pitch allows (< 1.2 mm to the next pin); drawn again 0.75 mm at the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    56.5708,
+    -44.025
+   ],
+   "end": [
+    56.1263,
+    -44.025
+   ],
+   "width": 0.762,
+   "reason": "5.1 track to R56 0.8 mm above Q21 pin 2 (420V)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    56.1263,
+    -44.025
+   ],
+   "end": [
+    55.377,
+    -44.025
+   ],
+   "width": 0.762,
+   "reason": "5.1 track to R56 0.8 mm above Q21 pin 2 (420V)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q21-G)",
+   "layer": "B.Cu",
+   "start": [
+    59.247,
+    -44.025
+   ],
+   "end": [
+    58.298,
+    -44.025
+   ],
+   "width": 0.762,
+   "reason": "5.1 track to R56 0.97 mm above Q21 pin 2 (420V)"
+  },
+  {
+   "kind": "segment",
+   "net": "420V",
+   "layer": "F.Cu",
+   "start": [
+    79.6,
+    -31.8
+   ],
+   "end": [
+    79.6,
+    -45.9
+   ],
+   "width": 0.1524,
+   "reason": "5.1 420V sense track 0.4 ... 0.5 mm from the AD2 vias, dangling at R23"
+  },
+  {
+   "kind": "segment",
+   "net": "420V",
+   "layer": "F.Cu",
+   "start": [
+    79.6,
+    -45.9
+   ],
+   "end": [
+    79.5,
+    -45.9
+   ],
+   "width": 0.1524,
+   "reason": "5.1 420V sense track 0.4 ... 0.5 mm from the AD2 vias, dangling at R23"
+  },
+  {
+   "kind": "segment",
+   "net": "15V_ISO_SEC",
+   "layer": "F.Cu",
+   "start": [
+    74.99,
+    -24.721
+   ],
+   "end": [
+    75.244,
+    -24.975
+   ],
+   "width": 0.635,
+   "reason": "5.1 track 1.15 mm from the divider node at R39 pin 1; drawn again 0.45 mm wide"
+  },
+  {
+   "kind": "segment",
+   "net": "15V_ISO_SEC",
+   "layer": "F.Cu",
+   "start": [
+    75.244,
+    -24.975
+   ],
+   "end": [
+    75.244,
+    -28.658
+   ],
+   "width": 0.635,
+   "reason": "5.1 track 1.15 mm from the divider node at R39 pin 1; drawn again 0.45 mm wide"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_GND",
+   "layer": "F.Cu",
+   "start": [
+    70.6226,
+    0.834
+   ],
+   "end": [
+    69.0986,
+    0.834
+   ],
+   "width": 0.1524,
+   "reason": "dangling 5.1 stub inside the 1.2 mm HV spacing of another net (TR1 pin 5, -100 V winding)"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_GND",
+   "layer": "F.Cu",
+   "start": [
+    68.0826,
+    0.834
+   ],
+   "end": [
+    69.0986,
+    0.834
+   ],
+   "width": 0.1524,
+   "reason": "dangling 5.1 stub inside the 1.2 mm HV spacing of another net (TR1 pin 5, -100 V winding)"
+  },
+  {
+   "kind": "segment",
+   "net": "-100V BIAS",
+   "layer": "F.Cu",
+   "start": [
+    76.1535,
+    4.179
+   ],
+   "end": [
+    77.2296,
+    4.179
+   ],
+   "width": 0.1524,
+   "reason": "dangling 5.1 stub inside the 1.2 mm HV spacing of another net (D8 cathode)"
+  },
+  {
+   "kind": "via",
+   "net": "/06 Heaters/HEATER_HI_SOURCE",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    -23.8,
+    -58.0
+   ],
+   "width": 0.5,
+   "drill": 0.3,
+   "reason": "5.1 via of the old driver footprint, 0.12 mm from DRV3 pin 10 (low-side output)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV3-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    -24.6,
+    -56.8
+   ],
+   "end": [
+    -23.9,
+    -56.1
+   ],
+   "width": 0.762,
+   "reason": "dangling 5.1 stub inside the 1.2 mm HV spacing of another net (DRV3 pin 10)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/HEATER_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    -16.907,
+    -63.583
+   ],
+   "end": [
+    -16.886,
+    -63.583
+   ],
+   "width": 1.016,
+   "reason": "5.1 stub at R24 (old gate route), 0.14 mm from R59"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/HEATER_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    -16.907,
+    -62.567
+   ],
+   "end": [
+    -16.907,
+    -63.583
+   ],
+   "width": 1.016,
+   "reason": "5.1 stub at R24 (old gate route), 0.14 mm from R59"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/HEATER_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    -16.886,
+    -63.583
+   ],
+   "end": [
+    -16.886,
+    -63.4687
+   ],
+   "width": 1.016,
+   "reason": "5.1 stub at R24 (old gate route), 0.14 mm from R59"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/HEATER_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    -16.886,
+    -63.4687
+   ],
+   "end": [
+    -16.907,
+    -62.567
+   ],
+   "width": 1.016,
+   "reason": "5.1 stub at R24 (old gate route), 0.14 mm from R59"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/HEATER_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    -18.3,
+    -61.1
+   ],
+   "end": [
+    -18.3,
+    -67.3
+   ],
+   "width": 1.27,
+   "reason": "5.1 track end 0.17 mm from DRV3 pin 15; drawn again 0.6 mm shorter"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/HEATER_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    -18.7264,
+    -60.3
+   ],
+   "end": [
+    -18.7264,
+    -59.9
+   ],
+   "width": 0.1524,
+   "reason": "5.1 stub of the old driver footprint between DRV3 pins 14 / 15"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    -11.933,
+    -53.677
+   ],
+   "end": [
+    -14.723,
+    -53.677
+   ],
+   "width": 0.508,
+   "reason": "dangling 5.1 stub inside the 1.2 mm HV spacing of another net (D11 cathode / R99, bootstrap)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    -11.933,
+    -53.677
+   ],
+   "end": [
+    -12.954,
+    -54.698
+   ],
+   "width": 0.508,
+   "reason": "dangling 5.1 stub inside the 1.2 mm HV spacing of another net (D11 cathode / R99, bootstrap)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    -10.832,
+    -60.3968
+   ],
+   "end": [
+    -10.3838,
+    -60.3968
+   ],
+   "width": 0.508,
+   "reason": "dangling 5.1 stub inside the 1.2 mm HV spacing of another net (D11 cathode / R99, bootstrap)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    -10.3838,
+    -60.3968
+   ],
+   "end": [
+    -9.5708,
+    -61.2098
+   ],
+   "width": 0.508,
+   "reason": "dangling 5.1 stub inside the 1.2 mm HV spacing of another net (D11 cathode / R99, bootstrap)"
+  },
+  {
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    19.3,
+    -1.8
+   ],
+   "end": [
+    19.6,
+    -1.8
+   ],
+   "width": 0.1524,
+   "reason": "5.1 +3V3 track 0.36 mm from C37 pin 1 (DC+); C62 / C76 now by vias into the In3 +3V3 pour"
+  },
+  {
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    19.6,
+    -1.8
+   ],
+   "end": [
+    20.4,
+    -2.6
+   ],
+   "width": 0.1524,
+   "reason": "5.1 +3V3 track 0.36 mm from C37 pin 1 (DC+); C62 / C76 now by vias into the In3 +3V3 pour"
+  },
+  {
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    20.4,
+    -2.6
+   ],
+   "end": [
+    21.3,
+    -2.6
+   ],
+   "width": 0.1524,
+   "reason": "5.1 +3V3 track 0.36 mm from C37 pin 1 (DC+); C62 / C76 now by vias into the In3 +3V3 pour"
+  },
+  {
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    21.3,
+    -2.6
+   ],
+   "end": [
+    24.5,
+    -5.8
+   ],
+   "width": 0.1524,
+   "reason": "5.1 +3V3 track 0.36 mm from C37 pin 1 (DC+); C62 / C76 now by vias into the In3 +3V3 pour"
+  },
+  {
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    24.5,
+    -5.8
+   ],
+   "end": [
+    24.5,
+    -8.6
+   ],
+   "width": 0.1524,
+   "reason": "5.1 +3V3 track 0.36 mm from C37 pin 1 (DC+); C62 / C76 now by vias into the In3 +3V3 pour"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    20.3254,
+    -1.2254
+   ],
+   "end": [
+    20.9,
+    -1.8
+   ],
+   "width": 0.3048,
+   "reason": "5.1 GND track 1.09 mm from C37 pin 1 (DC+)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    20.9,
+    -1.8
+   ],
+   "end": [
+    23.4,
+    -1.8
+   ],
+   "width": 0.1524,
+   "reason": "5.1 GND track 1.09 mm from C37 pin 1 (DC+)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    16.1,
+    2.7
+   ],
+   "end": [
+    16.4,
+    3.0
+   ],
+   "width": 0.3048,
+   "reason": "dangling 5.1 stub inside the 1.2 mm HV spacing of another net (via of the DC-link divider node R10 pin 1)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    16.1,
+    1.3
+   ],
+   "end": [
+    16.1,
+    2.7
+   ],
+   "width": 0.3048,
+   "reason": "dangling 5.1 stub inside the 1.2 mm HV spacing of another net (via of the DC-link divider node R10 pin 1)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    15.7,
+    0.9
+   ],
+   "end": [
+    16.1,
+    1.3
+   ],
+   "width": 0.3048,
+   "reason": "dangling 5.1 stub inside the 1.2 mm HV spacing of another net (via of the DC-link divider node R10 pin 1)"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    21.0084,
+    -14.9564
+   ],
+   "end": [
+    21.0084,
+    -15.6084
+   ],
+   "width": 0.1524,
+   "reason": "5.1 +1V65_BIAS track 0.46 mm from C56 pin 1 (DC+)"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    21.0084,
+    -15.6084
+   ],
+   "end": [
+    21.5,
+    -16.1
+   ],
+   "width": 0.1524,
+   "reason": "5.1 +1V65_BIAS track 0.46 mm from C56 pin 1 (DC+)"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    21.5,
+    -16.1
+   ],
+   "end": [
+    21.5,
+    -17.4
+   ],
+   "width": 0.1524,
+   "reason": "5.1 +1V65_BIAS track 0.46 mm from C56 pin 1 (DC+)"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    21.5,
+    -17.4
+   ],
+   "end": [
+    21.9,
+    -17.8
+   ],
+   "width": 0.1524,
+   "reason": "5.1 +1V65_BIAS track 0.46 mm from C56 pin 1 (DC+)"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    21.9,
+    -17.8
+   ],
+   "end": [
+    22.7,
+    -17.8
+   ],
+   "width": 0.1524,
+   "reason": "5.1 +1V65_BIAS track 0.46 mm from C56 pin 1 (DC+)"
+  },
+  {
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    23.749,
+    -10.414
+   ],
+   "end": [
+    21.844,
+    -12.319
+   ],
+   "width": 0.1524,
+   "reason": "5.1 +3V3 link 0.81 mm from C56 pin 1 (DC+); replaced by the In3 +3V3 pour"
+  },
+  {
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    21.844,
+    -12.319
+   ],
+   "end": [
+    21.844,
+    -15.444
+   ],
+   "width": 0.1524,
+   "reason": "5.1 +3V3 link 0.81 mm from C56 pin 1 (DC+); replaced by the In3 +3V3 pour"
+  },
+  {
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    21.844,
+    -15.444
+   ],
+   "end": [
+    21.844,
+    -16.7
+   ],
+   "width": 0.1524,
+   "reason": "5.1 +3V3 link 0.81 mm from C56 pin 1 (DC+); replaced by the In3 +3V3 pour"
+  },
+  {
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    21.844,
+    -16.7
+   ],
+   "end": [
+    22.144,
+    -17.0
+   ],
+   "width": 0.1524,
+   "reason": "5.1 +3V3 link 0.81 mm from C56 pin 1 (DC+); replaced by the In3 +3V3 pour"
+  },
+  {
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    22.144,
+    -17.0
+   ],
+   "end": [
+    23.4,
+    -17.0
+   ],
+   "width": 0.1524,
+   "reason": "5.1 +3V3 link 0.81 mm from C56 pin 1 (DC+); replaced by the In3 +3V3 pour"
+  },
+  {
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    23.4,
+    -17.0
+   ],
+   "end": [
+    25.2,
+    -18.8
+   ],
+   "width": 0.1524,
+   "reason": "5.1 +3V3 link 0.81 mm from C56 pin 1 (DC+); replaced by the In3 +3V3 pour"
+  },
+  {
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    25.2,
+    -18.8
+   ],
+   "end": [
+    26.8,
+    -18.8
+   ],
+   "width": 0.1524,
+   "reason": "5.1 +3V3 link 0.81 mm from C56 pin 1 (DC+); replaced by the In3 +3V3 pour"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    20.6,
+    14.8
+   ],
+   "end": [
+    36.2,
+    14.8
+   ],
+   "width": 0.381,
+   "reason": "5.1 15V track 0.16 ... 0.4 mm from the AC-sense divider nodes (R79 pin 1, vias of R48 / R51)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    36.2,
+    14.8
+   ],
+   "end": [
+    37.8,
+    13.2
+   ],
+   "width": 0.381,
+   "reason": "5.1 15V track 0.16 ... 0.4 mm from the AC-sense divider nodes (R79 pin 1, vias of R48 / R51)"
+  },
+  {
+   "kind": "via",
+   "net": "15V",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    26.841,
+    -39.58
+   ],
+   "width": 1.016,
+   "drill": 0.381,
+   "reason": "5.1 15V via 0.9 mm from C70 pin 1 (DC+); moved 0.8 mm east"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_GATE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    63.093,
+    -54.693
+   ],
+   "end": [
+    62.3,
+    -53.9
+   ],
+   "width": 0.762,
+   "reason": "5.1 gate track 1.18 mm from DRV6 pin 6; drawn again 0.7 mm wide"
+  },
+  {
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    24.5,
+    -8.7
+   ],
+   "end": [
+    24.5,
+    -8.6
+   ],
+   "width": 0.1524,
+   "reason": "5.1 +3V3 track 0.36 mm from C37 pin 1 (DC+); C62 / C76 now by vias into the In3 +3V3 pour"
+  },
+  {
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    24.5,
+    -9.3
+   ],
+   "end": [
+    24.5,
+    -8.7
+   ],
+   "width": 0.1524,
+   "reason": "5.1 +3V3 track 0.36 mm from C37 pin 1 (DC+); C62 / C76 now by vias into the In3 +3V3 pour"
+  },
+  {
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    24.62,
+    -10.414
+   ],
+   "end": [
+    23.749,
+    -10.414
+   ],
+   "width": 0.1524,
+   "reason": "5.1 +3V3 link 0.81 mm from C56 pin 1 (DC+); replaced by the In3 +3V3 pour"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM5A",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -13.547,
+    -55.753
+   ],
+   "end": [
+    0.347,
+    -55.753
+   ],
+   "width": 0.1524,
+   "reason": "5.1 track end 0.025 mm from the HEATER_CURRENT via; drawn again 0.95 mm shorter"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    4.5,
+    -59.5
+   ],
+   "end": [
+    5.2,
+    -58.8
+   ],
+   "width": 0.1524,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/HEATER_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    -11.779,
+    -75.321
+   ],
+   "end": [
+    -11.6,
+    -75.5
+   ],
+   "width": 0.1524,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/HEATER_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    -11.0,
+    -75.5
+   ],
+   "end": [
+    -11.6,
+    -75.5
+   ],
+   "width": 0.1524,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    10.8091,
+    -36.233
+   ],
+   "end": [
+    10.2151,
+    -35.639
+   ],
+   "width": 0.508,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "F.Cu",
+   "start": [
+    49.463,
+    -15.737
+   ],
+   "end": [
+    49.463,
+    -16.466
+   ],
+   "width": 0.635,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    13.125,
+    -51.0
+   ],
+   "end": [
+    13.125,
+    -57.8
+   ],
+   "width": 0.508,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    13.125,
+    -57.8
+   ],
+   "end": [
+    12.5,
+    -58.425
+   ],
+   "width": 0.508,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "15V_ISO_SEC",
+   "layer": "In2.Signal_HV",
+   "start": [
+    66.689,
+    -60.563
+   ],
+   "end": [
+    66.689,
+    -64.119
+   ],
+   "width": 0.635,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "15V_ISO_SEC",
+   "layer": "In2.Signal_HV",
+   "start": [
+    77.475,
+    -42.7931
+   ],
+   "end": [
+    77.475,
+    -50.502
+   ],
+   "width": 0.635,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    17.159,
+    -45.159
+   ],
+   "end": [
+    17.159,
+    -46.3
+   ],
+   "width": 0.1524,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "B.Cu",
+   "start": [
+    73.2628,
+    -33.611
+   ],
+   "end": [
+    72.958,
+    -33.3062
+   ],
+   "width": 0.1524,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "B.Cu",
+   "start": [
+    72.958,
+    -33.3062
+   ],
+   "end": [
+    72.958,
+    -32.849
+   ],
+   "width": 0.1524,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "In2.Signal_HV",
+   "start": [
+    78.745,
+    -40.899
+   ],
+   "end": [
+    78.745,
+    -51.772
+   ],
+   "width": 0.2032,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "In2.Signal_HV",
+   "start": [
+    73.8978,
+    -34.5762
+   ],
+   "end": [
+    73.8978,
+    -35.2112
+   ],
+   "width": 0.1524,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "In2.Signal_HV",
+   "start": [
+    77.426,
+    -39.58
+   ],
+   "end": [
+    78.745,
+    -40.899
+   ],
+   "width": 0.2032,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "In2.Signal_HV",
+   "start": [
+    75.9576,
+    -39.58
+   ],
+   "end": [
+    77.426,
+    -39.58
+   ],
+   "width": 0.2032,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "B.Cu",
+   "start": [
+    2.784,
+    -4.9858
+   ],
+   "end": [
+    3.8,
+    -4.98
+   ],
+   "width": 0.1524,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    9.5,
+    -51.9
+   ],
+   "end": [
+    9.5,
+    -56.5
+   ],
+   "width": 0.254,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    -10.225,
+    -80.4
+   ],
+   "end": [
+    -10.225,
+    -79.1
+   ],
+   "width": 0.1524,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "F.Cu",
+   "start": [
+    49.7332,
+    -4.8332
+   ],
+   "end": [
+    49.7332,
+    -3.5332
+   ],
+   "width": 0.508,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "F.Cu",
+   "start": [
+    60.766,
+    -27.2356
+   ],
+   "end": [
+    60.766,
+    -27.515
+   ],
+   "width": 0.2032,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "HT_GND",
+   "layer": "F.Cu",
+   "start": [
+    -48.9,
+    -57.1
+   ],
+   "end": [
+    -48.9,
+    -58.6708
+   ],
+   "width": 0.508,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "HT_GND",
+   "layer": "F.Cu",
+   "start": [
+    -50.033,
+    -55.967
+   ],
+   "end": [
+    -48.9,
+    -57.1
+   ],
+   "width": 0.508,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "HT_GND",
+   "layer": "F.Cu",
+   "start": [
+    -50.033,
+    -52.102
+   ],
+   "end": [
+    -50.033,
+    -55.967
+   ],
+   "width": 0.508,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(AD1-VA)",
+   "layer": "F.Cu",
+   "start": [
+    -49.9314,
+    -50.4004
+   ],
+   "end": [
+    -48.509,
+    -50.4004
+   ],
+   "width": 0.508,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q9-D)",
+   "layer": "B.Cu",
+   "start": [
+    -53.5,
+    -42.3564
+   ],
+   "end": [
+    -56.352,
+    -39.5044
+   ],
+   "width": 0.1524,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q9-D)",
+   "layer": "B.Cu",
+   "start": [
+    -56.352,
+    -39.5044
+   ],
+   "end": [
+    -56.352,
+    -35.903
+   ],
+   "width": 0.1524,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(U10A-+)",
+   "layer": "B.Cu",
+   "start": [
+    37.9115,
+    -0.0885
+   ],
+   "end": [
+    35.83,
+    1.993
+   ],
+   "width": 0.1524,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "PFC_PWM2",
+   "layer": "B.Cu",
+   "start": [
+    12.2061,
+    14.9
+   ],
+   "end": [
+    12.6061,
+    15.3
+   ],
+   "width": 0.1524,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "PFC_PWM2",
+   "layer": "B.Cu",
+   "start": [
+    12.6061,
+    15.3
+   ],
+   "end": [
+    13.7,
+    15.3
+   ],
+   "width": 0.1524,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "segment",
+   "net": "PFC_PWM2",
+   "layer": "B.Cu",
+   "start": [
+    13.7,
+    15.3
+   ],
+   "end": [
+    14.1,
+    14.9
+   ],
+   "width": 0.1524,
+   "reason": "dangling 5.1 track, no open connection starts on it"
+  },
+  {
+   "kind": "via",
+   "net": "GND",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    60.766,
+    -27.515
+   ],
+   "width": 0.5,
+   "drill": 0.3,
+   "reason": "dangling 5.1 via (copper on one layer only), no open connection starts on it"
+  },
+  {
+   "kind": "via",
+   "net": "Net-(C63-Pad1)",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    5.75,
+    -60.3
+   ],
+   "width": 0.5,
+   "drill": 0.3,
+   "reason": "dangling 5.1 via (copper on one layer only), no open connection starts on it"
+  },
+  {
+   "kind": "via",
+   "net": "15V_ISO_SEC",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    77.475,
+    -42.7931
+   ],
+   "width": 0.5,
+   "drill": 0.3,
+   "reason": "dangling 5.1 via (copper on one layer only), no open connection starts on it"
+  },
+  {
+   "kind": "via",
+   "net": "AD2_3V3",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    73.9,
+    -30.9
+   ],
+   "width": 0.5,
+   "drill": 0.3,
+   "reason": "dangling 5.1 via (copper on one layer only), no open connection starts on it"
+  },
+  {
+   "kind": "via",
+   "net": "5V_ISOL",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    73.2628,
+    -33.611
+   ],
+   "width": 0.5,
+   "drill": 0.3,
+   "reason": "dangling 5.1 via (copper on one layer only), no open connection starts on it"
+  },
+  {
+   "kind": "via",
+   "net": "5V_ISOL",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    73.8978,
+    -35.2112
+   ],
+   "width": 0.5,
+   "drill": 0.3,
+   "reason": "dangling 5.1 via (copper on one layer only), no open connection starts on it"
+  },
+  {
+   "kind": "via",
+   "net": "5V",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    17.159,
+    -46.3
+   ],
+   "width": 0.5,
+   "drill": 0.3,
+   "reason": "dangling 5.1 via (copper on one layer only), no open connection starts on it"
+  },
+  {
+   "kind": "via",
+   "net": "Net-(AD1-VA)",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    -48.509,
+    -50.4004
+   ],
+   "width": 0.5,
+   "drill": 0.3,
+   "reason": "dangling 5.1 via (copper on one layer only), no open connection starts on it"
+  }
+ ]
+}

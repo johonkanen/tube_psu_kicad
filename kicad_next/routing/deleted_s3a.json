@@ -429,6 +429,48 @@
    ],
    "width": 0.635,
    "reason": "dangling 5.1 15V_ISO_SEC stub above C43, in the way of the switch-node link"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    13.848,
+    8.6526
+   ],
+   "end": [
+    13.848,
+    10.5
+   ],
+   "width": 0.381,
+   "reason": "5.1 15V track 0.13 mm from DRV2 pins 2 / 3; drawn again at x 13.95"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    13.848,
+    10.5
+   ],
+   "end": [
+    13.848,
+    11.4886
+   ],
+   "width": 0.381,
+   "reason": "5.1 15V track 0.13 mm from DRV2 pins 2 / 3; drawn again at x 13.95"
+  },
+  {
+   "kind": "via",
+   "net": "15V",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    36.661,
+    4.061
+   ],
+   "width": 0.5,
+   "drill": 0.3,
+   "reason": "5.1 15V via 0.11 mm from the D10 anode pad; moved 0.44 mm"
   }
  ]
 }

@@ -9,6 +9,7 @@ A route script hands a list of STEPS to run(); every step is data:
   ("zone",  name, net, layer, [(x, y), ...], {options})  pour (name gets the prefix of the route script)
   ("auto",  net, start, target, {options})               routed by the local grid router (below)
   ("delete", net, layer, x0, y0, x1, y1, why)            remove one existing segment (end points, 5 um)
+  ("delvia", net, x, y, why)                             remove one existing via (centre, 5 um)
   ("delzone", zone name, why)                            remove a 5.1 pour
   ("move", ref, x, y, {rot, side}, why)                  move a footprint (absolute; logged in moves_<tag>.json)
 
@@ -61,6 +62,7 @@ DOMAIN_GAP = {("PRI", "SEC"): 11.1, ("HEATER", "PRI"): 8.0, ("PRI", "UART"): 8.0
               ("HEATER", "PE"): 1.0, ("HEATER", "HOLE"): 1.0, ("PE", "UART"): 1.0, ("HOLE", "UART"): 1.0}
 HEATER_SEC_LV = 1.5
 HV_OUTER = 1.2
+NC_NET = "unconnected-"       # net name KiCad gives the pad of a no-connect pin
 # nets of one floating high-side gate driver: 0.2 mm between them on the outer layers (.kicad_dru "High-side
 # driver group ...", user decision 2026-11-20) - keep in step with the rule file
 HS_GROUPS = {'DRV3': ['/06 Heaters/HEATER_HI_GATE', '/06 Heaters/HEATER_HI_SOURCE', '/06 Heaters/HEATER_HI_DRV', 'Net-(DRV3-VDDA)', 'Net-(D35-K)', 'Net-(D11-K)'], 'DRV5': ['DHB_HI_GATE', 'DHB_HI_SOURCE', 'Net-(DRV5-VDDB)', 'Net-(D19-K)', 'Net-(D30-PadA)', 'Net-(Q19-G)'], 'DRV6': ['DHB_HI_GATE_SEC', 'DHB_HI_SOURCE_SEC', 'Net-(DRV6-VDDA)', 'Net-(D18-K)', 'Net-(D31-PadA)', 'Net-(Q21-G)']}
@@ -189,7 +191,17 @@ def kipy_apply(board, job):
                 b.Delete(t)
             if not hit:
                 missing.append(a)
-    if any(a["kind"] in ("delete", "delzone", "move") for a in j["add"]):
+        if a["kind"] == "delvia":
+            hit = [t for t in b.GetTracks() if t.Type() == pcbnew.PCB_VIA_T and t.GetNetname() == a["net"]
+                   and key(t.GetPosition().x / 1e6, t.GetPosition().y / 1e6) == key(a["x"], a["y"])]
+            for t in hit:
+                gone.append(dict(kind="via", net=a["net"], layer="F.Cu - B.Cu", start=[a["x"], a["y"]],
+                                 width=round(t.GetWidth(pcbnew.F_Cu) / 1e6, 4), drill=round(t.GetDrill() / 1e6, 4),
+                                 reason=a.get("why", "")))
+                b.Delete(t)
+            if not hit:
+                missing.append(a)
+    if any(a["kind"] in ("delete", "delvia", "delzone", "move") for a in j["add"]):
         pcbnew.SaveBoard(board, b)
         b = pcbnew.LoadBoard(board)
         lid = {b.GetLayerName(l): l for l in b.GetEnabledLayers().CuStack()}
@@ -247,7 +259,7 @@ def kipy_apply(board, job):
                 for x, y in hole:
                     ol.Append(nm(x), nm(y), -1, h)
             b.Add(z)
-    if any(a["kind"] not in ("delete", "delzone", "move") for a in j["add"]):
+    if any(a["kind"] not in ("delete", "delvia", "delzone", "move") for a in j["add"]):
         # stale fills off: on loading, KiCad gives a via standing in the old fill of another net that net
         for z in b.Zones():
             if not z.GetIsRuleArea():
@@ -322,8 +334,8 @@ class World:
             return DOMAIN_GAP.get((da, db), DOMAIN_GAP.get((db, da), 0.2))
         if layer in OUTER and net in HS_OF and HS_OF[net] == HS_OF.get(o_net):
             return 0.2
-        if layer in OUTER and (ca in HV or cb in HV):
-            return HV_OUTER
+        if layer in OUTER and (ca in HV or cb in HV) and not (o_kind.startswith("pad") and o_net.startswith(NC_NET)):
+            return HV_OUTER        # (a no-connect pad is not a net: class clearance only, as in the .kicad_dru)
         c = {"HV_PRIMARY": 0.5, "HV_SECONDARY": 0.5, "PE_EARTH": 0.5, "PRIMARY_LV": 0.2, "SECONDARY_LV": 0.2,
              "HEATER": 0.2}
         return max(c.get(ca, 0.15), c.get(cb, 0.15), 0.2 if not o_net else 0)
@@ -832,6 +844,8 @@ def run(tag, groups, argv, drop_areas=(), post=None):
                 if s[0] == "delete":
                     pre.append(dict(kind="delete", net=s[1], layer=LAYER_ALIAS.get(s[2], s[2]), a=[s[3], s[4]],
                                     b=[s[5], s[6]], why=s[7]))
+                elif s[0] == "delvia":
+                    pre.append(dict(kind="delvia", net=s[1], x=s[2], y=s[3], why=s[4]))
                 elif s[0] == "delzone":
                     pre.append(dict(kind="delzone", name=s[1], why=s[2]))
                 elif s[0] == "move":
@@ -871,7 +885,7 @@ def run(tag, groups, argv, drop_areas=(), post=None):
                 elif kind == "auto":
                     _, net, a, b, o = s
                     rt.auto(net, a, b, o)
-                elif kind in ("delete", "delzone", "move"):
+                elif kind in ("delete", "delvia", "delzone", "move"):
                     pass                                   # done before the board was read
                 else:
                     sys.exit(f"s3: unknown step {s!r}")

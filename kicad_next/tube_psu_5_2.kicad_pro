@@ -648,14 +648,6 @@
       },
       {
         "netclass": "HV_PRIMARY",
-        "pattern": "Net-(R109-Pad1)"
-      },
-      {
-        "netclass": "HV_PRIMARY",
-        "pattern": "Net-(R111-Pad1)"
-      },
-      {
-        "netclass": "HV_PRIMARY",
         "pattern": "Net-(R114-Pad1)"
       },
       {
@@ -1169,6 +1161,14 @@
       {
         "netclass": "SIGNAL",
         "pattern": "Net-(Q9-G)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "Net-(R109-Pad1)"
+      },
+      {
+        "netclass": "SIGNAL",
+        "pattern": "Net-(R111-Pad1)"
       },
       {
         "netclass": "SIGNAL",

@@ -49,11 +49,13 @@ CASES = [
     ("DHB_HI_GATE", "DC+", "F", 1.0, {"clearance"}),               # ... but towards DC+ the 1.2 stays
     ("DHB_HI_GATE", "/06 Heaters/HEATER_HI_SOURCE", "F", 1.0, {"clearance"}),   # ... and between two groups
     ("DHB_HI_GATE", "DHB_LOW_GATE", "F", 1.0, {"clearance"}),      # ... and towards the low side
+    ("Net-(R109-Pad1)", "GND", "F", 0.3, set()),                    # GND leg of the DC-link difference amplifier: SIGNAL (3c)
+    ("Net-(R10-Pad1)", "GND", "F", 1.0, {"clearance"}),            # ... the DC+ leg stays HV (1.2)
 ]
 # The four extra slots (5.2 UART cases): KiCad 10 reported no creepage violation for test tracks at
 # (-10, -70) and (75, -50) (clearance works there; not understood - the creepage cases sit at (-10, -15) /
 # (75, 0), where it is reported). A wrong rule still shows up as a FAIL, a silent slot only as a false FAIL.
-SLOTS = [(x, y) for y in (-70, -40, -10, 15) for x in (-55, -30, 30, 55)] + [(-10, -70), (75, -50), (-10, -15), (75, 0)] + [(-5, -25), (15, -25), (-5, 5), (15, 5)]
+SLOTS = [(x, y) for y in (-70, -40, -10, 15) for x in (-55, -30, 30, 55)] + [(-10, -70), (75, -50), (-10, -15), (75, 0)] + [(-5, -25), (15, -25), (-42.5, 5), (42.5, 5)]
 assert len(CASES) <= len(SLOTS), "add test positions to SLOTS"
 HOLE_TEST = ("GND", "F", 1.5, {"clearance", "creepage"})          # 1.5 mm from the H4 ring: 2.0 / 3.2 mm rule (earthed screws)
 
@@ -65,6 +67,12 @@ PAD_FP = ("Package_SO", "VSSOP-8_3x3mm_P0.65mm")
 PAD_TESTS = [("+3V3", "GND", (8, -12), set()),
              ("ISO_GND", "5V_ISOL", (8, 3), set()),
              ("DC+", "GND", (78, -25), {"clearance"})]
+# A HV track next to the pad row of a footprint, edge-to-edge gap mm (stage 3c): (pad net, track net, position, gap,
+# expected). The pad of a no-connect pin is left out of "HV functional, outer layers" (class clearance 0.5 stays);
+# the same track next to a pad with a net still fails.
+NC_TESTS = [("unconnected-(PADTEST4-NC-Pad1)", "DC+", (-42.5, -25), 0.8, set()),
+            ("GND", "DC+", (42.5, -25), 0.8, {"clearance"}),
+            ("unconnected-(PADTEST6-NC-Pad1)", "DC+", (-42.5, -55), 0.3, {"clearance"})]
 
 
 def track(b, net, layer, x1, y, x2, w=0.3):
@@ -113,6 +121,16 @@ def main():
                 p.SetNet(net(na if int(p.GetNumber()) % 2 else nb))
             b.Add(fp)
             spots.append(((x, y), f"{PAD_FP[1]} pads {na} / {nb} (gap 0.15 mm)", exp))
+        for i, (na, nb, (x, y), gap, exp) in enumerate(NC_TESTS):
+            fp = pcbnew.FootprintLoad(lib, PAD_FP[1])
+            fp.SetReference(f"PADTEST{len(PAD_TESTS) + i + 1}")
+            fp.SetPosition(pcbnew.VECTOR2I(pcbnew.FromMM(x), pcbnew.FromMM(y)))
+            for p in fp.Pads():
+                p.SetNet(net(na))
+            b.Add(fp)
+            yt = max(p.GetBoundingBox().GetBottom() for p in fp.Pads()) / 1e6 + gap + 0.15
+            track(b, net(nb), L["F"], x - 3, yt, x + 3)
+            spots.append(((x, y), f"{nb} track {gap} mm from {PAD_FP[1]} pads on {na}", exp))
         pcbnew.SaveBoard(pcb, b)
         rpt = os.path.join(tmp, "drc.json")
         subprocess.run([CLI, "pcb", "drc", "--format", "json", "--severity-all", "-o", rpt, pcb],

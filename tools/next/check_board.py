@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 """DRC + schematic parity of the real 5.2 board, cheap enough for check_next.sh (system python3).
 
-    python3 tools/next/check_board.py [--all]
+    python3 tools/next/check_board.py [--all] [--all-track-errors]
+
+--all-track-errors: KiCad reports only the first clearance error of each track / via by default; with this
+switch every one is listed (more markers for the same copper - use it when cleaning up, compare counts only
+between runs of the same mode).
 
 Runs kicad-cli pcb drc --schematic-parity on kicad_next/tube_psu_5_2.kicad_pcb with every check on except the
 creepage test: the creepage DRC of the populated board needs > 3 GB (reuse_51_board.run_drc splits it into
@@ -38,6 +42,7 @@ DOMAIN_RULES = ("PRI-SEC", "PRI-HEATER", "SEC-UART", "SEC(HV)-HEATER", "SEC(LV)-
 SILK_CHECKS = ("silk_overlap", "silk_over_copper", "silk_edge_clearance", "nonmirrored_text_on_back_layer",
                "text_thickness", "text_height")
 # accepted domain-rule violations: (rule name, regex on the joined item descriptions, reason)
+ALL_TRACK = []
 ACCEPTED = [
     # (empty since routing stage 2, 2026-11-20: the TR1 pin 2 GND / pin 9 ISO_GND inner barrels no longer show,
     # pin 2 has no inner-layer connection - keep it that way, an inner GND pad on pin 2 fails here again)
@@ -45,6 +50,9 @@ ACCEPTED = [
 
 
 def main(argv):
+    global ALL_TRACK
+    if "--all-track-errors" in argv:      # every clearance error of a track, not only the first one KiCad finds
+        ALL_TRACK = ["--all-track-errors"]
     tmp = tempfile.mkdtemp(prefix=".drc_", dir=ROOT)
     try:
         for f in os.listdir(PROJ):
@@ -61,7 +69,7 @@ def main(argv):
         with open(os.path.join(tmp, NAME + ".kicad_pro"), "w") as f:
             json.dump(pro, f, indent=2)
         out = os.path.join(tmp, "drc.json")
-        r = subprocess.run([CLI, "pcb", "drc", "--format", "json", "--severity-all", "--schematic-parity",
+        r = subprocess.run([CLI, "pcb", "drc", "--format", "json", "--severity-all", "--schematic-parity", *ALL_TRACK,
                             "-o", out, os.path.join(tmp, NAME + ".kicad_pcb")], capture_output=True, text=True)
         if r.returncode or not os.path.exists(out):
             print("check_board: kicad-cli drc failed\n" + r.stdout[-2000:] + r.stderr[-2000:])

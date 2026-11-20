@@ -40,9 +40,12 @@
 # ---------------------------------------------------------------------------------------------------
 # Functional spacing inside a domain: HV nets on the outer layers (tracks / zones; pad-to-pad gaps are
 # set by the parts, e.g. TO-220 / TO-247 pin pitch). Inner layers: net class clearance 0.5 mm.
+# Not towards the pad of a no-connect pin (net "unconnected-(...)", routing stage 3c): such a pad carries no
+# voltage of its own, it is a piece of the package's pin row (UCC21520 pins 12 / 13 between the two output
+# channels); the net class clearance (0.5 mm for a HV net) stays. Tested by tools/next/check_rules.py (NC_TESTS).
 (rule "HV functional, outer layers"
 	(layer outer)
-	(condition "(A.hasNetclass('HV_PRIMARY') || A.hasNetclass('HV_SECONDARY') || B.hasNetclass('HV_PRIMARY') || B.hasNetclass('HV_SECONDARY')) && !(A.Type == 'Pad' && B.Type == 'Pad') && A.Net != B.Net")
+	(condition "(A.hasNetclass('HV_PRIMARY') || A.hasNetclass('HV_SECONDARY') || B.hasNetclass('HV_PRIMARY') || B.hasNetclass('HV_SECONDARY')) && !(A.Type == 'Pad' && B.Type == 'Pad') && A.Net != B.Net && !(A.Type == 'Pad' && A.NetName == 'unconnected-*') && !(B.Type == 'Pad' && B.NetName == 'unconnected-*')")
 	(constraint clearance (min 1.2mm)))
 
 # Exception (user decision 2026-11-20, routing stage 3b): the nets of ONE floating high-side gate driver - gate

@@ -46,7 +46,10 @@ HV_NETS = {
         "/01 AUX supply/FLY_C", "Net-(D7-K)", "Net-(C12-Pad2)",                   # flyback drain / clamp
         "Net-(R114-Pad1)", "Net-(R115-Pad1)", "Net-(R15-Pad1)", "Net-(R10-Pad1)",  # dividers from DC+
         "Net-(R4-Pad1)", "Net-(R5-Pad1)", "Net-(R47-Pad2)", "Net-(R48-Pad2)", "Net-(R50-Pad2)",
-        "Net-(R51-Pad2)", "Net-(R109-Pad1)", "Net-(R111-Pad1)",
+        "Net-(R51-Pad2)",
+        # not HV (routing stage 3c): Net-(R109-Pad1) / Net-(R111-Pad1), the return leg GND - R112 - R111 - R109 - U6 pin 4
+        # of the DC-link difference amplifier - both ends are within 0 ... 3.3 V (GND, op-amp input with 15 k
+        # feedback), so every node of the leg is; they are SIGNAL nets
         "Net-(R143-Pad2)", "Net-(R145-Pad2)",                     # C47 / C54 balancing mid nodes (NR 2.8)
         "Net-(R151-Pad2)", "Net-(R152-Pad2)",                     # PWM2 line-OVP divider DC+ -> VIN (NR 1.5)
         "Net-(R155-Pad2)", "Net-(R157-Pad2)",                     # heater LLC resonance split-cap balancing mid nodes (NR 2.8)

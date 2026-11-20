@@ -29,6 +29,7 @@ questions and the generated netlist diff 5.1 → 5.2: [CHANGES_5_2.md](CHANGES_5
 | `tools/next/promote_trial_board.py` (kipy) | copies `trial_from_51/tube_psu_5_2_trial_p3.kicad_pcb` to the real board, 3D model paths back to `${KIPRJMOD}/../lib`, Description / LCSC fields from the schematic (refuses to overwrite a populated board without `--force`) | phase 5 start |
 | `tools/next/route_s2_planes.py` (kipy), `tools/next/render_inner_layers.py` | routing stage 2: inner-layer planes / pours `S2_*` of the real board (re-runnable, section "Inner layers (routing stage 2)"); PNGs of the inner layers in `kicad_next/routing/` | phase 6 |
 | `tools/next/route_s3a_power.py`, `tools/next/s3_router.py` (python3 + kipy), `tools/next/render_s3a.py` | routing stage 3a: power / HV / ground copper as data (drawn tracks, zones `S3A_*`, vias, connections routed by a local grid router that keeps the class, HV and domain spacings), re-runnable (`routing/s3a_added.json`), PE pour keep-outs `S3A_KO_PE_*`; PNGs `routing/s3a_*.png` (section "Power, HV and ground routing (stage 3a)") | phase 6 |
+| `tools/next/route_s3c_cleanup.py` | routing stage 3c: kept 5.1 copper that breaks the 5.2 HV spacing deleted and drawn again, dangling 5.1 copper deleted (`routing/deleted_s3c.json`, `s3c_added.json`); runs between stage 3a and stage 3b (section "Clean-up of the kept 5.1 copper (stage 3c)") | phase 6 |
 | `tools/next/check_board.py` | DRC of the real board without the creepage pass (> 3 GB on the populated board) + `--schematic-parity`: fails on any parity item, short or isolation-rule violation besides `ACCEPTED`; everything else counted (`reports/next/drc.json`, ≈ 2.3 GB, 10 s) | phase 5 |
 | `tools/next/check_footprints.py` | footprint / pad / 3D / barrier-creepage check (kipy), `--dump` for `render_footprints.py` (PNGs) | phase 3 |
 | `tools/next/netlist_diff.py` | netlist diff 5.1 → 5.2 (section of CHANGES_5_2.md) + check that the three CSVs cover every part | phase 2 |
@@ -422,7 +423,9 @@ the stage-3b list above (bootstrap / driver returns, dividers, In2 Kelvin tracks
 
 ```
 python3 tools/next/route_s3b_signals.py --strip   # full rebuild: take this stage's copper off first,
+python3 tools/next/route_s3c_cleanup.py --strip   # (and that of stage 3c, since 2026-11-20)
 python3 tools/next/route_s3a_power.py             # so that the stage-3a router does not see it
+python3 tools/next/route_s3c_cleanup.py           # stage 3c, section below
 python3 tools/next/route_s3b_signals.py
 tools/p2k/bin/kipy tools/next/route_s2_planes.py
 ```
@@ -460,7 +463,7 @@ outer layers": 0.2 mm between two nets of the same floating high-side driver (DR
 Net-(DRV3-VDDA), Net-(D35-K), Net-(D11-K); DRV5: DHB_HI_GATE / _SOURCE, Net-(DRV5-VDDB), Net-(D19-K), Net-(D30-PadA),
 Net-(Q19-G); DRV6: DHB_HI_GATE_SEC / _SOURCE_SEC, Net-(DRV6-VDDA), Net-(D18-K), Net-(D31-PadA), Net-(Q21-G)); nothing
 else changes. `check_rules.py` proves it with four pairs (inside a group 0.3 mm passes; towards DC+, another group
-and the low side 1.0 mm still fails; 26 tests). The router has the same lists (`s3_router.HS_GROUPS`); stage 3b
+and the low side 1.0 mm still fails; 26 tests, 31 since stage 3c). The router has the same lists (`s3_router.HS_GROUPS`); stage 3b
 re-run with them: 137 of 196 rows + 2, **unconnected 62**, clearance markers 170 → 136 (142 before stage 3b; 94
 HV functional, 4 inside a driver group below 0.2 mm), dangling tracks 86, vias 13, planes GND 5581 / ISO_GND 2218 /
 HT_GND 909 mm². The numbers of the first pass above are those of 89608a5. Still to do from the user's list of
@@ -478,6 +481,141 @@ Open points (of 89608a5; 1 is decided as above):
    two pads); the 0.1 mm grid router fails there (J2.38 / 42 / 43 and the SPI rows).
 3. **ISO2 fan-out** (EPWM2A / B, DAB_DIS, CUK_*, AD2 SPI, both sides) is still open: outer layers only at the slot,
    and the primary side may not use the gap between the slots.
+
+## Clean-up of the kept 5.1 copper (routing stage 3c, 2026-11-20)
+
+```
+python3 tools/next/route_s3b_signals.py --strip   # full rebuild of stages 3a - 3c
+python3 tools/next/route_s3c_cleanup.py --strip
+python3 tools/next/route_s3a_power.py
+python3 tools/next/route_s3c_cleanup.py           # this stage: sees the copper of 3a, 3b sees both
+python3 tools/next/route_s3b_signals.py
+tools/p2k/bin/kipy tools/next/route_s2_planes.py
+python3 tools/next/check_board.py --all-track-errors   # every clearance error of a track, not only the first
+```
+
+The kept 5.1 copper was drawn for 5.1's rules (0.18 mm everywhere, thermal spokes as track segments). Stage 3c
+removes the 5.1 tracks / vias that break the 5.2 HV functional spacing (1.2 mm, outer layers) and draws them
+again, and it removes dangling 5.1 copper. `route_s3c_cleanup.py` is a step table like stage 3a (new step kind
+`delvia`); what it deletes stays deleted (`routing/deleted_s3c.json`, 104 segments and 10 vias), what it adds
+(`routing/s3c_added.json`, 39 segments and 5 vias) is rebuilt on every run. Three 5.1 items are replaced in the data
+of stage 3a instead (`deleted_s3a.json`). No part was moved (`routing/moves_s3c.json` is empty).
+
+KiCad's DRC reports only the first clearance error of each track; `check_board.py --all-track-errors` lists all
+(171 instead of 136 at 40991f4). Both counts are given below.
+
+### Rule changes (each with a test pair in `check_rules.py`, 31 tests)
+
+1. **No-connect pads are left out of "HV functional, outer layers"** (`.kicad_dru`: not when one item is a pad
+   on a net `unconnected-*`). Pins 12 / 13 of the UCC21520 (DRV3 / DRV5 / DRV6) lie between the two output
+   channels and have no internal connection; a pad of them carries no voltage of its own, and the pad row itself
+   is on 1.27 mm pitch (0.67 mm between pads). The net class clearance stays (0.5 mm for a HV net). Tests: DC+
+   track 0.8 mm from pads on an `unconnected-` net passes, 0.8 mm from the same pads on GND fails (1.2 mm), 0.3 mm
+   from the no-connect pads fails (0.5 mm). `s3_router.py` has the same exception.
+2. **`Net-(R109-Pad1)` and `Net-(R111-Pad1)` are SIGNAL nets, not HV_PRIMARY** (`setup_project.py`). They are the
+   return leg of the DC-link difference amplifier U6: GND – R112 – R111 – R109 – U6 pin 4 (inverting input, 15 k
+   feedback R82 from the output, 0 … 3.3 V). Both ends of the 3 MΩ string are within 0 … 3.3 V, so every node of
+   it is; the HV leg is DC+ – R16 – R15 – R10 – U6 pin 3 and keeps its class. Tests: `Net-(R109-Pad1)` 0.3 mm
+   from GND passes, `Net-(R10-Pad1)` 1.0 mm from GND fails. Now HV_PRIMARY 43, PRIMARY_LV 5, SIGNAL 110.
+3. **No exception for the nodes inside the HV dividers.** Voltages between neighbours (schematic):
+
+   | Divider | Chain | Between adjacent nodes |
+   |---|---|---|
+   | DC link (U6) | DC+ 400 … 450 V – R16 – `Net-(R15-Pad1)` – R15 – `Net-(R10-Pad1)` – R10 – U6 pin 3 (≈ 1 V) | 133 … 150 V per 1 MΩ; `Net-(R10-Pad1)` is 133 … 150 V above U6's inputs and GND |
+   | 420V (U3) | 420V – R23 – `Net-(R23-Pad2)` 280 V – R34 – `Net-(R34-Pad2)` 140 V – R39 – CUK_CAP_MEAS2 (≈ 1 V) | 140 V per 1 MΩ |
+   | Mains (U8) | AC1 / AC2 (≤ 358 V peak to GND) – R47 / R50 – R48 / R51 – R79 / R52 – U8 inputs (1.65 V) | ≤ 120 V peak per 1 MΩ; the last node is ≤ 120 V peak from U8's inputs and the 15 V rail |
+   | Balancing R143 – R150, R155 – R158 | half of DC+ / 420V per pair | 100 … 210 V |
+
+   None of these pairs is low-voltage, so the 1.2 mm stays for all of them and the copper has to move (open
+   point 1 below).
+
+### What was done
+
+- **TO-220 pins (Q7, Q19, Q21, Q8):** 5.1's spoke segments inside the pads deleted (10); tracks leave a pin 0.75 mm
+  wide (1.21 mm to both neighbours on 2.54 mm pitch): switch node Q7 pin 2 → Q19 pin 3 on F.Cu (was 1.78 mm, 0.57 mm
+  above Q7's gate pad) now 0.75 mm at the pins and 1.15 mm along y −44.75 inside the zone `S3A_DHB_HI_SOURCE_F`,
+  1.22 mm from the gate pad and from the DC+ track of stage 3a; Q19 pin 3 and Q7 pin 1 on B.Cu 0.75 mm; switch node
+  at Q21 pin 3 0.75 mm past the 420V pin, then 1.6 mm; R56's two tracks 0.3 mm along the upper half of its pads
+  (1.3 mm above the 420V pin instead of 0.8 / 0.97 mm).
+- **DAB gate tracks:** high-side gate track to DRV5 routed again (was 0.94 mm from the low-side gate track,
+  1.17 mm from D34); the one at DRV6 pin 6 0.7 mm wide (1.21 mm).
+- **Bulk capacitors C37 / C56 (DC+ pin, through-hole) on B.Cu:** +3V3, GND and +1V65_BIAS ran 0.36 … 1.1 mm past
+  the pins. +3V3: the two B.Cu links are deleted, C62 / U6 and C76 / U4 each have a via into the In3 +3V3 pour.
+  GND: 0.1 mm lower at C62. +1V65_BIAS: round the west side of C56 (through the GND pour, ≥ 1.2 mm).
+- **AC-sense divider (R79, vias of R48 / R51):** the 15V track flyback → DRV2 lay between the pads of R79
+  (0.16 … 0.4 mm from the divider nodes): now along the bottom edge on B.Cu (y 17.6) and a short piece on In2 (two vias 0.6 / 0.3).
+- **15V via at C70 (DC+ pad 0.9 mm):** 0.8 mm further east on the same tracks.
+- **DRV3:** via of the old driver footprint 0.12 mm from pin 10 deleted; the 1.27 mm bootstrap-return track ends
+  0.6 mm earlier (was 0.17 mm from pin 15); stubs at R24 / R59, D11 / R99 deleted.
+- **420V sense track of R23** (0.15 mm, 0.4 … 0.5 mm from the vias of AD2, dangling 6 mm before R23): deleted, not
+  routed again (open point 1).
+- **Dangling stubs** next to TR1 pin 5 / D8 (−100 V winding), the via of R10, and 15V_ISO_SEC 1.15 mm from R39
+  (0.45 mm wide now).
+- **Near-short:** the end of the kept EPWM5A track on In2 stood 0.025 mm from the HEATER_CURRENT via at
+  (0.4, −56.1): 0.95 mm shorter.
+- **In stage 3a's data:** the 5.1 15V via 0.11 mm from the D10 anode pad moved 0.44 mm, the 5.1 15V track beside
+  DRV2 (0.13 mm from pins 2 / 3) drawn again 0.1 mm further right, the GND stub at U4 0.3 mm wide.
+- **In stage 3b's data:** rows that started on deleted copper changed (DRV3 pin 14, R36, D11); the 420V row is
+  gone; `relax` taken off the 15V row at D11 (it let the track pass 0.27 mm from the bootstrap node at D11's
+  cathode); two rows moved up (DRV5 pin 5, U10 pin 2) so that they are routed before their neighbours close the pin.
+- **Dangling 5.1 copper:** 31 segments (69 mm) and 8 vias deleted that no open connection starts on – not an
+  end point of an unconnected item of the DRC and not within 0.3 mm of a start / end point of a route script.
+  Kept: 65 dangling segments that are such anchors, and the escape of AD2 pin 4 (later ISO2 / AD2 fan-out).
+
+### Numbers
+
+| | 40991f4 (before) | after stage 3c |
+|---|---|---|
+| unconnected | 62 | **59** |
+| clearance markers, first error per track (default) | 136 | **42** |
+| – HV functional 1.2 mm | 94 | 21 |
+| – inside a high-side driver group (0.2 mm) | 4 | 0 |
+| – PRIMARY_LV class 0.2 mm | 30 | 20 |
+| – other classes (SECONDARY_LV, HEATER, SIGNAL, footprint, HV class) | 8 | 1 |
+| clearance markers, all errors (`--all-track-errors`) | 171 (HV 127, PRIMARY_LV 32, driver group 4, other 8) | **51** (HV 28, PRIMARY_LV 22, HEATER 1) |
+| dangling tracks / vias | 86 / 13 | 72 / 6 |
+| courtyard overlaps | 131 | 131 |
+| planes In1 / In4: GND / ISO_GND / HT_GND (mm²) | 5581 / 2218 / 909 | 5582 / 2218 / 909 |
+| stage 3b rows routed | 137 of 196 + 2 | 140 of 196 |
+
+`check_board.py`, `check_domains.py` (same layer and layer to layer; ALLOW: Q19 / Q21) and `check_next.sh` pass.
+Deleted in total: 104 segments (207 mm) and 10 vias in `deleted_s3c.json`, 2 segments and 1 via more in
+`deleted_s3a.json`. The remaining dangling items: 65 kept anchors of open connections, the AD2 pin 4 escape, a few
+ends of stage-3a / 3c copper inside a pour; the 6 vias are the ISO2-side ends of EPWM2A / B, $CUK_CS and the AD2 SPI
+nets (ISO2 fan-out). A rebuild is not bit-identical: the plane vias of stage 3a land in the plane fill as it is at
+that moment, which carries the antipads of the last stage-3b run - between two consecutive rebuilds two ground
+vias of stage 3a and five pieces of stage 3b moved by ≤ 2 mm, all counts stayed the same.
+
+### Left, and open points
+
+1. **HV dividers: the remaining 27 HV markers (all errors) are inside the three sense dividers**, between a
+   divider node and its neighbour node or the amplifier input, 0.38 … 1.19 mm at 120 … 150 V:
+   R23 / R34 / R39 (the link R23.2 → R34.1 runs diagonally through the 0.7 mm gap between the pads of two 1206
+   resistors placed side by side; R34.1 is 1.15 mm from the CUK_CAP_MEAS2 via), R10 / U6 (R10 pin 1 is 0.61 mm from
+   U6 pin 4, pad to pad; its via 0.88 mm from R109 pin 2 and 1.05 mm from R16 pin 2), R79 / R49 / U8 (via of
+   `Net-(R48-Pad2)` 0.79 mm from R49 pin 2). No track can fix these: the parts stand closer than 1.2 mm. And
+   **R23 pin 1 has no 420V**: between the AD2 vias (x 80.3 … 80.5) and the 4.2 mm keep-off of mounting hole H5
+   there is no 1.2 mm path on F.Cu, R113 on the bottom side leaves no via site at R23, and In2 has 1.25 mm between
+   the AD2_3V3 via and the AD2-CS track (0.2 + 2 × 0.5 mm needed, without margin). Choices:
+   (a) re-place each divider as a straight row with ≥ 1.2 mm between unlike pads (R23 / R34 / R39 ≈ 3 mm, with
+   the 420V feed from the east; R10 0.5 … 1 mm from U6; R79 / R49) – part moves of 1 … 4 mm, more than this stage
+   may do; (b) a graded rule for adjacent divider nodes only (IEC 60664-1 Table F.5, printed wiring, PD2: 0.4 mm
+   at 160 V – to be checked against the standard), which clears the markers but not the 420V feed of R23.
+   Recommendation: (a) for R23 / R34 / R39 together with the ISO2 / AD2 fan-out (the area is redrawn there
+   anyway), (b) = accept as they are for R10 and R79.
+2. **PRIMARY_LV class clearance 0.2 mm against 5.1's 0.18 mm:** 22 markers (all errors) are kept 5.1 tracks / vias
+   0.156 … 0.19 mm from a neighbour (5V and $HT_CS on In2, +1V65_BIAS, GND vias), at ≤ 15 V. Not cheap (parallel
+   runs of 5 … 15 mm on In2). JLC needs 0.09 mm. Recommendation: accept them, or set the PRIMARY_LV class clearance
+   to 0.15 mm for inner layers.
+3. `DHB_LOW_GATE_SEC` (stage 3b) 1.15 mm from R149 pin 2 at the pad of D32: goes with Q8's
+   gate loop.
+4. The heater low-side gate (Q10 pin 1) is open again: the route of the first pass was only possible with
+   `relax` (0.38 mm from the switch-node pin Q10.2); DAB_DIS at DRV5 pin 5 is open too (shut in by the DT track).
+   In exchange D11 anode (15V, 20 mm round D11 - a first-pass route, to be drawn with the gate loops),
+   HEATER_LOW_DRV, U8's C127 and others are routed now (140 of 196 rows). Gate loops are the next stage.
+5. `relax` in stage 3b rows lowers the spacing to **every** pad of the named part, also to a HV pad of another
+   net. Stage 3c found and fixed the two cases that showed (D11, Q10); the next stages should name nets, not
+   parts, where a part has a HV pin.
 
 ## Footprints and 3D models (phase 3, 2026-11-18)
 
@@ -581,7 +719,7 @@ starting values; phase 6 sizes the power paths from the currents (D5 copper).
 
 Domains are found from the schematic by `setup_project.py` (flood fill from GND / ISO_GND / HT_GND, not
 through the barrier parts TR1, TR2, TR3, ISO1, ISO2; no other part bridges two domains in the 5.1
-netlist). Count after phase 2: primary 156 nets (HV_PRIMARY 43, PRIMARY_LV 5, SIGNAL 108; after the ICE5AR0680AG change and NR 2.8), DAB secondary 42
+netlist). Count after phase 2: primary 156 nets (HV_PRIMARY 43, PRIMARY_LV 5, SIGNAL 108; after the ICE5AR0680AG change and NR 2.8; since routing stage 3c 158 nets: HV_PRIMARY 43, PRIMARY_LV 5, SIGNAL 110), DAB secondary 42
 (HV_SECONDARY 14, SECONDARY_LV 28), heater 22, UART island 12 (ground ISO_UART_GND, barrier U11), PE 1.
 
 ### Basis
