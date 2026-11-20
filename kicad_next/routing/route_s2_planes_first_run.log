@@ -1,0 +1,102 @@
+route_s2_planes: step 1: removed 0 S2_* zones / rule areas
+route_s2_planes: step 2: removed 5.1 zone 'Proteus In1.Cu pour 0' [HT_GND] In1.GND x -69.7292...-39.6048 y -89.9862...-63.4178, filled 457 mm2
+route_s2_planes: step 2: removed 5.1 zone 'Proteus In1.Cu pour 8' [GND] In1.GND x 30.2564...42.8 y -31.0...14.6, filled 426 mm2
+route_s2_planes: step 2: removed 5.1 zone 'Proteus In1.Cu pour 9' [GND] In1.GND x -41.5382...32.3392 y -88.1702...17.6462, filled 1991 mm2
+route_s2_planes: step 2: removed 5.1 zone 'Proteus In1.Cu pour 6' [ISO_GND] In1.GND x 64.6226...89.6924 y -82.2774...13.9124, filled 1269 mm2
+route_s2_planes: step 2: removed 5.1 zone 'Proteus In1.Cu pour 1' [GND] In1.GND x 38.2108...64.0172 y -31.9092...-0.7032, filled 444 mm2
+route_s2_planes: step 2: removed 5.1 zone 'Proteus In2.Cu pour 1' [GND] In4.GND x 38.2108...64.0172 y -31.9092...-0.7032, filled 290 mm2
+route_s2_planes: step 2: removed 5.1 zone 'Proteus In2.Cu pour 4' [ISO_GND] In4.GND x 69.2708...89.6162 y -82.2012...13.8362, filled 1071 mm2
+route_s2_planes: step 2: removed 5.1 zone 'Proteus In2.Cu pour 7' [GND] In4.GND x 30.2...42.8 y -29.0976...14.6, filled 279 mm2
+route_s2_planes: step 2: removed 5.1 zone 'Proteus In2.Cu pour 2' [GND] In4.GND x 41.5128...58.8306 y -28.737...-23.3644, filled 21 mm2
+route_s2_planes: step 2: removed 5.1 zone 'Proteus In2.Cu pour 0' [HT_GND] In4.GND x -69.7292...-39.6048 y -89.9862...-63.4178, filled 447 mm2
+route_s2_planes: step 2: removed 32 thermal-spoke segments [GND] In1.GND (<= 1.5 mm)
+route_s2_planes: step 2: removed 16 thermal-spoke segments [HT_GND] In1.GND (<= 1.5 mm)
+route_s2_planes: step 2: removed 27 thermal-spoke segments [ISO_GND] In1.GND (<= 1.5 mm)
+route_s2_planes: step 2: removed 17 thermal-spoke segments [GND] In4.GND (<= 1.5 mm)
+route_s2_planes: step 2: removed 16 thermal-spoke segments [HT_GND] In4.GND (<= 1.5 mm)
+route_s2_planes: step 2: removed 23 thermal-spoke segments [ISO_GND] In4.GND (<= 1.5 mm)
+route_s2_planes: step 3: moved 399 segments (1657 mm, 44 nets) In4.GND -> In2.Signal_HV; staying on In4.GND (spokes of kept 5.1 pours): {'/06 Heaters/Q14_DRAIN': 12, '/06 Heaters/Q13_DRAIN': 12, '/05 PFC/IN2': 20, 'DHB_HI_SOURCE_SEC': 4, '/05 PFC/L2_PRI2': 16}
+route_s2_planes: step 3: deleted segment [/06 Heaters/Q14_DRAIN] In1.GND (-42.8, -66.0488)-(-42.8, -67.4): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [/06 Heaters/Q14_DRAIN] In1.GND (-36.4, -65.1783)-(-36.4, -66.08): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [/06 Heaters/Q14_DRAIN] In1.GND (-35.4983, -66.08)-(-36.4, -66.08): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [/06 Heaters/Q14_DRAIN] In1.GND (-37.3017, -66.08)-(-36.4, -66.08): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [/06 Heaters/Q14_DRAIN] In1.GND (-36.4, -66.9817)-(-36.4, -66.08): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [/06 Heaters/Q14_DRAIN] In4.GND (-36.4, -65.1783)-(-36.4, -66.08): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [/06 Heaters/Q14_DRAIN] In4.GND (-37.3017, -66.08)-(-36.4, -66.08): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [/06 Heaters/Q14_DRAIN] In4.GND (-36.4, -66.9817)-(-36.4, -66.08): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [/06 Heaters/Q14_DRAIN] In4.GND (-35.4983, -66.08)-(-36.4, -66.08): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [/06 Heaters/Q14_DRAIN] In4.GND (-42.8, -66.0488)-(-42.8, -67.4): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [ISO_GND] In2.Signal_HV (72.6181, -11.894)-(72.6181, -20.2639): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [+3V3] In2.Signal_HV (9.9, -43.1)-(10.9, -42.1): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [EPWM2A] In2.Signal_HV (60.761, -29.7756)-(60.253, -29.7756): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [EPWM2A] In2.Signal_HV (60.253, -29.7756)-(59.11, -28.6326): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [EPWM2B] In2.Signal_HV (59.9877, -26.2202)-(59.9877, -28.157): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [EPWM2B] In2.Signal_HV (60.3362, -28.5056)-(60.761, -28.5056): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [EPWM2B] In2.Signal_HV (58.0827, -24.3152)-(59.9877, -26.2202): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [EPWM2B] In2.Signal_HV (59.9877, -28.157)-(60.3362, -28.5056): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [CUK_CLK] In2.Signal_HV (60.3342, -24.213)-(59.9016, -23.7804): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [CUK_CLK] In2.Signal_HV (60.639, -24.213)-(60.3342, -24.213): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [CUK_CLK] In2.Signal_HV (59.9016, -23.7804)-(53.1414, -23.7804): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [CUK_SDATA] In2.Signal_HV (60.4494, -23.241)-(60.634, -23.4256): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [CUK_SDATA] In2.Signal_HV (47.541, -23.241)-(60.4494, -23.241): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [Net-(AD2-SDATA)] In2.Signal_HV (77.53, -25.356)-(74.355, -25.356): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [Net-(AD2-CLK)] In2.Signal_HV (77.784, -24.848)-(73.085, -24.848): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [Net-(AD2-CS)] In2.Signal_HV (73.085, -25.9656)-(77.3656, -25.9656): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [ISO_SEC_DHB_HI] In2.Signal_HV (72.572, -34.972)-(76.672, -39.072): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [ISO_SEC_DHB_HI] In2.Signal_HV (72.577, -29.801)-(72.704, -29.801): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [ISO_SEC_DHB_HI] In2.Signal_HV (72.704, -29.801)-(72.572, -29.933): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [ISO_SEC_DHB_HI] In2.Signal_HV (72.572, -29.933)-(72.572, -34.972): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [AD2_3V3] In2.Signal_HV (73.9, -30.9)-(75.5, -32.5): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [5V_ISOL] In2.Signal_HV (73.8978, -34.246)-(73.2628, -33.611): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [5V_ISOL] In2.Signal_HV (73.2628, -33.611)-(73.2628, -29.464): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [5V_ISOL] In2.Signal_HV (73.8978, -34.5762)-(73.8978, -34.246): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [5V_ISOL] In2.Signal_HV (73.2628, -29.464)-(72.8818, -29.083): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: deleted segment [5V_ISOL] In2.Signal_HV (72.8818, -29.083)-(72.318, -29.083): inside the layer-to-layer spacing of another domain
+route_s2_planes: step 3: 36 inner-layer segments deleted at the barriers, nets to route again: {'/06 Heaters/Q14_DRAIN': 10, 'ISO_GND': 1, '+3V3': 1, 'EPWM2A': 2, 'EPWM2B': 4, 'CUK_CLK': 3, 'CUK_SDATA': 2, 'Net-(AD2-SDATA)': 1, 'Net-(AD2-CLK)': 1, 'Net-(AD2-CS)': 1, 'ISO_SEC_DHB_HI': 4, 'AD2_3V3': 1, '5V_ISOL': 5}
+route_s2_planes: step 4: kept 5.1 zone 'Proteus In1.Cu pour 3' [/06 Heaters/Q14_DRAIN] In1.GND priority 66
+route_s2_planes: step 4: kept 5.1 zone 'Proteus In1.Cu pour 10' [/05 PFC/IN2] In1.GND priority 73
+route_s2_planes: step 4: kept 5.1 zone 'Proteus In1.Cu pour 4' [/05 PFC/PFC_DRAIN_1] In1.GND priority 67
+route_s2_planes: step 4: kept 5.1 zone 'Proteus In1.Cu pour 7' [/06 Heaters/Q13_DRAIN] In1.GND priority 70
+route_s2_planes: step 4: kept 5.1 zone 'Proteus In1.Cu pour 2' [/05 PFC/PFC_DRAIN_2] In1.GND priority 65
+route_s2_planes: step 4: kept 5.1 zone 'Proteus In1.Cu pour 11' [/05 PFC/L2_PRI2] In1.GND priority 74
+route_s2_planes: step 4: kept 5.1 zone 'Proteus In1.Cu pour 5' [/05 PFC/RES_IN] In1.GND priority 68
+route_s2_planes: step 4: kept 5.1 zone 'Proteus In2.Cu pour 8' [/05 PFC/IN2] In4.GND priority 83
+route_s2_planes: step 4: kept 5.1 zone 'Proteus In2.Cu pour 9' [/05 PFC/L2_PRI2] In4.GND priority 84
+route_s2_planes: step 4: kept 5.1 zone 'Proteus In2.Cu pour 3' [/06 Heaters/Q14_DRAIN] In4.GND priority 78
+route_s2_planes: step 4: kept 5.1 zone 'Proteus In2.Cu pour 6' [DHB_HI_SOURCE_SEC] In4.GND priority 81
+route_s2_planes: step 4: kept 5.1 zone 'Proteus In2.Cu pour 5' [/06 Heaters/Q13_DRAIN] In4.GND priority 80
+route_s2_planes: step 5: keep-out S2_KO_PWM2_drain on In1.GND, In2.Signal_HV, In3.Power, In4.GND
+route_s2_planes: step 5: keep-out S2_KO_TR1_pin2 on In1.GND, In2.Signal_HV, In3.Power, In4.GND
+route_s2_planes: step 5: keep-out S2_KO_xlayer_* (1) on In1.GND: 5.1 pour 'Proteus In1.Cu pour 3' [/06 Heaters/Q14_DRAIN] held 39.5 mm2 back from copper of other domains on other layers
+route_s2_planes: step 5: keep-out S2_KO_xlayer_* (4) on In1.GND: 5.1 pour 'Proteus In1.Cu pour 10' [/05 PFC/IN2] held 23.4 mm2 back from copper of other domains on other layers
+route_s2_planes: step 5: keep-out S2_KO_xlayer_* (1) on In1.GND: 5.1 pour 'Proteus In1.Cu pour 4' [/05 PFC/PFC_DRAIN_1] held 9.7 mm2 back from copper of other domains on other layers
+route_s2_planes: step 5: keep-out S2_KO_xlayer_* (1) on In1.GND: 5.1 pour 'Proteus In1.Cu pour 5' [/05 PFC/RES_IN] held 0.7 mm2 back from copper of other domains on other layers
+route_s2_planes: step 5: keep-out S2_KO_xlayer_* (4) on In4.GND: 5.1 pour 'Proteus In2.Cu pour 8' [/05 PFC/IN2] held 23.4 mm2 back from copper of other domains on other layers
+route_s2_planes: step 5: keep-out S2_KO_xlayer_* (1) on In4.GND: 5.1 pour 'Proteus In2.Cu pour 3' [/06 Heaters/Q14_DRAIN] held 39.5 mm2 back from copper of other domains on other layers
+route_s2_planes: step 5: keep-out S2_KO_xlayer_* (2) on In4.GND: 5.1 pour 'Proteus In2.Cu pour 6' [DHB_HI_SOURCE_SEC] held 40.6 mm2 back from copper of other domains on other layers
+route_s2_planes: step 6: In1.GND        GND          (PRI): 1 outline piece(s), 6333 mm2
+route_s2_planes: step 6: In1.GND        ISO_GND      (SEC): 1 outline piece(s), 2511 mm2
+route_s2_planes: step 6: In1.GND        HT_GND       (HEATER): 1 outline piece(s), 1138 mm2
+route_s2_planes: step 6: In4.GND        GND          (PRI): 1 outline piece(s), 6333 mm2
+route_s2_planes: step 6: In4.GND        ISO_GND      (SEC): 1 outline piece(s), 2511 mm2
+route_s2_planes: step 6: In4.GND        HT_GND       (HEATER): 1 outline piece(s), 1138 mm2
+route_s2_planes: step 6: In3.Power      15V          (PRI): 1 outline piece(s), 681 mm2
+route_s2_planes: step 6: In3.Power      5V           (PRI): 1 outline piece(s), 242 mm2
+route_s2_planes: step 6: In3.Power      +3V3         (PRI): 1 outline piece(s), 1169 mm2
+route_s2_planes: step 6: In3.Power      15V_ISO_SEC  (SEC): 1 outline piece(s), 607 mm2
+route_s2_planes: step 6: In3.Power      5V_ISOL      (SEC): 1 outline piece(s), 207 mm2
+route_s2_planes: step 6: In3.Power      6V3          (HEATER): 1 outline piece(s), 873 mm2
+route_s2_planes: step 7: zones refilled by kicad-cli (peak RSS 2188 MB)
+route_s2_planes: filled S2_In1_ISO_GND_1                 2244 mm2 in 2 island(s)
+route_s2_planes: filled S2_In1_GND_1                     5496 mm2 in 1 island(s)
+route_s2_planes: filled S2_In1_HT_GND_1                   683 mm2 in 1 island(s)
+route_s2_planes: filled S2_In3_15V_1                      658 mm2 in 1 island(s)
+route_s2_planes: filled S2_In3_5V_ISOL_1                  191 mm2 in 1 island(s)
+route_s2_planes: filled S2_In3_+3V3_1                     993 mm2 in 1 island(s)
+route_s2_planes: filled S2_In3_6V3_1                      686 mm2 in 1 island(s)
+route_s2_planes: filled S2_In3_5V_1                       239 mm2 in 1 island(s)
+route_s2_planes: filled S2_In3_15V_ISO_SEC_1              572 mm2 in 1 island(s)
+route_s2_planes: filled S2_In4_ISO_GND_1                 2035 mm2 in 2 island(s)
+route_s2_planes: filled S2_In4_HT_GND_1                   683 mm2 in 1 island(s)
+route_s2_planes: filled S2_In4_GND_1                     5652 mm2 in 1 island(s)
+route_s2_planes: wrote kicad_next/tube_psu_5_2.kicad_pcb

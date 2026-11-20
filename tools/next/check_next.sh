@@ -35,7 +35,7 @@ step "Board: 6 layers, JLC stackup, 5.1 outline (+ internal slots) and holes" qu
 step "Board: schematic parity, shorts, isolation rules (DRC without the creepage pass)" python3 tools/next/check_board.py
 step "Design rules parse and act (test tracks)" quiet tools/p2k/bin/kipy tools/next/check_rules.py
 step "Footprints load, pads = symbol pins, 3D models exist, barrier creepage (+ KiCad DRC)" quiet tools/p2k/bin/kipy tools/next/check_footprints.py
-step "Board: distances between isolation domains (pads, tracks, vias, zone copper, holes)" python3 tools/next/check_domains.py kicad_next/tube_psu_5_2.kicad_pcb
+step "Board: distances between isolation domains on one layer and layer to layer (pads, tracks, vias, zone copper, holes)" python3 tools/next/check_domains.py kicad_next/tube_psu_5_2.kicad_pcb
 step "Netlist diff 5.1 -> 5.2 in kicad_next/CHANGES_5_2.md up to date, CSVs cover every part" python3 tools/next/netlist_diff.py --check
 
 echo

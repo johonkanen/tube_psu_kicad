@@ -27,6 +27,7 @@ questions and the generated netlist diff 5.1 → 5.2: [CHANGES_5_2.md](CHANGES_5
 | `tools/next/reuse_51_board.py` (kipy) → `kicad_next/trial_from_51/` step 0, `tools/next/trial_placement.py` (kipy) → step 1, `tools/next/trial_placement_p2.py` (kipy) → step 2, `tools/next/trial_placement_p3.py` (kipy) → step 3, `tools/next/trial_report.py` → `REPORT.md` | trial 5.2 board from the verified 5.1 layout (step 0: footprints / nets / copper reuse, L1 / L2 upright on the RM8 holes); step 1: TR3 / split caps / DRV5 / DRV6 moves as data (`PLACE` / `GROUPS`) + split-pass DRC; step 2: UART island at the top edge, Q19 / Q21 / ISO2 L-slot, ISO2 / D4 / D5, TR1 / PWM2 / C102 flyback re-place, gate-driver bootstrap / decoupling parts (`PLACE` / `AUTO` / `GROUPS` / `SLOTS` / `KEEPOUTS`, deleted copper listed in `placement_p2.json`); step 3: heater barrier slot at ISO1 / TR2 + pour keep-outs, relay driver Q9 moved under RL1, PE / mounting-hole keep-outs and C85, the 54 added parts placed from the off-board grid (`PLACE` / `NEW` / `GROUPS` / `FOOTPRINTS` / `SLOTS` / `KEEPOUTS` / `DELETE` / `TEXTS`, ISO1 with its board-specific T-slot footprint, mounting-hole pad moves, deleted copper listed in `placement_p3.json`); the latest step is checked by `check_domains.py` in check_next.sh, its DRC only by the placement scripts | phase 5 input |
 | `tools/next/check_domains.py` [BOARD] | isolation-domain distance check of a board (check_next.sh: the real board; default: the latest trial step): straight same-layer distance between pads / tracks / vias / filled zone copper of two domains and the mounting holes (PE), limits = the `.kicad_dru` rules, slot credit only where a slot blocks the straight line (path round the slots), accepted pairs in its commented `ALLOW` list; ≈ 10 s, a few hundred MB – KiCad's creepage DRC does not list every pair | phase 5 / 6 |
 | `tools/next/promote_trial_board.py` (kipy) | copies `trial_from_51/tube_psu_5_2_trial_p3.kicad_pcb` to the real board, 3D model paths back to `${KIPRJMOD}/../lib`, Description / LCSC fields from the schematic (refuses to overwrite a populated board without `--force`) | phase 5 start |
+| `tools/next/route_s2_planes.py` (kipy), `tools/next/render_inner_layers.py` | routing stage 2: inner-layer planes / pours `S2_*` of the real board (re-runnable, section "Inner layers (routing stage 2)"); PNGs of the inner layers in `kicad_next/routing/` | phase 6 |
 | `tools/next/check_board.py` | DRC of the real board without the creepage pass (> 3 GB on the populated board) + `--schematic-parity`: fails on any parity item, short or isolation-rule violation besides `ACCEPTED`; everything else counted (`reports/next/drc.json`, ≈ 2.3 GB, 10 s) | phase 5 |
 | `tools/next/check_footprints.py` | footprint / pad / 3D / barrier-creepage check (kipy), `--dump` for `render_footprints.py` (PNGs) | phase 3 |
 | `tools/next/netlist_diff.py` | netlist diff 5.1 → 5.2 (section of CHANGES_5_2.md) + check that the three CSVs cover every part | phase 2 |
@@ -72,6 +73,117 @@ slot blocks the straight line; exit status 1 on any pair below its limit that is
 Q19 / Q21 slot exception and the TR1 pin 2 / 9 barrels). Stage 1 of the routing (2026-11-20, the trial board
 becomes the real board) replaces the plain DRC step (0 violations required, full creepage DRC) by `check_board.py`
 and lets `make_board.py --check` accept internal Edge.Cuts slots inside the unchanged 5.1 outline.
+
+## Inner layers (routing stage 2, 2026-11-20)
+
+Made by `tools/p2k/bin/kipy tools/next/route_s2_planes.py` on the real board (re-runnable: everything it makes is
+named `S2_*` and is removed and rebuilt; it stops if KiCad's lock file `~tube_psu_5_2.kicad_pcb.lck` exists; the
+zones are refilled by kicad-cli with the project rules, 2.2 GB). Pictures: `python3 tools/next/render_inner_layers.py`
+→ `routing/In1_GND.png`, `In2_Signal_HV.png`, `In3_Power.png`, `In4_GND.png`, `routing/inner_domains.png` (all
+copper by isolation domain). Output of the first run (what was removed / moved / deleted):
+`routing/route_s2_planes_first_run.log`.
+
+### Per layer
+
+| Layer | Content | Filled |
+|---|---|---|
+| In1.GND (L2) | **GND** plane: heater-LLC primary / DRV3 / U1 / DRV5 / DAB primary bridge (x −27 … 44, y < −34, round the UART island keep-out), arm to ISO1's primary side (x −40 … −27), PFC switches / bulk caps / control / flyback primary (x 2 … 64, y > −34). **ISO_GND** plane: right of the TR3 band (x > 54.5) and right of the ISO2 / TR1 slots. **HT_GND** plane: heater island incl. the AD1 / ISO1 heater side. Kept 5.1 pours (higher priority, the planes flow round them): IN2, RES_IN, L2_PRI2, PFC_DRAIN_1 / _2, Q13_DRAIN, Q14_DRAIN | GND 5496, ISO_GND 2244, HT_GND 683 mm² |
+| In2.Signal_HV (L3) | **no pour**: signal layer. Holds the 5.1 signal routing that the trial board had on In4 (399 segments, 1.66 m, 44 nets – the J2 bus to the gate drivers / isolators), moved here so that L5 is a plane. Free for the rest, incl. TX / RX from J2 pins 24 / 26 to U11 (primary copper, ≥ 8.0 mm from the island: the UART keep-out only stops pours, check_domains.py checks the tracks) | – |
+| In3.Power (L4) | primary: **15V** (flyback output D5 / C39 / C1 → link round the Q21 spacing → spine y −39 … −33.6 → DRV1, DRV5 pin 16, D19 / C96, DRV3 pin 11 / C18 / C52), **5V** (flyback output C6 / C36 / C71 / D6 → J2 pin 2, V4, C75), **+3V3** (control / measurement area round J2, x 15 … 42). Secondary: **15V_ISO_SEC** (flyback output / P15V_OUT → lane x 72.4 … 76.5 → DRV6 supply), **5V_ISOL** (output block at P5V_OUT). Heater: **6V3** over the island (parallel to the B.Cu pour) | 15V 658, 5V 239, +3V3 980, 15V_ISO_SEC 572, 5V_ISOL 191, 6V3 686 mm² |
+| In4.GND (L5) | **GND**, **ISO_GND**, **HT_GND** planes with the same outlines as In1. Kept 5.1 pours: IN2, L2_PRI2, Q13_DRAIN, Q14_DRAIN, DHB_HI_SOURCE_SEC | GND 5652, ISO_GND 2035, HT_GND 683 mm² |
+
+Not done, with the reason:
+- **No GND plane left of x 2 / below y −34 and none over the mains input** (IN1 / IN2, RL1, CM1, CM4, X / Y capacitors,
+  L1 / L2): a plane of the bridge's negative output under the nets in front of the common-mode chokes is a
+  capacitive bypass of the input filter (≈ 0.36 pF/mm² through the 0.1 mm prepreg). The 5.1 planes stopped there too.
+- **No DC+ pour on In3**: the DC-link loops are closed by the F.Cu DC+ pour over the In1 GND plane (0.0994 mm);
+  DC+ on In3 would put 400 V 0.11 mm above the signal layer In2 without a shield between.
+- **No ISO_UART_GND plane**: four ground pads on a 20 × 26 mm island that is a pour keep-out on all layers.
+- **+1V65_BIAS, −15V_SEC, 420V, −100 V**: no In3 pour (few pins, or F.Cu pours exist); tracks in the next stages.
+- The pours reach through-hole pins and vias only: SMD supply / ground pads get their vias in routing stage 3.
+
+Zone settings: priority 0 (below every kept 5.1 pour, 26 … 84), clearance 0.2 mm (net-class clearances of the
+`.kicad_pro` apply where larger: 0.5 mm to HV nets), minimum width 0.2 mm, islands always removed, pad connection
+"thermal relief for through-hole pads" (hand-soldered THT power pins; vias are connected solid by KiCad): gap
+0.3 mm, spokes 0.6 mm (HT_GND / 6V3: 0.8 mm).
+
+### Barrier gaps
+
+The planes are split on all four inner layers along the same lines as the outer layers:
+
+| Barrier | Line (centre) | Gap without planes |
+|---|---|---|
+| primary ↔ DAB secondary | TR3 band centre x 48.5 (top edge … y −62.5) → L-slot x 51.4 / y −39.8 → ISO2 slot x 66.75 → TR1 slot x 63.55 → bottom edge | ≥ 11.2 mm (line ± 5.6); wider wherever copper of the other domain is closer to the line, e.g. GND ends 11.25 mm left of the Q21 / Q8 / ISO2 pins 9–16 / TR1 pins 7–10, ISO_GND 11.25 mm right of Q19 / ISO2 pins 1–8 / C98 / TR1 pins 1–5 and the fly leads |
+| primary ↔ heater | y −46 below the island → ISO1 slot x −42.36 → T bar y −63.6 → between the TR2 pin rows x −30.05 → top edge | ≥ 8.1 mm (line ± 4.05), wider at the pins as above |
+| primary ↔ UART island | the existing all-layer pour keep-out (island + 8 mm) | no plane inside |
+
+plus the existing all-layer pour keep-outs of the placement (TR3 band x 42.5 … 54.5, ISO2 / TR1 slot gaps, heater,
+PE, mounting holes) and two new inner-layer keep-outs: `S2_KO_PWM2_drain` (no inner copper under the FLY_C drain
+area x 40 … 48.3 / y −2.6 … 14.6 and the strip to D7 / TR1 pin 12 – NEXT_REVISION_PLAN phase 5 (8)) and
+`S2_KO_TR1_pin2` (r 2.2 mm: nothing connects to TR1 pin 2 on an inner layer, so its inner ring is gone and the
+accepted 11.01 mm pin 2 / pin 9 pair no longer shows up).
+
+A plane cannot get its domain by accident: each one is drawn inside a hand-written region (`PLANES`) on its own side
+of the barrier lines (`BARRIERS`), and the script aborts if a region contains any copper of another domain.
+
+### Layer to layer (distance through insulation)
+
+Rule used: **plan-view spacing between copper of two domains on two different layers = the inner-layer spacing of
+the pair** (11.1 / 8.0 / 8.4 / 5.2 / 3.2 / 4.2 mm), no slot credit, whatever the two layers are. How it is met:
+the outline of every `S2_*` zone is its region minus all copper of every other domain on **all six layers** (pads,
+tracks, vias, stored zone fills, mounting holes) grown by that spacing + 0.15 mm – so the same outline is legal on
+its own layer (KiCad's inner-layer rules) and against every other layer (which KiCad does not check). The kept 5.1
+inner pours get the same treatment through per-layer keep-outs `S2_KO_xlayer_*` (Q14_DRAIN 39.5 mm² back from ISO1
+pins 5–8 / the B.Cu GND pour across the T slot, DHB_HI_SOURCE_SEC 40.6 mm² back from the primary side of the
+L-slot, IN2 / PFC_DRAIN_1 / RES_IN slivers at PE / H4). Run the script again after routing near a barrier: the planes
+follow the copper.
+
+Check: `check_domains.py` has a second pass "layer to layer" (in `check_next.sh`): every two copper items of two
+domains on two different layers; inner layer involved → inner-layer spacing in plan view, F.Cu ↔ B.Cu → as two
+items on one outer layer (clearance, creepage round slots); pairs that also meet on a common layer (through-hole
+pads, vias) are judged there, and the two pad rows of one barrier part by `check_footprints.py`. Before this
+stage the board had 270 such pairs below the limit, now 0 besides 33 accepted as OPEN (below).
+
+### 5.1 inner copper
+
+- **Removed:** the 5.1 ground pours on In1 / In4 (GND ×3 on In1 and ×3 on In4, ISO_GND ×1 + ×1, HT_GND ×1 + ×1; 6695 mm²
+  filled) and their 131 thermal-spoke segments – replaced by the `S2_*` planes (16 793 mm², one GND plane per layer
+  instead of three pieces).
+- **Moved:** 399 signal segments In4 → In2 (above).
+- **Deleted:** 36 inner-layer segments at the barriers that were closer in plan view than the inner-layer spacing
+  to copper of another domain on another layer (10 Q14_DRAIN spokes at TR2 pad 10 / WP4, and the ISO2 fan-out on
+  both sides: EPWM2A / EPWM2B, CUK_CLK / CUK_SDATA, +3V3, AD2 SPI, ISO_SEC_DHB_HI, AD2_3V3, 5V_ISOL, ISO_GND) – these
+  pins are fanned out on the outer layers, where the slots count.
+- **Kept:** the mains / switch-node / heater-rectifier pours that parallel the F.Cu copper (IN2, RES_IN, L2_PRI2,
+  PFC_DRAIN_1 / _2 on In1; IN2, L2_PRI2, DHB_HI_SOURCE_SEC on In4; Q13_DRAIN / Q14_DRAIN on both) with their spokes:
+  current capacity next to 1 oz F.Cu, and no ground plane is wanted under these nodes anyway.
+
+Numbers: unconnected 355 → 351 (GND 37 → 30, HT_GND 2 → 1, 15V 17 → 16, 15V_ISO_SEC 4 → 3; + 6 for the nets of the
+deleted barrier segments – the 5.1 planes already joined the through-hole pins, the rest are SMD pads without a
+via yet). `check_board.py`: no parity item, no short, no isolation-rule violation.
+
+### Open decisions
+
+1. **Distance through insulation, smaller numbers (not used).** A 0.55 mm core lies between In1 ↔ In2 and
+   In3 ↔ In4, the whole board (1.5 mm) between F.Cu ↔ B.Cu: ≥ 0.4 mm solid insulation, which IEC 62368-1 accepts
+   for reinforced insulation (clause to be verified, and a multilayer board normally also needs the cemented-joint
+   / thin-layer qualification that JLC does not give). If accepted, copper of two domains could overlap across a
+   core. Everything here uses the full plan-view spacing instead.
+2. **F.Cu ↔ B.Cu pairs found by the new check** (accepted as OPEN in `check_domains.py` `ALLOW`, to be closed by
+   routing or by decision 1): the 5.1 PE track on B.Cu under R4 / R5 / R6 on F.Cu (28 pairs, PE is routed again
+   anyway); U11 pin 9 (UART island, F.Cu) 7.4 mm from R102 and two tracks on B.Cu (5 pairs: move R102 ≈ 0.7 mm).
+3. **Slot credit on inner layers at ISO1 / TR2 pad 10.** The T slot cuts the laminate between ISO1 pins 5–8 and the
+   Q14_DRAIN inner pours, as the L-slot does for Q19 / Q21 (decision (a) of 2026-11-19). Without that credit the
+   Q14_DRAIN pours on In1 / In4 no longer reach TR2 pad 10 / WP4 (they still do on F.Cu / B.Cu).
+4. **5.1 routing moved to In2.** Alternative: leave it on In4 and accept a GND plane cut by the bus (set back with
+   `git checkout` of the board and `move_signals` disabled).
+5. **Plane coverage at ISO2 / TR1 / ISO1.** With 11.1 mm and no slot credit the GND plane ends 2.1 … 2.4 mm left of
+   ISO2's primary pads and 1.0 … 1.3 mm left of TR1 pins 1 / 2 (pin 2 must not be connected on an inner layer
+   anyway), ISO_GND starts 2.0 … 2.8 mm right of ISO2's secondary pads and 0.4 mm from TR1 pin 9 (not connected
+   there), and the GND plane ends 2.1 mm from ISO1 pin 8: these ground pins are reached by short outer-layer
+   tracks to a via in the plane, not by the plane under the part. ISO1 pin 1 and the heater side of ISO1 are over
+   their planes.
+6. **Kept 5.1 mains / switch-node pours on the ground-plane layers** (instead of moving them to In3 or dropping them).
 
 ## Footprints and 3D models (phase 3, 2026-11-18)
 

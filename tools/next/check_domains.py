@@ -20,6 +20,12 @@ H1-H8 as protective earth - and compares it with the limits of kicad_next/tube_p
                                                       graph over the slot outlines) must reach the creepage
   inner layers  d < inner spacing (= outer creepage): violation, no slot credit
 
+Layer to layer: KiCad checks nothing between two layers, and one prepreg (0.1 mm) is not reinforced insulation.
+The second pass therefore measures every two copper items of different domains on two DIFFERENT layers in plan
+view: if one of the layers is an inner layer the inner-layer spacing applies (no slot credit), F.Cu against B.Cu
+is treated like two items on one outer layer. Pairs that also meet on a common layer (through-hole pads, vias)
+are left to the same-layer pass; the two pad rows of one barrier part are left to check_footprints.py.
+
 Zones are not refilled here: run it on a board saved after a DRC refill (the trial placement scripts do that).
 Accepted pairs are listed in ALLOW with the reason; they are printed but do not fail the check. Exit status 1 if
 any other pair is below its limit. Memory: a few hundred MB (pcbnew board load + shapely), no DRC run.
@@ -65,7 +71,18 @@ ALLOW = [
     (r"^pad TR1\.2 ", r"^pad TR1\.9 ", r"^In", 11.0,
      "TR1 pin 2 (GND) / pin 9 (ISO_GND) barrels 11.01 mm apart on the inner layers (11.1 mm rule), fixed by the "
      "EEL19 bobbin pin pattern behind the footprint slot; accepted in REPORT.md step 2 - keep In1 / In4 pours off pin 2"),
+    # layer to layer, F.Cu <-> B.Cu only (the layer regex matches the pair "F.Cu / B.Cu"): OPEN items found by the
+    # layer-to-layer pass of routing stage 2 in 5.1 outer-layer copper / the placement. Between them is the whole
+    # board (1.5 mm, two 0.55 mm cores), not one prepreg; whether that counts as the insulation (then F.Cu <-> B.Cu
+    # needs no plan-view spacing) is a user decision (README "Inner layers", open decisions). Until then:
+    (r"^(pad R[456]\.|track \[Net-\(R[45]-Pad1\)\])", r"^track \[/05 PFC/PE\]", r"^F\.Cu / B\.Cu$", 0.0,
+     "OPEN: the 5.1 PE track on B.Cu runs under the mains discharge resistors R4 / R5 / R6 on F.Cu; the PE net is "
+     "routed again with the outer layers (trial REPORT.md step 3 note 2)"),
+    (r"^pad U11\.9 ", r"^(pad R102\.|track \[Net-\((U1B--|C63-Pad1)\)\])", r"^F\.Cu / B\.Cu$", 7.3,
+     "OPEN: U11 pin 9 (UART island, F.Cu) is 7.4 mm in plan view from R102 and its two tracks on B.Cu (8.0 mm rule): "
+     "move R102 0.7 mm down when the U1 area is routed"),
 ]
+BARRIERS = {"TR1", "TR2", "TR3", "ISO1", "ISO2", "U11"}      # setup_project.py BARRIERS: two domains in one footprint
 EPS = 1e-6
 
 
@@ -194,12 +211,16 @@ def main(argv):
     # items per layer: (geometry, kind, description)
     items = collections.defaultdict(list)
     nodom = set()
+    ALL = frozenset(g["layers"])
+    span = collections.defaultdict(set)      # (ref, pad number, net) -> every layer the pad has copper / a barrel on
+    for p in g["pads"]:
+        span[(p["ref"], p["num"], p["net"])].update(p["layers"])
     for p in g["pads"]:
         if HOLES.match(p["ref"]):
             ring, hole = mk(p["polys"]), mk(p["hole"]) if p["hole"] else None
             for l in g["layers"]:
                 # outer layers: the copper ring (clearance / creepage); inner layers: the hole (hole clearance)
-                items[l].append((ring if l in outer or hole is None else hole, "HOLE", f"hole {p['ref']}"))
+                items[l].append((ring if l in outer or hole is None else hole, "HOLE", f"hole {p['ref']}", ALL, p["ref"]))
             continue
         if not p["net"]:
             continue
@@ -209,7 +230,8 @@ def main(argv):
             continue
         geom = mk(p["polys"])
         for l in p["layers"]:
-            items[l].append((geom, k, f"pad {p['ref']}.{p['num']} [{p['net']}]"))
+            items[l].append((geom, k, f"pad {p['ref']}.{p['num']} [{p['net']}]",
+                             frozenset(span[(p["ref"], p["num"], p["net"])]), p["ref"]))
     for t in g["tracks"]:
         k = kind(t["net"])
         if not k:
@@ -217,7 +239,7 @@ def main(argv):
             continue
         x0, y0, x1, y1 = t["pts"]
         geom = (Point(x0, y0) if (x0, y0) == (x1, y1) else LineString([(x0, y0), (x1, y1)])).buffer(t["w"] / 2, 8)
-        items[t["layer"]].append((geom, k, f"track [{t['net']}] ({x0}, {y0})-({x1}, {y1})"))
+        items[t["layer"]].append((geom, k, f"track [{t['net']}] ({x0}, {y0})-({x1}, {y1})", frozenset([t["layer"]]), None))
     for v in g["vias"]:
         k = kind(v["net"])
         if not k:
@@ -225,14 +247,15 @@ def main(argv):
             continue
         geom = Point(v["x"], v["y"]).buffer(v["d"] / 2, 8)
         for l in v["layers"]:
-            items[l].append((geom, k, f"via [{v['net']}] ({v['x']}, {v['y']})"))
+            items[l].append((geom, k, f"via [{v['net']}] ({v['x']}, {v['y']})", frozenset(v["layers"]), None))
     for z in g["zones"]:
         k = kind(z["net"])
         if not k:
             nodom.add(z["net"])
             continue
         for ring, holes in z["polys"]:
-            items[z["layer"]].append((Polygon(ring, holes).buffer(0), k, f"zone [{z['net']}] '{z['name']}'"))
+            items[z["layer"]].append((Polygon(ring, holes).buffer(0), k, f"zone [{z['net']}] '{z['name']}'",
+                                      frozenset([z["layer"]]), None))
 
     slots = [Polygon(s).buffer(0) for s in g["slots"] if len(s) > 2]
     cores = [s.buffer(-0.01) for s in slots]          # a path may run along a slot edge
@@ -297,9 +320,9 @@ def main(argv):
                 reach = max(x for x in (clr, creep) if x) if layer in outer else inner
                 A, B = by[ka], by[kb]
                 tree = STRtree([b_[0] for b_ in B])
-                for ga, _, da in A:
+                for ga, _, da, _, _ in A:
                     for j in tree.query(ga.buffer(reach)):
-                        gb, _, db = B[j]
+                        gb, _, db, _, _ = B[j]
                         d = ga.distance(gb)
                         if d >= reach - EPS:
                             continue
@@ -330,9 +353,81 @@ def main(argv):
                         else:
                             viol.append(rec)
 
+    # ---- layer to layer (distance through insulation): copper of two domains on two different layers ----
+    # KiCad checks nothing between layers. README "Isolation domains": the prepregs (0.0994 / 0.1088 mm) are not
+    # reinforced solid insulation, so copper of one domain must not overlap copper of another domain on any other
+    # layer - and "overlap" is taken with the same plan-view spacing as on one layer, because a plane edge under a
+    # pad of the other domain is only a prepreg away from it:
+    #   one of the two layers is an inner layer   plan distance >= the inner-layer spacing, no slot credit
+    #   F.Cu <-> B.Cu                             as two items on one outer layer (clearance, creepage round slots)
+    # A pair is skipped when the two items also meet on a common layer (a through-hole pad or a via has copper /
+    # a barrel on every layer: the same-layer pass above has judged that pair, with the outer-layer slot credit),
+    # and for the two pad rows of one barrier part (TR1-TR3, ISO1, ISO2, U11: check_footprints.py checks their
+    # slots). ALLOW applies as on one layer.
+    xviol, xacc = [], []
+    xstats = collections.Counter()
+    trees = {}
+    for layer in g["layers"]:
+        by = collections.defaultdict(list)
+        for it in items[layer]:
+            by[it[1]].append(it)
+        trees[layer] = {k: (v, STRtree([i[0] for i in v])) for k, v in by.items()}
+    for ia, la in enumerate(g["layers"]):
+        for lb in g["layers"][ia + 1:]:
+            both_outer = la in outer and lb in outer
+            for ka, (A, _) in trees[la].items():
+                for kb, (B, tree) in trees[lb].items():
+                    key, lim = pair_key(ka, kb)
+                    if lim is None:
+                        continue
+                    clr, creep, inner = lim
+                    reach = max(x for x in (clr, creep) if x) if both_outer else inner
+                    for ga, _, da, sa, ra in A:
+                        if lb in sa:
+                            continue
+                        for j in tree.query(ga.buffer(reach)):
+                            gb, _, db, sb, rb = B[j]
+                            if la in sb or (ra and ra == rb and ra in BARRIERS):
+                                continue
+                            d = ga.distance(gb)
+                            if d >= reach - EPS:
+                                continue
+                            xstats[(key, la, lb)] += 1
+                            what, need, path = None, None, None
+                            if not both_outer:
+                                what, need = "layer-to-layer spacing", inner
+                            elif d < clr - EPS:
+                                what, need = "layer-to-layer clearance", clr
+                            elif creep and d < creep - EPS:
+                                pa, pb = nearest_points(ga, gb)
+                                if not blocked((pa.x, pa.y), (pb.x, pb.y)):
+                                    what, need = "layer-to-layer creepage", creep
+                                else:
+                                    path = surface_path(ga, gb, creep)
+                                    if path < creep - EPS:
+                                        what, need = "layer-to-layer creepage round a slot", creep
+                            if what is None:
+                                continue
+                            rec = dict(pair="-".join(key), layer=f"{la} / {lb}", what=what, need=need, d=round(d, 3),
+                                       path=None if path is None else round(path, 3), a=da, b=db)
+                            ok = next((why for xa, xb, rl, dmin, why in ALLOW
+                                       if (re.search(rl, la) or re.search(rl, lb) or re.search(rl, f"{la} / {lb}"))
+                                       and d >= dmin - EPS and
+                                       ((re.search(xa, da) and re.search(xb, db)) or (re.search(xa, db) and re.search(xb, da)))), None)
+                            if ok:
+                                rec["accepted"] = ok
+                                xacc.append(rec)
+                            else:
+                                xviol.append(rec)
+    viol += xviol
+    accepted += xacc
+
     def line(v):
         act = f"{v['d']:.2f} mm" + (f" straight, {v['path']:.2f} mm round the slot" if v["path"] is not None else "")
         return f"  {v['pair']:11s} {v['layer']:14s} {v['what']} {v['need']} mm: {act}: {v['a']} | {v['b']}"
+
+    print(f"check_domains: layer to layer: {sum(xstats.values())} pairs of two domains on two different layers closer "
+          f"than their limit in plan view, {len(xviol)} below the limit, {len(xacc)} accepted")
 
     rel = os.path.relpath(board, ROOT)
     print(f"check_domains: {rel}: {sum(len(v) for v in items.values())} copper items on {len(g['layers'])} layers, "
