@@ -53,34 +53,6 @@
   },
   {
    "kind": "track",
-   "net": "GND",
-   "layer": "In2.Signal_HV",
-   "w": 0.3,
-   "a": [
-    -21.3,
-    -48.7
-   ],
-   "b": [
-    -21.312,
-    -48.699
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "GND",
-   "layer": "In2.Signal_HV",
-   "w": 0.3,
-   "a": [
-    -21.312,
-    -48.699
-   ],
-   "b": [
-    -22.012,
-    -48.699
-   ]
-  },
-  {
-   "kind": "track",
    "net": "5V",
    "layer": "B.Cu",
    "w": 0.3,
@@ -1477,62 +1449,6 @@
   },
   {
    "kind": "track",
-   "net": "EPWM5A",
-   "layer": "B.Cu",
-   "w": 0.4,
-   "a": [
-    -16.632,
-    -49.999
-   ],
-   "b": [
-    -16.632,
-    -49.475
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "EPWM5A",
-   "layer": "B.Cu",
-   "w": 0.4,
-   "a": [
-    -16.632,
-    -49.475
-   ],
-   "b": [
-    -16.032,
-    -48.875
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "EPWM5A",
-   "layer": "B.Cu",
-   "w": 0.4,
-   "a": [
-    -16.032,
-    -48.875
-   ],
-   "b": [
-    -15.832,
-    -48.875
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "EPWM5A",
-   "layer": "B.Cu",
-   "w": 0.4,
-   "a": [
-    -15.832,
-    -48.875
-   ],
-   "b": [
-    -14.632,
-    -50.075
-   ]
-  },
-  {
-   "kind": "track",
    "net": "Net-(DRV3-DT)",
    "layer": "B.Cu",
    "w": 0.4,
@@ -1641,48 +1557,6 @@
    "b": [
     13.65,
     -56.525
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "EPWM5A",
-   "layer": "B.Cu",
-   "w": 0.4,
-   "a": [
-    -16.632,
-    -49.999
-   ],
-   "b": [
-    -16.6,
-    -49.999
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "EPWM5A",
-   "layer": "B.Cu",
-   "w": 0.4,
-   "a": [
-    -16.6,
-    -49.999
-   ],
-   "b": [
-    -16.6,
-    -50.599
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "EPWM5A",
-   "layer": "B.Cu",
-   "w": 0.4,
-   "a": [
-    -16.6,
-    -50.599
-   ],
-   "b": [
-    -17.9,
-    -51.899
    ]
   },
   {
@@ -2017,62 +1891,6 @@
   },
   {
    "kind": "track",
-   "net": "Net-(DRV5-DT)",
-   "layer": "B.Cu",
-   "w": 0.4,
-   "a": [
-    13.45,
-    -56.625
-   ],
-   "b": [
-    12.15,
-    -56.625
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "Net-(DRV5-DT)",
-   "layer": "B.Cu",
-   "w": 0.4,
-   "a": [
-    12.15,
-    -56.625
-   ],
-   "b": [
-    11.95,
-    -56.425
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "Net-(DRV5-DT)",
-   "layer": "B.Cu",
-   "w": 0.4,
-   "a": [
-    11.95,
-    -56.425
-   ],
-   "b": [
-    11.95,
-    -54.525
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "Net-(DRV5-DT)",
-   "layer": "B.Cu",
-   "w": 0.4,
-   "a": [
-    11.95,
-    -54.525
-   ],
-   "b": [
-    11.45,
-    -54.025
-   ]
-  },
-  {
-   "kind": "track",
    "net": "/06 Heaters/HEATER_HI_GATE",
    "layer": "B.Cu",
    "w": 0.4,
@@ -2153,48 +1971,6 @@
    "b": [
     -16.5945,
     -63.201
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "PRI_DHB_HI",
-   "layer": "B.Cu",
-   "w": 0.4,
-   "a": [
-    15.55,
-    -50.72
-   ],
-   "b": [
-    16.35,
-    -50.72
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "PRI_DHB_HI",
-   "layer": "B.Cu",
-   "w": 0.4,
-   "a": [
-    16.35,
-    -50.72
-   ],
-   "b": [
-    18.95,
-    -48.12
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "PRI_DHB_HI",
-   "layer": "B.Cu",
-   "w": 0.4,
-   "a": [
-    18.95,
-    -48.12
-   ],
-   "b": [
-    18.95,
-    -46.52
    ]
   },
   {
@@ -3033,98 +2809,6 @@
   },
   {
    "kind": "track",
-   "net": "EPWM6A",
-   "layer": "B.Cu",
-   "w": 0.4,
-   "a": [
-    -17.902,
-    -49.999
-   ],
-   "b": [
-    -17.902,
-    -49.969
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "EPWM6A",
-   "layer": "B.Cu",
-   "w": 0.4,
-   "a": [
-    -17.902,
-    -49.969
-   ],
-   "b": [
-    -17.902,
-    -50.769
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "EPWM6A",
-   "layer": "B.Cu",
-   "w": 0.4,
-   "a": [
-    -17.902,
-    -50.769
-   ],
-   "b": [
-    -18.602,
-    -51.469
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "EPWM6A",
-   "layer": "B.Cu",
-   "w": 0.4,
-   "a": [
-    -18.602,
-    -51.469
-   ],
-   "b": [
-    -18.602,
-    -52.569
-   ]
-  },
-  {
-   "kind": "via",
-   "net": "EPWM6A",
-   "x": -18.602,
-   "y": -52.569,
-   "d": 0.6,
-   "drill": 0.3
-  },
-  {
-   "kind": "track",
-   "net": "EPWM6A",
-   "layer": "In2.Signal_HV",
-   "w": 0.4,
-   "a": [
-    -18.602,
-    -52.569
-   ],
-   "b": [
-    -14.202,
-    -56.969
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "EPWM6A",
-   "layer": "In2.Signal_HV",
-   "w": 0.4,
-   "a": [
-    -14.202,
-    -56.969
-   ],
-   "b": [
-    -9.102,
-    -56.969
-   ]
-  },
-  {
-   "kind": "track",
    "net": "DHB_HI_GATE",
    "layer": "B.Cu",
    "w": 0.4,
@@ -3387,8 +3071,8 @@
     -48.83
    ],
    "b": [
-    13.725,
-    -48.43
+    13.325,
+    -48.63
    ]
   },
   {
@@ -3397,12 +3081,26 @@
    "layer": "B.Cu",
    "w": 0.4,
    "a": [
-    13.725,
-    -48.43
+    13.325,
+    -48.63
+   ],
+   "b": [
+    14.125,
+    -47.83
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "w": 0.4,
+   "a": [
+    14.125,
+    -47.83
    ],
    "b": [
     16.425,
-    -48.43
+    -47.83
    ]
   },
   {
@@ -3412,11 +3110,11 @@
    "w": 0.4,
    "a": [
     16.425,
-    -48.43
+    -47.83
    ],
    "b": [
     17.825,
-    -47.03
+    -46.43
    ]
   },
   {
@@ -3426,7 +3124,7 @@
    "w": 0.4,
    "a": [
     17.825,
-    -47.03
+    -46.43
    ],
    "b": [
     17.825,
@@ -5213,8 +4911,8 @@
     -51.4
    ],
    "b": [
-    11.4,
-    -55.1
+    13.8,
+    -52.7
    ]
   },
   {
@@ -5223,8 +4921,22 @@
    "layer": "In2.Signal_HV",
    "w": 0.2,
    "a": [
-    11.4,
-    -55.1
+    13.8,
+    -52.7
+   ],
+   "b": [
+    10.3,
+    -52.7
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(C11-Pad1)",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    10.3,
+    -52.7
    ],
    "b": [
     7.9,
@@ -6233,18 +5945,6 @@
    "group": "supply, ground and switch-node leftovers"
   },
   {
-   "step": "auto (-21.3, -48.7, 'In2.Signal_HV') -> net",
-   "net": "GND",
-   "ok": true,
-   "w": 0.3,
-   "length": 0.71,
-   "vias": 0,
-   "layers": [
-    "In2.Signal_HV"
-   ],
-   "group": "supply, ground and switch-node leftovers"
-  },
-  {
    "step": "auto (-23.3, -53.036, 'B.Cu') -> net",
    "net": "5V",
    "ok": true,
@@ -6476,12 +6176,6 @@
     "B.Cu",
     "F.Cu"
    ],
-   "group": "supply, ground and switch-node leftovers"
-  },
-  {
-   "step": "auto (3.6, -49.8, 'B.Cu') -> net",
-   "net": "5V",
-   "ok": false,
    "group": "supply, ground and switch-node leftovers"
   },
   {
@@ -6728,12 +6422,6 @@
    "group": "gate drives"
   },
   {
-   "step": "auto (-16.51, -54.89, 'B.Cu') -> net",
-   "net": "EPWM5A",
-   "ok": false,
-   "group": "gate drives"
-  },
-  {
    "step": "auto D32.A -> R88.1",
    "net": "Net-(D32-PadA)",
    "ok": true,
@@ -6758,18 +6446,6 @@
    "group": "gate drives"
   },
   {
-   "step": "auto DRV3.1 -> R78.2",
-   "net": "EPWM5A",
-   "ok": true,
-   "w": 0.4,
-   "length": 3.27,
-   "vias": 0,
-   "layers": [
-    "B.Cu"
-   ],
-   "group": "gate drives"
-  },
-  {
    "step": "auto DRV3.6 -> R130.1",
    "net": "Net-(DRV3-DT)",
    "ok": true,
@@ -6782,29 +6458,11 @@
    "group": "gate drives"
   },
   {
-   "step": "auto DRV5.5 -> R129.1",
-   "net": "DAB_DIS",
-   "ok": false,
-   "group": "gate drives"
-  },
-  {
    "step": "auto DRV5.6 -> R127.1",
    "net": "Net-(DRV5-DT)",
    "ok": true,
    "w": 0.4,
    "length": 2.21,
-   "vias": 0,
-   "layers": [
-    "B.Cu"
-   ],
-   "group": "gate drives"
-  },
-  {
-   "step": "auto DRV3.1 -> net",
-   "net": "EPWM5A",
-   "ok": true,
-   "w": 0.4,
-   "length": 2.47,
    "vias": 0,
    "layers": [
     "B.Cu"
@@ -6945,35 +6603,11 @@
    "group": "gate drives"
   },
   {
-   "step": "auto R127.1 -> C118.1",
-   "net": "Net-(DRV5-DT)",
-   "ok": true,
-   "w": 0.4,
-   "length": 4.19,
-   "vias": 0,
-   "layers": [
-    "B.Cu"
-   ],
-   "group": "gate drives"
-  },
-  {
    "step": "auto R36.1 -> R24.2",
    "net": "/06 Heaters/HEATER_HI_GATE",
    "ok": true,
    "w": 0.4,
    "length": 8.57,
-   "vias": 0,
-   "layers": [
-    "B.Cu"
-   ],
-   "group": "gate drives"
-  },
-  {
-   "step": "auto DRV5.2 -> net",
-   "net": "PRI_DHB_HI",
-   "ok": true,
-   "w": 0.4,
-   "length": 6.08,
    "vias": 0,
    "layers": [
     "B.Cu"
@@ -7073,12 +6707,6 @@
    "group": "gate drives"
   },
   {
-   "step": "auto DRV5.1 -> net",
-   "net": "B12",
-   "ok": false,
-   "group": "gate drives"
-  },
-  {
    "step": "auto R63.1 -> R108.1",
    "net": "/06 Heaters/HEATER_SYNC_GATE_1",
    "ok": true,
@@ -7126,12 +6754,6 @@
   {
    "step": "auto DRV6.6 -> R128.1",
    "net": "Net-(DRV6-DT)",
-   "ok": false,
-   "group": "gate drives"
-  },
-  {
-   "step": "auto (-9.1238, -63.119, 'B.Cu') -> net",
-   "net": "EPWM6A",
    "ok": false,
    "group": "gate drives"
   },
@@ -7184,19 +6806,6 @@
    "group": "gate drives"
   },
   {
-   "step": "auto DRV3.2 -> net",
-   "net": "EPWM6A",
-   "ok": true,
-   "w": 0.4,
-   "length": 14.24,
-   "vias": 1,
-   "layers": [
-    "B.Cu",
-    "In2.Signal_HV"
-   ],
-   "group": "gate drives"
-  },
-  {
    "step": "auto DRV5.10 -> net",
    "net": "DHB_HI_GATE",
    "ok": true,
@@ -7244,7 +6853,7 @@
    "net": "DAB_DIS",
    "ok": true,
    "w": 0.4,
-   "length": 59.44,
+   "length": 59.21,
    "vias": 5,
    "layers": [
     "B.Cu",
@@ -7862,12 +7471,6 @@
   {
    "step": "auto R139.1 -> R138.2",
    "net": "Net-(PWM2-VERR)",
-   "ok": false,
-   "group": "SPI and control"
-  },
-  {
-   "step": "auto ISO1.7 -> net",
-   "net": "HT_SDATA",
    "ok": false,
    "group": "SPI and control"
   },

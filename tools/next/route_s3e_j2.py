@@ -169,7 +169,67 @@ BUNDLE = [
     t(P5, B, 0.4, [(5.133, -48.267), (7.266, -50.4), (9.25, -50.4), (10.154, -49.496), (10.154, -48.0)]),
 ]
 
-GROUPS = [("J2 analog escapes", ANALOG), ("control bus round H4", BUNDLE)]
+# ================================================================================================ DRV3 inputs
+# EPWM5A / EPWM6A (J2 pins 5 / 3) end at DRV3 pins 1 / 2 on B.Cu, below the bus. Via sites: F.Cu has the heater
+# switch node (HEATER_HI_SOURCE, 1.2 mm) north of y -56.1, B.Cu the anode pad of D11 east of x -14.8 and the
+# floating supply Net-(DRV3-VDDA) at y -56.1 - what is left is x -20 ... -15.3 / y -54.3 ... -51.5, and the dead
+# end of the 5.1 5V lane and a 5.1 GND stub ran through it on In2. Lane order from the north: (5V), EPWM6A,
+# EPWM5A; vias from the west: 5V (stage 3a), EPWM6A, EPWM5A = pin order 3, 2, 1, so nothing crosses on B.Cu.
+E5, E6 = "EPWM5A", "EPWM6A"
+DEAD5V = ("dead end of the 5.1 5V lane on In2 (its B.Cu half from the bus is gone; open 5V link, README stage 3e): "
+          "in the via sites of EPWM5A / EPWM6A")
+OLD5A = "5.1 EPWM5A escape towards the old driver footprint (its via site is taken by the heater switch node)"
+DRV3 = [
+    *dels(P5, I2, DEAD5V, (-21.011, -48.089, -15.2096, -53.8904), (-15.2096, -53.8904, -15.2096, -55.1484),
+          (-15.2096, -55.1484, -14.014, -56.344), (-14.014, -56.344, -11.679, -56.344)),
+    *dels("GND", I2, "dangling 5.1 GND stub on In2 beside the 5V lane, in the via site of EPWM5A",
+          (-21.3, -48.7, -15.997, -54.003)),
+    *dels(E5, I2, OLD5A, (-14.351, -55.245, -14.055, -55.245), (-14.055, -55.245, -13.547, -55.753)),
+    *dels(E5, B, OLD5A, (-16.51, -54.89, -16.155, -55.245), (-16.51, -53.289, -16.51, -54.89),
+          (-17.9, -51.899, -16.51, -53.289)),
+    t(E5, I2, WI, [(-13.547, -55.753), (-14.657, -55.753), (-16.51, -53.9)]), v(E5, -16.51, -53.9),
+    t(E5, B, W, [(-16.51, -53.9), (-16.51, -51.6), (-16.632, -51.478), (-16.632, -50.175), (-14.4, -50.175)]),
+    t(E6, I2, WI, [(-8.7428, -56.388), (-14.782, -56.388), (-18.602, -52.569)]), v(E6, -18.602, -52.569),
+    t(E6, B, W, [(-18.602, -52.569), (-18.602, -51.9), (-17.902, -51.2), (-17.902, -50.0)]),
+]
+
+# ================================================================================================ ISO1 pin 7
+# HT_SDATA. TR2 (heater domain, Q14_DRAIN) stands 6.7 mm north of pin 7: a via / inner copper is only possible
+# south of y -56.6 (8.0 mm in plan view). F.Cu from the pad south-east between the HT_CLK track of pin 6 and the
+# ground via of pin 8 (stage 3a keeps that ground track out of the way: "avoid" box) to a via at y -56.5, then In2
+# west, round the vias of pins 3 - 5 under the primary pad row (8.7 mm from the heater-side pads) to the end of
+# the kept 5.1 lane.
+SDA = "HT_SDATA"
+ISO1 = [
+    t(SDA, F, W, [(-37.709, -58.02), (-36.62, -58.02), (-35.1, -56.5)], foreign_gap=4.0), v(SDA, -35.1, -56.5),
+    t(SDA, I2, WI, [(-35.1, -56.5), (-36.9, -56.5), (-37.2, -56.2), (-37.2, -54.306), (-36.952, -54.058)]),
+]
+
+# ================================================================================================ DRV5 inputs
+# B12 / PRI_DHB_HI (J2 pins 6 / 4) arrive at the vias (19.85 / 19.0, -46.4), DAB_DIS (stage 3b) west of them at
+# x 17.8: the lanes turn west below pin 1 in that order from the north. B12 enters pin 1 from below,
+# PRI_DHB_HI goes round its west end into pin 2, DAB_DIS (the south-most lane) has C120 / R129 on the west side.
+# DAB_DIS -> pin 5: the east ends of pins 4 - 7 are inside the 5V link pin 3 - pin 8 of stage 3a, so 0.2 mm from
+# R129 pin 1 between the capacitors (C94 / C118) to the west end of pin 5; the dead-time net (R127 - C118)
+# beside it is drawn here too (0.2 mm; a 0.4 mm track of stage 3b does not fit next to it).
+PRI_HI, B12, DIS, DT = "PRI_DHB_HI", "B12", "DAB_DIS", "Net-(DRV5-DT)"
+OLD_D5 = "5.1 stub north of the via, towards the old driver footprint"
+DRV5 = [
+    *dels(PRI_HI, B, OLD_D5, (19.0, -49.12, 19.0, -46.4)), *dels(B12, B, OLD_D5, (19.854, -46.4, 19.854, -48.4)),
+    t(B12, B, W, [(19.854, -46.4), (19.854, -47.9), (18.954, -48.8), (16.3, -48.8), (16.3, -49.45)]),
+    t(PRI_HI, B, W, [(19.0, -46.4), (19.0, -47.42), (18.0, -48.42), (14.45, -48.42), (14.15, -48.72), (14.15, -50.72),
+                     (15.55, -50.72)]),
+    t(DIS, B, W, [(13.375, -50.33), (12.9, -50.69), (12.175, -51.2), (12.175, -54.0), (12.375, -54.2), (14.2, -54.2),
+                  (14.53, -54.53), (15.55, -54.53)]),
+    t(DT, B, W, [(13.45, -56.625), (12.05, -56.625), (11.75, -56.325), (11.75, -54.4), (11.5, -54.15),
+                 (11.35, -53.875)]),    # the DAB_DIS track cuts C94 pin 2 / DRV5 pin 4 and R127 pin 2 off the B.Cu ground pour: a via each into the
+    # planes (through the F.Cu DC+ pour, next to the hole of the 5V via of stage 3a)
+    v("GND", 14.0, -53.26), t("GND", B, 0.3, [(13.0, -53.375), (14.0, -53.26), (15.55, -53.26)]),
+    v("GND", 12.45, -55.0), t("GND", B, 0.3, [(12.45, -55.0), (13.45, -54.975)]),
+]
+
+GROUPS = [("J2 analog escapes", ANALOG), ("control bus round H4", BUNDLE), ("DRV3 inputs", DRV3),
+          ("ISO1 pin 7", ISO1), ("DRV5 inputs", DRV5)]
 
 if __name__ == "__main__":
     R.RELAX_OWN_DOMAIN = True

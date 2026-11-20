@@ -31,6 +31,7 @@ questions and the generated netlist diff 5.1 → 5.2: [CHANGES_5_2.md](CHANGES_5
 | `tools/next/route_s3a_power.py`, `tools/next/s3_router.py` (python3 + kipy), `tools/next/render_s3a.py` | routing stage 3a: power / HV / ground copper as data (drawn tracks, zones `S3A_*`, vias, connections routed by a local grid router that keeps the class, HV and domain spacings), re-runnable (`routing/s3a_added.json`), PE pour keep-outs `S3A_KO_PE_*`; PNGs `routing/s3a_*.png` (section "Power, HV and ground routing (stage 3a)") | phase 6 |
 | `tools/next/route_s3c_cleanup.py` | routing stage 3c: kept 5.1 copper that breaks the 5.2 HV spacing deleted and drawn again, dangling 5.1 copper deleted (`routing/deleted_s3c.json`, `s3c_added.json`); runs between stage 3a and stage 3b (section "Clean-up of the kept 5.1 copper (stage 3c)") | phase 6 |
 | `tools/next/route_s3d_iso2.py` | routing stage 3d: ISO2 / AD2 fan-out on both sides as drawn copper, the 420V sense divider as a row with its feed, R10 / R79 moved (`routing/moves_s3d.json`, `deleted_s3d.json`, `s3d_added.json`); runs between stage 3c and stage 3b (section "ISO2 / AD2 fan-out (stage 3d)") | phase 6 |
+| `tools/next/route_s3e_j2.py` | routing stage 3e: the J2 header escapes and the open nets that end at J2 as drawn copper - analog lines, the control bus round mounting hole H4, the DRV3 / DRV5 inputs, HT_SDATA at ISO1 (`routing/deleted_s3e.json`, `s3e_added.json`, `moves_s3e.json`); runs between stage 3d and stage 3b (section "J2 escapes and J2 nets (stage 3e)") | phase 6 |
 | `tools/next/check_board.py` | DRC of the real board without the creepage pass (> 3 GB on the populated board) + `--schematic-parity`: fails on any parity item, short or isolation-rule violation besides `ACCEPTED`; everything else counted (`reports/next/drc.json`, ≈ 2.3 GB, 10 s) | phase 5 |
 | `tools/next/check_footprints.py` | footprint / pad / 3D / barrier-creepage check (kipy), `--dump` for `render_footprints.py` (PNGs) | phase 3 |
 | `tools/next/netlist_diff.py` | netlist diff 5.1 → 5.2 (section of CHANGES_5_2.md) + check that the three CSVs cover every part | phase 2 |
@@ -424,11 +425,13 @@ the stage-3b list above (bootstrap / driver returns, dividers, In2 Kelvin tracks
 
 ```
 python3 tools/next/route_s3b_signals.py --strip   # full rebuild: take this stage's copper off first,
+python3 tools/next/route_s3e_j2.py --strip        # (stage 3e, since 2026-11-20)
 python3 tools/next/route_s3d_iso2.py --strip      # (and that of stages 3d / 3c, since 2026-11-20)
 python3 tools/next/route_s3c_cleanup.py --strip
 python3 tools/next/route_s3a_power.py             # so that the stage-3a router does not see it
 python3 tools/next/route_s3c_cleanup.py           # stage 3c, section below
 python3 tools/next/route_s3d_iso2.py              # stage 3d: ISO2 / AD2 fan-out (drawn), section below
+python3 tools/next/route_s3e_j2.py                # stage 3e: J2 escapes and the J2 nets (drawn), section below
 python3 tools/next/route_s3b_signals.py
 tools/p2k/bin/kipy tools/next/route_s2_planes.py
 ```
@@ -488,12 +491,14 @@ Open points (of 89608a5; 1 is decided as above):
 ## Clean-up of the kept 5.1 copper (routing stage 3c, 2026-11-20)
 
 ```
-python3 tools/next/route_s3b_signals.py --strip   # full rebuild of stages 3a - 3d
+python3 tools/next/route_s3b_signals.py --strip   # full rebuild of stages 3a - 3e
+python3 tools/next/route_s3e_j2.py --strip
 python3 tools/next/route_s3d_iso2.py --strip
 python3 tools/next/route_s3c_cleanup.py --strip
 python3 tools/next/route_s3a_power.py
 python3 tools/next/route_s3c_cleanup.py           # this stage: sees the copper of 3a
 python3 tools/next/route_s3d_iso2.py              # stage 3d (next section): sees 3a and 3c, 3b sees all three
+python3 tools/next/route_s3e_j2.py                # stage 3e
 python3 tools/next/route_s3b_signals.py
 tools/p2k/bin/kipy tools/next/route_s2_planes.py
 python3 tools/next/check_board.py --all-track-errors   # every clearance error of a track, not only the first
@@ -625,12 +630,14 @@ vias of stage 3a and five pieces of stage 3b moved by ≤ 2 mm, all counts staye
 ## ISO2 / AD2 fan-out, 420V divider, R10 / R79 (routing stage 3d, 2026-11-20)
 
 ```
-python3 tools/next/route_s3b_signals.py --strip   # full rebuild of stages 3a - 3d
+python3 tools/next/route_s3b_signals.py --strip   # full rebuild of stages 3a - 3e
+python3 tools/next/route_s3e_j2.py --strip
 python3 tools/next/route_s3d_iso2.py --strip
 python3 tools/next/route_s3c_cleanup.py --strip
 python3 tools/next/route_s3a_power.py
 python3 tools/next/route_s3c_cleanup.py
 python3 tools/next/route_s3d_iso2.py              # this stage: drawn copper, before the grid router of stage 3b
+python3 tools/next/route_s3e_j2.py                # stage 3e (next section)
 python3 tools/next/route_s3b_signals.py
 tools/p2k/bin/kipy tools/next/route_s2_planes.py
 python3 tools/next/render_inner_layers.py && python3 tools/next/render_s3a.py     # PNGs in routing/
@@ -779,6 +786,144 @@ path now that R10 has moved).
    copper for ISO2 pins 8 / 9 / 16, but the two stage-3a routes next to it (ISO2 pin 1 / C98) are found by the grid
    router and moved by 1 mm in this rebuild (the +3V3 via is now at (58.4, -29.4) next to C98, the In2 feed ends
    there). The fan-out does not depend on where they land.
+
+## J2 escapes and J2 nets (routing stage 3e, 2026-11-20)
+
+```
+python3 tools/next/route_s3b_signals.py --strip   # full rebuild of stages 3a - 3e
+python3 tools/next/route_s3e_j2.py --strip
+python3 tools/next/route_s3d_iso2.py --strip
+python3 tools/next/route_s3c_cleanup.py --strip
+python3 tools/next/route_s3a_power.py
+python3 tools/next/route_s3c_cleanup.py
+python3 tools/next/route_s3d_iso2.py
+python3 tools/next/route_s3e_j2.py                # this stage: drawn copper, before the grid router of stage 3b
+python3 tools/next/route_s3b_signals.py
+tools/p2k/bin/kipy tools/next/route_s2_planes.py
+python3 tools/next/render_inner_layers.py && python3 tools/next/render_s3a.py     # PNGs in routing/
+```
+
+`route_s3e_j2.py` is a step table like stage 3d (`--dry-run OUT.kicad_pcb`, `--strip`, any other option is
+refused); all of it is drawn copper, no `auto` step, no `relax`. 5.1 copper it deletes stays deleted
+(`routing/deleted_s3e.json`: 58 segments, 220 mm, and 1 via), no part is moved (`routing/moves_s3e.json` is empty),
+what it adds is rebuilt on every run (`routing/s3e_added.json`: 119 segments - In2 311 mm, B.Cu 52 mm, F.Cu 9 mm -
+and 10 vias). The rows of these nets are gone from the stage 3b table (175 -> 150 rows). Changed in the data of
+the earlier stages: stage 3a keeps the ground track of ISO1 pin 8 out of the via site of pin 7 (`avoid` box), stage
+3c ends its EPWM5A lane where the bundle below turns (x -1.848).
+
+### Escape geometry at J2
+
+Pads 0.805 mm round on every layer, pitch 1.27 mm: 0.465 mm between two pads of a column and between the two
+columns. A 0.15 mm track fits only centred, 0.1575 mm each side:
+
+- between two signal pads on any layer (SIGNAL class clearance 0.15 mm);
+- between two GND pads **only on In2** (rule "PRIMARY_LV inner layers 0.15 mm" of stage 3d; 0.2 mm on the outer
+  layers leaves no room - this is why the 5.1 escape of pin 38 between the grounded pins 35 / 37 was cut).
+
+The header is crossed at right angles through the gap between two rows (y of the gap = pin y + 0.635), a pad of
+the far column is entered at 45 degrees from the crossing point between the columns (x 33.7707). The script has
+the pin positions as functions (`pin_y`, `gap_y`), the tracks are written from them.
+
+| Pin, net | Route | Length |
+|---|---|---|
+| 38 DHB_I_MEAS (R42 / C26) | 5.1 F.Cu track, via 0.5 / 0.3 at (31.9, -1.15) west of the column, **In2** through the gap 35 / 37 (both GND) into pin 38 | F.Cu 2.6 mm new, In2 3.6 mm |
+| 42 PFC_I1_MEAS (R96 / C88) | B.Cu 1.3 mm from R96 pin 1, via (32.1, 4.3), **F.Cu** through the gap 41 / 43 into pin 42 | F.Cu 2.7 mm |
+| 43 AUX_MEAS (R132) | **In2** through the gap 42 / 44, east to a via at (36.53, 1.6) between the +3V3 and 15V tracks on F.Cu, B.Cu 2.0 mm to R132 pin 2 | In2 5.6 mm |
+| 49 5V_MEAS (R135) | In2 round the south end of the header and north along x 37.4 to a via at (35.64, -3.81) and B.Cu to R135 pin 2: drawn here, 0.9 mm east of the AUX_MEAS via (the stage-3b lane at x 35.6 lay across the path of AUX_MEAS) | In2 19.4 mm |
+
+PFC_I2_MEAS has the gap 41 / 43 on B.Cu, PFC_I1_MEAS on F.Cu (In1 ... In4 between the two), AUX_MEAS crosses
+PFC_I1_MEAS between the columns on In2 under the In1 ground plane. All four lines run over the In1 / In4 ground
+planes (In2 between In1 GND and the In3 +3V3 pour), away from the PWM lanes, which leave J2 north of pin 19.
+
+### Control bus round mounting hole H4
+
+The nine lanes of the 5.1 control bus on In2 (J2 -> DRV3 / ISO1 / relay driver: GPIO_BYPASS_RLY, +3V3, HT_CLK,
+SYNCH_1, HT_SDATA, SYNCH_2, $HT_CS, EPWM5A, EPWM6A) passed 1.5 mm from the centre of H4, which is earthed in 5.2
+(hole clearance 3.2 mm): they were cut there, and stage 3b got two of them through on a detour. All nine are drawn
+again as one bundle, 0.1524 mm wide on 0.3048 mm pitch, same order everywhere: the kept west lane -> 45 degrees
+south-east -> east above the hole -> 45 degrees south-east (tangent) -> the kept east lane -> the kept diagonal bus.
+Innermost lane (GPIO_BYPASS_RLY) 5.03 mm from the hole centre: its edge 3.2 mm from the ring of H4 (the stricter
+measure of `s3_router.py`), 3.45 mm from the hole wall; outermost (EPWM6A) 7.47 mm.
+
+Nine lanes did not fit between the hole and the 5.1 5V via at (8.81, -47.45) with the `Net-(C63-Pad1)` lane round
+it (2.7 mm, 2.9 mm needed): the **5V via stands 1.35 mm further east** at (10.15, -48.0) (0.6 / 0.3), its B.Cu
+track passes north of the +1V65_BIAS via at (7.9, -49.7), and the C63 lane comes straight down x 8.8 and turns
+outside the bundle. This also clears the 5.1 marker "5V via 0.166 mm from the +1V65_BIAS track".
+
+### DRV3, DRV5, ISO1
+
+- **DRV3 inputs (EPWM5A pin 1, EPWM6A pin 2).** Via sites: F.Cu has the heater switch node north of y -56.1
+  (1.2 mm), B.Cu the anode pad of D11 and the floating supply `Net-(DRV3-VDDA)`; what is left is x -20 ... -15.3 /
+  y -54.3 ... -51.5. The dead end of the 5.1 5V lane and a dangling 5.1 GND stub on In2 ran through it: deleted
+  (5 segments). EPWM5A: In2 lane -> via (-16.51, -53.9) -> B.Cu 6.0 mm to pin 1 and on to R78 pin 2. EPWM6A: In2
+  lane west along y -56.39 and south-west to a via at (-18.6, -52.57) -> B.Cu 2.9 mm to pin 2. Vias from the west:
+  5V (stage 3a), EPWM6A, EPWM5A = pin order 3, 2, 1.
+- **DRV5 inputs.** B12 / PRI_DHB_HI arrive at the 5.1 vias (19.85 / 19.0, -46.4), DAB_DIS (stage 3b) west of
+  them; pin 1 (B12) lies south of pin 2 (PRI_DHB_HI), so the lanes turn west below pin 1 in the order B12,
+  PRI_DHB_HI, DAB_DIS from the north: B12 enters pin 1 from below (B.Cu 6.1 mm), PRI_DHB_HI goes round its west
+  end into pin 2 (9.8 mm, 0.275 mm from the pads on both sides). The stage-3b route of PRI_DHB_HI (east end of pin
+  2) had shut pin 1 in. **DAB_DIS -> pin 5:** the east ends of pins 4 - 7 are inside the 5V link pin 3 - pin 8 of
+  stage 3a, so 0.2 mm on B.Cu from R129 pin 1 between C94 and C118 to the west end of pin 5 (7.9 mm); the
+  dead-time net R127 - C118 beside it is drawn here as well (0.2 mm, 4.4 mm; a 0.4 mm track of stage 3b does not
+  fit next to it). That track cuts C94 pin 2 / DRV5 pin 4 and R127 pin 2 off the B.Cu ground pour: **two ground
+  vias** 0.5 / 0.3 at (14.0, -53.26) and (12.45, -55.0) into the planes, through the F.Cu DC+ pour next to the
+  hole of the 5V via of stage 3a.
+- **HT_SDATA at ISO1 pin 7.** TR2 (heater domain) stands 6.7 mm north of the pin, a via is only possible south of
+  y -56.6 (8.0 mm in plan view): F.Cu 3.2 mm south-east between the HT_CLK track of pin 6 and the ground via of
+  pin 8 to a via at (-35.1, -56.5), In2 4.5 mm west and round the vias of pins 3 - 5 under the primary pad row (8.7
+  mm from the heater-side pads) to the end of the kept 5.1 lane.
+
+### Numbers
+
+| | 8fa3b1b (before) | after stage 3e |
+|---|---|---|
+| unconnected | 43 | **29** |
+| clearance markers, first error per track | 7 (HV 1, PRIMARY_LV 5, HEATER 1) | **6** (1 / 4 / 1) |
+| clearance markers, all errors | 9 (1 / 7 / 1) | 8 (1 / 6 / 1) |
+| dangling tracks / vias | 59 / 0 | 37 / 0 |
+| courtyard overlaps | 130 | 130 |
+| planes In1 / In4: GND / ISO_GND / HT_GND (mm²) | 5577 / 2225 / 909 | 5574 / 2225 / 909 |
+| In3 pours: 15V / 5V / +3V3 / 15V_ISO_SEC / 5V_ISOL / 6V3 (mm²) | 645 / 232 / 969 / 554 / 190 / 681 | 644 / 232 / 967 / 554 / 190 / 681 |
+| stage 3b rows routed | 134 of 175 | 125 of 150 |
+
+`check_board.py`, `check_domains.py` (same layer and layer to layer; ALLOW: Q19 / Q21 only) and `check_next.sh`
+pass. Nothing of this stage is on In1 / In4, no switch node on an inner layer, TR1 pin 2 untouched, no via near
+the PRI / SEC barrier. The 14 closed connections: DHB_I_MEAS, PFC_I1_MEAS, AUX_MEAS, the six open bus lanes
+(SYNCH_1, SYNCH_2, HT_CLK, GPIO_BYPASS_RLY, EPWM5A, EPWM6A; $HT_CS and HT_SDATA were joined by stage 3b before
+on a detour, the +3V3 lane is joined now and its open end is C125), EPWM5A at DRV3, HT_SDATA at ISO1, B12, DAB_DIS at DRV5 pin 5, the +3V3 lane to U1 (stage 3b finds it now).
+
+### Left, and open points
+
+1. **UART TX / RX (J2 pins 26 / 24 -> U11 pins 4 / 5) and the +3V3 feed of U11 pin 3: not routed.** U11 lies
+   north of the control bus, J2 pins 24 / 26 south of the pins the bus leaves from, and primary copper may not
+   come closer than 8.0 mm to the UART island (x -4.4 ... 20.3 for y < -65.3). On In2 alone there is no path:
+   south-west of the bus the lanes end at H4 / the PFC choke pin L2.2 and would still have to cross the bus at
+   DRV3; north-east of it they have to cross every lane that goes north into the U1 block (C63, C11, +1V65_BIAS,
+   +3V3, HEATER_CURRENT). Choices: (a) TX / RX as two more inner lanes of the H4 bundle (the bundle and the 5V via
+   move out by 0.6 mm), In2 south of the bus to x about -4, two vias each south of the bus (outside the F.Cu DC+
+   pour) and B.Cu north through the empty strip x -6.5 ... -4.4 to vias beside U11 pins 4 / 5, with the +3V3 of
+   U11 as a third B.Cu track from a via on the +3V3 bus lane; at J2 the two lines leave pins 24 / 26 on an outer
+   layer, because the C63 lane (x 29.6) closes In2 west of the header; (b) move U11 / J4. Recommendation: (a), as
+   its own stage with the bundle redrawn for eleven lanes. The 5.1 stubs of TX / RX on B.Cu (to x 40.6 / 48.7,
+   towards the old UART place) are still there.
+2. **R77 (pull-down of EPWM6A) and the 5V link bus -> DRV3: both open, one decision.** R77 sits at (-8.0, -62.6)
+   on B.Cu; its 5.1 connection is an In2 leg (x -9.12) from the bus plus a via that no longer exists: every via
+   site at R77 is in the F.Cu DC+ zone of Q11's tab (`S3A_Q11_tab_DC`), and B.Cu is closed by the bootstrap node of
+   D11 and the 15V tracks. The 5V of DRV3 / the relay driver / ISO1 came through the same bus (5.1: B.Cu from the
+   via at the bundle to x -11.7, where D11 stands now). 5V has to be the lane north of EPWM6A (pin order 3, 2, 1
+   at DRV3), and exactly there the leg of R77 crosses. **Recommendation: move R77 next to DRV3 pin 2** (beside R78,
+   about 10 mm - more than this stage may do); then the leg goes, 5V is drawn as the tenth lane (0.25 mm; room for
+   it is kept: 0.6 mm between EPWM6A and the +1V65_BIAS lane) with a via beside the end of its B.Cu track at
+   (3.6, -49.8). Without the move 5V needs a 15 mm loop round the R77 via. The dead 5.1 5V lane at DRV3 is
+   deleted; the live lane ends at (-21.0, -48.1).
+3. **DAB_DIS, branch to DRV5** is still the stage-3b route: 59 mm with 5 vias (it has to cross the +3V3 trunk
+   north-east of J2). To be drawn with one F.Cu hop. GPIO_BYPASS_RLY west of the bus (38 mm B.Cu through the gap
+   at C85, 1 via) and the short stubs at ISO1 pins 3 - 6 are stage-3b routes that look right.
+4. `+3V3` at C125 / C87 (U1 block) and `Net-(R51-Pad2)` are not J2 nets: unchanged (open).
+5. Two more holes in the F.Cu DC+ pour (the ground vias at DRV5). The pour is the feed of the heater bridge only
+   (about 4.5 mm of copper is left beside the column of holes at x 12 ... 14); if that is not wanted, DAB_DIS has
+   to reach pin 5 by an In2 hop instead (two vias as well).
+6. A rebuild is still not bit-identical in stage 3a / 3b (plane vias); stages 3c, 3d and 3e reproduce exactly.
 
 ## Footprints and 3D models (phase 3, 2026-11-18)
 

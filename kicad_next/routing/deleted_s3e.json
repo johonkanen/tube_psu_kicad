@@ -702,6 +702,186 @@
    ],
    "width": 0.3048,
    "reason": "5.1 5V via / track in the way of the bundle round H4: via 1.35 mm further east"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -21.011,
+    -48.089
+   ],
+   "end": [
+    -15.2096,
+    -53.8904
+   ],
+   "width": 0.254,
+   "reason": "dead end of the 5.1 5V lane on In2 (its B.Cu half from the bus is gone; open 5V link, README stage 3e): in the via sites of EPWM5A / EPWM6A"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -15.2096,
+    -53.8904
+   ],
+   "end": [
+    -15.2096,
+    -55.1484
+   ],
+   "width": 0.254,
+   "reason": "dead end of the 5.1 5V lane on In2 (its B.Cu half from the bus is gone; open 5V link, README stage 3e): in the via sites of EPWM5A / EPWM6A"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -15.2096,
+    -55.1484
+   ],
+   "end": [
+    -14.014,
+    -56.344
+   ],
+   "width": 0.254,
+   "reason": "dead end of the 5.1 5V lane on In2 (its B.Cu half from the bus is gone; open 5V link, README stage 3e): in the via sites of EPWM5A / EPWM6A"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -14.014,
+    -56.344
+   ],
+   "end": [
+    -11.679,
+    -56.344
+   ],
+   "width": 0.254,
+   "reason": "dead end of the 5.1 5V lane on In2 (its B.Cu half from the bus is gone; open 5V link, README stage 3e): in the via sites of EPWM5A / EPWM6A"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -21.3,
+    -48.7
+   ],
+   "end": [
+    -15.997,
+    -54.003
+   ],
+   "width": 0.1524,
+   "reason": "dangling 5.1 GND stub on In2 beside the 5V lane, in the via site of EPWM5A"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM5A",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -14.351,
+    -55.245
+   ],
+   "end": [
+    -14.055,
+    -55.245
+   ],
+   "width": 0.1524,
+   "reason": "5.1 EPWM5A escape towards the old driver footprint (its via site is taken by the heater switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM5A",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -14.055,
+    -55.245
+   ],
+   "end": [
+    -13.547,
+    -55.753
+   ],
+   "width": 0.1524,
+   "reason": "5.1 EPWM5A escape towards the old driver footprint (its via site is taken by the heater switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM5A",
+   "layer": "B.Cu",
+   "start": [
+    -16.51,
+    -54.89
+   ],
+   "end": [
+    -16.155,
+    -55.245
+   ],
+   "width": 0.1524,
+   "reason": "5.1 EPWM5A escape towards the old driver footprint (its via site is taken by the heater switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM5A",
+   "layer": "B.Cu",
+   "start": [
+    -16.51,
+    -53.289
+   ],
+   "end": [
+    -16.51,
+    -54.89
+   ],
+   "width": 0.1524,
+   "reason": "5.1 EPWM5A escape towards the old driver footprint (its via site is taken by the heater switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM5A",
+   "layer": "B.Cu",
+   "start": [
+    -17.9,
+    -51.899
+   ],
+   "end": [
+    -16.51,
+    -53.289
+   ],
+   "width": 0.1524,
+   "reason": "5.1 EPWM5A escape towards the old driver footprint (its via site is taken by the heater switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "B.Cu",
+   "start": [
+    19.0,
+    -49.12
+   ],
+   "end": [
+    19.0,
+    -46.4
+   ],
+   "width": 0.1524,
+   "reason": "5.1 stub north of the via, towards the old driver footprint"
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "B.Cu",
+   "start": [
+    19.854,
+    -46.4
+   ],
+   "end": [
+    19.854,
+    -48.4
+   ],
+   "width": 0.1524,
+   "reason": "5.1 stub north of the via, towards the old driver footprint"
   }
  ]
 }

@@ -281,7 +281,7 @@ GROUNDS = [
     ("track", "GND", F, 0.3, [(-4.65, -74.83), (-6.15, -74.83)], dict(relax=("U11",))),
     ("via", "GND", -6.15, -74.83, *VS, dict(relax=("U11",))),
     a("GND", "C97.2", "ISO1.2", F, 0.3, relax=("ISO1",)), gnd("C97.2", layers=F),
-    gnd("ISO1.8", layers=F, relax=("ISO1",), margin=10, **FG),
+    gnd("ISO1.8", layers=F, relax=("ISO1",), margin=10, avoid=[(-36.75, -58.75, -34.25, -55.8)], **FG),   # (box: HT_SDATA of pin 7, stage 3e)
     # (ISO2 pin 8: stage 3d, route_s3d_iso2.py - its ground leaves with the signal bundle, not past C98)
     gnd("C98.2", layers=F, margin=7, **FG), gnd("R125.2", layers=B),
     gnd((56.5, -17.0, "F.Cu"), layers=F), gnd((20.9, -12.36, "B.Cu"), layers=B, w=0.3),

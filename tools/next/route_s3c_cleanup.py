@@ -11,11 +11,13 @@ dangling 5.1 copper that no open connection starts on. Plan and list: kicad_next
 Order of a full rebuild (this step sees the copper of stage 3a, stage 3d = the ISO2 / AD2 fan-out sees both, and
 stage 3b all three):
     python3 tools/next/route_s3b_signals.py --strip
+    python3 tools/next/route_s3e_j2.py --strip
     python3 tools/next/route_s3d_iso2.py --strip
     python3 tools/next/route_s3c_cleanup.py --strip
     python3 tools/next/route_s3a_power.py
     python3 tools/next/route_s3c_cleanup.py
     python3 tools/next/route_s3d_iso2.py
+    python3 tools/next/route_s3e_j2.py
     python3 tools/next/route_s3b_signals.py
     tools/p2k/bin/kipy tools/next/route_s2_planes.py
 

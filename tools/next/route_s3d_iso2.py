@@ -9,11 +9,13 @@ ISO2 are left to the grid router. Plan, numbers and the reasons: kicad_next/READ
 
 Order of a full rebuild (this stage is a drawn structure: it runs before the grid router of stage 3b):
     python3 tools/next/route_s3b_signals.py --strip
+    python3 tools/next/route_s3e_j2.py --strip
     python3 tools/next/route_s3d_iso2.py --strip
     python3 tools/next/route_s3c_cleanup.py --strip
     python3 tools/next/route_s3a_power.py
     python3 tools/next/route_s3c_cleanup.py
     python3 tools/next/route_s3d_iso2.py
+    python3 tools/next/route_s3e_j2.py
     python3 tools/next/route_s3b_signals.py
     tools/p2k/bin/kipy tools/next/route_s2_planes.py
 

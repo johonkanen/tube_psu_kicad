@@ -7,11 +7,13 @@ Order of a full rebuild (the stage-3a router must not see the copper of the late
 the kept 5.1 copper, route_s3c_cleanup.py, and stage 3d = the drawn ISO2 / AD2 fan-out, route_s3d_iso2.py, run
 between 3a and this stage):
     python3 tools/next/route_s3b_signals.py --strip
+    python3 tools/next/route_s3e_j2.py --strip
     python3 tools/next/route_s3d_iso2.py --strip
     python3 tools/next/route_s3c_cleanup.py --strip
     python3 tools/next/route_s3a_power.py
     python3 tools/next/route_s3c_cleanup.py
     python3 tools/next/route_s3d_iso2.py
+    python3 tools/next/route_s3e_j2.py
     python3 tools/next/route_s3b_signals.py
     tools/p2k/bin/kipy tools/next/route_s2_planes.py
 
@@ -32,12 +34,15 @@ VS = (0.6, 0.3)
 SLOT_GAP = (57.5, -22.5, 66.0, -9.0)      # primary tracks of ISO2 do not use the gap between the TR1 and ISO2 slots
 # (the ISO2 / AD2 rows - both sides of ISO2, the AD2 SPI, DAB_DIS / DAB_DIS_SEC, AD2_3V3, C103 - are stage 3d now:
 # route_s3d_iso2.py)
+# (the J2 nets - the analog escapes at J2, the control bus round mounting hole H4, EPWM5A / EPWM6A at DRV3, B12 /
+# PRI_DHB_HI / DAB_DIS at DRV5 with its dead-time net, HT_SDATA at ISO1 - are stage 3e: route_s3e_j2.py. Two open
+# connections have no row any more, they need a decision (README "Stage 3e"): EPWM6A -> R77 pin 2 and the 5V link
+# from the bus to DRV3)
 
 TABLE = [
     # ---- supply, ground and switch-node leftovers
     ('supply, ground and switch-node leftovers', '+1V65_BIAS', 'C123.1', (1.5, -54.5, 'In2.Signal_HV'), 'FB2', 0.3, {'relax': ('C123',)}),
     ('supply, ground and switch-node leftovers', '+1V65_BIAS', 'C126.1', (30.518, 9.182, 'F.Cu'), 'FB2', 0.3, {'relax': ('C126',)}),
-    ('supply, ground and switch-node leftovers', 'GND', (-21.3, -48.7, 'In2.Signal_HV'), (-21.712, -49.199, 'B.Cu'), 'FB2', 0.3, {}),
     ('supply, ground and switch-node leftovers', '5V', (-23.3, -53.036, 'B.Cu'), (-22.6, -53.1, 'B.Cu'), 'FB2', 0.3, {}),
     ('supply, ground and switch-node leftovers', 'ISO_GND', (71.51, -61.3436, 'B.Cu'), (71.51, -60.3784, 'B.Cu'), 'FB2', 0.3, {}),
     ('supply, ground and switch-node leftovers', '/06 Heaters/HEATER_HI_SOURCE', 'DRV3.14', (-18.3, -61.7, 'B.Cu'), 'FB', 0.3, {'relax': ('DRV3',)}),
@@ -59,7 +64,6 @@ TABLE = [
     ('supply, ground and switch-node leftovers', '+3V3', 'C125.1', (-1.1, -52.8, 'In2.Signal_HV'), 'FB2', 0.3, {'relax': ('C125',)}),
     ('supply, ground and switch-node leftovers', 'DHB_HI_SOURCE_SEC', 'DRV6.14', (55.45, -47.275, 'F.Cu'), 'FB', 0.3, {'relax': ('DRV6',)}),
     ('supply, ground and switch-node leftovers', 'DHB_HI_SOURCE_SEC', 'C46.1', (55.45, -47.275, 'F.Cu'), 'FB', 0.3, {'relax': ('C46',)}),
-    ('supply, ground and switch-node leftovers', '5V', (3.6, -49.8, 'B.Cu'), (-14.014, -56.344, 'In2.Signal_HV'), 'FB2', 0.3, {}),
     ('supply, ground and switch-node leftovers', '+3V3', 'U11.3', (6.4, -61.0, 'B.Cu'), 'FB2', 0.3, {'relax': ('U11',)}),
     # ---- gate drives
     ('gate drives', 'Net-(D10-PadA)', 'D10.A', 'R142.2', 'FB2', 0.4, {'relax': ('D10', 'R142')}),
@@ -82,14 +86,10 @@ TABLE = [
     ('gate drives', 'DHB_LOW_GATE_SEC', 'R87.1', 'D32.C', 'FB2', 0.4, {'relax': ('D32', 'R87')}),
     ('gate drives', 'Net-(Q8-G)', 'R88.2', (71.415, -41.9499, 'B.Cu'), 'FB2', 0.4, {'relax': ('R88',)}),
     ('gate drives', 'Net-(DRV3-VDDA)', 'R99.2', 'C25.1', 'FB2', 0.4, {'relax': ('C25', 'R99')}),
-    ('gate drives', 'EPWM5A', (-16.51, -54.89, 'B.Cu'), (-14.351, -55.245, 'In2.Signal_HV'), 'FB2', 0.4, {}),
     ('gate drives', 'Net-(D32-PadA)', 'D32.A', 'R88.1', 'FB2', 0.4, {'relax': ('D32', 'R88')}),
     ('gate drives', '/06 Heaters/HEATER_HI_DRV', (-21.9, -64.212, 'B.Cu'), (-20.433, -62.567, 'B.Cu'), 'FB2', 0.4, {}),
-    ('gate drives', 'EPWM5A', 'DRV3.1', 'R78.2', 'FB2', 0.4, {'relax': ('DRV3', 'R78')}),
     ('gate drives', 'Net-(DRV3-DT)', 'DRV3.6', 'R130.1', 'FB2', 0.4, {'relax': ('DRV3', 'R130')}),
-    ('gate drives', 'DAB_DIS', 'DRV5.5', 'R129.1', 'FB2', 0.4, {'relax': ('DRV5', 'R129')}),
     ('gate drives', 'Net-(DRV5-DT)', 'DRV5.6', 'R127.1', 'FB2', 0.4, {'relax': ('DRV5', 'R127')}),
-    ('gate drives', 'EPWM5A', 'DRV3.1', (-17.9, -51.899, 'B.Cu'), 'FB2', 0.4, {'relax': ('DRV3',)}),
     ('gate drives', '/06 Heaters/HEATER_SYNC_GATE_1', 'Q1.2', 'R63.1', 'FB2', 0.4, {'relax': ('Q1', 'R63')}),
     ('gate drives', 'Net-(DRV6-VDDA)', 'C46.2', 'DRV6.16', 'FB2', 0.4, {'relax': ('C46', 'DRV6')}),
     ('gate drives', 'Net-(DRV4-OUTA)', 'DRV4.7', 'R63.2', 'FB2', 0.4, {'relax': ('DRV4', 'R63')}),
@@ -101,9 +101,7 @@ TABLE = [
     ('gate drives', 'ISO_SEC_DHB_LO', 'DRV6.2', (68.7, -60.182, 'In2.Signal_HV'), 'FB2', 0.4, {'relax': ('DRV6',)}),
     ('gate drives', 'Net-(DRV5-VDDB)', 'DRV5.11', (21.6, -56.2, 'B.Cu'), 'FB2', 0.4, {'relax': ('DRV5',)}),
     ('gate drives', 'Net-(D11-K)', 'D11.C', 'R99.1', 'FB2', 0.4, {'relax': ('D11', 'R99')}),
-    ('gate drives', 'Net-(DRV5-DT)', 'R127.1', 'C118.1', 'FB2', 0.4, {'relax': ('C118', 'R127')}),
     ('gate drives', '/06 Heaters/HEATER_HI_GATE', 'R36.1', 'R24.2', 'FB2', 0.4, {'relax': ('R36', 'R24')}),
-    ('gate drives', 'PRI_DHB_HI', 'DRV5.2', (19.0, -49.12, 'B.Cu'), 'FB2', 0.4, {'relax': ('DRV5',)}),
     ('gate drives', 'Net-(DRV1-OUTH)', 'R14.1', 'DRV1.2', 'FB2', 0.4, {'relax': ('DRV1', 'R14')}),
     ('gate drives', '/06 Heaters/HEATER_HI_DRV', 'DRV3.15', (-20.433, -62.567, 'B.Cu'), 'FB2', 0.4, {'relax': ('DRV3',)}),
     ('gate drives', 'Net-(D18-K)', 'R46.1', (60.4, -66.8, 'B.Cu'), 'FB2', 0.4, {'relax': ('R46',)}),
@@ -113,18 +111,15 @@ TABLE = [
     ('gate drives', 'Net-(DRV6-VDDA)', 'DRV6.16', 'R46.2', 'FB2', 0.4, {'relax': ('DRV6', 'R46')}),
     ('gate drives', 'Net-(DRV2-OUTH)', 'DRV2.2', 'R20.1', 'FB2', 0.4, {'relax': ('DRV2', 'R20')}),
     ('gate drives', 'Net-(DRV5-VDDB)', 'C92.2', 'R41.2', 'FB2', 0.4, {'relax': ('C92', 'R41')}),
-    ('gate drives', 'B12', 'DRV5.1', (19.854, -46.4, 'B.Cu'), 'FB2', 0.4, {'relax': ('DRV5',)}),
     ('gate drives', '/06 Heaters/HEATER_SYNC_GATE_1', 'R63.1', 'R108.1', 'FB2', 0.4, {'relax': ('R108', 'R63')}),
     ('gate drives', 'Net-(DRV1-OUTL)', 'R1.1', 'DRV1.3', 'FB2', 0.4, {'relax': ('DRV1', 'R1')}),
     ('gate drives', 'PFC_PWM2', 'DRV2.6', (14.1, 13.8, 'B.Cu'), 'FB2', 0.4, {'relax': ('DRV2',)}),
     ('gate drives', '/06 Heaters/HEATER_LOW_GATE', 'Q10.1', (-10.028, -73.1, 'B.Cu'), 'FB2', 0.4, {'relax': ('Q10',)}),
     ('gate drives', 'Net-(DRV6-DT)', 'DRV6.6', 'R128.1', 'FB2', 0.4, {'relax': ('DRV6', 'R128')}),
-    ('gate drives', 'EPWM6A', (-9.1238, -63.119, 'B.Cu'), (-9.1238, -56.769, 'In2.Signal_HV'), 'FB2', 0.4, {}),
     ('gate drives', 'Net-(DRV3-VDDA)', 'DRV3.16', (-23.9, -56.1, 'B.Cu'), 'FB2', 0.4, {'relax': ('DRV3',)}),
     ('gate drives', 'DHB_HI_GATE_SEC', 'DRV6.15', (62.3, -53.9, 'B.Cu'), 'FB2', 0.4, {'relax': ('DRV6',)}),
     ('gate drives', 'DHB_LOW_GATE', 'DRV5.15', (34.78, -50.72, 'B.Cu'), 'FB2', 0.4, {'relax': ('DRV5',)}),
     ('gate drives', 'ISO_SEC_DHB_LO', (68.7, -60.182, 'In2.Signal_HV'), (78.105, -54.677, 'In2.Signal_HV'), 'FB2', 0.4, {}),
-    ('gate drives', 'EPWM6A', 'DRV3.2', (-9.1238, -56.769, 'In2.Signal_HV'), 'FB2', 0.4, {'relax': ('DRV3',)}),
     ('gate drives', 'DHB_HI_GATE', 'DRV5.10', (35.2175, -52.6, 'B.Cu'), 'FB2', 0.4, {'relax': ('DRV5',)}),
     ('gate drives', '/06 Heaters/HEATER_LOW_DRV', 'DRV3.10', (-10.028, -70.441, 'B.Cu'), 'FB2', 0.4, {'relax': ('DRV3',)}),
     ('gate drives', 'DHB_LOW_GATE_SEC', 'D32.C', 'DRV6.10', 'FB2', 0.4, {'relax': ('D32', 'DRV6')}),
@@ -187,7 +182,6 @@ TABLE = [
     ('SPI and control', 'Net-(PWM2-VIN)', 'C140.1', 'R154.1', 'FB2', 0.2, {'relax': ('C140', 'R154')}),
     ('SPI and control', 'Net-(Q9-D)', 'Q9.1', (-58.9615, -33.2935, 'B.Cu'), 'FB2', 0.2, {'relax': ('Q9',)}),
     ('SPI and control', 'Net-(PWM2-VERR)', 'R139.1', 'R138.2', 'FB2', 0.2, {'relax': ('R138', 'R139')}),
-    ('SPI and control', 'HT_SDATA', 'ISO1.7', (-36.952, -54.058, 'In2.Signal_HV'), 'FB2', 0.2, {'relax': ('ISO1',), 'foreign_gap': 4.0}),
     ('SPI and control', 'AC2', (-6.0, 2.9, 'B.Cu'), (-0.2, 6.5, 'B.Cu'), 'FB2', 0.3, {}),
     ('SPI and control', 'Net-(PWM2-VIN)', 'R153.2', 'PWM2.1', 'FB2', 0.2, {'relax': ('PWM2', 'R153')}),
     ('SPI and control', 'AC1', 'R47.1', (-15.5, -2.5, 'B.Cu'), 'FB2', 0.3, {'relax': ('R47',)}),
