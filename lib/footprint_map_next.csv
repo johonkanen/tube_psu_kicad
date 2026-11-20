@@ -146,7 +146,7 @@ HT_6V3,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"
 HT_GND,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
 IN1,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
 IN2,tube_psu:PIN,tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1 (5.2 copy with 3D model)"
-ISO1,tube_psu:SI8661,tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0,"SOIC-16W + 1 x 14.5 mm creepage slot (8.0 mm reinforced, primary <-> heater; phase 3)"
+ISO1,tube_psu:SI8661,tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0_T_ISO1,"SOIC-16W + T-shaped creepage slot: 14.5 mm stem (8.0 mm reinforced, primary <-> heater) + cross slot towards TR2 (board-specific, placement step 3)"
 ISO2,tube_psu:SI8661,tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot11.1,"SOIC-16W + 1 x 19.5 mm creepage slot (11.1 mm reinforced, primary <-> DAB secondary; phase 3)"
 J2,tube_psu:HEADER_2X25_50MIL,tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus,2x25 1.27 mm header
 J4,tube_psu_next:CONN_01X04,Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical,"1x4 2.54 mm: 1 GND, 2 3V3 in, 3 TXD in, 4 RXD out (NR 3b.2)"

@@ -5169,7 +5169,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0"
+		(property "Footprint" "tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0_T_ISO1"
 			(at 58.42 160.02 0)
 			(effects
 				(font

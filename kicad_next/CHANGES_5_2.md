@@ -198,7 +198,7 @@ Parts: 5.1 315, 5.2 363; removed 12, added 60.
 | HT_GND |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
 | IN1 |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
 | IN2 |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
-| ISO1 | SI8661 -> CA-IS3761LW |  | tube_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus -> tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0 |
+| ISO1 | SI8661 -> CA-IS3761LW |  | tube_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus -> tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0_T_ISO1 |
 | ISO2 | SI8661 -> CA-IS3761LW |  | tube_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus -> tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot11.1 |
 | J4 | 66226-003 -> UART 1x4 | CONN_01X03 -> CONN_01X04 | Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical -> Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical |
 | L1 | 200u -> TBD (measured) | RM8_INDUCTOR -> L_TOROID | tube_psu:L_RM8_Proteus -> tube_psu_next:L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_45deg |

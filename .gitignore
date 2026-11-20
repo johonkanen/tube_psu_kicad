@@ -16,3 +16,7 @@ build/
 reports/erc.rpt
 reports/drc.json
 reports/next/
+
+# temporary check projects (tools/next/check_board.py, check_footprints.py)
+.drc_*/
+.fpcheck_*/

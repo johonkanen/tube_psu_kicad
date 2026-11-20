@@ -92,6 +92,12 @@ def mm(v):
     return round(v / MM, 3)
 
 
+# Footprints that the trial chain starts from instead of the schematic one: ISO1 gets its board-specific T-slot
+# footprint (the schematic since 2026-11-20) only in placement step 3 (trial_placement_p3.py FOOTPRINTS), so steps
+# 0-2 stay as they were built.
+STEP0_FPID = {"ISO1": "tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0"}
+
+
 # --- netlist ------------------------------------------------------------------------------------------
 def netlist():
     with tempfile.TemporaryDirectory() as tmp:
@@ -391,6 +397,8 @@ def overlaps(pad, t):
 
 def main(argv):
     comps, pins, nets52 = netlist()
+    for r, f in STEP0_FPID.items():    # the trial chain keeps its own footprint history (see STEP0_FPID)
+        comps[r]["fpid"] = f
     nets52_set = set(nets52)
     b = pcbnew.LoadBoard(SRC)
     rec = {"layer_map": {"F.Cu": "F.Cu", "In1.Cu": "In1.Cu (In1.GND, L2)", "In2.Cu": "In4.Cu (In4.GND, L5)",

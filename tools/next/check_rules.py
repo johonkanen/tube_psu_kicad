@@ -2,7 +2,7 @@
 """Functional test of the 5.2 design rules (run with tools/p2k/bin/kipy).
 
 kicad-cli does not report syntax errors in a .kicad_dru (a broken rule is silently dropped), so this
-test proves that the rules parse and act: it copies kicad_next/tube_psu_5_2.{kicad_pcb,kicad_pro,
+test proves that the rules parse and act: it writes the empty board skeleton (make_board.write) and copies kicad_next/tube_psu_5_2.{kicad_pro,
 kicad_dru} into a temporary directory, adds pairs of test tracks on nets of the 5.2 schematic (their
 net classes come from the project's netclass patterns), runs the KiCad DRC and compares the violation
 types found at each test spot with the expected ones.
@@ -21,6 +21,8 @@ import pcbnew
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SRC = os.path.join(ROOT, "kicad_next")
 CLI = os.path.join(ROOT, "tools", "p2k", "bin", "kicad-cli")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import make_board  # noqa: E402
 L = {"F": pcbnew.F_Cu, "B": pcbnew.B_Cu, "In1": pcbnew.In1_Cu, "In2": pcbnew.In2_Cu, "In3": pcbnew.In3_Cu}
 
 # (net A, net B, layer, edge-to-edge gap mm, expected violation types at this spot)
@@ -73,9 +75,10 @@ def track(b, net, layer, x1, y, x2, w=0.3):
 
 def main():
     with tempfile.TemporaryDirectory() as tmp:
-        for ext in ("kicad_pcb", "kicad_pro", "kicad_dru"):
+        for ext in ("kicad_pro", "kicad_dru"):
             shutil.copy(os.path.join(SRC, f"tube_psu_5_2.{ext}"), tmp)
         pcb = os.path.join(tmp, "tube_psu_5_2.kicad_pcb")
+        make_board.write(pcb, quiet=True)   # empty skeleton (outline, H1-H8, layers, stackup), not the routed board
         b = pcbnew.LoadBoard(pcb)
         nets = {}
 

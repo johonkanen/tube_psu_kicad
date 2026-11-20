@@ -18,16 +18,6 @@ erc() {
     [ "$errs" -eq 0 ]
 }
 
-drc() {
-    tools/p2k/bin/kicad-cli pcb drc --format json --severity-all -o reports/next/drc.json kicad_next/tube_psu_5_2.kicad_pcb >/dev/null || return 1
-    python3 - <<'EOF'
-import collections, json, sys
-d = json.load(open("reports/next/drc.json"))
-v = collections.Counter(x["type"] for x in d["violations"])
-print(f"drc: {sum(v.values())} violations{' ' + str(dict(v)) if v else ''}, {len(d['unconnected_items'])} unconnected (reports/next/drc.json)")
-sys.exit(1 if v or d["unconnected_items"] else 0)
-EOF
-}
 
 step "5.2 symbol library up to date" python3 tools/next/gen_symbols.py --check
 step "5.2 schematic regenerated from tools/next/sheets, up to date" python3 tools/next/gen_schematic.py --check
@@ -41,11 +31,11 @@ else
 fi
 step "ERC" erc
 step "Net classes: one isolation domain per net, project file up to date" python3 tools/next/setup_project.py --check
-step "Board skeleton: 6 layers, JLC stackup, 5.1 outline and holes" quiet tools/p2k/bin/kipy tools/next/make_board.py --check
-step "DRC of the board" drc
+step "Board: 6 layers, JLC stackup, 5.1 outline (+ internal slots) and holes" quiet tools/p2k/bin/kipy tools/next/make_board.py --check
+step "Board: schematic parity, shorts, isolation rules (DRC without the creepage pass)" python3 tools/next/check_board.py
 step "Design rules parse and act (test tracks)" quiet tools/p2k/bin/kipy tools/next/check_rules.py
 step "Footprints load, pads = symbol pins, 3D models exist, barrier creepage (+ KiCad DRC)" quiet tools/p2k/bin/kipy tools/next/check_footprints.py
-step "Trial board (latest step): distances between isolation domains (pads, tracks, vias, zone copper, holes)" python3 tools/next/check_domains.py
+step "Board: distances between isolation domains (pads, tracks, vias, zone copper, holes)" python3 tools/next/check_domains.py kicad_next/tube_psu_5_2.kicad_pcb
 step "Netlist diff 5.1 -> 5.2 in kicad_next/CHANGES_5_2.md up to date, CSVs cover every part" python3 tools/next/netlist_diff.py --check
 
 echo

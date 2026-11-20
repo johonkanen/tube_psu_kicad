@@ -6,6 +6,7 @@
     tools/p2k/bin/kipy tools/next/make_board.py --check   check the committed board: 6 copper layers with
                                                           the names / types below, the JLC stackup, the
                                                           5.1 outline and mounting holes H1-H8 unchanged
+                                                          (added Edge.Cuts shapes must be internal slots)
 
 The skeleton holds only what is fixed (NEXT_REVISION_PLAN.md D3): the 5.1 board outline (Edge.Cuts) and
 the eight mounting holes copied from kicad/tube_psu.kicad_pcb (locked), the 6-layer copper set and the
@@ -86,7 +87,8 @@ def holes(board):
     return out
 
 
-def write():
+def write(out=OUT, quiet=False):
+    """the skeleton board; check_rules.py / check_footprints.py also write it as their empty test board"""
     src = pcbnew.LoadBoard(SRC)
     b = pcbnew.BOARD()
     b.SetCopperLayerCount(6)
@@ -104,18 +106,19 @@ def write():
             c.SetLocked(True)
             b.Add(c)
     b.GetDesignSettings().SetBoardThickness(pcbnew.FromMM(1.6))
-    pcbnew.SaveBoard(OUT, b)
+    pcbnew.SaveBoard(out, b)
     # the stackup goes in as text (pcbnew's Python stackup API is incomplete); pcbnew re-reads and
     # re-saves it, so the file is in pcbnew's own format
-    with open(OUT) as f:
+    with open(out) as f:
         s = f.read()
     s = re.sub(r"\t\t\(stackup\n.*?\n\t\t\)\n", "", s, flags=re.S)
     s = s.replace("\t(setup\n", "\t(setup\n" + STACKUP, 1)
-    with open(OUT, "w") as f:
+    with open(out, "w") as f:
         f.write(s)
-    b = pcbnew.LoadBoard(OUT)
-    pcbnew.SaveBoard(OUT, b)
-    print(f"make_board: wrote {os.path.relpath(OUT, ROOT)}")
+    b = pcbnew.LoadBoard(out)
+    pcbnew.SaveBoard(out, b)
+    if not quiet:
+        print(f"make_board: wrote {os.path.relpath(out, ROOT)}")
 
 
 def check():
@@ -127,8 +130,18 @@ def check():
     for layer, name, ltype in COPPER:
         if b.GetLayerName(layer) != name or b.GetLayerType(layer) != ltype:
             errs.append(f"layer {pcbnew.LayerName(layer)}: name {b.GetLayerName(layer)} type {b.GetLayerType(layer)}")
-    if outline(b) != outline(src):
-        errs.append("Edge.Cuts differs from the 5.1 outline")
+    extra = [s for s in outline(b) if s not in set(outline(src))]
+    if not set(outline(src)) <= set(outline(b)):
+        errs.append("Edge.Cuts: the 5.1 outline is not complete")
+    bb = src.GetBoardEdgesBoundingBox()
+    for s in b.GetDrawings():     # added Edge.Cuts shapes = internal barrier slots: strictly inside the 5.1 outline
+        if s.GetLayer() == pcbnew.Edge_Cuts and (s.GetShapeStr(), mm(s.GetStart().x), mm(s.GetStart().y),
+                                                 mm(s.GetEnd().x), mm(s.GetEnd().y)) in extra:
+            sb = s.GetBoundingBox()
+            if not (bb.GetLeft() < sb.GetLeft() and sb.GetRight() < bb.GetRight()
+                    and bb.GetTop() < sb.GetTop() and sb.GetBottom() < bb.GetBottom()):
+                errs.append(f"Edge.Cuts {s.GetShapeStr()} at ({mm(s.GetStart().x)}, {mm(s.GetStart().y)}) "
+                            "is not inside the 5.1 outline")
     if holes(b) != holes(src) or len(holes(b)) != 8:
         errs.append("mounting holes H1-H8 differ from 5.1")
     with open(OUT) as f:
@@ -141,7 +154,7 @@ def check():
     for e in errs:
         print("make_board: " + e)
     print(f"make_board: board skeleton {'OK' if not errs else 'FAILED'} (6 layers, stackup {thick} mm, "
-          f"outline {len(outline(b))} segments, holes {len(holes(b))})")
+          f"5.1 outline {len(outline(src))} segments + {len(extra)} internal slot shapes, holes {len(holes(b))})")
     return 1 if errs else 0
 
 

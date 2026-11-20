@@ -35,6 +35,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
 import setup_project  # noqa: E402
+import make_board  # noqa: E402
 
 PROJ = os.path.join(ROOT, "kicad_next")
 SCH = os.path.join(PROJ, "tube_psu_5_2.kicad_sch")
@@ -50,9 +51,10 @@ CREEPAGE = {frozenset(("PRIMARY", "SECONDARY")): 11.1, frozenset(("PRIMARY", "HE
             frozenset(("PRIMARY", "UART")): 8.0, frozenset(("SECONDARY", "UART")): 8.4,
             frozenset(("SECONDARY", "HEATER")): 5.2, frozenset(("HEATER", "UART")): 1.0,
             frozenset(("PRIMARY", "EARTH")): 3.2, frozenset(("SECONDARY", "EARTH")): 4.2}   # Y caps: basic
-# board-specific footprint variants that no schematic part uses (swapped in by the trial placement,
-# tools/next/trial_placement_p3.py): checked like the part's own footprint (pads, creepage, KiCad DRC)
-BOARD_VARIANTS = {"ISO1": "tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0_T_ISO1"}
+# footprint variants that the schematic part does not use but a board does: ISO1's plain slot footprint is what
+# the trial chain steps 0-2 place (reuse_51_board.py STEP0_FPID; the schematic uses the T-slot variant since
+# 2026-11-20): checked like the part's own footprint (pads, creepage, KiCad DRC)
+BOARD_VARIANTS = {"ISO1": "tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0"}
 NEG_CONTROL = ("ISO2", "Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm")   # must fail the KiCad creepage check
 MM = 1e6
 
@@ -355,9 +357,10 @@ def kicad_drc(barrier, comps, pins, netpins):
     xs = [place[r] for r, _ in items]
     assert len(items) <= len(xs)
     with tempfile.TemporaryDirectory(dir=ROOT, prefix=".fpcheck_") as tmp:
-        for ext in ("kicad_pcb", "kicad_pro", "kicad_dru"):
+        for ext in ("kicad_pro", "kicad_dru"):
             shutil.copy(os.path.join(PROJ, f"tube_psu_5_2.{ext}"), tmp)
         pcb = os.path.join(tmp, "tube_psu_5_2.kicad_pcb")
+        make_board.write(pcb, quiet=True)   # empty skeleton (outline, H1-H8, layers, stackup), not the routed board
         b = pcbnew.LoadBoard(pcb)
         nets = {}
         spots = {}
