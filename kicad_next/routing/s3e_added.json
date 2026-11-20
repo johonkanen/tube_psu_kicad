@@ -1,0 +1,1415 @@
+{
+ "note": "copper added by tools/next/route_s3e_*.py (removed and rebuilt on a re-run)",
+ "added": [
+  {
+   "kind": "track",
+   "net": "DHB_I_MEAS",
+   "layer": "F.Cu",
+   "w": 0.1524,
+   "a": [
+    29.7272,
+    -0.1
+   ],
+   "b": [
+    30.85,
+    -0.1
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DHB_I_MEAS",
+   "layer": "F.Cu",
+   "w": 0.1524,
+   "a": [
+    30.85,
+    -0.1
+   ],
+   "b": [
+    31.9,
+    -1.15
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "DHB_I_MEAS",
+   "x": 31.9,
+   "y": -1.15,
+   "d": 0.5,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "DHB_I_MEAS",
+   "layer": "In2.Signal_HV",
+   "w": 0.15,
+   "a": [
+    31.9,
+    -1.15
+   ],
+   "b": [
+    31.9,
+    -0.6
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DHB_I_MEAS",
+   "layer": "In2.Signal_HV",
+   "w": 0.15,
+   "a": [
+    31.9,
+    -0.6
+   ],
+   "b": [
+    32.5688,
+    0.0688
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DHB_I_MEAS",
+   "layer": "In2.Signal_HV",
+   "w": 0.15,
+   "a": [
+    32.5688,
+    0.0688
+   ],
+   "b": [
+    33.7707,
+    0.0688
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DHB_I_MEAS",
+   "layer": "In2.Signal_HV",
+   "w": 0.15,
+   "a": [
+    33.7707,
+    0.0688
+   ],
+   "b": [
+    34.4057,
+    0.7038
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "PFC_I1_MEAS",
+   "layer": "B.Cu",
+   "w": 0.1524,
+   "a": [
+    30.988,
+    3.937
+   ],
+   "b": [
+    31.351,
+    4.3
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "PFC_I1_MEAS",
+   "layer": "B.Cu",
+   "w": 0.1524,
+   "a": [
+    31.351,
+    4.3
+   ],
+   "b": [
+    32.1,
+    4.3
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "PFC_I1_MEAS",
+   "x": 32.1,
+   "y": 4.3,
+   "d": 0.5,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "PFC_I1_MEAS",
+   "layer": "F.Cu",
+   "w": 0.15,
+   "a": [
+    32.1,
+    4.3
+   ],
+   "b": [
+    32.5212,
+    3.8788
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "PFC_I1_MEAS",
+   "layer": "F.Cu",
+   "w": 0.15,
+   "a": [
+    32.5212,
+    3.8788
+   ],
+   "b": [
+    33.7707,
+    3.8788
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "PFC_I1_MEAS",
+   "layer": "F.Cu",
+   "w": 0.15,
+   "a": [
+    33.7707,
+    3.8788
+   ],
+   "b": [
+    34.4057,
+    3.2438
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "/04 MCU connector/AUX_MEAS",
+   "layer": "In2.Signal_HV",
+   "w": 0.15,
+   "a": [
+    33.1357,
+    4.5138
+   ],
+   "b": [
+    33.7707,
+    3.8788
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "/04 MCU connector/AUX_MEAS",
+   "layer": "In2.Signal_HV",
+   "w": 0.15,
+   "a": [
+    33.7707,
+    3.8788
+   ],
+   "b": [
+    35.9,
+    3.8788
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "/04 MCU connector/AUX_MEAS",
+   "layer": "In2.Signal_HV",
+   "w": 0.15,
+   "a": [
+    35.9,
+    3.8788
+   ],
+   "b": [
+    36.53,
+    3.2488
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "/04 MCU connector/AUX_MEAS",
+   "layer": "In2.Signal_HV",
+   "w": 0.15,
+   "a": [
+    36.53,
+    3.2488
+   ],
+   "b": [
+    36.53,
+    1.6
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "/04 MCU connector/AUX_MEAS",
+   "x": 36.53,
+   "y": 1.6,
+   "d": 0.5,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "/04 MCU connector/AUX_MEAS",
+   "layer": "B.Cu",
+   "w": 0.2,
+   "a": [
+    36.53,
+    1.6
+   ],
+   "b": [
+    37.02,
+    1.11
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "/04 MCU connector/AUX_MEAS",
+   "layer": "B.Cu",
+   "w": 0.2,
+   "a": [
+    37.02,
+    1.11
+   ],
+   "b": [
+    38.345,
+    1.11
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "/04 MCU connector/5V_MEAS",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    33.1357,
+    8.3238
+   ],
+   "b": [
+    33.1357,
+    8.49
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "/04 MCU connector/5V_MEAS",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    33.1357,
+    8.49
+   ],
+   "b": [
+    34.535,
+    9.89
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "/04 MCU connector/5V_MEAS",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    34.535,
+    9.89
+   ],
+   "b": [
+    36.8,
+    9.89
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "/04 MCU connector/5V_MEAS",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    36.8,
+    9.89
+   ],
+   "b": [
+    37.4,
+    9.29
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "/04 MCU connector/5V_MEAS",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    37.4,
+    9.29
+   ],
+   "b": [
+    37.4,
+    -2.6
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "/04 MCU connector/5V_MEAS",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    37.4,
+    -2.6
+   ],
+   "b": [
+    36.19,
+    -3.81
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "/04 MCU connector/5V_MEAS",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    36.19,
+    -3.81
+   ],
+   "b": [
+    35.635,
+    -3.81
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "/04 MCU connector/5V_MEAS",
+   "x": 35.635,
+   "y": -3.81,
+   "d": 0.6,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "/04 MCU connector/5V_MEAS",
+   "layer": "B.Cu",
+   "w": 0.2,
+   "a": [
+    35.635,
+    -3.81
+   ],
+   "b": [
+    35.635,
+    -3.91
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "/04 MCU connector/5V_MEAS",
+   "layer": "B.Cu",
+   "w": 0.2,
+   "a": [
+    35.635,
+    -3.91
+   ],
+   "b": [
+    36.035,
+    -4.31
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "GPIO_BYPASS_RLY",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    0.0,
+    -50.888
+   ],
+   "b": [
+    5.726,
+    -45.162
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "GPIO_BYPASS_RLY",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    5.726,
+    -45.162
+   ],
+   "b": [
+    7.9255,
+    -45.162
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "GPIO_BYPASS_RLY",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    7.9255,
+    -45.162
+   ],
+   "b": [
+    11.4875,
+    -41.6
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "GPIO_BYPASS_RLY",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    11.4875,
+    -41.6
+   ],
+   "b": [
+    12.6,
+    -41.6
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    -13.1,
+    -52.8
+   ],
+   "b": [
+    -1.481,
+    -52.8
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    -1.481,
+    -52.8
+   ],
+   "b": [
+    5.8522,
+    -45.4668
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    5.8522,
+    -45.4668
+   ],
+   "b": [
+    8.0517,
+    -45.4668
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    8.0517,
+    -45.4668
+   ],
+   "b": [
+    11.4185,
+    -42.1
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    11.4185,
+    -42.1
+   ],
+   "b": [
+    12.9,
+    -42.1
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "HT_CLK",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    -13.2,
+    -53.2
+   ],
+   "b": [
+    -1.45,
+    -53.2
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "HT_CLK",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    -1.45,
+    -53.2
+   ],
+   "b": [
+    5.9784,
+    -45.7716
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "HT_CLK",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    5.9784,
+    -45.7716
+   ],
+   "b": [
+    8.178,
+    -45.7716
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "HT_CLK",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    8.178,
+    -45.7716
+   ],
+   "b": [
+    11.2776,
+    -42.672
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "HT_CLK",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    11.2776,
+    -42.672
+   ],
+   "b": [
+    13.589,
+    -42.672
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "SYNCH_1",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    -13.2081,
+    -53.677
+   ],
+   "b": [
+    -1.496,
+    -53.677
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "SYNCH_1",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    -1.496,
+    -53.677
+   ],
+   "b": [
+    6.1046,
+    -46.0764
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "SYNCH_1",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    6.1046,
+    -46.0764
+   ],
+   "b": [
+    8.3043,
+    -46.0764
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "SYNCH_1",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    8.3043,
+    -46.0764
+   ],
+   "b": [
+    10.8637,
+    -43.517
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "SYNCH_1",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    10.8637,
+    -43.517
+   ],
+   "b": [
+    14.102,
+    -43.517
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "HT_SDATA",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    -13.33,
+    -54.058
+   ],
+   "b": [
+    -1.446,
+    -54.058
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "HT_SDATA",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    -1.446,
+    -54.058
+   ],
+   "b": [
+    6.2308,
+    -46.3812
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "HT_SDATA",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    6.2308,
+    -46.3812
+   ],
+   "b": [
+    8.4305,
+    -46.3812
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "HT_SDATA",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    8.4305,
+    -46.3812
+   ],
+   "b": [
+    10.9137,
+    -43.898
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "HT_SDATA",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    10.9137,
+    -43.898
+   ],
+   "b": [
+    14.229,
+    -43.898
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "SYNCH_2",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    -13.457,
+    -54.439
+   ],
+   "b": [
+    -1.396,
+    -54.439
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "SYNCH_2",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    -1.396,
+    -54.439
+   ],
+   "b": [
+    6.357,
+    -46.686
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "SYNCH_2",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    6.357,
+    -46.686
+   ],
+   "b": [
+    8.5568,
+    -46.686
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "SYNCH_2",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    8.5568,
+    -46.686
+   ],
+   "b": [
+    10.9638,
+    -44.279
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "SYNCH_2",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    10.9638,
+    -44.279
+   ],
+   "b": [
+    14.483,
+    -44.279
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "$HT_CS",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    -13.1722,
+    -55.328
+   ],
+   "b": [
+    -1.854,
+    -55.328
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "$HT_CS",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    -1.854,
+    -55.328
+   ],
+   "b": [
+    6.4832,
+    -46.9908
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "$HT_CS",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    6.4832,
+    -46.9908
+   ],
+   "b": [
+    8.683,
+    -46.9908
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "$HT_CS",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    8.683,
+    -46.9908
+   ],
+   "b": [
+    9.9978,
+    -45.676
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "$HT_CS",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    9.9978,
+    -45.676
+   ],
+   "b": [
+    14.141,
+    -45.676
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM5A",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    -1.848,
+    -55.753
+   ],
+   "b": [
+    6.6094,
+    -47.2956
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM5A",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    6.6094,
+    -47.2956
+   ],
+   "b": [
+    8.8093,
+    -47.2956
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM5A",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    8.8093,
+    -47.2956
+   ],
+   "b": [
+    10.0039,
+    -46.101
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM5A",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    10.0039,
+    -46.101
+   ],
+   "b": [
+    14.199,
+    -46.101
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM6A",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    -8.7428,
+    -56.388
+   ],
+   "b": [
+    -2.052,
+    -56.388
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM6A",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    -2.052,
+    -56.388
+   ],
+   "b": [
+    6.7356,
+    -47.6004
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM6A",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    6.7356,
+    -47.6004
+   ],
+   "b": [
+    8.9355,
+    -47.6004
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM6A",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    8.9355,
+    -47.6004
+   ],
+   "b": [
+    10.0539,
+    -46.482
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM6A",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    10.0539,
+    -46.482
+   ],
+   "b": [
+    14.351,
+    -46.482
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(C63-Pad1)",
+   "layer": "In2.Signal_HV",
+   "w": 0.2032,
+   "a": [
+    8.8,
+    -51.9
+   ],
+   "b": [
+    8.8,
+    -48.24
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(C63-Pad1)",
+   "layer": "In2.Signal_HV",
+   "w": 0.2032,
+   "a": [
+    8.8,
+    -48.24
+   ],
+   "b": [
+    10.14,
+    -46.9
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(C63-Pad1)",
+   "layer": "In2.Signal_HV",
+   "w": 0.2032,
+   "a": [
+    10.14,
+    -46.9
+   ],
+   "b": [
+    14.7,
+    -46.9
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "5V",
+   "x": 10.154,
+   "y": -48.0,
+   "d": 0.6,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "w": 0.3048,
+   "a": [
+    10.154,
+    -48.0
+   ],
+   "b": [
+    10.7,
+    -47.454
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "5V",
+   "layer": "B.Cu",
+   "w": 0.4,
+   "a": [
+    5.133,
+    -48.267
+   ],
+   "b": [
+    7.266,
+    -50.4
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "5V",
+   "layer": "B.Cu",
+   "w": 0.4,
+   "a": [
+    7.266,
+    -50.4
+   ],
+   "b": [
+    9.25,
+    -50.4
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "5V",
+   "layer": "B.Cu",
+   "w": 0.4,
+   "a": [
+    9.25,
+    -50.4
+   ],
+   "b": [
+    10.154,
+    -49.496
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "5V",
+   "layer": "B.Cu",
+   "w": 0.4,
+   "a": [
+    10.154,
+    -49.496
+   ],
+   "b": [
+    10.154,
+    -48.0
+   ]
+  }
+ ],
+ "report": [
+  {
+   "step": "track (29.7272, -0.1) ... (31.9, -1.15)",
+   "net": "DHB_I_MEAS",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 2.61,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "J2 analog escapes"
+  },
+  {
+   "step": "via (31.9, -1.15)",
+   "net": "DHB_I_MEAS",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "J2 analog escapes"
+  },
+  {
+   "step": "track (31.9, -1.15) ... (34.4057, 0.7038)",
+   "net": "DHB_I_MEAS",
+   "ok": true,
+   "w": 0.15,
+   "vias": 0,
+   "length": 3.6,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "J2 analog escapes"
+  },
+  {
+   "step": "track (30.988, 3.937) ... (32.1, 4.3)",
+   "net": "PFC_I1_MEAS",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 1.26,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "J2 analog escapes"
+  },
+  {
+   "step": "via (32.1, 4.3)",
+   "net": "PFC_I1_MEAS",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "J2 analog escapes"
+  },
+  {
+   "step": "track (32.1, 4.3) ... (34.4057, 3.2438)",
+   "net": "PFC_I1_MEAS",
+   "ok": true,
+   "w": 0.15,
+   "vias": 0,
+   "length": 2.74,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "J2 analog escapes"
+  },
+  {
+   "step": "track (33.1357, 4.5138) ... (36.53, 1.6)",
+   "net": "/04 MCU connector/AUX_MEAS",
+   "ok": true,
+   "w": 0.15,
+   "vias": 0,
+   "length": 5.57,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "J2 analog escapes"
+  },
+  {
+   "step": "via (36.53, 1.6)",
+   "net": "/04 MCU connector/AUX_MEAS",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "J2 analog escapes"
+  },
+  {
+   "step": "track (36.53, 1.6) ... (38.345, 1.11)",
+   "net": "/04 MCU connector/AUX_MEAS",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 2.02,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "J2 analog escapes"
+  },
+  {
+   "step": "track (33.1357, 8.3238) ... (35.635, -3.81)",
+   "net": "/04 MCU connector/5V_MEAS",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 19.42,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "J2 analog escapes"
+  },
+  {
+   "step": "via (35.635, -3.81)",
+   "net": "/04 MCU connector/5V_MEAS",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "J2 analog escapes"
+  },
+  {
+   "step": "track (35.635, -3.81) ... (36.035, -4.31)",
+   "net": "/04 MCU connector/5V_MEAS",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 0.67,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "J2 analog escapes"
+  },
+  {
+   "step": "track (0.0, -50.888) ... (12.6, -41.6)",
+   "net": "GPIO_BYPASS_RLY",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 16.45,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "control bus round H4"
+  },
+  {
+   "step": "track (-13.1, -52.8) ... (12.9, -42.1)",
+   "net": "+3V3",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 30.43,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "control bus round H4"
+  },
+  {
+   "step": "track (-13.2, -53.2) ... (13.589, -42.672)",
+   "net": "HT_CLK",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 31.15,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "control bus round H4"
+  },
+  {
+   "step": "track (-13.2081, -53.677) ... (14.102, -43.517)",
+   "net": "SYNCH_1",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 31.52,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "control bus round H4"
+  },
+  {
+   "step": "track (-13.33, -54.058) ... (14.229, -43.898)",
+   "net": "HT_SDATA",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 31.77,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "control bus round H4"
+  },
+  {
+   "step": "track (-13.457, -54.439) ... (14.483, -44.279)",
+   "net": "SYNCH_2",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 32.15,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "control bus round H4"
+  },
+  {
+   "step": "track (-13.1722, -55.328) ... (14.141, -45.676)",
+   "net": "$HT_CS",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 31.31,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "control bus round H4"
+  },
+  {
+   "step": "track (-1.848, -55.753) ... (14.199, -46.101)",
+   "net": "EPWM5A",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 20.04,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "control bus round H4"
+  },
+  {
+   "step": "track (-8.7428, -56.388) ... (14.351, -46.482)",
+   "net": "EPWM6A",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 27.2,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "control bus round H4"
+  },
+  {
+   "step": "track (8.8, -51.9) ... (14.7, -46.9)",
+   "net": "Net-(C63-Pad1)",
+   "ok": true,
+   "w": 0.2032,
+   "vias": 0,
+   "length": 10.12,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "control bus round H4"
+  },
+  {
+   "step": "via (10.154, -48.0)",
+   "net": "5V",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "control bus round H4"
+  },
+  {
+   "step": "track (10.154, -48.0) ... (10.7, -47.454)",
+   "net": "5V",
+   "ok": true,
+   "w": 0.3048,
+   "vias": 0,
+   "length": 0.77,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "control bus round H4"
+  },
+  {
+   "step": "track (5.133, -48.267) ... (10.154, -48.0)",
+   "net": "5V",
+   "ok": true,
+   "w": 0.4,
+   "vias": 0,
+   "length": 7.77,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "control bus round H4"
+  }
+ ]
+}

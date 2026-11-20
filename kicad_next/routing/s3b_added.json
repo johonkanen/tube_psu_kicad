@@ -5233,126 +5233,6 @@
   },
   {
    "kind": "track",
-   "net": "/04 MCU connector/5V_MEAS",
-   "layer": "In2.Signal_HV",
-   "w": 0.2,
-   "a": [
-    33.135,
-    8.323
-   ],
-   "b": [
-    33.135,
-    8.29
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "/04 MCU connector/5V_MEAS",
-   "layer": "In2.Signal_HV",
-   "w": 0.2,
-   "a": [
-    33.135,
-    8.29
-   ],
-   "b": [
-    33.135,
-    8.49
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "/04 MCU connector/5V_MEAS",
-   "layer": "In2.Signal_HV",
-   "w": 0.2,
-   "a": [
-    33.135,
-    8.49
-   ],
-   "b": [
-    34.535,
-    9.89
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "/04 MCU connector/5V_MEAS",
-   "layer": "In2.Signal_HV",
-   "w": 0.2,
-   "a": [
-    34.535,
-    9.89
-   ],
-   "b": [
-    35.035,
-    9.89
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "/04 MCU connector/5V_MEAS",
-   "layer": "In2.Signal_HV",
-   "w": 0.2,
-   "a": [
-    35.035,
-    9.89
-   ],
-   "b": [
-    35.635,
-    9.29
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "/04 MCU connector/5V_MEAS",
-   "layer": "In2.Signal_HV",
-   "w": 0.2,
-   "a": [
-    35.635,
-    9.29
-   ],
-   "b": [
-    35.635,
-    -3.81
-   ]
-  },
-  {
-   "kind": "via",
-   "net": "/04 MCU connector/5V_MEAS",
-   "x": 35.635,
-   "y": -3.81,
-   "d": 0.6,
-   "drill": 0.3
-  },
-  {
-   "kind": "track",
-   "net": "/04 MCU connector/5V_MEAS",
-   "layer": "B.Cu",
-   "w": 0.2,
-   "a": [
-    35.635,
-    -3.81
-   ],
-   "b": [
-    35.635,
-    -3.91
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "/04 MCU connector/5V_MEAS",
-   "layer": "B.Cu",
-   "w": 0.2,
-   "a": [
-    35.635,
-    -3.91
-   ],
-   "b": [
-    36.035,
-    -4.31
-   ]
-  },
-  {
-   "kind": "track",
    "net": "DHB_CURRENT",
    "layer": "B.Cu",
    "w": 0.2,
@@ -5907,118 +5787,6 @@
    "b": [
     -1.5,
     6.5
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "$HT_CS",
-   "layer": "In2.Signal_HV",
-   "w": 0.2,
-   "a": [
-    0.259,
-    -55.328
-   ],
-   "b": [
-    0.259,
-    -54.828
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "$HT_CS",
-   "layer": "In2.Signal_HV",
-   "w": 0.2,
-   "a": [
-    0.259,
-    -54.828
-   ],
-   "b": [
-    3.359,
-    -51.728
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "$HT_CS",
-   "layer": "In2.Signal_HV",
-   "w": 0.2,
-   "a": [
-    3.359,
-    -51.728
-   ],
-   "b": [
-    3.359,
-    -48.528
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "$HT_CS",
-   "layer": "In2.Signal_HV",
-   "w": 0.2,
-   "a": [
-    3.359,
-    -48.528
-   ],
-   "b": [
-    3.459,
-    -48.428
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "HT_SDATA",
-   "layer": "In2.Signal_HV",
-   "w": 0.2,
-   "a": [
-    11.054,
-    -44.533
-   ],
-   "b": [
-    11.064,
-    -44.545
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "HT_SDATA",
-   "layer": "In2.Signal_HV",
-   "w": 0.2,
-   "a": [
-    11.064,
-    -44.545
-   ],
-   "b": [
-    10.364,
-    -45.245
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "HT_SDATA",
-   "layer": "In2.Signal_HV",
-   "w": 0.2,
-   "a": [
-    10.364,
-    -45.245
-   ],
-   "b": [
-    5.464,
-    -45.245
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "HT_SDATA",
-   "layer": "In2.Signal_HV",
-   "w": 0.2,
-   "a": [
-    5.464,
-    -45.245
-   ],
-   "b": [
-    2.164,
-    -48.545
    ]
   },
   {
@@ -6695,12 +6463,6 @@
     "B.Cu",
     "F.Cu"
    ],
-   "group": "supply, ground and switch-node leftovers"
-  },
-  {
-   "step": "auto (0.7, -51.0, 'In2.Signal_HV') -> net",
-   "net": "+3V3",
-   "ok": false,
    "group": "supply, ground and switch-node leftovers"
   },
   {
@@ -7435,12 +7197,6 @@
    "group": "gate drives"
   },
   {
-   "step": "auto (11.308, -44.914, 'In2.Signal_HV') -> net",
-   "net": "SYNCH_2",
-   "ok": false,
-   "group": "gate drives"
-  },
-  {
    "step": "auto DRV5.10 -> net",
    "net": "DHB_HI_GATE",
    "ok": true,
@@ -7450,18 +7206,6 @@
    "layers": [
     "B.Cu"
    ],
-   "group": "gate drives"
-  },
-  {
-   "step": "auto (1.783, -51.217, 'In2.Signal_HV') -> net",
-   "net": "SYNCH_1",
-   "ok": false,
-   "group": "gate drives"
-  },
-  {
-   "step": "auto (-0.8077, -56.134, 'In2.Signal_HV') -> net",
-   "net": "EPWM6A",
-   "ok": false,
    "group": "gate drives"
   },
   {
@@ -7480,12 +7224,6 @@
   {
    "step": "auto D32.C -> DRV6.10",
    "net": "DHB_LOW_GATE_SEC",
-   "ok": false,
-   "group": "gate drives"
-  },
-  {
-   "step": "auto (-13.547, -55.753, 'In2.Signal_HV') -> net",
-   "net": "EPWM5A",
    "ok": false,
    "group": "gate drives"
   },
@@ -7869,12 +7607,6 @@
    "group": "current sense and analog"
   },
   {
-   "step": "auto J2.42 -> net",
-   "net": "PFC_I1_MEAS",
-   "ok": false,
-   "group": "current sense and analog"
-  },
-  {
    "step": "auto R113.1 -> net",
    "net": "CUK_CAP_MEAS-",
    "ok": true,
@@ -7896,18 +7628,6 @@
    "layers": [
     "B.Cu"
    ],
-   "group": "current sense and analog"
-  },
-  {
-   "step": "auto J2.38 -> net",
-   "net": "DHB_I_MEAS",
-   "ok": false,
-   "group": "current sense and analog"
-  },
-  {
-   "step": "auto J2.43 -> R132.2",
-   "net": "/04 MCU connector/AUX_MEAS",
-   "ok": false,
    "group": "current sense and analog"
   },
   {
@@ -7974,19 +7694,6 @@
    "length": 12.23,
    "vias": 0,
    "layers": [
-    "In2.Signal_HV"
-   ],
-   "group": "current sense and analog"
-  },
-  {
-   "step": "auto J2.49 -> R135.2",
-   "net": "/04 MCU connector/5V_MEAS",
-   "ok": true,
-   "w": 0.2,
-   "length": 17.33,
-   "vias": 1,
-   "layers": [
-    "B.Cu",
     "In2.Signal_HV"
    ],
    "group": "current sense and analog"
@@ -8177,44 +7884,8 @@
    "group": "SPI and control"
   },
   {
-   "step": "auto (0.259, -55.328, 'In2.Signal_HV') -> net",
-   "net": "$HT_CS",
-   "ok": true,
-   "w": 0.2,
-   "length": 8.23,
-   "vias": 0,
-   "layers": [
-    "In2.Signal_HV"
-   ],
-   "group": "SPI and control"
-  },
-  {
-   "step": "auto (11.054, -44.533, 'In2.Signal_HV') -> net",
-   "net": "HT_SDATA",
-   "ok": true,
-   "w": 0.2,
-   "length": 10.57,
-   "vias": 0,
-   "layers": [
-    "In2.Signal_HV"
-   ],
-   "group": "SPI and control"
-  },
-  {
-   "step": "auto (1.016, -51.284, 'In2.Signal_HV') -> net",
-   "net": "HT_CLK",
-   "ok": false,
-   "group": "SPI and control"
-  },
-  {
    "step": "auto R153.2 -> PWM2.1",
    "net": "Net-(PWM2-VIN)",
-   "ok": false,
-   "group": "SPI and control"
-  },
-  {
-   "step": "auto (0.0, -50.888, 'In2.Signal_HV') -> net",
-   "net": "GPIO_BYPASS_RLY",
    "ok": false,
    "group": "SPI and control"
   },

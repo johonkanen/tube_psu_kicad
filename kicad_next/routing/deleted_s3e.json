@@ -1,0 +1,707 @@
+{
+ "note": "5.1 copper deleted by the s3e route script (mm)",
+ "deleted": [
+  {
+   "kind": "segment",
+   "net": "DHB_I_MEAS",
+   "layer": "F.Cu",
+   "start": [
+    29.7272,
+    -0.1
+   ],
+   "end": [
+    32.3319,
+    -0.1
+   ],
+   "width": 0.1524,
+   "reason": "5.1 escape (0.18 mm rules): ends short of the pin, drawn again"
+  },
+  {
+   "kind": "segment",
+   "net": "PFC_I1_MEAS",
+   "layer": "B.Cu",
+   "start": [
+    30.988,
+    3.937
+   ],
+   "end": [
+    31.5648,
+    4.5138
+   ],
+   "width": 0.1524,
+   "reason": "5.1 escape (0.18 mm rules): ends short of the pin, drawn again"
+  },
+  {
+   "kind": "segment",
+   "net": "GPIO_BYPASS_RLY",
+   "layer": "In2.Signal_HV",
+   "start": [
+    0.0,
+    -50.888
+   ],
+   "end": [
+    0.0,
+    -48.1
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "GPIO_BYPASS_RLY",
+   "layer": "In2.Signal_HV",
+   "start": [
+    10.9,
+    -41.6
+   ],
+   "end": [
+    12.6,
+    -41.6
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -13.1,
+    -52.8
+   ],
+   "end": [
+    -1.1,
+    -52.8
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -1.1,
+    -52.8
+   ],
+   "end": [
+    0.7,
+    -51.0
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    10.9,
+    -42.1
+   ],
+   "end": [
+    12.9,
+    -42.1
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "HT_CLK",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -13.2,
+    -53.2
+   ],
+   "end": [
+    -0.9,
+    -53.2
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "HT_CLK",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -0.9,
+    -53.2
+   ],
+   "end": [
+    1.016,
+    -51.284
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "HT_CLK",
+   "layer": "In2.Signal_HV",
+   "start": [
+    1.016,
+    -51.284
+   ],
+   "end": [
+    1.016,
+    -48.084
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "HT_CLK",
+   "layer": "In2.Signal_HV",
+   "start": [
+    10.366,
+    -43.434
+   ],
+   "end": [
+    11.128,
+    -42.672
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "HT_CLK",
+   "layer": "In2.Signal_HV",
+   "start": [
+    11.128,
+    -42.672
+   ],
+   "end": [
+    13.589,
+    -42.672
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "SYNCH_1",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -13.2081,
+    -53.677
+   ],
+   "end": [
+    -0.677,
+    -53.677
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "SYNCH_1",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -0.677,
+    -53.677
+   ],
+   "end": [
+    1.783,
+    -51.217
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "SYNCH_1",
+   "layer": "In2.Signal_HV",
+   "start": [
+    1.783,
+    -51.217
+   ],
+   "end": [
+    1.783,
+    -48.117
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "SYNCH_1",
+   "layer": "In2.Signal_HV",
+   "start": [
+    10.8,
+    -44.152
+   ],
+   "end": [
+    11.435,
+    -43.517
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "SYNCH_1",
+   "layer": "In2.Signal_HV",
+   "start": [
+    11.435,
+    -43.517
+   ],
+   "end": [
+    14.102,
+    -43.517
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "HT_SDATA",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -13.33,
+    -54.058
+   ],
+   "end": [
+    -0.249,
+    -54.058
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "HT_SDATA",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -0.249,
+    -54.058
+   ],
+   "end": [
+    2.164,
+    -51.645
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "HT_SDATA",
+   "layer": "In2.Signal_HV",
+   "start": [
+    2.164,
+    -51.645
+   ],
+   "end": [
+    2.164,
+    -48.536
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "HT_SDATA",
+   "layer": "In2.Signal_HV",
+   "start": [
+    11.054,
+    -44.533
+   ],
+   "end": [
+    11.689,
+    -43.898
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "HT_SDATA",
+   "layer": "In2.Signal_HV",
+   "start": [
+    11.689,
+    -43.898
+   ],
+   "end": [
+    14.229,
+    -43.898
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "SYNCH_2",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -13.457,
+    -54.439
+   ],
+   "end": [
+    0.005,
+    -54.439
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "SYNCH_2",
+   "layer": "In2.Signal_HV",
+   "start": [
+    0.005,
+    -54.439
+   ],
+   "end": [
+    2.545,
+    -51.899
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "SYNCH_2",
+   "layer": "In2.Signal_HV",
+   "start": [
+    2.545,
+    -51.899
+   ],
+   "end": [
+    2.545,
+    -48.755
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "SYNCH_2",
+   "layer": "In2.Signal_HV",
+   "start": [
+    11.308,
+    -44.914
+   ],
+   "end": [
+    11.943,
+    -44.279
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "SYNCH_2",
+   "layer": "In2.Signal_HV",
+   "start": [
+    11.943,
+    -44.279
+   ],
+   "end": [
+    14.483,
+    -44.279
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "$HT_CS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    0.259,
+    -55.328
+   ],
+   "end": [
+    -13.1722,
+    -55.328
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "$HT_CS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    6.224,
+    -45.676
+   ],
+   "end": [
+    3.434,
+    -48.466
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "$HT_CS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.141,
+    -45.676
+   ],
+   "end": [
+    6.224,
+    -45.676
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM5A",
+   "layer": "In2.Signal_HV",
+   "start": [
+    3.81,
+    -48.641
+   ],
+   "end": [
+    6.35,
+    -46.101
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM5A",
+   "layer": "In2.Signal_HV",
+   "start": [
+    6.35,
+    -46.101
+   ],
+   "end": [
+    14.199,
+    -46.101
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM6A",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -1.0617,
+    -56.388
+   ],
+   "end": [
+    -8.7428,
+    -56.388
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM6A",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -0.8077,
+    -56.134
+   ],
+   "end": [
+    -1.0617,
+    -56.388
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM6A",
+   "layer": "In2.Signal_HV",
+   "start": [
+    6.604,
+    -46.482
+   ],
+   "end": [
+    4.191,
+    -48.895
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM6A",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.351,
+    -46.482
+   ],
+   "end": [
+    6.604,
+    -46.482
+   ],
+   "width": 0.1524,
+   "reason": "5.1 lane of the control bus on In2, cut at mounting hole H4: drawn again in the bundle round the hole"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(C63-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    8.8,
+    -51.9
+   ],
+   "end": [
+    8.8,
+    -48.7212
+   ],
+   "width": 0.2032,
+   "reason": "5.1 C63 lane round the old 5V via, drawn again outside the bundle"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(C63-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    8.8,
+    -48.7212
+   ],
+   "end": [
+    8.1788,
+    -48.1
+   ],
+   "width": 0.2032,
+   "reason": "5.1 C63 lane round the old 5V via, drawn again outside the bundle"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(C63-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    8.1788,
+    -48.1
+   ],
+   "end": [
+    8.1788,
+    -47.2212
+   ],
+   "width": 0.2032,
+   "reason": "5.1 C63 lane round the old 5V via, drawn again outside the bundle"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(C63-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    8.1788,
+    -47.2212
+   ],
+   "end": [
+    8.5,
+    -46.9
+   ],
+   "width": 0.2032,
+   "reason": "5.1 C63 lane round the old 5V via, drawn again outside the bundle"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(C63-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    8.5,
+    -46.9
+   ],
+   "end": [
+    14.7,
+    -46.9
+   ],
+   "width": 0.2032,
+   "reason": "5.1 C63 lane round the old 5V via, drawn again outside the bundle"
+  },
+  {
+   "kind": "via",
+   "net": "5V",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    8.8076,
+    -47.454
+   ],
+   "width": 0.5,
+   "drill": 0.3,
+   "reason": "5.1 5V via / track in the way of the bundle round H4: via 1.35 mm further east"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    8.8076,
+    -47.454
+   ],
+   "end": [
+    10.7,
+    -47.454
+   ],
+   "width": 0.3048,
+   "reason": "5.1 5V via / track in the way of the bundle round H4: via 1.35 mm further east"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    5.133,
+    -48.267
+   ],
+   "end": [
+    7.7,
+    -48.267
+   ],
+   "width": 0.508,
+   "reason": "5.1 5V via / track in the way of the bundle round H4: via 1.35 mm further east"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    7.7,
+    -48.267
+   ],
+   "end": [
+    7.9044,
+    -48.267
+   ],
+   "width": 0.508,
+   "reason": "5.1 5V via / track in the way of the bundle round H4: via 1.35 mm further east"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    7.9044,
+    -48.267
+   ],
+   "end": [
+    8.7174,
+    -47.454
+   ],
+   "width": 0.3048,
+   "reason": "5.1 5V via / track in the way of the bundle round H4: via 1.35 mm further east"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    8.7174,
+    -47.454
+   ],
+   "end": [
+    8.8076,
+    -47.454
+   ],
+   "width": 0.3048,
+   "reason": "5.1 5V via / track in the way of the bundle round H4: via 1.35 mm further east"
+  }
+ ]
+}

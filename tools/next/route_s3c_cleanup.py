@@ -182,10 +182,11 @@ ANALOG = [
     ("via", "15V", 36.9, 14.1, *VS),
     ("track", "15V", B, 0.4, [(36.9, 14.1), (37.7, 13.3)]),
     # 15V via 0.9 mm from C70 pin 1 (DC+, F.Cu): 0.8 mm further east on the same In2 / B.Cu tracks
-    # EPWM5A (In2): the end of the kept track stood 0.025 mm from the HEATER_CURRENT via at (0.4, -56.1); 0.95 mm shorter
+    # EPWM5A (In2): the end of the kept track stood 0.025 mm from the HEATER_CURRENT via at (0.4, -56.1); it ends
+    # where the stage-3e bundle round H4 turns south-east (x -1.848; 0.95 mm shorter until stage 3e)
     *dels("EPWM5A", I2, "5.1 track end 0.025 mm from the HEATER_CURRENT via; drawn again 0.95 mm shorter",
           (-13.547, -55.753, 0.347, -55.753)),
-    ("track", "EPWM5A", I2, 0.1524, [(-13.547, -55.753), (-0.6, -55.753)]),
+    ("track", "EPWM5A", I2, 0.1524, [(-13.547, -55.753), (-1.848, -55.753)]),      # (to the bundle of stage 3e)
     ("delvia", "15V", 26.841, -39.58, "5.1 15V via 0.9 mm from C70 pin 1 (DC+); moved 0.8 mm east"),
     ("via", "15V", 27.65, -39.58, 1.0, 0.4),
     ("track", "15V", B, 0.762, [(26.841, -39.58), (27.65, -39.58)]),
