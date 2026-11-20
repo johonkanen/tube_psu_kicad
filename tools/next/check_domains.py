@@ -68,19 +68,6 @@ ALLOW = [
     (r"^pad Q19\.", r"^pad Q21\.", r"^In", 4.0,
      "kicad_dru rule 'PRI-SEC inner layers, Q19/Q21 across the barrier slot' (user decision 2026-11-19 (a)): the "
      "L-slot cuts the laminate between the barrels, 4.0 mm air clearance applies"),
-    (r"^pad TR1\.2 ", r"^pad TR1\.9 ", r"^In", 11.0,
-     "TR1 pin 2 (GND) / pin 9 (ISO_GND) barrels 11.01 mm apart on the inner layers (11.1 mm rule), fixed by the "
-     "EEL19 bobbin pin pattern behind the footprint slot; accepted in REPORT.md step 2 - keep In1 / In4 pours off pin 2"),
-    # layer to layer, F.Cu <-> B.Cu only (the layer regex matches the pair "F.Cu / B.Cu"): OPEN items found by the
-    # layer-to-layer pass of routing stage 2 in 5.1 outer-layer copper / the placement. Between them is the whole
-    # board (1.5 mm, two 0.55 mm cores), not one prepreg; whether that counts as the insulation (then F.Cu <-> B.Cu
-    # needs no plan-view spacing) is a user decision (README "Inner layers", open decisions). Until then:
-    (r"^(pad R[456]\.|track \[Net-\(R[45]-Pad1\)\])", r"^track \[/05 PFC/PE\]", r"^F\.Cu / B\.Cu$", 0.0,
-     "OPEN: the 5.1 PE track on B.Cu runs under the mains discharge resistors R4 / R5 / R6 on F.Cu; the PE net is "
-     "routed again with the outer layers (trial REPORT.md step 3 note 2)"),
-    (r"^pad U11\.9 ", r"^(pad R102\.|track \[Net-\((U1B--|C63-Pad1)\)\])", r"^F\.Cu / B\.Cu$", 7.3,
-     "OPEN: U11 pin 9 (UART island, F.Cu) is 7.4 mm in plan view from R102 and its two tracks on B.Cu (8.0 mm rule): "
-     "move R102 0.7 mm down when the U1 area is routed"),
 ]
 BARRIERS = {"TR1", "TR2", "TR3", "ISO1", "ISO2", "U11"}      # setup_project.py BARRIERS: two domains in one footprint
 EPS = 1e-6

@@ -1,0 +1,2407 @@
+{
+ "note": "copper deleted by tools/next/route_s2_planes.py (routing stage 2); segments: mm, to be routed again in stage 3 where the net still needs them",
+ "deleted": [
+  {
+   "kind": "zone",
+   "zone": "Proteus In1.Cu pour 0",
+   "net": "HT_GND",
+   "layer": "In1.GND",
+   "bbox": [
+    -69.7292,
+    -89.9862,
+    -39.6048,
+    -63.4178
+   ],
+   "filled_mm2": 457.0,
+   "reason": "5.1 ground pour replaced by the S2 plane (first run, 3bdf54c)"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus In1.Cu pour 8",
+   "net": "GND",
+   "layer": "In1.GND",
+   "bbox": [
+    30.2564,
+    -31.0,
+    42.8,
+    14.6
+   ],
+   "filled_mm2": 426.0,
+   "reason": "5.1 ground pour replaced by the S2 plane (first run, 3bdf54c)"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus In1.Cu pour 9",
+   "net": "GND",
+   "layer": "In1.GND",
+   "bbox": [
+    -41.5382,
+    -88.1702,
+    32.3392,
+    17.6462
+   ],
+   "filled_mm2": 1991.0,
+   "reason": "5.1 ground pour replaced by the S2 plane (first run, 3bdf54c)"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus In1.Cu pour 6",
+   "net": "ISO_GND",
+   "layer": "In1.GND",
+   "bbox": [
+    64.6226,
+    -82.2774,
+    89.6924,
+    13.9124
+   ],
+   "filled_mm2": 1269.0,
+   "reason": "5.1 ground pour replaced by the S2 plane (first run, 3bdf54c)"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus In1.Cu pour 1",
+   "net": "GND",
+   "layer": "In1.GND",
+   "bbox": [
+    38.2108,
+    -31.9092,
+    64.0172,
+    -0.7032
+   ],
+   "filled_mm2": 444.0,
+   "reason": "5.1 ground pour replaced by the S2 plane (first run, 3bdf54c)"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus In2.Cu pour 1",
+   "net": "GND",
+   "layer": "In4.GND",
+   "bbox": [
+    38.2108,
+    -31.9092,
+    64.0172,
+    -0.7032
+   ],
+   "filled_mm2": 290.0,
+   "reason": "5.1 ground pour replaced by the S2 plane (first run, 3bdf54c)"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus In2.Cu pour 4",
+   "net": "ISO_GND",
+   "layer": "In4.GND",
+   "bbox": [
+    69.2708,
+    -82.2012,
+    89.6162,
+    13.8362
+   ],
+   "filled_mm2": 1071.0,
+   "reason": "5.1 ground pour replaced by the S2 plane (first run, 3bdf54c)"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus In2.Cu pour 7",
+   "net": "GND",
+   "layer": "In4.GND",
+   "bbox": [
+    30.2,
+    -29.0976,
+    42.8,
+    14.6
+   ],
+   "filled_mm2": 279.0,
+   "reason": "5.1 ground pour replaced by the S2 plane (first run, 3bdf54c)"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus In2.Cu pour 2",
+   "net": "GND",
+   "layer": "In4.GND",
+   "bbox": [
+    41.5128,
+    -28.737,
+    58.8306,
+    -23.3644
+   ],
+   "filled_mm2": 21.0,
+   "reason": "5.1 ground pour replaced by the S2 plane (first run, 3bdf54c)"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus In2.Cu pour 0",
+   "net": "HT_GND",
+   "layer": "In4.GND",
+   "bbox": [
+    -69.7292,
+    -89.9862,
+    -39.6048,
+    -63.4178
+   ],
+   "filled_mm2": 447.0,
+   "reason": "5.1 ground pour replaced by the S2 plane (first run, 3bdf54c)"
+  },
+  {
+   "kind": "spokes",
+   "count": 32,
+   "net": "GND",
+   "layer": "In1.GND",
+   "reason": "thermal-spoke segments (<= 1.5 mm) of the removed 5.1 ground pours (first run, 3bdf54c; not listed one by one)"
+  },
+  {
+   "kind": "spokes",
+   "count": 16,
+   "net": "HT_GND",
+   "layer": "In1.GND",
+   "reason": "thermal-spoke segments (<= 1.5 mm) of the removed 5.1 ground pours (first run, 3bdf54c; not listed one by one)"
+  },
+  {
+   "kind": "spokes",
+   "count": 27,
+   "net": "ISO_GND",
+   "layer": "In1.GND",
+   "reason": "thermal-spoke segments (<= 1.5 mm) of the removed 5.1 ground pours (first run, 3bdf54c; not listed one by one)"
+  },
+  {
+   "kind": "spokes",
+   "count": 17,
+   "net": "GND",
+   "layer": "In4.GND",
+   "reason": "thermal-spoke segments (<= 1.5 mm) of the removed 5.1 ground pours (first run, 3bdf54c; not listed one by one)"
+  },
+  {
+   "kind": "spokes",
+   "count": 16,
+   "net": "HT_GND",
+   "layer": "In4.GND",
+   "reason": "thermal-spoke segments (<= 1.5 mm) of the removed 5.1 ground pours (first run, 3bdf54c; not listed one by one)"
+  },
+  {
+   "kind": "spokes",
+   "count": 23,
+   "net": "ISO_GND",
+   "layer": "In4.GND",
+   "reason": "thermal-spoke segments (<= 1.5 mm) of the removed 5.1 ground pours (first run, 3bdf54c; not listed one by one)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -42.8,
+    -66.0488
+   ],
+   "end": [
+    -42.8,
+    -67.4
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -36.4,
+    -65.1783
+   ],
+   "end": [
+    -36.4,
+    -66.08
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -35.4983,
+    -66.08
+   ],
+   "end": [
+    -36.4,
+    -66.08
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -37.3017,
+    -66.08
+   ],
+   "end": [
+    -36.4,
+    -66.08
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -36.4,
+    -66.9817
+   ],
+   "end": [
+    -36.4,
+    -66.08
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -36.4,
+    -65.1783
+   ],
+   "end": [
+    -36.4,
+    -66.08
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -37.3017,
+    -66.08
+   ],
+   "end": [
+    -36.4,
+    -66.08
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -36.4,
+    -66.9817
+   ],
+   "end": [
+    -36.4,
+    -66.08
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -35.4983,
+    -66.08
+   ],
+   "end": [
+    -36.4,
+    -66.08
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -42.8,
+    -66.0488
+   ],
+   "end": [
+    -42.8,
+    -67.4
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_GND",
+   "layer": "In2.Signal_HV",
+   "start": [
+    72.6181,
+    -11.894
+   ],
+   "end": [
+    72.6181,
+    -20.2639
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    9.9,
+    -43.1
+   ],
+   "end": [
+    10.9,
+    -42.1
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM2A",
+   "layer": "In2.Signal_HV",
+   "start": [
+    60.761,
+    -29.7756
+   ],
+   "end": [
+    60.253,
+    -29.7756
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM2A",
+   "layer": "In2.Signal_HV",
+   "start": [
+    60.253,
+    -29.7756
+   ],
+   "end": [
+    59.11,
+    -28.6326
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM2B",
+   "layer": "In2.Signal_HV",
+   "start": [
+    59.9877,
+    -26.2202
+   ],
+   "end": [
+    59.9877,
+    -28.157
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM2B",
+   "layer": "In2.Signal_HV",
+   "start": [
+    60.3362,
+    -28.5056
+   ],
+   "end": [
+    60.761,
+    -28.5056
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM2B",
+   "layer": "In2.Signal_HV",
+   "start": [
+    58.0827,
+    -24.3152
+   ],
+   "end": [
+    59.9877,
+    -26.2202
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM2B",
+   "layer": "In2.Signal_HV",
+   "start": [
+    59.9877,
+    -28.157
+   ],
+   "end": [
+    60.3362,
+    -28.5056
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "CUK_CLK",
+   "layer": "In2.Signal_HV",
+   "start": [
+    60.3342,
+    -24.213
+   ],
+   "end": [
+    59.9016,
+    -23.7804
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "CUK_CLK",
+   "layer": "In2.Signal_HV",
+   "start": [
+    60.639,
+    -24.213
+   ],
+   "end": [
+    60.3342,
+    -24.213
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "CUK_CLK",
+   "layer": "In2.Signal_HV",
+   "start": [
+    59.9016,
+    -23.7804
+   ],
+   "end": [
+    53.1414,
+    -23.7804
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "CUK_SDATA",
+   "layer": "In2.Signal_HV",
+   "start": [
+    60.4494,
+    -23.241
+   ],
+   "end": [
+    60.634,
+    -23.4256
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "CUK_SDATA",
+   "layer": "In2.Signal_HV",
+   "start": [
+    47.541,
+    -23.241
+   ],
+   "end": [
+    60.4494,
+    -23.241
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(AD2-SDATA)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    77.53,
+    -25.356
+   ],
+   "end": [
+    74.355,
+    -25.356
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(AD2-CLK)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    77.784,
+    -24.848
+   ],
+   "end": [
+    73.085,
+    -24.848
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(AD2-CS)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    73.085,
+    -25.9656
+   ],
+   "end": [
+    77.3656,
+    -25.9656
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_SEC_DHB_HI",
+   "layer": "In2.Signal_HV",
+   "start": [
+    72.572,
+    -34.972
+   ],
+   "end": [
+    76.672,
+    -39.072
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_SEC_DHB_HI",
+   "layer": "In2.Signal_HV",
+   "start": [
+    72.577,
+    -29.801
+   ],
+   "end": [
+    72.704,
+    -29.801
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_SEC_DHB_HI",
+   "layer": "In2.Signal_HV",
+   "start": [
+    72.704,
+    -29.801
+   ],
+   "end": [
+    72.572,
+    -29.933
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_SEC_DHB_HI",
+   "layer": "In2.Signal_HV",
+   "start": [
+    72.572,
+    -29.933
+   ],
+   "end": [
+    72.572,
+    -34.972
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "AD2_3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    73.9,
+    -30.9
+   ],
+   "end": [
+    75.5,
+    -32.5
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "In2.Signal_HV",
+   "start": [
+    73.8978,
+    -34.246
+   ],
+   "end": [
+    73.2628,
+    -33.611
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "In2.Signal_HV",
+   "start": [
+    73.2628,
+    -33.611
+   ],
+   "end": [
+    73.2628,
+    -29.464
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "In2.Signal_HV",
+   "start": [
+    73.8978,
+    -34.5762
+   ],
+   "end": [
+    73.8978,
+    -34.246
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "In2.Signal_HV",
+   "start": [
+    73.2628,
+    -29.464
+   ],
+   "end": [
+    72.8818,
+    -29.083
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "In2.Signal_HV",
+   "start": [
+    72.8818,
+    -29.083
+   ],
+   "end": [
+    72.318,
+    -29.083
+   ],
+   "reason": "inner-layer segment inside the layer-to-layer spacing of another domain (first run, 3bdf54c)"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus In1.Cu pour 3",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In1.GND",
+   "bbox": [
+    -51.6332,
+    -75.2162,
+    -33.7008,
+    -63.2528
+   ],
+   "filled_mm2": 95.7,
+   "reason": "5.1 switching-node pour on a ground-plane layer (user decision 2026-11-20)"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus In1.Cu pour 4",
+   "net": "/05 PFC/PFC_DRAIN_1",
+   "layer": "In1.GND",
+   "bbox": [
+    -3.8812,
+    -39.6562,
+    13.4162,
+    -21.7238
+   ],
+   "filled_mm2": 148.2,
+   "reason": "5.1 switching-node pour on a ground-plane layer (user decision 2026-11-20)"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus In1.Cu pour 7",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In1.GND",
+   "bbox": [
+    -55.6972,
+    -89.8968,
+    -34.0056,
+    -77.7308
+   ],
+   "filled_mm2": 166.8,
+   "reason": "5.1 switching-node pour on a ground-plane layer (user decision 2026-11-20)"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus In1.Cu pour 2",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "In1.GND",
+   "bbox": [
+    -4.3638,
+    -4.5788,
+    13.8988,
+    6.0638
+   ],
+   "filled_mm2": 110.9,
+   "reason": "5.1 switching-node pour on a ground-plane layer (user decision 2026-11-20)"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus In1.Cu pour 11",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In1.GND",
+   "bbox": [
+    -43.9238,
+    -13.9238,
+    -28.0762,
+    7.9238
+   ],
+   "filled_mm2": 185.2,
+   "reason": "5.1 switching-node pour on a ground-plane layer (user decision 2026-11-20)"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus In2.Cu pour 9",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In4.GND",
+   "bbox": [
+    -43.9238,
+    -13.9238,
+    -28.0762,
+    7.9238
+   ],
+   "filled_mm2": 185.2,
+   "reason": "5.1 switching-node pour on a ground-plane layer (user decision 2026-11-20)"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus In2.Cu pour 3",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In4.GND",
+   "bbox": [
+    -51.6332,
+    -75.2162,
+    -33.7008,
+    -63.2528
+   ],
+   "filled_mm2": 95.7,
+   "reason": "5.1 switching-node pour on a ground-plane layer (user decision 2026-11-20)"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus In2.Cu pour 6",
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "In4.GND",
+   "bbox": [
+    53.6,
+    -66.0,
+    70.0,
+    -40.8
+   ],
+   "filled_mm2": 199.1,
+   "reason": "5.1 switching-node pour on a ground-plane layer (user decision 2026-11-20)"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus In2.Cu pour 5",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In4.GND",
+   "bbox": [
+    -55.6972,
+    -89.8968,
+    -34.0056,
+    -77.7308
+   ],
+   "filled_mm2": 166.8,
+   "reason": "5.1 switching-node pour on a ground-plane layer (user decision 2026-11-20)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -35.4983,
+    -71.16
+   ],
+   "end": [
+    -36.4,
+    -71.16
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -36.4,
+    -72.0617
+   ],
+   "end": [
+    -36.4,
+    -71.16
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -44.1512,
+    -67.4
+   ],
+   "end": [
+    -42.8,
+    -67.4
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -42.8,
+    -68.7512
+   ],
+   "end": [
+    -42.8,
+    -67.4
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -41.4488,
+    -67.4
+   ],
+   "end": [
+    -42.8,
+    -67.4
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -36.4,
+    -70.2583
+   ],
+   "end": [
+    -36.4,
+    -71.16
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -37.3017,
+    -71.16
+   ],
+   "end": [
+    -36.4,
+    -71.16
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -37.3017,
+    -71.16
+   ],
+   "end": [
+    -36.4,
+    -71.16
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -36.4,
+    -70.2583
+   ],
+   "end": [
+    -36.4,
+    -71.16
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -36.4,
+    -72.0617
+   ],
+   "end": [
+    -36.4,
+    -71.16
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -41.4488,
+    -67.4
+   ],
+   "end": [
+    -42.8,
+    -67.4
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -44.1512,
+    -67.4
+   ],
+   "end": [
+    -42.8,
+    -67.4
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -35.4983,
+    -71.16
+   ],
+   "end": [
+    -36.4,
+    -71.16
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -42.8,
+    -68.7512
+   ],
+   "end": [
+    -42.8,
+    -67.4
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -44.1512,
+    -86.8
+   ],
+   "end": [
+    -42.8,
+    -86.8
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -36.4,
+    -80.4183
+   ],
+   "end": [
+    -36.4,
+    -81.32
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -37.3017,
+    -86.4
+   ],
+   "end": [
+    -36.4,
+    -86.4
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -35.4983,
+    -81.32
+   ],
+   "end": [
+    -36.4,
+    -81.32
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -37.3017,
+    -81.32
+   ],
+   "end": [
+    -36.4,
+    -81.32
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -36.4,
+    -85.4983
+   ],
+   "end": [
+    -36.4,
+    -86.4
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -36.4,
+    -87.3017
+   ],
+   "end": [
+    -36.4,
+    -86.4
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -42.8,
+    -85.4488
+   ],
+   "end": [
+    -42.8,
+    -86.8
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -42.8,
+    -88.1512
+   ],
+   "end": [
+    -42.8,
+    -86.8
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -41.4488,
+    -86.8
+   ],
+   "end": [
+    -42.8,
+    -86.8
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -35.4983,
+    -86.4
+   ],
+   "end": [
+    -36.4,
+    -86.4
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In1.GND",
+   "start": [
+    -36.4,
+    -82.2217
+   ],
+   "end": [
+    -36.4,
+    -81.32
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -37.3017,
+    -86.4
+   ],
+   "end": [
+    -36.4,
+    -86.4
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -42.8,
+    -85.4488
+   ],
+   "end": [
+    -42.8,
+    -86.8
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -36.4,
+    -82.2217
+   ],
+   "end": [
+    -36.4,
+    -81.32
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -44.1512,
+    -86.8
+   ],
+   "end": [
+    -42.8,
+    -86.8
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -37.3017,
+    -81.32
+   ],
+   "end": [
+    -36.4,
+    -81.32
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -41.4488,
+    -86.8
+   ],
+   "end": [
+    -42.8,
+    -86.8
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -36.4,
+    -85.4983
+   ],
+   "end": [
+    -36.4,
+    -86.4
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -42.8,
+    -88.1512
+   ],
+   "end": [
+    -42.8,
+    -86.8
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -36.4,
+    -80.4183
+   ],
+   "end": [
+    -36.4,
+    -81.32
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -36.4,
+    -87.3017
+   ],
+   "end": [
+    -36.4,
+    -86.4
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -35.4983,
+    -86.4
+   ],
+   "end": [
+    -36.4,
+    -86.4
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/Q13_DRAIN",
+   "layer": "In4.GND",
+   "start": [
+    -35.4983,
+    -81.32
+   ],
+   "end": [
+    -36.4,
+    -81.32
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_1",
+   "layer": "In1.GND",
+   "start": [
+    4.6546,
+    -24.115
+   ],
+   "end": [
+    3.7529,
+    -24.115
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_1",
+   "layer": "In1.GND",
+   "start": [
+    3.7529,
+    -25.0167
+   ],
+   "end": [
+    3.7529,
+    -24.115
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_1",
+   "layer": "In1.GND",
+   "start": [
+    -0.0746,
+    -36.7268
+   ],
+   "end": [
+    -0.0746,
+    -37.7555
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_1",
+   "layer": "In1.GND",
+   "start": [
+    11.5033,
+    -26.1428
+   ],
+   "end": [
+    11.5033,
+    -26.727
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_1",
+   "layer": "In1.GND",
+   "start": [
+    0.9541,
+    -37.7555
+   ],
+   "end": [
+    -0.0746,
+    -37.7555
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_1",
+   "layer": "In1.GND",
+   "start": [
+    10.9191,
+    -26.727
+   ],
+   "end": [
+    11.5033,
+    -26.727
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_1",
+   "layer": "In1.GND",
+   "start": [
+    -0.0746,
+    -38.7842
+   ],
+   "end": [
+    -0.0746,
+    -37.7555
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_1",
+   "layer": "In1.GND",
+   "start": [
+    12.0875,
+    -26.727
+   ],
+   "end": [
+    11.5033,
+    -26.727
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_1",
+   "layer": "In1.GND",
+   "start": [
+    2.8512,
+    -24.115
+   ],
+   "end": [
+    3.7529,
+    -24.115
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_1",
+   "layer": "In1.GND",
+   "start": [
+    -1.1033,
+    -37.7555
+   ],
+   "end": [
+    -0.0746,
+    -37.7555
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_1",
+   "layer": "In1.GND",
+   "start": [
+    3.7529,
+    -23.2133
+   ],
+   "end": [
+    3.7529,
+    -24.115
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_1",
+   "layer": "In1.GND",
+   "start": [
+    11.5033,
+    -27.3112
+   ],
+   "end": [
+    11.5033,
+    -26.727
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "In1.GND",
+   "start": [
+    -0.1024,
+    2.3138
+   ],
+   "end": [
+    -0.1024,
+    3.3425
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "In1.GND",
+   "start": [
+    -0.1024,
+    4.3712
+   ],
+   "end": [
+    -0.1024,
+    3.3425
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "In1.GND",
+   "start": [
+    4.3842,
+    0.1
+   ],
+   "end": [
+    3.8,
+    0.1
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "In1.GND",
+   "start": [
+    12.291,
+    -2.4368
+   ],
+   "end": [
+    11.3893,
+    -2.4368
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "In1.GND",
+   "start": [
+    11.3893,
+    -1.5351
+   ],
+   "end": [
+    11.3893,
+    -2.4368
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "In1.GND",
+   "start": [
+    0.9263,
+    3.3425
+   ],
+   "end": [
+    -0.1024,
+    3.3425
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "In1.GND",
+   "start": [
+    3.8,
+    -0.4842
+   ],
+   "end": [
+    3.8,
+    0.1
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "In1.GND",
+   "start": [
+    3.8,
+    0.6842
+   ],
+   "end": [
+    3.8,
+    0.1
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "In1.GND",
+   "start": [
+    -1.1311,
+    3.3425
+   ],
+   "end": [
+    -0.1024,
+    3.3425
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "In1.GND",
+   "start": [
+    10.4876,
+    -2.4368
+   ],
+   "end": [
+    11.3893,
+    -2.4368
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "In1.GND",
+   "start": [
+    11.3893,
+    -3.3385
+   ],
+   "end": [
+    11.3893,
+    -2.4368
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "In1.GND",
+   "start": [
+    3.2158,
+    0.1
+   ],
+   "end": [
+    3.8,
+    0.1
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "In4.GND",
+   "start": [
+    68.2654,
+    -41.9499
+   ],
+   "end": [
+    68.875,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "In4.GND",
+   "start": [
+    68.875,
+    -41.3403
+   ],
+   "end": [
+    68.875,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "In4.GND",
+   "start": [
+    69.4846,
+    -41.9499
+   ],
+   "end": [
+    68.875,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "In4.GND",
+   "start": [
+    68.875,
+    -42.5595
+   ],
+   "end": [
+    68.875,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In1.GND",
+   "start": [
+    -39.1854,
+    -8.6103
+   ],
+   "end": [
+    -39.1854,
+    -9.1945
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In1.GND",
+   "start": [
+    -34.435,
+    -4.1008
+   ],
+   "end": [
+    -34.435,
+    -4.685
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In1.GND",
+   "start": [
+    -39.1854,
+    -9.7787
+   ],
+   "end": [
+    -39.1854,
+    -9.1945
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In1.GND",
+   "start": [
+    -38.6012,
+    -9.1945
+   ],
+   "end": [
+    -39.1854,
+    -9.1945
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In1.GND",
+   "start": [
+    -35.0192,
+    -4.685
+   ],
+   "end": [
+    -34.435,
+    -4.685
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In1.GND",
+   "start": [
+    -30.3842,
+    -10.9
+   ],
+   "end": [
+    -29.8,
+    -10.9
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In1.GND",
+   "start": [
+    -41.7838,
+    6.3082
+   ],
+   "end": [
+    -42.368,
+    6.3082
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In1.GND",
+   "start": [
+    -42.368,
+    6.8924
+   ],
+   "end": [
+    -42.368,
+    6.3082
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In1.GND",
+   "start": [
+    -33.8508,
+    -4.685
+   ],
+   "end": [
+    -34.435,
+    -4.685
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In1.GND",
+   "start": [
+    -34.435,
+    -5.2692
+   ],
+   "end": [
+    -34.435,
+    -4.685
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In1.GND",
+   "start": [
+    -29.2158,
+    -10.9
+   ],
+   "end": [
+    -29.8,
+    -10.9
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In1.GND",
+   "start": [
+    -29.8,
+    -10.3158
+   ],
+   "end": [
+    -29.8,
+    -10.9
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In1.GND",
+   "start": [
+    -39.7696,
+    -9.1945
+   ],
+   "end": [
+    -39.1854,
+    -9.1945
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In1.GND",
+   "start": [
+    -42.9522,
+    6.3082
+   ],
+   "end": [
+    -42.368,
+    6.3082
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In1.GND",
+   "start": [
+    -42.368,
+    5.724
+   ],
+   "end": [
+    -42.368,
+    6.3082
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In1.GND",
+   "start": [
+    -29.8,
+    -11.4842
+   ],
+   "end": [
+    -29.8,
+    -10.9
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In4.GND",
+   "start": [
+    -34.435,
+    -5.2692
+   ],
+   "end": [
+    -34.435,
+    -4.685
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In4.GND",
+   "start": [
+    -42.368,
+    5.724
+   ],
+   "end": [
+    -42.368,
+    6.3082
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In4.GND",
+   "start": [
+    -41.7838,
+    6.3082
+   ],
+   "end": [
+    -42.368,
+    6.3082
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In4.GND",
+   "start": [
+    -42.368,
+    6.8924
+   ],
+   "end": [
+    -42.368,
+    6.3082
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In4.GND",
+   "start": [
+    -39.1854,
+    -9.7787
+   ],
+   "end": [
+    -39.1854,
+    -9.1945
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In4.GND",
+   "start": [
+    -29.2158,
+    -10.9
+   ],
+   "end": [
+    -29.8,
+    -10.9
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In4.GND",
+   "start": [
+    -39.1854,
+    -8.6103
+   ],
+   "end": [
+    -39.1854,
+    -9.1945
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In4.GND",
+   "start": [
+    -42.9522,
+    6.3082
+   ],
+   "end": [
+    -42.368,
+    6.3082
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In4.GND",
+   "start": [
+    -34.435,
+    -4.1008
+   ],
+   "end": [
+    -34.435,
+    -4.685
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In4.GND",
+   "start": [
+    -33.8508,
+    -4.685
+   ],
+   "end": [
+    -34.435,
+    -4.685
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In4.GND",
+   "start": [
+    -29.8,
+    -11.4842
+   ],
+   "end": [
+    -29.8,
+    -10.9
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In4.GND",
+   "start": [
+    -38.6012,
+    -9.1945
+   ],
+   "end": [
+    -39.1854,
+    -9.1945
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In4.GND",
+   "start": [
+    -35.0192,
+    -4.685
+   ],
+   "end": [
+    -34.435,
+    -4.685
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In4.GND",
+   "start": [
+    -30.3842,
+    -10.9
+   ],
+   "end": [
+    -29.8,
+    -10.9
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In4.GND",
+   "start": [
+    -29.8,
+    -10.3158
+   ],
+   "end": [
+    -29.8,
+    -10.9
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/L2_PRI2",
+   "layer": "In4.GND",
+   "start": [
+    -39.7696,
+    -9.1945
+   ],
+   "end": [
+    -39.1854,
+    -9.1945
+   ],
+   "width": 0.1524,
+   "reason": "thermal spoke of a removed 5.1 switching-node pour"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PE",
+   "layer": "B.Cu",
+   "start": [
+    -58.4,
+    -3.8
+   ],
+   "end": [
+    -66.2,
+    -3.8
+   ],
+   "width": 2.032,
+   "reason": "5.1 PE track on B.Cu under R4 / R5 / R6 on F.Cu (layer-to-layer PE-PRI)"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PE",
+   "layer": "B.Cu",
+   "start": [
+    -68.7,
+    -1.3
+   ],
+   "end": [
+    -66.3,
+    -3.7
+   ],
+   "width": 2.032,
+   "reason": "5.1 PE track on B.Cu under R4 / R5 / R6 on F.Cu (layer-to-layer PE-PRI)"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PE",
+   "layer": "B.Cu",
+   "start": [
+    -66.2,
+    -3.8
+   ],
+   "end": [
+    -68.7,
+    -6.3
+   ],
+   "width": 2.032,
+   "reason": "5.1 PE track on B.Cu under R4 / R5 / R6 on F.Cu (layer-to-layer PE-PRI)"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PE",
+   "layer": "B.Cu",
+   "start": [
+    -66.3,
+    -3.7
+   ],
+   "end": [
+    -66.2,
+    -3.7
+   ],
+   "width": 2.032,
+   "reason": "5.1 PE track on B.Cu under R4 / R5 / R6 on F.Cu (layer-to-layer PE-PRI)"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PE",
+   "layer": "B.Cu",
+   "start": [
+    -66.2,
+    -3.7
+   ],
+   "end": [
+    -66.2,
+    -3.8
+   ],
+   "width": 2.032,
+   "reason": "5.1 PE track on B.Cu under R4 / R5 / R6 on F.Cu (layer-to-layer PE-PRI)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(C63-Pad1)",
+   "layer": "B.Cu",
+   "start": [
+    6.3,
+    -65.3728
+   ],
+   "end": [
+    6.3,
+    -63.9
+   ],
+   "width": 0.1524,
+   "reason": "old connection of R102 (moved away from U11 pin 9)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(C63-Pad1)",
+   "layer": "B.Cu",
+   "start": [
+    6.3272,
+    -65.4
+   ],
+   "end": [
+    6.3,
+    -65.3728
+   ],
+   "width": 0.1524,
+   "reason": "old connection of R102 (moved away from U11 pin 9)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(U1B--)",
+   "layer": "B.Cu",
+   "start": [
+    4.6,
+    -64.0
+   ],
+   "end": [
+    4.6,
+    -65.4
+   ],
+   "width": 0.1524,
+   "reason": "old connection of R102 (moved away from U11 pin 9)"
+  }
+ ]
+}

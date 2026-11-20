@@ -80,17 +80,18 @@ Made by `tools/p2k/bin/kipy tools/next/route_s2_planes.py` on the real board (re
 named `S2_*` and is removed and rebuilt; it stops if KiCad's lock file `~tube_psu_5_2.kicad_pcb.lck` exists; the
 zones are refilled by kicad-cli with the project rules, 2.2 GB). Pictures: `python3 tools/next/render_inner_layers.py`
 → `routing/In1_GND.png`, `In2_Signal_HV.png`, `In3_Power.png`, `In4_GND.png`, `routing/inner_domains.png` (all
-copper by isolation domain). Output of the first run (what was removed / moved / deleted):
-`routing/route_s2_planes_first_run.log`.
+copper by isolation domain). Output of the two runs that changed 5.1 copper: `routing/route_s2_planes_first_run.log` (3bdf54c) and
+`routing/route_s2_planes_second_run.log` (user decisions of 2026-11-20); every deleted zone / segment is listed in
+`routing/deleted_s2.json` (net, layer, end points, reason) for the re-routing in stage 3.
 
 ### Per layer
 
 | Layer | Content | Filled |
 |---|---|---|
-| In1.GND (L2) | **GND** plane: heater-LLC primary / DRV3 / U1 / DRV5 / DAB primary bridge (x −27 … 44, y < −34, round the UART island keep-out), arm to ISO1's primary side (x −40 … −27), PFC switches / bulk caps / control / flyback primary (x 2 … 64, y > −34). **ISO_GND** plane: right of the TR3 band (x > 54.5) and right of the ISO2 / TR1 slots. **HT_GND** plane: heater island incl. the AD1 / ISO1 heater side. Kept 5.1 pours (higher priority, the planes flow round them): IN2, RES_IN, L2_PRI2, PFC_DRAIN_1 / _2, Q13_DRAIN, Q14_DRAIN | GND 5496, ISO_GND 2244, HT_GND 683 mm² |
+| In1.GND (L2) | **GND** plane: heater-LLC primary / DRV3 / U1 / DRV5 / DAB primary bridge (x −27 … 44, y < −34, round the UART island keep-out), arm to ISO1's primary side (x −40 … −27), PFC switches / bulk caps / control / flyback primary (x 2 … 64, y > −34). **ISO_GND** plane: right of the TR3 band (x > 54.5) and right of the ISO2 / TR1 slots. **HT_GND** plane: heater island incl. the AD1 / ISO1 heater side. Kept 5.1 pours (higher priority, outside the plane regions): the mains pours IN2, RES_IN | GND 5653, ISO_GND 2244, HT_GND 918 mm² |
 | In2.Signal_HV (L3) | **no pour**: signal layer. Holds the 5.1 signal routing that the trial board had on In4 (399 segments, 1.66 m, 44 nets – the J2 bus to the gate drivers / isolators), moved here so that L5 is a plane. Free for the rest, incl. TX / RX from J2 pins 24 / 26 to U11 (primary copper, ≥ 8.0 mm from the island: the UART keep-out only stops pours, check_domains.py checks the tracks) | – |
 | In3.Power (L4) | primary: **15V** (flyback output D5 / C39 / C1 → link round the Q21 spacing → spine y −39 … −33.6 → DRV1, DRV5 pin 16, D19 / C96, DRV3 pin 11 / C18 / C52), **5V** (flyback output C6 / C36 / C71 / D6 → J2 pin 2, V4, C75), **+3V3** (control / measurement area round J2, x 15 … 42). Secondary: **15V_ISO_SEC** (flyback output / P15V_OUT → lane x 72.4 … 76.5 → DRV6 supply), **5V_ISOL** (output block at P5V_OUT). Heater: **6V3** over the island (parallel to the B.Cu pour) | 15V 658, 5V 239, +3V3 980, 15V_ISO_SEC 572, 5V_ISOL 191, 6V3 686 mm² |
-| In4.GND (L5) | **GND**, **ISO_GND**, **HT_GND** planes with the same outlines as In1. Kept 5.1 pours: IN2, L2_PRI2, Q13_DRAIN, Q14_DRAIN, DHB_HI_SOURCE_SEC | GND 5652, ISO_GND 2035, HT_GND 683 mm² |
+| In4.GND (L5) | **GND**, **ISO_GND**, **HT_GND** planes with the same outlines as In1. Kept 5.1 pour: IN2 | GND 5653, ISO_GND 2244, HT_GND 918 mm² |
 
 Not done, with the reason:
 - **No GND plane left of x 2 / below y −34 and none over the mains input** (IN1 / IN2, RL1, CM1, CM4, X / Y capacitors,
@@ -133,16 +134,15 @@ the pair** (11.1 / 8.0 / 8.4 / 5.2 / 3.2 / 4.2 mm), no slot credit, whatever the
 the outline of every `S2_*` zone is its region minus all copper of every other domain on **all six layers** (pads,
 tracks, vias, stored zone fills, mounting holes) grown by that spacing + 0.15 mm – so the same outline is legal on
 its own layer (KiCad's inner-layer rules) and against every other layer (which KiCad does not check). The kept 5.1
-inner pours get the same treatment through per-layer keep-outs `S2_KO_xlayer_*` (Q14_DRAIN 39.5 mm² back from ISO1
-pins 5–8 / the B.Cu GND pour across the T slot, DHB_HI_SOURCE_SEC 40.6 mm² back from the primary side of the
-L-slot, IN2 / PFC_DRAIN_1 / RES_IN slivers at PE / H4). Run the script again after routing near a barrier: the planes
+inner pours (IN2, RES_IN) get the same treatment through per-layer keep-outs `S2_KO_xlayer_*` (slivers at the PE
+pads). Run the script again after routing near a barrier: the planes
 follow the copper.
 
 Check: `check_domains.py` has a second pass "layer to layer" (in `check_next.sh`): every two copper items of two
 domains on two different layers; inner layer involved → inner-layer spacing in plan view, F.Cu ↔ B.Cu → as two
 items on one outer layer (clearance, creepage round slots); pairs that also meet on a common layer (through-hole
 pads, vias) are judged there, and the two pad rows of one barrier part by `check_footprints.py`. Before this
-stage the board had 270 such pairs below the limit, now 0 besides 33 accepted as OPEN (below).
+stage the board had 270 such pairs below the limit, now 0, and `ALLOW` holds only the Q19 / Q21 slot rule.
 
 ### 5.1 inner copper
 
@@ -154,36 +154,45 @@ stage the board had 270 such pairs below the limit, now 0 besides 33 accepted as
   to copper of another domain on another layer (10 Q14_DRAIN spokes at TR2 pad 10 / WP4, and the ISO2 fan-out on
   both sides: EPWM2A / EPWM2B, CUK_CLK / CUK_SDATA, +3V3, AD2 SPI, ISO_SEC_DHB_HI, AD2_3V3, 5V_ISOL, ISO_GND) – these
   pins are fanned out on the outer layers, where the slots count.
-- **Kept:** the mains / switch-node / heater-rectifier pours that parallel the F.Cu copper (IN2, RES_IN, L2_PRI2,
-  PFC_DRAIN_1 / _2 on In1; IN2, L2_PRI2, DHB_HI_SOURCE_SEC on In4; Q13_DRAIN / Q14_DRAIN on both) with their spokes:
-  current capacity next to 1 oz F.Cu, and no ground plane is wanted under these nodes anyway.
+- **Removed (decision 6):** the 5.1 switching-node pours on the ground-plane layers – PFC_DRAIN_1, PFC_DRAIN_2,
+  L2_PRI2, Q13_DRAIN, Q14_DRAIN on In1 (707 mm² filled) and L2_PRI2, Q13_DRAIN, Q14_DRAIN, DHB_HI_SOURCE_SEC on In4
+  (647 mm²) – with their 98 spoke segments. The planes took the freed area inside their regions: GND In1
+  5496 → 5653 mm² (under the PFC drains), HT_GND 683 → 918 mm² on both layers, ISO_GND In4 2035 → 2244 mm²
+  (L2_PRI2 lies outside the GND region, nothing replaces it).
+- **Kept:** the mains pours IN2 (In1, In4) and RES_IN (In1) with their spokes.
+- **Outer layers (decision 2):** the five 5.1 PE segments on B.Cu under R4 / R5 / R6 are deleted (PE is routed again
+  in stage 3; the "PE pour keep-out" rule areas of the placement were computed from the old PE tracks and must be
+  re-made then). R102 (B.Cu, across C63) stood 7.4 mm in plan view from U11 pin 9; 0.7 mm further down is taken by
+  C63, so it now stands upright right of C63 at (8.1, −64.1) with pad 2 up, re-connected by five short B.Cu segments
+  (U1B− along y −65.0 to the old track at x 4.6, C63 pad 1 directly): 8.2 mm from U11 pin 9.
 
-Numbers: unconnected 355 → 351 (GND 37 → 30, HT_GND 2 → 1, 15V 17 → 16, 15V_ISO_SEC 4 → 3; + 6 for the nets of the
-deleted barrier segments – the 5.1 planes already joined the through-hole pins, the rest are SMD pads without a
-via yet). `check_board.py`: no parity item, no short, no isolation-rule violation.
+Numbers: unconnected 355 (stage 1) → 351 (3bdf54c) → 353 now: GND 37 → 30, HT_GND 2 → 1, 15V 17 → 16, 15V_ISO_SEC
+4 → 3; + 6 for the nets of the deleted barrier segments and + 2 for the deleted PE track. The 5.1 planes already
+joined the through-hole pins; the remaining ground items are SMD pads without a via yet. `check_board.py`: no parity
+item, no short, no isolation-rule violation.
 
-### Open decisions
+### Decisions (user, 2026-11-20)
 
-1. **Distance through insulation, smaller numbers (not used).** A 0.55 mm core lies between In1 ↔ In2 and
-   In3 ↔ In4, the whole board (1.5 mm) between F.Cu ↔ B.Cu: ≥ 0.4 mm solid insulation, which IEC 62368-1 accepts
-   for reinforced insulation (clause to be verified, and a multilayer board normally also needs the cemented-joint
-   / thin-layer qualification that JLC does not give). If accepted, copper of two domains could overlap across a
-   core. Everything here uses the full plan-view spacing instead.
-2. **F.Cu ↔ B.Cu pairs found by the new check** (accepted as OPEN in `check_domains.py` `ALLOW`, to be closed by
-   routing or by decision 1): the 5.1 PE track on B.Cu under R4 / R5 / R6 on F.Cu (28 pairs, PE is routed again
-   anyway); U11 pin 9 (UART island, F.Cu) 7.4 mm from R102 and two tracks on B.Cu (5 pairs: move R102 ≈ 0.7 mm).
-3. **Slot credit on inner layers at ISO1 / TR2 pad 10.** The T slot cuts the laminate between ISO1 pins 5–8 and the
-   Q14_DRAIN inner pours, as the L-slot does for Q19 / Q21 (decision (a) of 2026-11-19). Without that credit the
-   Q14_DRAIN pours on In1 / In4 no longer reach TR2 pad 10 / WP4 (they still do on F.Cu / B.Cu).
-4. **5.1 routing moved to In2.** Alternative: leave it on In4 and accept a GND plane cut by the bus (set back with
-   `git checkout` of the board and `move_signals` disabled).
-5. **Plane coverage at ISO2 / TR1 / ISO1.** With 11.1 mm and no slot credit the GND plane ends 2.1 … 2.4 mm left of
-   ISO2's primary pads and 1.0 … 1.3 mm left of TR1 pins 1 / 2 (pin 2 must not be connected on an inner layer
-   anyway), ISO_GND starts 2.0 … 2.8 mm right of ISO2's secondary pads and 0.4 mm from TR1 pin 9 (not connected
-   there), and the GND plane ends 2.1 mm from ISO1 pin 8: these ground pins are reached by short outer-layer
-   tracks to a via in the plane, not by the plane under the part. ISO1 pin 1 and the heater side of ISO1 are over
-   their planes.
-6. **Kept 5.1 mains / switch-node pours on the ground-plane layers** (instead of moving them to In3 or dropping them).
+1. **No smaller through-insulation spacing.** The full inner-layer spacing applies in plan view between any two
+   layers, also across the 0.55 mm cores and F.Cu ↔ B.Cu.
+2. **The 33 F.Cu ↔ B.Cu pairs of the first run are fixed, not accepted** (PE track, R102 – above); the two OPEN
+   entries are gone from `check_domains.py` `ALLOW`, as is the TR1 pin 2 / 9 entry (nothing connects to pin 2 on an
+   inner layer any more; `S2_KO_TR1_pin2` keeps it so).
+3. **No inner-layer slot credit at ISO1 / TR2 pad 10** (the Q19 / Q21 rule stays the only exception).
+4. **The 5.1 signal routing stays on In2.**
+5. **Plane clearance at the isolators and TR1 is accepted.** GND ends 2.1 … 2.4 mm from ISO2's primary pads, 2.1 mm
+   from ISO1 pin 8 and 1.0 … 1.3 mm from TR1 pins 1 / 2; ISO_GND starts 2.0 … 2.8 mm from ISO2's secondary pads and
+   does not reach TR1 pin 9.
+6. **No switching-node pours on the inner layers** (removed, above); the mains pours IN2 / RES_IN stay.
+
+### To do in routing stage 3
+
+- Ground pins at the barriers (ISO2 pins 8 / 9, ISO1 pin 8, TR1 pins 2 / 9, C98 …): short outer-layer track to a
+  via in the plane (TR1 pin 2: no inner-layer connection at the pin itself).
+- Vias for the SMD ground / supply pads into the planes and In3 pours.
+- Route again what `routing/deleted_s2.json` lists: the ISO2 fan-out on both sides (outer layers), PE (≥ 3.2 mm in
+  plan view from primary copper on both outer layers, then re-make the PE pour keep-outs), and the connections the
+  removed switching-node pours made on In1 / In4 (they remain joined on F.Cu / B.Cu where the 5.1 outer pours exist).
 
 ## Footprints and 3D models (phase 3, 2026-11-18)
 

@@ -17,7 +17,10 @@ Steps
  3. move the 5.1 signal routing from In4.GND to In2.Signal_HV (only while In2 holds no track: one-time) and
     delete the inner-layer segments that are closer than the inner-layer spacing, in plan view, to copper of
     another domain on any layer (5.1 routing at the barriers)
- 4. the other 5.1 inner pours (mains / switch-node / heater-rectifier copper in parallel with F.Cu) stay
+ 2b. remove the 5.1 switching-node pours on In1 / In4 (SWITCH_POUR_NETS) with their spokes
+ 4. the 5.1 mains pours IN2 / RES_IN on In1 / In4 stay
+ 4b. outer-layer fixes of the layer-to-layer check (DELETE_TRACKS: PE track under R4-R6; MOVE / ADD_TRACKS: R102)
+     Everything deleted is listed in kicad_next/routing/deleted_s2.json.
  5. keep-outs S2_KO_* (rule areas, inner layers, no zone fill): PWM2 drain, TR1 pin 2, and S2_KO_xlayer_*
     that hold the kept 5.1 inner pours back from copper of other domains on other layers
  6. planes and pours S2_<layer>_<net>_<n>: outline = REGION of the net (hand-drawn, inside the domain's side of
@@ -84,6 +87,34 @@ BARRIERS = [
 # ---------------------------------------------------------------------------------------------- 5.1 copper
 GROUND_NETS = ("GND", "ISO_GND", "HT_GND")
 SPOKE_MAX = 1.5               # mm: 5.1 thermal spokes of the removed ground pours (imported as segments)
+# 5.1 pours of switching nodes on In1 / In4 (user decision 2026-11-20, 6): removed with their spokes, the
+# ground planes take the area. The mains pours IN2 / RES_IN stay.
+SWITCH_POUR_NETS = ("/05 PFC/PFC_DRAIN_1", "/05 PFC/PFC_DRAIN_2", "/06 Heaters/Q13_DRAIN", "/06 Heaters/Q14_DRAIN",
+                    "/05 PFC/L2_PRI2", "DHB_HI_SOURCE_SEC")
+DELETED_LOG = os.path.join(PROJ, "routing", "deleted_s2.json")   # every piece of copper this script deleted
+
+# Outer-layer fixes of the layer-to-layer check (user decision 2026-11-20, 2).
+# (a) 5.1 PE track on B.Cu under the mains discharge resistors R4 / R5 / R6 (F.Cu): deleted, PE is routed again
+#     in stage 3. (net, layer, x0, y0, x1, y1)
+DELETE_TRACKS = [
+    ("/05 PFC/PE", pcbnew.B_Cu, -58.4, -3.8, -66.2, -3.8),
+    ("/05 PFC/PE", pcbnew.B_Cu, -68.7, -1.3, -66.3, -3.7),
+    ("/05 PFC/PE", pcbnew.B_Cu, -66.2, -3.8, -68.7, -6.3),
+    ("/05 PFC/PE", pcbnew.B_Cu, -66.3, -3.7, -66.2, -3.7),
+    ("/05 PFC/PE", pcbnew.B_Cu, -66.2, -3.7, -66.2, -3.8),
+    # (b) old connections of R102 (moved, below)
+    ("Net-(C63-Pad1)", pcbnew.B_Cu, 6.3, -65.3728, 6.3, -63.9),
+    ("Net-(C63-Pad1)", pcbnew.B_Cu, 6.3272, -65.4, 6.3, -65.3728),
+    ("Net-(U1B--)", pcbnew.B_Cu, 4.6, -64.0, 4.6, -65.4),
+]
+# (b) R102 (B.Cu, feedback resistor across C63) was 7.4 mm in plan view from U11 pin 9 (UART island, F.Cu; 8.0 mm
+#     rule). 0.7 mm further down is taken by C63, so it stands upright right of C63 (clear of the U1 / C63 courtyards):
+#     absolute position, pad 2 up.
+MOVE = {"R102": (8.1, -64.1, "2")}            # ref: (x, y, number of the pad with the smaller y)
+ADD_TRACKS = [                                 # (net, layer, width, points)
+    ("Net-(U1B--)", pcbnew.B_Cu, 0.152, [(8.1, -64.925), (8.025, -65.0), (4.6, -65.0), (4.6, -64.0)]),
+    ("Net-(C63-Pad1)", pcbnew.B_Cu, 0.152, [(8.1, -63.275), (7.475, -63.9), (6.275, -63.9)]),
+]
 
 # ---------------------------------------------------------------------------------------------- keep-outs
 # name -> (layers, list of polygons); rule areas "no zone fill"; circles as ("circle", x, y, r)
@@ -300,6 +331,122 @@ def foreign(raw, d, extra):
     return f
 
 
+DELETED = []
+
+
+def deleted(kind, **kw):
+    DELETED.append(dict(kind=kind, **kw))
+
+
+def seg_rec(b, t, reason):
+    return dict(net=t.GetNetname(), layer=b.GetLayerName(t.GetLayer()), start=[mm(t.GetStart().x), mm(t.GetStart().y)],
+                end=[mm(t.GetEnd().x), mm(t.GetEnd().y)], width=mm(t.GetWidth()), reason=reason)
+
+
+def write_deleted():
+    """merge what this run deleted into kicad_next/routing/deleted_s2.json (a re-run deletes nothing and keeps it)"""
+    old = []
+    if os.path.exists(DELETED_LOG):
+        with open(DELETED_LOG) as f:
+            old = json.load(f)["deleted"]
+    seen = {json.dumps(x, sort_keys=True) for x in old}
+    new = [x for x in DELETED if json.dumps(x, sort_keys=True) not in seen]
+    if new or not os.path.exists(DELETED_LOG):
+        os.makedirs(os.path.dirname(DELETED_LOG), exist_ok=True)
+        with open(DELETED_LOG, "w") as f:
+            json.dump(dict(note="copper deleted by tools/next/route_s2_planes.py (routing stage 2); segments: mm, "
+                                "to be routed again in stage 3 where the net still needs them", deleted=old + new),
+                      f, indent=1)
+            f.write("\n")
+    log(f"{len(new)} deleted items added to {os.path.relpath(DELETED_LOG, ROOT)} ({len(old) + len(new)} in total)")
+
+
+def remove_switch_pours(b):
+    """user decision 2026-11-20 (6): no switching-node pour on the ground-plane layers"""
+    n = 0
+    for z in list(b.Zones()):
+        if z.GetIsRuleArea() or z.GetNetname() not in SWITCH_POUR_NETS or not z.GetZoneName().startswith("Proteus "):
+            continue
+        ls = [l for l in z.GetLayerSet().CuStack()]
+        if not ls or ls[0] not in (IN1, IN4):
+            continue
+        bb = z.GetBoundingBox()
+        rec = dict(zone=z.GetZoneName(), net=z.GetNetname(), layer=b.GetLayerName(ls[0]),
+                   bbox=[mm(bb.GetLeft()), mm(bb.GetTop()), mm(bb.GetRight()), mm(bb.GetBottom())],
+                   filled_mm2=round(area(z.GetFilledPolysList(ls[0])), 1),
+                   reason="5.1 switching-node pour on a ground-plane layer (user decision 2026-11-20)")
+        deleted("zone", **rec)
+        log(f"step 2b: removed 5.1 zone '{rec['zone']}' [{rec['net']}] {rec['layer']}, filled {rec['filled_mm2']} mm2")
+        b.Delete(z)
+        n += 1
+    spokes = collections.Counter()
+    for t in list(b.GetTracks()):
+        if t.Type() != pcbnew.PCB_VIA_T and t.GetLayer() in (IN1, IN4) and t.GetNetname() in SWITCH_POUR_NETS:
+            deleted("segment", **seg_rec(b, t, "thermal spoke of a removed 5.1 switching-node pour"))
+            spokes[(b.GetLayerName(t.GetLayer()), t.GetNetname())] += 1
+            b.Delete(t)
+    for (layer, net), k in sorted(spokes.items()):
+        log(f"step 2b: removed {k} spoke segments [{net}] {layer}")
+    if not n and not spokes:
+        log("step 2b: no 5.1 switching-node pour / spoke left on In1 / In4")
+
+
+def near(a, b_, tol=0.002):
+    return abs(a[0] - b_[0]) <= tol and abs(a[1] - b_[1]) <= tol
+
+
+def outer_fixes(b):
+    """user decision 2026-11-20 (2): DELETE_TRACKS, MOVE, ADD_TRACKS - all by absolute coordinates, so a second
+    run finds nothing to do"""
+    n = 0
+    for t in list(b.GetTracks()):
+        if t.Type() == pcbnew.PCB_VIA_T:
+            continue
+        s_, e_ = (mm(t.GetStart().x), mm(t.GetStart().y)), (mm(t.GetEnd().x), mm(t.GetEnd().y))
+        for net, layer, x0, y0, x1, y1 in DELETE_TRACKS:
+            if t.GetNetname() == net and t.GetLayer() == layer and (
+                    (near(s_, (x0, y0)) and near(e_, (x1, y1))) or (near(s_, (x1, y1)) and near(e_, (x0, y0)))):
+                why = ("5.1 PE track on B.Cu under R4 / R5 / R6 on F.Cu (layer-to-layer PE-PRI)" if "PE" in net
+                       else "old connection of R102 (moved away from U11 pin 9)")
+                deleted("segment", **seg_rec(b, t, why))
+                log(f"step 4b: deleted segment [{net}] {b.GetLayerName(layer)} {s_}-{e_}: {why}")
+                b.Delete(t)
+                n += 1
+                break
+    for ref, (x, y, up) in MOVE.items():
+        fp = b.FindFootprintByReference(ref)
+        pos = (mm(fp.GetPosition().x), mm(fp.GetPosition().y))
+        pads = {p.GetNumber(): p for p in fp.Pads()}
+        other = next(k for k in pads if k != up)
+        if near(pos, (x, y)) and pads[up].GetPosition().y < pads[other].GetPosition().y:
+            log(f"step 4b: {ref} already at ({x}, {y})")
+            continue
+        fp.SetPosition(pcbnew.VECTOR2I(nm(x), nm(y)))
+        for deg in (90.0, 270.0):
+            fp.SetOrientationDegrees(deg)
+            if pads[up].GetPosition().y < pads[other].GetPosition().y:
+                break
+        log(f"step 4b: moved {ref} {pos} -> ({x}, {y}) / {fp.GetOrientationDegrees():g} deg, pads "
+            + ", ".join(f"{k} ({mm(p.GetPosition().x)}, {mm(p.GetPosition().y)})" for k, p in sorted(pads.items())))
+    have = {(t.GetNetname(), t.GetLayer(), mm(t.GetStart().x), mm(t.GetStart().y), mm(t.GetEnd().x), mm(t.GetEnd().y))
+            for t in b.GetTracks() if t.Type() != pcbnew.PCB_VIA_T}
+    for net, layer, w, pts in ADD_TRACKS:
+        for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
+            if (net, layer, x0, y0, x1, y1) in have or (net, layer, x1, y1, x0, y0) in have:
+                continue
+            t = pcbnew.PCB_TRACK(b)
+            t.SetStart(pcbnew.VECTOR2I(nm(x0), nm(y0)))
+            t.SetEnd(pcbnew.VECTOR2I(nm(x1), nm(y1)))
+            t.SetWidth(nm(w))
+            t.SetLayer(layer)
+            t.SetNetCode(b.GetNetcodeFromNetname(net))
+            b.Add(t)
+            n += 1
+            log(f"step 4b: added segment [{net}] {b.GetLayerName(layer)} ({x0}, {y0})-({x1}, {y1})")
+    if not n:
+        log("step 4b: outer-layer fixes already in place")
+
+
 def move_signals(b, dom):
     """5.1 routing on In4.GND (the 5.1 layer In2) -> In2.Signal_HV; segments of nets that keep a 5.1 pour on
     In4 (its thermal spokes) stay. Then, once: inner-layer segments closer in plan view than the inner-layer
@@ -336,6 +483,7 @@ def move_signals(b, dom):
                 f"({mm(t.GetStart().x)}, {mm(t.GetStart().y)})-({mm(t.GetEnd().x)}, {mm(t.GetEnd().y)}): inside the "
                 f"layer-to-layer spacing of another domain")
             gone[t.GetNetname()] += 1
+            deleted("segment", **seg_rec(b, t, "inner-layer segment inside the layer-to-layer spacing of another domain"))
             b.Delete(t)
     log(f"step 3: {sum(gone.values())} inner-layer segments deleted at the barriers, nets to route again: {dict(gone)}")
 
@@ -515,12 +663,16 @@ def edit(path):
     dom = net_domains()
     remove_s2(b)
     remove_51_grounds(b)
+    remove_switch_pours(b)
     move_signals(b, dom)
     kept_51(b)
+    outer_fixes(b)
     raw = domain_copper(b, dom)
     add_keepouts(b, dom, raw)
     add_planes(b, dom, raw)
     pcbnew.SaveBoard(path, b)
+    with open(os.path.join(os.path.dirname(path), "deleted.json"), "w") as f:
+        json.dump(DELETED, f)
 
 
 def report(path):
@@ -566,6 +718,9 @@ def main(argv):
             sys.exit("route_s2_planes: the board was opened in KiCad meanwhile - not written")
         shutil.copy(pcb, BOARD)
         log(f"wrote {os.path.relpath(BOARD, ROOT)}")
+        with open(os.path.join(tmp, "deleted.json")) as f:
+            DELETED.extend(json.load(f))
+        write_deleted()
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
     return 0
