@@ -51,11 +51,14 @@ CASES = [
     ("DHB_HI_GATE", "DHB_LOW_GATE", "F", 1.0, {"clearance"}),      # ... and towards the low side
     ("Net-(R109-Pad1)", "GND", "F", 0.3, set()),                    # GND leg of the DC-link difference amplifier: SIGNAL (3c)
     ("Net-(R10-Pad1)", "GND", "F", 1.0, {"clearance"}),            # ... the DC+ leg stays HV (1.2)
+    ("5V", "GND", "In2", 0.16, set()),                              # PRIMARY_LV on inner layers: 0.15 (stage 3d)
+    ("5V", "GND", "F", 0.16, {"clearance"}),                       # ... outer layers keep the class clearance 0.2
+    ("5V", "DC+", "In2", 0.3, {"clearance"}),                      # ... and a HV net its 0.5 on the inner layers
 ]
 # The four extra slots (5.2 UART cases): KiCad 10 reported no creepage violation for test tracks at
 # (-10, -70) and (75, -50) (clearance works there; not understood - the creepage cases sit at (-10, -15) /
 # (75, 0), where it is reported). A wrong rule still shows up as a FAIL, a silent slot only as a false FAIL.
-SLOTS = [(x, y) for y in (-70, -40, -10, 15) for x in (-55, -30, 30, 55)] + [(-10, -70), (75, -50), (-10, -15), (75, 0)] + [(-5, -25), (15, -25), (-42.5, 5), (42.5, 5)]
+SLOTS = [(x, y) for y in (-70, -40, -10, 15) for x in (-55, -30, 30, 55)] + [(-10, -70), (75, -50), (-10, -15), (75, 0)] + [(-5, -25), (15, -25), (-42.5, 5), (42.5, 5)] + [(-30, -84), (30, -84), (55, -84)]
 assert len(CASES) <= len(SLOTS), "add test positions to SLOTS"
 HOLE_TEST = ("GND", "F", 1.5, {"clearance", "creepage"})          # 1.5 mm from the H4 ring: 2.0 / 3.2 mm rule (earthed screws)
 

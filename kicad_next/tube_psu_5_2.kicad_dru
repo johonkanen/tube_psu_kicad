@@ -38,6 +38,19 @@
 	(constraint clearance (min 0.15mm)))
 
 # ---------------------------------------------------------------------------------------------------
+# PRIMARY_LV supply nets (GND, 15V, 5V, +3V3, +1V65_BIAS) on the INNER layers: 0.15 mm to another PRIMARY_LV or
+# SIGNAL net (user decision 2026-11-20, routing stage 3d). The net class clearance of PRIMARY_LV is 0.2 mm on all
+# layers; the kept 5.1 runs on In2 (5V, $HT_CS, +1V65_BIAS, GND vias) are 0.156 ... 0.19 mm from their neighbours
+# at <= 15 V, and JLC needs 0.09 mm. Outer layers keep 0.2 mm (solder side). Tracks, vias and pads only: zone
+# fills keep the class / zone clearance; towards a HV net or another domain the rules below and the HV class
+# clearance stay (the condition names the two low-voltage primary classes). The same exception is in
+# tools/next/s3_router.py (World.gap); tested by tools/next/check_rules.py (inner 0.16 mm passes, outer fails).
+(rule "PRIMARY_LV inner layers 0.15 mm"
+	(layer inner)
+	(condition "A.Type != 'Zone' && B.Type != 'Zone' && A.Net != B.Net && ((A.hasNetclass('PRIMARY_LV') && (B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL'))) || (B.hasNetclass('PRIMARY_LV') && (A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL'))))")
+	(constraint clearance (min 0.15mm)))
+
+# ---------------------------------------------------------------------------------------------------
 # Functional spacing inside a domain: HV nets on the outer layers (tracks / zones; pad-to-pad gaps are
 # set by the parts, e.g. TO-220 / TO-247 pin pitch). Inner layers: net class clearance 0.5 mm.
 # Not towards the pad of a no-connect pin (net "unconnected-(...)", routing stage 3c): such a pad carries no

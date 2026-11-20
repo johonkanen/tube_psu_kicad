@@ -338,6 +338,9 @@ class World:
             return HV_OUTER        # (a no-connect pad is not a net: class clearance only, as in the .kicad_dru)
         c = {"HV_PRIMARY": 0.5, "HV_SECONDARY": 0.5, "PE_EARTH": 0.5, "PRIMARY_LV": 0.2, "SECONDARY_LV": 0.2,
              "HEATER": 0.2}
+        if (layer not in OUTER and not o_kind.startswith("zone:") and "PRIMARY_LV" in (ca, cb)
+                and {ca, cb} <= {"PRIMARY_LV", "SIGNAL"}):
+            return 0.15            # .kicad_dru "PRIMARY_LV inner layers 0.15 mm" (stage 3d): tracks / vias / pads
         return max(c.get(ca, 0.15), c.get(cb, 0.15), 0.2 if not o_net else 0)
 
     def add(self, layer, geom, net, kind):

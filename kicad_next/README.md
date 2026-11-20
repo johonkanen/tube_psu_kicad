@@ -710,7 +710,8 @@ Loss tangent 0.02 is a generic FR-4 figure (not published per stackup). Finished
 | silk line / text height | 0.15 / 1.0 mm | 0.15 / 1.0 | kicad_pro |
 | inner 0.5 oz track / space | not listed | as outer | – |
 
-Net classes (clearance / track / via; mm): Default and SIGNAL 0.15 / 0.2 / 0.6-0.3, PRIMARY_LV 0.2 / 0.5,
+Net classes (clearance / track / via; mm): Default and SIGNAL 0.15 / 0.2 / 0.6-0.3, PRIMARY_LV 0.2 (inner layers 0.15 to
+PRIMARY_LV / SIGNAL nets, `.kicad_dru` rule of routing stage 3d) / 0.5,
 SECONDARY_LV 0.2 / 0.3, HEATER 0.2 / 1.0, UART_ISO 0.15 / 0.2, HV_PRIMARY and HV_SECONDARY 0.5 / 1.0 / 1.0-0.5
 (inner-layer functional spacing for ≤ 500 V; outer layers 1.2 mm by rule), PE_EARTH 0.5 / 1.5. Widths are
 starting values; phase 6 sizes the power paths from the currents (D5 copper).
