@@ -34,6 +34,9 @@ REPORT = os.path.join(ROOT, "reports", "next", "drc.json")
 # isolation-domain rules of the .kicad_dru (rule names start with these)
 DOMAIN_RULES = ("PRI-SEC", "PRI-HEATER", "SEC-UART", "SEC(HV)-HEATER", "SEC(LV)-HEATER", "HEATER-UART",
                 "PE-PRI", "PE-SEC", "Mounting hole")
+# DRC checks that only concern silkscreen / text: ignored, the board has no silkscreen
+SILK_CHECKS = ("silk_overlap", "silk_over_copper", "silk_edge_clearance", "nonmirrored_text_on_back_layer",
+               "text_thickness", "text_height")
 # accepted domain-rule violations: (rule name, regex on the joined item descriptions, reason)
 ACCEPTED = [
     # (empty since routing stage 2, 2026-11-20: the TR1 pin 2 GND / pin 9 ISO_GND inner barrels no longer show,
@@ -50,7 +53,11 @@ def main(argv):
                 shutil.copy(os.path.join(PROJ, f), tmp)
         with open(os.path.join(PROJ, NAME + ".kicad_pro")) as f:
             pro = json.load(f)
-        pro["board"]["design_settings"]["rule_severities"]["creepage"] = "ignore"
+        sev = pro["board"]["design_settings"]["rule_severities"]
+        sev["creepage"] = "ignore"
+        # the 5.2 board is ordered without silkscreen (user, 2026-11-20): silk / text checks are noise
+        for k in SILK_CHECKS:
+            sev[k] = "ignore"
         with open(os.path.join(tmp, NAME + ".kicad_pro"), "w") as f:
             json.dump(pro, f, indent=2)
         out = os.path.join(tmp, "drc.json")
