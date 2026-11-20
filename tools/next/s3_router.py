@@ -797,6 +797,9 @@ def load_world(pcb, tmp):
 
 def run(tag, groups, argv, drop_areas=(), post=None):
     """groups: [(group name, [steps])]. Writes the board in place (or --dry-run OUT), records what it added."""
+    bad = [x for x in argv if x.startswith("-") and x not in ("--dry-run", "--strip")]
+    if bad:                                            # (an unknown switch must not start a run that writes the board)
+        sys.exit(f"s3: unknown option {' '.join(bad)} (--dry-run OUT.kicad_pcb | --strip)")
     if os.path.exists(LOCK):
         sys.exit(f"s3: {os.path.relpath(LOCK, ROOT)} exists - the board is open in KiCad; close it first")
     added_log = os.path.join(PROJ, "routing", f"{tag}_added.json")
