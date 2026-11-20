@@ -455,7 +455,19 @@ It does not pair Kelvin tracks, does not keep a gate track beside its return, an
 under an analog track. Not done: the 64 rows that found no legal path (`report` in `s3b_added.json`), the
 clean-up of 5.1 dangling copper (many open rows start on those stubs), Q8's gate loop review.
 
-Open points:
+**Stage 3b.2, item 1 (2026-11-20, user decision):** `.kicad_dru` rules "High-side driver group DRV3 / DRV5 / DRV6,
+outer layers": 0.2 mm between two nets of the same floating high-side driver (DRV3: HEATER_HI_GATE / _SOURCE / _DRV,
+Net-(DRV3-VDDA), Net-(D35-K), Net-(D11-K); DRV5: DHB_HI_GATE / _SOURCE, Net-(DRV5-VDDB), Net-(D19-K), Net-(D30-PadA),
+Net-(Q19-G); DRV6: DHB_HI_GATE_SEC / _SOURCE_SEC, Net-(DRV6-VDDA), Net-(D18-K), Net-(D31-PadA), Net-(Q21-G)); nothing
+else changes. `check_rules.py` proves it with four pairs (inside a group 0.3 mm passes; towards DC+, another group
+and the low side 1.0 mm still fails; 26 tests). The router has the same lists (`s3_router.HS_GROUPS`); stage 3b
+re-run with them: 137 of 196 rows + 2, **unconnected 62**, clearance markers 170 → 136 (142 before stage 3b; 94
+HV functional, 4 inside a driver group below 0.2 mm), dangling tracks 86, vias 13, planes GND 5581 / ISO_GND 2218 /
+HT_GND 909 mm². The numbers of the first pass above are those of 89608a5. Still to do from the user's list of
+2026-11-20: gate loops drawn by hand (incl. Q8 and the low sides), J2 escape stubs, ISO2 fan-out, Kelvin pairs,
+analog review, TX / GPIO_BYPASS_RLY, dangling clean-up, render review.
+
+Open points (of 89608a5; 1 is decided as above):
 1. **HV functional rule inside one gate-drive domain.** The + 28 clearance markers are almost all "HV functional
    1.2 mm" between nets of the same floating high-side driver (gate / source / bootstrap supply, ≤ 20 V apart) at
    1.27 mm pin pitch; most of the 142 older ones are the same. A tight gate loop and this rule exclude each other.

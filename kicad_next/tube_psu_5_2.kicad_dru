@@ -45,6 +45,27 @@
 	(condition "(A.hasNetclass('HV_PRIMARY') || A.hasNetclass('HV_SECONDARY') || B.hasNetclass('HV_PRIMARY') || B.hasNetclass('HV_SECONDARY')) && !(A.Type == 'Pad' && B.Type == 'Pad') && A.Net != B.Net")
 	(constraint clearance (min 1.2mm)))
 
+# Exception (user decision 2026-11-20, routing stage 3b): the nets of ONE floating high-side gate driver - gate
+# path, source / switch-node return, bootstrap supply - are at most about 20 V apart, so the 1.2 mm above (and
+# the 0.5 mm of the HV net classes) is not needed between them and would forbid a tight gate loop at 1.27 mm pin
+# pitch: 0.2 mm inside one group. Both items must be in the SAME group; towards DC+, the low side, another group
+# or any other net the rules above stay. Outer layers only (no switch node on an inner layer). The same lists
+# are in tools/next/s3_router.py (HS_GROUPS); tested by tools/next/check_rules.py.
+(rule "High-side driver group DRV3, outer layers"
+	(layer outer)
+	(condition "(A.NetName == '/06 Heaters/HEATER_HI_GATE' || A.NetName == '/06 Heaters/HEATER_HI_SOURCE' || A.NetName == '/06 Heaters/HEATER_HI_DRV' || A.NetName == 'Net-(DRV3-VDDA)' || A.NetName == 'Net-(D35-K)' || A.NetName == 'Net-(D11-K)') && (B.NetName == '/06 Heaters/HEATER_HI_GATE' || B.NetName == '/06 Heaters/HEATER_HI_SOURCE' || B.NetName == '/06 Heaters/HEATER_HI_DRV' || B.NetName == 'Net-(DRV3-VDDA)' || B.NetName == 'Net-(D35-K)' || B.NetName == 'Net-(D11-K)') && A.Net != B.Net")
+	(constraint clearance (min 0.2mm)))
+
+(rule "High-side driver group DRV5, outer layers"
+	(layer outer)
+	(condition "(A.NetName == 'DHB_HI_GATE' || A.NetName == 'DHB_HI_SOURCE' || A.NetName == 'Net-(DRV5-VDDB)' || A.NetName == 'Net-(D19-K)' || A.NetName == 'Net-(D30-PadA)' || A.NetName == 'Net-(Q19-G)') && (B.NetName == 'DHB_HI_GATE' || B.NetName == 'DHB_HI_SOURCE' || B.NetName == 'Net-(DRV5-VDDB)' || B.NetName == 'Net-(D19-K)' || B.NetName == 'Net-(D30-PadA)' || B.NetName == 'Net-(Q19-G)') && A.Net != B.Net")
+	(constraint clearance (min 0.2mm)))
+
+(rule "High-side driver group DRV6, outer layers"
+	(layer outer)
+	(condition "(A.NetName == 'DHB_HI_GATE_SEC' || A.NetName == 'DHB_HI_SOURCE_SEC' || A.NetName == 'Net-(DRV6-VDDA)' || A.NetName == 'Net-(D18-K)' || A.NetName == 'Net-(D31-PadA)' || A.NetName == 'Net-(Q21-G)') && (B.NetName == 'DHB_HI_GATE_SEC' || B.NetName == 'DHB_HI_SOURCE_SEC' || B.NetName == 'Net-(DRV6-VDDA)' || B.NetName == 'Net-(D18-K)' || B.NetName == 'Net-(D31-PadA)' || B.NetName == 'Net-(Q21-G)') && A.Net != B.Net")
+	(constraint clearance (min 0.2mm)))
+
 # ---------------------------------------------------------------------------------------------------
 # Primary <-> DAB secondary: REINFORCED. Working voltage 552 Vrms / 778 Vpk (ISO_GND is always earthed
 # via the amplifier chassis - confirmed by the user 2026-11-17): creepage 2 x 5.52 mm (IEC 60664-1 Table F.5 / IEC 62368-1 Table 17, PD2, MG III,

@@ -61,6 +61,10 @@ DOMAIN_GAP = {("PRI", "SEC"): 11.1, ("HEATER", "PRI"): 8.0, ("PRI", "UART"): 8.0
               ("HEATER", "PE"): 1.0, ("HEATER", "HOLE"): 1.0, ("PE", "UART"): 1.0, ("HOLE", "UART"): 1.0}
 HEATER_SEC_LV = 1.5
 HV_OUTER = 1.2
+# nets of one floating high-side gate driver: 0.2 mm between them on the outer layers (.kicad_dru "High-side
+# driver group ...", user decision 2026-11-20) - keep in step with the rule file
+HS_GROUPS = {'DRV3': ['/06 Heaters/HEATER_HI_GATE', '/06 Heaters/HEATER_HI_SOURCE', '/06 Heaters/HEATER_HI_DRV', 'Net-(DRV3-VDDA)', 'Net-(D35-K)', 'Net-(D11-K)'], 'DRV5': ['DHB_HI_GATE', 'DHB_HI_SOURCE', 'Net-(DRV5-VDDB)', 'Net-(D19-K)', 'Net-(D30-PadA)', 'Net-(Q19-G)'], 'DRV6': ['DHB_HI_GATE_SEC', 'DHB_HI_SOURCE_SEC', 'Net-(DRV6-VDDA)', 'Net-(D18-K)', 'Net-(D31-PadA)', 'Net-(Q21-G)']}
+HS_OF = {n: k for k, v in HS_GROUPS.items() for n in v}
 EDGE = 0.5
 HARD_ZONES = False            # True: pours of HV nets and the S3A_* zones are not crossed by other nets (stage 3b)
 RELAX_OWN_DOMAIN = False      # True: "relax" never shortens a spacing to another isolation domain (stage 3b)
@@ -316,6 +320,8 @@ class World:
             if {da, db} == {"HEATER", "SEC"} and "SECONDARY_LV" in (ca, cb):
                 return HEATER_SEC_LV
             return DOMAIN_GAP.get((da, db), DOMAIN_GAP.get((db, da), 0.2))
+        if layer in OUTER and net in HS_OF and HS_OF[net] == HS_OF.get(o_net):
+            return 0.2
         if layer in OUTER and (ca in HV or cb in HV):
             return HV_OUTER
         c = {"HV_PRIMARY": 0.5, "HV_SECONDARY": 0.5, "PE_EARTH": 0.5, "PRIMARY_LV": 0.2, "SECONDARY_LV": 0.2,

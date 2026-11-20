@@ -45,11 +45,15 @@ CASES = [
     ("UART_3V3", "HT_GND", "F", 0.8, {"clearance"}),               # HEATER-UART functional 1.0
     ("+3V3", "UART_3V3", "F", 7.0, {"creepage"}),                   # PRI-UART reinforced creepage 8.0
     ("ISO_GND", "ISO_UART_GND", "F", 8.0, {"creepage"}),           # SEC-UART reinforced creepage 8.4
+    ("DHB_HI_GATE", "DHB_HI_SOURCE", "F", 0.3, set()),              # one high-side driver group: 0.2 (not 1.2 / 0.5)
+    ("DHB_HI_GATE", "DC+", "F", 1.0, {"clearance"}),               # ... but towards DC+ the 1.2 stays
+    ("DHB_HI_GATE", "/06 Heaters/HEATER_HI_SOURCE", "F", 1.0, {"clearance"}),   # ... and between two groups
+    ("DHB_HI_GATE", "DHB_LOW_GATE", "F", 1.0, {"clearance"}),      # ... and towards the low side
 ]
 # The four extra slots (5.2 UART cases): KiCad 10 reported no creepage violation for test tracks at
 # (-10, -70) and (75, -50) (clearance works there; not understood - the creepage cases sit at (-10, -15) /
 # (75, 0), where it is reported). A wrong rule still shows up as a FAIL, a silent slot only as a false FAIL.
-SLOTS = [(x, y) for y in (-70, -40, -10, 15) for x in (-55, -30, 30, 55)] + [(-10, -70), (75, -50), (-10, -15), (75, 0)]
+SLOTS = [(x, y) for y in (-70, -40, -10, 15) for x in (-55, -30, 30, 55)] + [(-10, -70), (75, -50), (-10, -15), (75, 0)] + [(-5, -25), (15, -25), (-5, 5), (15, 5)]
 assert len(CASES) <= len(SLOTS), "add test positions to SLOTS"
 HOLE_TEST = ("GND", "F", 1.5, {"clearance", "creepage"})          # 1.5 mm from the H4 ring: 2.0 / 3.2 mm rule (earthed screws)
 
