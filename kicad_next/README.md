@@ -28,6 +28,7 @@ questions and the generated netlist diff 5.1 → 5.2: [CHANGES_5_2.md](CHANGES_5
 | `tools/next/check_domains.py` [BOARD] | isolation-domain distance check of a board (check_next.sh: the real board; default: the latest trial step): straight same-layer distance between pads / tracks / vias / filled zone copper of two domains and the mounting holes (PE), limits = the `.kicad_dru` rules, slot credit only where a slot blocks the straight line (path round the slots), accepted pairs in its commented `ALLOW` list; ≈ 10 s, a few hundred MB – KiCad's creepage DRC does not list every pair | phase 5 / 6 |
 | `tools/next/promote_trial_board.py` (kipy) | copies `trial_from_51/tube_psu_5_2_trial_p3.kicad_pcb` to the real board, 3D model paths back to `${KIPRJMOD}/../lib`, Description / LCSC fields from the schematic (refuses to overwrite a populated board without `--force`) | phase 5 start |
 | `tools/next/route_s2_planes.py` (kipy), `tools/next/render_inner_layers.py` | routing stage 2: inner-layer planes / pours `S2_*` of the real board (re-runnable, section "Inner layers (routing stage 2)"); PNGs of the inner layers in `kicad_next/routing/` | phase 6 |
+| `tools/next/route_s3a_power.py`, `tools/next/s3_router.py` (python3 + kipy), `tools/next/render_s3a.py` | routing stage 3a: power / HV / ground copper as data (drawn tracks, zones `S3A_*`, vias, connections routed by a local grid router that keeps the class, HV and domain spacings), re-runnable (`routing/s3a_added.json`), PE pour keep-outs `S3A_KO_PE_*`; PNGs `routing/s3a_*.png` (section "Power, HV and ground routing (stage 3a)") | phase 6 |
 | `tools/next/check_board.py` | DRC of the real board without the creepage pass (> 3 GB on the populated board) + `--schematic-parity`: fails on any parity item, short or isolation-rule violation besides `ACCEPTED`; everything else counted (`reports/next/drc.json`, ≈ 2.3 GB, 10 s) | phase 5 |
 | `tools/next/check_footprints.py` | footprint / pad / 3D / barrier-creepage check (kipy), `--dump` for `render_footprints.py` (PNGs) | phase 3 |
 | `tools/next/netlist_diff.py` | netlist diff 5.1 → 5.2 (section of CHANGES_5_2.md) + check that the three CSVs cover every part | phase 2 |
@@ -187,12 +188,145 @@ item, no short, no isolation-rule violation.
 
 ### To do in routing stage 3
 
+(Stage 3a, 2026-11-20: the ground / supply vias, PE as far as it can go, the PE pour keep-outs and the power part of
+the deleted copper are done – next section. Left of this list: the ISO2 signal fan-out, stage 3b.)
+
 - Ground pins at the barriers (ISO2 pins 8 / 9, ISO1 pin 8, TR1 pins 2 / 9, C98 …): short outer-layer track to a
   via in the plane (TR1 pin 2: no inner-layer connection at the pin itself).
 - Vias for the SMD ground / supply pads into the planes and In3 pours.
 - Route again what `routing/deleted_s2.json` lists: the ISO2 fan-out on both sides (outer layers), PE (≥ 3.2 mm in
   plan view from primary copper on both outer layers, then re-make the PE pour keep-outs), and the connections the
   removed switching-node pours made on In1 / In4 (they remain joined on F.Cu / B.Cu where the 5.1 outer pours exist).
+
+## Power, HV and ground routing (routing stage 3a, 2026-11-20)
+
+```
+python3 tools/next/route_s3a_power.py            # tracks / vias / zones S3A_* of stage 3a (removes its last run first)
+tools/p2k/bin/kipy tools/next/route_s2_planes.py # the planes follow the new copper
+python3 tools/next/render_s3a.py                 # routing/s3a_F_Cu.png, s3a_B_Cu.png, s3a_power_nets.png
+```
+
+`route_s3a_power.py` is a table of steps per net group; `s3_router.py` applies it to a copy of the board (kipy),
+refills with kicad-cli (2.2 GB) and writes the board back (stops on KiCad's lock file). Step kinds: drawn copper
+(`track`, `via`, `zone`), `auto` (a 0.1 mm grid router between a pad / point and a pad, the rest of the net, or a via
+into the plane / pour of the net) and `delete` / `delzone` for 5.1 leftovers (logged in `routing/deleted_s3a.json`).
+The router blocks, by construction: the net-class clearances, the HV functional 1.2 mm on the outer layers, the
+largest spacing of a domain pair in plan view against the other domain's copper on **all** layers (no slot credit,
+`S2_*` planes left out because `route_s2_planes.py` re-cuts them), 0.5 mm to the edge / slots, the TR3 barrier band
+(rule area "no tracks / vias"). Connections at a barrier part that need the slot credit carry `foreign_gap=4.0`
+(clearance only) and are judged by `check_domains.py`. Everything added is listed in `routing/s3a_added.json`
+(330 segments, 86 vias) and is removed and rebuilt on the next run; signals are stage 3b.
+
+### Current and width
+
+Rule of thumb used (IPC-2221 curve fitted, in the range IPC-2152 gives for a board with planes; ΔT ≈ 20 K):
+1 oz outer **I ≈ 3.25 · w^0.725 A**, 0.5 oz inner **I ≈ 0.98 · w^0.725 A** (w in mm); via 0.8 / 0.4 mm ≈ 1 A,
+0.6 / 0.3 mm ≈ 0.7 A.
+
+| width (mm) | 0.3 | 0.4 | 0.5 | 0.75 | 1.0 | 1.5 | 1.6 | 2.0 |
+|---|---|---|---|---|---|---|---|---|
+| outer 1 oz (A) | 1.4 | 1.7 | 2.0 | 2.6 | 3.3 | 4.4 | 4.6 | 5.4 |
+| inner 0.5 oz (A) | 0.4 | 0.5 | 0.6 | 0.8 | 1.0 | 1.3 | 1.4 | 1.6 |
+
+| Path | Current | Copper of stage 3a | Good for |
+|---|---|---|---|
+| DAB primary, DC+ → C47 (one split-capacitor half; `DAB_SIMULATION.md`: I1 2.4 A rms, half per capacitor) | 1.2 A rms | F.Cu track Q19 pin 2 → y −47.3 → x 41.5 (west of the TR3 band) → top edge → C47.1: 1.5 mm, 0.75 / 0.8 mm for the 9 mm at the TO-220 pins (pin pitch, switch-node strip) | 4.4 A (2.6 A at the pins) |
+| DAB primary switch node Q7.2 / Q19.3 → TR3 pins 7 / 8 | 2.4 A rms | zone `S3A_DHB_HI_SOURCE_F` (≥ 2.1 mm strip above the TO row + 11 × 12.7 mm at the pins) and the kept 5.1 track 1.5 mm | > 5 A |
+| DAB primary low side Q7.3 / C67 → C54.2, midpoint C47.2 / C54.1 / TR3 pins 1 / 2 | 1.2 A / 2.4 A rms | zones `S3A_DHB_CURRENT_F` (5.4 mm wide, 1.7 mm neck to the 5.1 pour at C67), `S3A_DHB_CAP_F` | > 4.7 A |
+| DAB secondary switch node Q21.3 → TR3 pins 15 / 16 | 2.3 A rms | F.Cu track 1.6 mm, east of the TR3 band (5.1 stub 1.78 mm at the pin) | 4.6 A |
+| DAB secondary midpoint TR3 pins 9 / 10 / C16.2 / C55.1; 420V → C16.1; ISO_GND ← C55.2 | 2.3 / 1.2 A rms | zone `S3A_TRANS_SEC_F`; track 1.2 mm to the 420V pour; C55.2 1.0 mm + via to the planes (the 5.1 ISO_GND pour carries the rest) | 3.7 A |
+| Flyback primary: DC+ feed → R116 / R151 / C12 / R45 → TR1 fly lead 11; C15 → TR1 pin 11 | ≈ 0.1 A dc, ≤ 0.4 A rms, 1.2 A peak | F.Cu 0.76 mm along the bottom edge, 0.5 mm below R72 (1.3 mm to its pads, 0.5 mm to the edge), 1.0 mm at the pin; B.Cu 0.6 mm from C15 | ≥ 2 A |
+| PWM2 drain (FLY_C) | same | zones `S3A_PWM2_drain_F` / `_B` + 10 vias 0.8 / 0.4 (below) | – |
+| Flyback windings: TR1.3 → D6 (5 V), TR1.1 → D5 (15 V), TR1.7 → D29 (5V_ISOL), TR1.10 → D4 (15V_ISO_SEC) | 0.6 – 0.8 A rms (NR 1.11) | 0.8 / 0.6 / 0.8 / 0.5 mm | 2.0 – 2.8 A |
+| Heater LLC primary: Q11 drain tab → DC+ pour, Q11.3 → switch-node pour, Q10.3 → shunt R30 | ≈ 0.5 A rms | zone `S3A_Q11_tab_DC` (2.5 × 5.3 mm), 1.0 mm, 0.8 mm F.Cu + via 0.8 / 0.4 + 0.8 mm B.Cu | ≥ 1 A (the via) |
+| Supply pins (15V, 5V, +3V3, 5V_ISOL, 15V_ISO_SEC, 6V3 at DRV4), ground pins | < 0.3 A each | 0.3 – 0.5 mm stub + via 0.8 / 0.4 (0.6 / 0.3 at fine-pitch parts) into the In3 pour / In1 + In4 plane | 0.7 – 1 A per via |
+| PE (Y-capacitor currents only) | mA | B.Cu 1.0 mm (kept 5.1 pieces 2.0 mm) | 3.3 A |
+
+Not touched: mains input / filter / bridge, PFC switch / diode / bulk loops and the DC+ distribution are the kept 5.1
+pours and tracks (no power item of those nets was open besides the ones below).
+
+### What was routed
+
+- **Flyback primary (PWM2).** Drain copper: one F.Cu area round pins 5–8 (x 41.3 … 48.9, y −1.4 … 10.4) with the strip
+  y 6.9 … 10.4 to D7 anode / TR1 pin 12, and B.Cu x 40.2 … 47.4, y −0.9 … 13.7, stitched with 7 + 3 vias; no inner copper
+  (`S2_KO_PWM2_drain`). **Filled area 127.5 mm² (F) + 64.3 mm² (B) = 1.92 cm²** (target 2–3 cm², estimate 1.9). What limits
+  it: HV 1.2 mm to R114 / R115 (left), R45 / D7 cathode (below), PWM2 pins 4 / 9 and the U10 / R132 pads (B, top); the
+  B.Cu area is in two pieces (30.9 + 33.4 mm²) because VCC (D10 cathode → C58 / C51 → pin 11) and the start-up / gate net
+  (R114 → pin 10) have to cross it – one 3.2 mm corridor on B.Cu at y 6.0 / 7.0 (the gate track passes between the pads
+  of C58); their vias and the GND via of pin 12 sit under the package between the pin rows. The 5.1 VCC track across
+  the area (F.Cu, dangling) is deleted. The area proper is ≥ 14 mm from the TR1 slot; only the strip runs to the
+  fly-lead pin 12 (its end 5.2 mm from the slot, as the pin). PWM2 pins 2 / 3 (VERR / FB) are ≥ 2.5 mm from it, their
+  parts R140 / R141 / C138 / C139 1.2 … 1.5 mm from its upper edge (HV functional spacing, nothing closer). Clamp D7 – R72 0.6 mm; CS pin → R9 / R8 0.4 mm; sense
+  resistors, C15, C58, C51, C138 – C140, R139, R141, R154 each with a via to the GND planes; TR1 pin 2 by a 0.6 mm B.Cu
+  track to a via outside `S2_KO_TR1_pin2` (no inner connection at the pin).
+- **Flyback secondary.** TR1.10 → D4 east of the gap between the TR1 and ISO2 slots (x 71.9: 11.1 mm round the slots to
+  ISO2 pin 8 / D5), TR1.7 → D29, TR1 pin 9 → via in the ISO_GND plane, C102 – R68 (−100 V), R68 / C45 grounds.
+- **DAB primary.** The 5.1 pours 22 (DHB_CAP) and 28 (switch node) stood where TR3 / L3 / the split capacitors were:
+  deleted, replaced by the zones of the table. DC+ cannot leave Q19 pin 2 northwards (TR3 barrier band from y −47.8)
+  and the switch node has to pass between it and the pins, so DC+ runs 1.2 mm above the switch-node strip (y −47.3,
+  0.5 mm under the band), turns north at x 41.5 (0.25 mm west of the band) and reaches C47.1 round TR3 pins 1 / 2
+  along the top edge (≈ 69 mm; the loop it adds carries only the transformer current – < 0.1 µH against 40 µH
+  leakage; the switching loop Q19 – Q7 – C67 is unchanged). Balancing resistors R143 – R146: one via per capacitor
+  terminal.
+- **DAB secondary.** The 5.1 pour 26 (TRANS_SEC at the old TR3) deleted. Switch node Q21.3 → TR3 15 / 16 as a 1.6 mm
+  track east of the band; TRANS_SEC zone at TR3 9 / 10; 420V to C16.1; R147 – R150 vias.
+- **Heater LLC.** Q11 tab to the DC+ pour (the 5.1 pours have no pad connection – their spokes were segments, and
+  the ones of moved parts are gone), Q11.3 to the switch-node pour, Q10.3 → R30, R158 → R30, HEATER_CURRENT pours
+  F ↔ B.
+- **Grounds.** 25 vias 0.8 / 0.4: DRV3 / DRV5 / DRV6 ground pins and their capacitors, U1 / U11 primary side, ISO1 pin 8
+  (4.8 mm F.Cu track to a via ≥ 8 mm from the heater barrels), ISO1 pin 2 / C97, ISO2 pin 8 / C98 and pin 9, ISO1 pin 9
+  (HT_GND), C55 / C89 / C93 / C119 / R128 (ISO_GND), the 5.1 GND pours that had lost their plane spokes. The relay
+  driver's ground pads (Q9 / C35 / R32) are joined to each other only (see open points).
+- **Supply rails.** 15V / 5V / +3V3 / 15V_ISO_SEC / 5V_ISOL / 6V3 pins to their In3 pour or to the kept 5.1 track of
+  the net (28 vias); where the 5.1 feed is a track on In2 its end is taken to the nearest free via site on In2 (5V
+  at DRV3 and DRV5, 5V_ISOL at DRV6, +3V3 at ISO2 / C98). UART island: U11 secondary side, C135, J4 pins 1 / 2.
+- **PE.** The Y capacitors are joined again on B.Cu, 1.0 mm, ≥ 3.2 mm in plan view from primary pads / tracks on both
+  outer layers: C84 – C65 direct, C84 → (−56, −6.2) → (−56, −11.5) → (−53.4, −14.1) → (−43.8, −14.1) → C81 / C82, C85 → C81;
+  the two PE terminal pins are joined. The placement's four "PE pour keep-out" rule areas are replaced by
+  `S3A_KO_PE_1` (PE terminal, 97 mm²) and `S3A_KO_PE_2` (Y capacitors and their tracks, 589 mm²) = PE copper + 3.25 mm
+  on all six layers, made from the PE copper of each run. **The PE terminal is not connected to the Y capacitors**
+  (open point 1).
+
+Checks after the last run: `check_board.py` no parity item, no short, no isolation-rule violation (clearance markers
+140 → 143: three at the ends of kept 5.1 tracks that are 0.13 … 0.18 mm from a neighbour where the new segment
+starts; dangling tracks 145 → 124, dangling vias 22 → 20); `check_domains.py` same-layer and layer-to-layer clean,
+`ALLOW` unchanged (Q19 / Q21). Planes after the re-cut: GND 5619 mm², ISO_GND 2227 mm², HT_GND 914 mm² per layer
+(5653 / 2244 / 918 before). **Unconnected 353 → 204; in the power / HV / ground nets 189 → 40.**
+
+### Open points (decisions) and what is left in the power / HV / ground nets
+
+1. **PE terminal ↔ Y capacitors cannot be routed.** The discharge chain RES_IN – R6 – R5 – R4 – IN2 (F.Cu, 1206, pad
+   gaps 1.7 … 1.9 mm) lies between the PE terminal and everything else, with the RES_IN and IN2 pours on both sides:
+   PE needs 3.2 + w + 3.2 mm between two primary pads in plan view on every layer, and a chain node is copper on
+   both sides of every gap. (5.1 crossed under the resistors; decision 2 of stage 2 forbids that.) Choices: one of
+   R4 – R6 as a part with ≥ 7.4 mm between its pads (axial through-hole, PE crosses under its body); the PE terminal
+   east of the chain; or the Y capacitors earthed through a mounting hole. 1 item open (PE.1 ↔ track at (−56, −6.2)).
+2. **Mains neutral: CM1 pin 3 is cut off from the IN2 pour** (was so before this stage). The PE pads of C84 (−50.9, −1.1)
+   and C65 (−42.4, −1.2) stand 8.5 mm apart between CM1 pin 3 and the pour: 2 × (1.0 + 3.2) mm closes the gap to
+   0.1 mm on every layer. Needs C84 or C65 moved by ≥ 3 mm (or the neutral taken round the east side of C65),
+   together with point 1. 1 item (IN2 pour in two pieces).
+3. **DAB secondary: Q8 pin 2 is not joined to the switch node** (Q21.3 / TR3 15 / 16). 5.1 did that with the In4 pour
+   removed by decision 6. On the outer layers the 420V pour (F) and Q8's gate parts R87 / R88 / D32 / D34 / C43
+   (B) lie between the pin and everything else; the slot is 1.5 mm below the pins. Choices: a ≥ 3 mm track on In2
+   (14 mm long, ≈ 15 pF to the planes; In2 is the HV routing layer of the stackup, but it is a switching node on
+   an inner layer), or moving the gate parts > 2 mm and taking the 420V band to B.Cu. 1 item (R56.2 ↔ Q8.2).
+4. **Heater LLC split capacitors have no DC+** (was so before this stage): the DC+ pour island at C42.1 / C49.1 / C20.1
+   is 1.3 mm from the main pour; C134 (U11 decoupling) stands in the neck between the Q10 tab and U11 – with 1.2 mm
+   on both sides 0 mm is left, and there is no via site (R155 – R158 under the capacitors). Needs C134 moved ≈ 2.5 mm
+   (e.g. to the bottom side); then the neck is 1.9 mm. Same spot: R155 pin 1 (DC+) has no legal via site next to
+   C42.1 (via in pad, or R155 1.5 mm down). 2 items.
+5. **Relay driver under RL1 (Q9 / C35 / R32): 5V and GND cannot reach it** (as GPIO_BYPASS_RLY, stage 3b): the strip
+   between 8 mm from the heater island and the PE keep-out of C82 is 0 … 1.7 mm high and the PE tracks close every
+   other way on all layers. Depends on points 1 / 2. 2 items.
+6. Small: the PWM2 drain area is 1.92 cm², at the lower end – 0.1 cm² more on B.Cu if `S2_KO_PWM2_drain` and the
+   area go 0.9 mm further left (to 1.2 mm from the 15V track at x 37.8).
+
+Left for stage 3b in these nets (gate-drive loops, sense dividers, analog supplies, 5.1 fragments on In2), 33
+items: bootstrap / driver returns HEATER_HI_SOURCE (4), DHB_HI_SOURCE (2), DHB_HI_SOURCE_SEC (2) and D11 anode (15V);
+dividers 420V – R23, AC1 / AC2 – R47 / R50; In2 Kelvin tracks DHB_CURRENT (2) / HEATER_CURRENT (3); +3V3 of U1
+(C125, C87, two In2 pieces) and of U11 (with TX / RX on In2); AD2_3V3 and 5V at their In2 ends, DRV6 pin 3 (5V_ISOL),
+C103.2 and four 0.15 mm ISO_GND fragments at DRV6, the 15V_ISO_SEC stub at ISO2, one GND via next to an In2 end,
+two 5V fragments at DRV3.
 
 ## Footprints and 3D models (phase 3, 2026-11-18)
 

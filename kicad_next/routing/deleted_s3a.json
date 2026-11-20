@@ -1,0 +1,134 @@
+{
+ "note": "5.1 copper deleted by the s3a route script (mm)",
+ "deleted": [
+  {
+   "kind": "segment",
+   "net": "Net-(D10-K)",
+   "layer": "F.Cu",
+   "start": [
+    46.88,
+    8.48
+   ],
+   "end": [
+    46.0,
+    7.6
+   ],
+   "width": 1.016,
+   "reason": "5.1 VCC track across the PWM2 drain area (dangling at both ends), VCC is routed on B.Cu"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(D10-K)",
+   "layer": "F.Cu",
+   "start": [
+    41.2,
+    7.6
+   ],
+   "end": [
+    42.1,
+    7.6
+   ],
+   "width": 1.016,
+   "reason": "5.1 VCC track across the PWM2 drain area (dangling at both ends), VCC is routed on B.Cu"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(D10-K)",
+   "layer": "F.Cu",
+   "start": [
+    46.0,
+    7.6
+   ],
+   "end": [
+    44.2,
+    7.6
+   ],
+   "width": 1.016,
+   "reason": "5.1 VCC track across the PWM2 drain area (dangling at both ends), VCC is routed on B.Cu"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(D10-K)",
+   "layer": "F.Cu",
+   "start": [
+    42.1,
+    7.6
+   ],
+   "end": [
+    44.2,
+    7.6
+   ],
+   "width": 1.016,
+   "reason": "5.1 VCC track across the PWM2 drain area (dangling at both ends), VCC is routed on B.Cu"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus F.Cu pour 22",
+   "net": "/07 DHB/DHB_CAP",
+   "layer": "F.Cu",
+   "bbox": [
+    19.2,
+    -66.8,
+    25.6,
+    -47.6
+   ],
+   "reason": "5.1 pour of the old TR3 / split-capacitor position, connected to nothing on the 5.2 board"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus F.Cu pour 26",
+   "net": "/07 DHB/TRANS_SEC",
+   "layer": "F.Cu",
+   "bbox": [
+    58.0,
+    -86.4,
+    69.6,
+    -66.4
+   ],
+   "reason": "5.1 pour of the old TR3 / split-capacitor position, connected to nothing on the 5.2 board"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "F.Cu",
+   "start": [
+    37.315,
+    -1.4499
+   ],
+   "end": [
+    37.315,
+    2.546
+   ],
+   "width": 0.508,
+   "reason": "5.1 15V stub that ended on the D10 anode pad (moved)"
+  },
+  {
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "B.Cu",
+   "start": [
+    56.4,
+    -0.468
+   ],
+   "end": [
+    56.032,
+    -0.1
+   ],
+   "width": 1.016,
+   "reason": "5.1 DC+ stub at the old TR1 position"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus F.Cu pour 28",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu",
+   "bbox": [
+    33.2,
+    -65.6,
+    44.0,
+    -40.4
+   ],
+   "reason": "5.1 pour of the old TR3 / L3 / split-capacitor position (connected to nothing, or in the way of DC+)"
+  }
+ ]
+}
