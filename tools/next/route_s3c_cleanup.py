@@ -8,11 +8,14 @@ the 5.2 high-voltage functional spacing (1.2 mm on the outer layers, tube_psu_5_
 clearance and draws them again with the engine of stage 3a / 3b (tools/next/s3_router.py), and it removes
 dangling 5.1 copper that no open connection starts on. Plan and list: kicad_next/README.md "Stage 3c".
 
-Order of a full rebuild (this step sees the copper of stage 3a, stage 3b sees both):
+Order of a full rebuild (this step sees the copper of stage 3a, stage 3d = the ISO2 / AD2 fan-out sees both, and
+stage 3b all three):
     python3 tools/next/route_s3b_signals.py --strip
+    python3 tools/next/route_s3d_iso2.py --strip
     python3 tools/next/route_s3c_cleanup.py --strip
     python3 tools/next/route_s3a_power.py
     python3 tools/next/route_s3c_cleanup.py
+    python3 tools/next/route_s3d_iso2.py
     python3 tools/next/route_s3b_signals.py
     tools/p2k/bin/kipy tools/next/route_s2_planes.py
 
@@ -107,10 +110,10 @@ DAB_SEC = [
     *dels("DHB_HI_GATE_SEC", B, "5.1 gate track 1.18 mm from DRV6 pin 6; drawn again 0.7 mm wide",
           (63.093, -54.693, 62.3, -53.9)),
     ("track", "DHB_HI_GATE_SEC", B, 0.7, [(63.093, -54.693), (62.3, -53.9)], FG),
-    # 15V_ISO_SEC 1.15 mm from R39 pin 1 (divider node): the same track 0.45 mm wide (1.24 mm)
+    # 15V_ISO_SEC 1.15 mm from R39 pin 1 (divider node)
     *dels("15V_ISO_SEC", F, "5.1 track 1.15 mm from the divider node at R39 pin 1; drawn again 0.45 mm wide",
           (74.99, -24.721, 75.244, -24.975), (75.244, -24.975, 75.244, -28.658)),
-    ("track", "15V_ISO_SEC", F, 0.45, [(74.99, -24.721), (75.244, -24.975), (75.244, -28.658)], FG),
+    # (not drawn again since stage 3d: the whole 5.1 track is a dead end and is deleted there, route_s3d_iso2.py)
 ]
 
 # ------------------------------------------------------------------------------------------------ flyback secondary
@@ -170,7 +173,14 @@ ANALOG = [
     # 15V (flyback -> DRV2) between the pads of R79, 0.16 ... 0.4 mm from the AC-sense divider nodes
     *dels("15V", B, "5.1 15V track 0.16 ... 0.4 mm from the AC-sense divider nodes (R79 pin 1, vias of R48 / R51)",
           (20.6, 14.8, 36.2, 14.8), (36.2, 14.8, 37.8, 13.2)),
-    re("15V", (20.6, 14.8, "B.Cu"), (37.8, 13.2), "B2", 0.4, margin=4.0),
+    # (drawn since stage 3d - the grid router found this path first; the via of R79 pin 1 stands 1.25 mm from the
+    # second via here, so its place must not depend on the state of the board)
+    ("track", "15V", B, 0.4, [(20.6, 14.8), (21.2, 15.4), (21.2, 17.6), (21.3, 17.7), (30.5, 17.7), (32.1, 16.1),
+                              (32.1, 15.5)]),
+    ("via", "15V", 32.1, 15.5, *VS),
+    ("track", "15V", I2, 0.4, [(32.1, 15.5), (33.5, 14.1), (36.9, 14.1)]),
+    ("via", "15V", 36.9, 14.1, *VS),
+    ("track", "15V", B, 0.4, [(36.9, 14.1), (37.7, 13.3)]),
     # 15V via 0.9 mm from C70 pin 1 (DC+, F.Cu): 0.8 mm further east on the same In2 / B.Cu tracks
     # EPWM5A (In2): the end of the kept track stood 0.025 mm from the HEATER_CURRENT via at (0.4, -56.1); 0.95 mm shorter
     *dels("EPWM5A", I2, "5.1 track end 0.025 mm from the HEATER_CURRENT via; drawn again 0.95 mm shorter",

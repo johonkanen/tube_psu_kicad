@@ -1,0 +1,3119 @@
+{
+ "note": "copper added by tools/next/route_s3d_*.py (removed and rebuilt on a re-run)",
+ "added": [
+  {
+   "kind": "track",
+   "net": "GND",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    62.107,
+    -22.155
+   ],
+   "b": [
+    60.9,
+    -22.155
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "GND",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    60.9,
+    -22.155
+   ],
+   "b": [
+    60.25,
+    -22.805
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "GND",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    60.25,
+    -22.805
+   ],
+   "b": [
+    60.25,
+    -24.05
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "GND",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    60.25,
+    -24.05
+   ],
+   "b": [
+    59.77,
+    -24.53
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "GND",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    59.77,
+    -24.53
+   ],
+   "b": [
+    57.38,
+    -24.53
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "GND",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    57.38,
+    -24.53
+   ],
+   "b": [
+    57.35,
+    -24.5
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "GND",
+   "x": 57.35,
+   "y": -24.5,
+   "d": 0.5,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "CUK_SDATA",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    62.107,
+    -23.425
+   ],
+   "b": [
+    60.95,
+    -23.425
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "CUK_SDATA",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    60.95,
+    -23.425
+   ],
+   "b": [
+    60.7,
+    -23.675
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "CUK_SDATA",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    60.7,
+    -23.675
+   ],
+   "b": [
+    60.7,
+    -24.2
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "CUK_SDATA",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    60.7,
+    -24.2
+   ],
+   "b": [
+    59.85,
+    -25.05
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "CUK_SDATA",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    59.85,
+    -25.05
+   ],
+   "b": [
+    57.1,
+    -25.05
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "CUK_SDATA",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    57.1,
+    -25.05
+   ],
+   "b": [
+    56.55,
+    -24.5
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "CUK_SDATA",
+   "x": 56.55,
+   "y": -24.5,
+   "d": 0.5,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "CUK_SDATA",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    47.541,
+    -23.241
+   ],
+   "b": [
+    55.291,
+    -23.241
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "CUK_SDATA",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    55.291,
+    -23.241
+   ],
+   "b": [
+    56.55,
+    -24.5
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "CUK_CLK",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    62.107,
+    -24.695
+   ],
+   "b": [
+    60.9,
+    -24.695
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "CUK_CLK",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    60.9,
+    -24.695
+   ],
+   "b": [
+    60.195,
+    -25.4
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "CUK_CLK",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    60.195,
+    -25.4
+   ],
+   "b": [
+    56.7,
+    -25.4
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "CUK_CLK",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    56.7,
+    -25.4
+   ],
+   "b": [
+    55.8,
+    -24.5
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "CUK_CLK",
+   "x": 55.8,
+   "y": -24.5,
+   "d": 0.5,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "CUK_CLK",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    53.1414,
+    -23.7804
+   ],
+   "b": [
+    55.0804,
+    -23.7804
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "CUK_CLK",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    55.0804,
+    -23.7804
+   ],
+   "b": [
+    55.8,
+    -24.5
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "$CUK_CS",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    62.107,
+    -25.965
+   ],
+   "b": [
+    58.55,
+    -25.965
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "$CUK_CS",
+   "x": 58.55,
+   "y": -25.965,
+   "d": 0.5,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "$CUK_CS",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    56.8375,
+    -25.356
+   ],
+   "b": [
+    57.941,
+    -25.356
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "$CUK_CS",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    57.941,
+    -25.356
+   ],
+   "b": [
+    58.55,
+    -25.965
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    62.107,
+    -27.235
+   ],
+   "b": [
+    61.25,
+    -27.235
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    61.25,
+    -27.235
+   ],
+   "b": [
+    60.515,
+    -26.5
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    60.515,
+    -26.5
+   ],
+   "b": [
+    57.85,
+    -26.5
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "DAB_DIS",
+   "x": 57.85,
+   "y": -26.5,
+   "d": 0.5,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    57.85,
+    -26.5
+   ],
+   "b": [
+    57.4,
+    -26.05
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    57.4,
+    -26.05
+   ],
+   "b": [
+    46.8,
+    -26.05
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM2B",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    62.107,
+    -28.505
+   ],
+   "b": [
+    60.97,
+    -28.505
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM2B",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    60.97,
+    -28.505
+   ],
+   "b": [
+    60.77,
+    -28.305
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM2B",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    60.77,
+    -28.305
+   ],
+   "b": [
+    60.77,
+    -27.475
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM2B",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    60.77,
+    -27.475
+   ],
+   "b": [
+    60.345,
+    -27.05
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM2B",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    60.345,
+    -27.05
+   ],
+   "b": [
+    57.385,
+    -27.05
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM2B",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    57.385,
+    -27.05
+   ],
+   "b": [
+    54.65,
+    -24.315
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "EPWM2B",
+   "x": 54.65,
+   "y": -24.3152,
+   "d": 0.5,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "EPWM2B",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    46.9762,
+    -24.3152
+   ],
+   "b": [
+    54.65,
+    -24.3152
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM2A",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    62.107,
+    -29.775
+   ],
+   "b": [
+    60.62,
+    -29.775
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM2A",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    60.62,
+    -29.775
+   ],
+   "b": [
+    60.42,
+    -29.575
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM2A",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    60.42,
+    -29.575
+   ],
+   "b": [
+    60.42,
+    -27.62
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM2A",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    60.42,
+    -27.62
+   ],
+   "b": [
+    60.2,
+    -27.4
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM2A",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    60.2,
+    -27.4
+   ],
+   "b": [
+    56.777,
+    -27.4
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "EPWM2A",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    56.777,
+    -27.4
+   ],
+   "b": [
+    54.2,
+    -24.823
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "EPWM2A",
+   "x": 54.2,
+   "y": -24.8232,
+   "d": 0.5,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "EPWM2A",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    46.5249,
+    -24.8232
+   ],
+   "b": [
+    54.2,
+    -24.8232
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    46.8,
+    -26.05
+   ],
+   "b": [
+    46.805,
+    -26.05
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    46.805,
+    -26.05
+   ],
+   "b": [
+    42.905,
+    -26.05
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    42.905,
+    -26.05
+   ],
+   "b": [
+    35.805,
+    -18.95
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "DAB_DIS",
+   "x": 35.805,
+   "y": -18.95,
+   "d": 0.6,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    35.805,
+    -18.95
+   ],
+   "b": [
+    35.805,
+    -13.65
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    35.805,
+    -13.65
+   ],
+   "b": [
+    34.405,
+    -12.25
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(AD2-SDATA)",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    71.407,
+    -23.425
+   ],
+   "b": [
+    74.55,
+    -23.425
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "Net-(AD2-SDATA)",
+   "x": 74.55,
+   "y": -23.425,
+   "d": 0.5,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "Net-(AD2-SDATA)",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    74.55,
+    -23.425
+   ],
+   "b": [
+    79.78,
+    -23.425
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(AD2-SDATA)",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    79.78,
+    -23.425
+   ],
+   "b": [
+    81.05,
+    -24.695
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(AD2-SDATA)",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    81.05,
+    -24.695
+   ],
+   "b": [
+    81.05,
+    -35.3
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "Net-(AD2-SDATA)",
+   "x": 81.05,
+   "y": -35.3,
+   "d": 0.5,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "Net-(AD2-SDATA)",
+   "layer": "B.Cu",
+   "w": 0.2,
+   "a": [
+    81.05,
+    -35.3
+   ],
+   "b": [
+    81.05,
+    -33.86
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(AD2-SDATA)",
+   "layer": "B.Cu",
+   "w": 0.2,
+   "a": [
+    81.05,
+    -33.86
+   ],
+   "b": [
+    80.75,
+    -33.56
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(AD2-SDATA)",
+   "layer": "B.Cu",
+   "w": 0.2,
+   "a": [
+    80.75,
+    -33.56
+   ],
+   "b": [
+    79.6636,
+    -33.56
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(AD2-CLK)",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    71.407,
+    -24.695
+   ],
+   "b": [
+    74.55,
+    -24.695
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "Net-(AD2-CLK)",
+   "x": 74.55,
+   "y": -24.695,
+   "d": 0.5,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "Net-(AD2-CLK)",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    74.55,
+    -24.695
+   ],
+   "b": [
+    79.18,
+    -24.695
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(AD2-CLK)",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    79.18,
+    -24.695
+   ],
+   "b": [
+    80.451,
+    -25.966
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(AD2-CLK)",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    80.451,
+    -25.966
+   ],
+   "b": [
+    80.451,
+    -34.5
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(AD2-CS)",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    71.407,
+    -25.965
+   ],
+   "b": [
+    74.55,
+    -25.965
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "Net-(AD2-CS)",
+   "x": 74.55,
+   "y": -25.965,
+   "d": 0.5,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "Net-(AD2-CS)",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    74.55,
+    -25.965
+   ],
+   "b": [
+    77.965,
+    -25.965
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(AD2-CS)",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    77.965,
+    -25.965
+   ],
+   "b": [
+    78.6,
+    -26.6
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(AD2-CS)",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    78.6,
+    -26.6
+   ],
+   "b": [
+    78.6,
+    -32.55
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(AD2-CS)",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    78.6,
+    -32.55
+   ],
+   "b": [
+    78.8,
+    -32.75
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "Net-(AD2-CS)",
+   "x": 78.8,
+   "y": -32.75,
+   "d": 0.5,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "Net-(AD2-CS)",
+   "layer": "B.Cu",
+   "w": 0.2,
+   "a": [
+    78.8,
+    -32.75
+   ],
+   "b": [
+    78.955,
+    -32.595
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(AD2-CS)",
+   "layer": "B.Cu",
+   "w": 0.2,
+   "a": [
+    78.955,
+    -32.595
+   ],
+   "b": [
+    79.6636,
+    -32.595
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_SEC_DHB_HI",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    71.407,
+    -29.775
+   ],
+   "b": [
+    72.3,
+    -29.775
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_SEC_DHB_HI",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    72.3,
+    -29.775
+   ],
+   "b": [
+    73.125,
+    -28.95
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_SEC_DHB_HI",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    73.125,
+    -28.95
+   ],
+   "b": [
+    75.2,
+    -28.95
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_SEC_DHB_HI",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    75.2,
+    -28.95
+   ],
+   "b": [
+    75.35,
+    -28.8
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_SEC_DHB_HI",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    75.35,
+    -28.8
+   ],
+   "b": [
+    75.57,
+    -28.8
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "ISO_SEC_DHB_HI",
+   "x": 75.57,
+   "y": -28.8,
+   "d": 0.6,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "ISO_SEC_DHB_HI",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    75.57,
+    -28.8
+   ],
+   "b": [
+    75.3,
+    -29.07
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_SEC_DHB_HI",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    75.3,
+    -29.07
+   ],
+   "b": [
+    75.3,
+    -32.45
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_SEC_DHB_HI",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    75.3,
+    -32.45
+   ],
+   "b": [
+    75.9,
+    -33.05
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_SEC_DHB_HI",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    75.9,
+    -33.05
+   ],
+   "b": [
+    75.9,
+    -38.3
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_SEC_DHB_HI",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    75.9,
+    -38.3
+   ],
+   "b": [
+    76.672,
+    -39.072
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_SEC_DHB_LO",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    71.407,
+    -28.505
+   ],
+   "b": [
+    72.6,
+    -28.505
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_SEC_DHB_LO",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    72.6,
+    -28.505
+   ],
+   "b": [
+    72.84,
+    -28.265
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_SEC_DHB_LO",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    72.84,
+    -28.265
+   ],
+   "b": [
+    72.84,
+    -27.7
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_SEC_DHB_LO",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    72.84,
+    -27.7
+   ],
+   "b": [
+    73.14,
+    -27.4
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_SEC_DHB_LO",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    73.14,
+    -27.4
+   ],
+   "b": [
+    75.57,
+    -27.4
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "ISO_SEC_DHB_LO",
+   "x": 75.57,
+   "y": -27.4,
+   "d": 0.6,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "ISO_SEC_DHB_LO",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    75.57,
+    -27.4
+   ],
+   "b": [
+    74.9,
+    -28.07
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_SEC_DHB_LO",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    74.9,
+    -28.07
+   ],
+   "b": [
+    74.9,
+    -32.65
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_SEC_DHB_LO",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    74.9,
+    -32.65
+   ],
+   "b": [
+    75.5,
+    -33.25
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_SEC_DHB_LO",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    75.5,
+    -33.25
+   ],
+   "b": [
+    75.5,
+    -39.91
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_SEC_DHB_LO",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    75.5,
+    -39.91
+   ],
+   "b": [
+    75.405,
+    -40.005
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS_SEC",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    71.407,
+    -27.235
+   ],
+   "b": [
+    72.2,
+    -27.235
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS_SEC",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    72.2,
+    -27.235
+   ],
+   "b": [
+    72.685,
+    -26.75
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS_SEC",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    72.685,
+    -26.75
+   ],
+   "b": [
+    76.3,
+    -26.75
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "DAB_DIS_SEC",
+   "x": 76.3,
+   "y": -26.75,
+   "d": 0.6,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS_SEC",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    76.3,
+    -26.75
+   ],
+   "b": [
+    74.65,
+    -26.75
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS_SEC",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    74.65,
+    -26.75
+   ],
+   "b": [
+    74.5,
+    -26.9
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS_SEC",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    74.5,
+    -26.9
+   ],
+   "b": [
+    74.5,
+    -32.85
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS_SEC",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    74.5,
+    -32.85
+   ],
+   "b": [
+    75.1,
+    -33.45
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS_SEC",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    75.1,
+    -33.45
+   ],
+   "b": [
+    75.1,
+    -39.2
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS_SEC",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    75.1,
+    -39.2
+   ],
+   "b": [
+    74.7,
+    -39.6
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS_SEC",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    74.7,
+    -39.6
+   ],
+   "b": [
+    74.7,
+    -40.6
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS_SEC",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    74.7,
+    -40.6
+   ],
+   "b": [
+    74.657,
+    -40.572
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS_SEC",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    74.657,
+    -40.572
+   ],
+   "b": [
+    74.657,
+    -42.372
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS_SEC",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    74.657,
+    -42.372
+   ],
+   "b": [
+    65.657,
+    -51.372
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS_SEC",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    65.657,
+    -51.372
+   ],
+   "b": [
+    65.657,
+    -54.772
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS_SEC",
+   "layer": "In2.Signal_HV",
+   "w": 0.2,
+   "a": [
+    65.657,
+    -54.772
+   ],
+   "b": [
+    64.157,
+    -56.272
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "DAB_DIS_SEC",
+   "x": 64.157,
+   "y": -56.272,
+   "d": 0.6,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "DAB_DIS_SEC",
+   "layer": "B.Cu",
+   "w": 0.2,
+   "a": [
+    64.157,
+    -56.272
+   ],
+   "b": [
+    64.757,
+    -56.272
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_GND",
+   "layer": "F.Cu",
+   "w": 0.3,
+   "a": [
+    71.407,
+    -22.155
+   ],
+   "b": [
+    73.6,
+    -22.155
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_GND",
+   "layer": "F.Cu",
+   "w": 0.3,
+   "a": [
+    73.6,
+    -22.155
+   ],
+   "b": [
+    74.855,
+    -20.9
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_GND",
+   "layer": "F.Cu",
+   "w": 0.3,
+   "a": [
+    74.855,
+    -20.9
+   ],
+   "b": [
+    76.0,
+    -20.9
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_GND",
+   "layer": "F.Cu",
+   "w": 0.3,
+   "a": [
+    76.0,
+    -20.9
+   ],
+   "b": [
+    76.507,
+    -20.393
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "ISO_GND",
+   "layer": "F.Cu",
+   "w": 0.3,
+   "a": [
+    76.507,
+    -20.393
+   ],
+   "b": [
+    76.507,
+    -20.355
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "ISO_GND",
+   "x": 76.507,
+   "y": -20.355,
+   "d": 0.6,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "ISO_GND",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    73.72,
+    -28.175
+   ],
+   "b": [
+    76.55,
+    -28.175
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "AD2_3V3",
+   "layer": "F.Cu",
+   "w": 0.3,
+   "a": [
+    71.407,
+    -31.045
+   ],
+   "b": [
+    72.607,
+    -31.045
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "AD2_3V3",
+   "layer": "F.Cu",
+   "w": 0.3,
+   "a": [
+    72.607,
+    -31.045
+   ],
+   "b": [
+    73.207,
+    -30.445
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "AD2_3V3",
+   "layer": "F.Cu",
+   "w": 0.3,
+   "a": [
+    72.607,
+    -31.045
+   ],
+   "b": [
+    74.45,
+    -31.045
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "AD2_3V3",
+   "layer": "F.Cu",
+   "w": 0.3,
+   "a": [
+    74.45,
+    -31.045
+   ],
+   "b": [
+    75.405,
+    -32.0
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "AD2_3V3",
+   "layer": "F.Cu",
+   "w": 0.3,
+   "a": [
+    75.405,
+    -32.0
+   ],
+   "b": [
+    75.9,
+    -32.0
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "AD2_3V3",
+   "x": 75.9,
+   "y": -32.0,
+   "d": 0.6,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "AD2_3V3",
+   "layer": "B.Cu",
+   "w": 0.3,
+   "a": [
+    75.9,
+    -32.0
+   ],
+   "b": [
+    75.9,
+    -35.2366
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(R34-Pad2)",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    77.9,
+    -22.3
+   ],
+   "b": [
+    79.7,
+    -22.3
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(R23-Pad2)",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    81.7,
+    -22.3
+   ],
+   "b": [
+    83.5,
+    -22.3
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "CUK_CAP_MEAS2",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    75.9,
+    -22.3
+   ],
+   "b": [
+    75.6,
+    -22.6
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "CUK_CAP_MEAS2",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    75.6,
+    -22.6
+   ],
+   "b": [
+    75.6,
+    -24.0
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "CUK_CAP_MEAS2",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    75.6,
+    -24.0
+   ],
+   "b": [
+    76.93,
+    -25.33
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "CUK_CAP_MEAS2",
+   "x": 76.93,
+   "y": -25.33,
+   "d": 0.5,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "CUK_CAP_MEAS2",
+   "layer": "B.Cu",
+   "w": 0.1524,
+   "a": [
+    76.93,
+    -25.33
+   ],
+   "b": [
+    76.93,
+    -26.33
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "CUK_CAP_MEAS2",
+   "layer": "B.Cu",
+   "w": 0.1524,
+   "a": [
+    76.93,
+    -26.33
+   ],
+   "b": [
+    77.7,
+    -27.1
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "CUK_CAP_MEAS-",
+   "layer": "B.Cu",
+   "w": 0.2,
+   "a": [
+    81.361,
+    -26.6
+   ],
+   "b": [
+    81.75,
+    -26.6
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "CUK_CAP_MEAS-",
+   "layer": "B.Cu",
+   "w": 0.2,
+   "a": [
+    81.75,
+    -26.6
+   ],
+   "b": [
+    83.3,
+    -25.05
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "CUK_CAP_MEAS-",
+   "layer": "B.Cu",
+   "w": 0.2,
+   "a": [
+    83.3,
+    -25.05
+   ],
+   "b": [
+    83.3,
+    -22.7
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "CUK_CAP_MEAS-",
+   "layer": "B.Cu",
+   "w": 0.2,
+   "a": [
+    83.3,
+    -22.7
+   ],
+   "b": [
+    82.9,
+    -22.3
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "CUK_CAP_MEAS-",
+   "layer": "B.Cu",
+   "w": 0.2,
+   "a": [
+    82.9,
+    -22.3
+   ],
+   "b": [
+    82.1,
+    -22.3
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "420V",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    85.9,
+    -43.1
+   ],
+   "b": [
+    85.9,
+    -38.0
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "420V",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    85.9,
+    -38.0
+   ],
+   "b": [
+    83.9,
+    -36.0
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "420V",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    83.9,
+    -36.0
+   ],
+   "b": [
+    82.3,
+    -34.0
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "420V",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    82.3,
+    -34.0
+   ],
+   "b": [
+    81.529,
+    -32.433
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "420V",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    81.529,
+    -32.433
+   ],
+   "b": [
+    81.179,
+    -31.491
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "420V",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    81.179,
+    -31.491
+   ],
+   "b": [
+    80.987,
+    -30.504
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "420V",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    80.987,
+    -30.504
+   ],
+   "b": [
+    80.956,
+    -29.499
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "420V",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    80.956,
+    -29.499
+   ],
+   "b": [
+    81.088,
+    -28.503
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "420V",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    81.088,
+    -28.503
+   ],
+   "b": [
+    81.379,
+    -27.541
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "420V",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    81.379,
+    -27.541
+   ],
+   "b": [
+    81.822,
+    -26.638
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "420V",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    81.822,
+    -26.638
+   ],
+   "b": [
+    82.405,
+    -25.819
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "420V",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    82.405,
+    -25.819
+   ],
+   "b": [
+    83.113,
+    -25.106
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "420V",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    83.113,
+    -25.106
+   ],
+   "b": [
+    83.927,
+    -24.515
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "420V",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    83.927,
+    -24.515
+   ],
+   "b": [
+    84.825,
+    -24.064
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "420V",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    84.825,
+    -24.064
+   ],
+   "b": [
+    85.5,
+    -23.4
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "420V",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    85.5,
+    -23.4
+   ],
+   "b": [
+    85.5,
+    -22.3
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "Net-(R10-Pad1)",
+   "x": 17.7,
+   "y": 3.5,
+   "d": 0.5,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "Net-(R10-Pad1)",
+   "layer": "B.Cu",
+   "w": 0.2,
+   "a": [
+    17.7,
+    3.5
+   ],
+   "b": [
+    18.4,
+    3.6
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(R10-Pad1)",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    17.7,
+    3.5
+   ],
+   "b": [
+    17.7,
+    2.4
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(R10-Pad1)",
+   "layer": "F.Cu",
+   "w": 0.2,
+   "a": [
+    17.7,
+    2.4
+   ],
+   "b": [
+    17.3,
+    1.9
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(U6--)",
+   "layer": "B.Cu",
+   "w": 0.1524,
+   "a": [
+    18.8316,
+    1.5398
+   ],
+   "b": [
+    20.2,
+    1.5398
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(U6--)",
+   "layer": "B.Cu",
+   "w": 0.1524,
+   "a": [
+    20.2,
+    1.5398
+   ],
+   "b": [
+    20.7,
+    2.04
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(U6--)",
+   "layer": "B.Cu",
+   "w": 0.1524,
+   "a": [
+    20.7,
+    2.04
+   ],
+   "b": [
+    20.7,
+    3.0
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(U6-+)",
+   "layer": "B.Cu",
+   "w": 0.1524,
+   "a": [
+    18.7,
+    5.6
+   ],
+   "b": [
+    20.95,
+    5.6
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(U6-+)",
+   "layer": "B.Cu",
+   "w": 0.1524,
+   "a": [
+    20.95,
+    5.6
+   ],
+   "b": [
+    21.4,
+    5.15
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(U6-+)",
+   "layer": "B.Cu",
+   "w": 0.1524,
+   "a": [
+    21.4,
+    5.15
+   ],
+   "b": [
+    21.4,
+    4.875
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "Net-(R48-Pad2)",
+   "x": 35.85,
+   "y": 15.56,
+   "d": 0.5,
+   "drill": 0.3
+  },
+  {
+   "kind": "track",
+   "net": "Net-(R48-Pad2)",
+   "layer": "B.Cu",
+   "w": 0.2,
+   "a": [
+    35.85,
+    15.56
+   ],
+   "b": [
+    35.3,
+    15.56
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(R48-Pad2)",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    33.95,
+    15.4
+   ],
+   "b": [
+    34.11,
+    15.56
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(R48-Pad2)",
+   "layer": "In2.Signal_HV",
+   "w": 0.1524,
+   "a": [
+    34.11,
+    15.56
+   ],
+   "b": [
+    35.85,
+    15.56
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(U8--)",
+   "layer": "B.Cu",
+   "w": 0.1524,
+   "a": [
+    33.6272,
+    13.9
+   ],
+   "b": [
+    33.9,
+    13.627
+   ]
+  },
+  {
+   "kind": "track",
+   "net": "Net-(U8--)",
+   "layer": "B.Cu",
+   "w": 0.1524,
+   "a": [
+    33.9,
+    13.627
+   ],
+   "b": [
+    34.6,
+    13.627
+   ]
+  }
+ ],
+ "report": [
+  {
+   "step": "track (62.107, -22.155) ... (57.35, -24.5)",
+   "net": "GND",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 6.48,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "via (57.35, -24.5)",
+   "net": "GND",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "track (62.107, -23.425) ... (56.55, -24.5)",
+   "net": "CUK_SDATA",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 6.77,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "via (56.55, -24.5)",
+   "net": "CUK_SDATA",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "track (47.541, -23.241) ... (56.55, -24.5)",
+   "net": "CUK_SDATA",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 9.53,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "track (62.107, -24.695) ... (55.8, -24.5)",
+   "net": "CUK_CLK",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 6.97,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "via (55.8, -24.5)",
+   "net": "CUK_CLK",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "track (53.1414, -23.7804) ... (55.8, -24.5)",
+   "net": "CUK_CLK",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 2.96,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "track (62.107, -25.965) ... (58.55, -25.965)",
+   "net": "$CUK_CS",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 3.56,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "via (58.55, -25.965)",
+   "net": "$CUK_CS",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "track (56.8375, -25.356) ... (58.55, -25.965)",
+   "net": "$CUK_CS",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 1.96,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "track (62.107, -27.235) ... (57.85, -26.5)",
+   "net": "DAB_DIS",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 4.56,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "via (57.85, -26.5)",
+   "net": "DAB_DIS",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "track (57.85, -26.5) ... (46.8, -26.05)",
+   "net": "DAB_DIS",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 11.24,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "track (62.107, -28.505) ... (54.65, -24.315)",
+   "net": "EPWM2B",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 9.68,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "via (54.65, -24.3152)",
+   "net": "EPWM2B",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "track (46.9762, -24.3152) ... (54.65, -24.3152)",
+   "net": "EPWM2B",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 7.67,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "track (62.107, -29.775) ... (54.2, -24.823)",
+   "net": "EPWM2A",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 11.1,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "via (54.2, -24.8232)",
+   "net": "EPWM2A",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "track (46.5249, -24.8232) ... (54.2, -24.8232)",
+   "net": "EPWM2A",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 7.68,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "auto (46.8, -26.05, 'In2.Signal_HV') -> J2.18",
+   "net": "DAB_DIS",
+   "ok": true,
+   "w": 0.2,
+   "length": 21.23,
+   "vias": 1,
+   "layers": [
+    "F.Cu",
+    "In2.Signal_HV"
+   ],
+   "group": "ISO2 primary side"
+  },
+  {
+   "step": "track (71.407, -23.425) ... (74.55, -23.425)",
+   "net": "Net-(AD2-SDATA)",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 3.14,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "via (74.55, -23.425)",
+   "net": "Net-(AD2-SDATA)",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "track (74.55, -23.425) ... (81.05, -35.3)",
+   "net": "Net-(AD2-SDATA)",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 17.63,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "via (81.05, -35.3)",
+   "net": "Net-(AD2-SDATA)",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "track (81.05, -35.3) ... (79.6636, -33.56)",
+   "net": "Net-(AD2-SDATA)",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 2.95,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "track (71.407, -24.695) ... (74.55, -24.695)",
+   "net": "Net-(AD2-CLK)",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 3.14,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "via (74.55, -24.695)",
+   "net": "Net-(AD2-CLK)",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "track (74.55, -24.695) ... (80.451, -34.5)",
+   "net": "Net-(AD2-CLK)",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 14.96,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "track (71.407, -25.965) ... (74.55, -25.965)",
+   "net": "Net-(AD2-CS)",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 3.14,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "via (74.55, -25.965)",
+   "net": "Net-(AD2-CS)",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "track (74.55, -25.965) ... (78.8, -32.75)",
+   "net": "Net-(AD2-CS)",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 10.55,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "via (78.8, -32.75)",
+   "net": "Net-(AD2-CS)",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "track (78.8, -32.75) ... (79.6636, -32.595)",
+   "net": "Net-(AD2-CS)",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 0.93,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "track (71.407, -29.775) ... (75.57, -28.8)",
+   "net": "ISO_SEC_DHB_HI",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 4.57,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "via (75.57, -28.8)",
+   "net": "ISO_SEC_DHB_HI",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "track (75.57, -28.8) ... (76.672, -39.072)",
+   "net": "ISO_SEC_DHB_HI",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 10.95,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "track (71.407, -28.505) ... (75.57, -27.4)",
+   "net": "ISO_SEC_DHB_LO",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 4.95,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "via (75.57, -27.4)",
+   "net": "ISO_SEC_DHB_LO",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "track (75.57, -27.4) ... (75.405, -40.005)",
+   "net": "ISO_SEC_DHB_LO",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 13.17,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "track (71.407, -27.235) ... (76.3, -26.75)",
+   "net": "DAB_DIS_SEC",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 5.09,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "via (76.3, -26.75)",
+   "net": "DAB_DIS_SEC",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "track (76.3, -26.75) ... (74.7, -40.6)",
+   "net": "DAB_DIS_SEC",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 15.98,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "auto (74.7, -40.6, 'In2.Signal_HV') -> DRV6.5",
+   "net": "DAB_DIS_SEC",
+   "ok": true,
+   "w": 0.2,
+   "length": 20.7,
+   "vias": 1,
+   "layers": [
+    "B.Cu",
+    "In2.Signal_HV"
+   ],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "track (71.407, -22.155) ... (76.507, -20.355)",
+   "net": "ISO_GND",
+   "ok": true,
+   "w": 0.3,
+   "vias": 0,
+   "length": 5.87,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "via (76.507, -20.355)",
+   "net": "ISO_GND",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "track (73.72, -28.175) ... (76.55, -28.175)",
+   "net": "ISO_GND",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 2.83,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "track (71.407, -31.045) ... (73.207, -30.445)",
+   "net": "AD2_3V3",
+   "ok": true,
+   "w": 0.3,
+   "vias": 0,
+   "length": 2.05,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "track (72.607, -31.045) ... (75.9, -32.0)",
+   "net": "AD2_3V3",
+   "ok": true,
+   "w": 0.3,
+   "vias": 0,
+   "length": 3.69,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "via (75.9, -32.0)",
+   "net": "AD2_3V3",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "track (75.9, -32.0) ... (75.9, -35.2366)",
+   "net": "AD2_3V3",
+   "ok": true,
+   "w": 0.3,
+   "vias": 0,
+   "length": 3.24,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "ISO2 secondary side"
+  },
+  {
+   "step": "track (77.9, -22.3) ... (79.7, -22.3)",
+   "net": "Net-(R34-Pad2)",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 1.8,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "420V divider"
+  },
+  {
+   "step": "track (81.7, -22.3) ... (83.5, -22.3)",
+   "net": "Net-(R23-Pad2)",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 1.8,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "420V divider"
+  },
+  {
+   "step": "track (75.9, -22.3) ... (76.93, -25.33)",
+   "net": "CUK_CAP_MEAS2",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 3.71,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "420V divider"
+  },
+  {
+   "step": "via (76.93, -25.33)",
+   "net": "CUK_CAP_MEAS2",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "420V divider"
+  },
+  {
+   "step": "track (76.93, -25.33) ... (77.7, -27.1)",
+   "net": "CUK_CAP_MEAS2",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 2.09,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "420V divider"
+  },
+  {
+   "step": "track (81.361, -26.6) ... (82.1, -22.3)",
+   "net": "CUK_CAP_MEAS-",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 6.3,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "420V divider"
+  },
+  {
+   "step": "track (85.9, -43.1) ... (85.5, -22.3)",
+   "net": "420V",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 24.34,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "420V divider"
+  },
+  {
+   "step": "via (17.7, 3.5)",
+   "net": "Net-(R10-Pad1)",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "R10 / R79"
+  },
+  {
+   "step": "track (17.7, 3.5) ... (18.4, 3.6)",
+   "net": "Net-(R10-Pad1)",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 0.71,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "R10 / R79"
+  },
+  {
+   "step": "track (17.7, 3.5) ... (17.3, 1.9)",
+   "net": "Net-(R10-Pad1)",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 1.74,
+   "layers": [
+    "F.Cu"
+   ],
+   "group": "R10 / R79"
+  },
+  {
+   "step": "track (18.8316, 1.5398) ... (20.7, 3.0)",
+   "net": "Net-(U6--)",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 3.04,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "R10 / R79"
+  },
+  {
+   "step": "track (18.7, 5.6) ... (21.4, 4.875)",
+   "net": "Net-(U6-+)",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 3.16,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "R10 / R79"
+  },
+  {
+   "step": "via (35.85, 15.56)",
+   "net": "Net-(R48-Pad2)",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "R10 / R79"
+  },
+  {
+   "step": "track (35.85, 15.56) ... (35.3, 15.56)",
+   "net": "Net-(R48-Pad2)",
+   "ok": true,
+   "w": 0.2,
+   "vias": 0,
+   "length": 0.55,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "R10 / R79"
+  },
+  {
+   "step": "track (33.95, 15.4) ... (35.85, 15.56)",
+   "net": "Net-(R48-Pad2)",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 1.97,
+   "layers": [
+    "In2.Signal_HV"
+   ],
+   "group": "R10 / R79"
+  },
+  {
+   "step": "track (33.6272, 13.9) ... (34.6, 13.627)",
+   "net": "Net-(U8--)",
+   "ok": true,
+   "w": 0.1524,
+   "vias": 0,
+   "length": 1.09,
+   "layers": [
+    "B.Cu"
+   ],
+   "group": "R10 / R79"
+  }
+ ]
+}

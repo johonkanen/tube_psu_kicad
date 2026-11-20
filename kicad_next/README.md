@@ -30,6 +30,7 @@ questions and the generated netlist diff 5.1 → 5.2: [CHANGES_5_2.md](CHANGES_5
 | `tools/next/route_s2_planes.py` (kipy), `tools/next/render_inner_layers.py` | routing stage 2: inner-layer planes / pours `S2_*` of the real board (re-runnable, section "Inner layers (routing stage 2)"); PNGs of the inner layers in `kicad_next/routing/` | phase 6 |
 | `tools/next/route_s3a_power.py`, `tools/next/s3_router.py` (python3 + kipy), `tools/next/render_s3a.py` | routing stage 3a: power / HV / ground copper as data (drawn tracks, zones `S3A_*`, vias, connections routed by a local grid router that keeps the class, HV and domain spacings), re-runnable (`routing/s3a_added.json`), PE pour keep-outs `S3A_KO_PE_*`; PNGs `routing/s3a_*.png` (section "Power, HV and ground routing (stage 3a)") | phase 6 |
 | `tools/next/route_s3c_cleanup.py` | routing stage 3c: kept 5.1 copper that breaks the 5.2 HV spacing deleted and drawn again, dangling 5.1 copper deleted (`routing/deleted_s3c.json`, `s3c_added.json`); runs between stage 3a and stage 3b (section "Clean-up of the kept 5.1 copper (stage 3c)") | phase 6 |
+| `tools/next/route_s3d_iso2.py` | routing stage 3d: ISO2 / AD2 fan-out on both sides as drawn copper, the 420V sense divider as a row with its feed, R10 / R79 moved (`routing/moves_s3d.json`, `deleted_s3d.json`, `s3d_added.json`); runs between stage 3c and stage 3b (section "ISO2 / AD2 fan-out (stage 3d)") | phase 6 |
 | `tools/next/check_board.py` | DRC of the real board without the creepage pass (> 3 GB on the populated board) + `--schematic-parity`: fails on any parity item, short or isolation-rule violation besides `ACCEPTED`; everything else counted (`reports/next/drc.json`, ≈ 2.3 GB, 10 s) | phase 5 |
 | `tools/next/check_footprints.py` | footprint / pad / 3D / barrier-creepage check (kipy), `--dump` for `render_footprints.py` (PNGs) | phase 3 |
 | `tools/next/netlist_diff.py` | netlist diff 5.1 → 5.2 (section of CHANGES_5_2.md) + check that the three CSVs cover every part | phase 2 |
@@ -423,9 +424,11 @@ the stage-3b list above (bootstrap / driver returns, dividers, In2 Kelvin tracks
 
 ```
 python3 tools/next/route_s3b_signals.py --strip   # full rebuild: take this stage's copper off first,
-python3 tools/next/route_s3c_cleanup.py --strip   # (and that of stage 3c, since 2026-11-20)
+python3 tools/next/route_s3d_iso2.py --strip      # (and that of stages 3d / 3c, since 2026-11-20)
+python3 tools/next/route_s3c_cleanup.py --strip
 python3 tools/next/route_s3a_power.py             # so that the stage-3a router does not see it
 python3 tools/next/route_s3c_cleanup.py           # stage 3c, section below
+python3 tools/next/route_s3d_iso2.py              # stage 3d: ISO2 / AD2 fan-out (drawn), section below
 python3 tools/next/route_s3b_signals.py
 tools/p2k/bin/kipy tools/next/route_s2_planes.py
 ```
@@ -485,10 +488,12 @@ Open points (of 89608a5; 1 is decided as above):
 ## Clean-up of the kept 5.1 copper (routing stage 3c, 2026-11-20)
 
 ```
-python3 tools/next/route_s3b_signals.py --strip   # full rebuild of stages 3a - 3c
+python3 tools/next/route_s3b_signals.py --strip   # full rebuild of stages 3a - 3d
+python3 tools/next/route_s3d_iso2.py --strip
 python3 tools/next/route_s3c_cleanup.py --strip
 python3 tools/next/route_s3a_power.py
-python3 tools/next/route_s3c_cleanup.py           # this stage: sees the copper of 3a, 3b sees both
+python3 tools/next/route_s3c_cleanup.py           # this stage: sees the copper of 3a
+python3 tools/next/route_s3d_iso2.py              # stage 3d (next section): sees 3a and 3c, 3b sees all three
 python3 tools/next/route_s3b_signals.py
 tools/p2k/bin/kipy tools/next/route_s2_planes.py
 python3 tools/next/check_board.py --all-track-errors   # every clearance error of a track, not only the first
@@ -616,6 +621,164 @@ vias of stage 3a and five pieces of stage 3b moved by ≤ 2 mm, all counts staye
 5. `relax` in stage 3b rows lowers the spacing to **every** pad of the named part, also to a HV pad of another
    net. Stage 3c found and fixed the two cases that showed (D11, Q10); the next stages should name nets, not
    parts, where a part has a HV pin.
+
+## ISO2 / AD2 fan-out, 420V divider, R10 / R79 (routing stage 3d, 2026-11-20)
+
+```
+python3 tools/next/route_s3b_signals.py --strip   # full rebuild of stages 3a - 3d
+python3 tools/next/route_s3d_iso2.py --strip
+python3 tools/next/route_s3c_cleanup.py --strip
+python3 tools/next/route_s3a_power.py
+python3 tools/next/route_s3c_cleanup.py
+python3 tools/next/route_s3d_iso2.py              # this stage: drawn copper, before the grid router of stage 3b
+python3 tools/next/route_s3b_signals.py
+tools/p2k/bin/kipy tools/next/route_s2_planes.py
+python3 tools/next/render_inner_layers.py && python3 tools/next/render_s3a.py     # PNGs in routing/
+```
+
+`route_s3d_iso2.py` is a step table like stage 3a (`--dry-run OUT.kicad_pcb`, `--strip`, any other option is
+refused). All of it is drawn copper; only the two long DAB_DIS runs away from ISO2 are routed by the grid router.
+5.1 copper it deletes stays deleted (`routing/deleted_s3d.json`: 59 segments, 12 vias), moves are absolute
+(`routing/moves_s3d.json`), what it adds is rebuilt on every run (`routing/s3d_added.json`: 155 segments - F.Cu 128 mm,
+In2 160 mm, B.Cu 25 mm - and 22 vias; two B.Cu pour keep-outs `S3D_KO_*`). The rows of these nets are gone from the
+stage 3b table (196 -> 175 rows); stage 3a no longer routes ISO2 pins 8 / 9 / 16 and stage 3c no longer redraws the
+15V_ISO_SEC stub; its 15V hop past R79 is drawn instead of routed (below).
+
+### Rule change (user decision)
+
+**PRIMARY_LV clearance 0.15 mm on the inner layers** (`.kicad_dru` rule "PRIMARY_LV inner layers 0.15 mm": a
+PRIMARY_LV net against a PRIMARY_LV or SIGNAL net, tracks / vias / pads; zone fills, the outer layers (0.2 mm), HV
+nets and other domains unchanged). It covers 5.1's In2 runs at 0.156 ... 0.19 mm, <= 15 V. `s3_router.World.gap` has
+the same exception; `check_rules.py` proves it with three pairs (5V / GND 0.16 mm on In2 passes, on F.Cu fails,
+5V / DC+ 0.3 mm on In2 still fails; 34 tests). Clearance markers 42 -> 27 (all errors 51 -> 36).
+**Other classes:** one marker of the same kind is left in the HEATER class (EPWM5A_ISO track 0.162 mm from the
+EPWM6A_ISO via on In2 at (-48.9, -54.2)); SECONDARY_LV and SIGNAL have none. Not changed.
+
+### Part moves
+
+| Part | From | To | Move | Why |
+|---|---|---|---|---|
+| R39 | (76.9, -24.4), 90° | (76.9, -22.3), 180° | 2.1 mm | 420V divider as a straight row, CUK_CAP_MEAS2 end west |
+| R34 | (79.1, -24.4), -90° | (80.7, -22.3), 180° | 2.6 mm | row, 3.8 mm pitch (the 0805 courtyards do not overlap) |
+| R23 | (81.2, -24.4), -90° | (84.5, -22.3), 180° | 3.9 mm | row; 420V end east, pad 6.8 mm from the centre of H5 |
+| R10 (B.Cu) | (18.6, 4.0) | (18.7, 4.6) | 0.61 mm | pin 1 (133 ... 150 V) 1.2 mm from U6's input tracks and R109 |
+| R79 (B.Cu) | (35.2, 14.7) | (34.8, 14.6) | 0.41 mm | room for the via of pin 1 on its right side |
+
+Courtyard overlaps 131 -> 130. No other part moved.
+
+- **420V divider:** 420V - R23 - 280 V - R34 - 140 V - R39 - CUK_CAP_MEAS2 in one line at y -22.3; unlike nodes of
+  two parts are >= 1.9 mm apart pad to pad (0.6 mm between the two pads of one node), the node links are 0.2 mm tracks
+  from pad centre to pad centre. **420V feed:** F.Cu 0.2 mm, 24 mm, from the 420V pour at (85.9, -43.1) south,
+  between AD2's vias and the 4.2 mm keep-off of mounting hole H5 (an arc of radius 6.2 mm round the hole: 4.33 mm
+  from its ring), into pin 1 from the north; >= 1.26 mm from every other net. AD2's SPI vias had to leave the strip east of
+  its pins for that (below). CUK_CAP_MEAS2 (about 1 V): F.Cu west of the 140 V node, a via between the SPI lanes,
+  B.Cu to the 5.1 via at U3 pin 3. CUK_CAP_MEAS- (R113 - R120): B.Cu round R120 pin 1, the In2 hop of stage 3b
+  under the new place of R23 is gone.
+- **R10:** via of `Net-(R10-Pad1)` at (17.7, 3.5), 1.2 mm clear of R109 pin 2, R16 pin 2, C131 pin 1 and R10 pin 2;
+  the U6 "-" track enters R82 at x 20.7, the U6 "+" track leaves R10 pin 2 at its centre line.
+- **R79:** the only legal via site next to pin 1 is 0.15 x 0.2 mm large (R49 pin 2 / R79 pin 2 above, the DC+
+  track on F.Cu below, the 15V via of stage 3c on the right): via 0.5 / 0.3 at (35.85, 15.56) with R79 0.4 mm
+  further left: 1.25 mm from the 15V via, 1.31 mm from the DC+ track, 1.32 mm from R79 pin 2. Because of the
+  0.05 mm margin the 15V hop of stage 3c ((32.1, 15.5) - In2 - (36.9, 14.1)) is drawn copper now - as an `auto` row
+  it moved by 0.1 mm when it was routed with R79 at its new place. See open point 2.
+
+HV functional markers (all errors) 28 -> 1: the last one is `DHB_LOW_GATE_SEC` at D32 (Q8's gate loop).
+
+### ISO2 fan-out
+
+Rules used: (1) **no via closer than 11.1 mm in plan view to copper of the other domain** - a via has a ring on the
+inner layers; `check_domains.py` does not ask for this (a via also stands on F.Cu, where the slot counts), the
+5.1 vias at x 60.8 (9.4 mm) and 73.1 / 74.4 (9.7 ... 11.0 mm) are deleted; (2) between a pad and its via only F.Cu;
+(3) nothing in the gap between the TR1 and ISO2 slots except the first 1.9 mm of pin 8's ground; (4) In2 lanes over
+the GND / ISO_GND planes, no track on In1 / In4.
+
+**Primary side (pins 2 - 8).** C98 and D5 leave a 3.2 mm corridor west of the pin row. All seven nets go through
+it as one F.Cu bundle (0.2 mm, 0.35 ... 0.55 mm pitch) in pin order, pins 2 / 3 first down the 0.98 mm channel
+between C98 and the pins. Vias 0.5 / 0.3 (the 5.1 In2 lanes are 0.51 mm apart):
+
+| Pin, net | F.Cu | via | In2 |
+|---|---|---|---|
+| 8 GND | 6.5 mm | (57.35, -24.5) into the planes | - |
+| 7 CUK_SDATA | 6.8 mm | (56.55, -24.5) | 9.5 mm new, to the 5.1 lane end at x 47.5 |
+| 6 CUK_CLK | 7.0 mm | (55.8, -24.5) | 3.0 mm new, 5.1 lane end at x 53.1 |
+| 5 $CUK_CS | 3.6 mm | (58.55, -25.97) | 1.7 mm new end of the 5.1 lane |
+| 4 DAB_DIS | 4.1 mm | (57.85, -26.5) | new lane y -26.05 north of the CS lane, then beside the bus to J2 pin 18 (25 mm, the last 7.7 mm on F.Cu) |
+| 3 EPWM2B | 9.7 mm | (54.65, -24.32) | 5.1 lane, 3.4 mm shorter |
+| 2 EPWM2A | 11.1 mm | (54.2, -24.82) | 5.1 lane, 3.6 mm shorter |
+
+The lanes arrive in the order SDATA, CLK, 2B, 2A, CS (south to north), the pins leave in the order SDATA, CLK, CS,
+DIS, 2B, 2A: CS and DAB_DIS get their vias in the middle of the bundle, 2A / 2B pass north of them and cross the CS /
+DAB_DIS lanes on F.Cu. The three southern vias stand in a row north of the 15V pour (its strip y -23.8 ... -23.0 is
+the link D5 cathode - C39, 0.7 A). Eastmost primary via edge x 58.8 = 11.58 mm from the secondary pads. Pin 8 no
+longer runs past C98 (stage 3a had it at x 60.6 across the corridor).
+
+**Secondary side (pins 9 - 16).** The 5.1 15V_ISO_SEC track on F.Cu (x 72.5 ... 75.2, y -42.8 ... -24.7; a dead end
+since stage 3c, the rail is the In3 pour) walled the pins in: deleted (10 segments).
+
+| Pin, net | F.Cu | via | then |
+|---|---|---|---|
+| 10 AD2-SDATA | 3.1 mm straight east | 0.5 / 0.3 at (74.55, -23.43) | In2 17.6 mm, via (81.05, -35.3) north-east of AD2, B.Cu 3.0 mm to pin 5 |
+| 11 AD2-CLK | 3.1 mm | (74.55, -24.70) | In2 15.0 mm to the 5.1 via (80.45, -34.5) at pin 4 |
+| 12 AD2-CS | 3.1 mm | (74.55, -25.97) | In2 10.5 mm, via (78.8, -32.75) under AD2, B.Cu 0.9 mm to pin 6 |
+| 13 DAB_DIS_SEC | 5.1 mm | 0.6 / 0.3 at (76.3, -26.75) | In2 lane x 74.5 / 75.1 north, then the grid router to DRV6 pin 5 (36 mm In2, via, 0.6 mm B.Cu) |
+| 14 ISO_SEC_DHB_LO | 5.0 mm, south of C103 | (75.57, -27.4) | In2 13.2 mm (x 74.9 / 75.5) to the 5.1 lane end (75.4, -40.0) |
+| 15 ISO_SEC_DHB_HI | 4.6 mm, between the pads of C103 | (75.57, -28.8) | In2 11.0 mm (x 75.3 / 75.9) to the 5.1 lane end (76.7, -39.1) |
+| 16 AD2_3V3 | 5.7 mm (C103 pin 1 on the way) | (75.9, -32.0) | B.Cu 3.2 mm north to the 5.1 track of V2 pin 5 (the 5.1 In2 link across the gate lanes is deleted) |
+| 9 ISO_GND | 5.4 mm, south of the divider row | 0.6 / 0.3 at (76.51, -20.36) between the pads of D4 | planes |
+
+C103 pin 2 goes by a 2.8 mm F.Cu track to R38 pin 2 (its 5.1 via at x 73.1 was not in a plane; this was an open
+connection). The SPI vias stand in the 0.15 mm window between the 11.1 mm line (x 74.23 + via radius) and the
+5V_ISOL track on B.Cu (x 75.08): 11.17 mm from the primary pads, 0.28 mm from that track. The SPI lanes are 1.27 mm
+apart side by side on In2 between In1 (ISO_GND) and In3 / In4, the eastmost one 6.0 mm from the centre of H5.
+**AD2's vias:** only CLK keeps its place east of the pins; SDATA's is 0.8 mm further north-east and CS's under the
+package, so that the strip between AD2 and H5 is free for the 420V feed (a via east of pin 5 / 6 leaves < 1.2 mm).
+In2 lane order (CS, CLK, SDATA from the west) and pin order differ, so SDATA's B.Cu stub crosses the CLK lane.
+
+**B.Cu pour keep-outs** (rule areas, rebuilt by the script): `S3D_KO_ISO2_pri_B` - the 5.1 GND pour reached x 64.0,
+0.9 mm past the primary pads towards the slot, which pushed every secondary In2 track and the In3 lane to x 75.2;
+`S3D_KO_ISO2_sec_B` - the island of the 5.1 ISO_GND pour under C103, which hung on the deleted via.
+
+### Numbers
+
+| | 95af98e (before) | rule change (b979b0c) | after stage 3d |
+|---|---|---|---|
+| unconnected | 59 | 59 | **43** |
+| clearance markers, first error per track | 42 | 27 | **7** |
+| - HV functional 1.2 mm | 21 | 21 | 1 |
+| - PRIMARY_LV class | 20 | 5 | 5 (outer layers) |
+| - HEATER class | 1 | 1 | 1 |
+| clearance markers, all errors | 51 (HV 28, PRIMARY_LV 22, HEATER 1) | 36 (28 / 7 / 1) | **9** (1 / 7 / 1) |
+| dangling tracks / vias | 72 / 6 | 72 / 6 | 59 / 0 |
+| courtyard overlaps | 131 | 131 | 130 |
+| planes In1 / In4: GND / ISO_GND / HT_GND (mm²) | 5582 / 2218 / 909 | same | 5577 / 2225 / 909 |
+| In3 pours: 15V / 5V / +3V3 / 15V_ISO_SEC / 5V_ISOL / 6V3 (mm²) | 658 / 239 / 980 / 572 / 191 / 686 (stage 2) | - | 645 / 232 / 969 / 554 / 190 / 681 |
+| stage 3b rows routed | 140 of 196 | - | 134 of 175 |
+
+`check_board.py`, `check_domains.py` (same layer and layer to layer; ALLOW: Q19 / Q21 only) and `check_next.sh`
+pass. Nothing of this stage is on In1 / In4, no switch node on an inner layer, TR1 pin 2 untouched. The 16 closed
+connections: the 13 at ISO2 / AD2, the 420V feed of R23, C103 pin 2 and `Net-(U6--)` at C131 (stage 3b finds the
+path now that R10 has moved).
+
+### Left, and open points
+
+1. **In3 15V_ISO_SEC lane at ISO2** (the supply of DRV6): the lane is 2.1 mm wide there (x 74.4 ... 76.5) and the
+   vias of ISO_SEC_DHB_HI / _LO stand in it (they cannot move: 5V_ISOL on B.Cu to the west, R38 on F.Cu to the east),
+   which leaves 0.67 mm west and 0.43 mm east of each for 1 mm - about 0.7 A at 0.5 oz, against < 0.1 A average.
+   The dead 5.1 F.Cu track that used to run in parallel is gone. If more is wanted: a 15V_ISO_SEC track on B.Cu
+   from D4 to DRV6, or the 5V_ISOL track on B.Cu 0.5 mm further west (then the two vias and the lane move).
+2. **R79:** legal, but with 0.05 mm of margin at the via. Cleaner: R49 0.5 mm to the left as well (one more
+   part), or a via in the pad of R79 pin 1 (the vias of this stack-up are filled and capped) - not done, both are
+   outside what was approved. Recommendation: move R49 with the analog review.
+3. **420V divider placement.** It works where it is, but the 420 V line now runs 24 mm past the ADC to a divider
+   that sits between ISO2 and the 15 V output. With R23 / R34 / R39 at the 420V pour (y about -41, 16 mm north) the
+   high-voltage part would be 3 mm long and only the 1 V node would travel. Bigger move than approved; recommended
+   for the next placement touch.
+4. `DHB_LOW_GATE_SEC` 1.15 mm from R149 pin 2 (Q8's gate loop), DAB_DIS at DRV5 pin 5, PWM2 FB / VERR / VIN, the J2
+   escapes (pins 38 / 42 / 43), TX / RX, the Kelvin pairs: later stages, unchanged.
+5. A rebuild is still not bit-identical (plane vias of stage 3a, the +3V3 feed of C98): this stage draws its own
+   copper for ISO2 pins 8 / 9 / 16, but the two stage-3a routes next to it (ISO2 pin 1 / C98) are found by the grid
+   router and moved by 1 mm in this rebuild (the +3V3 via is now at (58.4, -29.4) next to C98, the In2 feed ends
+   there). The fan-out does not depend on where they land.
 
 ## Footprints and 3D models (phase 3, 2026-11-18)
 

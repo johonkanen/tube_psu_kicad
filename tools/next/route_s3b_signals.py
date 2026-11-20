@@ -4,11 +4,14 @@
     python3 tools/next/route_s3b_signals.py [--dry-run OUT.kicad_pcb | --strip]
 
 Order of a full rebuild (the stage-3a router must not see the copper of the later stages; stage 3c = clean-up of
-the kept 5.1 copper, route_s3c_cleanup.py, runs between 3a and this stage):
+the kept 5.1 copper, route_s3c_cleanup.py, and stage 3d = the drawn ISO2 / AD2 fan-out, route_s3d_iso2.py, run
+between 3a and this stage):
     python3 tools/next/route_s3b_signals.py --strip
+    python3 tools/next/route_s3d_iso2.py --strip
     python3 tools/next/route_s3c_cleanup.py --strip
     python3 tools/next/route_s3a_power.py
     python3 tools/next/route_s3c_cleanup.py
+    python3 tools/next/route_s3d_iso2.py
     python3 tools/next/route_s3b_signals.py
     tools/p2k/bin/kipy tools/next/route_s2_planes.py
 
@@ -27,6 +30,8 @@ import s3_router as R  # noqa: E402
 
 VS = (0.6, 0.3)
 SLOT_GAP = (57.5, -22.5, 66.0, -9.0)      # primary tracks of ISO2 do not use the gap between the TR1 and ISO2 slots
+# (the ISO2 / AD2 rows - both sides of ISO2, the AD2 SPI, DAB_DIS / DAB_DIS_SEC, AD2_3V3, C103 - are stage 3d now:
+# route_s3d_iso2.py)
 
 TABLE = [
     # ---- supply, ground and switch-node leftovers
@@ -39,9 +44,7 @@ TABLE = [
     ('supply, ground and switch-node leftovers', '+3V3', (6.5, -59.4, 'F.Cu'), (7.2, -58.1, 'In2.Signal_HV'), 'FB2', 0.3, {}),
     ('supply, ground and switch-node leftovers', '+1V65_BIAS', 'R103.2', (5.2, -54.5, 'In2.Signal_HV'), 'FB2', 0.3, {'relax': ('R103',)}),
     ('supply, ground and switch-node leftovers', '+1V65_BIAS', 'C122.1', (1.5, -60.8, 'B.Cu'), 'FB2', 0.3, {'relax': ('C122',)}),
-    ('supply, ground and switch-node leftovers', 'ISO_GND', 'C103.2', (75.879, -29.547, 'B.Cu'), 'FB2', 0.3, {'relax': ('C103',)}),
     ('supply, ground and switch-node leftovers', 'DHB_HI_SOURCE', 'C92.1', 'DRV5.9', 'FB', 0.3, {'relax': ('C92', 'DRV5')}),
-    ('supply, ground and switch-node leftovers', 'AD2_3V3', (75.5, -32.5, 'In2.Signal_HV'), (73.3875, -30.3875, 'F.Cu'), 'FB2', 0.3, {}),
     ('supply, ground and switch-node leftovers', 'ISO_GND', (69.9, -65.1476, 'B.Cu'), (71.51, -61.6484, 'B.Cu'), 'FB2', 0.3, {}),
     ('supply, ground and switch-node leftovers', '/06 Heaters/HEATER_HI_SOURCE', 'C25.2', (-18.3, -61.7, 'B.Cu'), 'FB', 0.3, {'relax': ('C25',)}),
     ('supply, ground and switch-node leftovers', '+1V65_BIAS', 'C48.1', (27.9, -28.1, 'In2.Signal_HV'), 'FB2', 0.3, {'relax': ('C48',)}),
@@ -56,7 +59,6 @@ TABLE = [
     ('supply, ground and switch-node leftovers', '+3V3', 'C125.1', (-1.1, -52.8, 'In2.Signal_HV'), 'FB2', 0.3, {'relax': ('C125',)}),
     ('supply, ground and switch-node leftovers', 'DHB_HI_SOURCE_SEC', 'DRV6.14', (55.45, -47.275, 'F.Cu'), 'FB', 0.3, {'relax': ('DRV6',)}),
     ('supply, ground and switch-node leftovers', '+3V3', (0.7, -51.0, 'In2.Signal_HV'), (10.9, -42.1, 'In2.Signal_HV'), 'FB2', 0.3, {}),
-    ('supply, ground and switch-node leftovers', '15V_ISO_SEC', (74.99, -24.721, 'F.Cu'), (89.3964, -20.4925, 'F.Cu'), 'FB2', 0.3, {}),
     ('supply, ground and switch-node leftovers', 'DHB_HI_SOURCE_SEC', 'C46.1', (55.45, -47.275, 'F.Cu'), 'FB', 0.3, {'relax': ('C46',)}),
     ('supply, ground and switch-node leftovers', '5V', (3.6, -49.8, 'B.Cu'), (-14.014, -56.344, 'In2.Signal_HV'), 'FB2', 0.3, {}),
     ('supply, ground and switch-node leftovers', '+3V3', 'U11.3', (6.4, -61.0, 'B.Cu'), 'FB2', 0.3, {'relax': ('U11',)}),
@@ -66,8 +68,6 @@ TABLE = [
     ('gate drives', 'EPWM5A_ISO', 'DRV4.4', (-53.3, -65.1, 'In2.Signal_HV'), 'FB2', 0.4, {'relax': ('DRV4',)}),
     ('gate drives', 'Net-(DRV4-OUTB)', 'DRV4.5', (-52.35, -71.6, 'In2.Signal_HV'), 'FB2', 0.4, {'relax': ('DRV4',)}),
     ('gate drives', 'ISO_SEC_DHB_LO', 'R76.2', (68.7, -60.182, 'In2.Signal_HV'), 'FB2', 0.4, {'relax': ('R76',)}),
-    ('gate drives', 'EPWM2A', 'ISO2.2', (60.761, -29.7756, 'B.Cu'), 'FB2', 0.4, {'relax': ('ISO2',), 'foreign_gap': 4.0, 'avoid': [SLOT_GAP]}),
-    ('gate drives', 'EPWM2B', 'ISO2.3', (60.761, -28.5056, 'B.Cu'), 'FB2', 0.4, {'relax': ('ISO2',), 'foreign_gap': 4.0, 'avoid': [SLOT_GAP]}),
     ('gate drives', 'EPWM5A_ISO', 'ISO1.14', (-48.2, -53.605, 'In2.Signal_HV'), 'FB2', 0.4, {'relax': ('ISO1',), 'foreign_gap': 4.0}),
     ('gate drives', 'SYNCH_2', 'ISO1.4', (-36.317, -54.2104, 'B.Cu'), 'FB2', 0.4, {'relax': ('ISO1',), 'foreign_gap': 4.0}),
     ('gate drives', 'SYNCH_1', 'ISO1.3', (-36.317, -52.9404, 'B.Cu'), 'FB2', 0.4, {'relax': ('ISO1',), 'foreign_gap': 4.0}),
@@ -80,7 +80,6 @@ TABLE = [
     ('gate drives', 'Net-(Q8-G)', 'R87.2', 'R88.2', 'FB2', 0.4, {'relax': ('R87', 'R88')}),
     ('gate drives', 'EPWM6A_ISO', 'ISO1.13', (-48.89, -54.2104, 'B.Cu'), 'FB2', 0.4, {'relax': ('ISO1',), 'foreign_gap': 4.0}),
     ('gate drives', '/06 Heaters/HEATER_HI_GATE', 'D35.A', 'R36.1', 'FB2', 0.4, {'relax': ('D35', 'R36')}),
-    ('gate drives', 'EPWM2A', (59.11, -28.6326, 'In2.Signal_HV'), (60.761, -29.7756, 'B.Cu'), 'FB2', 0.4, {}),
     ('gate drives', 'DHB_LOW_GATE_SEC', 'R87.1', 'D32.C', 'FB2', 0.4, {'relax': ('D32', 'R87')}),
     ('gate drives', 'Net-(Q8-G)', 'R88.2', (71.415, -41.9499, 'B.Cu'), 'FB2', 0.4, {'relax': ('R88',)}),
     ('gate drives', 'Net-(DRV3-VDDA)', 'R99.2', 'C25.1', 'FB2', 0.4, {'relax': ('C25', 'R99')}),
@@ -125,22 +124,16 @@ TABLE = [
     ('gate drives', 'Net-(DRV3-VDDA)', 'DRV3.16', (-23.9, -56.1, 'B.Cu'), 'FB2', 0.4, {'relax': ('DRV3',)}),
     ('gate drives', 'DHB_HI_GATE_SEC', 'DRV6.15', (62.3, -53.9, 'B.Cu'), 'FB2', 0.4, {'relax': ('DRV6',)}),
     ('gate drives', 'DHB_LOW_GATE', 'DRV5.15', (34.78, -50.72, 'B.Cu'), 'FB2', 0.4, {'relax': ('DRV5',)}),
-    ('gate drives', 'ISO_SEC_DHB_HI', 'ISO2.15', (76.672, -39.072, 'In2.Signal_HV'), 'FB2', 0.4, {'relax': ('ISO2',), 'foreign_gap': 4.0}),
     ('gate drives', 'ISO_SEC_DHB_LO', (68.7, -60.182, 'In2.Signal_HV'), (78.105, -54.677, 'In2.Signal_HV'), 'FB2', 0.4, {}),
     ('gate drives', 'EPWM6A', 'DRV3.2', (-9.1238, -56.769, 'In2.Signal_HV'), 'FB2', 0.4, {'relax': ('DRV3',)}),
     ('gate drives', 'SYNCH_2', (11.308, -44.914, 'In2.Signal_HV'), (2.545, -51.899, 'In2.Signal_HV'), 'FB2', 0.4, {}),
     ('gate drives', 'DHB_HI_GATE', 'DRV5.10', (35.2175, -52.6, 'B.Cu'), 'FB2', 0.4, {'relax': ('DRV5',)}),
     ('gate drives', 'SYNCH_1', (1.783, -51.217, 'In2.Signal_HV'), (10.8, -44.152, 'In2.Signal_HV'), 'FB2', 0.4, {}),
     ('gate drives', 'EPWM6A', (-0.8077, -56.134, 'In2.Signal_HV'), (6.604, -46.482, 'In2.Signal_HV'), 'FB2', 0.4, {}),
-    ('gate drives', 'ISO_SEC_DHB_LO', 'ISO2.14', (77.216, -40.005, 'In2.Signal_HV'), 'FB2', 0.4, {'relax': ('ISO2',), 'foreign_gap': 4.0}),
-    ('gate drives', 'EPWM2B', (60.761, -28.5056, 'B.Cu'), (46.9762, -24.3152, 'In2.Signal_HV'), 'FB2', 0.4, {}),
     ('gate drives', '/06 Heaters/HEATER_LOW_DRV', 'DRV3.10', (-10.028, -70.441, 'B.Cu'), 'FB2', 0.4, {'relax': ('DRV3',)}),
     ('gate drives', 'DHB_LOW_GATE_SEC', 'D32.C', 'DRV6.10', 'FB2', 0.4, {'relax': ('D32', 'DRV6')}),
     ('gate drives', 'EPWM5A', (-13.547, -55.753, 'In2.Signal_HV'), (3.81, -48.641, 'In2.Signal_HV'), 'FB2', 0.4, {}),
     ('gate drives', 'ISO_SEC_DHB_HI', (70.88, -59.547, 'In2.Signal_HV'), (79.38, -40.772, 'In2.Signal_HV'), 'FB2', 0.4, {}),
-    ('gate drives', 'DAB_DIS_SEC', 'DRV6.5', 'ISO2.13', 'FB2', 0.4, {'relax': ('DRV6', 'ISO2'), 'foreign_gap': 4.0}),
-    ('gate drives', 'DAB_DIS', 'J2.18', 'ISO2.4', 'FB2', 0.4, {'relax': ('ISO2', 'J2'), 'foreign_gap': 4.0,
-     'avoid': [(57.5, -22.5, 66.0, -9.0)]}),      # not through the gap between the TR1 and ISO2 slots
     ('gate drives', 'DAB_DIS', 'C120.1', 'J2.18', 'FB2', 0.4, {'relax': ('C120', 'J2')}),
     # ---- current sense and analog
     ('current sense and analog', 'Net-(C138-Pad1)', 'C138.1', 'R140.2', 'FB2', 0.2, {'relax': ('C138', 'R140')}),
@@ -177,7 +170,6 @@ TABLE = [
     ('current sense and analog', 'PFC_I1_MEAS', 'J2.42', (30.988, 3.937, 'B.Cu'), 'FB2', 0.2, {'relax': ('J2',)}),
     ('current sense and analog', 'CUK_CAP_MEAS-', 'R113.1', (79.3, -29.6, 'B.Cu'), 'FB2', 0.2, {'relax': ('R113',)}),
     ('current sense and analog', 'Net-(U6--)', 'C131.1', (18.6918, 1.4, 'B.Cu'), 'FB2', 0.2, {'relax': ('C131',)}),
-    ('current sense and analog', 'CUK_CAP_MEAS-', 'R113.1', (82.4, -22.3, 'B.Cu'), 'FB2', 0.2, {'relax': ('R113',)}),
     ('current sense and analog', 'DHB_I_MEAS', 'J2.38', (29.7272, -0.1, 'F.Cu'), 'FB2', 0.2, {'relax': ('J2',)}),
     ('current sense and analog', '/04 MCU connector/AUX_MEAS', 'J2.43', 'R132.2', 'FB2', 0.2, {'relax': ('J2', 'R132')}),
     ('current sense and analog', 'Net-(C131-Pad2)', 'C131.2', (22.1, 3.0, 'B.Cu'), 'FB2', 0.2, {'relax': ('C131',)}),
@@ -196,10 +188,7 @@ TABLE = [
     ('SPI and control', 'Net-(PWM2-FB)', 'R140.1', 'R141.1', 'FB2', 0.2, {'relax': ('R140', 'R141')}),
     ('SPI and control', '$HT_CS', 'ISO1.5', (-36.063, -55.455, 'B.Cu'), 'FB2', 0.2, {'relax': ('ISO1',), 'foreign_gap': 4.0}),
     ('SPI and control', 'HT_CLK', 'ISO1.6', (-36.0504, -56.7504, 'F.Cu'), 'FB2', 0.2, {'relax': ('ISO1',), 'foreign_gap': 4.0}),
-    ('SPI and control', 'Net-(AD2-CS)', 'ISO2.12', (73.085, -25.9656, 'B.Cu'), 'FB2', 0.2, {'relax': ('ISO2',), 'foreign_gap': 4.0}),
-    ('SPI and control', 'Net-(AD2-CLK)', 'ISO2.11', (73.085, -24.848, 'F.Cu'), 'FB2', 0.2, {'relax': ('ISO2',), 'foreign_gap': 4.0}),
     ('SPI and control', 'Net-(PWM2-VIN)', 'PWM2.1', 'C140.1', 'FB2', 0.2, {'relax': ('C140', 'PWM2')}),
-    ('SPI and control', 'Net-(AD2-SDATA)', 'ISO2.10', (73.593, -23.991, 'F.Cu'), 'FB2', 0.2, {'relax': ('ISO2',), 'foreign_gap': 4.0}),
     ('SPI and control', 'GPIO_BYPASS_RLY', 'R44.2', 'R32.1', 'FB2', 0.2, {'relax': ('R32', 'R44')}),
     ('SPI and control', 'Net-(PWM2-FB)', 'C139.1', 'PWM2.3', 'FB2', 0.2, {'relax': ('C139', 'PWM2')}),
     ('SPI and control', 'Net-(PWM2-VERR)', 'PWM2.2', 'R139.1', 'FB2', 0.2, {'relax': ('PWM2', 'R139')}),
@@ -208,18 +197,12 @@ TABLE = [
     ('SPI and control', 'Net-(Q9-D)', 'Q9.1', (-58.9615, -33.2935, 'B.Cu'), 'FB2', 0.2, {'relax': ('Q9',)}),
     ('SPI and control', 'Net-(PWM2-VERR)', 'R139.1', 'R138.2', 'FB2', 0.2, {'relax': ('R138', 'R139')}),
     ('SPI and control', 'HT_SDATA', 'ISO1.7', (-36.952, -54.058, 'In2.Signal_HV'), 'FB2', 0.2, {'relax': ('ISO1',), 'foreign_gap': 4.0}),
-    ('SPI and control', 'Net-(AD2-CS)', (73.085, -25.9656, 'B.Cu'), (77.3656, -25.9656, 'In2.Signal_HV'), 'FB2', 0.2, {}),
-    ('SPI and control', '$CUK_CS', 'ISO2.5', (57.4477, -25.9662, 'B.Cu'), 'FB2', 0.2, {'relax': ('ISO2',), 'foreign_gap': 4.0, 'avoid': [SLOT_GAP]}),
     ('SPI and control', 'AC2', (-6.0, 2.9, 'B.Cu'), (-0.2, 6.5, 'B.Cu'), 'FB2', 0.3, {}),
-    ('SPI and control', 'Net-(AD2-SDATA)', (74.355, -25.356, 'F.Cu'), (80.959, -28.785, 'In2.Signal_HV'), 'FB2', 0.2, {}),
-    ('SPI and control', 'CUK_CLK', 'ISO2.6', (53.1414, -23.7804, 'In2.Signal_HV'), 'FB2', 0.2, {'relax': ('ISO2',), 'foreign_gap': 4.0, 'avoid': [SLOT_GAP]}),
     ('SPI and control', '$HT_CS', (0.259, -55.328, 'In2.Signal_HV'), (6.224, -45.676, 'In2.Signal_HV'), 'FB2', 0.2, {}),
     ('SPI and control', 'HT_SDATA', (11.054, -44.533, 'In2.Signal_HV'), (2.164, -51.645, 'In2.Signal_HV'), 'FB2', 0.2, {}),
-    ('SPI and control', 'Net-(AD2-CLK)', 'AD2.4', (73.085, -24.848, 'F.Cu'), 'FB2', 0.2, {'relax': ('AD2',)}),
     ('SPI and control', 'HT_CLK', (1.016, -51.284, 'In2.Signal_HV'), (10.366, -43.434, 'In2.Signal_HV'), 'FB2', 0.2, {}),
     ('SPI and control', 'Net-(PWM2-VIN)', 'R153.2', 'PWM2.1', 'FB2', 0.2, {'relax': ('PWM2', 'R153')}),
     ('SPI and control', 'GPIO_BYPASS_RLY', (0.0, -50.888, 'In2.Signal_HV'), (10.9, -41.6, 'In2.Signal_HV'), 'FB2', 0.2, {}),
-    ('SPI and control', 'CUK_SDATA', 'ISO2.7', (44.493, -20.193, 'In2.Signal_HV'), 'FB2', 0.2, {'relax': ('ISO2',), 'foreign_gap': 4.0, 'avoid': [SLOT_GAP]}),
     ('SPI and control', 'AC1', 'R47.1', (-15.5, -2.5, 'B.Cu'), 'FB2', 0.3, {'relax': ('R47',)}),
     ('SPI and control', 'GPIO_BYPASS_RLY', 'R44.2', (-37.81, -45.3, 'In2.Signal_HV'), 'FB2', 0.2, {'relax': ('R44',)}),
     # ---- UART

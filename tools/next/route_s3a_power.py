@@ -255,7 +255,7 @@ RAILS = [
     a("5V_ISOL", "C93.1", "DRV6.8", B, 0.4),     *inner_end("5V_ISOL", "C93.1", 74.81, -47.96, B, 0.3),
     a("5V_ISOL", (73.2, -37.3, "B.Cu"), "net", "FB", 0.4),
     *inner_end("5V_ISOL", (75.12, -40.72, "F.Cu"), 75.96, -39.58, F),
-    a("AD2_3V3", "ISO2.16", "net", F, 0.3, relax=("ISO2",), **FG),
+    # (ISO2 pin 16 / C103: stage 3d, route_s3d_iso2.py)
     # heater: 6V3 to DRV4 (In3 pour over the island), AD1 supply
     a("6V3", "C17.1", "DRV4.8", F, 0.5), a("6V3", "DRV4.6", "DRV4.8", F, 0.3, relax=("DRV4",)),
     pl("DRV4.8", "6V3", layers=F), pl("DRV4.1", "6V3", layers=F),
@@ -282,7 +282,7 @@ GROUNDS = [
     ("via", "GND", -6.15, -74.83, *VS, dict(relax=("U11",))),
     a("GND", "C97.2", "ISO1.2", F, 0.3, relax=("ISO1",)), gnd("C97.2", layers=F),
     gnd("ISO1.8", layers=F, relax=("ISO1",), margin=10, **FG),
-    a("GND", "ISO2.8", "net", F, 0.4, relax=("ISO2",), margin=7, **FG),
+    # (ISO2 pin 8: stage 3d, route_s3d_iso2.py - its ground leaves with the signal bundle, not past C98)
     gnd("C98.2", layers=F, margin=7, **FG), gnd("R125.2", layers=B),
     gnd((56.5, -17.0, "F.Cu"), layers=F), gnd((20.9, -12.36, "B.Cu"), layers=B, w=0.3),
     gnd((-10.85, -70.17, "B.Cu"), layers=B),
@@ -292,7 +292,7 @@ GROUNDS = [
     gnd("C89.2", "ISO_GND", layers=F, w=0.6),
     gnd("C93.2", "ISO_GND", layers=B), gnd("R128.2", "ISO_GND", layers=B), gnd("C119.2", "ISO_GND", layers=B),
     gnd("DRV6.9", "ISO_GND", layers=B, relax=("DRV6",), **FG), gnd("DRV6.4", "ISO_GND", layers=B, relax=("DRV6",)),
-    gnd("ISO2.9", "ISO_GND", layers=F, relax=("ISO2",), margin=7, **FG),
+    # (ISO2 pin 9: stage 3d, route_s3d_iso2.py)
     gnd("C55.2", "ISO_GND", layers=F, w=1.0),
     # HT_GND
     gnd("ISO1.9", "HT_GND", layers=F, relax=("ISO1",), margin=6),

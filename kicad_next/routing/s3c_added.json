@@ -199,34 +199,6 @@
   },
   {
    "kind": "track",
-   "net": "15V_ISO_SEC",
-   "layer": "F.Cu",
-   "w": 0.45,
-   "a": [
-    74.99,
-    -24.721
-   ],
-   "b": [
-    75.244,
-    -24.975
-   ]
-  },
-  {
-   "kind": "track",
-   "net": "15V_ISO_SEC",
-   "layer": "F.Cu",
-   "w": 0.45,
-   "a": [
-    75.244,
-    -24.975
-   ],
-   "b": [
-    75.244,
-    -28.658
-   ]
-  },
-  {
-   "kind": "track",
    "net": "/06 Heaters/HEATER_HI_SOURCE",
    "layer": "B.Cu",
    "w": 1.27,
@@ -722,18 +694,6 @@
    "group": "DAB secondary"
   },
   {
-   "step": "track (74.99, -24.721) ... (75.244, -28.658)",
-   "net": "15V_ISO_SEC",
-   "ok": true,
-   "w": 0.45,
-   "vias": 0,
-   "length": 4.04,
-   "layers": [
-    "F.Cu"
-   ],
-   "group": "DAB secondary"
-  },
-  {
    "step": "track (-18.3, -67.3) ... (-18.3, -61.7)",
    "net": "/06 Heaters/HEATER_HI_SOURCE",
    "ok": true,
@@ -816,15 +776,58 @@
    "group": "analog front ends"
   },
   {
-   "step": "auto (20.6, 14.8, 'B.Cu') -> net",
+   "step": "track (20.6, 14.8) ... (32.1, 15.5)",
    "net": "15V",
    "ok": true,
    "w": 0.4,
-   "length": 21.76,
-   "vias": 2,
+   "vias": 0,
+   "length": 15.25,
    "layers": [
-    "B.Cu",
+    "B.Cu"
+   ],
+   "group": "analog front ends"
+  },
+  {
+   "step": "via (32.1, 15.5)",
+   "net": "15V",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "analog front ends"
+  },
+  {
+   "step": "track (32.1, 15.5) ... (36.9, 14.1)",
+   "net": "15V",
+   "ok": true,
+   "w": 0.4,
+   "vias": 0,
+   "length": 5.38,
+   "layers": [
     "In2.Signal_HV"
+   ],
+   "group": "analog front ends"
+  },
+  {
+   "step": "via (36.9, 14.1)",
+   "net": "15V",
+   "ok": true,
+   "w": 0,
+   "length": 0,
+   "vias": 1,
+   "layers": [],
+   "group": "analog front ends"
+  },
+  {
+   "step": "track (36.9, 14.1) ... (37.7, 13.3)",
+   "net": "15V",
+   "ok": true,
+   "w": 0.4,
+   "vias": 0,
+   "length": 1.13,
+   "layers": [
+    "B.Cu"
    ],
    "group": "analog front ends"
   },
