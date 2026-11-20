@@ -1,4 +1,21 @@
 {
  "note": "footprints moved by the s3e route script (mm, degrees)",
- "moves": []
+ "moves": [
+  {
+   "ref": "R77",
+   "frm": {
+    "x": -7.2135,
+    "y": -62.611,
+    "rot": 180.0,
+    "side": "B"
+   },
+   "to": {
+    "x": -17.45,
+    "y": -47.1,
+    "rot": 90,
+    "side": "B"
+   },
+   "why": "pull-down of EPWM6A beside DRV3 pin 2 (as R78 at pin 1): no via site at the 5.1 place, and its In2 leg crossed the 5V lane to DRV3"
+  }
+ ]
 }

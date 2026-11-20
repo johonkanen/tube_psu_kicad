@@ -906,7 +906,7 @@ on a detour, the +3V3 lane is joined now and its open end is C125), EPWM5A at DR
    layer, because the C63 lane (x 29.6) closes In2 west of the header; (b) move U11 / J4. Recommendation: (a), as
    its own stage with the bundle redrawn for eleven lanes. The 5.1 stubs of TX / RX on B.Cu (to x 40.6 / 48.7,
    towards the old UART place) are still there.
-2. **R77 (pull-down of EPWM6A) and the 5V link bus -> DRV3: both open, one decision.** R77 sits at (-8.0, -62.6)
+2. *(Done in stage 3f, see below.)* **R77 (pull-down of EPWM6A) and the 5V link bus -> DRV3: both open, one decision.** R77 sits at (-8.0, -62.6)
    on B.Cu; its 5.1 connection is an In2 leg (x -9.12) from the bus plus a via that no longer exists: every via
    site at R77 is in the F.Cu DC+ zone of Q11's tab (`S3A_Q11_tab_DC`), and B.Cu is closed by the bootstrap node of
    D11 and the 15V tracks. The 5V of DRV3 / the relay driver / ISO1 came through the same bus (5.1: B.Cu from the
@@ -924,6 +924,31 @@ on a detour, the +3V3 lane is joined now and its open end is C125), EPWM5A at DR
    (about 4.5 mm of copper is left beside the column of holes at x 12 ... 14); if that is not wanted, DAB_DIS has
    to reach pin 5 by an In2 hop instead (two vias as well).
 6. A rebuild is still not bit-identical in stage 3a / 3b (plane vias); stages 3c, 3d and 3e reproduce exactly.
+
+### Stage 3f: R77 moved, 5V lane to DRV3 (2026-11-20)
+
+Open point 2, with the move approved by the user. Drawn in the group "R77 / 5V link" of
+`tools/next/route_s3e_j2.py` (applied on the current board, then `route_s2_planes.py`; no full rebuild).
+
+- **R77** moved from (-7.21, -62.61, 180 deg) to (-17.45, -47.1, 90 deg) on B.Cu, 18.6 mm (logged in
+  `routing/moves_s3e.json`): south of DRV3 pin 2, beside R78. Pin 2 on a 0.2 mm B.Cu track from the pad of DRV3
+  pin 2, pin 1 on a GND via (0.6 / 0.3) at (-17.45, -45.2) into the planes. Its 5.1 In2 leg (x -9.12) and the pad
+  stubs at the old place are deleted (`routing/deleted_s3e.json`).
+- **5V** is the tenth lane of the H4 bundle on In2, 0.25 mm: via (0.5 / 0.3) at (4.33, -50.75) beside the end of
+  the B.Cu track at (3.6, -49.8), west diagonal y = x - 55.08 (0.33 mm from the EPWM6A lane, 0.28 mm from the
+  +1V65_BIAS via at (4.5, -51.5)), lane y -56.82 north of EPWM6A to x -15.58, then down to the 5V via of stage 3a
+  at DRV3 pin 3 (-19.7, -51.29). The 5V of DRV3, the relay driver and ISO1 hangs on that via (kept In2 lane
+  y -48.09); no 5V connection is open.
+
+| | before | after |
+|---|---|---|
+| unconnected | 29 | **27** |
+| clearance markers, first error per track | 6 | 6 (the same six) |
+| dangling tracks / vias | 37 / 0 | 34 / 0 |
+| courtyard overlaps | 130 | 130 |
+
+`check_next.sh`, `check_board.py`, `check_domains.py` pass (ALLOW: Q19 / Q21 only); nothing on In1 / In4, no
+`relax`. Left: open points 1, 3 - 6 above. The full rebuild in the documented order was not run with this group.
 
 ## Footprints and 3D models (phase 3, 2026-11-18)
 

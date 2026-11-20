@@ -19,8 +19,8 @@ Order of a full rebuild (a drawn structure: after stage 3d, before the grid rout
     python3 tools/next/route_s3b_signals.py
     tools/p2k/bin/kipy tools/next/route_s2_planes.py
 
-Deleted 5.1 items stay deleted (kicad_next/routing/deleted_s3e.json; a second run finds nothing to delete), no
-part is moved (routing/moves_s3e.json is empty), the copper added here (routing/s3e_added.json) is removed and
+Deleted 5.1 items stay deleted (kicad_next/routing/deleted_s3e.json; a second run finds nothing to delete), one
+part is moved (R77, absolute: routing/moves_s3e.json), the copper added here (routing/s3e_added.json) is removed and
 rebuilt on every run.
 
 J2 geometry: pads 0.805 mm round on every layer, pitch 1.27 mm, so 0.465 mm between two pads of a column and
@@ -228,8 +228,31 @@ DRV5 = [
     v("GND", 12.45, -55.0), t("GND", B, 0.3, [(12.45, -55.0), (13.45, -54.975)]),
 ]
 
+# ================================================================================================ R77 / 5V link
+# (stage 3f) R77, the pull-down of EPWM6A, had no via site at its 5.1 place (F.Cu: DC+ zone of Q11's tab, B.Cu:
+# bootstrap node of D11) and its In2 leg at x -9.12 crossed the only lane left for 5V. It stands south of DRV3
+# pin 2 now (beside R78, the pull-down of pin 1): pin 2 on the EPWM6A pad track, pin 1 on a via into the planes.
+# 5V is the tenth lane of the bundle (0.25 mm, 0.53 mm outside EPWM6A, 0.28 mm from the +1V65_BIAS via at
+# (4.5, -51.5)): via beside the end of the B.Cu track at (3.6, -49.8), west diagonal, lane y -56.82 north of
+# EPWM6A, then down to the 5V via of stage 3a at DRV3 pin 3 (via order from the west 5V, EPWM6A, EPWM5A).
+R77_WHY = ("pull-down of EPWM6A beside DRV3 pin 2 (as R78 at pin 1): no via site at the 5.1 place, and its In2 leg "
+           "crossed the 5V lane to DRV3")
+R77_OLD = "5.1 connection of R77 at its old place (In2 leg from the bus / pad stubs); R77 moved to DRV3 pin 2"
+C5, Y5 = 55.08, -56.82                # 5V lane: west diagonal y = x - C5, west lane y
+R77_5V = [
+    ("move", "R77", -17.45, -47.1, dict(rot=90), R77_WHY),
+    *dels(E6, I2, R77_OLD, (-8.7428, -56.388, -9.1238, -56.769), (-9.1238, -56.769, -9.1238, -63.119)),
+    *dels(E6, B, R77_OLD, (-8.616, -62.611, -8.077, -62.611), (-9.1238, -63.119, -8.616, -62.611)),
+    *dels("GND", B, R77_OLD, (-6.274, -62.611, -6.35, -62.611), (-6.426, -62.611, -6.35, -62.611),
+          (-6.35, -62.535, -6.35, -62.611), (-6.35, -62.687, -6.35, -62.611)),
+    t(E6, B, W, [(-17.902, -49.999), (-17.902, -48.6), (-17.45, -48.15), (-17.45, -47.925)]),
+    v("GND", -17.45, -45.2, V6), t("GND", B, 0.3, [(-17.45, -46.275), (-17.45, -45.2)]),
+    v(P5, 4.33, -50.75), t(P5, B, 0.4, [(3.6, -49.8), (4.33, -50.75)]),
+    t(P5, I2, 0.25, [(4.33, -50.75), (C5 + Y5, Y5), (-15.58, Y5), (-19.7, -52.7), (-19.7, -51.29)]),
+]
+
 GROUPS = [("J2 analog escapes", ANALOG), ("control bus round H4", BUNDLE), ("DRV3 inputs", DRV3),
-          ("ISO1 pin 7", ISO1), ("DRV5 inputs", DRV5)]
+          ("ISO1 pin 7", ISO1), ("DRV5 inputs", DRV5), ("R77 / 5V link", R77_5V)]
 
 if __name__ == "__main__":
     R.RELAX_OWN_DOMAIN = True
