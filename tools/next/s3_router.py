@@ -806,6 +806,15 @@ def run(tag, groups, argv, drop_areas=(), post=None):
 
         res = apply([], old)                      # strip the previous run
         log(f"removed {res['removed']} items of the previous {tag} run")
+        if "--strip" in argv:                      # only take the copper of this script off the board
+            if os.path.exists(LOCK):
+                sys.exit("s3: the board was opened in KiCad meanwhile - not written")
+            shutil.copy(pcb, BOARD)
+            with open(added_log, "w") as f:
+                json.dump(dict(note=f"copper added by tools/next/route_{tag}_*.py (stripped)", added=[], report=[]), f, indent=1)
+                f.write("\n")
+            log(f"stripped: wrote {os.path.relpath(BOARD, ROOT)}")
+            return None
         pre = []
         for gname, steps in groups:
             for s in steps:

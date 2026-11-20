@@ -394,6 +394,11 @@ Still open after 3a.2 (both done in stage 3a.3 below):
 | R156 | (−14.7, −87.88) | (−9.57, −89.9) | lies above R155 / R157 (pads 0.5 mm from the board edge) |
 | R158 | (−8.0, −81.61) | (−13.3, −81.61) | left of the shunt R30, on the HEATER_CURRENT copper |
 
+**Stage 3b step 0 (2026-11-20, user: no HV at the board edge):** the chain moved 1.5 mm inward – final places R155
+(−8.0, −84.88), R157 (−11.14, −84.88), R156 (−9.57, −88.4; pads 2.0 mm from the top edge, reference text back on the
+board), R158 (−13.5, −81.61); vias DC+ (−8.4, −82.0), CAP_MEAS (−12.7, −88.4), HEATER_CURRENT (−15.8, −81.6). The table
+above and the list below give the 3a.3 places; `routing/moves_s3a.json` holds the first and the final place.
+
 - **Q8 pin 2 → switch node:** B.Cu 0.75 mm at the pins, 1.0 mm north to y −46.5 and west above C43 to x 62.8, via
   1.0 / 0.5 at (62.8, −49.2), F.Cu 1.2 mm along y −49.6 above the 420V band to the Q21 – TR3 track (x 55.45); no inner
   copper. Good for 3.3 A (2.3 A rms). Deleted: the nine 5.1 gate segments at the old places of R87 / R88 / D32 and
