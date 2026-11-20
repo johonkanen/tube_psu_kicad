@@ -36,10 +36,8 @@ DOMAIN_RULES = ("PRI-SEC", "PRI-HEATER", "SEC-UART", "SEC(HV)-HEATER", "SEC(LV)-
                 "PE-PRI", "PE-SEC", "Mounting hole")
 # accepted domain-rule violations: (rule name, regex on the joined item descriptions, reason)
 ACCEPTED = [
-    ("PRI-SEC inner layers", re.compile(r"pad 2 \[GND\] of TR1.*pad 9 \[ISO_GND\] of TR1|pad 9 \[ISO_GND\] of TR1.*"
-                                        r"pad 2 \[GND\] of TR1"),
-     "TR1 pin 2 / pin 9 barrels 11.01 mm on the inner layers, fixed by the EEL19 bobbin pin pattern behind the "
-     "footprint slot (trial REPORT.md step 2; check_domains.py ALLOW) - keep In1 / In4 pours off pin 2"),
+    # (empty since routing stage 2, 2026-11-20: the TR1 pin 2 GND / pin 9 ISO_GND inner barrels no longer show,
+    # pin 2 has no inner-layer connection - keep it that way, an inner GND pad on pin 2 fails here again)
 ]
 
 
