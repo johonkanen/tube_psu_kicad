@@ -418,6 +418,55 @@ Left for stage 3b from this step (signals): Q8's gate loop – Net-(Q8-G) (Q8.1 
 (D32.A – R88.1), DHB_LOW_GATE_SEC (DRV6.10 – R87.1 – D32.C). The 33 items left in the power / HV / ground nets are
 the stage-3b list above (bootstrap / driver returns, dividers, In2 Kelvin tracks, U1 / U11 +3V3, small fragments).
 
+## Signal routing (routing stage 3b, first pass, 2026-11-20) – not finished
+
+```
+python3 tools/next/route_s3b_signals.py --strip   # full rebuild: take this stage's copper off first,
+python3 tools/next/route_s3a_power.py             # so that the stage-3a router does not see it
+python3 tools/next/route_s3b_signals.py
+tools/p2k/bin/kipy tools/next/route_s2_planes.py
+```
+
+`route_s3b_signals.py`: one connection per row of `TABLE` (group, net, start, end, layers, width, options), generated
+from the unconnected list after stage 3a (842d301) and edited from there; routed in table order by the grid router
+of `s3_router.py` on F.Cu / B.Cu / In2 (switch nodes: outer layers only), via 0.6 / 0.3, width 0.2 mm (gate-drive
+nets 0.4, supply / HV 0.3). New engine switches used here: `RELAX_OWN_DOMAIN` (the pin-pitch relaxation of a part
+never applies to copper of another isolation domain), `HARD_ZONES` (pours of HV nets and the `S3A_*` zones are
+neither crossed nor pushed back by a signal track), an `avoid` box that keeps ISO2's primary-side tracks out of the
+gap between the TR1 and ISO2 slots. Copper of the run: `routing/s3b_added.json` (438 segments – 247 B.Cu, 102 F.Cu,
+89 In2 – and 52 vias).
+
+| group | rows | routed |
+|---|---|---|
+| supply, ground and switch-node leftovers | 32 | 20 |
+| gate drives | 80 | 56 |
+| current sense and analog | 46 | 35 |
+| SPI and control | 32 | 16 |
+| UART | 6 | 5 |
+| ground repairs (pads cut off by the tracks above) | 2 | 2 |
+
+**Unconnected 196 → 65.** `check_board.py`, `check_domains.py` (ALLOW: Q19 / Q21), `check_next.sh` pass; courtyard
+overlaps 131 (unchanged), no short, no hole or rule-area marker. Clearance markers 142 → 170, dangling tracks
+120 → 89, dangling vias 20 → 13. Planes In1 / In4: GND 5607 → 5578, ISO_GND 2224 → 2218, HT_GND 913 → 909 mm² (via
+antipads only; no track on In1 / In4).
+
+**This is a legal first pass, not a reviewed layout:** the router joins each open pair by the cheapest legal path.
+It does not pair Kelvin tracks, does not keep a gate track beside its return, and does not look at what runs
+under an analog track. Not done: the 64 rows that found no legal path (`report` in `s3b_added.json`), the
+clean-up of 5.1 dangling copper (many open rows start on those stubs), Q8's gate loop review.
+
+Open points:
+1. **HV functional rule inside one gate-drive domain.** The + 28 clearance markers are almost all "HV functional
+   1.2 mm" between nets of the same floating high-side driver (gate / source / bootstrap supply, ≤ 20 V apart) at
+   1.27 mm pin pitch; most of the 142 older ones are the same. A tight gate loop and this rule exclude each other.
+   Recommendation: a `.kicad_dru` exception per driver group (DRV3: HEATER_HI_*, Net-(DRV3-VDDA), Net-(D35-K);
+   DRV5: DHB_HI_GATE / DHB_HI_SOURCE / Net-(DRV5-VDDB) …; DRV6 likewise) with 0.2 mm, then route the gate loops
+   by hand-drawn steps next to their returns.
+2. **J2 (1.27 mm header) escapes** need drawn stubs on a 0.025 mm grid (a 0.15 mm track only fits centred between
+   two pads); the 0.1 mm grid router fails there (J2.38 / 42 / 43 and the SPI rows).
+3. **ISO2 fan-out** (EPWM2A / B, DAB_DIS, CUK_*, AD2 SPI, both sides) is still open: outer layers only at the slot,
+   and the primary side may not use the gap between the slots.
+
 ## Footprints and 3D models (phase 3, 2026-11-18)
 
 Regenerate: `python3 tools/next/gen_next_footprints.py`, `tools/p2k/bin/kicad_env.sh python3

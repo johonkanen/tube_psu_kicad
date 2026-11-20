@@ -62,6 +62,8 @@ DOMAIN_GAP = {("PRI", "SEC"): 11.1, ("HEATER", "PRI"): 8.0, ("PRI", "UART"): 8.0
 HEATER_SEC_LV = 1.5
 HV_OUTER = 1.2
 EDGE = 0.5
+HARD_ZONES = False            # True: pours of HV nets and the S3A_* zones are not crossed by other nets (stage 3b)
+RELAX_OWN_DOMAIN = False      # True: "relax" never shortens a spacing to another isolation domain (stage 3b)
 RELAX_GAP = 0.2               # spacing to the parts / nets named in a step's "relax" (pin-pitch escapes)
 GRID = 0.1
 SLACK = 0.06                  # grid margin added to every spacing while routing
@@ -351,7 +353,7 @@ class World:
                 if l != layer and (not foreign or ok in ("pad-tht", "via", "hole")):
                     continue        # through items are met on the own layer
                 need = self.gap(net, layer if l == layer else "inner", on, ok)
-                if oref in relax or on in relax:
+                if (oref in relax or on in relax) and not (RELAX_OWN_DOMAIN and foreign):
                     need = min(need, RELAX_GAP)
                 if fgap and foreign and l in OUTER and layer in OUTER:
                     need = min(need, fgap)       # slot credit claimed: judged by check_domains.py
@@ -429,10 +431,13 @@ class Router:
                         continue                       # planes: re-cut by route_s2_planes.py; PE: pour keep-outs
                     if not foreign:
                         if l == layer:
-                            soft.append(og)
+                            if HARD_ZONES and (ok.startswith("zone:S3A_") or w.cls.get(on, "") in HV):
+                                hard.append(og.buffer(w.gap(net, layer, on, ok) + half + SLACK, 4))   # never cut / push back a HV or stage-3a pour
+                            else:
+                                soft.append(og)
                         continue
                 need = w.gap(net, layer if l == layer else "inner", on, ok)
-                if oref in relax or on in relax:
+                if (oref in relax or on in relax) and not (RELAX_OWN_DOMAIN and foreign):
                     need = min(need, RELAX_GAP)
                 if fgap and foreign and l in OUTER and layer in OUTER:
                     need = min(need, fgap)
