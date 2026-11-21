@@ -1073,7 +1073,7 @@
 					)
 				)
 			)
-			(property "Description" "DAB transformer EC42/15 two-chamber, option B 20:21 (NR 2.1); dots on 1+2 / 9+10"
+			(property "Description" "DAB transformer EC42/15 two-chamber, option B 20:21 (NR 2.1); dots on 4+5 / 9+10"
 				(at 0 0 0)
 				(hide yes)
 				(effects
@@ -1106,7 +1106,7 @@
 							)
 						)
 					)
-					(number "1"
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1124,7 +1124,7 @@
 							)
 						)
 					)
-					(number "2"
+					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1214,7 +1214,7 @@
 							)
 						)
 					)
-					(number "15"
+					(number "13"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1232,7 +1232,7 @@
 							)
 						)
 					)
-					(number "16"
+					(number "14"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3990,7 +3990,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "DAB transformer EC42/15 two-chamber, option B 20:21 (NR 2.1); dots on 1+2 / 9+10"
+		(property "Description" "DAB transformer EC42/15 two-chamber, option B 20:21 (NR 2.1); dots on 4+5 / 9+10"
 			(at 137.16 58.42 0)
 			(effects
 				(font
@@ -4008,11 +4008,11 @@
 				(hide yes)
 			)
 		)
-		(pin "1"
-			(uuid "5b928aef-00f6-59fc-87a8-85dba7f93f50")
+		(pin "4"
+			(uuid "617f76e4-8b60-514b-8e06-6d3110403632")
 		)
-		(pin "2"
-			(uuid "058e15e8-8af7-5339-bcd4-6ab9bb8e5844")
+		(pin "5"
+			(uuid "86d710bd-24b3-51d0-a1c8-f7c5f2ae911b")
 		)
 		(pin "7"
 			(uuid "7c16d77e-a533-5d43-9b2b-7a8ce6f42800")
@@ -4026,11 +4026,11 @@
 		(pin "10"
 			(uuid "12e4ff51-b44e-55a3-b1b6-d93fb9ef5526")
 		)
-		(pin "15"
-			(uuid "96d8259a-70a3-5312-8b35-a0c7e4ded316")
+		(pin "13"
+			(uuid "9b9621be-c7a4-5e87-aa09-40dbf57e9576")
 		)
-		(pin "16"
-			(uuid "1c76af87-2460-5228-9053-0c42156e59f9")
+		(pin "14"
+			(uuid "64e7f8c9-ee15-524c-874b-4c7ba4af3607")
 		)
 		(instances
 			(project "tube_psu_5_2"

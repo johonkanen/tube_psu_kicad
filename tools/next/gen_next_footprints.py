@@ -232,11 +232,14 @@ def ec42():
     """EC42/15 two-chamber horizontal bobbin, 2 x 8 pins, 5.0 mm pitch, rows 40 mm apart (bobbin
     drawing: 46 x 40 mm base, seated height 31.5 mm; core A 42 mm). Left row (pins 1..8, top to
     bottom) = chamber 1 (10.4 mm, primary), right row (9..16, bottom to top) = chamber 2 (12.4 mm,
-    secondary). DAB_TRANSFORMER.md 5: two pins per winding end - 1+2 primary start (DHB_CAP),
-    7+8 primary finish (bridge), 9+10 secondary start (C16/C55 midpoint), 15+16 secondary finish
-    (bridge); pins 3-6 and 11-14 clipped, no pads."""
+    secondary). DAB_TRANSFORMER.md 5: two pins per winding end - 4+5 primary start (DHB_CAP),
+    7+8 primary finish (bridge), 9+10 secondary start (C16/C55 midpoint), 13+14 secondary finish
+    (bridge); pins 1-3, 6, 11, 12, 15, 16 clipped, no pads (2026-11-21: the pairs nearest to the split
+    capacitors as placed by the user and to the bridges; was 1+2 / 7+8 / 9+10 / 15+16. 11+12 would be
+    5 mm nearer to the secondary bridge, but R75 / R76 / C72 of DRV6 stand there on the bottom side). No rectangular
+    pad: pin 1 has none, the silk mark at pin 1 stays."""
     xr = 20.0
-    used = {1, 2, 7, 8, 9, 10, 15, 16}
+    used = {4, 5, 7, 8, 9, 10, 13, 14}
     body = ""
     bx, by = 46.0 / 2, 42.0 / 2           # pin bases 46 mm along the axis, core 42 mm across
     body += rect(-bx, -20.0, bx, 20.0, "F.Fab", 0.1)                     # bobbin base 46 x 40
@@ -268,11 +271,11 @@ def ec42():
                     "TR3 barrier")
     body += rect(b["x0"], -by - 0.5, b["x1"], by + 0.5, "Cmts.User", 0.1)
     body += text("user", "barrier 12 mm (no copper)", (b["x0"] + b["x1"]) / 2, by - 2.0, "Cmts.User", 0.8)
-    # core = primary-side part; secondary pin wraps (9/10, 15/16) sit under the secondary core plate
+    # core = primary-side part; secondary pin wraps (9/10, 13/14) sit under the secondary core plate
     body += text("user", "core = PRI: tape SEC core plate", xr - 6.0, by - 2.0, "F.Fab", 0.7)
     descr = ("EC42/15 PC40 two-chamber bobbin 2 x 8 pins, pitch 5.0 mm, rows 40 mm, DAB transformer TR3 for "
-             "the next revision: pads 1+2 / 7+8 primary (chamber 1, 10.4 mm), 9+10 / 15+16 secondary "
-             "(chamber 2, 12.4 mm), pins 3-6 / 11-14 clipped; body 46 x 42 mm, seated height 31.5 mm "
+             "the next revision: pads 4+5 / 7+8 primary (chamber 1, 10.4 mm), 9+10 / 13+14 secondary "
+             "(chamber 2, 12.4 mm), pins 1-3, 6 / 11, 12, 15, 16 clipped; body 46 x 42 mm, seated height 31.5 mm "
              "(tube_psu_next, simulation/dab/DAB_TRANSFORMER.md 5; confirm dims with calipers)")
     return footprint_x("Transformer_EC42x15_2Slot_2x8_P5mm", descr, "transformer EC42 DAB two-chamber", body,
                        -by - 1.5, by + 1.5, models=model("Transformer_EC42x15_2Slot"))

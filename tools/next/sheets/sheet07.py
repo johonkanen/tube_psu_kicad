@@ -79,9 +79,10 @@ _, ct, cb = vert2(sh, "C", "C54", xc, CAPR + g(19), sh_value("C54"), top=1)     
 sh.wire((xc, CAPR), ct)
 sh.wire(cb, (xc, HC))
 sh.junction(xc, HC)
-# 5.2 (NR 2.1 / 2.4): TR3 = EC42/15 two-chamber, option B 20:21, two pins per winding end (1+2 primary
-# start (dot) = DHB_CAP, 7+8 primary finish = DHB_HI_SOURCE, 9+10 secondary start = TRANS_SEC, 15+16
-# secondary finish = DHB_HI_SOURCE_SEC; DAB_TRANSFORMER.md 5). L3 is removed: its leakage replaces it, DHB_CAP
+# 5.2 (NR 2.1 / 2.4): TR3 = EC42/15 two-chamber, option B 20:21, two pins per winding end (4+5 primary
+# start (dot) = DHB_CAP, 7+8 primary finish = DHB_HI_SOURCE, 9+10 secondary start (dot) = TRANS_SEC, 13+14
+# secondary finish = DHB_HI_SOURCE_SEC; DAB_TRANSFORMER.md 5; pins re-assigned 2026-11-21 to the pairs nearest
+# to the split capacitors / bridges, was 1+2 / 7+8 / 9+10 / 15+16). L3 is removed: its leakage replaces it, DHB_CAP
 # goes straight to the primary (the 5.1 net TRANS_PRI disappears).
 # 5.2 (NR 2.8): balancing resistors R143 + R144 across C47 (DC+ symbol above, ends on the DHB_CAP row) and
 # R145 + R146 across C54 (column crosses the source row like C54), right of the C47 / C54 column.
@@ -98,8 +99,8 @@ sh.junction(xbal, HC)
 sh.label("DHB_CAP", xbal + g(2), CAPR, 0)
 TRX, TRY = g(108), CAPR + g(4)
 tr = sh.place("EC42_2CH", "TR3", TRX, TRY, value=sh_value("TR3"))
-P1, P2, P7, P8 = (tr.pin(n) for n in ("1", "2", "7", "8"))
-S1, S2, S15, S16 = (tr.pin(n) for n in ("9", "10", "15", "16"))
+P1, P2, P7, P8 = (tr.pin(n) for n in ("4", "5", "7", "8"))          # primary start pair, finish pair
+S1, S2, S15, S16 = (tr.pin(n) for n in ("9", "10", "13", "14"))    # secondary start pair, finish pair
 xbus = P1[0] - g(2)
 sh.wire((xc, CAPR), (xbus, CAPR))
 sh.wire((xbus, CAPR), P1)
@@ -147,7 +148,7 @@ sh.label("TRANS_SEC", xbr + g(2), CAPR, 0)
 sh.junction(xc2, CAPR)
 sh.wire(S15, (xbr, S15[1]), (xbr, SR))
 sh.junction(xbr, SR)
-S2 = S16                                           # the secondary finish (15 + 16) = DHB_HI_SOURCE_SEC row
+S2 = S16                                           # the secondary finish (13 + 14) = DHB_HI_SOURCE_SEC row
 _, ct, cb = vert2(sh, "C", "C16", xc2, V4R + g(3), sh_value("C16"), top=1)       # pin 1 = 420V
 sh.wire(cb, (xc2, CAPR))
 sh.wire((xc2, V4R), (XB, V4R))

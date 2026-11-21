@@ -173,9 +173,12 @@ def build():
             [(10, "S15", PAS), (9, "SGND", PAS), (8, "SN5", PAS), (7, "S5", PAS), (5, "SHV", PAS)],
             desc="Aux flyback transformer EEL19 vertical 4+6 with fly-lead primary (NR 1.1)"),
         # TR3 on the EC42/15 two-chamber bobbin (DAB_TRANSFORMER.md 5): two pins per winding end.
-        box("EC42_2CH", "TR", [(1, "P_START", PAS), (2, "P_START", PAS), None, (7, "P_FIN", PAS), (8, "P_FIN", PAS)],
-            [(9, "S_START", PAS), (10, "S_START", PAS), None, (15, "S_FIN", PAS), (16, "S_FIN", PAS)],
-            desc="DAB transformer EC42/15 two-chamber, option B 20:21 (NR 2.1); dots on 1+2 / 9+10"),
+        # 2026-11-21 (user placement of C47 / C54 / C16 / C55): the winding ends on the pin pairs nearest to the split
+        # capacitors and the bridges - primary start 4+5, finish 7+8; secondary start 9+10, finish 13+14 (11+12 are
+        # nearer to the bridge, but R75 / R76 / C72 of DRV6 stand on those pin places on the bottom side).
+        box("EC42_2CH", "TR", [(4, "P_START", PAS), (5, "P_START", PAS), None, (7, "P_FIN", PAS), (8, "P_FIN", PAS)],
+            [(9, "S_START", PAS), (10, "S_START", PAS), None, (13, "S_FIN", PAS), (14, "S_FIN", PAS)],
+            desc="DAB transformer EC42/15 two-chamber, option B 20:21 (NR 2.1); dots on 4+5 / 9+10"),
     ]
     l, r = header(range(1, 51))
     syms.append(box("HEADER_2X25_50MIL", "J", l, r, show_pin_names=False, desc="MCU connector 2x25, 50 mil"))

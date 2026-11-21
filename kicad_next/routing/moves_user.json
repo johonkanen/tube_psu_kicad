@@ -1,0 +1,101 @@
+{
+ "note": "user placement 2026-11-21: footprints moved by the user in the KiCad GUI (mm, degrees). Source of the 'move' steps of tools/next/route_s3a_power.py group 'user placement' - every rebuild puts the parts here again. Edit this file to change a place.",
+ "moves": [
+  {
+   "ref": "C16",
+   "frm": {
+    "x": 76.1,
+    "y": -58.6,
+    "rot": -90.0,
+    "side": "F"
+   },
+   "to": {
+    "x": 76.1,
+    "y": -50.6,
+    "rot": 90.0,
+    "side": "F"
+   },
+   "why": "DAB secondary split capacitors swapped and turned: the TRANS_SEC pads face each other at TR3 pins 9 / 10, 420V end towards the bridge"
+  },
+  {
+   "ref": "C55",
+   "frm": {
+    "x": 76.1,
+    "y": -50.6,
+    "rot": -90.0,
+    "side": "F"
+   },
+   "to": {
+    "x": 76.1,
+    "y": -58.6,
+    "rot": 90.0,
+    "side": "F"
+   },
+   "why": "same (swapped with C16)"
+  },
+  {
+   "ref": "C47",
+   "frm": {
+    "x": 23.05,
+    "y": -86.5,
+    "rot": -90.0,
+    "side": "F"
+   },
+   "to": {
+    "x": 22.88,
+    "y": -71.71,
+    "rot": -90.0,
+    "side": "F"
+   },
+   "why": "DAB primary split capacitors 14.8 mm nearer to the bridge, beside TR3 pins 4 / 5"
+  },
+  {
+   "ref": "C54",
+   "frm": {
+    "x": 23.05,
+    "y": -78.5,
+    "rot": -90.0,
+    "side": "F"
+   },
+   "to": {
+    "x": 22.88,
+    "y": -63.71,
+    "rot": -90.0,
+    "side": "F"
+   },
+   "why": "same (moved with C47)"
+  },
+  {
+   "ref": "Q10",
+   "frm": {
+    "x": -12.872,
+    "y": -75.321,
+    "rot": 90.0,
+    "side": "F"
+   },
+   "to": {
+    "x": -13.73718,
+    "y": -63.0718,
+    "rot": -90.0,
+    "side": "F"
+   },
+   "why": "heater half-bridge FETs swapped and turned"
+  },
+  {
+   "ref": "Q11",
+   "frm": {
+    "x": -12.771,
+    "y": -63.583,
+    "rot": 90.0,
+    "side": "F"
+   },
+   "to": {
+    "x": -13.83818,
+    "y": -74.8098,
+    "rot": -90.0,
+    "side": "F"
+   },
+   "why": "same (swapped with Q10)"
+  }
+ ]
+}

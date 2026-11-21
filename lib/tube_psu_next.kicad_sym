@@ -9341,7 +9341,7 @@
 				)
 			)
 		)
-		(property "Description" "DAB transformer EC42/15 two-chamber, option B 20:21 (NR 2.1); dots on 1+2 / 9+10"
+		(property "Description" "DAB transformer EC42/15 two-chamber, option B 20:21 (NR 2.1); dots on 4+5 / 9+10"
 			(at 0 0 0)
 			(hide yes)
 			(effects
@@ -9374,7 +9374,7 @@
 						)
 					)
 				)
-				(number "1"
+				(number "4"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -9392,7 +9392,7 @@
 						)
 					)
 				)
-				(number "2"
+				(number "5"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -9482,7 +9482,7 @@
 						)
 					)
 				)
-				(number "15"
+				(number "13"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -9500,7 +9500,7 @@
 						)
 					)
 				)
-				(number "16"
+				(number "14"
 					(effects
 						(font
 							(size 1.27 1.27)

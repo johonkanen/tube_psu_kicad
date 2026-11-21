@@ -41,7 +41,7 @@ ICE5AR change (1.5) R64, R81, R84, R85, R86, C50.
 
 | NR | Done | Refdes / value / nets |
 |---|---|---|
-| 2.1 | yes | TR3 → symbol `EC42_2CH`, value `EC42/15 2CH 20:21` (option B, D1): 1 + 2 primary start = **DHB_CAP**, 7 + 8 primary finish = DHB_HI_SOURCE, 9 + 10 secondary start = TRANS_SEC, 15 + 16 secondary finish = DHB_HI_SOURCE_SEC (DAB_TRANSFORMER.md 5) |
+| 2.1 | yes | TR3 → symbol `EC42_2CH`, value `EC42/15 2CH 20:21` (option B, D1): **4 + 5** primary start = **DHB_CAP**, 7 + 8 primary finish = DHB_HI_SOURCE, 9 + 10 secondary start = TRANS_SEC, **13 + 14** secondary finish = DHB_HI_SOURCE_SEC (DAB_TRANSFORMER.md 5; pins re-assigned 2026-11-21, was 1 + 2 / 7 + 8 / 9 + 10 / 15 + 16 – section "Transformer pins and winding tables" below) |
 | 2.2 | yes | footprint `tube_psu_next:Transformer_EC42x15_2Slot_2x8_P5mm` |
 | 2.4 | yes | **L3 removed** (no jumper position: the leakage is the series L; the net TRANS_PRI disappears) |
 | 2.3 / 2.5 / 2.6 | layout | C47 / C54 at the TR3 primary pins (note on the sheet), phase 5 |
@@ -49,6 +49,49 @@ ICE5AR change (1.5) R64, R81, R84, R85, R86, C50.
 | 2.7 | firmware | dead time **150 ns total** (UCC21520 DT 100 ns is a minimum, not additive; notes on sheets 2 / 7 updated) |
 | 2.8 | yes | **R143 + R144** across C47 (DC+ → Net-(R143-Pad2) → DHB_CAP), **R145 + R146** across C54 (DHB_CAP → Net-(R145-Pad2) → DHB_CURRENT), **R147 + R148** across C16 (420V → Net-(R147-Pad2) → TRANS_SEC), **R149 + R150** across C55 (TRANS_SEC → Net-(R149-Pad2) → ISO_GND): split-cap balancing, **220k 1 % 1206** UNI-ROYAL 1206W4F2203T5E (C17956, 200 V, 143 771 pcs, extended), ≤ ≈ 105 V / 50 mW each. Drawn beside the C47 / C54 and C16 / C55 columns; the secondary half bridge moved 12 grid units right (Q2X 184 → 196, C16 / C55 column 132 → 142) to make room. Mid nets in HV_NETS (`setup_project.py`): R143 / R145 → HV_PRIMARY, R147 / R149 → HV_SECONDARY |
 | 2.8 LLC | yes | **R155 + R156** across C49 ‖ C42 (DC+ → Net-(R155-Pad2) → HEATER_CAP_MEAS), **R157 + R158** across C41 ‖ C22 (HEATER_CAP_MEAS → Net-(R157-Pad2) → HEATER_CURRENT), 220k 1 % 1206 C17956 (user 2026-11-19: balancing resistors in the heater LLC resonance caps too). 100 V per resistor at 400 V, 0.45 mA / 0.18 W; |Z| of each 9.4 nF half at 100 kHz is 170 Ω vs 440 kΩ, so the resonance is unaffected. Mid nets HV_PRIMARY (setup_project.py). Sheet 6, below the resonance notes. |
+
+### Transformer pins and winding tables (2026-11-21)
+
+After the user's placement of 2026-11-21 (C47 / C54 next to the middle of the TR3 primary row, C16 / C55 swapped
+and turned, Q10 / Q11 swapped and turned; `kicad_next/routing/moves_user.json`) every winding end is on the pin
+pair nearest to the copper it connects to. Changed: symbol `EC42_2CH` (`gen_symbols.py`), `sheets/sheet07.py`,
+footprint `Transformer_EC42x15_2Slot_2x8_P5mm` (pads only on the used pins; the pin rows, the body and the
+12 mm barrier band are unchanged, so the PRI-SEC barrier is as before) and its STEP model, the board footprint
+(`tools/next/update_board_parts.py`). **TR2 is unchanged** – its pins were already the nearest ones.
+
+**TR3 (DAB, EC42/15 two-chamber, option B 20 : 21; details and wire in `simulation/dab/DAB_TRANSFORMER.md` 5).**
+Pin 1 = top of the primary row (board: y −86.8), 8 = bottom (y −51.8, at the TO-220 row); 9 = bottom of the
+secondary row, 16 = top. Two adjacent pins per winding end, the other pins cut.
+
+| Winding | Start (inner layer, **dot**) | Finish (outer layer) | Was |
+|---|---|---|---|
+| Primary, chamber 1, 20 T | **4 + 5** = DHB_CAP (C47.2 / C54.1) | **7 + 8** = DHB_HI_SOURCE (Q19.3 / Q7.2) | start 1 + 2, finish 7 + 8 |
+| Secondary, chamber 2, 21 T | **9 + 10** = TRANS_SEC (C16.2 / C55.1) | **13 + 14** = DHB_HI_SOURCE_SEC (Q21.3 / Q8.2) | start 9 + 10, finish 15 + 16 |
+
+Same winding direction for both, dots on the two starts (as before). Why: pins 4 / 5 are 3.9 mm from the
+DHB_CAP pads of C47 / C54 (the midpoint copper is one 10 × 8 mm area); 7 + 8 and 9 + 10 are the row ends at the
+bridges / at C16 / C55; 13 + 14 takes 10 mm off the secondary switch-node track. **11 + 12 would take off 10 mm
+more, but R75 / R76 / C72 (DRV6) stand on those pin places on the bottom side** – they would have to move
+2 – 3 mm with their tracks (stage 3d copper); not done, a decision for the user.
+
+**TR2 (heater LLC, EF25 2 × 5, pins 3 and 8 not fitted; 5.1 note "E25 : 64/2/2").** Unchanged. Pins 1, 2, 4, 5 =
+primary row (x −23.7, 1 at the bottom / y −66.1, 5 at the top / y −86.4), 6, 7, 9, 10 = secondary row (6 at the top).
+The secondary is two heavy turns with a centre tap; its ends and the tap are soldered to the wire pads next to
+the row as on 5.1.
+
+| Winding | Start (**dot**) | Finish | Why these pins |
+|---|---|---|---|
+| Primary, 64 T (5.1 note: "check primary turns!") | **1 + 2** = HEATER_HI_SOURCE (switch node: Q10 drain tab, Q11 source) | **4 + 5** = HEATER_CAP_MEAS (C42 / C49 / C41 / C22) | pin 1 is 7 mm from the Q10 tab (now at y −62), pins 4 / 5 are 8 mm from the resonant capacitors at the top edge; the other way round both runs would be ≈ 20 mm. Pins 2 / 4 are the nearest to Q11's source – equal either way |
+| Secondary half 1, 2 T | **9 + 10** / wire pad WP4 = Q14_DRAIN (Q1) | centre tap = 6V3 (wire pad WP3) | Q1 stands at the height of pins 9 / 10 |
+| Secondary half 2, 2 T | centre tap = 6V3 (wire pad WP2) | **6 + 7** / wire pad WP1 = Q13_DRAIN (Q2) | Q2 stands at the height of pins 6 / 7 |
+
+Dots as the schematic implies them (not stated in the 5.1 documents – check against the 5.1 transformer before
+winding): the rectifier Q2 (EPWM5A_ISO) conducts while the high-side switch Q11 (EPWM5A) is on, i.e. while pins
+1 + 2 are positive against 4 + 5 and the centre tap is positive against 6 + 7. So the secondary runs
+9 / 10 → centre tap → 6 / 7 in the same direction as the primary 1 / 2 → 4 / 5. If the rectifier conducts in the wrong
+half cycle, swap the two primary ends. The switch node is on the primary start here (inner layer); if the primary
+is wound the other way to have the quiet end inside, swap the secondary ends as well. PRI – HEATER 8 mm: pin rows and
+slot unchanged.
 
 ## 3. Gate drivers (sheets 2, 6, 9) – NR 3, 3a
 
@@ -266,10 +309,10 @@ Nets: 5.1 208, 5.2 232 (with at least one part pin).
 | unconnected-(ISO2-VO_C-Pad13) -> DAB_DIS_SEC | +DRV6.5 |
 | DC+ | +TR1.11; -TR1.4; new parts R143 R151 R155 |
 | /04 MCU connector/DC_LINK_MEAS | removed parts C4 |
-| /07 DHB/DHB_CAP | +TR3.1 TR3.2; new parts R144 R145; removed parts L3 |
+| /07 DHB/DHB_CAP | +TR3.4 TR3.5; new parts R144 R145; removed parts L3 |
 | DHB_CURRENT | new parts R146 |
 | DHB_HI_SOURCE | +TR3.7 TR3.8; -TR3.2 |
-| DHB_HI_SOURCE_SEC | +TR3.15 TR3.16; -TR3.4 |
+| DHB_HI_SOURCE_SEC | +TR3.13 TR3.14; -TR3.4 |
 | DHB_I_MEAS | +J2.38; -J2.37 |
 | EPWM5A_ISO | +DRV4.4; -DRV4.3 |
 | EPWM6A | +DRV3.2; removed parts DRV9 |

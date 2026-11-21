@@ -950,6 +950,34 @@ Open point 2, with the move approved by the user. Drawn in the group "R77 / 5V l
 `check_next.sh`, `check_board.py`, `check_domains.py` pass (ALLOW: Q19 / Q21 only); nothing on In1 / In4, no
 `relax`. Left: open points 1, 3 - 6 above. The full rebuild in the documented order was not run with this group.
 
+## User placement 2026-11-21, transformer pins
+
+The user moved six parts by hand in KiCad. They are data now – `kicad_next/routing/moves_user.json`, read by
+`route_s3a_power.py` as the `move` steps of its first group "user placement", so every rebuild puts the parts
+there again (edit the JSON to change a place):
+
+| Part | Before | Now | What |
+|---|---|---|---|
+| C16 | (76.1, −58.6), −90° | (76.1, −50.6), 90° | DAB secondary split capacitors swapped and turned: TRANS_SEC pads face each other at TR3 pins 9 / 10, the 420V pad at the bridge end |
+| C55 | (76.1, −50.6), −90° | (76.1, −58.6), 90° | same |
+| C47 | (23.05, −86.5), −90° | (22.88, −71.71), −90° | DAB primary split capacitors 14.8 mm nearer to the bridge |
+| C54 | (23.05, −78.5), −90° | (22.88, −63.71), −90° | same |
+| Q10 | (−12.872, −75.321), 90° | (−13.737, −63.072), −90° | heater half-bridge FETs swapped and turned |
+| Q11 | (−12.771, −63.583), 90° | (−13.838, −74.810), −90° | same |
+
+**Transformer pins** (winding tables: [CHANGES_5_2.md](CHANGES_5_2.md) "Transformer pins and winding tables",
+`simulation/dab/DAB_TRANSFORMER.md` 5): TR3 primary start (dot) 1 + 2 → **4 + 5** (DHB_CAP, beside C47 / C54),
+finish 7 + 8; secondary start (dot) 9 + 10, finish 15 + 16 → **13 + 14** (switch node). 11 + 12 is 5 mm nearer
+still, but R75 / R76 / C72 stand there on B.Cu. TR2 unchanged (its pins were the nearest already). The footprint
+has pads only on the used pins: `gen_next_footprints.py`, then
+
+```
+tools/p2k/bin/kipy tools/next/update_board_parts.py [--check] [REF ...]   # default TR2 TR3
+```
+
+= "update PCB from schematic" for single parts: replaces the board footprint by the library one if its pads
+differ (place / rotation / side / fields kept) and sets the pad nets from the netlist; no copper is touched.
+
 ## Footprints and 3D models (phase 3, 2026-11-18)
 
 Regenerate: `python3 tools/next/gen_next_footprints.py`, `tools/p2k/bin/kicad_env.sh python3

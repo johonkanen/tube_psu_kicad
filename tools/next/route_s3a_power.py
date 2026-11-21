@@ -26,6 +26,15 @@ VP = (0.8, 0.4)        # via of the power / ground nets
 VS = (0.6, 0.3)        # via of the low-current nets
 
 
+def user_moves():
+    """user placement 2026-11-21 (kicad_next/routing/moves_user.json): parts the user placed by hand in KiCad, as
+    'move' steps - the first thing every run of this script does, so no rebuild can undo them"""
+    import json
+    with open(os.path.join(R.PROJ, "routing", "moves_user.json")) as f:
+        return [("move", m["ref"], m["to"]["x"], m["to"]["y"], dict(rot=m["to"]["rot"], side=m["to"]["side"]),
+                 "user placement 2026-11-21: " + m["why"]) for m in json.load(f)["moves"]]
+
+
 def a(net, start, target, layers="FB", w=0.4, **o):
     return ("auto", net, start, target, dict(layers=layers, w=w, **o))
 
@@ -339,7 +348,7 @@ MAINS = [
     a("5V", (-52.5, -38.7, "In2.Signal_HV"), (-59.7, -37.6486, "B.Cu"), "2B", 0.15, via=VS, margin=5, via_cost=5.0, **RLY),
 ]
 
-GROUPS = [("flyback primary", FLYBACK), ("flyback secondary", FLY_SEC), ("DAB primary", DAB_PRI),
+GROUPS = [("user placement", user_moves()), ("flyback primary", FLYBACK), ("flyback secondary", FLY_SEC), ("DAB primary", DAB_PRI),
           ("DAB secondary", DAB_SEC), ("heater LLC", HEATER_LLC), ("grounds", GROUNDS), ("supply rails", RAILS),
           ("mains / PE", MAINS)]
 

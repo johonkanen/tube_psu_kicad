@@ -63,7 +63,7 @@ def eel19():
 def ec42():
     """EC42/15 two-chamber horizontal: 46 x 42 x 31.5 mm (bobbin drawing); winding D 30 on the x axis at
     z 16.5, core 43 x 42, core depth 15 assumed - caliper: core set, seated height, core-to-board gap."""
-    used = [(-20.0, -17.5 + 5.0 * k) for k in (0, 1, 6, 7)] + [(20.0, -17.5 + 5.0 * k) for k in (0, 1, 6, 7)]
+    used = [(-20.0, -17.5 + 5.0 * k) for k in (3, 4, 6, 7)] + [(20.0, -17.5 + 5.0 * k) for k in (2, 3, 6, 7)]   # pins 4 5 7 8 / 14 13 10 9
     wind = cq.Workplane("YZ").polygon(24, 30.0).extrude(30.3).translate((-15.15, 0, 16.5))   # 24-gon: STEP points reach z 31.5
     return [(box(-23.0, -20.0, 0.4, -18.0, 20.0, 5.0), BLACK), (box(18.0, -20.0, 0.4, 23.0, 20.0, 5.0), BLACK),
             (wind, TAPE), (box(-21.5, -21.0, 9.0, 21.5, 21.0, 24.0), GREY), (pins(used, 1.0), PIN)]

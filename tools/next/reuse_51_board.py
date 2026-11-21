@@ -112,7 +112,7 @@ def netlist():
         comps[c.get("ref")] = dict(fpid=c.findtext("footprint") or "", value=c.findtext("value") or "",
                                    sheet=props.get("Sheetname", ""), sheetfile=props.get("Sheetfile", ""),
                                    path=sp.get("tstamps") + c.findtext("tstamps"),
-                                   lcsc=props.get("LCSC", ""))
+                                   lcsc=props.get("LCSC", ""), descr=c.findtext("description") or "")
     pins, nets = collections.defaultdict(dict), []
     for n in t.find("nets"):
         nets.append(n.get("name"))
