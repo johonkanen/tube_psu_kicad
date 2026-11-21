@@ -199,20 +199,6 @@
   },
   {
    "kind": "track",
-   "net": "/06 Heaters/HEATER_HI_SOURCE",
-   "layer": "B.Cu",
-   "w": 1.27,
-   "a": [
-    -18.3,
-    -67.3
-   ],
-   "b": [
-    -18.3,
-    -61.7
-   ]
-  },
-  {
-   "kind": "track",
    "net": "+3V3",
    "layer": "B.Cu",
    "w": 0.2,
@@ -692,18 +678,6 @@
     "B.Cu"
    ],
    "group": "DAB secondary"
-  },
-  {
-   "step": "track (-18.3, -67.3) ... (-18.3, -61.7)",
-   "net": "/06 Heaters/HEATER_HI_SOURCE",
-   "ok": true,
-   "w": 1.27,
-   "vias": 0,
-   "length": 5.6,
-   "layers": [
-    "B.Cu"
-   ],
-   "group": "heater driver"
   },
   {
    "step": "track (19.3, -1.6) ... (19.58, -0.75)",

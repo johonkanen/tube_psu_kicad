@@ -1214,7 +1214,7 @@
 							)
 						)
 					)
-					(number "13"
+					(number "11"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1232,7 +1232,7 @@
 							)
 						)
 					)
-					(number "14"
+					(number "12"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4026,11 +4026,11 @@
 		(pin "10"
 			(uuid "12e4ff51-b44e-55a3-b1b6-d93fb9ef5526")
 		)
-		(pin "13"
-			(uuid "9b9621be-c7a4-5e87-aa09-40dbf57e9576")
+		(pin "11"
+			(uuid "4871ef62-bde7-5a1b-9476-9068452c26fa")
 		)
-		(pin "14"
-			(uuid "64e7f8c9-ee15-524c-874b-4c7ba4af3607")
+		(pin "12"
+			(uuid "4f99e54a-2527-5d46-a5a8-eb664843a2ee")
 		)
 		(instances
 			(project "tube_psu_5_2"

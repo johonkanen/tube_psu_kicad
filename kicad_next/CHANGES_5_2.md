@@ -41,7 +41,7 @@ ICE5AR change (1.5) R64, R81, R84, R85, R86, C50.
 
 | NR | Done | Refdes / value / nets |
 |---|---|---|
-| 2.1 | yes | TR3 → symbol `EC42_2CH`, value `EC42/15 2CH 20:21` (option B, D1): **4 + 5** primary start = **DHB_CAP**, 7 + 8 primary finish = DHB_HI_SOURCE, 9 + 10 secondary start = TRANS_SEC, **13 + 14** secondary finish = DHB_HI_SOURCE_SEC (DAB_TRANSFORMER.md 5; pins re-assigned 2026-11-21, was 1 + 2 / 7 + 8 / 9 + 10 / 15 + 16 – section "Transformer pins and winding tables" below) |
+| 2.1 | yes | TR3 → symbol `EC42_2CH`, value `EC42/15 2CH 20:21` (option B, D1): **4 + 5** primary start = **DHB_CAP**, 7 + 8 primary finish = DHB_HI_SOURCE, 9 + 10 secondary start = TRANS_SEC, **11 + 12** secondary finish = DHB_HI_SOURCE_SEC (DAB_TRANSFORMER.md 5; pins re-assigned 2026-11-21, was 1 + 2 / 7 + 8 / 9 + 10 / 15 + 16 – section "Transformer pins and winding tables" below) |
 | 2.2 | yes | footprint `tube_psu_next:Transformer_EC42x15_2Slot_2x8_P5mm` |
 | 2.4 | yes | **L3 removed** (no jumper position: the leakage is the series L; the net TRANS_PRI disappears) |
 | 2.3 / 2.5 / 2.6 | layout | C47 / C54 at the TR3 primary pins (note on the sheet), phase 5 |
@@ -66,13 +66,16 @@ secondary row, 16 = top. Two adjacent pins per winding end, the other pins cut.
 | Winding | Start (inner layer, **dot**) | Finish (outer layer) | Was |
 |---|---|---|---|
 | Primary, chamber 1, 20 T | **4 + 5** = DHB_CAP (C47.2 / C54.1) | **7 + 8** = DHB_HI_SOURCE (Q19.3 / Q7.2) | start 1 + 2, finish 7 + 8 |
-| Secondary, chamber 2, 21 T | **9 + 10** = TRANS_SEC (C16.2 / C55.1) | **13 + 14** = DHB_HI_SOURCE_SEC (Q21.3 / Q8.2) | start 9 + 10, finish 15 + 16 |
+| Secondary, chamber 2, 21 T | **9 + 10** = TRANS_SEC (C16.2 / C55.1) | **11 + 12** = DHB_HI_SOURCE_SEC (Q21.3 / Q8.2) | start 9 + 10, finish 15 + 16 (13 + 14 for one commit, 6c3a9bf) |
 
 Same winding direction for both, dots on the two starts (as before). Why: pins 4 / 5 are 3.9 mm from the
 DHB_CAP pads of C47 / C54 (the midpoint copper is one 10 × 8 mm area); 7 + 8 and 9 + 10 are the row ends at the
-bridges / at C16 / C55; 13 + 14 takes 10 mm off the secondary switch-node track. **11 + 12 would take off 10 mm
-more, but R75 / R76 / C72 (DRV6) stand on those pin places on the bottom side** – they would have to move
-2 – 3 mm with their tracks (stage 3d copper); not done, a decision for the user.
+bridges / at C16 / C55. **Secondary finish 11 + 12** (user decision 2026-11-21) is the pair nearest to the bridge
+Q21 / Q8: the four secondary pins are the bottom four of the row (9 – 12), 13 – 16 are cut. R75 / R76 / C72 (DRV6)
+stood on the pin places 11 / 12 on the bottom side and moved 2.3 – 2.6 mm (D18 0.8 mm), listed in
+`kicad_next/routing/moves_user.json`. Switch-node track Q21 pin 3 → first pin: 30.9 mm (pin 11; was 37.5 mm to
+pin 13 and 46 mm to pin 15) – 6.6 mm less, not the 10 mm of the pin pitch, because the track cannot run straight
+over the vias of DRV6 (README "TR3 secondary finish on pins 11 / 12").
 
 **TR2 (heater LLC, EF25 2 × 5, pins 3 and 8 not fitted; 5.1 note "E25 : 64/2/2").** Unchanged. Pins 1, 2, 4, 5 =
 primary row (x −23.7, 1 at the bottom / y −66.1, 5 at the top / y −86.4), 6, 7, 9, 10 = secondary row (6 at the top).
@@ -312,7 +315,7 @@ Nets: 5.1 208, 5.2 232 (with at least one part pin).
 | /07 DHB/DHB_CAP | +TR3.4 TR3.5; new parts R144 R145; removed parts L3 |
 | DHB_CURRENT | new parts R146 |
 | DHB_HI_SOURCE | +TR3.7 TR3.8; -TR3.2 |
-| DHB_HI_SOURCE_SEC | +TR3.13 TR3.14; -TR3.4 |
+| DHB_HI_SOURCE_SEC | +TR3.11 TR3.12; -TR3.4 |
 | DHB_I_MEAS | +J2.38; -J2.37 |
 | EPWM5A_ISO | +DRV4.4; -DRV4.3 |
 | EPWM6A | +DRV3.2; removed parts DRV9 |

@@ -295,7 +295,7 @@ shift (section 1).
 
 **Pins (5.2 board, re-assigned 2026-11-21).** Use 2 pins per winding end, splitting the litz
 strands over 2 adjacent pins. That is 4 pins per row; cut the other pins (primary row 1, 2, 3, 6;
-secondary row 11, 12, 15, 16): the 5.2 footprint has no pads for them.
+secondary row 13, 14, 15, 16): the 5.2 footprint has no pads for them.
 
 Pin numbering as on the footprint, seen from above with the primary row on the left: pin 1 is at
 the top of the primary row (chamber 1), 8 at the bottom; 9 is at the bottom of the secondary row
@@ -304,7 +304,7 @@ the top of the primary row (chamber 1), 8 at the bottom; 9 is at the bottom of t
 | winding | chamber | start (inner layer, **dot**) | finish (outer layer) | turns (option B) |
 |---|---|---|---|---|
 | primary | 1 (10.4 mm, pins 1–8) | **pins 4 + 5** → split-cap midpoint DHB_CAP (C47 / C54), the quiet end, next to the core | **pins 7 + 8** → primary bridge midpoint DHB_HI_SOURCE (Q19 source / Q7 drain) | 20 |
-| secondary | 2 (12.4 mm, pins 9–16) | **pins 9 + 10** → split-cap midpoint TRANS_SEC (C16 / C55) | **pins 13 + 14** → secondary bridge midpoint DHB_HI_SOURCE_SEC (Q21 source / Q8 drain) | 21 |
+| secondary | 2 (12.4 mm, pins 9–16) | **pins 9 + 10** → split-cap midpoint TRANS_SEC (C16 / C55) | **pins 11 + 12** → secondary bridge midpoint DHB_HI_SOURCE_SEC (Q21 source / Q8 drain) | 21 |
 
 Both windings are wound in the same direction, so the two starts are the dotted ends (primary
 start ↔ secondary start, as before).
@@ -316,12 +316,15 @@ Why these pins: each winding end sits on the pin pair nearest to the copper it c
 - Primary finish 7 + 8: the bottom of the row, nearest to Q7 / Q19 (unchanged).
 - Secondary start 9 + 10: the bottom of the row; the TRANS_SEC pads of C16 / C55 face each other
   3.9 mm right of them (unchanged).
-- Secondary finish 13 + 14 (was 15 + 16 at the top of the row): 10 mm less switch-node track.
-  11 + 12 would save another 10 mm, but the DRV6 parts R75 / R76 / C72 stand on those two pin
-  places on the bottom side (they would have to move 2–3 mm, with their tracks).
+- Secondary finish 11 + 12 (was 15 + 16 at the top of the row, 13 + 14 for one commit): the pair
+  nearest to the secondary bridge, 15 mm less switch-node track than 15 + 16. The DRV6 parts
+  R75 / R76 / C72 stood on those two pin places on the bottom side and were moved 2.3–2.6 mm.
+  The secondary now uses the four bottom pins 9–12 next to each other: start pair 9 + 10,
+  finish pair 11 + 12, 5 mm between pin 10 and pin 11 (TRANS_SEC ↔ switch node, 210 V + ripple;
+  pad to pad 2.6 mm on the board).
 
-Earlier assignment (footprint until 2026-11-21): 1 + 2 primary start, 7 + 8 primary finish,
-9 + 10 secondary start, 15 + 16 secondary finish.
+Earlier assignments: until 2026-11-21 1 + 2 primary start, 7 + 8 primary finish, 9 + 10 secondary
+start, 15 + 16 secondary finish; commit 6c3a9bf 4 + 5 / 7 + 8 / 9 + 10 / 13 + 14.
 
 If power flows the wrong way at a positive phase command, swap one winding's ends, or
 change the phase sign in the FPGA.
@@ -448,10 +451,10 @@ than the 6.1 mm available). In that case use 120 × 0.071 strands or a thinner t
 
 **What still needs care with the TIW-litz secondary:**
 1. **Terminations.** The jacket must run unbroken into the chamber and out to pins 9/10 and
-   13/14. Strip it only over the last few millimetres that wrap the pin. Never lead secondary
+   11/12. Strip it only over the last few millimetres that wrap the pin. Never lead secondary
    wire across chamber 1 or the primary pins.
 2. **Secondary pins ↔ core.** On this horizontal EC bobbin the core end plates sit above the
-   pin rows (core 43 mm along the axis, pin rows at ±20 mm). The bare pin wraps of pins 9/10/13/14
+   pin rows (core 43 mm along the axis, pin rows at ±20 mm). The bare pin wraps of pins 9/10/11/12
    are a few millimetres from the core, which is primary-side.
    - **Measure** the path from the secondary pin wraps to the core along the bobbin: it needs
      ≥ 11.1 mm creepage and ≥ 4.0 mm clearance.

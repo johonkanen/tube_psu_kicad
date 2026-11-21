@@ -236,7 +236,7 @@ Rule of thumb used (IPC-2221 curve fitted, in the range IPC-2152 gives for a boa
 | DAB primary, DC+ → C47 (one split-capacitor half; `DAB_SIMULATION.md`: I1 2.4 A rms, half per capacitor) | 1.2 A rms | F.Cu track Q19 pin 2 → y −47.3 → x 41.5 (west of the TR3 band) → y −75.21 → west between the pin places 3 / 4 → C47.1 (2026-11-21, 55 mm; was along the top edge, 69 mm): 1.5 mm, 0.75 / 0.8 mm for the 9 mm at the TO-220 pins (pin pitch, switch-node strip) | 4.4 A (2.6 A at the pins) |
 | DAB primary switch node Q7.2 / Q19.3 → TR3 pins 7 / 8 | 2.4 A rms | zone `S3A_DHB_HI_SOURCE_F` (≥ 2.1 mm strip above the TO row + 11 × 12.7 mm at the pins) and the kept 5.1 track 1.5 mm | > 5 A |
 | DAB primary low side Q7.3 / C67 → C54.2, midpoint C47.2 / C54.1 / TR3 pins 4 / 5 (2026-11-21, was 1 / 2) | 1.2 A / 2.4 A rms | zones `S3A_DHB_CURRENT_F` (5.4 mm wide, 1.7 mm neck to the 5.1 pour at C67; 14.5 mm long from C54.2, was 29 mm), `S3A_DHB_CAP_F` | > 4.7 A |
-| DAB secondary switch node Q21.3 → TR3 pins 13 / 14 (2026-11-21, was 15 / 16) | 2.3 A rms | F.Cu track 1.6 mm, east of the TR3 band, 37.5 mm to pin 13 (was 46 mm to pin 15) | 4.6 A |
+| DAB secondary switch node Q21.3 → TR3 pins 11 / 12 (2026-11-21, was 15 / 16, then 13 / 14) | 2.3 A rms | F.Cu track 1.6 mm, east of the TR3 band, 30.9 mm to pin 11 (was 37.5 mm to pin 13, 46 mm to pin 15) | 4.6 A |
 | DAB secondary midpoint TR3 pins 9 / 10 / C16.2 / C55.1; 420V → C16.1; ISO_GND ← C55.2 | 2.3 / 1.2 A rms | zone `S3A_TRANS_SEC_F`; 2026-11-21 (C16 / C55 swapped): zone `S3A_420V_C16_F` 5.4 mm wide from the pad into the 420V band of Q21 pin 2 (was a 1.2 mm track to the pour east of the capacitors); zone `S3A_ISO_GND_C55_F` into the 5.1 ISO_GND pour + 3 vias 0.8 / 0.4 to the planes | > 3 A (3 vias) |
 | Flyback primary: DC+ feed → R116 / R151 / C12 / R45 → TR1 fly lead 11; C15 → TR1 pin 11 | ≈ 0.1 A dc, ≤ 0.4 A rms, 1.2 A peak | F.Cu 0.76 mm along the bottom edge, 0.5 mm below R72 (1.3 mm to its pads, 0.5 mm to the edge), 1.0 mm at the pin; B.Cu 0.6 mm from C15 | ≥ 2 A |
 | PWM2 drain (FLY_C) | same | zones `S3A_PWM2_drain_F` / `_B` + 10 vias 0.8 / 0.4 (below) | – |
@@ -967,9 +967,9 @@ there again (edit the JSON to change a place):
 
 **Transformer pins** (winding tables: [CHANGES_5_2.md](CHANGES_5_2.md) "Transformer pins and winding tables",
 `simulation/dab/DAB_TRANSFORMER.md` 5): TR3 primary start (dot) 1 + 2 → **4 + 5** (DHB_CAP, beside C47 / C54),
-finish 7 + 8; secondary start (dot) 9 + 10, finish 15 + 16 → **13 + 14** (switch node). 11 + 12 is 10 mm nearer
-still, but R75 / R76 / C72 stand there on B.Cu. TR2 unchanged (its pins were the nearest already). The footprint
-has pads only on the used pins: `gen_next_footprints.py`, then
+finish 7 + 8; secondary start (dot) 9 + 10, finish 15 + 16 → 13 + 14 (commit 6c3a9bf) → **11 + 12** (switch node,
+user decision of the same day: subsection "TR3 secondary finish on pins 11 / 12 …" below). TR2 unchanged (its pins
+were the nearest already). The footprint has pads only on the used pins: `gen_next_footprints.py`, then
 
 ```
 tools/p2k/bin/kipy tools/next/update_board_parts.py [--check] [REF ...]   # default TR2 TR3
@@ -993,7 +993,8 @@ re-netted to the swapped pads).
   under the new capacitor position is taken by C92 / R41 / DRV5): 0.4 mm links by the router – DC+ down F.Cu x 24.3
   into the feed, DHB_CAP down the west edge (x 20.7) to C47.2 / C54.1, DHB_CURRENT to a via above C54.2. Kelvin
   track DHB_CURRENT (stage 3b) starts at C54.2.
-- **DAB secondary.** Switch node 1.6 mm: x 55.45 to y −60.25, 45° to (67, −71.8), pins 13 / 14. C16.1 sits in the
+- **DAB secondary.** Switch node 1.6 mm: x 55.45 to y −60.25, 45° to (67, −71.8), pins 13 / 14 (pins 11 / 12 and
+  another path since the next subsection). C16.1 sits in the
   420V band of Q21 pin 2, C55.2 in the ISO_GND pour (table above). **R147 – R150 keep their places but swap their
   ends** (sheet 7: R150 + R149 across C16, R148 + R147 across C55 – R147.1 = ISO_GND, R150.2 = 420V), so every
   resistor end is under its capacitor pad again; no part moved.
@@ -1001,6 +1002,7 @@ re-netted to the swapped pads).
   `S3A_Q11_tab_DC` (priority 91). Switch node: one area from Q10's tab to TR2 pins 1 / 2 and up a column west of
   Q11 to Q11 pin 3. HEATER_CURRENT: Q10.3 → via (−12.8, −68.6) between the tabs → B.Cu under Q11 → R30.1; the
   B ↔ F via of the HEATER_CURRENT pours moved to (−17.8, −82.8) (the old place is 0.25 mm from Q11 pin 3).
+  (Superseded by the next subsection: the gate parts are at their FETs now.)
   **Gate parts stayed where they were** (R24 / R36 / D35 at Q10 now, R37 / R31 / D33 at Q11): the high-side gate is
   drawn – B.Cu under Q11, via (−17.6, −78.3) in the switch-node column, F.Cu between the DC+ tab (1.4 mm) and pin 3
   to pin 1, beside its return, ≈ 21 mm; the low-side gate (router, 7 mm) and HEATER_LOW_DRV (In2 from DRV3 pin 10 to
@@ -1019,15 +1021,87 @@ new track on an inner layer besides In2 signals, nothing new on In1 / In4, no ne
 from stage 3a, 404 / 44 from stage 3b. Stage 3b: 126 of 149 rows (the open ones are those of eb497bb less the two
 heater gates).
 
-Open / for a decision:
-1. **TR3 secondary finish on 11 + 12** instead of 13 + 14 (10 mm less switch-node track): needs R75 / R76 / C72
-   moved 2 – 3 mm and their stage-3b / 3d tracks drawn again.
-2. **Heater gate parts** are at the wrong FET since the swap: moving R24 / R36 / D35 / R59 to Q11 and R37 / R31 /
-   D33 / R66 to Q10 (8 parts, 10 – 12 mm) would shorten the high-side gate track from ≈ 21 mm to ≈ 5 mm.
+Open / for a decision (state of 2744443; 1 and 2 are done in the next subsection):
+1. ~~TR3 secondary finish on 11 + 12 instead of 13 + 14~~ – done.
+2. ~~Heater gate parts at the wrong FET since the swap~~ – done.
 3. **R143 – R146** are 14.8 mm from C47 / C54 now (µA only – cosmetic); a place under the capacitors needs C92 / R41
    moved.
 4. The loop ISO_GND C55.2 → Q8 pin 3 runs through the planes (≈ 22 mm, was ≈ 12 mm with C55 at the bridge end);
    420V Q21 pin 2 → C16.1 is ≈ 22 mm in the band (was ≈ 43 mm).
+
+### TR3 secondary finish on pins 11 / 12, heater gate parts at their FETs (2026-11-21)
+
+Two follow-ups the user approved. 13 parts moved, all on B.Cu; the moves are in
+`kicad_next/routing/moves_user.json` (entries with `"by": "agent"`, applied by `route_s3a_power.py` with the user's
+own six), R158 is a `move` step of stage 3a as before. TR3: `gen_symbols.py`, `sheets/sheet07.py`,
+`gen_next_footprints.py`, `gen_next_3d.py`, then `update_board_parts.py`; full rebuild in the documented order.
+
+| Part | Before | Now | mm | What |
+|---|---|---|---|---|
+| R75 | (70.646, −61.496) | (73.2, −61.496) | 2.55 | pull-downs of DRV6's inputs stood on pin place 11: east of the pin column, pads 1.28 mm from the pin pad |
+| R76 | (70.646, −60.226) | (73.2, −60.226) | 2.55 | same |
+| C72 | (68.325, −65.3), 180° | (66.1, −65.0), 90° | 2.25 | stood on pin place 12: west of it and turned, pads 1.3 mm from the pin pad, 15V_ISO_SEC pad beside D18's anode |
+| D18 | (62.45, −66.8) | (61.65, −66.8) | 0.8 | room for C72 between its anode pad and pin 12 |
+| R24, R59, R36, D35 | at Q10 (old place of Q11) | each (−1.067, −11.227) | 11.28 | high-side gate group moved exactly as Q11 was: R24 (−19.424, −73.794), R59 (−19.403, −76.334), R36 (−17.445, −79.153), D35 (−15.537, −76.937) |
+| R37, R31, D33, R66 | at Q11 (old place of Q10) | each (−0.865, +7.0) | 7.05 | low-side gate group: R37 (−10.893, −65.1), R31 (−8.861, −65.1), D33 (−9.907, −67.632), R66 (−11.165, −70.064). Q10 itself moved (−0.865, +12.249); C52 / R99 stand on the last 5 mm, so the group stops 5.2 mm short and ends at Q10's gate pin instead of beside the tab |
+| R158 | (−13.5, −81.61) | (−13.5, −82.0) | 0.39 | its HEATER_CURRENT pad 1.39 mm from the high-side gate via |
+
+**TR3 secondary finish 11 + 12** (stage 3a group "DAB secondary", stage 3d group "DRV6 inputs").
+- Switch node, F.Cu 1.6 mm: x 55.45 to y −56.1, 45° over DRV6 to (61.15, −61.8), east into pin 11, up the pin column
+  to pin 12. **Q21 pin 3 → first pin 30.9 mm (was 37.5 mm to pin 13), second pin 35.9 mm (was 42.5 mm): 6.6 mm
+  less, not the 10 mm of the pin pitch.** The straight 45° line from Q21 to pin 11 would be 26 mm, but it runs over
+  the via sites of DRV6 pins 3 / 4 / 5 (5V_ISOL, ISO_GND, DAB_DIS_SEC) and the 1.2 mm HV rule keeps every via of
+  another net 2.3 mm from the track centre; the path taken turns as early as the 15V_ISO_SEC via of DRV6 pin 11
+  allows (1.3 mm).
+- DRV6 inputs ISO_SEC_DHB_HI / LO: the 5.1 lane ends ran through pin place 11 and are deleted (KiCad had given the
+  two In2 pieces and the via at (68.34, −61.45) the switch-node net when the pad came on top of them – deleted under
+  both names). In2 lanes 0.4 mm from the ends of the 5.1 lanes (x 79.4 / 78.1), between the pads of pins 10 and 11
+  (LO 0.65 mm from pin 10 = TRANS_SEC, HI 0.75 mm from pin 11; inner-layer rule 0.5 mm), to vias under DRV6 at
+  (64.0, −59.45) / (62.8, −59.45): 1.25 mm from the switch-node track on F.Cu. R76 taps LO by a via on its lane
+  (73.6, −58.85; 1.34 mm from the TRANS_SEC area), R75 taps HI by a via south of it and a 3.1 mm In2 stub. Their
+  ISO_GND ends go to R147 pin 1 (was open in 2744443).
+- C72: one via per pad between its pads – 15V_ISO_SEC (66.6, −64.9) into the In3 pour, ISO_GND (65.6, −64.75) into
+  the planes – and 0.6 mm to D18's anode. The 5.1 via and tracks of the old place are deleted.
+- No switch-node copper on an inner layer (the pin barrels as before), nothing new on In1 / In4.
+
+**Heater gate loops** (stage 3a group "heater LLC", all drawn; the rows are gone from stage 3b).
+- **High side.** HEATER_HI_DRV: DRV3 pin 15 → B.Cu column x −20.8 between TR2 and the FETs (1.28 mm from the 15V pad
+  of C18) → R24 / R59, 16.8 mm to R24 (19.3 mm to R59); it was open in 2744443. Its return on the same layer: a 0.5 mm switch-node track
+  between the pads of R24 / R59 (x −19.42, 1.4 mm beside it), stitched to the F.Cu switch-node area at both ends,
+  ending on R36 pin 2 at Q11's source pin. DRV3 pin 14 and C25 pin 2 each have a via into the tab copper of Q10.
+  Gate: R24 pin 2 east round D35's cathode to the node R36 pin 1 / D35 anode, via (−14.6, −78.3), F.Cu between the DC+
+  tab (1.4 mm) and the source pin to pin 1. **D35 anode → gate pin 5.5 mm (was 21 mm)**, R24 pin 2 → gate pin
+  12.5 mm (was 29 mm); the net has 15.4 mm of track (was 31.0 mm).
+- **Low side.** HEATER_LOW_DRV lands on a via north of R37 / R31 at (−9.2, −62.95) (In2 lane y −62.95 from DRV3 pin 10,
+  19 mm; the via in the DC+ neck at (−6.2, −70.7) is gone). Gate: R37 pin 2 → D33 anode → R66 pin 1 in one line, via
+  (−12.3, −67.63) beside the HEATER_CURRENT via of the source pin, F.Cu into pin 1. **R37 pin 2 → gate pin 3.7 mm
+  (was 7 mm)**; the net has 5.3 mm of track (was 10.7 mm). R66 pin 2 on the GND via east of the gate pin.
+- HEATER_CURRENT trunk on B.Cu at x −11.2 below y −72.6 (2.9 mm from the high-side gate node), its branch to the
+  via at (−17.8, −82.8) 1.3 mm clear of R36. C52 pin 2 (GND, under Q10's tab) hung on the B.Cu GND pour that the
+  gate parts cut up: track and via at (−9.3, −60.7).
+- DRV3 group rule: inside the group ≥ 0.2 mm; towards DC+, HEATER_CURRENT, 15V and GND ≥ 1.2 mm on the outer layers
+  (smallest: 1.23 mm GND via of C52 ↔ R99 pin 1, 1.24 mm the same via ↔ Q10's tab, 1.25 mm gate via ↔ DC+ tab).
+
+| | 2744443 | now |
+|---|---|---|
+| shorts | 0 | **0** |
+| unconnected | 24 | **22** (HEATER_HI_DRV at DRV3 pin 15 and ISO_GND of R75 / R76 closed) |
+| clearance markers (first error per track) | 6 | 6 (the same six tracks; 8 = 8 with `--all-track-errors`) |
+| dangling tracks / vias | 33 / 0 | 32 / 0 |
+| courtyard overlaps | 130 | 130 (the same pairs) |
+
+`check_next.sh`, `check_board.py`, `check_domains.py` pass (ALLOW: Q19 / Q21 only); `check_footprints.py`: TR3
+PRI-SEC 37.55 mm. No new `relax`. Stage 3a 390 segments / 104 vias (221 of 222 steps), 3d 176 / 26, 3b 365 / 41
+(109 of 130 rows: the 21 open ones are rows that were open before).
+
+Open / for a decision:
+1. The switch node is 6.6 mm shorter, not 10 mm (above). The rest needs DRV6's input-side vias moved out of the
+   45° line (pins 3 / 4 / 5 under the package, past the HV gate track of pin 15) – a re-layout of DRV6's fan-out.
+2. HEATER_HI_DRV is 16.8 mm long (driver → gate resistors), the price of gate resistors at the FET with the FETs
+   swapped: before the swap DRV3 pin 15 was 4 mm from R24. Turning the group or moving R24 / R59 back to DRV3 would
+   shorten it and lengthen the gate track by the same amount.
+3. The 5.1 15V stub on B.Cu at x −7.41 (y −67.7 … −63.3, dangling, 0.55 mm east of R31) is still there.
+4. Points 3 and 4 of the list above are unchanged.
 
 ## Footprints and 3D models (phase 3, 2026-11-18)
 

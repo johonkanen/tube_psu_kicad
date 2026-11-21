@@ -181,6 +181,40 @@ SEC = [
     v(A3, 75.9, -32.0, V6), t(A3, B, 0.3, [(75.9, -32.0), (75.9, -35.2366)]),
 ]
 
+# ================================================================================================ DRV6 inputs
+# 2026-11-21: TR3's secondary finish (the switch node) is on pins 11 / 12, where R75 / R76 (pull-downs of DRV6's
+# inputs) stood on B.Cu: they are 2.55 mm further east now (routing/moves_user.json). The gate signals come from the
+# east on In2 (5.1 lanes x 78.1 / 79.4), tap their pull-down east of the pin column, pass between the pads of pins
+# 10 and 11 (LO 0.65 mm from pin 10, HI 0.75 mm from pin 11, inner-layer rule 0.5 mm) and end on vias under DRV6:
+# no via of these nets within 1.2 mm of the switch-node track on F.Cu (y -61.8) or of a transformer pin on an outer
+# layer. LO's via is on its lane (1.34 mm from the TRANS_SEC area on F.Cu), HI's south of R75 with an In2 stub.
+SWN = "DHB_HI_SOURCE_SEC"
+D6_OLD = "5.1 end of the gate-signal lane at the old place of R75 / R76 (through the pin place 11 of TR3)"
+RPD_OLD = "5.1 copper at the old place of R75 / R76 (0.7 mm from the pin place 11 of TR3, now the switch node)"
+DRV6_IN = [
+    *dels(HI, I2, D6_OLD, (68.975, -61.452, 68.34, -61.452), (70.88, -59.547, 68.975, -61.452)),
+    ("delvia", HI, 68.34, -61.452, D6_OLD),
+    # (the same three items under the net name KiCad gave them when the pad of pin 11 was put on top of them)
+    *dels(SWN, I2, D6_OLD, (68.975, -61.452, 68.34, -61.452), (70.88, -59.547, 68.975, -61.452)),
+    ("delvia", SWN, 68.34, -61.452, D6_OLD),
+    *dels(LO, I2, D6_OLD, (68.7, -60.182, 69.605, -59.277)),
+    *dels(IG, B, RPD_OLD, (71.3576, -61.496, 71.51, -61.496), (71.51, -61.3436, 71.51, -61.496),
+          (71.51, -61.6484, 71.51, -61.496), (71.6624, -61.496, 71.51, -61.496), (71.3576, -60.226, 71.51, -60.226),
+          (71.51, -60.0736, 71.51, -60.226), (71.51, -60.3784, 71.51, -60.226), (71.6624, -60.226, 71.51, -60.226)),
+    # In2 lanes from the ends of the 5.1 lanes
+    t(LO, I2, 0.4, [(78.105, -54.677), (73.932, -58.85), (65.0, -58.85), (64.4, -59.45), (64.0, -59.45)]),
+    t(HI, I2, 0.4, [(79.38, -54.947), (74.677, -59.65), (66.2, -59.65), (65.65, -60.2), (63.55, -60.2), (62.8, -59.45)]),
+    # DRV6 pins 2 / 1 -> vias under the package
+    v(LO, 64.0, -59.45, V6), t(LO, B, 0.4, [(65.657, -60.182), (64.5, -60.182), (64.0, -59.68), (64.0, -59.45)]),
+    v(HI, 62.8, -59.45, V6), t(HI, B, 0.4, [(65.657, -61.35), (63.0, -61.35), (62.8, -61.15), (62.8, -59.45)]),
+    # pull-downs: R76 pin 2 -> via on the LO lane (B.Cu crosses the HI lane), R75 pin 2 -> via south of it, In2 stub
+    v(LO, 73.6, -58.85, V6), t(LO, B, 0.3, [(72.375, -60.226), (73.6, -59.001), (73.6, -58.85)]),
+    v(HI, 72.375, -62.75, V6), t(HI, B, 0.3, [(72.375, -61.496), (72.375, -62.75)]),
+    t(HI, I2, 0.4, [(72.375, -62.75), (72.375, -59.65)]),
+    # ISO_GND ends of R75 / R76 -> R147 pin 1 (its vias: stage 3a)
+    t(IG, B, 0.3, [(74.025, -61.496), (74.025, -60.226)]), t(IG, B, 0.3, [(74.025, -60.98), (76.1, -60.98)]),
+]
+
 # ================================================================================================ 420V divider
 N1, N2 = "Net-(R23-Pad2)", "Net-(R34-Pad2)"
 OLDDIV = "5.1 link of the divider at the old places of R23 / R34 / R39"
@@ -225,7 +259,7 @@ R10_R79 = [
     t(UM8, B, WI, [(33.6272, 13.9), (33.9, 13.627), (34.6, 13.627)]),
 ]
 
-GROUPS = [("part moves", MOVES), ("ISO2 primary side", PRI), ("ISO2 secondary side", SEC),
+GROUPS = [("part moves", MOVES), ("ISO2 primary side", PRI), ("ISO2 secondary side", SEC), ("DRV6 inputs", DRV6_IN),
           ("420V divider", DIVIDER), ("R10 / R79", R10_R79)]
 
 

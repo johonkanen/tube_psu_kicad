@@ -501,6 +501,453 @@
    ],
    "width": 0.635,
    "reason": "5.1 HEATER_LOW_DRV stub at R37 pin 1 towards the old via site (dangling: the In2 track lands east of R31 now)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V_ISO_SEC",
+   "layer": "B.Cu",
+   "start": [
+    66.689,
+    -64.119
+   ],
+   "end": [
+    66.689,
+    -65.135
+   ],
+   "width": 0.635,
+   "reason": "5.1 copper at the old place of C72 (the pad stood on the pin place 12 of TR3, now the switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V_ISO_SEC",
+   "layer": "B.Cu",
+   "start": [
+    66.689,
+    -65.135
+   ],
+   "end": [
+    66.689,
+    -65.3
+   ],
+   "width": 0.635,
+   "reason": "5.1 copper at the old place of C72 (the pad stood on the pin place 12 of TR3, now the switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V_ISO_SEC",
+   "layer": "B.Cu",
+   "start": [
+    66.689,
+    -65.3
+   ],
+   "end": [
+    66.689,
+    -66.4
+   ],
+   "width": 0.635,
+   "reason": "5.1 copper at the old place of C72 (the pad stood on the pin place 12 of TR3, now the switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V_ISO_SEC",
+   "layer": "B.Cu",
+   "start": [
+    66.7504,
+    -65.3
+   ],
+   "end": [
+    66.689,
+    -65.3
+   ],
+   "width": 0.1524,
+   "reason": "5.1 copper at the old place of C72 (the pad stood on the pin place 12 of TR3, now the switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V_ISO_SEC",
+   "layer": "B.Cu",
+   "start": [
+    66.7504,
+    -65.3
+   ],
+   "end": [
+    66.7504,
+    -64.9
+   ],
+   "width": 0.1524,
+   "reason": "5.1 copper at the old place of C72 (the pad stood on the pin place 12 of TR3, now the switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V_ISO_SEC",
+   "layer": "B.Cu",
+   "start": [
+    66.689,
+    -66.4
+   ],
+   "end": [
+    66.289,
+    -66.8
+   ],
+   "width": 0.635,
+   "reason": "5.1 copper at the old place of C72 (the pad stood on the pin place 12 of TR3, now the switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V_ISO_SEC",
+   "layer": "B.Cu",
+   "start": [
+    66.289,
+    -66.8
+   ],
+   "end": [
+    64.5,
+    -66.8
+   ],
+   "width": 0.635,
+   "reason": "5.1 copper at the old place of C72 (the pad stood on the pin place 12 of TR3, now the switch node)"
+  },
+  {
+   "kind": "via",
+   "net": "15V_ISO_SEC",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    66.689,
+    -64.119
+   ],
+   "width": 0.5,
+   "drill": 0.3,
+   "reason": "5.1 copper at the old place of C72 (the pad stood on the pin place 12 of TR3, now the switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "start": [
+    69.7476,
+    -65.3
+   ],
+   "end": [
+    69.9,
+    -65.3
+   ],
+   "width": 0.254,
+   "reason": "5.1 copper at the old place of C72 (the pad stood on the pin place 12 of TR3, now the switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "start": [
+    69.9,
+    -65.1476
+   ],
+   "end": [
+    69.9,
+    -65.3
+   ],
+   "width": 0.254,
+   "reason": "5.1 copper at the old place of C72 (the pad stood on the pin place 12 of TR3, now the switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "start": [
+    69.9,
+    -65.4524
+   ],
+   "end": [
+    69.9,
+    -65.3
+   ],
+   "width": 0.254,
+   "reason": "5.1 copper at the old place of C72 (the pad stood on the pin place 12 of TR3, now the switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "start": [
+    70.0524,
+    -65.3
+   ],
+   "end": [
+    69.9,
+    -65.3
+   ],
+   "width": 0.254,
+   "reason": "5.1 copper at the old place of C72 (the pad stood on the pin place 12 of TR3, now the switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(D18-K)",
+   "layer": "B.Cu",
+   "start": [
+    60.4,
+    -66.8
+   ],
+   "end": [
+    60.085,
+    -66.485
+   ],
+   "width": 1.016,
+   "reason": "5.1 stub at the old place of D18's cathode pad"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/HEATER_HI_DRV",
+   "layer": "B.Cu",
+   "start": [
+    -20.433,
+    -62.567
+   ],
+   "end": [
+    -19.807,
+    -62.567
+   ],
+   "width": 0.635,
+   "reason": "5.1 copper at the old places of the heater gate parts (moved to their FETs 2026-11-21)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/HEATER_HI_DRV",
+   "layer": "B.Cu",
+   "start": [
+    -21.005,
+    -65.107
+   ],
+   "end": [
+    -19.786,
+    -65.107
+   ],
+   "width": 0.635,
+   "reason": "5.1 copper at the old places of the heater gate parts (moved to their FETs 2026-11-21)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/HEATER_HI_DRV",
+   "layer": "B.Cu",
+   "start": [
+    -21.9,
+    -64.212
+   ],
+   "end": [
+    -21.005,
+    -65.107
+   ],
+   "width": 0.635,
+   "reason": "5.1 copper at the old places of the heater gate parts (moved to their FETs 2026-11-21)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/HEATER_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    -16.81,
+    -68.79
+   ],
+   "end": [
+    -16.378,
+    -68.79
+   ],
+   "width": 1.27,
+   "reason": "5.1 copper at the old places of the heater gate parts (moved to their FETs 2026-11-21)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/HEATER_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    -18.3,
+    -67.3
+   ],
+   "end": [
+    -16.81,
+    -68.79
+   ],
+   "width": 1.27,
+   "reason": "5.1 copper at the old places of the heater gate parts (moved to their FETs 2026-11-21)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/HEATER_LOW_DRV",
+   "layer": "B.Cu",
+   "start": [
+    -10.028,
+    -71.1
+   ],
+   "end": [
+    -7.996,
+    -71.1
+   ],
+   "width": 0.635,
+   "reason": "5.1 copper at the old places of the heater gate parts (moved to their FETs 2026-11-21)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/HEATER_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    -10.028,
+    -73.1
+   ],
+   "end": [
+    -10.342,
+    -73.414
+   ],
+   "width": 0.635,
+   "reason": "5.1 copper at the old places of the heater gate parts (moved to their FETs 2026-11-21)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/HEATER_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    -10.342,
+    -73.414
+   ],
+   "end": [
+    -10.342,
+    -74.432
+   ],
+   "width": 0.635,
+   "reason": "5.1 copper at the old places of the heater gate parts (moved to their FETs 2026-11-21)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/HEATER_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    -10.342,
+    -74.432
+   ],
+   "end": [
+    -10.342,
+    -74.632
+   ],
+   "width": 0.635,
+   "reason": "5.1 copper at the old places of the heater gate parts (moved to their FETs 2026-11-21)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/HEATER_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    -10.3,
+    -76.2
+   ],
+   "end": [
+    -11.0,
+    -75.5
+   ],
+   "width": 0.1524,
+   "reason": "5.1 copper at the old places of the heater gate parts (moved to their FETs 2026-11-21)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(D33-K)",
+   "layer": "B.Cu",
+   "start": [
+    -7.996,
+    -73.1
+   ],
+   "end": [
+    -7.742,
+    -73.354
+   ],
+   "width": 0.635,
+   "reason": "5.1 copper at the old places of the heater gate parts (moved to their FETs 2026-11-21)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(D33-K)",
+   "layer": "B.Cu",
+   "start": [
+    -7.742,
+    -73.354
+   ],
+   "end": [
+    -7.742,
+    -74.632
+   ],
+   "width": 0.635,
+   "reason": "5.1 copper at the old places of the heater gate parts (moved to their FETs 2026-11-21)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    -10.2238,
+    -77.9272
+   ],
+   "end": [
+    -10.3,
+    -77.9272
+   ],
+   "width": 0.1524,
+   "reason": "5.1 copper at the old places of the heater gate parts (moved to their FETs 2026-11-21)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    -10.3,
+    -77.851
+   ],
+   "end": [
+    -10.3,
+    -77.9272
+   ],
+   "width": 0.1524,
+   "reason": "5.1 copper at the old places of the heater gate parts (moved to their FETs 2026-11-21)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    -10.3,
+    -78.0034
+   ],
+   "end": [
+    -10.3,
+    -77.9272
+   ],
+   "width": 0.1524,
+   "reason": "5.1 copper at the old places of the heater gate parts (moved to their FETs 2026-11-21)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    -10.3762,
+    -77.9272
+   ],
+   "end": [
+    -10.3,
+    -77.9272
+   ],
+   "width": 0.1524,
+   "reason": "5.1 copper at the old places of the heater gate parts (moved to their FETs 2026-11-21)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    -9.5708,
+    -61.2098
+   ],
+   "end": [
+    -9.5708,
+    -61.932
+   ],
+   "width": 0.508,
+   "reason": "5.1 15V stub on C52 pin 1 (the rest of it went in stage 3c), at the GND via of C52 pin 2"
   }
  ]
 }

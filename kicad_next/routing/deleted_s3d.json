@@ -1029,6 +1029,183 @@
    ],
    "width": 0.1524,
    "reason": "5.1 copper at the old place of R79"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_SEC_DHB_LO",
+   "layer": "In2.Signal_HV",
+   "start": [
+    68.7,
+    -60.182
+   ],
+   "end": [
+    69.605,
+    -59.277
+   ],
+   "width": 0.2032,
+   "reason": "5.1 end of the gate-signal lane at the old place of R75 / R76 (through the pin place 11 of TR3)"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "start": [
+    71.3576,
+    -61.496
+   ],
+   "end": [
+    71.51,
+    -61.496
+   ],
+   "width": 0.254,
+   "reason": "5.1 copper at the old place of R75 / R76 (0.7 mm from the pin place 11 of TR3, now the switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "start": [
+    71.51,
+    -61.3436
+   ],
+   "end": [
+    71.51,
+    -61.496
+   ],
+   "width": 0.254,
+   "reason": "5.1 copper at the old place of R75 / R76 (0.7 mm from the pin place 11 of TR3, now the switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "start": [
+    71.51,
+    -61.6484
+   ],
+   "end": [
+    71.51,
+    -61.496
+   ],
+   "width": 0.254,
+   "reason": "5.1 copper at the old place of R75 / R76 (0.7 mm from the pin place 11 of TR3, now the switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "start": [
+    71.6624,
+    -61.496
+   ],
+   "end": [
+    71.51,
+    -61.496
+   ],
+   "width": 0.254,
+   "reason": "5.1 copper at the old place of R75 / R76 (0.7 mm from the pin place 11 of TR3, now the switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "start": [
+    71.3576,
+    -60.226
+   ],
+   "end": [
+    71.51,
+    -60.226
+   ],
+   "width": 0.254,
+   "reason": "5.1 copper at the old place of R75 / R76 (0.7 mm from the pin place 11 of TR3, now the switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "start": [
+    71.51,
+    -60.0736
+   ],
+   "end": [
+    71.51,
+    -60.226
+   ],
+   "width": 0.254,
+   "reason": "5.1 copper at the old place of R75 / R76 (0.7 mm from the pin place 11 of TR3, now the switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "start": [
+    71.51,
+    -60.3784
+   ],
+   "end": [
+    71.51,
+    -60.226
+   ],
+   "width": 0.254,
+   "reason": "5.1 copper at the old place of R75 / R76 (0.7 mm from the pin place 11 of TR3, now the switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "start": [
+    71.6624,
+    -60.226
+   ],
+   "end": [
+    71.51,
+    -60.226
+   ],
+   "width": 0.254,
+   "reason": "5.1 copper at the old place of R75 / R76 (0.7 mm from the pin place 11 of TR3, now the switch node)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "In2.Signal_HV",
+   "start": [
+    68.975,
+    -61.452
+   ],
+   "end": [
+    68.34,
+    -61.452
+   ],
+   "width": 0.2032,
+   "reason": "5.1 end of the gate-signal lane at the old place of R75 / R76 (through the pin place 11 of TR3)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "In2.Signal_HV",
+   "start": [
+    70.88,
+    -59.547
+   ],
+   "end": [
+    68.975,
+    -61.452
+   ],
+   "width": 0.2032,
+   "reason": "5.1 end of the gate-signal lane at the old place of R75 / R76 (through the pin place 11 of TR3)"
+  },
+  {
+   "kind": "via",
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    68.34,
+    -61.452
+   ],
+   "width": 0.5,
+   "drill": 0.3,
+   "reason": "5.1 end of the gate-signal lane at the old place of R75 / R76 (through the pin place 11 of TR3)"
   }
  ]
 }

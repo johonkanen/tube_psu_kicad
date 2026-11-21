@@ -1,5 +1,5 @@
 {
- "note": "user placement 2026-11-21: footprints moved by the user in the KiCad GUI (mm, degrees). Source of the 'move' steps of tools/next/route_s3a_power.py group 'user placement' - every rebuild puts the parts here again. Edit this file to change a place.",
+ "note": "user placement 2026-11-21: footprints moved by the user in the KiCad GUI, and (entries with \"by\": \"agent\") moves the user approved the same day for the two follow-ups - TR3 secondary finish on pins 11 / 12 and the heater gate parts following their FETs (mm, degrees). Source of the 'move' steps of tools/next/route_s3a_power.py group 'user placement' - every rebuild puts the parts here again. Edit this file to change a place.",
  "moves": [
   {
    "ref": "C16",
@@ -96,6 +96,210 @@
     "side": "F"
    },
    "why": "same (swapped with Q10)"
+  },
+  {
+   "ref": "R75",
+   "frm": {
+    "x": 70.646,
+    "y": -61.496,
+    "rot": 180.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 73.2,
+    "y": -61.496,
+    "rot": 180.0,
+    "side": "B"
+   },
+   "why": "TR3 secondary finish on pins 11 / 12 (user decision 2026-11-21): 2.55 mm east of the pin column, pads 1.28 mm from the pad of pin 11",
+   "by": "agent"
+  },
+  {
+   "ref": "R76",
+   "frm": {
+    "x": 70.646,
+    "y": -60.226,
+    "rot": 180.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 73.2,
+    "y": -60.226,
+    "rot": 180.0,
+    "side": "B"
+   },
+   "why": "TR3 secondary finish on pins 11 / 12 (user decision 2026-11-21): moved with R75",
+   "by": "agent"
+  },
+  {
+   "ref": "C72",
+   "frm": {
+    "x": 68.325,
+    "y": -65.3,
+    "rot": 180.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 66.1,
+    "y": -65.0,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "why": "TR3 secondary finish on pins 11 / 12 (user decision 2026-11-21): 2.25 mm west and turned, 1.3 mm from the pad of pin 12, 15V_ISO_SEC pad beside D18's anode",
+   "by": "agent"
+  },
+  {
+   "ref": "D18",
+   "frm": {
+    "x": 62.45,
+    "y": -66.8,
+    "rot": 0.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 61.65,
+    "y": -66.8,
+    "rot": 0.0,
+    "side": "B"
+   },
+   "why": "TR3 secondary finish on pins 11 / 12 (user decision 2026-11-21): 0.8 mm west, room for C72 between its anode pad and pin 12",
+   "by": "agent"
+  },
+  {
+   "ref": "R24",
+   "frm": {
+    "x": -18.357,
+    "y": -62.567,
+    "rot": 0.0,
+    "side": "B"
+   },
+   "to": {
+    "x": -19.424,
+    "y": -73.794,
+    "rot": 0.0,
+    "side": "B"
+   },
+   "why": "heater gate parts follow their FET (user decision 2026-11-21): high-side group moved as Q11 was (-1.067, -11.227)",
+   "by": "agent"
+  },
+  {
+   "ref": "R59",
+   "frm": {
+    "x": -18.336,
+    "y": -65.107,
+    "rot": 0.0,
+    "side": "B"
+   },
+   "to": {
+    "x": -19.403,
+    "y": -76.334,
+    "rot": 0.0,
+    "side": "B"
+   },
+   "why": "heater gate parts follow their FET (user decision 2026-11-21): high-side group moved as Q11 was (-1.067, -11.227)",
+   "by": "agent"
+  },
+  {
+   "ref": "R36",
+   "frm": {
+    "x": -16.378,
+    "y": -67.926,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": -17.445,
+    "y": -79.153,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "why": "heater gate parts follow their FET (user decision 2026-11-21): high-side group moved as Q11 was (-1.067, -11.227)",
+   "by": "agent"
+  },
+  {
+   "ref": "D35",
+   "frm": {
+    "x": -14.47,
+    "y": -65.71,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": -15.537,
+    "y": -76.937,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "why": "heater gate parts follow their FET (user decision 2026-11-21): high-side group moved as Q11 was (-1.067, -11.227)",
+   "by": "agent"
+  },
+  {
+   "ref": "R37",
+   "frm": {
+    "x": -10.028,
+    "y": -72.1,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": -10.893,
+    "y": -65.1,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "why": "heater gate parts follow their FET (user decision 2026-11-21): low-side group moved (-0.865, +7.0) - Q10 moved (-0.865, +12.249), but C52 / R99 stand 5 mm further on; the group ends at Q10's gate pin",
+   "by": "agent"
+  },
+  {
+   "ref": "R31",
+   "frm": {
+    "x": -7.996,
+    "y": -72.1,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": -8.861,
+    "y": -65.1,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "why": "heater gate parts follow their FET (user decision 2026-11-21): low-side group moved (-0.865, +7.0) - Q10 moved (-0.865, +12.249), but C52 / R99 stand 5 mm further on; the group ends at Q10's gate pin",
+   "by": "agent"
+  },
+  {
+   "ref": "D33",
+   "frm": {
+    "x": -9.042,
+    "y": -74.632,
+    "rot": 180.0,
+    "side": "B"
+   },
+   "to": {
+    "x": -9.907,
+    "y": -67.632,
+    "rot": 180.0,
+    "side": "B"
+   },
+   "why": "heater gate parts follow their FET (user decision 2026-11-21): low-side group moved (-0.865, +7.0) - Q10 moved (-0.865, +12.249), but C52 / R99 stand 5 mm further on; the group ends at Q10's gate pin",
+   "by": "agent"
+  },
+  {
+   "ref": "R66",
+   "frm": {
+    "x": -10.3,
+    "y": -77.064,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": -11.165,
+    "y": -70.064,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "why": "heater gate parts follow their FET (user decision 2026-11-21): low-side group moved (-0.865, +7.0) - Q10 moved (-0.865, +12.249), but C52 / R99 stand 5 mm further on; the group ends at Q10's gate pin",
+   "by": "agent"
   }
  ]
 }

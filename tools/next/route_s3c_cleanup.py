@@ -136,7 +136,8 @@ HEATER = [
     *dels(HHS, B, "5.1 track end 0.17 mm from DRV3 pin 15; drawn again 0.6 mm shorter",
           (-18.3, -61.1, -18.3, -67.3)),
     *dels(HHS, B, "5.1 stub of the old driver footprint between DRV3 pins 14 / 15", (-18.7264, -60.3, -18.7264, -59.9)),
-    ("track", HHS, B, 1.27, [(-18.3, -67.3), (-18.3, -61.7)]),
+    # (2026-11-21: not drawn again - R36 moved to Q11 with the gate parts, the switch-node return of the high-side
+    # gate loop is drawn in route_s3a_power.py)
     *dels("15V", B, DANGLE + " (D11 cathode / R99, bootstrap)", (-11.933, -53.677, -14.723, -53.677),
           (-11.933, -53.677, -12.954, -54.698), (-10.832, -60.3968, -10.3838, -60.3968),
           (-10.3838, -60.3968, -9.5708, -61.2098)),

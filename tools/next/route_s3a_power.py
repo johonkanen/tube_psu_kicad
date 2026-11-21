@@ -27,12 +27,14 @@ VS = (0.6, 0.3)        # via of the low-current nets
 
 
 def user_moves():
-    """user placement 2026-11-21 (kicad_next/routing/moves_user.json): parts the user placed by hand in KiCad, as
-    'move' steps - the first thing every run of this script does, so no rebuild can undo them"""
+    """user placement 2026-11-21 (kicad_next/routing/moves_user.json): parts the user placed by hand in KiCad, and
+    the moves the user approved for the two follow-ups (entries with "by": "agent"), as 'move' steps - the first
+    thing every run of this script does, so no rebuild can undo them"""
     import json
     with open(os.path.join(R.PROJ, "routing", "moves_user.json")) as f:
         return [("move", m["ref"], m["to"]["x"], m["to"]["y"], dict(rot=m["to"]["rot"], side=m["to"]["side"]),
-                 "user placement 2026-11-21: " + m["why"]) for m in json.load(f)["moves"]]
+                 ("user-approved move 2026-11-21: " if m.get("by") == "agent" else "user placement 2026-11-21: ")
+                 + m["why"]) for m in json.load(f)["moves"]]
 
 
 def a(net, start, target, layers="FB", w=0.4, **o):
@@ -130,11 +132,32 @@ DAB_PRI = [
 # ------------------------------------------------------------------------------------------------ DAB secondary
 Q8_WHY = "room on B.Cu for the switch-node link of Q8 pin 2"
 Q8_OLD = "5.1 gate track of Q8 at the old place of R87 / R88 / D32 (gate loop: stage 3b)"
+C72_OLD = "5.1 copper at the old place of C72 (the pad stood on the pin place 12 of TR3, now the switch node)"
 DAB_SEC = [
     ("delzone", "Proteus F.Cu pour 26", OLD_TR3),
-    # switch node: Q21 pin 3 -> TR3 pins 13, 14 (2026-11-21, was 15, 16), right of the TR3 barrier band (x 54.5)
-    ("track", SWS, F, 1.6, [(54.675, -46.215), (54.675, -46.5), (55.45, -47.275), (55.45, -60.25), (67.0, -71.8),
-                            (69.5, -71.8), (69.5, -76.8)]),
+    # switch node: Q21 pin 3 -> TR3 pins 11, 12 (2026-11-21; was 15, 16, then 13, 14), right of the TR3 barrier band
+    # (x 54.5): down x 55.45 to y -56.1 (1.3 mm from the 15V_ISO_SEC via of DRV6 pin 11), 45 deg over DRV6 to
+    # y -61.8, east into pin 11, then up the pin column to pin 12. No via of another net within 1.2 mm of it: the
+    # vias of DRV6 pins 1 / 2 stand under the package north of y -59.5 (stage 3d), those of C72 south of y -64.4
+    ("track", SWS, F, 1.6, [(54.675, -46.215), (54.675, -46.5), (55.45, -47.275), (55.45, -56.1), (61.15, -61.8),
+                            (69.5, -61.8), (69.5, -66.8)]),
+    # C72 (15V_ISO_SEC / ISO_GND at D18's anode) stood on the pin place 12: turned and moved 2.25 mm west, D18 0.8 mm
+    # west (routing/moves_user.json). The 5.1 via / tracks of the old place go; one via per pad between the pads
+    # (15V_ISO_SEC into the In3 pour, ISO_GND into the planes), 15V_ISO_SEC on to D18's anode
+    *[("delete", "15V_ISO_SEC", B, *sg, C72_OLD) for sg in (
+        (66.689, -64.119, 66.689, -65.135), (66.689, -65.135, 66.689, -65.3), (66.689, -65.3, 66.689, -66.4),
+        (66.7504, -65.3, 66.689, -65.3), (66.7504, -65.3, 66.7504, -64.9), (66.689, -66.4, 66.289, -66.8),
+        (66.289, -66.8, 64.5, -66.8))],
+    ("delvia", "15V_ISO_SEC", 66.689, -64.119, C72_OLD),
+    *[("delete", "ISO_GND", B, *sg, C72_OLD) for sg in (
+        (69.7476, -65.3, 69.9, -65.3), (69.9, -65.1476, 69.9, -65.3), (69.9, -65.4524, 69.9, -65.3),
+        (70.0524, -65.3, 69.9, -65.3))],
+    ("delete", "Net-(D18-K)", B, 60.4, -66.8, 60.085, -66.485, "5.1 stub at the old place of D18's cathode pad"),
+    ("via", "15V_ISO_SEC", 66.6, -64.9, *VS),
+    ("track", "15V_ISO_SEC", B, 0.4, [(66.6, -64.9), (66.6, -66.3)]),
+    ("track", "15V_ISO_SEC", B, 0.6, [(66.1, -66.56), (65.0, -66.8), (63.7, -66.8)]),
+    ("via", "ISO_GND", 65.6, -64.75, *VS),
+    ("track", "ISO_GND", B, 0.3, [(66.1, -63.44), (65.6, -63.94), (65.6, -64.75)]),
     # split-capacitor midpoint TR3 pins 9, 10 / C16.2 / C55.1
     ("zone", "TRANS_SEC_F", TSEC, F, [(68.3, -58.0), (72.0, -58.0), (73.4, -56.95), (78.8, -56.95), (78.8, -52.25),
                                       (73.4, -52.25), (72.0, -50.6), (68.3, -50.6)], dict(clearance=0.5, spoke=1.2)),
@@ -195,6 +218,8 @@ CAPM = "/06 Heaters/HEATER_CAP_MEAS"
 HHG = "/06 Heaters/HEATER_HI_GATE"
 CH_WHY = "heater split-capacitor balancing chain re-placed: DC+ via for R155 pin 1, 1.2 mm between its nodes"
 LD_OLD = "5.1 HEATER_LOW_DRV stub at R37 pin 1 towards the old via site (dangling: the In2 track lands east of R31 now)"
+GP_OLD = "5.1 copper at the old places of the heater gate parts (moved to their FETs 2026-11-21)"
+HID, LDRV, LG = "/06 Heaters/HEATER_HI_DRV", "/06 Heaters/HEATER_LOW_DRV", "/06 Heaters/HEATER_LOW_GATE"
 HEATER_LLC = [
     # stage 3a.2 (user 2026-11-20): C134 leaves the DC+ neck between the Q10 tab and U11
     ("move", "C134", -5.2, -81.2, dict(side="B", rot=90.0), "frees the DC+ neck to the heater split capacitors C42 / C49 / C20"),
@@ -213,34 +238,84 @@ HEATER_LLC = [
     # under Q11 to R30 pin 1 (drawn 2026-11-21: Q10 pin 3 lies between the DC+ tab and the switch-node tab)
     ("track", HC, F, 0.8, [(-16.02, -68.11), (-15.5, -68.6), (-12.8, -68.6)]),
     ("via", HC, -12.8, -68.6, *VP),
-    ("track", HC, B, 0.8, [(-12.8, -68.6), (-12.8, -78.8), (-11.2, -80.4)]),
-    # high-side gate: the gate parts R24 / R36 / D35 stayed at the old place of Q11 (now Q10's). B.Cu from D35 anode
-    # north under Q11, via in the switch-node column west of pin 3, F.Cu between the DC+ tab (1.4 mm) and pin 3
-    # (its own source, 0.3 mm - driver group DRV3) to pin 1: the gate runs beside its return all the way
-    ("track", HHG, B, 0.4, [(-14.47, -67.01), (-14.8, -67.6), (-14.8, -76.5), (-16.6, -78.3), (-17.6, -78.3)]),
-    ("via", HHG, -17.6, -78.3, *VS),
-    ("track", HHG, F, 0.3, [(-17.6, -78.3), (-11.56, -78.3), (-11.56, -79.85)]),
-    # low-side driver output: landing via east of R31 for the In2 track from DRV3 pin 10 (stage 3b) - the old via
-    # site at (-12.75, -69.64) is taken by the HEATER_CURRENT via above
-    ("delete", "/06 Heaters/HEATER_LOW_DRV", B, -9.647, -70.06, -10.028, -70.441, LD_OLD),
-    ("delete", "/06 Heaters/HEATER_LOW_DRV", B, -10.028, -70.441, -10.028, -71.1, LD_OLD),
-    ("track", "/06 Heaters/HEATER_LOW_DRV", B, 0.4, [(-7.996, -71.1), (-6.6, -71.1), (-6.2, -70.7)]),
-    ("via", "/06 Heaters/HEATER_LOW_DRV", -6.2, -70.7, *VS),
+    # (2026-11-21, gate parts at Q11: the trunk runs at x -11.2 below y -72.6, 2.9 mm east of the high-side gate node)
+    ("track", HC, B, 0.8, [(-12.8, -68.6), (-12.8, -71.0), (-11.2, -72.6), (-11.2, -80.4)]),
+    # ---- gate loops (2026-11-21): the gate parts follow their FETs (routing/moves_user.json) and both loops are
+    #      drawn here, nothing of them is left to the grid router of stage 3b
+    *[("delete", HID, B, *sg, GP_OLD) for sg in ((-20.433, -62.567, -19.807, -62.567), (-21.005, -65.107, -19.786, -65.107),
+                                                  (-21.9, -64.212, -21.005, -65.107))],
+    *[("delete", HHS, B, *sg, GP_OLD) for sg in ((-16.81, -68.79, -16.378, -68.79), (-18.3, -67.3, -16.81, -68.79))],
+    ("delete", LDRV, B, -10.028, -71.1, -7.996, -71.1, GP_OLD),
+    *[("delete", LG, B, *sg, GP_OLD) for sg in ((-10.028, -73.1, -10.342, -73.414), (-10.342, -73.414, -10.342, -74.432),
+                                                 (-10.342, -74.432, -10.342, -74.632), (-10.3, -76.2, -11.0, -75.5))],
+    *[("delete", "Net-(D33-K)", B, *sg, GP_OLD) for sg in ((-7.996, -73.1, -7.742, -73.354), (-7.742, -73.354, -7.742, -74.632))],
+    *[("delete", "GND", B, *sg, GP_OLD) for sg in ((-10.2238, -77.9272, -10.3, -77.9272), (-10.3, -77.851, -10.3, -77.9272),
+                                                    (-10.3, -78.0034, -10.3, -77.9272), (-10.3762, -77.9272, -10.3, -77.9272))],
+    # DRV3 high side at the driver: pin 14 (VSSA) and the bootstrap capacitor C25 each by a via into the switch-node
+    # copper of Q10's tab on F.Cu; pin 15 (output) leaves between the two vias and turns west below pin 14's via
+    ("track", HHS, B, 0.4, [(-19.172, -59.299), (-19.172, -61.0)]), ("via", HHS, -19.172, -61.0, *VS),
+    ("track", HHS, F, 0.5, [(-19.172, -61.0), (-18.0, -61.0), (-17.1, -61.9), (-16.2, -61.9)]),
+    ("via", HHS, -17.1, -61.9, *VS),
+    ("track", HHS, B, 0.4, [(-14.3, -61.175), (-16.375, -61.175), (-17.1, -61.9)]),
+    # HEATER_HI_DRV: B.Cu down the column between TR2 and Q10 / Q11 (1.28 mm from the 15V pad of C18) to R24 / R59,
+    # under the switch-node area of F.Cu; its return beside it on the same layer - a 0.5 mm switch-node track between
+    # the pads of R24 / R59, stitched to the F.Cu area at both ends, ending on R36 pin 2 at Q11's source pin
+    ("track", HID, B, 0.4, [(-17.902, -59.299), (-17.902, -61.35), (-18.452, -61.9), (-20.3, -61.9), (-20.8, -62.4),
+                            (-20.8, -76.334)]),
+    ("via", HHS, -19.42, -65.8, *VS),
+    ("track", HHS, B, 0.5, [(-19.42, -65.8), (-19.42, -79.0), (-18.44, -79.98), (-17.445, -79.98)]),
+    ("via", HHS, -18.44, -79.98, *VS),
+    # turn-off branch R59 -> D35
+    ("track", "Net-(D35-K)", B, 0.4, [(-17.94, -76.334), (-16.234, -76.334), (-15.537, -75.637)]),
+    # high-side gate: R24 pin 2 east round D35's cathode (as on 5.1) to the gate node R36 pin 1 / D35 anode, via 0.9 mm
+    # east of the anode pad (1.25 mm below the DC+ tab on F.Cu, 1.39 mm from the HEATER_CURRENT pad of R158 on B.Cu),
+    # F.Cu between the DC+ tab (1.4 mm) and the source pin to pin 1: D35 anode -> gate pin 5.5 mm (was 21 mm)
+    ("track", HHG, B, 0.4, [(-17.962, -73.794), (-14.906, -73.794), (-14.3, -74.4), (-14.3, -77.7), (-14.6, -78.0),
+                            (-14.6, -78.3)]),
+    ("track", HHG, B, 0.4, [(-17.445, -78.3), (-14.6, -78.3)]),
+    ("via", HHG, -14.6, -78.3, *VS),
+    ("track", HHG, F, 0.3, [(-14.6, -78.3), (-11.56, -78.3), (-11.56, -79.85)]),
+    # low side: HEATER_LOW_DRV lands on a via north of R37 / R31 (In2 track from DRV3 pin 10: stage 3b; 1.34 mm east of
+    # the switch-node tab on F.Cu - the via at (-6.2, -70.7) in the DC+ neck is gone)
+    ("delete", LDRV, B, -9.647, -70.06, -10.028, -70.441, LD_OLD),
+    ("delete", LDRV, B, -10.028, -70.441, -10.028, -71.1, LD_OLD),
+    ("via", LDRV, -9.2, -62.95, *VS),
+    ("track", LDRV, B, 0.4, [(-9.2, -62.95), (-9.2, -64.1)]),
+    ("track", LDRV, B, 0.5, [(-10.893, -64.1), (-8.861, -64.1)]),
+    ("track", "Net-(D33-K)", B, 0.4, [(-8.861, -66.1), (-8.607, -66.6), (-8.607, -67.632)]),
+    # low-side gate: R37 pin 2 -> D33 anode -> R66 pin 1 in one line, via 1.1 mm west of the anode beside the
+    # HEATER_CURRENT via of the source pin, F.Cu into pin 1: R37 pin 2 -> gate pin 3.7 mm (was 7 mm by the router)
+    ("track", LG, B, 0.4, [(-10.893, -66.1), (-11.207, -66.6), (-11.207, -67.632)]),
+    ("track", LG, B, 0.3, [(-11.2, -67.632), (-11.2, -69.239)]),
+    ("track", LG, B, 0.4, [(-11.207, -67.632), (-12.3, -67.632)]),
+    ("via", LG, -12.3, -67.632, *VS),
+    ("track", LG, F, 0.4, [(-12.3, -67.632), (-11.457, -68.112)]),
+    # C52 pin 2 (GND of DRV3's 15 V decoupling, under Q10's tab) hung on the B.Cu GND pour under Q10, which the gate
+    # parts cut up: track north of C52 pin 1 to a via 1.24 mm east of the switch-node tab (1.23 mm below R99 pin 1)
+    ("delete", "15V", B, -9.5708, -61.2098, -9.5708, -61.932, "5.1 15V stub on C52 pin 1 (the rest of it went in stage 3c), at the GND via of C52 pin 2"),
+    ("track", "GND", B, 0.3, [(-11.145, -61.932), (-11.145, -60.9), (-10.945, -60.7), (-9.3, -60.7)]),
+    ("via", "GND", -9.3, -60.7, *VS),
+    # R66 pin 2 -> the GND via east of Q10's gate pin
+    ("via", "GND", -10.05, -69.07, *VP),
+    ("track", "GND", B, 0.4, [(-11.165, -70.889), (-10.45, -70.889), (-10.05, -70.489), (-10.05, -69.07)]),
     # stage 3a.3 (user 2026-11-20): balancing chain DC+ - R155 - R156 - CAP_MEAS - R157 - R158 - HEATER_CURRENT
     # re-placed on B.Cu: R155 / R157 swap places (DC+ end over the free DC+ copper right of C20), R156 lies above
     # them, R158 goes left of the shunt R30; >= 1.2 mm between the chain nodes
     # (stage 3b step 0: the whole chain 1.5 mm further from the top edge - R156 pads 2.0 mm from it)
     ("move", "R155", -8.0, -84.88, {}, CH_WHY), ("move", "R157", -11.14, -84.88, {}, CH_WHY),
-    ("move", "R156", -9.57, -88.4, {}, CH_WHY), ("move", "R158", -13.5, -81.61, {}, CH_WHY),
+    ("move", "R156", -9.57, -88.4, {}, CH_WHY),
+    # (2026-11-21: R158 0.39 mm further north, its HEATER_CURRENT pad 1.39 mm from the high-side gate via)
+    ("move", "R158", -13.5, -82.0, {}, CH_WHY),
     ("track", "DC+", B, 0.4, [(-8.0, -83.42), (-8.4, -82.6), (-8.4, -82.0)]), ("via", "DC+", -8.4, -82.0, *VS),
     ("track", "Net-(R155-Pad2)", B, 0.4, [(-8.0, -86.34), (-8.11, -88.4)]),
     ("track", CAPM, B, 0.4, [(-11.14, -86.34), (-11.03, -88.4), (-12.7, -88.4)]),
     ("via", CAPM, -12.7, -88.4, *VS),
-    ("track", "Net-(R157-Pad2)", B, 0.4, [(-11.14, -83.42), (-13.5, -83.07)]),
-    ("track", HC, B, 0.4, [(-13.5, -80.15), (-12.8, -79.45), (-12.5, -79.1)]),
+    ("track", "Net-(R157-Pad2)", B, 0.4, [(-11.14, -83.42), (-13.5, -83.46)]),
+    ("track", HC, B, 0.4, [(-13.5, -80.54), (-11.2, -80.54)]),
     # HEATER_CURRENT B.Cu (R158 / R30 / pour 20) <-> F.Cu pour 24
     # (2026-11-21: the via 2 mm further west - Q11 pin 3, the switch node, stands at (-16.1, -79.9) now)
-    ("track", HC, B, 0.5, [(-13.5, -80.15), (-14.4, -80.6), (-15.4, -81.6), (-16.6, -81.6), (-17.8, -82.8)]),
+    # (2026-11-21: 1.3 mm clear of the switch-node pad of R36, which stands at Q11's source pin now)
+    ("track", HC, B, 0.5, [(-13.5, -80.54), (-14.9, -80.54), (-17.16, -82.8), (-17.8, -82.8)]),
     ("via", HC, -17.8, -82.8, *VP),
 ]
 
@@ -330,7 +405,7 @@ GROUNDS = [
     # (ISO2 pin 8: stage 3d, route_s3d_iso2.py - its ground leaves with the signal bundle, not past C98)
     gnd("C98.2", layers=F, margin=7, **FG), gnd("R125.2", layers=B),
     gnd((56.5, -17.0, "F.Cu"), layers=F), gnd((20.9, -12.36, "B.Cu"), layers=B, w=0.3),
-    gnd((-10.85, -70.17, "B.Cu"), layers=B),
+    # (the GND pour under Q10: via of R66 pin 2, heater group)
     # relay driver under RL1 (no plane over the mains input): tracks
     a("GND", "Q9.3", "C35.2", B, 0.4), a("GND", "C35.2", "R32.2", B, 0.4),
     # ISO_GND -> plane

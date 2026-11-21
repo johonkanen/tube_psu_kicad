@@ -14,6 +14,7 @@ went away shows up in check_board.py as a short / dangling track and is the rout
 The project file is left as it is. Idempotent; --check writes nothing and fails if something would change. Stops on KiCad's lock file.
 
 First use 2026-11-21: TR3 pins re-assigned (primary start 1+2 -> 4+5, secondary finish 15+16 -> 13+14).
+Second use 2026-11-21: TR3 secondary finish 13+14 -> 11+12.
 """
 import os
 import sys
