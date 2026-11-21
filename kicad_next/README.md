@@ -1103,6 +1103,47 @@ Open / for a decision:
 3. The 5.1 15V stub on B.Cu at x −7.41 (y −67.7 … −63.3, dangling, 0.55 mm east of R31) is still there.
 4. Points 3 and 4 of the list above are unchanged.
 
+### Stage 3g (2026-11-21): +3V3 of U11 drawn, UART TX / RX designed but not on the board
+
+Group "U11 +3V3" of `tools/next/route_s3e_j2.py` (applied on the current board, then `route_s2_planes.py`; no full
+rebuild): **+3V3 from C134 pin 1 (on the via of U11 pin 3) to C125 pin 1**, B.Cu 0.2 mm, 25.9 mm, no via, down the
+strip west of the UART island at x -4.68 (copper edge 8.2 mm from the secondary pads of U11 at x 3.625). Still open
+in +3V3: the bus lane (y -52.8) to C125 - a via does not fit on the lane inside the bundle (0.3 mm pitch) - and
+C125 to the U1 block (via at (5.8, -60.1)).
+
+**TX / RX (open point 1 of stage 3e) are not routed.** The route was laid out and dry-run as two inner lanes of the
+H4 bundle; it stops at one place, so nothing of it is on the board and the 5.1 stubs on B.Cu are still there.
+What was found (for the next block):
+
+- J2: In2 is open west of the header between the C63 lane (x 29.6) and the west pad column. F.Cu from pins 24 / 26
+  through the gaps 21 / 23 and 23 / 25 to vias at (31.3, -8.82) / (31.3, -7.55), In2 north at x 30.65 / 30.2
+  (between the C63 via (29.6, -12.2) and the GND via (31.62, -11.43), under the F.Cu piece of PFC_PWM1): no
+  warning in the dry run.
+- **Blocker: the neck at C56 pin 2** (GND, THT, (25.2, -17.2), pad 1.52 mm on every layer). Between that pad and
+  GPIO_BYPASS_RLY (x - y = 44.7) there is 0.87 mm; PFC_PWM1 (5.1 lane on In2, from J2 pin 19) uses it, and TX / RX
+  from pins 24 / 26 have to be on the bus side of PFC_PWM1. Two 0.15 mm lanes fit there (x - y = 44.265 / 43.83,
+  gaps 0.155 / 0.155 / 0.17 mm), three do not. PFC_PWM1 cannot go round the other side of the pad on In2 (the
+  `PFC CURRENT 3+` track at y -14.6 crosses) or on F.Cu (inside the DC+ pour "Proteus F.Cu pour 29"). Choices:
+  PFC_PWM1 through the neck on B.Cu above the two In2 lanes (two more vias in a gate-drive PWM line), or move C56
+  (more than 1 mm), or TX / RX on B.Cu past the neck.
+- North-west of the neck the corridor between PFC_PWM1 (x - y = 44.8) and the bus is 3.4 mm wide: diagonals
+  x - y = 47.8 / 47.37 (west of the +3V3 via (24.72, -23.96), 0.79 mm from the DC+ pad of C28 at (19.9, -30.2)),
+  jog at x 17.6 / 17.2, x - y = 51.85 / 51.42 between the GND via (16.85, -36.28) and the 15V vias (15.24, -35.02)
+  / (14.63, -38.27), then vertical at x 11.177 / 10.872 (r 5.335 / 5.03 from H4) into the bundle.
+- Bundle: the nine lanes go out by two pitches (0.61 mm) round the hole only; the west diagonals stay, TX / RX
+  take diagonals inside the GPIO_BYPASS_RLY one (x - y = 50.457 / 50.026) to lanes y -51.87 / -51.44. The C63
+  lane turns at (8.8, -49.1) -> (11.0, -46.9). The 5V via needs a new site: (11.0, -48.3) is 0.09 mm from the GND
+  pad of C120, and the first 1.15 mm of the kept 5V lane y -47.454 has to be drawn again from x 11.85.
+- U11 end: vias at (-5.52, -51.6) (RX; 0.43 mm from the GPIO lane is too close, hence y -51.6) and (-4.2, -50.7)
+  (TX), south of the F.Cu DC+ pour (edge y -53.5); B.Cu north at x -5.52 / -5.1 (east of the GND via of pin 7 at
+  (-6.15, -74.83)), vias at (-6.15, -77.365) / (-6.15, -78.635), F.Cu 1.5 mm to pins 5 / 4. No warning there.
+
+| | before | after |
+|---|---|---|
+| unconnected | 22 | **21** |
+| clearance markers, first error per track | 6 | 6 (the same six) |
+| courtyard overlaps | 130 | 130 |
+
 ## Footprints and 3D models (phase 3, 2026-11-18)
 
 Regenerate: `python3 tools/next/gen_next_footprints.py`, `tools/p2k/bin/kicad_env.sh python3

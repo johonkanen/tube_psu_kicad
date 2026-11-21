@@ -251,8 +251,17 @@ R77_5V = [
     t(P5, I2, 0.25, [(4.33, -50.75), (C5 + Y5, Y5), (-15.58, Y5), (-19.7, -52.7), (-19.7, -51.29)]),
 ]
 
+# ================================================================================================ U11 +3V3
+# (stage 3g) +3V3 of U11 pin 3 (via at (-6.15, -79.91) and C134 pin 1, stage 3a) from C134 pin 1 on B.Cu down the strip west of the UART island
+# (x -4.68: copper edge 8.2 mm from the secondary pads of U11 at x 3.625) to C125 pin 1. RX / TX get x -5.52 /
+# -5.1 of the same strip (not drawn yet: README "Stage 3g").
+U11_3V3 = [
+    t("+3V3", B, W, [(-5.2, -80.42), (-4.68, -79.9), (-4.68, -60.2), (-3.655, -59.175),
+                     (0.4, -59.175)]),
+]
+
 GROUPS = [("J2 analog escapes", ANALOG), ("control bus round H4", BUNDLE), ("DRV3 inputs", DRV3),
-          ("ISO1 pin 7", ISO1), ("DRV5 inputs", DRV5), ("R77 / 5V link", R77_5V)]
+          ("ISO1 pin 7", ISO1), ("DRV5 inputs", DRV5), ("R77 / 5V link", R77_5V), ("U11 +3V3", U11_3V3)]
 
 if __name__ == "__main__":
     R.RELAX_OWN_DOMAIN = True
