@@ -5759,14 +5759,14 @@
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
-		(at 170.18 41.91 0)
+		(at 170.18 41.91 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c8c596a4-ebbe-5e27-a71b-57639f6eb53b")
-		(property "Reference" "R147"
+		(uuid "1779aeff-38d2-5794-a237-39797400bdee")
+		(property "Reference" "R150"
 			(at 174.92 40.64 0)
 			(effects
 				(font
@@ -5783,7 +5783,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
-			(at 168.402 41.91 0)
+			(at 171.958 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5819,15 +5819,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "cf01357d-89c2-5603-a0ab-5ab5ba9b3194")
+			(uuid "63a7fc62-528d-50f2-a535-9c7d9abad951")
 		)
 		(pin "2"
-			(uuid "ab745a41-e7b6-5077-8c38-5e2babf01c54")
+			(uuid "9c2c048d-83a1-5e9b-93c6-5a4a97831183")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
-					(reference "R147")
+					(reference "R150")
 					(unit 1)
 				)
 			)
@@ -5900,14 +5900,14 @@
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
-		(at 170.18 49.53 0)
+		(at 170.18 49.53 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "5688a629-2e6b-5f84-a118-174bfc1d5962")
-		(property "Reference" "R148"
+		(uuid "a75328df-6239-5121-bfea-c509b5f596c2")
+		(property "Reference" "R149"
 			(at 174.92 48.26 0)
 			(effects
 				(font
@@ -5924,7 +5924,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
-			(at 168.402 49.53 0)
+			(at 171.958 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5952,88 +5952,6 @@
 		)
 		(property "LCSC" "C17956"
 			(at 170.18 49.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "04e1bd1b-6f16-5ef5-bf60-aa4b82ee3c47")
-		)
-		(pin "2"
-			(uuid "7a9ba802-1b0b-501d-80b6-50b6dd84debd")
-		)
-		(instances
-			(project "tube_psu_5_2"
-				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
-					(reference "R148")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(junction
-		(at 170.18 53.34)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "9a165754-c1ea-5e79-80c7-ea7522c4ed96")
-	)
-	(symbol
-		(lib_id "tube_psu_next:R")
-		(at 170.18 69.85 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "a75328df-6239-5121-bfea-c509b5f596c2")
-		(property "Reference" "R149"
-			(at 174.92 68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "220k"
-			(at 174.92 71.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
-			(at 168.402 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 170.18 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 170.18 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C17956"
-			(at 170.18 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6056,6 +5974,88 @@
 			)
 		)
 	)
+	(junction
+		(at 170.18 53.34)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9a165754-c1ea-5e79-80c7-ea7522c4ed96")
+	)
+	(symbol
+		(lib_id "tube_psu_next:R")
+		(at 170.18 69.85 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5688a629-2e6b-5f84-a118-174bfc1d5962")
+		(property "Reference" "R148"
+			(at 174.92 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "220k"
+			(at 174.92 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 171.958 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 170.18 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 170.18 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C17956"
+			(at 170.18 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "04e1bd1b-6f16-5ef5-bf60-aa4b82ee3c47")
+		)
+		(pin "2"
+			(uuid "7a9ba802-1b0b-501d-80b6-50b6dd84debd")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
+					(reference "R148")
+					(unit 1)
+				)
+			)
+		)
+	)
 	(wire
 		(pts
 			(xy 170.18 53.34) (xy 170.18 66.04)
@@ -6068,14 +6068,14 @@
 	)
 	(symbol
 		(lib_id "tube_psu_next:R")
-		(at 170.18 77.47 0)
+		(at 170.18 77.47 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "1779aeff-38d2-5794-a237-39797400bdee")
-		(property "Reference" "R150"
+		(uuid "c8c596a4-ebbe-5e27-a71b-57639f6eb53b")
+		(property "Reference" "R147"
 			(at 174.92 76.2 0)
 			(effects
 				(font
@@ -6092,7 +6092,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
-			(at 168.402 77.47 0)
+			(at 171.958 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6128,15 +6128,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "63a7fc62-528d-50f2-a535-9c7d9abad951")
+			(uuid "cf01357d-89c2-5603-a0ab-5ab5ba9b3194")
 		)
 		(pin "2"
-			(uuid "9c2c048d-83a1-5e9b-93c6-5a4a97831183")
+			(uuid "ab745a41-e7b6-5077-8c38-5e2babf01c54")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/75114165-edbc-4990-a42e-1d9c53861b3e"
-					(reference "R150")
+					(reference "R147")
 					(unit 1)
 				)
 			)

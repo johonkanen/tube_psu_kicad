@@ -471,6 +471,36 @@
    "width": 0.5,
    "drill": 0.3,
    "reason": "5.1 15V via 0.11 mm from the D10 anode pad; moved 0.44 mm"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/HEATER_LOW_DRV",
+   "layer": "B.Cu",
+   "start": [
+    -9.647,
+    -70.06
+   ],
+   "end": [
+    -10.028,
+    -70.441
+   ],
+   "width": 0.635,
+   "reason": "5.1 HEATER_LOW_DRV stub at R37 pin 1 towards the old via site (dangling: the In2 track lands east of R31 now)"
+  },
+  {
+   "kind": "segment",
+   "net": "/06 Heaters/HEATER_LOW_DRV",
+   "layer": "B.Cu",
+   "start": [
+    -10.028,
+    -70.441
+   ],
+   "end": [
+    -10.028,
+    -71.1
+   ],
+   "width": 0.635,
+   "reason": "5.1 HEATER_LOW_DRV stub at R37 pin 1 towards the old via site (dangling: the In2 track lands east of R31 now)"
   }
  ]
 }

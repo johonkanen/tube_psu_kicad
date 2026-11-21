@@ -1,0 +1,357 @@
+{
+ "note": "copper the user moved by hand in KiCad on 2026-11-21 together with C47 / C54 / Q11 (copies of stage-3a / 3b copper at new places, not known to the stage scripts), deleted once on 2026-11-21 and routed again by the scripts (mm). Also listed: 12 pieces of stage-3a copper at C16 / C55 that KiCad re-netted (see their reason). The other copper of the stage scripts that no longer fitted the moved parts is not listed here: it is removed and rebuilt by every run of its script.",
+ "deleted": [
+  {
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    20.88,
+    -72.8475
+   ],
+   "end": [
+    20.88,
+    -73.6475
+   ],
+   "width": 0.4,
+   "reason": "stage-3a DC+ copper moved by the user with C47 (the 1.5 mm feed, now at y -75.21, is drawn again there by route_s3a_power.py; the via of R143 is routed again)"
+  },
+  {
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    39.93,
+    -75.21
+   ],
+   "end": [
+    23.83,
+    -75.21
+   ],
+   "width": 1.5,
+   "reason": "stage-3a DC+ copper moved by the user with C47 (the 1.5 mm feed, now at y -75.21, is drawn again there by route_s3a_power.py; the via of R143 is routed again)"
+  },
+  {
+   "kind": "via",
+   "net": "DC+",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    20.88,
+    -72.8475
+   ],
+   "width": 0.8,
+   "reason": "stage-3a DC+ copper moved by the user with C47 (the 1.5 mm feed, now at y -75.21, is drawn again there by route_s3a_power.py; the via of R143 is routed again)"
+  },
+  {
+   "kind": "segment",
+   "net": "/07 DHB/DHB_CAP",
+   "layer": "F.Cu",
+   "start": [
+    21.48,
+    -64.8475
+   ],
+   "end": [
+    21.48,
+    -65.6475
+   ],
+   "width": 0.4,
+   "reason": "stage-3a via / stub of a balancing resistor, moved by the user with C47 / C54 (14.8 mm from its B.Cu track): routed again by route_s3a_power.py"
+  },
+  {
+   "kind": "segment",
+   "net": "/07 DHB/DHB_CAP",
+   "layer": "F.Cu",
+   "start": [
+    25.88,
+    -67.7725
+   ],
+   "end": [
+    25.28,
+    -68.3725
+   ],
+   "width": 0.4,
+   "reason": "stage-3a via / stub of a balancing resistor, moved by the user with C47 / C54 (14.8 mm from its B.Cu track): routed again by route_s3a_power.py"
+  },
+  {
+   "kind": "via",
+   "net": "/07 DHB/DHB_CAP",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    25.88,
+    -67.7725
+   ],
+   "width": 0.8,
+   "reason": "stage-3a via / stub of a balancing resistor, moved by the user with C47 / C54 (14.8 mm from its B.Cu track): routed again by route_s3a_power.py"
+  },
+  {
+   "kind": "via",
+   "net": "/07 DHB/DHB_CAP",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    21.48,
+    -64.8475
+   ],
+   "width": 0.8,
+   "reason": "stage-3a via / stub of a balancing resistor, moved by the user with C47 / C54 (14.8 mm from its B.Cu track): routed again by route_s3a_power.py"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "F.Cu",
+   "start": [
+    26.08,
+    -60.8725
+   ],
+   "end": [
+    25.28,
+    -60.8725
+   ],
+   "width": 0.4,
+   "reason": "stage-3a via of R146 moved by the user with C54: routed again by route_s3a_power.py"
+  },
+  {
+   "kind": "via",
+   "net": "DHB_CURRENT",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    26.08,
+    -60.8725
+   ],
+   "width": 0.8,
+   "reason": "stage-3a via of R146 moved by the user with C54: routed again by route_s3a_power.py"
+  },
+  {
+   "kind": "via",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    25.53,
+    -58.19
+   ],
+   "width": 0.6,
+   "reason": "stage-3b Kelvin via of DHB_CURRENT moved with C54 onto C92 pad 2 and re-netted by KiCad: the Kelvin track starts at C54 pin 2 now (route_s3b_signals.py)"
+  },
+  {
+   "kind": "via",
+   "net": "HEATER_CURRENT",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    -12.85,
+    -70.87
+   ],
+   "width": 0.8,
+   "reason": "stage-3a GND via / stub at (-12.85, -70.87), re-netted by KiCad when Q11's DC+ tab was put on it (short): the ground via is placed again by route_s3a_power.py"
+  },
+  {
+   "kind": "segment",
+   "net": "HEATER_CURRENT",
+   "layer": "B.Cu",
+   "start": [
+    -10.85,
+    -70.17
+   ],
+   "end": [
+    -12.15,
+    -70.17
+   ],
+   "width": 0.4,
+   "reason": "stage-3a GND via / stub at (-12.85, -70.87), re-netted by KiCad when Q11's DC+ tab was put on it (short): the ground via is placed again by route_s3a_power.py"
+  },
+  {
+   "kind": "segment",
+   "net": "HEATER_CURRENT",
+   "layer": "B.Cu",
+   "start": [
+    -12.15,
+    -70.17
+   ],
+   "end": [
+    -12.85,
+    -70.87
+   ],
+   "width": 0.4,
+   "reason": "stage-3a GND via / stub at (-12.85, -70.87), re-netted by KiCad when Q11's DC+ tab was put on it (short): the ground via is placed again by route_s3a_power.py"
+  },
+  {
+   "kind": "zone",
+   "zone": "S3A_DHB_CAP_F",
+   "net": "/07 DHB/DHB_CAP",
+   "layer": "F.Cu",
+   "bbox": [
+    20.18,
+    -73.21,
+    30.53,
+    -65.31
+   ],
+   "reason": "outline moved by the user with C47 / C54 (was x 20.35 ... 30.7, y -88.0 ... -80.1); replaced by the zone of route_s3a_power.py at the user's place (x 20.18 ... 30.9, y -73.2 ... -65.3, pins 4 / 5)"
+  },
+  {
+   "kind": "segment",
+   "net": "420V",
+   "layer": "F.Cu",
+   "start": [
+    76.1,
+    -47.9625
+   ],
+   "end": [
+    75.1,
+    -47.9625
+   ],
+   "width": 1.0,
+   "reason": "stage-3a copper of eb497bb at the old pads of C16 / C55 (420V feed of C16, ISO_GND link of C55, vias of R147 / R150); KiCad gave it the net of the swapped pad it touched, so the stage-3a strip no longer found it. Deleted once; route_s3a_power.py routes these connections again"
+  },
+  {
+   "kind": "segment",
+   "net": "420V",
+   "layer": "F.Cu",
+   "start": [
+    75.1,
+    -47.9625
+   ],
+   "end": [
+    73.6,
+    -49.4625
+   ],
+   "width": 1.0,
+   "reason": "stage-3a copper of eb497bb at the old pads of C16 / C55 (420V feed of C16, ISO_GND link of C55, vias of R147 / R150); KiCad gave it the net of the swapped pad it touched, so the stage-3a strip no longer found it. Deleted once; route_s3a_power.py routes these connections again"
+  },
+  {
+   "kind": "segment",
+   "net": "420V",
+   "layer": "F.Cu",
+   "start": [
+    80.2,
+    -47.7625
+   ],
+   "end": [
+    78.5,
+    -47.7625
+   ],
+   "width": 0.4,
+   "reason": "stage-3a copper of eb497bb at the old pads of C16 / C55 (420V feed of C16, ISO_GND link of C55, vias of R147 / R150); KiCad gave it the net of the swapped pad it touched, so the stage-3a strip no longer found it. Deleted once; route_s3a_power.py routes these connections again"
+  },
+  {
+   "kind": "via",
+   "net": "420V",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    73.6,
+    -49.4625
+   ],
+   "width": 0.8,
+   "reason": "stage-3a copper of eb497bb at the old pads of C16 / C55 (420V feed of C16, ISO_GND link of C55, vias of R147 / R150); KiCad gave it the net of the swapped pad it touched, so the stage-3a strip no longer found it. Deleted once; route_s3a_power.py routes these connections again"
+  },
+  {
+   "kind": "via",
+   "net": "420V",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    80.2,
+    -47.7625
+   ],
+   "width": 0.8,
+   "reason": "stage-3a copper of eb497bb at the old pads of C16 / C55 (420V feed of C16, ISO_GND link of C55, vias of R147 / R150); KiCad gave it the net of the swapped pad it touched, so the stage-3a strip no longer found it. Deleted once; route_s3a_power.py routes these connections again"
+  },
+  {
+   "kind": "segment",
+   "net": "420V",
+   "layer": "B.Cu",
+   "start": [
+    80.2,
+    -46.8625
+   ],
+   "end": [
+    80.2,
+    -47.7625
+   ],
+   "width": 0.4,
+   "reason": "stage-3a copper of eb497bb at the old pads of C16 / C55 (420V feed of C16, ISO_GND link of C55, vias of R147 / R150); KiCad gave it the net of the swapped pad it touched, so the stage-3a strip no longer found it. Deleted once; route_s3a_power.py routes these connections again"
+  },
+  {
+   "kind": "segment",
+   "net": "420V",
+   "layer": "B.Cu",
+   "start": [
+    79.7,
+    -46.3625
+   ],
+   "end": [
+    80.2,
+    -46.8625
+   ],
+   "width": 0.4,
+   "reason": "stage-3a copper of eb497bb at the old pads of C16 / C55 (420V feed of C16, ISO_GND link of C55, vias of R147 / R150); KiCad gave it the net of the swapped pad it touched, so the stage-3a strip no longer found it. Deleted once; route_s3a_power.py routes these connections again"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_GND",
+   "layer": "F.Cu",
+   "start": [
+    76.1,
+    -61.2375
+   ],
+   "end": [
+    78.1,
+    -61.2375
+   ],
+   "width": 1.2,
+   "reason": "stage-3a copper of eb497bb at the old pads of C16 / C55 (420V feed of C16, ISO_GND link of C55, vias of R147 / R150); KiCad gave it the net of the swapped pad it touched, so the stage-3a strip no longer found it. Deleted once; route_s3a_power.py routes these connections again"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_GND",
+   "layer": "F.Cu",
+   "start": [
+    78.1,
+    -61.2375
+   ],
+   "end": [
+    81.3,
+    -58.0375
+   ],
+   "width": 1.2,
+   "reason": "stage-3a copper of eb497bb at the old pads of C16 / C55 (420V feed of C16, ISO_GND link of C55, vias of R147 / R150); KiCad gave it the net of the swapped pad it touched, so the stage-3a strip no longer found it. Deleted once; route_s3a_power.py routes these connections again"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_GND",
+   "layer": "F.Cu",
+   "start": [
+    76.1,
+    -62.7375
+   ],
+   "end": [
+    76.1,
+    -61.9375
+   ],
+   "width": 0.4,
+   "reason": "stage-3a copper of eb497bb at the old pads of C16 / C55 (420V feed of C16, ISO_GND link of C55, vias of R147 / R150); KiCad gave it the net of the swapped pad it touched, so the stage-3a strip no longer found it. Deleted once; route_s3a_power.py routes these connections again"
+  },
+  {
+   "kind": "via",
+   "net": "ISO_GND",
+   "layer": "F.Cu - B.Cu",
+   "start": [
+    76.1,
+    -62.7375
+   ],
+   "width": 0.8,
+   "reason": "stage-3a copper of eb497bb at the old pads of C16 / C55 (420V feed of C16, ISO_GND link of C55, vias of R147 / R150); KiCad gave it the net of the swapped pad it touched, so the stage-3a strip no longer found it. Deleted once; route_s3a_power.py routes these connections again"
+  },
+  {
+   "kind": "segment",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "start": [
+    76.1,
+    -60.9375
+   ],
+   "end": [
+    76.1,
+    -62.7375
+   ],
+   "width": 0.4,
+   "reason": "stage-3a copper of eb497bb at the old pads of C16 / C55 (420V feed of C16, ISO_GND link of C55, vias of R147 / R150); KiCad gave it the net of the swapped pad it touched, so the stage-3a strip no longer found it. Deleted once; route_s3a_power.py routes these connections again"
+  }
+ ]
+}

@@ -111,17 +111,18 @@ DAB_PRI = [
                                                      (44.05, -40.95), (33.2, -40.95), (33.2, -50.6), (28.3, -50.6)],
      dict(clearance=0.5, spoke=1.2)),
     # DC+ from the high-side drain Q19 pin 2 to the split capacitor C47: north of the switch-node strip, west of
-    # the TR3 barrier band (x 42.5), under TR3, along the top edge
+    # the TR3 barrier band (x 42.5), under TR3, then west between the (clipped) pin 3 and pin 4 to C47 pin 1
+    # (user placement 2026-11-21: the user's track at y -75.21; was along the top edge to the old place of C47)
     ("track", "DC+", F, 0.75, [(45.62, -41.95), (45.62, -44.6)]),
     ("track", "DC+", F, 0.8, [(45.62, -44.6), (45.62, -47.3), (41.5, -47.3)]),
-    ("track", "DC+", F, 1.5, [(41.5, -47.3), (41.5, -88.6), (40.1, -90.0), (24.0, -90.0)]),
-    # split-capacitor midpoint C47.2 / C54.1 / TR3 pins 1, 2
-    ("zone", "DHB_CAP_F", CAP, F, [(20.35, -84.9), (27.5, -84.9), (27.5, -88.0), (30.7, -88.0), (30.7, -80.1),
-                                   (20.35, -80.1)], dict(clearance=0.5, spoke=1.2)),
+    ("track", "DC+", F, 1.5, [(41.5, -47.3), (41.5, -75.21), (23.83, -75.21)]),
+    # split-capacitor midpoint C47.2 / C54.1 / TR3 pins 4, 5 (the user's outline of 2026-11-21, 0.4 mm wider at the pins)
+    ("zone", "DHB_CAP_F", CAP, F, [(20.18, -70.1), (27.3, -70.1), (27.3, -73.2), (30.9, -73.2), (30.9, -65.3),
+                                   (20.18, -65.3)], dict(clearance=0.5, spoke=1.2)),
     # low side: Q7 source / C67 (5.1 pour 23) -> C54.2, in the area of the removed pour 22
-    ("zone", "DHB_CURRENT_F", "DHB_CURRENT", F, [(20.35, -76.9), (25.75, -76.9), (25.75, -49.3), (28.2, -49.3),
+    ("zone", "DHB_CURRENT_F", "DHB_CURRENT", F, [(20.35, -62.1), (25.75, -62.1), (25.75, -49.3), (28.2, -49.3),
                                                  (28.2, -47.6), (20.35, -47.6)], dict(clearance=0.5)),
-    # balancing resistors under the capacitors (B.Cu): one via per capacitor terminal
+    # balancing resistors (B.Cu, still at the old place of C47 / C54, 14.8 mm north): one via per capacitor terminal
     a("DC+", "R143.1", "C47.1", "FB", 0.4, via=VP), a(CAP, "R144.2", "C47.2", "FB", 0.4, via=VP),
     a(CAP, "R145.1", "C54.1", "FB", 0.4, via=VP), a("DHB_CURRENT", "R146.2", "C54.2", "FB", 0.4, via=VP),
 ]
@@ -131,15 +132,24 @@ Q8_WHY = "room on B.Cu for the switch-node link of Q8 pin 2"
 Q8_OLD = "5.1 gate track of Q8 at the old place of R87 / R88 / D32 (gate loop: stage 3b)"
 DAB_SEC = [
     ("delzone", "Proteus F.Cu pour 26", OLD_TR3),
-    # switch node: Q21 pin 3 -> TR3 pins 15, 16, right of the TR3 barrier band (x 54.5)
-    ("track", SWS, F, 1.6, [(54.675, -46.215), (54.675, -46.5), (55.45, -47.275), (55.45, -64.0), (66.5, -75.05),
-                            (69.5, -78.05), (69.5, -86.8)]),
+    # switch node: Q21 pin 3 -> TR3 pins 13, 14 (2026-11-21, was 15, 16), right of the TR3 barrier band (x 54.5)
+    ("track", SWS, F, 1.6, [(54.675, -46.215), (54.675, -46.5), (55.45, -47.275), (55.45, -60.25), (67.0, -71.8),
+                            (69.5, -71.8), (69.5, -76.8)]),
     # split-capacitor midpoint TR3 pins 9, 10 / C16.2 / C55.1
     ("zone", "TRANS_SEC_F", TSEC, F, [(68.3, -58.0), (72.0, -58.0), (73.4, -56.95), (78.8, -56.95), (78.8, -52.25),
                                       (73.4, -52.25), (72.0, -50.6), (68.3, -50.6)], dict(clearance=0.5, spoke=1.2)),
-    a("420V", "C16.1", "net", F, 1.2, margin=6),
-    a("420V", "R147.1", "C16.1", "FB", 0.4, via=VP), a(TSEC, "R148.2", "C16.2", "FB", 0.4, via=VP),
-    a(TSEC, "R149.1", "C55.1", "FB", 0.4, via=VP), a("ISO_GND", "R150.2", "C55.2", "FB", 0.4, via=VP),
+    # user placement 2026-11-21 (C16 / C55 swapped and turned): C16 pin 1 stands at the 420V band of Q21 pin 2 -
+    # one solid area from the pad into the band (was a 1.2 mm track to the pour east of the capacitors); C55 pin 2
+    # stands at the 5.1 ISO_GND pour north of it - solid area into that pour (its via to the planes: GROUNDS)
+    ("zone", "420V_C16_F", "420V", F, [(73.4, -48.95), (78.8, -48.95), (78.8, -44.6), (73.4, -44.6)],
+     dict(solid=True, clearance=0.5)),
+    ("zone", "ISO_GND_C55_F", "ISO_GND", F, [(73.4, -64.2), (78.8, -64.2), (78.8, -60.25), (73.4, -60.25)],
+     dict(solid=True, clearance=0.5)),
+    # balancing resistors (B.Cu, not moved): R147 + R148 are across C55 now, R149 + R150 across C16 (sheet 7)
+    ("track", "ISO_GND", B, 0.4, [(76.1, -60.98), (76.1, -63.3)]),          # R147 pin 1 -> via in the area of C55 pin 2
+    ("via", "ISO_GND", 76.1, -63.3, *VP), ("via", "ISO_GND", 74.3, -63.3, *VP), ("via", "ISO_GND", 77.9, -63.3, *VP),
+    a(TSEC, "R148.2", "C55.1", "FB", 0.4, via=VP),
+    a(TSEC, "R149.1", "C16.2", "FB", 0.4, via=VP), a("420V", "R150.2", "C16.1", "FB", 0.4, via=VP),
     # stage 3a.3 (user 2026-11-20): Q8 pin 2 joins the switch node on the outer layers. Q8's gate parts make
     # room on B.Cu (their 5.1 gate tracks go, stage 3b routes the gate loop again)
     ("move", "R88", 72.23, -44.93, {}, Q8_WHY), ("move", "R87", 74.01, -44.93, {}, Q8_WHY),
@@ -182,15 +192,40 @@ FG = dict(foreign_gap=4.0)         # connection at a barrier part: slot credit, 
 # ------------------------------------------------------------------------------------------------ heater LLC
 HC = "HEATER_CURRENT"
 CAPM = "/06 Heaters/HEATER_CAP_MEAS"
+HHG = "/06 Heaters/HEATER_HI_GATE"
 CH_WHY = "heater split-capacitor balancing chain re-placed: DC+ via for R155 pin 1, 1.2 mm between its nodes"
+LD_OLD = "5.1 HEATER_LOW_DRV stub at R37 pin 1 towards the old via site (dangling: the In2 track lands east of R31 now)"
 HEATER_LLC = [
     # stage 3a.2 (user 2026-11-20): C134 leaves the DC+ neck between the Q10 tab and U11
     ("move", "C134", -5.2, -81.2, dict(side="B", rot=90.0), "frees the DC+ neck to the heater split capacitors C42 / C49 / C20"),
     ("zone", "DC_neck_Q10_U11", "DC+", F, [(-8.8, -81.6), (-7.6, -81.6), (-7.6, -72.5), (-8.8, -72.5)], dict(solid=True)),
-    a(HHS, "Q11.3", "net", F, 1.0, margin=8),            # high-side source -> switch-node pour
-    # high-side drain tab -> DC+ pour (the 5.1 pours have no pad connection, their spokes were segments)
-    ("zone", "Q11_tab_DC", "DC+", F, [(-10.5, -67.5), (-8.0, -67.5), (-8.0, -62.2), (-10.5, -62.2)], dict(solid=True)),
-    a(HC, "Q10.3", "R30.1", "FB", 0.8, via=VP, margin=4),  # low-side source -> shunt R30 (B.Cu)
+    # user placement 2026-11-21 (Q10 / Q11 swapped and turned). Switch node: one area from the low-side drain tab
+    # (Q10 pad 2) to TR2 pins 1 / 2 and, in a 2.9 mm column west of Q11's tab, to the high-side source Q11 pin 3
+    # (the 5.1 pours have no pad connection, their spokes were segments)
+    ("zone", "HHS_F", HHS, F, [(-24.9, -72.4), (-24.9, -64.5), (-18.4, -64.5), (-18.4, -58.7), (-10.9, -58.7),
+                               (-10.9, -65.0), (-17.6, -65.0), (-17.6, -78.4), (-15.4, -78.4), (-15.4, -81.0),
+                               (-20.5, -81.0), (-20.5, -72.4)],
+     dict(clearance=0.5, spoke=1.0)),
+    # high-side drain tab -> DC+ pour and the neck above, 2.9 mm east of the tab
+    ("zone", "Q11_tab_DC", "DC+", F, [(-11.5, -76.5), (-8.0, -76.5), (-8.0, -70.6), (-11.5, -70.6)],
+     dict(solid=True, priority=91)),
+    # low-side source Q10 pin 3 -> shunt R30: F.Cu to a via between the two tabs (1.35 mm to the DC+ tab above), B.Cu
+    # under Q11 to R30 pin 1 (drawn 2026-11-21: Q10 pin 3 lies between the DC+ tab and the switch-node tab)
+    ("track", HC, F, 0.8, [(-16.02, -68.11), (-15.5, -68.6), (-12.8, -68.6)]),
+    ("via", HC, -12.8, -68.6, *VP),
+    ("track", HC, B, 0.8, [(-12.8, -68.6), (-12.8, -78.8), (-11.2, -80.4)]),
+    # high-side gate: the gate parts R24 / R36 / D35 stayed at the old place of Q11 (now Q10's). B.Cu from D35 anode
+    # north under Q11, via in the switch-node column west of pin 3, F.Cu between the DC+ tab (1.4 mm) and pin 3
+    # (its own source, 0.3 mm - driver group DRV3) to pin 1: the gate runs beside its return all the way
+    ("track", HHG, B, 0.4, [(-14.47, -67.01), (-14.8, -67.6), (-14.8, -76.5), (-16.6, -78.3), (-17.6, -78.3)]),
+    ("via", HHG, -17.6, -78.3, *VS),
+    ("track", HHG, F, 0.3, [(-17.6, -78.3), (-11.56, -78.3), (-11.56, -79.85)]),
+    # low-side driver output: landing via east of R31 for the In2 track from DRV3 pin 10 (stage 3b) - the old via
+    # site at (-12.75, -69.64) is taken by the HEATER_CURRENT via above
+    ("delete", "/06 Heaters/HEATER_LOW_DRV", B, -9.647, -70.06, -10.028, -70.441, LD_OLD),
+    ("delete", "/06 Heaters/HEATER_LOW_DRV", B, -10.028, -70.441, -10.028, -71.1, LD_OLD),
+    ("track", "/06 Heaters/HEATER_LOW_DRV", B, 0.4, [(-7.996, -71.1), (-6.6, -71.1), (-6.2, -70.7)]),
+    ("via", "/06 Heaters/HEATER_LOW_DRV", -6.2, -70.7, *VS),
     # stage 3a.3 (user 2026-11-20): balancing chain DC+ - R155 - R156 - CAP_MEAS - R157 - R158 - HEATER_CURRENT
     # re-placed on B.Cu: R155 / R157 swap places (DC+ end over the free DC+ copper right of C20), R156 lies above
     # them, R158 goes left of the shunt R30; >= 1.2 mm between the chain nodes
@@ -204,8 +239,9 @@ HEATER_LLC = [
     ("track", "Net-(R157-Pad2)", B, 0.4, [(-11.14, -83.42), (-13.5, -83.07)]),
     ("track", HC, B, 0.4, [(-13.5, -80.15), (-12.8, -79.45), (-12.5, -79.1)]),
     # HEATER_CURRENT B.Cu (R158 / R30 / pour 20) <-> F.Cu pour 24
-    ("track", HC, B, 0.5, [(-13.5, -80.15), (-14.4, -80.6), (-15.4, -81.6), (-15.8, -81.6)]),
-    ("via", HC, -15.8, -81.6, *VP),
+    # (2026-11-21: the via 2 mm further west - Q11 pin 3, the switch node, stands at (-16.1, -79.9) now)
+    ("track", HC, B, 0.5, [(-13.5, -80.15), (-14.4, -80.6), (-15.4, -81.6), (-16.6, -81.6), (-17.8, -82.8)]),
+    ("via", HC, -17.8, -82.8, *VP),
 ]
 
 # ------------------------------------------------------------------------------------------------ flyback secondary
@@ -302,7 +338,7 @@ GROUNDS = [
     gnd("C93.2", "ISO_GND", layers=B), gnd("R128.2", "ISO_GND", layers=B), gnd("C119.2", "ISO_GND", layers=B),
     gnd("DRV6.9", "ISO_GND", layers=B, relax=("DRV6",), **FG), gnd("DRV6.4", "ISO_GND", layers=B, relax=("DRV6",)),
     # (ISO2 pin 9: stage 3d, route_s3d_iso2.py)
-    gnd("C55.2", "ISO_GND", layers=F, w=1.0),
+    # (C55 pin 2: three vias in its ISO_GND area, DAB secondary group)
     # HT_GND
     gnd("ISO1.9", "HT_GND", layers=F, relax=("ISO1",), margin=6),
 ]

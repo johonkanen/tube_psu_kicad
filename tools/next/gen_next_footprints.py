@@ -236,7 +236,7 @@ def ec42():
     7+8 primary finish (bridge), 9+10 secondary start (C16/C55 midpoint), 13+14 secondary finish
     (bridge); pins 1-3, 6, 11, 12, 15, 16 clipped, no pads (2026-11-21: the pairs nearest to the split
     capacitors as placed by the user and to the bridges; was 1+2 / 7+8 / 9+10 / 15+16. 11+12 would be
-    5 mm nearer to the secondary bridge, but R75 / R76 / C72 of DRV6 stand there on the bottom side). No rectangular
+    10 mm nearer to the secondary bridge, but R75 / R76 / C72 of DRV6 stand there on the bottom side). No rectangular
     pad: pin 1 has none, the silk mark at pin 1 stays."""
     xr = 20.0
     used = {4, 5, 7, 8, 9, 10, 13, 14}

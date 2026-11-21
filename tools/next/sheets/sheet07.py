@@ -3,7 +3,8 @@
 DHB_CURRENT -> R83 4m -> GND), C47 / C54 with the DHB_CAP node -> TR3 primary (5.2: EC42/15, L3 removed),
 C67 / C70 across DC+ - DHB_CURRENT. Secondary: Q21 / Q8 (420V -> DHB_HI_SOURCE_SEC -> ISO_GND), C16 /
 C55 with the TRANS_SEC node at TR3's secondary, C89 / C90 on 420V. 5.2: 2 x 220k balancing resistors
-across each split cap (R143-R146 primary, R147-R150 secondary, NR 2.8). Every MOSFET gate has the same
+across each split cap (R143-R146 primary, R147-R150 secondary, NR 2.8; secondary since 2026-11-21:
+R150 + R149 across C16, R148 + R147 across C55). Every MOSFET gate has the same
 network: global gate label -> 40R, with a Schottky diode + 3.3R turn-off path, optionally a 10k
 pull-down to the source (high side) or GND (Q7). The 420V rail: terminal +400V (P400V), caps C101 /
 C91 / C30 / C19 / C99 / C100 to ISO_GND (terminal GND is on ISO_GND), dividers R23 / R34 / R39 ->
@@ -155,16 +156,20 @@ sh.wire((xc2, V4R), (XB, V4R))
 _, ct, cb = vert2(sh, "C", "C55", xc2, CAPR + g(19), sh_value("C55"), top=1)     # pin 1 = TRANS_SEC
 sh.wire((xc2, CAPR), ct)
 sh.wire(cb, (xc2, IGR), (XB, IGR))
-# 5.2 (NR 2.8): balancing resistors R147 + R148 across C16 (420V symbol above, ends on the TRANS_SEC row) and
-# R149 + R150 across C55 (crosses the source row, ends on ISO_GND at C55), between TR3 and the C16 / C55 column.
+# 5.2 (NR 2.8): balancing resistors across C16 (420V symbol above, ends on the TRANS_SEC row) and across C55
+# (crosses the source row, ends on ISO_GND at C55), between TR3 and the C16 / C55 column.
+# 2026-11-21: the user swapped C16 / C55 on the board (420V end now at the bridge); the resistor row under them
+# stays where it is and takes the nets of the capacitor above each pair instead: R150 + R149 across C16
+# (R150 pin 2 = 420V), R148 + R147 across C55 (R147 pin 1 = ISO_GND). Was R147 + R148 across C16, R149 + R150
+# across C55; four equal 220k resistors, the mid nodes Net-(R147-Pad2) / Net-(R149-Pad2) are unchanged.
 xbal2 = xc2 - g(8)
-_, rt, rb = vert2(sh, "R", "R147", xbal2, CAPR - g(9), sh_value("R147"), top=1)   # pin 1 = 420V
+_, rt, rb = vert2(sh, "R", "R150", xbal2, CAPR - g(9), sh_value("R150"), top=2)   # pin 2 = 420V
 power_at(sh, "420V", rt, "up")
-vert2(sh, "R", "R148", xbal2, CAPR - g(3), sh_value("R148"), top=1)
+vert2(sh, "R", "R149", xbal2, CAPR - g(3), sh_value("R149"), top=2)                # pin 1 = TRANS_SEC
 sh.junction(xbal2, CAPR)
-_, rt, rb = vert2(sh, "R", "R149", xbal2, CAPR + g(13), sh_value("R149"), top=1)  # pin 1 = TRANS_SEC
+_, rt, rb = vert2(sh, "R", "R148", xbal2, CAPR + g(13), sh_value("R148"), top=2)  # pin 2 = TRANS_SEC
 sh.wire((xbal2, CAPR), rt)
-_, rt, rb = vert2(sh, "R", "R150", xbal2, CAPR + g(19), sh_value("R150"), top=1)  # pin 2 = ISO_GND
+_, rt, rb = vert2(sh, "R", "R147", xbal2, CAPR + g(19), sh_value("R147"), top=2)  # pin 1 = ISO_GND
 sh.wire(rb, (xbal2, IGR), (xc2, IGR))
 sh.junction(xc2, IGR)
 sh.wire(S2, (xn, SR))                              # through R56's bottom pin

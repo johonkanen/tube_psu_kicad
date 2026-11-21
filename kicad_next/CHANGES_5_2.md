@@ -47,7 +47,7 @@ ICE5AR change (1.5) R64, R81, R84, R85, R86, C50.
 | 2.3 / 2.5 / 2.6 | layout | C47 / C54 at the TR3 primary pins (note on the sheet), phase 5 |
 | 2.1 gap | doc | gap target **Lm ≈ 200 µH** (≈ 0.66–0.68 mm centre grind, set by measuring Lm; user 2026-11-18, simulation/dab/DAB_SIMULATION.md) – sheet-7 note updated (was Lm ~300 µH, gap 0.35 mm) |
 | 2.7 | firmware | dead time **150 ns total** (UCC21520 DT 100 ns is a minimum, not additive; notes on sheets 2 / 7 updated) |
-| 2.8 | yes | **R143 + R144** across C47 (DC+ → Net-(R143-Pad2) → DHB_CAP), **R145 + R146** across C54 (DHB_CAP → Net-(R145-Pad2) → DHB_CURRENT), **R147 + R148** across C16 (420V → Net-(R147-Pad2) → TRANS_SEC), **R149 + R150** across C55 (TRANS_SEC → Net-(R149-Pad2) → ISO_GND): split-cap balancing, **220k 1 % 1206** UNI-ROYAL 1206W4F2203T5E (C17956, 200 V, 143 771 pcs, extended), ≤ ≈ 105 V / 50 mW each. Drawn beside the C47 / C54 and C16 / C55 columns; the secondary half bridge moved 12 grid units right (Q2X 184 → 196, C16 / C55 column 132 → 142) to make room. Mid nets in HV_NETS (`setup_project.py`): R143 / R145 → HV_PRIMARY, R147 / R149 → HV_SECONDARY |
+| 2.8 | yes | **R143 + R144** across C47 (DC+ → Net-(R143-Pad2) → DHB_CAP), **R145 + R146** across C54 (DHB_CAP → Net-(R145-Pad2) → DHB_CURRENT), **R150 + R149** across C16 (420V → Net-(R149-Pad2) → TRANS_SEC), **R148 + R147** across C55 (TRANS_SEC → Net-(R147-Pad2) → ISO_GND) (2026-11-21, after the user swapped C16 / C55 on the board: the resistor row under them stays in place and takes the nets of the capacitor above each pair – R147 pin 1 is ISO_GND, R150 pin 2 is 420V; was R147 + R148 across C16, R149 + R150 across C55): split-cap balancing, **220k 1 % 1206** UNI-ROYAL 1206W4F2203T5E (C17956, 200 V, 143 771 pcs, extended), ≤ ≈ 105 V / 50 mW each. Drawn beside the C47 / C54 and C16 / C55 columns; the secondary half bridge moved 12 grid units right (Q2X 184 → 196, C16 / C55 column 132 → 142) to make room. Mid nets in HV_NETS (`setup_project.py`): R143 / R145 → HV_PRIMARY, R147 / R149 → HV_SECONDARY |
 | 2.8 LLC | yes | **R155 + R156** across C49 ‖ C42 (DC+ → Net-(R155-Pad2) → HEATER_CAP_MEAS), **R157 + R158** across C41 ‖ C22 (HEATER_CAP_MEAS → Net-(R157-Pad2) → HEATER_CURRENT), 220k 1 % 1206 C17956 (user 2026-11-19: balancing resistors in the heater LLC resonance caps too). 100 V per resistor at 400 V, 0.45 mA / 0.18 W; |Z| of each 9.4 nF half at 100 kHz is 170 Ω vs 440 kΩ, so the resonance is unaffected. Mid nets HV_PRIMARY (setup_project.py). Sheet 6, below the resonance notes. |
 
 ### Transformer pins and winding tables (2026-11-21)
@@ -297,7 +297,7 @@ Nets: 5.1 208, 5.2 232 (with at least one part pin).
 | +3V3 | new parts C124 C125 C129 C133 C134 U9 U10 U11 |
 | -5V_SEC -> -15V_SEC | new parts N15V_OUT; removed parts N5V_OUT |
 | 15V | +DRV3.11; -D10.A DRV1.3 DRV1.8 DRV2.3 DRV2.8; new parts R125 R142; removed parts DRV9 |
-| 420V | new parts R147 |
+| 420V | new parts R150 |
 | 5V | +DRV3.3 DRV3.8; -DRV3.2 DRV3.4 DRV5.5; new parts R126 R133 R138 |
 | 5V_ISOL | -DRV6.5 |
 | /04 MCU connector/ADB0 -> /04 MCU connector/5V_MEAS | new parts R135 |
@@ -325,7 +325,7 @@ Nets: 5.1 208, 5.2 232 (with at least one part pin).
 | /06 Heaters/HEATER_HI_SOURCE | +DRV3.14; -DRV3.5 |
 | Net-(DRV9-OUTA) -> /06 Heaters/HEATER_LOW_DRV | +DRV3.10; removed parts DRV9 |
 | HT_GND | +DRV4.3; -DRV4.7 DRV4.9 |
-| ISO_GND | new parts C119 R128 R150; removed parts R25 |
+| ISO_GND | new parts C119 R128 R147; removed parts R25 |
 | Net-(R49-Pad1) -> Net-(C127-Pad1) | new parts C127 |
 | Net-(R2-Pad2) -> Net-(C131-Pad2) | new parts C131 |
 | Net-(D10-K) | +PWM2.11; -PWM2.5 R114.2 |
