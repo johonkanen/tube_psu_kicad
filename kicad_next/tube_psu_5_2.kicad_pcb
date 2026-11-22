@@ -94596,6 +94596,14 @@
 		(uuid "93868cc8-1928-4ec5-b8c6-8fd28724ff3b")
 	)
 	(segment
+		(start 24.1 -72.5)
+		(end 24.1 -74.3)
+		(width 1.55)
+		(layer "F.Cu")
+		(net "DC+")
+		(uuid "93d4e1f9-cbea-4b74-8576-0c7ac032d6ea")
+	)
+	(segment
 		(start 19.9 9.8842)
 		(end 19.9 9.3)
 		(width 0.1524)
