@@ -1676,6 +1676,48 @@ Not closed in this stage:
   at y 8.25). Needs a via pair or the south end of the kept track (22.1, -0.365).
 * **Net-(R51-Pad2)**: In2 track end (29.2, 16.5) to R51 pad 2 (5.3, 6.5), 24 mm apart, HV_PRIMARY; not looked at.
 
+## Stage 5b: local connections closed (2026-11-22)
+
+`tools/next/route_s5b_local.py --group u9`, `drv2`, `dt`, `c131`, `q9d`, `r51,gnd21,d32` (incremental, not
+re-runnable; `routing/moves_s5b.json`, `deleted_s5b.json`, `s5b_added.json`). Unconnected 12 -> 3, clearance markers
+6 -> 5, 0 shorts. One part moved (R131). Aim as in stage 5a: every connection made and rule-clean, not optimised.
+
+* **Net-(U9--) / Net-(U9-+)** (B.Cu): the +1V65_BIAS lane x 27.9 ran between R131 and U9 pin 4. R131 turned and moved
+  0.9 mm ((26.82, -22.94) rot -90 -> (27.65, -23.3) rot 180): pad 2 west of the lane (joined to it), pad 1 east,
+  straight north of pin 4. The lane via (27.9, -26.4) is 0.25 mm further north (27.9, -26.15) (In2 lane and F.Cu link
+  lengthened) so pin 1 - pin 4 passes on y -26.7 under the body. U9-+: pin 3 east, x 29.5 north, y -25.8 north of the
+  second +1V65_BIAS via (31.1, -26.4), x 31.75 south to R3 pad 1; the +3V3 lane there steps south 1.6 mm further east.
+* **Net-(DRV2-OUTH)**: pin 2 was closed in by the B.Cu 15V link pin 1 - via (14.06, 10.6). The link is on F.Cu now
+  (new via (13.2, 8.75) in the edge of pin 1, 0.4 mm), OUTH leaves south-east and runs on x 14.737 to R20 pad 1
+  (B.Cu, 0.3 mm, 6.2 mm).
+* **Net-(DRV6-DT)**: via (66.95, -55.1) east of pin 6, F.Cu 0.2 mm on x 66.95, via (66.9, -49.3) in R128 pad 1. The gap
+  between the 5V_ISOL via and TR3 pin 9 (TRANS_SEC, 1.2 mm) was 0.02 mm short, so that via moved 0.25 mm south-west
+  along its In2 diagonal to (66.3, -51.675). B.Cu under DRV6 is taken by DHB_HI_GATE_SEC, In2 by the DAB_DIS_SEC and
+  5V_ISOL diagonals, In3 by the 15V_ISO_SEC plane.
+* **Net-(C131-Pad2)** (output of U6, B.Cu 0.152 mm, 13 mm): the Net-(U6-+) link R10 pad 2 - R17 pad 1 drops to y 5.1
+  west of R17; the output runs on y 6.7 (1.4 mm south of the DC+ pad of C29), through the gap between the pads of
+  R17 (y 5.7), between the pads of C130 (y 5.44), east of C130 (x 23.85) and west on y 3.7 to R82 pad 2.
+* **Net-(Q9-D)**: via (-62.4, -31.9) under Q9 (west of the F.Cu Net-(RL1-COM) pour), In3 0.25 mm diagonal to the
+  through-hole pin 5 of RL1 (7.7 mm; In3 has no pour and no other track there). On B.Cu both GPIO_BYPASS_RLY
+  (x -60.15, then east on y -39.4) and 5V (x -59.7) run between Q9 and D9.
+* **Net-(R51-Pad2)** (HV_PRIMARY): In2 0.152 mm from the lane end (11.578, 16.478) on x 9.7 between the Net-(R48-Pad2)
+  lane (x 8.6) and the PFC_PWM2 lane (x 10.594), diagonal 0.54 mm from the R48 via to a via (5.6, 6.3) in the corner
+  of R51 pad 2 (1.2 mm from R51 pad 1 and R48 pad 2).
+* **GND pour 'Proteus B.Cu pour 21'**: one via to the GND planes in each island, (42.1, -29.6) and (35.3, -27.5).
+* **D32 clearance marker**: the last 0.14 mm segment of the DHB_LOW_GATE_SEC track (inside the D32 cathode pad,
+  1.15 mm from R149 pad 2) deleted.
+
+Not closed in this stage:
+
+* **TX / RX** to U11 pins 4 / 5: not started (next block).
+* **DHB_LOW_GATE_SEC** DRV6 pin 10 - D32 / R87 (Q8 gate network): pin 10 is on the west pin row. B.Cu: closed in by
+  the high-side group (DHB_HI_GATE_SEC under the body of DRV6, D31 / R57 / R58, the DHB_HI_SOURCE_SEC pour y -46).
+  F.Cu: the DHB_HI_SOURCE_SEC track (x 54.75 ... 56.5 over the pin row, y -49 ... -50 east). In2: the DAB_DIS_SEC lane
+  (via (64.157, -56.272) - x 65.657 - diagonal to (74.657, -42.372)), the 5V_ISOL diagonal / y -48 lane and the
+  ISO_SEC_DHB_LO / HI diagonals (crossing y -59 near x 73); the target (73.81, -47.72) lies in the wedge between the
+  DAB_DIS_SEC diagonal and the 5V_ISOL lane. In3: 15V_ISO_SEC plane. A via east of pin 10 at about (58.3, -53.83)
+  fits on all layers (not placed); the In2 lanes of DAB_DIS_SEC / 5V_ISOL have to be re-drawn first.
+
 ## Footprints and 3D models (phase 3, 2026-11-18)
 
 Regenerate: `python3 tools/next/gen_next_footprints.py`, `tools/p2k/bin/kicad_env.sh python3

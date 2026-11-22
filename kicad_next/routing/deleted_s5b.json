@@ -5,7 +5,10 @@
   "drv2",
   "dt",
   "c131",
-  "q9d"
+  "q9d",
+  "r51",
+  "gnd21",
+  "d32"
  ],
  "deleted": [
   {
@@ -235,6 +238,22 @@
    ],
    "width": 0.1524,
    "why": "U6-+ link drops south before R17 (gap between the R17 pads for the output)"
+  },
+  {
+   "group": "d32",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    73.81,
+    -47.72
+   ],
+   "end": [
+    73.91,
+    -47.82
+   ],
+   "width": 0.4,
+   "why": "redundant end inside the D32 pad, 1.15 mm from R149 pad 2"
   }
  ]
 }

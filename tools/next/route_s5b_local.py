@@ -116,6 +116,25 @@ GROUPS = {
         ("v", "Net-(Q9-D)", -62.4, -31.9, 0.5, 0.3),
         ("t", "Net-(Q9-D)", I3, 0.25, [(-62.4, -31.9), (-58.4, -35.9), (-56.351, -35.902)]),
     ]),
+    # Net-(R51-Pad2) (DC+ divider node, HV_PRIMARY): In2 lane end (11.578, 16.478) - R51 pad 2. In2 between the
+    # Net-(R48-Pad2) lane (x 8.6, 0.5 mm) and the PFC_PWM2 lane (x 10.594): x 9.7, then a diagonal 0.54 mm from
+    # the R48 via (6.4, 8.6) to a via in the corner of R51 pad 2 (1.2 mm from R51 pad 1 and R48 pad 2; F.Cu is empty
+    # there, north of the heatsink strip).
+    "r51": dict(ADD=[
+        ("t", "Net-(R51-Pad2)", I2, 0.152, [(11.578, 16.478), (9.7, 14.6), (9.7, 10.6), (5.6, 6.5), (5.6, 6.3)]),
+        ("v", "Net-(R51-Pad2)", 5.6, 6.3, 0.5, 0.3),
+    ]),
+    # GND pour 'Proteus B.Cu pour 21': two islands (north / south of the Net-(REF1-VOUT) track); one via to the GND
+    # planes in each
+    "gnd21": dict(ADD=[
+        ("v", "GND", 42.1, -29.6, 0.5, 0.3),
+        ("v", "GND", 35.3, -27.5, 0.5, 0.3),
+    ]),
+    # D32 cathode: the last 0.14 mm of the DHB_LOW_GATE_SEC track ended 1.15 mm from R149 pad 2 (HV functional 1.2 mm);
+    # the segment before it already ends inside the pad of D32
+    "d32": dict(DEL=[
+        ("DHB_LOW_GATE_SEC", B, 73.81, -47.72, 73.91, -47.82, "redundant end inside the D32 pad, 1.15 mm from R149 pad 2"),
+    ]),
 }
 
 
