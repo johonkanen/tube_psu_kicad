@@ -1,0 +1,68 @@
+{
+ "note": "routing stage 7 (2026-11-22), tools/next/route_s7_fixes.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "caps",
+  "r83",
+  "iso2"
+ ],
+ "deleted": [
+  {
+   "group": "r83",
+   "kind": "via",
+   "net": "GND",
+   "at": [
+    17.96,
+    -64.55
+   ],
+   "why": "0.5 / 0.3 via replaced by 0.6 / 0.3"
+  },
+  {
+   "group": "iso2",
+   "kind": "segment",
+   "net": "Net-(TR1-S15)",
+   "layer": "F.Cu",
+   "start": [
+    71.9,
+    -11.6
+   ],
+   "end": [
+    71.9,
+    -17.2
+   ],
+   "width": 0.5,
+   "why": "corner (71.9, -17.2) was the nearest secondary copper to ISO2 pad 8"
+  },
+  {
+   "group": "iso2",
+   "kind": "segment",
+   "net": "Net-(TR1-S15)",
+   "layer": "F.Cu",
+   "start": [
+    71.9,
+    -17.2
+   ],
+   "end": [
+    73.6,
+    -18.9
+   ],
+   "width": 0.5,
+   "why": "same"
+  },
+  {
+   "group": "iso2",
+   "kind": "segment",
+   "net": "Net-(TR1-S15)",
+   "layer": "F.Cu",
+   "start": [
+    73.6,
+    -18.9
+   ],
+   "end": [
+    74.75,
+    -19.2
+   ],
+   "width": 0.5,
+   "why": "same"
+  }
+ ]
+}

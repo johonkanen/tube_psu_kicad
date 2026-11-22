@@ -1,0 +1,78 @@
+{
+ "note": "routing stage 7 (2026-11-22), tools/next/route_s7_fixes.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "caps",
+  "r83",
+  "iso2"
+ ],
+ "moves": [
+  {
+   "group": "caps",
+   "ref": "C90",
+   "frm": {
+    "x": 75.4,
+    "y": -75.425,
+    "rot": -90.0,
+    "side": "F"
+   },
+   "to": {
+    "x": 74.7,
+    "y": -75.425,
+    "rot": -90.0,
+    "side": "F"
+   },
+   "why": "1210 body 2.5 mm: pitch 2.0 -> 2.9 mm to C91 (body gap 0.4 mm)"
+  },
+  {
+   "group": "caps",
+   "ref": "C91",
+   "frm": {
+    "x": 77.4,
+    "y": -75.425,
+    "rot": -90.0,
+    "side": "F"
+   },
+   "to": {
+    "x": 77.6,
+    "y": -75.425,
+    "rot": -90.0,
+    "side": "F"
+   },
+   "why": "1210 body 2.5 mm: pitch 2.0 -> 2.9 mm to C90 (body gap 0.4 mm)"
+  },
+  {
+   "group": "caps",
+   "ref": "C99",
+   "frm": {
+    "x": 77.4,
+    "y": -75.425,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 78.3,
+    "y": -75.425,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "why": "1210 body 2.5 mm: pitch 2.0 -> 2.9 mm to C100 (body gap 0.4 mm)"
+  },
+  {
+   "group": "caps",
+   "ref": "C101",
+   "frm": {
+    "x": 73.5,
+    "y": -75.425,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 72.5,
+    "y": -75.425,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "why": "1210 body 2.5 mm: pitch 1.9 -> 2.9 mm to C100 (body gap 0.4 mm)"
+  }
+ ]
+}

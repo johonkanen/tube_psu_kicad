@@ -66,6 +66,10 @@ def main(argv):
         # the 5.2 board is ordered without silkscreen (user, 2026-11-20): silk / text checks are noise
         for k in SILK_CHECKS:
             sev[k] = "ignore"
+        # Q19 / Q21 differ from the library footprint on purpose: unused inner-layer pad rings removed
+        # (trial_placement_p2.py PAD_INNER_REMOVE, inner-layer distance across the barrier); outer pads and
+        # drills are the library ones (verification of the first draft, 2026-11-22)
+        sev["lib_footprint_mismatch"] = "ignore"
         with open(os.path.join(tmp, NAME + ".kicad_pro"), "w") as f:
             json.dump(pro, f, indent=2)
         out = os.path.join(tmp, "drc.json")

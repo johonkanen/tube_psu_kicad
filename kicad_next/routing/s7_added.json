@@ -1,0 +1,135 @@
+{
+ "note": "routing stage 7 (2026-11-22), tools/next/route_s7_fixes.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "caps",
+  "r83",
+  "iso2"
+ ],
+ "added": [
+  {
+   "group": "caps",
+   "kind": "zone",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "name": "S7_ISO_GND_B_C101",
+   "settings_from": "Proteus B.Cu pour 12",
+   "outline": [
+    [
+     71.0,
+     -74.657
+    ],
+    [
+     73.2,
+     -74.657
+    ],
+    [
+     73.2,
+     -73.3
+    ],
+    [
+     71.0,
+     -73.3
+    ]
+   ]
+  },
+  {
+   "group": "caps",
+   "kind": "zone",
+   "net": "420V",
+   "layer": "B.Cu",
+   "name": "S7_420V_B_C101",
+   "settings_from": "Proteus B.Cu pour 25",
+   "outline": [
+    [
+     71.0,
+     -77.6
+    ],
+    [
+     72.8,
+     -77.6
+    ],
+    [
+     72.8,
+     -76.076
+    ],
+    [
+     71.0,
+     -76.076
+    ]
+   ]
+  },
+  {
+   "group": "r83",
+   "kind": "via",
+   "net": "GND",
+   "at": [
+    17.96,
+    -64.55
+   ],
+   "size": [
+    0.6,
+    0.3
+   ]
+  },
+  {
+   "group": "r83",
+   "kind": "segment",
+   "net": "GND",
+   "layer": "F.Cu",
+   "start": [
+    15.4,
+    -64.73
+   ],
+   "end": [
+    18.55,
+    -64.73
+   ],
+   "width": 1.0
+  },
+  {
+   "group": "iso2",
+   "kind": "segment",
+   "net": "Net-(TR1-S15)",
+   "layer": "F.Cu",
+   "start": [
+    71.9,
+    -11.6
+   ],
+   "end": [
+    71.9,
+    -15.9
+   ],
+   "width": 0.5
+  },
+  {
+   "group": "iso2",
+   "kind": "segment",
+   "net": "Net-(TR1-S15)",
+   "layer": "F.Cu",
+   "start": [
+    71.9,
+    -15.9
+   ],
+   "end": [
+    74.2,
+    -18.2
+   ],
+   "width": 0.5
+  },
+  {
+   "group": "iso2",
+   "kind": "segment",
+   "net": "Net-(TR1-S15)",
+   "layer": "F.Cu",
+   "start": [
+    74.2,
+    -18.2
+   ],
+   "end": [
+    74.75,
+    -19.2
+   ],
+   "width": 0.5
+  }
+ ]
+}
