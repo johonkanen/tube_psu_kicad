@@ -1,0 +1,101 @@
+{
+ "note": "routing stage 4h (2026-11-22), tools/next/route_s4h_drv5_low.py - incremental edit of the board, not a rebuild",
+ "moves": [
+  {
+   "ref": "R127",
+   "frm": {
+    "x": 13.45,
+    "y": -55.8,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": -5.0,
+    "y": -51.805,
+    "rot": 180,
+    "side": "B"
+   },
+   "why": "dead-time resistor at pin 6 of DRV5 (input side, west of the pads)"
+  },
+  {
+   "ref": "C118",
+   "frm": {
+    "x": 12.15,
+    "y": -55.8,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": -5.0,
+    "y": -53.1,
+    "rot": 180,
+    "side": "B"
+   },
+   "why": "dead-time capacitor beside R127"
+  },
+  {
+   "ref": "R90",
+   "frm": {
+    "x": 35.836,
+    "y": -46.746,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 10.25,
+    "y": -56.6,
+    "rot": 90,
+    "side": "B"
+   },
+   "why": "low-side gate resistor between the exit of pin 10 and the gate pad of Q7"
+  },
+  {
+   "ref": "D34",
+   "frm": {
+    "x": 34.79,
+    "y": -49.397,
+    "rot": 180.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 12.75,
+    "y": -54.9,
+    "rot": 0,
+    "side": "B"
+   },
+   "why": "turn-off diode in the pin-column gap between Q19 pin 3 and the gate pad of Q7"
+  },
+  {
+   "ref": "R92",
+   "frm": {
+    "x": 33.804,
+    "y": -46.746,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 14.6,
+    "y": -57.3,
+    "rot": 90,
+    "side": "B"
+   },
+   "why": "turn-off resistor east of the gate pad of Q7"
+  },
+  {
+   "ref": "R70",
+   "frm": {
+    "x": 28.7,
+    "y": -45.036,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 10.4,
+    "y": -59.6,
+    "rot": 90,
+    "side": "B"
+   },
+   "why": "gate-source resistor of Q7 at R90, GND on pin 2 of C124"
+  }
+ ]
+}

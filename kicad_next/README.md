@@ -1380,6 +1380,47 @@ Still open:
 * R22, D30, R53, D19, R41 still at their old places east of the column; clean-up there and C70 not done.
 * New courtyard overlaps: C92 / DRV5, C92 / R26, R106 / DRV5.
 
+## Stage 4h: DRV5 low side, 15V of pin 11, dead-time parts (2026-11-22) – not finished
+
+`tools/next/route_s4h_drv5_low.py` (incremental, not re-runnable; `routing/moves_s4h.json`, `deleted_s4h.json`,
+`s4h_added.json`). Unconnected 37 -> 32, clearance markers 6 -> 6, 0 shorts.
+
+| part | from | to (all B.Cu) | why |
+|---|---|---|---|
+| R90 | (35.836, -46.746) rot -90 | (10.25, -56.6) rot 90 | gate resistor: pin 1 (-55.6) from pin 10, pin 2 (-57.6) to the gate pad of Q7 |
+| D34 | (34.79, -49.397) rot 180 | (12.75, -54.9) rot 0 | turn-off diode in the pin-column gap (cathode west, on DHB_LOW_GATE) |
+| R92 | (33.804, -46.746) rot -90 | (14.6, -57.3) rot 90 | turn-off resistor east of the gate pad of Q7 |
+| R70 | (28.7, -45.036) rot -90 | (10.4, -59.6) rot 90 | gate-source resistor, GND on pin 2 of C124 (GND via (9.575, -61.8)) |
+| R127 | (13.45, -55.8) rot -90 | (-5.0, -51.805) rot 180 | dead-time resistor at pin 6 |
+| C118 | (12.15, -55.8) rot -90 | (-5.0, -53.1) rot 180 | dead-time capacitor beside R127 |
+
+Done:
+* **15V of pin 11**: via 0.5 / 0.3 in the pad (6.6, -51.805), In3 track 0.5 mm to (10.3, -51.805) inside the 15V plane
+  (2.9 mm to the plane edge at x 9.5). No B.Cu copper in the 0.9 mm squeeze.
+* **Low-side gate** on B.Cu: pin 10 -> east at y -53.075 to x 8.6 -> between the 5V via and the source return to
+  (10.25, -54.6) -> R90 -> gate pad of Q7: about 9.5 mm pin centre to pad centre (4.9 mm to R90, R90 2.0, 2.6 to the
+  pad). Turn-off branch R90 pin 1 -> D34 -> R92 -> gate pad about 9.5 mm. Nearest switch-node copper: source return
+  track 1.9 mm, Q19 pin 3 pad 1.7 mm (track) / 1.4 mm (pad of D34); Q7 pin 2 pad 1.4 mm; DC+ more than 3 mm. The
+  return enters the planes at the GND via (8.25, -54.345), 1.3 mm from pin 9.
+* Dead time: pin 6 -> R127 / C118 (2.6 mm), their GND on the GND via of C94 (-5.75, -49.405).
+* Deleted: all old copper of DHB_LOW_GATE, Net-(D34-PadA), Net-(Q7-G) east of the column, GND via (12.45, -55.0) and
+  the GND stubs of C118 / R127 / R70 at their old places.
+
+Still open:
+* **C95 (4.7 uF 1206, 15V decoupling of pins 11 / 9) is not moved**: it is still at (24.0, -47.2), about 17 mm from
+  the pins through the planes. No legal place was found beside the pins: east of the pads only x 8.0 - 8.8 is free
+  (1.2 mm to the source return), a part cannot sit under the body on the same side, and vias for a top-side
+  place at x < 5 land in the In2 bus. Candidates: a smaller footprint (0603) east of pin 9 / south of y -52, or C95
+  on B.Cu east of the column at x 15 - 16.8.
+* R22, D30, R53, D19, R41, C96 (rest of the high side), R73 / R74 / C120 / R129 and PRI_DHB_HI, B12, DAB_DIS to pins
+  1 / 2 / 5, +1V65_BIAS to the U1 block, clean-up east of the column (15V via (17.625, -51.0) and its B.Cu track, old
+  stubs), C70: not started. The GND track of R127 / C118 (x -5.8, y -53.1 ... -49.4) lies west of pin 5: DAB_DIS has
+  to arrive by a via between it and the pad or the track is moved.
+* The 5V link on B.Cu y -55.15 (0.35 mm from the pads of C11) is unchanged.
+* New courtyard overlaps: R90 / R70, R90 / D34, R92 / D34, R127 / DRV5, R127 / C118, C118 / DRV5.
+* Switch-node zone `S3A_DHB_HI_SOURCE_F` at Q19 pin 3 after the refill: filled x 11.8 ... 16.4 at y -51.8 (4.6 mm),
+  6 mm wide from y -52.5 to -56 (unchanged by this stage; the 15V via (17.625, -51.0) is still there).
+
 ## Footprints and 3D models (phase 3, 2026-11-18)
 
 Regenerate: `python3 tools/next/gen_next_footprints.py`, `tools/p2k/bin/kicad_env.sh python3

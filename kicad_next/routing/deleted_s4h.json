@@ -1,0 +1,284 @@
+{
+ "note": "routing stage 4h (2026-11-22), tools/next/route_s4h_drv5_low.py - incremental edit of the board, not a rebuild",
+ "deleted": [
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    12.15,
+    -55.025
+   ],
+   "end": [
+    12.45,
+    -55.0
+   ],
+   "width": 0.3,
+   "why": "GND of C118 / R127 at their old place in the pin-column gap (both moved to pin 6 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    12.45,
+    -55.0
+   ],
+   "end": [
+    13.45,
+    -54.975
+   ],
+   "width": 0.3,
+   "why": "GND of C118 / R127 at their old place in the pin-column gap (both moved to pin 6 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    28.6238,
+    -44.1728
+   ],
+   "end": [
+    28.7,
+    -44.1728
+   ],
+   "width": 0.1524,
+   "why": "low-side gate copper at the old part places east of the column (R90, D34, R92, R70 moved to the Q7 gate pad)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    28.7,
+    -44.249
+   ],
+   "end": [
+    28.7,
+    -44.1728
+   ],
+   "width": 0.1524,
+   "why": "low-side gate copper at the old part places east of the column (R90, D34, R92, R70 moved to the Q7 gate pad)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    28.7,
+    -44.0966
+   ],
+   "end": [
+    28.7,
+    -44.1728
+   ],
+   "width": 0.1524,
+   "why": "low-side gate copper at the old part places east of the column (R90, D34, R92, R70 moved to the Q7 gate pad)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    28.7762,
+    -44.1728
+   ],
+   "end": [
+    28.7,
+    -44.1728
+   ],
+   "width": 0.1524,
+   "why": "low-side gate copper at the old part places east of the column (R90, D34, R92, R70 moved to the Q7 gate pad)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q7-G)",
+   "layer": "B.Cu",
+   "start": [
+    31.2,
+    -45.9
+   ],
+   "end": [
+    31.354,
+    -45.746
+   ],
+   "width": 0.254,
+   "why": "low-side gate copper at the old part places east of the column (R90, D34, R92, R70 moved to the Q7 gate pad)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q7-G)",
+   "layer": "B.Cu",
+   "start": [
+    31.354,
+    -45.746
+   ],
+   "end": [
+    33.804,
+    -45.746
+   ],
+   "width": 0.254,
+   "why": "low-side gate copper at the old part places east of the column (R90, D34, R92, R70 moved to the Q7 gate pad)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q7-G)",
+   "layer": "B.Cu",
+   "start": [
+    28.7,
+    -45.9
+   ],
+   "end": [
+    31.2,
+    -45.9
+   ],
+   "width": 0.254,
+   "why": "low-side gate copper at the old part places east of the column (R90, D34, R92, R70 moved to the Q7 gate pad)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q7-G)",
+   "layer": "B.Cu",
+   "start": [
+    33.804,
+    -45.746
+   ],
+   "end": [
+    35.836,
+    -45.746
+   ],
+   "width": 1.016,
+   "why": "low-side gate copper at the old part places east of the column (R90, D34, R92, R70 moved to the Q7 gate pad)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    34.78,
+    -50.72
+   ],
+   "end": [
+    36.09,
+    -49.41
+   ],
+   "width": 0.635,
+   "why": "low-side gate copper at the old part places east of the column (R90, D34, R92, R70 moved to the Q7 gate pad)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    35.836,
+    -48.546
+   ],
+   "end": [
+    35.836,
+    -47.746
+   ],
+   "width": 0.635,
+   "why": "low-side gate copper at the old part places east of the column (R90, D34, R92, R70 moved to the Q7 gate pad)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    36.09,
+    -48.8
+   ],
+   "end": [
+    35.836,
+    -48.546
+   ],
+   "width": 0.635,
+   "why": "low-side gate copper at the old part places east of the column (R90, D34, R92, R70 moved to the Q7 gate pad)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    36.09,
+    -49.41
+   ],
+   "end": [
+    36.09,
+    -49.397
+   ],
+   "width": 0.635,
+   "why": "low-side gate copper at the old part places east of the column (R90, D34, R92, R70 moved to the Q7 gate pad)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    36.09,
+    -49.397
+   ],
+   "end": [
+    36.09,
+    -48.8
+   ],
+   "width": 0.635,
+   "why": "low-side gate copper at the old part places east of the column (R90, D34, R92, R70 moved to the Q7 gate pad)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(D34-PadA)",
+   "layer": "B.Cu",
+   "start": [
+    33.804,
+    -48.586
+   ],
+   "end": [
+    33.804,
+    -47.746
+   ],
+   "width": 0.635,
+   "why": "low-side gate copper at the old part places east of the column (R90, D34, R92, R70 moved to the Q7 gate pad)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(D34-PadA)",
+   "layer": "B.Cu",
+   "start": [
+    33.49,
+    -49.397
+   ],
+   "end": [
+    33.49,
+    -48.9
+   ],
+   "width": 0.635,
+   "why": "low-side gate copper at the old part places east of the column (R90, D34, R92, R70 moved to the Q7 gate pad)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(D34-PadA)",
+   "layer": "B.Cu",
+   "start": [
+    33.49,
+    -48.9
+   ],
+   "end": [
+    33.804,
+    -48.586
+   ],
+   "width": 0.635,
+   "why": "low-side gate copper at the old part places east of the column (R90, D34, R92, R70 moved to the Q7 gate pad)"
+  },
+  {
+   "kind": "via",
+   "net": "GND",
+   "at": [
+    12.45,
+    -55.0
+   ],
+   "why": "GND of C118 / R127 at their old place in the pin-column gap (both moved to pin 6 on the west side)"
+  }
+ ]
+}
