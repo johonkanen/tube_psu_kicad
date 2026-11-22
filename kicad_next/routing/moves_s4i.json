@@ -1,0 +1,69 @@
+{
+ "note": "routing stage 4i (2026-11-22), tools/next/route_s4i_drv5_in.py - incremental edit of the board, not a rebuild",
+ "moves": [
+  {
+   "ref": "R73",
+   "frm": {
+    "x": 18.8,
+    "y": -44.6635,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": -6.875,
+    "y": -45.2,
+    "rot": 0,
+    "side": "B"
+   },
+   "why": "pull-down of PRI_DHB_HI at pin 1 of DRV5 (west of the input pins)"
+  },
+  {
+   "ref": "R74",
+   "frm": {
+    "x": 20.3,
+    "y": -44.6635,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": -6.875,
+    "y": -46.9,
+    "rot": 0,
+    "side": "B"
+   },
+   "why": "pull-down of B12 at pin 2 of DRV5"
+  },
+  {
+   "ref": "C120",
+   "frm": {
+    "x": 15.3,
+    "y": -46.45,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": -7.0,
+    "y": -49.45,
+    "rot": -90,
+    "side": "B"
+   },
+   "why": "DAB_DIS filter capacitor at pin 5 of DRV5"
+  },
+  {
+   "ref": "R129",
+   "frm": {
+    "x": 16.6,
+    "y": -46.45,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": -8.5,
+    "y": -49.45,
+    "rot": -90,
+    "side": "B"
+   },
+   "why": "DAB_DIS pull-down at pin 5 of DRV5"
+  }
+ ]
+}

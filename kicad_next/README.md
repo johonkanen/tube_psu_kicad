@@ -1421,7 +1421,7 @@ Still open:
 * Switch-node zone `S3A_DHB_HI_SOURCE_F` at Q19 pin 3 after the refill: filled x 11.8 ... 16.4 at y -51.8 (4.6 mm),
   6 mm wide from y -52.5 to -56 (unchanged by this stage; the 15V via (17.625, -51.0) is still there).
 
-## Stage 4i: driver inputs of DRV5 – not routed, blocker found; 5V link moved (stage 4h2, 2026-11-22)
+## Stage 4i: driver inputs of DRV5 – blocker found (stage 4h2), solved by a window in the In3 15V strip (2026-11-22)
 
 On the board (`tools/next/route_s4h2_5v_link.py`, incremental, not re-runnable; `routing/deleted_s4h2.json`,
 `s4h2_added.json`, `moves_s4h2.json` (empty)): the 5V link on B.Cu under DRV5 runs at y -54.98 instead of -55.15
@@ -1451,11 +1451,48 @@ coordinates of the board, not from a routing run):
   the two input vias stand where those parts or C70 would go, and the 15V via (17.625, -51.0) with its B.Cu track
   still feeds D19 / C96.
 
-Ways out, to be decided: (1) re-lay the In2 bus section x 5.7 - 15.7 with the four extra lanes in it (needs about
-1.2 mm more between H4 and the gate pad of Q19: narrower pitch is not available, so R26 / C92 / the gate pad
-clearance or the H4 measure has to give); (2) open the In3 15V strip between y -45.6 and -41 for an In3 crossing
-(the strip then feeds pin 11 / D19 from the south only); (3) take the four signals round the north of H4 on In2
-(needs them on the north-west flank of the bus already at J2).
+Ways out considered: (1) re-lay the In2 bus section x 5.7 - 15.7 with the four extra lanes in it; (2) open the In3
+15V strip for an In3 crossing; (3) take the four signals round the north of H4 on In2. **Decision: (2).**
+
+### Stage 4i on the board: In3 window, PRI_DHB_HI / B12 / DAB_DIS / +1V65_BIAS routed
+
+`tools/next/route_s4i_drv5_in.py` (incremental, not re-runnable; `routing/moves_s4i.json`, `deleted_s4i.json`,
+`s4i_added.json`). Unconnected 32 -> 28 (the four nets closed), clearance markers 6 -> 6, 0 shorts, no H4 marker.
+
+* **Window**: rule area `S4I_KO_In3_15V_window` (no zone fill, In3 only), rectangle x 9.3 ... 13.7, y -46.9 ... -42.0.
+  It cuts the 15V strip (x 9.5 - 13.5) over its full width: no neck is left beside it. Band north of the gate pad of
+  Q19 chosen, not the gap Q19 pin 3 / gate pad of Q7: the lanes end at pins 1 / 2 / 5 (y -45.5 ... -50.5) and come
+  from the north-east, and the south gap is used by the 15V bridge below. North of the window the strip is a tab of
+  the north band (y > -42.0).
+* **15V of the south half** (strip south of y -46.9, pin 11 of DRV5, the band y -65 ... -60.6 with DRV3 / C18 / C52):
+  In3 track 1.0 mm from the east block of the plane (24.0, -50.4) -> (24.0, -51.6) -> (17.625, -51.6) -> (17.625,
+  -54.75) -> (12.0, -55.25) into the strip between Q19 pin 3 and the gate pad of Q7, 0.5 mm stub to the via (17.625,
+  -51.0). DAB_DIS leaves its via (27.425, -45.43) on In3 through the east block, so the block is joined round the
+  east of that via by a 0.5 mm In3 track (27.6, -44.6) -> (28.2, -44.6) -> (28.2, -46.6) -> (27.6, -46.6): the feed of
+  the south half is north band -> east block -> 0.5 mm link (and whatever plane is left beside the lane) -> 1.0 mm
+  track. Checked by DRC: no 15V item unconnected; with the last piece of the bridge removed on a copy the DRC
+  reports the split (28 -> 29). The bridge lies under the switch-node pour `S3A_DHB_HI_SOURCE_F` (F.Cu; In1 between).
+* **Lanes** (0.152 mm, In3; rows in the column chosen in the gaps between the In2 lanes above, none directly under
+  one; verticals x 10.2 ... 11.13 cross the In2 bus at 45 degrees; west of x 10 the rows cross it at 45 degrees):
+  * PRI_DHB_HI: kept via (19.0, -45.0) -> north -> row y -42.386 -> x 10.2 south -> row -45.455 -> via (-4.1, -45.455)
+    -> B.Cu to pin 1 and R73. In3 27.8 mm. Edge 4.93 mm from the centre of H4, 1.66 mm from the gate pad.
+  * B12: kept via (19.854, -45.0) -> round the south of the PRI_DHB_HI via -> x 18.5 north -> row -42.825 -> x 10.51
+    -> row -45.8 -> via (-4.1, -46.725) -> pin 2 and R74. In3 29.3 mm. H4 5.42 mm, gate pad 1.24 mm.
+  * DAB_DIS: kept via (27.425, -45.43) -> row -45.85 -> x 18.15 north -> row -43.434 -> x 10.82 -> row -46.15 to x 0.5
+    -> diagonal -> via (-4.1, -50.535) -> pin 5, C120, R129. In3 37.6 mm. H4 5.94 mm, gate pad 0.86 mm. The branch to
+    ISO2 pin 4 is untouched; the B.Cu piece from that via towards the old place of DRV5 is deleted.
+  * +1V65_BIAS: new via (14.6, -44.076) on its In2 lane (0.164 mm to SYNCH_2 / $HT_CS on In2; its F.Cu antipad
+    takes x 13.15 - 16.05 of the DC+ pour, the pour column to Q19 pin 2 keeps x 16.05 - 17.5) -> row -44.076 -> x 11.13
+    (0.544 mm from the gate pad) -> row -46.5 to x 6.0 -> diagonal to (1.5, -51.0) -> x 1.5 south to the kept via
+    (1.5, -54.9) at R103 / C123. In3 21.1 mm. H4 6.29 mm. The In2 lane end x 12.4 - 14.6 is deleted.
+* Parts (all B.Cu): R73 (18.8, -44.663) rot 90 -> (-6.875, -45.2) rot 0; R74 (20.3, -44.663) rot 90 -> (-6.875, -46.9)
+  rot 0; C120 (15.3, -46.45) -> (-7.0, -49.45) rot -90; R129 (16.6, -46.45) -> (-8.5, -49.45) rot -90. Their GND on the
+  via of C94 (-5.75, -49.405). R127 / C118 got their own GND via (-6.9, -51.55); the GND track x -5.8 is deleted (DAB_DIS
+  passes there on B.Cu).
+
+Still open: R22, D30, R53, D19, R41, C96 to the high side (the pocket east of the column is free now apart from the
+vias (19.0, -45.0) / (19.854, -45.0)), C70, C95, clean-up east of the column (15V via (17.625, -51.0) and its B.Cu
+track still feed D19 / C96).
 
 ## Footprints and 3D models (phase 3, 2026-11-18)
 

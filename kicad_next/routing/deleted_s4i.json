@@ -1,0 +1,455 @@
+{
+ "note": "routing stage 4i (2026-11-22), tools/next/route_s4i_drv5_in.py - incremental edit of the board, not a rebuild",
+ "deleted": [
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "B.Cu",
+   "start": [
+    18.8,
+    -45.5272
+   ],
+   "end": [
+    19.0,
+    -45.7272
+   ],
+   "width": 0.1524,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "B.Cu",
+   "start": [
+    18.8,
+    -45.489
+   ],
+   "end": [
+    19.0,
+    -45.0
+   ],
+   "width": 0.1524,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "B.Cu",
+   "start": [
+    19.0,
+    -45.7272
+   ],
+   "end": [
+    19.0,
+    -46.4
+   ],
+   "width": 0.1524,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "B.Cu",
+   "start": [
+    20.3,
+    -45.489
+   ],
+   "end": [
+    19.854,
+    -45.0
+   ],
+   "width": 0.1524,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    15.3,
+    -47.83
+   ],
+   "end": [
+    15.3,
+    -47.225
+   ],
+   "width": 0.3,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    15.3,
+    -47.83
+   ],
+   "end": [
+    16.425,
+    -47.83
+   ],
+   "width": 0.4,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    16.425,
+    -47.83
+   ],
+   "end": [
+    17.825,
+    -46.43
+   ],
+   "width": 0.4,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    16.6,
+    -47.75
+   ],
+   "end": [
+    16.6,
+    -47.275
+   ],
+   "width": 0.3,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    17.825,
+    -46.43
+   ],
+   "end": [
+    17.825,
+    -44.83
+   ],
+   "width": 0.4,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    17.825,
+    -44.83
+   ],
+   "end": [
+    17.925,
+    -44.73
+   ],
+   "width": 0.4,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    17.925,
+    -44.73
+   ],
+   "end": [
+    17.925,
+    -44.33
+   ],
+   "width": 0.4,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    17.925,
+    -44.33
+   ],
+   "end": [
+    17.825,
+    -44.23
+   ],
+   "width": 0.4,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    17.825,
+    -44.23
+   ],
+   "end": [
+    17.825,
+    -43.33
+   ],
+   "width": 0.4,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    17.825,
+    -43.33
+   ],
+   "end": [
+    18.225,
+    -42.93
+   ],
+   "width": 0.4,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    18.225,
+    -42.93
+   ],
+   "end": [
+    22.225,
+    -42.93
+   ],
+   "width": 0.4,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    22.225,
+    -42.93
+   ],
+   "end": [
+    23.225,
+    -43.93
+   ],
+   "width": 0.4,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    23.225,
+    -43.93
+   ],
+   "end": [
+    23.225,
+    -44.73
+   ],
+   "width": 0.4,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    23.225,
+    -44.73
+   ],
+   "end": [
+    23.925,
+    -45.43
+   ],
+   "width": 0.4,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    23.925,
+    -45.43
+   ],
+   "end": [
+    27.425,
+    -45.43
+   ],
+   "width": 0.4,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    15.3,
+    -45.675
+   ],
+   "end": [
+    16.6,
+    -45.625
+   ],
+   "width": 0.3,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    18.8762,
+    -43.8
+   ],
+   "end": [
+    18.8,
+    -43.8
+   ],
+   "width": 0.1524,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    18.8,
+    -43.7238
+   ],
+   "end": [
+    18.8,
+    -43.8
+   ],
+   "width": 0.1524,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    18.8,
+    -43.8762
+   ],
+   "end": [
+    18.8,
+    -43.8
+   ],
+   "width": 0.1524,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    18.7238,
+    -43.8
+   ],
+   "end": [
+    18.8,
+    -43.8
+   ],
+   "width": 0.1524,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    20.3,
+    -43.8762
+   ],
+   "end": [
+    20.3,
+    -43.8
+   ],
+   "width": 0.1524,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    20.3762,
+    -43.8
+   ],
+   "end": [
+    20.3,
+    -43.8
+   ],
+   "width": 0.1524,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    20.3,
+    -43.7238
+   ],
+   "end": [
+    20.3,
+    -43.8
+   ],
+   "width": 0.1524,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    20.2238,
+    -43.8
+   ],
+   "end": [
+    20.3,
+    -43.8
+   ],
+   "width": 0.1524,
+   "why": "old place east of the FET column (part moved to the input pins of DRV5 on the west side)"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    12.4,
+    -44.076
+   ],
+   "end": [
+    15.224,
+    -44.076
+   ],
+   "width": 0.1524,
+   "why": "In2 lane end of +1V65_BIAS over the 15V strip (tapped at the new via (14.6, -44.076), crosses on In3)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    -5.825,
+    -51.805
+   ],
+   "end": [
+    -5.75,
+    -49.405
+   ],
+   "width": 0.3,
+   "why": "GND of R127 / C118 to the via of C94: in the way of DAB_DIS at pin 5 (own GND via (-6.9, -51.55) instead)"
+  }
+ ]
+}

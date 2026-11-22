@@ -1,0 +1,999 @@
+{
+ "note": "routing stage 4i (2026-11-22), tools/next/route_s4i_drv5_in.py - incremental edit of the board, not a rebuild",
+ "added": [
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In3.Power",
+   "start": [
+    24.0,
+    -50.4
+   ],
+   "end": [
+    24.0,
+    -51.6
+   ],
+   "width": 1.0
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In3.Power",
+   "start": [
+    24.0,
+    -51.6
+   ],
+   "end": [
+    17.625,
+    -51.6
+   ],
+   "width": 1.0
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In3.Power",
+   "start": [
+    17.625,
+    -51.6
+   ],
+   "end": [
+    17.625,
+    -54.75
+   ],
+   "width": 1.0
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In3.Power",
+   "start": [
+    17.625,
+    -54.75
+   ],
+   "end": [
+    17.125,
+    -55.25
+   ],
+   "width": 1.0
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In3.Power",
+   "start": [
+    17.125,
+    -55.25
+   ],
+   "end": [
+    12.0,
+    -55.25
+   ],
+   "width": 1.0
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In3.Power",
+   "start": [
+    17.625,
+    -51.6
+   ],
+   "end": [
+    17.625,
+    -51.0
+   ],
+   "width": 0.5
+  },
+  {
+   "kind": "via",
+   "net": "+1V65_BIAS",
+   "at": [
+    14.6,
+    -44.076
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    15.224,
+    -44.076
+   ],
+   "end": [
+    14.6,
+    -44.076
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In3.Power",
+   "start": [
+    27.6,
+    -44.6
+   ],
+   "end": [
+    28.2,
+    -44.6
+   ],
+   "width": 0.5
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In3.Power",
+   "start": [
+    28.2,
+    -44.6
+   ],
+   "end": [
+    28.2,
+    -46.6
+   ],
+   "width": 0.5
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In3.Power",
+   "start": [
+    28.2,
+    -46.6
+   ],
+   "end": [
+    27.6,
+    -46.6
+   ],
+   "width": 0.5
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "In3.Power",
+   "start": [
+    19.0,
+    -45.0
+   ],
+   "end": [
+    19.0,
+    -43.7
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "In3.Power",
+   "start": [
+    19.0,
+    -43.7
+   ],
+   "end": [
+    17.686,
+    -42.386
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "In3.Power",
+   "start": [
+    17.686,
+    -42.386
+   ],
+   "end": [
+    10.4,
+    -42.386
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "In3.Power",
+   "start": [
+    10.4,
+    -42.386
+   ],
+   "end": [
+    10.2,
+    -42.586
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "In3.Power",
+   "start": [
+    10.2,
+    -42.586
+   ],
+   "end": [
+    10.2,
+    -45.255
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "In3.Power",
+   "start": [
+    10.2,
+    -45.255
+   ],
+   "end": [
+    10.0,
+    -45.455
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "In3.Power",
+   "start": [
+    10.0,
+    -45.455
+   ],
+   "end": [
+    -4.1,
+    -45.455
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "In3.Power",
+   "start": [
+    19.854,
+    -45.0
+   ],
+   "end": [
+    19.354,
+    -45.5
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "In3.Power",
+   "start": [
+    19.354,
+    -45.5
+   ],
+   "end": [
+    18.75,
+    -45.5
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "In3.Power",
+   "start": [
+    18.75,
+    -45.5
+   ],
+   "end": [
+    18.5,
+    -45.25
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "In3.Power",
+   "start": [
+    18.5,
+    -45.25
+   ],
+   "end": [
+    18.5,
+    -43.7
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "In3.Power",
+   "start": [
+    18.5,
+    -43.7
+   ],
+   "end": [
+    17.625,
+    -42.825
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "In3.Power",
+   "start": [
+    17.625,
+    -42.825
+   ],
+   "end": [
+    10.71,
+    -42.825
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "In3.Power",
+   "start": [
+    10.71,
+    -42.825
+   ],
+   "end": [
+    10.51,
+    -43.025
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "In3.Power",
+   "start": [
+    10.51,
+    -43.025
+   ],
+   "end": [
+    10.51,
+    -45.6
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "In3.Power",
+   "start": [
+    10.51,
+    -45.6
+   ],
+   "end": [
+    10.31,
+    -45.8
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "In3.Power",
+   "start": [
+    10.31,
+    -45.8
+   ],
+   "end": [
+    -3.0,
+    -45.8
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "In3.Power",
+   "start": [
+    -3.0,
+    -45.8
+   ],
+   "end": [
+    -3.925,
+    -46.725
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "In3.Power",
+   "start": [
+    -3.925,
+    -46.725
+   ],
+   "end": [
+    -4.1,
+    -46.725
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "In3.Power",
+   "start": [
+    27.425,
+    -45.43
+   ],
+   "end": [
+    27.005,
+    -45.85
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "In3.Power",
+   "start": [
+    27.005,
+    -45.85
+   ],
+   "end": [
+    18.4,
+    -45.85
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "In3.Power",
+   "start": [
+    18.4,
+    -45.85
+   ],
+   "end": [
+    18.15,
+    -45.6
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "In3.Power",
+   "start": [
+    18.15,
+    -45.6
+   ],
+   "end": [
+    18.15,
+    -44.525
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "In3.Power",
+   "start": [
+    18.15,
+    -44.525
+   ],
+   "end": [
+    17.059,
+    -43.434
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "In3.Power",
+   "start": [
+    17.059,
+    -43.434
+   ],
+   "end": [
+    11.02,
+    -43.434
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "In3.Power",
+   "start": [
+    11.02,
+    -43.434
+   ],
+   "end": [
+    10.82,
+    -43.634
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "In3.Power",
+   "start": [
+    10.82,
+    -43.634
+   ],
+   "end": [
+    10.82,
+    -45.95
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "In3.Power",
+   "start": [
+    10.82,
+    -45.95
+   ],
+   "end": [
+    10.62,
+    -46.15
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "In3.Power",
+   "start": [
+    10.62,
+    -46.15
+   ],
+   "end": [
+    0.5,
+    -46.15
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "In3.Power",
+   "start": [
+    0.5,
+    -46.15
+   ],
+   "end": [
+    -3.885,
+    -50.535
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "In3.Power",
+   "start": [
+    -3.885,
+    -50.535
+   ],
+   "end": [
+    -4.1,
+    -50.535
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "In3.Power",
+   "start": [
+    14.6,
+    -44.076
+   ],
+   "end": [
+    11.33,
+    -44.076
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "In3.Power",
+   "start": [
+    11.33,
+    -44.076
+   ],
+   "end": [
+    11.13,
+    -44.276
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "In3.Power",
+   "start": [
+    11.13,
+    -44.276
+   ],
+   "end": [
+    11.13,
+    -46.3
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "In3.Power",
+   "start": [
+    11.13,
+    -46.3
+   ],
+   "end": [
+    10.93,
+    -46.5
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "In3.Power",
+   "start": [
+    10.93,
+    -46.5
+   ],
+   "end": [
+    6.0,
+    -46.5
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "In3.Power",
+   "start": [
+    6.0,
+    -46.5
+   ],
+   "end": [
+    1.5,
+    -51.0
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "In3.Power",
+   "start": [
+    1.5,
+    -51.0
+   ],
+   "end": [
+    1.5,
+    -54.9
+   ],
+   "width": 0.152
+  },
+  {
+   "kind": "via",
+   "net": "PRI_DHB_HI",
+   "at": [
+    -4.1,
+    -45.455
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "B12",
+   "at": [
+    -4.1,
+    -46.725
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "DAB_DIS",
+   "at": [
+    -4.1,
+    -50.535
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "GND",
+   "at": [
+    -6.9,
+    -51.55
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "B.Cu",
+   "start": [
+    -2.35,
+    -45.455
+   ],
+   "end": [
+    -4.1,
+    -45.455
+   ],
+   "width": 0.2
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "B.Cu",
+   "start": [
+    -4.1,
+    -45.455
+   ],
+   "end": [
+    -5.0,
+    -45.455
+   ],
+   "width": 0.2
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "B.Cu",
+   "start": [
+    -5.0,
+    -45.455
+   ],
+   "end": [
+    -6.05,
+    -45.2
+   ],
+   "width": 0.2
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "B.Cu",
+   "start": [
+    -2.35,
+    -46.725
+   ],
+   "end": [
+    -4.1,
+    -46.725
+   ],
+   "width": 0.2
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "B.Cu",
+   "start": [
+    -4.1,
+    -46.725
+   ],
+   "end": [
+    -5.2,
+    -46.725
+   ],
+   "width": 0.2
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "B.Cu",
+   "start": [
+    -5.2,
+    -46.725
+   ],
+   "end": [
+    -6.05,
+    -46.9
+   ],
+   "width": 0.2
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    -2.35,
+    -50.535
+   ],
+   "end": [
+    -4.1,
+    -50.535
+   ],
+   "width": 0.2
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    -4.1,
+    -50.535
+   ],
+   "end": [
+    -6.3,
+    -50.535
+   ],
+   "width": 0.2
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    -6.3,
+    -50.535
+   ],
+   "end": [
+    -6.7,
+    -50.225
+   ],
+   "width": 0.2
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    -6.7,
+    -50.225
+   ],
+   "end": [
+    -8.5,
+    -50.25
+   ],
+   "width": 0.2
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    -7.7,
+    -45.2
+   ],
+   "end": [
+    -7.7,
+    -46.9
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    -7.7,
+    -46.9
+   ],
+   "end": [
+    -7.7,
+    -47.9
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    -7.7,
+    -47.9
+   ],
+   "end": [
+    -7.0,
+    -48.6
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    -8.5,
+    -48.65
+   ],
+   "end": [
+    -7.0,
+    -48.65
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    -7.0,
+    -48.65
+   ],
+   "end": [
+    -6.25,
+    -49.405
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    -6.25,
+    -49.405
+   ],
+   "end": [
+    -5.75,
+    -49.405
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    -5.825,
+    -51.805
+   ],
+   "end": [
+    -6.9,
+    -51.55
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "rule area (no zone fill)",
+   "zone": "S4I_KO_In3_15V_window",
+   "layer": "In3.Power",
+   "outline": [
+    [
+     13.7,
+     -42.0
+    ],
+    [
+     9.3,
+     -42.0
+    ],
+    [
+     9.3,
+     -46.9
+    ],
+    [
+     13.7,
+     -46.9
+    ]
+   ],
+   "why": "window in the In3 15V strip (x 9.5 - 13.5) for the lanes PRI_DHB_HI, B12, DAB_DIS, +1V65_BIAS"
+  }
+ ]
+}
