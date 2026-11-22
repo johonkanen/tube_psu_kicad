@@ -1,0 +1,154 @@
+{
+ "note": "routing stage 5c (2026-11-22), tools/next/route_s5c_last.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "lowgate"
+ ],
+ "added": [
+  {
+   "group": "lowgate",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    56.357,
+    -53.832
+   ],
+   "end": [
+    58.3,
+    -53.832
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "lowgate",
+   "kind": "via",
+   "net": "DHB_LOW_GATE_SEC",
+   "at": [
+    58.3,
+    -53.832
+   ],
+   "size": [
+    0.6,
+    0.3
+   ]
+  },
+  {
+   "group": "lowgate",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE_SEC",
+   "layer": "In3.Power",
+   "start": [
+    58.3,
+    -53.832
+   ],
+   "end": [
+    58.568,
+    -54.1
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "lowgate",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE_SEC",
+   "layer": "In3.Power",
+   "start": [
+    58.568,
+    -54.1
+   ],
+   "end": [
+    71.0,
+    -54.1
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "lowgate",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE_SEC",
+   "layer": "In3.Power",
+   "start": [
+    71.0,
+    -54.1
+   ],
+   "end": [
+    72.5,
+    -52.6
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "lowgate",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE_SEC",
+   "layer": "In3.Power",
+   "start": [
+    72.5,
+    -52.6
+   ],
+   "end": [
+    72.5,
+    -50.3
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "lowgate",
+   "kind": "via",
+   "net": "DHB_LOW_GATE_SEC",
+   "at": [
+    72.5,
+    -50.3
+   ],
+   "size": [
+    0.6,
+    0.3
+   ]
+  },
+  {
+   "group": "lowgate",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    72.5,
+    -50.3
+   ],
+   "end": [
+    73.3,
+    -49.5
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "lowgate",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    73.3,
+    -49.5
+   ],
+   "end": [
+    73.3,
+    -48.45
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "lowgate",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    73.3,
+    -48.45
+   ],
+   "end": [
+    73.73,
+    -48.02
+   ],
+   "width": 0.3
+  }
+ ]
+}
