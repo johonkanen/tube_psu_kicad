@@ -81,6 +81,10 @@ GROUPS = {
         (GPIO, I2, -20.0, -45.3, -13.0, -52.3, "GPIO_BYPASS_RLY lane 0.4 mm north round the +3V3 via (-12.5, -52.6)"),
         (GPIO, I2, -13.0, -52.3, -1.412, -52.3, "GPIO_BYPASS_RLY lane 0.4 mm north round the +3V3 via (-12.5, -52.6)"),
     ]),
+    # HEATER_CURRENT: 0.3 mm In2 leftover under the gate pad of Q11 (no via possible there, nothing on its other end)
+    "hc": dict(DEL=[
+        ("HEATER_CURRENT", I2, -11.2, -79.1, -11.2, -78.8, "dangling 0.3 mm In2 stub at R30 pad 1, joined to nothing"),
+    ]),
 }
 
 

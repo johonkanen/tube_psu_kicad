@@ -1640,6 +1640,42 @@ Sum 1.25 + 1.0 + 2.2 = 4.45 mm of copper width, about 3.3 mm counted as 1 oz (In
 * New courtyard overlap R41 / D30 (0.375 mm between the pads); the old leftover track of Net-(D30-PadA) at
   (41.5, -49.2 ... -47.7) is deleted.
 
+## Stage 5a: small signal nets closed (2026-11-22)
+
+`tools/next/route_s5a_signals.py --group pwm2,p3v3` and `--group hc` (incremental, not re-runnable;
+`routing/moves_s5a.json` (empty), `deleted_s5a.json`, `s5a_added.json`). Unconnected 20 -> 12, clearance markers
+6 -> 6 (the same six), 0 shorts. No part moved. Aim of this stage: every connection made and rule-clean, not optimised.
+
+* **Net-(PWM2-VERR)**: R138 pad 2 - R139 pad 1 on B.Cu, 0.2 mm, y -1.82 between the GND pads of R139 and C15 (3.5 mm).
+* **Net-(PWM2-FB)**: R140 pad 1 - C139 pad 1 on B.Cu (2.9 mm); via 0.6 / 0.3 at (49.38, -0.745) in the edge of C139
+  pad 1; F.Cu 0.2 mm under the body of PWM2 (x 49.38 north, y 2.4 north of the GND via (50.1, 1.605), down to pin 3;
+  7.3 mm). The FLY_C pours on F.Cu / B.Cu give way by the 1.2 mm rule beside the via and the tracks.
+* **Net-(PWM2-VIN)**: R153 pad 2 on B.Cu east on y 10.6, diagonal to x 55.15 (1.27 mm from TR1 pin 12, FLY_C), south
+  east of C51 to a via 0.6 / 0.3 at (55.15, 3.7) (1.27 mm from the B.Cu DC+ track of C15); F.Cu on x 55.15 to pin 1
+  from the east. B.Cu 13.3 mm, F.Cu 4.5 mm. The crossing of the F.Cu FLY_C pour (y 7 ... 10.25) is on B.Cu.
+* **Net-(D10-PadA)**: via 0.5 / 0.3 at (36.8, 3.2), in the anode pad of D10 (F.Cu) and in pad 2 of R142 (B.Cu). The
+  anode pad is closed in on F.Cu (+3V3 west, 15V on the other three sides) and the In2 lanes of AUX_MEAS (x 36.53)
+  and 5V_MEAS (x 37.4) were 0.72 mm apart under it, so the AUX_MEAS lane now runs at x 36.2 under the pad
+  ((35.0, 3.879) - (36.2, 2.679) - (36.2, 1.93) - its via (36.53, 1.6)).
+* **+3V3** (both items): C125 pad 1 -> B.Cu 1.3 mm -> via (0.8, -60.2) -> In3 0.25 mm on y -59.8 to the kept via
+  (5.8, -60.1) of the U1 block (5.3 mm), and In3 on y -59.4 / diagonal / x -12.5 (18.1 mm) to a new via (-12.5, -52.6)
+  on the In2 bus lane y -52.8. In3 has no pour there (the 15V plane starts at y -60.55). The +3V3 lane is the second
+  lane of the bundle, so the outer lane GPIO_BYPASS_RLY (y -52.3) steps to y -51.9 from x -13.4 to -11.7 round the
+  via; the via is west of the B.Cu 15V track (x -11.6) and 2.3 mm from the F.Cu DC+ pour.
+* **HEATER_CURRENT**: the open item was a 0.3 mm In2 stub at R30 pad 1 (under the gate pad of Q11, joined to
+  nothing); deleted.
+
+Not closed in this stage:
+
+* **TX / RX** to U11 pins 4 / 5: not started (findings of stage 3g still apply; In3 not tried).
+* **Net-(Q9-D)** Q9 pad 1 - D9 anode: the B.Cu track of GPIO_BYPASS_RLY (x -60.15, y -31 ... -38.1, and its diagonal
+  north-west) runs between the two pads; F.Cu above is the Net-(RL1-COM) pour (mains), so no via pair there. Way
+  out: round the south end of the GPIO track (y -38.1) or GPIO_BYPASS_RLY onto In2 earlier.
+* **Net-(C131-Pad2)** C131 pad 2 - R82 pad 2: on B.Cu R82 pad 2 is fenced by Net-(U6-+) (x 21.3, y 4.865) and
+  Net-(U6--) (x 20.7); the way north of R17 needs y >= 7.2 (GND pad of R17) and y <= 6.97 (1.2 mm from the DC+ pad
+  at y 8.25). Needs a via pair or the south end of the kept track (22.1, -0.365).
+* **Net-(R51-Pad2)**: In2 track end (29.2, 16.5) to R51 pad 2 (5.3, 6.5), 24 mm apart, HV_PRIMARY; not looked at.
+
 ## Footprints and 3D models (phase 3, 2026-11-18)
 
 Regenerate: `python3 tools/next/gen_next_footprints.py`, `tools/p2k/bin/kicad_env.sh python3

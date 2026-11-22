@@ -106340,14 +106340,6 @@
 		(uuid "5c427fba-932f-4351-8305-7e4f4f25d513")
 	)
 	(segment
-		(start -11.2 -79.1)
-		(end -11.2 -78.8)
-		(width 0.1524)
-		(layer "In2.Cu")
-		(net "HEATER_CURRENT")
-		(uuid "a1c090c6-ecf0-4f37-bec7-23547073b434")
-	)
-	(segment
 		(start -1.5 -66)
 		(end 0.2 -64.3)
 		(width 0.2)
