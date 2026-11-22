@@ -3,7 +3,9 @@
  "groups": [
   "u9",
   "drv2",
-  "dt"
+  "dt",
+  "c131",
+  "q9d"
  ],
  "deleted": [
   {
@@ -185,6 +187,54 @@
     -51.5
    ],
    "why": "0.25 mm south-west (room for DT past TR3 pin 9)"
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(U6-+)",
+   "layer": "B.Cu",
+   "start": [
+    18.7,
+    5.6
+   ],
+   "end": [
+    20.95,
+    5.6
+   ],
+   "width": 0.1524,
+   "why": "U6-+ link drops south before R17 (gap between the R17 pads for the output)"
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(U6-+)",
+   "layer": "B.Cu",
+   "start": [
+    20.95,
+    5.6
+   ],
+   "end": [
+    21.4,
+    5.15
+   ],
+   "width": 0.1524,
+   "why": "U6-+ link drops south before R17 (gap between the R17 pads for the output)"
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(U6-+)",
+   "layer": "B.Cu",
+   "start": [
+    21.4,
+    5.15
+   ],
+   "end": [
+    21.4,
+    4.875
+   ],
+   "width": 0.1524,
+   "why": "U6-+ link drops south before R17 (gap between the R17 pads for the output)"
   }
  ]
 }

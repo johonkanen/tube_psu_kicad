@@ -94,6 +94,28 @@ GROUPS = {
         ("v", "Net-(DRV6-DT)", 66.9, -49.3, 0.5, 0.3),
         ("t", "Net-(DRV6-DT)", B, 0.25, [(66.9, -49.3), (67.085, -49.1)]),
     ]),
+    # C131 pad 2 - R82 pad 2 (output of U6). The fence was the Net-(U6-+) track R10 pad 2 - R17 pad 1 on y 5.6, which
+    # ran into the gap between the pads of R17. It now drops to y 5.1 west of R17 (1.2 mm from R10 pad 1), and the
+    # output runs on y 6.7 (1.4 mm south of the DC+ pad of C29), through the gap between the pads of R17, between the
+    # pads of C130, east of C130 and back west on y 3.7 to R82 pad 2.
+    "c131": dict(DEL=[
+        ("Net-(U6-+)", B, 18.7, 5.6, 20.95, 5.6, "U6-+ link drops south before R17 (gap between the R17 pads for the output)"),
+        ("Net-(U6-+)", B, 20.95, 5.6, 21.4, 5.15, "U6-+ link drops south before R17 (gap between the R17 pads for the output)"),
+        ("Net-(U6-+)", B, 21.4, 5.15, 21.4, 4.875, "U6-+ link drops south before R17 (gap between the R17 pads for the output)"),
+    ], ADD=[
+        ("t", "Net-(U6-+)", B, 0.152, [(18.7, 5.6), (20.1, 5.6), (20.6, 5.1), (21.175, 5.1), (21.4, 4.875)]),
+        ("t", "Net-(C131-Pad2)", B, 0.152, [(16.73, 6.815), (16.845, 6.7), (20.0, 6.7), (20.5, 6.2), (20.5, 5.9), (20.7, 5.7),
+                                             (22.0, 5.7), (22.26, 5.44), (23.6, 5.44), (23.85, 5.19), (23.85, 3.95),
+                                             (23.6, 3.7), (22.7, 3.7), (22.3, 3.3), (22.125, 3.0)]),
+    ]),
+    # Q9 pad 1 (drain) - RL1 pin 5 / D9 anode. On B.Cu the GPIO_BYPASS_RLY track (x -60.15, then east on y -39.4)
+    # and the 5V track (x -59.7) both run between them. Via under the body of Q9, west of the F.Cu Net-(RL1-COM) pour
+    # (1.2 mm), and In3 (no pour, no other track here) straight to the through-hole pin 5 of RL1.
+    "q9d": dict(ADD=[
+        ("t", "Net-(Q9-D)", B, 0.25, [(-61.642, -31.9), (-62.4, -31.9)]),
+        ("v", "Net-(Q9-D)", -62.4, -31.9, 0.5, 0.3),
+        ("t", "Net-(Q9-D)", I3, 0.25, [(-62.4, -31.9), (-58.4, -35.9), (-56.351, -35.902)]),
+    ]),
 }
 
 

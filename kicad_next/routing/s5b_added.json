@@ -3,7 +3,9 @@
  "groups": [
   "u9",
   "drv2",
-  "dt"
+  "dt",
+  "c131",
+  "q9d"
  ],
  "added": [
   {
@@ -668,6 +670,334 @@
    "end": [
     67.085,
     -49.1
+   ],
+   "width": 0.25
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(U6-+)",
+   "layer": "B.Cu",
+   "start": [
+    18.7,
+    5.6
+   ],
+   "end": [
+    20.1,
+    5.6
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(U6-+)",
+   "layer": "B.Cu",
+   "start": [
+    20.1,
+    5.6
+   ],
+   "end": [
+    20.6,
+    5.1
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(U6-+)",
+   "layer": "B.Cu",
+   "start": [
+    20.6,
+    5.1
+   ],
+   "end": [
+    21.175,
+    5.1
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(U6-+)",
+   "layer": "B.Cu",
+   "start": [
+    21.175,
+    5.1
+   ],
+   "end": [
+    21.4,
+    4.875
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(C131-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    16.73,
+    6.815
+   ],
+   "end": [
+    16.845,
+    6.7
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(C131-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    16.845,
+    6.7
+   ],
+   "end": [
+    20.0,
+    6.7
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(C131-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    20.0,
+    6.7
+   ],
+   "end": [
+    20.5,
+    6.2
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(C131-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    20.5,
+    6.2
+   ],
+   "end": [
+    20.5,
+    5.9
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(C131-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    20.5,
+    5.9
+   ],
+   "end": [
+    20.7,
+    5.7
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(C131-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    20.7,
+    5.7
+   ],
+   "end": [
+    22.0,
+    5.7
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(C131-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    22.0,
+    5.7
+   ],
+   "end": [
+    22.26,
+    5.44
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(C131-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    22.26,
+    5.44
+   ],
+   "end": [
+    23.6,
+    5.44
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(C131-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    23.6,
+    5.44
+   ],
+   "end": [
+    23.85,
+    5.19
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(C131-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    23.85,
+    5.19
+   ],
+   "end": [
+    23.85,
+    3.95
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(C131-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    23.85,
+    3.95
+   ],
+   "end": [
+    23.6,
+    3.7
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(C131-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    23.6,
+    3.7
+   ],
+   "end": [
+    22.7,
+    3.7
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(C131-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    22.7,
+    3.7
+   ],
+   "end": [
+    22.3,
+    3.3
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "c131",
+   "kind": "segment",
+   "net": "Net-(C131-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    22.3,
+    3.3
+   ],
+   "end": [
+    22.125,
+    3.0
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "q9d",
+   "kind": "segment",
+   "net": "Net-(Q9-D)",
+   "layer": "B.Cu",
+   "start": [
+    -61.642,
+    -31.9
+   ],
+   "end": [
+    -62.4,
+    -31.9
+   ],
+   "width": 0.25
+  },
+  {
+   "group": "q9d",
+   "kind": "via",
+   "net": "Net-(Q9-D)",
+   "at": [
+    -62.4,
+    -31.9
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "group": "q9d",
+   "kind": "segment",
+   "net": "Net-(Q9-D)",
+   "layer": "In3.Power",
+   "start": [
+    -62.4,
+    -31.9
+   ],
+   "end": [
+    -58.4,
+    -35.9
+   ],
+   "width": 0.25
+  },
+  {
+   "group": "q9d",
+   "kind": "segment",
+   "net": "Net-(Q9-D)",
+   "layer": "In3.Power",
+   "start": [
+    -58.4,
+    -35.9
+   ],
+   "end": [
+    -56.351,
+    -35.902
    ],
    "width": 0.25
   }
