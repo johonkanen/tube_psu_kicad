@@ -1,0 +1,21 @@
+{
+ "note": "routing stage 4b (2026-11-22), tools/next/route_s4b_dab_primary.py - incremental edit of the board, not a rebuild",
+ "moves": [
+  {
+   "ref": "C67",
+   "frm": {
+    "x": 26.7745,
+    "y": -43.7,
+    "rot": 0.0,
+    "side": "F"
+   },
+   "to": {
+    "x": 19.7,
+    "y": -48.0,
+    "rot": 0,
+    "side": "F"
+   },
+   "why": "DC+ decoupling to the half bridge: pin 1 in the DC+ zone at Q19 pin 2 (5 mm), pin 2 on the DHB_CURRENT return (In2 under the switch-node strip to Q7 pin 3)"
+  }
+ ]
+}

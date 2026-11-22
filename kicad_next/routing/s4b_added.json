@@ -1,0 +1,335 @@
+{
+ "note": "routing stage 4b (2026-11-22), tools/next/route_s4b_dab_primary.py - incremental edit of the board, not a rebuild",
+ "added": [
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    18.8,
+    -52.0
+   ],
+   "end": [
+    18.8,
+    -56.5
+   ],
+   "width": 0.254
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    12.75,
+    -63.34
+   ],
+   "end": [
+    16.2,
+    -63.34
+   ],
+   "width": 1.2
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    16.2,
+    -63.34
+   ],
+   "end": [
+    17.4,
+    -62.14
+   ],
+   "width": 1.2
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    17.4,
+    -62.14
+   ],
+   "end": [
+    17.4,
+    -52.3
+   ],
+   "width": 1.2
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    17.4,
+    -52.3
+   ],
+   "end": [
+    21.2,
+    -52.3
+   ],
+   "width": 1.2
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    21.2,
+    -52.3
+   ],
+   "end": [
+    22.6,
+    -50.9
+   ],
+   "width": 1.2
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    22.6,
+    -50.9
+   ],
+   "end": [
+    22.6,
+    -49.0
+   ],
+   "width": 1.2
+  },
+  {
+   "kind": "via",
+   "net": "DHB_CURRENT",
+   "at": [
+    22.6,
+    -50.0
+   ],
+   "size": [
+    0.8,
+    0.4
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "DHB_CURRENT",
+   "at": [
+    22.6,
+    -49.0
+   ],
+   "size": [
+    0.8,
+    0.4
+   ]
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "F.Cu",
+   "start": [
+    22.0,
+    -46.9
+   ],
+   "end": [
+    22.6,
+    -45.9
+   ],
+   "width": 1.0
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "F.Cu",
+   "start": [
+    22.6,
+    -45.9
+   ],
+   "end": [
+    25.6,
+    -45.9
+   ],
+   "width": 1.0
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "F.Cu",
+   "start": [
+    25.6,
+    -45.9
+   ],
+   "end": [
+    26.3,
+    -46.75
+   ],
+   "width": 1.0
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "F.Cu",
+   "start": [
+    26.3,
+    -46.75
+   ],
+   "end": [
+    29.2,
+    -46.75
+   ],
+   "width": 1.0
+  },
+  {
+   "kind": "via",
+   "net": "PRI_DHB_HI",
+   "at": [
+    19.0,
+    -45.0
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "In2.Signal_HV",
+   "start": [
+    19.0,
+    -44.5
+   ],
+   "end": [
+    19.0,
+    -45.0
+   ],
+   "width": 0.1524
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "B.Cu",
+   "start": [
+    18.8,
+    -45.489
+   ],
+   "end": [
+    19.0,
+    -45.0
+   ],
+   "width": 0.1524
+  },
+  {
+   "kind": "via",
+   "net": "B12",
+   "at": [
+    19.854,
+    -45.0
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "In2.Signal_HV",
+   "start": [
+    19.854,
+    -44.154
+   ],
+   "end": [
+    19.854,
+    -45.0
+   ],
+   "width": 0.1524
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "B.Cu",
+   "start": [
+    20.3,
+    -45.489
+   ],
+   "end": [
+    19.854,
+    -45.0
+   ],
+   "width": 0.1524
+  },
+  {
+   "kind": "zone",
+   "zone": "S4B_DHB_CURRENT_F",
+   "net": "DHB_CURRENT",
+   "layer": "F.Cu",
+   "outline": [
+    [
+     20.35,
+     -50.6
+    ],
+    [
+     25.75,
+     -50.6
+    ],
+    [
+     25.75,
+     -49.3
+    ],
+    [
+     28.2,
+     -49.3
+    ],
+    [
+     28.2,
+     -46.1
+    ],
+    [
+     24.0,
+     -46.1
+    ],
+    [
+     24.0,
+     -46.5
+    ],
+    [
+     20.35,
+     -46.5
+    ]
+   ]
+  },
+  {
+   "kind": "zone",
+   "zone": "S4B_DC+_F",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "outline": [
+    [
+     11.8,
+     -50.45
+    ],
+    [
+     18.9,
+     -50.45
+    ],
+    [
+     18.9,
+     -44.6
+    ],
+    [
+     14.0,
+     -44.6
+    ],
+    [
+     14.0,
+     -48.6
+    ],
+    [
+     11.8,
+     -48.6
+    ]
+   ]
+  }
+ ]
+}

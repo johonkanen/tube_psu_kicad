@@ -1,0 +1,254 @@
+{
+ "note": "routing stage 4b (2026-11-22), tools/next/route_s4b_dab_primary.py - incremental edit of the board, not a rebuild",
+ "deleted": [
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "F.Cu",
+   "start": [
+    22.88,
+    -61.0725
+   ],
+   "end": [
+    22.9,
+    -61.0725
+   ],
+   "width": 0.2,
+   "why": "in the F.Cu switch-node arm Q19 / Q7 -> TR3 (1.2 mm HV spacing)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "F.Cu",
+   "start": [
+    22.9,
+    -61.0725
+   ],
+   "end": [
+    19.7,
+    -57.8725
+   ],
+   "width": 0.2,
+   "why": "in the F.Cu switch-node arm Q19 / Q7 -> TR3 (1.2 mm HV spacing)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    19.7,
+    -57.8725
+   ],
+   "end": [
+    18.8,
+    -57.8725
+   ],
+   "width": 0.2,
+   "why": "in the F.Cu switch-node arm Q19 / Q7 -> TR3 (1.2 mm HV spacing)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    18.8,
+    -52.0
+   ],
+   "end": [
+    18.8,
+    -57.873
+   ],
+   "width": 0.254,
+   "why": "sense lane shortened to the y -56.5 lane (its via is gone)"
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "In2.Signal_HV",
+   "start": [
+    19.0,
+    -46.4
+   ],
+   "end": [
+    19.0,
+    -44.5
+   ],
+   "width": 0.1524,
+   "why": "through via 1.1 mm from C67 pin 1 (DC+) on F.Cu: moved 1.4 mm north to the pad of R73 / R74"
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "In2.Signal_HV",
+   "start": [
+    19.854,
+    -44.154
+   ],
+   "end": [
+    19.854,
+    -46.4
+   ],
+   "width": 0.1524,
+   "why": "through via 1.1 mm from C67 pin 1 (DC+) on F.Cu: moved 1.4 mm north to the pad of R73 / R74"
+  },
+  {
+   "kind": "via",
+   "net": "DHB_CURRENT",
+   "at": [
+    19.7,
+    -57.873
+   ],
+   "why": "in the F.Cu switch-node arm Q19 / Q7 -> TR3 (1.2 mm HV spacing)"
+  },
+  {
+   "kind": "via",
+   "net": "PRI_DHB_HI",
+   "at": [
+    19.0,
+    -46.4
+   ],
+   "why": "through via 1.1 mm from C67 pin 1 (DC+) on F.Cu: moved 1.4 mm north to the pad of R73 / R74"
+  },
+  {
+   "kind": "via",
+   "net": "B12",
+   "at": [
+    19.854,
+    -46.4
+   ],
+   "why": "through via 1.1 mm from C67 pin 1 (DC+) on F.Cu: moved 1.4 mm north to the pad of R73 / R74"
+  },
+  {
+   "kind": "zone outline",
+   "zone": "S3A_DHB_HI_SOURCE_F",
+   "net": "DHB_HI_SOURCE",
+   "why": "switch node Q19 pin 3 / Q7 pin 2 -> TR3 pins 7 / 8 as one F.Cu shape",
+   "new": [
+    [
+     11.8,
+     -61.75
+    ],
+    [
+     16.6,
+     -61.75
+    ],
+    [
+     16.6,
+     -57.6
+    ],
+    [
+     27.9,
+     -57.6
+    ],
+    [
+     27.9,
+     -58.0
+    ],
+    [
+     31.0,
+     -58.0
+    ],
+    [
+     31.0,
+     -50.6
+    ],
+    [
+     27.9,
+     -50.6
+    ],
+    [
+     27.9,
+     -52.0
+    ],
+    [
+     16.6,
+     -52.0
+    ],
+    [
+     16.6,
+     -51.65
+    ],
+    [
+     11.8,
+     -51.65
+    ]
+   ],
+   "old": [
+    [
+     28.3,
+     -58.0
+    ],
+    [
+     31.0,
+     -58.0
+    ],
+    [
+     31.0,
+     -50.6
+    ],
+    [
+     28.3,
+     -50.6
+    ]
+   ]
+  },
+  {
+   "kind": "zone outline",
+   "zone": "S3A_DHB_CURRENT_F",
+   "net": "DHB_CURRENT",
+   "why": "south part only (Q7 pin 3 -> C54 pin 2): the switch-node arm crosses the old shape",
+   "new": [
+    [
+     11.8,
+     -64.15
+    ],
+    [
+     25.75,
+     -64.15
+    ],
+    [
+     25.75,
+     -59.2
+    ],
+    [
+     17.9,
+     -59.2
+    ],
+    [
+     17.9,
+     -62.95
+    ],
+    [
+     11.8,
+     -62.95
+    ]
+   ],
+   "old": [
+    [
+     20.35,
+     -62.1
+    ],
+    [
+     25.75,
+     -62.1
+    ],
+    [
+     25.75,
+     -49.3
+    ],
+    [
+     28.2,
+     -49.3
+    ],
+    [
+     28.2,
+     -47.6
+    ],
+    [
+     20.35,
+     -47.6
+    ]
+   ]
+  }
+ ]
+}

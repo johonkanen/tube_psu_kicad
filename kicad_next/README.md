@@ -1215,6 +1215,58 @@ slot exception (rule 'PRI-SEC inner layers, Q19/Q21 across the barrier slot', AL
    the four pads are open: pour outlines to be re-cut at the new pads.
 5. Via in the pad of DRV5 pin 3 (goes with point 1).
 
+## Stage 4b: DAB primary power on F.Cu (2026-11-22)
+
+```
+tools/p2k/bin/kipy tools/next/route_s4b_dab_primary.py [--dry-run OUT.kicad_pcb]   # not re-runnable on its own result
+```
+
+Block B, power part only (`routing/deleted_s4b.json` 11, `routing/s4b_added.json` 21, `routing/moves_s4b.json` 1).
+**DRV5 and its gate / bootstrap parts are not re-laid yet** (see "Left").
+
+- **What C67 / C70 decouple (netlist):** both are DC+ <-> DHB_CURRENT, i.e. Q19 drain to Q7 source *before* the shunt
+  R83 (DHB_CURRENT -> GND). They close the HF commutation loop DC+ - Q19 - switch node - Q7 - DHB_CURRENT directly;
+  C47 / C54 (DC+ - DHB_CAP - DHB_CURRENT, 1 u each) are the split-capacitor leg for TR3 pins 4 + 5 and lie in parallel
+  with the same two rails. R83 only carries the input current of the bridge.
+- **Switch node** `S3A_DHB_HI_SOURCE_F` (F.Cu only, 107 mm2, solid pads): Q7 pin 2 -> strip x 15.0 ... 16.55 east of the
+  pin column -> Q19 pin 3 -> arm y -57.55 ... -52.0 (5.5 mm) -> TR3 pins 7 / 8. No switch-node copper on an inner layer.
+- **DHB_CURRENT** crossed that arm (C54 pin 2 at y -61, R83 at y -42). `S3A_DHB_CURRENT_F` is now the south part
+  (Q7 pin 3 -> C54 pin 2), `S4B_DHB_CURRENT_F` the north part (C67 pin 2), tied to 'Proteus F.Cu pour 23' / R83 by a
+  1.0 mm F.Cu track (22.0, -46.9) ... (29.2, -46.75). South and north are joined **on In2**: 1.2 mm from the
+  through-hole pad of Q7 pin 3, x 17.4 under the switch-node strip, y -52.3, two vias 0.8 / 0.4 at (22.6, -50.0 / -49.0).
+  The whole DC current of the bridge to the shunt runs through this In2 track and the two vias.
+- **C67** (26.77, -43.7) -> (19.7, -48.0) F.Cu, 0 deg: pin 1 in the new DC+ zone `S4B_DC+_F` (5.5 mm from Q19 pin 2),
+  pin 2 in the north zone. **C70 not moved**: beside C67 its DC+ pad would be 0.3 mm from the 15V via (17.625, -51.0)
+  of the interim DRV5 layout.
+- DC+ at Q19 pin 2 and C47 pin 1 checked by net (DRC connectivity): Q19 pin 2 is in 'Proteus F.Cu pour 29'; the
+  1.5 mm track (41.5, -47.3) - (41.5, -75.21) - (23.83, -75.21) is the only DC+ feed of C47 pin 1 - **kept, not stale**.
+- PRI_DHB_HI / B12 vias (19.0 / 19.854, -46.4) moved to y -45.0 (pad edge of R73 / R74): 1.1 mm from C67 pin 1.
+  The F.Cu sense track C54 pin 2 -> via (19.7, -57.873) lay in the arm: deleted; the In2 sense lane (y -56.5) now
+  taps the In2 return at (17.4, -56.5) - not a Kelvin tap at C54 any more.
+
+| | 4a | 4b |
+|---|---|---|
+| shorts | 0 | 0 |
+| unconnected | 33 | 30 |
+| clearance markers | 6 | 6 (the same six, none here) |
+| courtyard overlaps / dangling | 133 / 31 | 132 / 32 (B.Cu stub of the old PRI_DHB_HI via) |
+
+**Left (block B, not done):**
+1. DRV5 re-lay (both gates, R22, PRI_DHB_HI -> pin 2, DAB_DIS -> pin 5 still open). Worked out, not on the board:
+   DRV5 on B.Cu turned 180 deg at about (21.2, -54.9) puts pin 15 (low gate) at y -58.08 beside Q7 pin 1 and
+   pins 9 / 10 / 11 at y -50.5 / -51.7 / -53.0. Limits: east pads must stay 1.2 mm off the TR3 pads (centre x <= 21.4),
+   so only 1.8 mm remain between the FET pads and the driver pads - C92 does not fit there; HG and VDDB have to leave
+   under the body; a track past the DC+ pad needs x >= 15.1 on B.Cu. R73 / R74 / C95 and the vias of C95, the 5V via in
+   the pad of the old pin 3 and the 15V via (17.625, -51.0) stand where the high-side parts have to go; PRI_DHB_HI / B12 /
+   DAB_DIS then enter under the body from the north in the window x 21.3 ... 24.6.
+2. The 5V via (15.25, -51.99) and the GND via (12.45, -55.0) cut the switch-node fill at Q19 pin 3 (it joins the
+   strip south of the pad, about 1 mm neck): both go with the DRV5 re-lay. C70 to the bridge after that.
+3. R83 is 17 mm from Q7 pin 3, so the low-side gate return (driver GND -> R83 -> DHB_CURRENT -> source) is long
+   whatever DRV5 does; moving R83 to Q7 pin 3 / C54 pin 2 would also take the bridge current off In2.
+4. In2 lanes x 14.65 / 15.118 / 15.8 and y -53.75 ... -56.5 still lie under the switch-node copper in plan view
+   (In1 GND between them); not moved.
+5. SICD1 / SICD2 pour outlines (4 pads open).
+
 ## Footprints and 3D models (phase 3, 2026-11-18)
 
 Regenerate: `python3 tools/next/gen_next_footprints.py`, `tools/p2k/bin/kicad_env.sh python3
