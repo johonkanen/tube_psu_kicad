@@ -2,7 +2,8 @@
  "note": "routing stage 8 (2026-11-22), tools/next/route_s8_c95_dc.py - incremental edit of the board, not a rebuild",
  "groups": [
   "c95",
-  "old"
+  "old",
+  "dc"
  ],
  "moves": [
   {

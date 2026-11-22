@@ -233,6 +233,35 @@ the 0603 stands 0.21 mm beside the pin pads), the rest unchanged; `check_next.sh
 * **Old place** (18.9, -60.6): 15V via (18.9, -58.85), In3 spur (17.125, -55.25) - (18.9, -57.025) - (18.9, -58.85)
   and GND via (18.9, -61.7) deleted; nothing else used them.
 
+* **DC+ into Q19 pin 2** (drain; pads oval 1.905 x 2.0 at 2.54 mm pitch). Measured on a 0.1 mm raster of the fill:
+
+  | layer | before | after |
+  |---|---|---|
+  | F.Cu, east (`S4B_DC+_F`) | 0.9 mm (y -50.0 ... -49.2) | 0.9 mm |
+  | F.Cu, west (pour 29) | 0.9 mm (same rows) | 0.9 mm |
+  | In3 | - | 1.8 mm track (0.5 oz copper) |
+  | B.Cu, In2 | - | - |
+  | sum | 1.8 mm | 3.6 mm (2.7 mm counted as 1 oz copper) |
+
+  5.1 (`kicad/tube_psu.kicad_pcb`): one F.Cu entry about 2.3 mm wide (pour 29 from the north, pins in a row east-west),
+  0.2 ... 0.5 mm beside the source / gate pads; nothing on the other layers.
+  - **F.Cu is limited by the pads, not by the necks**: with 1.2 mm to the gate and source pads the pour can touch the
+    drain pad over about 1.0 mm of its height on each side (geometry: 2 x 0.51 mm). The west way has two necks in
+    parallel in front of that (1.0 mm at x 9.6 ... 10.5, y -47.8 ... -47.1, and 0.6 mm at x 7.6 ... 8.6,
+    y -48.9 ... -48.3, round a hole in the fill at (8.9, -47.5)), together wider than the entry - not changed.
+  - **B.Cu is not possible** with moves <= 2 mm: the pad is enclosed on B.Cu by the high-side group - east by
+    gate track y -47.2 / R22 (15.5, -48.6) / source track x 15.5, y -52.06, west by the driver loop (R26 pad 2,
+    C92 pad 1, return on x 10.25). The gate-source resistor has to cross the DC+ line on one side of the column,
+    and the group may not use an inner layer. It would need R22 on the west side (between R26 pad 2 and C92 pad 1,
+    5 mm away) - not done.
+  - **In3** (group `dc`): 1.8 mm track (12.75, -49.52) - (18.7, -49.52) from the pin east to the three existing DC+
+    vias (17.7 / 18.7, -50.0) 0.8 / 0.4 and (18.3, -48.5) 0.6 / 0.3 (F.Cu pour `S4B_DC+_F`, B.Cu run to C70 / C47).
+    In3 east of the column was empty there; 0.69 mm to the outlines of the gate / source pads (1.09 mm to their
+    holes; inner-layer HV spacing 0.5 mm), 0.68 mm to the 15V bridge on y -51.6. The In3 15V strip (x 9.5 ... 13.5) passes the pad on its west side and
+    is 1.7 mm wide there (was 2.0; the DC+ pad has a ring on In3 now). First DC+ copper on an inner layer of this
+    board: 400 V to the In4 GND plane through the In3 / In4 dielectric (stackup section) - not assessed further.
+    In2 is closed east of the pin by `Net-(C63-Pad1)` on x 14.65.
+
 ## Inner layers (routing stage 2, 2026-11-20)
 
 Made by `tools/p2k/bin/kipy tools/next/route_s2_planes.py` on the real board (re-runnable: everything it makes is
