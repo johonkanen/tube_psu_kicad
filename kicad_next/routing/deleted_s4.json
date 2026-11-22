@@ -1,0 +1,2088 @@
+{
+ "note": "routing stage 4a (2026-11-22), tools/next/route_s4_dab_primary.py - incremental edit of the board, not a rebuild",
+ "deleted": [
+  {
+   "kind": "segment",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    46.015,
+    -45.708
+   ],
+   "end": [
+    48.155,
+    -43.568
+   ],
+   "width": 0.762,
+   "why": "copper of Q7 / Q19 at their old place (x 34 ... 48, y -42): the FETs stand on the primary heatsink line now"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    48.155,
+    -43.568
+   ],
+   "end": [
+    48.155,
+    -41.9499
+   ],
+   "width": 0.762,
+   "why": "copper of Q7 / Q19 at their old place (x 34 ... 48, y -42): the FETs stand on the primary heatsink line now"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    41.534,
+    -45.708
+   ],
+   "end": [
+    46.015,
+    -45.708
+   ],
+   "width": 0.762,
+   "why": "copper of Q7 / Q19 at their old place (x 34 ... 48, y -42): the FETs stand on the primary heatsink line now"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q7-G)",
+   "layer": "B.Cu",
+   "start": [
+    36.875,
+    -41.95
+   ],
+   "end": [
+    36.875,
+    -44.707
+   ],
+   "width": 0.75,
+   "why": "copper of Q7 / Q19 at their old place (x 34 ... 48, y -42): the FETs stand on the primary heatsink line now"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q7-G)",
+   "layer": "B.Cu",
+   "start": [
+    36.875,
+    -44.707
+   ],
+   "end": [
+    35.836,
+    -45.746
+   ],
+   "width": 1.016,
+   "why": "copper of Q7 / Q19 at their old place (x 34 ... 48, y -42): the FETs stand on the primary heatsink line now"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu",
+   "start": [
+    34.335,
+    -41.3403
+   ],
+   "end": [
+    34.335,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "why": "copper of Q7 / Q19 at their old place (x 34 ... 48, y -42): the FETs stand on the primary heatsink line now"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu",
+   "start": [
+    34.335,
+    -42.5595
+   ],
+   "end": [
+    34.335,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "why": "copper of Q7 / Q19 at their old place (x 34 ... 48, y -42): the FETs stand on the primary heatsink line now"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu",
+   "start": [
+    34.335,
+    -44.75
+   ],
+   "end": [
+    43.075,
+    -44.75
+   ],
+   "width": 1.15,
+   "why": "copper of Q7 / Q19 at their old place (x 34 ... 48, y -42): the FETs stand on the primary heatsink line now"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu",
+   "start": [
+    34.335,
+    -41.95
+   ],
+   "end": [
+    34.335,
+    -44.75
+   ],
+   "width": 0.75,
+   "why": "copper of Q7 / Q19 at their old place (x 34 ... 48, y -42): the FETs stand on the primary heatsink line now"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu",
+   "start": [
+    42.4654,
+    -41.9499
+   ],
+   "end": [
+    43.075,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "why": "copper of Q7 / Q19 at their old place (x 34 ... 48, y -42): the FETs stand on the primary heatsink line now"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu",
+   "start": [
+    43.075,
+    -41.95
+   ],
+   "end": [
+    43.075,
+    -44.75
+   ],
+   "width": 0.75,
+   "why": "copper of Q7 / Q19 at their old place (x 34 ... 48, y -42): the FETs stand on the primary heatsink line now"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu",
+   "start": [
+    43.075,
+    -42.5595
+   ],
+   "end": [
+    43.075,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "why": "copper of Q7 / Q19 at their old place (x 34 ... 48, y -42): the FETs stand on the primary heatsink line now"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu",
+   "start": [
+    43.075,
+    -41.3403
+   ],
+   "end": [
+    43.075,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "why": "copper of Q7 / Q19 at their old place (x 34 ... 48, y -42): the FETs stand on the primary heatsink line now"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    41.315,
+    -41.95
+   ],
+   "end": [
+    43.075,
+    -41.95
+   ],
+   "width": 0.75,
+   "why": "copper of Q7 / Q19 at their old place (x 34 ... 48, y -42): the FETs stand on the primary heatsink line now"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    39.502,
+    -43.7629
+   ],
+   "end": [
+    41.315,
+    -41.9499
+   ],
+   "width": 1.016,
+   "why": "copper of Q7 / Q19 at their old place (x 34 ... 48, y -42): the FETs stand on the primary heatsink line now"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    39.502,
+    -44.152
+   ],
+   "end": [
+    39.502,
+    -43.7629
+   ],
+   "width": 1.016,
+   "why": "copper of Q7 / Q19 at their old place (x 34 ... 48, y -42): the FETs stand on the primary heatsink line now"
+  },
+  {
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    45.615,
+    -41.3403
+   ],
+   "end": [
+    45.615,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    45.615,
+    -42.5595
+   ],
+   "end": [
+    45.615,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "F.Cu",
+   "start": [
+    31.1854,
+    -41.9499
+   ],
+   "end": [
+    31.795,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "F.Cu",
+   "start": [
+    31.795,
+    -42.5595
+   ],
+   "end": [
+    31.795,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "F.Cu",
+   "start": [
+    31.795,
+    -41.3403
+   ],
+   "end": [
+    31.795,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "B.Cu",
+   "start": [
+    31.1854,
+    -41.9499
+   ],
+   "end": [
+    31.795,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "B.Cu",
+   "start": [
+    31.795,
+    -41.3403
+   ],
+   "end": [
+    31.795,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "B.Cu",
+   "start": [
+    31.795,
+    -42.5595
+   ],
+   "end": [
+    31.795,
+    -41.9499
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_1",
+   "layer": "F.Cu",
+   "start": [
+    10.9191,
+    -21.647
+   ],
+   "end": [
+    11.5033,
+    -21.647
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_1",
+   "layer": "F.Cu",
+   "start": [
+    11.5033,
+    -21.0628
+   ],
+   "end": [
+    11.5033,
+    -21.647
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_1",
+   "layer": "F.Cu",
+   "start": [
+    11.5033,
+    -22.2312
+   ],
+   "end": [
+    11.5033,
+    -21.647
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_1",
+   "layer": "F.Cu",
+   "start": [
+    12.0875,
+    -21.647
+   ],
+   "end": [
+    11.5033,
+    -21.647
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    10.9191,
+    -26.727
+   ],
+   "end": [
+    11.5033,
+    -26.727
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    11.5033,
+    -26.1428
+   ],
+   "end": [
+    11.5033,
+    -26.727
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    11.5033,
+    -27.3112
+   ],
+   "end": [
+    11.5033,
+    -26.727
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    12.0875,
+    -26.727
+   ],
+   "end": [
+    11.5033,
+    -26.727
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "F.Cu",
+   "start": [
+    3.2158,
+    -4.98
+   ],
+   "end": [
+    3.8,
+    -4.98
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "F.Cu",
+   "start": [
+    3.8,
+    -4.3958
+   ],
+   "end": [
+    3.8,
+    -4.98
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "F.Cu",
+   "start": [
+    3.8,
+    -5.5642
+   ],
+   "end": [
+    3.8,
+    -4.98
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "F.Cu",
+   "start": [
+    4.3842,
+    -4.98
+   ],
+   "end": [
+    3.8,
+    -4.98
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    3.2158,
+    0.1
+   ],
+   "end": [
+    3.8,
+    0.1
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    3.8,
+    0.6842
+   ],
+   "end": [
+    3.8,
+    0.1
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    3.8,
+    -0.4842
+   ],
+   "end": [
+    3.8,
+    0.1
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    4.3842,
+    0.1
+   ],
+   "end": [
+    3.8,
+    0.1
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "SYNCH_1",
+   "layer": "In2.Signal_HV",
+   "start": [
+    8.3043,
+    -46.0764
+   ],
+   "end": [
+    10.8637,
+    -43.517
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "SYNCH_1",
+   "layer": "In2.Signal_HV",
+   "start": [
+    10.8637,
+    -43.517
+   ],
+   "end": [
+    14.102,
+    -43.517
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "SYNCH_1",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.102,
+    -43.517
+   ],
+   "end": [
+    22.865,
+    -34.754
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "HT_SDATA",
+   "layer": "In2.Signal_HV",
+   "start": [
+    8.4305,
+    -46.3812
+   ],
+   "end": [
+    10.9137,
+    -43.898
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "HT_SDATA",
+   "layer": "In2.Signal_HV",
+   "start": [
+    10.9137,
+    -43.898
+   ],
+   "end": [
+    14.229,
+    -43.898
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "HT_SDATA",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.229,
+    -43.898
+   ],
+   "end": [
+    23.246,
+    -34.881
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "SYNCH_2",
+   "layer": "In2.Signal_HV",
+   "start": [
+    8.5568,
+    -46.686
+   ],
+   "end": [
+    10.9638,
+    -44.279
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "SYNCH_2",
+   "layer": "In2.Signal_HV",
+   "start": [
+    10.9638,
+    -44.279
+   ],
+   "end": [
+    14.483,
+    -44.279
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "SYNCH_2",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.483,
+    -44.279
+   ],
+   "end": [
+    23.627,
+    -35.135
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    10.4,
+    -45.1
+   ],
+   "end": [
+    12.4,
+    -45.1
+   ],
+   "width": 0.1524,
+   "why": "via 0.68 mm from Q19 pin 1 (HV 1.2 mm): via moved into the re-stacked bundle"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    12.4,
+    -45.1
+   ],
+   "end": [
+    14.2,
+    -45.1
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.2,
+    -45.1
+   ],
+   "end": [
+    27.1,
+    -32.2
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "$HT_CS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    8.683,
+    -46.9908
+   ],
+   "end": [
+    9.9978,
+    -45.676
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "$HT_CS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    9.9978,
+    -45.676
+   ],
+   "end": [
+    14.141,
+    -45.676
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "$HT_CS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    27.7,
+    -32.117
+   ],
+   "end": [
+    14.141,
+    -45.676
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM5A",
+   "layer": "In2.Signal_HV",
+   "start": [
+    8.8093,
+    -47.2956
+   ],
+   "end": [
+    10.0039,
+    -46.101
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM5A",
+   "layer": "In2.Signal_HV",
+   "start": [
+    10.0039,
+    -46.101
+   ],
+   "end": [
+    14.199,
+    -46.101
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM5A",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.199,
+    -46.101
+   ],
+   "end": [
+    28.1,
+    -32.2
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM6A",
+   "layer": "In2.Signal_HV",
+   "start": [
+    8.9355,
+    -47.6004
+   ],
+   "end": [
+    10.0539,
+    -46.482
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM6A",
+   "layer": "In2.Signal_HV",
+   "start": [
+    10.0539,
+    -46.482
+   ],
+   "end": [
+    14.351,
+    -46.482
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "EPWM6A",
+   "layer": "In2.Signal_HV",
+   "start": [
+    28.4911,
+    -32.3419
+   ],
+   "end": [
+    14.351,
+    -46.482
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(C63-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    8.8,
+    -48.24
+   ],
+   "end": [
+    10.14,
+    -46.9
+   ],
+   "width": 0.2032,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(C63-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    8.8,
+    -51.9
+   ],
+   "end": [
+    8.8,
+    -48.24
+   ],
+   "width": 0.2032,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(C63-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    10.14,
+    -46.9
+   ],
+   "end": [
+    14.7,
+    -46.9
+   ],
+   "width": 0.2032,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(C63-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    5.75,
+    -54.95
+   ],
+   "end": [
+    8.8,
+    -51.9
+   ],
+   "width": 0.1524,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    10.154,
+    -48.0
+   ],
+   "end": [
+    10.7,
+    -47.454
+   ],
+   "width": 0.3048,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    10.7,
+    -47.454
+   ],
+   "end": [
+    14.864,
+    -47.454
+   ],
+   "width": 0.3048,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.864,
+    -47.454
+   ],
+   "end": [
+    15.118,
+    -47.2
+   ],
+   "width": 0.3048,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.86,
+    -47.45
+   ],
+   "end": [
+    14.86,
+    -47.49
+   ],
+   "width": 0.3,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.86,
+    -47.49
+   ],
+   "end": [
+    14.16,
+    -48.19
+   ],
+   "width": 0.3,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.16,
+    -48.19
+   ],
+   "end": [
+    14.16,
+    -51.39
+   ],
+   "width": 0.3,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    10.154,
+    -49.496
+   ],
+   "end": [
+    10.154,
+    -48.0
+   ],
+   "width": 0.4,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    9.25,
+    -50.4
+   ],
+   "end": [
+    10.154,
+    -49.496
+   ],
+   "width": 0.4,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    14.16,
+    -51.39
+   ],
+   "end": [
+    14.76,
+    -51.99
+   ],
+   "width": 0.3,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    13.2,
+    -51.99
+   ],
+   "end": [
+    14.8,
+    -51.99
+   ],
+   "width": 0.4,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    13.0,
+    -51.825
+   ],
+   "end": [
+    13.0,
+    -51.79
+   ],
+   "width": 0.4,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    13.0,
+    -51.79
+   ],
+   "end": [
+    13.2,
+    -51.99
+   ],
+   "width": 0.4,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(C11-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    15.1,
+    -47.9
+   ],
+   "end": [
+    16.4,
+    -47.9
+   ],
+   "width": 0.2032,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(C11-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    15.1,
+    -47.9
+   ],
+   "end": [
+    15.1,
+    -51.4
+   ],
+   "width": 0.2,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(C11-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    15.1,
+    -51.4
+   ],
+   "end": [
+    13.8,
+    -52.7
+   ],
+   "width": 0.2,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(C11-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    13.8,
+    -52.7
+   ],
+   "end": [
+    10.3,
+    -52.7
+   ],
+   "width": 0.2,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(C11-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    10.3,
+    -52.7
+   ],
+   "end": [
+    7.9,
+    -55.1
+   ],
+   "width": 0.2,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    10.1,
+    -59.3
+   ],
+   "end": [
+    9.5,
+    -59.9
+   ],
+   "width": 0.254,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    17.6,
+    -59.3
+   ],
+   "end": [
+    10.1,
+    -59.3
+   ],
+   "width": 0.254,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    18.8,
+    -58.1
+   ],
+   "end": [
+    17.6,
+    -59.3
+   ],
+   "width": 0.254,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    8.2,
+    -59.8
+   ],
+   "end": [
+    9.5,
+    -59.8
+   ],
+   "width": 0.2,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    18.8,
+    -52.0
+   ],
+   "end": [
+    18.8,
+    -58.1
+   ],
+   "width": 0.254,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    7.2,
+    -58.8
+   ],
+   "end": [
+    8.2,
+    -59.8
+   ],
+   "width": 0.2,
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    16.8,
+    -48.4
+   ],
+   "end": [
+    15.6,
+    -48.4
+   ],
+   "width": 0.254,
+   "why": "dangling 5.1 stub in the way of the C11 / 5V lanes"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    13.325,
+    -48.63
+   ],
+   "end": [
+    14.125,
+    -47.83
+   ],
+   "width": 0.4,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    13.325,
+    -48.83
+   ],
+   "end": [
+    13.325,
+    -48.63
+   ],
+   "width": 0.4,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    13.375,
+    -50.33
+   ],
+   "end": [
+    13.425,
+    -50.33
+   ],
+   "width": 0.4,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    13.375,
+    -50.33
+   ],
+   "end": [
+    12.9,
+    -50.69
+   ],
+   "width": 0.2,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    13.425,
+    -50.33
+   ],
+   "end": [
+    13.425,
+    -49.03
+   ],
+   "width": 0.4,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    12.9,
+    -50.69
+   ],
+   "end": [
+    12.175,
+    -51.2
+   ],
+   "width": 0.2,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    12.175,
+    -51.2
+   ],
+   "end": [
+    12.175,
+    -54.0
+   ],
+   "width": 0.2,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    12.175,
+    -54.0
+   ],
+   "end": [
+    12.375,
+    -54.2
+   ],
+   "width": 0.2,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    12.375,
+    -54.2
+   ],
+   "end": [
+    14.2,
+    -54.2
+   ],
+   "width": 0.2,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    14.2,
+    -54.2
+   ],
+   "end": [
+    14.53,
+    -54.53
+   ],
+   "width": 0.2,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    14.53,
+    -54.53
+   ],
+   "end": [
+    15.55,
+    -54.53
+   ],
+   "width": 0.2,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "start": [
+    14.125,
+    -47.83
+   ],
+   "end": [
+    16.425,
+    -47.83
+   ],
+   "width": 0.4,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-DT)",
+   "layer": "B.Cu",
+   "start": [
+    13.45,
+    -56.625
+   ],
+   "end": [
+    12.05,
+    -56.625
+   ],
+   "width": 0.2,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-DT)",
+   "layer": "B.Cu",
+   "start": [
+    12.05,
+    -56.625
+   ],
+   "end": [
+    11.75,
+    -56.325
+   ],
+   "width": 0.2,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-DT)",
+   "layer": "B.Cu",
+   "start": [
+    11.75,
+    -56.325
+   ],
+   "end": [
+    11.75,
+    -54.4
+   ],
+   "width": 0.2,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-DT)",
+   "layer": "B.Cu",
+   "start": [
+    11.75,
+    -54.4
+   ],
+   "end": [
+    11.5,
+    -54.15
+   ],
+   "width": 0.2,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-DT)",
+   "layer": "B.Cu",
+   "start": [
+    11.5,
+    -54.15
+   ],
+   "end": [
+    11.35,
+    -53.875
+   ],
+   "width": 0.2,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "B.Cu",
+   "start": [
+    14.15,
+    -50.72
+   ],
+   "end": [
+    15.55,
+    -50.72
+   ],
+   "width": 0.2,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "B.Cu",
+   "start": [
+    14.15,
+    -48.72
+   ],
+   "end": [
+    14.15,
+    -50.72
+   ],
+   "width": 0.2,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "B.Cu",
+   "start": [
+    14.45,
+    -48.42
+   ],
+   "end": [
+    14.15,
+    -48.72
+   ],
+   "width": 0.2,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "B.Cu",
+   "start": [
+    18.0,
+    -48.42
+   ],
+   "end": [
+    14.45,
+    -48.42
+   ],
+   "width": 0.2,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "B.Cu",
+   "start": [
+    19.0,
+    -47.42
+   ],
+   "end": [
+    18.0,
+    -48.42
+   ],
+   "width": 0.2,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "PRI_DHB_HI",
+   "layer": "B.Cu",
+   "start": [
+    19.0,
+    -46.4
+   ],
+   "end": [
+    19.0,
+    -47.42
+   ],
+   "width": 0.2,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    13.0,
+    -53.375
+   ],
+   "end": [
+    14.0,
+    -53.26
+   ],
+   "width": 0.3,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    14.0,
+    -53.26
+   ],
+   "end": [
+    15.55,
+    -53.26
+   ],
+   "width": 0.3,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    10.4238,
+    -55.5504
+   ],
+   "end": [
+    10.5,
+    -55.5504
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    10.5,
+    -55.6266
+   ],
+   "end": [
+    10.5,
+    -55.5504
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    10.5,
+    -55.4742
+   ],
+   "end": [
+    10.5,
+    -55.5504
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    10.5762,
+    -55.5504
+   ],
+   "end": [
+    10.5,
+    -55.5504
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    10.5,
+    -55.63
+   ],
+   "end": [
+    8.9,
+    -57.23
+   ],
+   "width": 0.3,
+   "why": "GND track of C96 (moved)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    8.9,
+    -57.23
+   ],
+   "end": [
+    8.9,
+    -58.23
+   ],
+   "width": 0.3,
+   "why": "GND track of C96 (moved)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    10.4238,
+    -58.7
+   ],
+   "end": [
+    10.5,
+    -58.7
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    10.5,
+    -58.7762
+   ],
+   "end": [
+    10.5,
+    -58.7
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    10.5,
+    -58.6238
+   ],
+   "end": [
+    10.5,
+    -58.7
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    10.5762,
+    -58.7
+   ],
+   "end": [
+    10.5,
+    -58.7
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    11.9238,
+    -61.0
+   ],
+   "end": [
+    12.0,
+    -61.0
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    12.0,
+    -60.9238
+   ],
+   "end": [
+    12.0,
+    -61.0
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    12.0,
+    -61.0762
+   ],
+   "end": [
+    12.0,
+    -61.0
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    12.0762,
+    -61.0
+   ],
+   "end": [
+    12.0,
+    -61.0
+   ],
+   "width": 0.1524,
+   "why": "pad spokes of a pad that is not there any more"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    12.225,
+    -58.7
+   ],
+   "end": [
+    10.5,
+    -58.7
+   ],
+   "width": 0.1524,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    12.5,
+    -58.425
+   ],
+   "end": [
+    12.5,
+    -60.775
+   ],
+   "width": 0.1524,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    12.5,
+    -58.425
+   ],
+   "end": [
+    12.225,
+    -58.7
+   ],
+   "width": 0.1524,
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(D19-K)",
+   "layer": "B.Cu",
+   "start": [
+    16.1,
+    -61.0
+   ],
+   "end": [
+    18.7,
+    -61.0
+   ],
+   "width": 0.762,
+   "why": "old D19 - R41 link (both moved)"
+  },
+  {
+   "kind": "via",
+   "net": "+1V65_BIAS",
+   "at": [
+    12.4,
+    -45.1
+   ],
+   "why": "0.68 mm from Q19 pin 1"
+  },
+  {
+   "kind": "via",
+   "net": "5V",
+   "at": [
+    10.154,
+    -48.0
+   ],
+   "why": "In2 lane through the new pin column: drawn again round it"
+  },
+  {
+   "kind": "via",
+   "net": "5V",
+   "at": [
+    14.16,
+    -51.39
+   ],
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "via",
+   "net": "GND",
+   "at": [
+    14.0,
+    -53.26
+   ],
+   "why": "on / too near the new Q19 / Q7 pins (x 12.75)"
+  },
+  {
+   "kind": "via",
+   "net": "15V",
+   "at": [
+    12.5,
+    -58.425
+   ],
+   "why": "inside the pad of Q7 pin 1"
+  },
+  {
+   "kind": "zone outline",
+   "zone": "S3A_DHB_HI_SOURCE_F",
+   "net": "DHB_HI_SOURCE",
+   "why": "switch-node area reached to the old Q7 / Q19 pins (x 44): cut back to TR3 pins 7 / 8",
+   "new": [
+    [
+     28.3,
+     -58.0
+    ],
+    [
+     31.0,
+     -58.0
+    ],
+    [
+     31.0,
+     -50.6
+    ],
+    [
+     28.3,
+     -50.6
+    ]
+   ],
+   "old": [
+    [
+     28.3,
+     -58.0
+    ],
+    [
+     39.4,
+     -58.0
+    ],
+    [
+     39.4,
+     -45.3
+    ],
+    [
+     44.05,
+     -45.3
+    ],
+    [
+     44.05,
+     -40.95
+    ],
+    [
+     33.2,
+     -40.95
+    ],
+    [
+     33.2,
+     -50.6
+    ],
+    [
+     28.3,
+     -50.6
+    ]
+   ]
+  }
+ ]
+}

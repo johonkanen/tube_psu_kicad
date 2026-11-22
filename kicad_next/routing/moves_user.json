@@ -300,6 +300,74 @@
    },
    "why": "heater gate parts follow their FET (user decision 2026-11-21): low-side group moved (-0.865, +7.0) - Q10 moved (-0.865, +12.249), but C52 / R99 stand 5 mm further on; the group ends at Q10's gate pin",
    "by": "agent"
+  },
+  {
+   "ref": "Q19",
+   "frm": {
+    "x": 48.16,
+    "y": -41.95,
+    "rot": 180.0,
+    "side": "F"
+   },
+   "to": {
+    "x": 12.75,
+    "y": -46.98,
+    "rot": 90.0,
+    "side": "F"
+   },
+   "why": "user placement 2026-11-22: single primary heatsink line (Q5, Q6, SICD1, SICD2, DB1, Q7, Q19 along x 5 ... 13); DAB primary bridge next to C47 / C54 and the TR3 primary pins",
+   "date": "2026-11-22"
+  },
+  {
+   "ref": "Q7",
+   "frm": {
+    "x": 36.88,
+    "y": -41.95,
+    "rot": 180.0,
+    "side": "F"
+   },
+   "to": {
+    "x": 12.75,
+    "y": -58.26,
+    "rot": 90.0,
+    "side": "F"
+   },
+   "why": "user placement 2026-11-22: single primary heatsink line (Q5, Q6, SICD1, SICD2, DB1, Q7, Q19 along x 5 ... 13); DAB primary bridge next to C47 / C54 and the TR3 primary pins",
+   "date": "2026-11-22"
+  },
+  {
+   "ref": "SICD1",
+   "frm": {
+    "x": 11.5,
+    "y": -26.73,
+    "rot": -90.0,
+    "side": "F"
+   },
+   "to": {
+    "x": 11.8,
+    "y": -21.4,
+    "rot": 90.0,
+    "side": "F"
+   },
+   "why": "user placement 2026-11-22: single primary heatsink line (Q5, Q6, SICD1, SICD2, DB1, Q7, Q19 along x 5 ... 13)",
+   "date": "2026-11-22"
+  },
+  {
+   "ref": "SICD2",
+   "frm": {
+    "x": 3.8,
+    "y": 0.1,
+    "rot": 90.0,
+    "side": "F"
+   },
+   "to": {
+    "x": 3.09,
+    "y": -3.82,
+    "rot": -90.0,
+    "side": "F"
+   },
+   "why": "user placement 2026-11-22: single primary heatsink line (Q5, Q6, SICD1, SICD2, DB1, Q7, Q19 along x 5 ... 13)",
+   "date": "2026-11-22"
   }
  ]
 }

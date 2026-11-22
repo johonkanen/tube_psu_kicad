@@ -1144,6 +1144,77 @@ What was found (for the next block):
 | clearance markers, first error per track | 6 | 6 (the same six) |
 | courtyard overlaps | 130 | 130 |
 
+## Stage 4a: single primary heatsink line (user placement 2026-11-22)
+
+**The rebuild scripts are frozen from here** (`route_s3a` ... `route_s3e`, `route_s3b_signals.py`,
+`route_s2_planes.py`: do not run them any more). **The board file is the source of truth**; work goes on
+incrementally, one script per block that loads the board, edits it and saves. Block A:
+
+```
+tools/p2k/bin/kipy tools/next/route_s4_dab_primary.py [--dry-run OUT.kicad_pcb]   # not re-runnable on its own result
+```
+
+The user moved four parts in KiCad so that all primary power semiconductors (Q5, Q6, SICD1, SICD2, DB1, Q7, Q19)
+stand in one line x 5 ... 13 on one heatsink; Q21 / Q8 keep their own secondary heatsink
+(`routing/moves_user.json`, the four entries dated 2026-11-22):
+
+| Part | Before | Now |
+|---|---|---|
+| Q19 | (48.16, -41.95), 180° | (12.75, -46.98), 90° |
+| Q7 | (36.88, -41.95), 180° | (12.75, -58.26), 90° |
+| SICD1 | (11.5, -26.73), -90° | (11.8, -21.4), 90° |
+| SICD2 | (3.8, 0.1), 90° | (3.09, -3.82), -90° |
+
+Pin column x 12.75 (pads x 11.75 ... 13.75): Q19 gate -46.98, DC+ -49.52, switch node -52.06; Q7 gate -58.26, switch
+node -60.80, DHB_CURRENT -63.34. Block A only brings the board back to 0 shorts (`routing/deleted_s4.json` 138 items,
+`routing/s4_added.json` 61, `routing/moves_s4.json` 7):
+
+- **Dead copper.** Tracks of the old Q7 / Q19 pins at x 34 ... 48 / y -42 (gate ends, switch-node tracks on F.Cu / B.Cu),
+  the pad spokes of the old Q7 / Q19 / SICD1 / SICD2 pads, `S3A_DHB_HI_SOURCE_F` cut back to TR3 pins 7 / 8
+  (x 28.3 ... 31.0, y -58.0 ... -50.6). The pad of the old Q7 pin 3 joined the In2 sense line, R83 and the two DHB_CURRENT
+  pours: a via 0.6 / 0.3 with an F.Cu cross stands there now (31.795, -41.95). The 1.5 mm DC+ feed of C47 pin 1 still
+  starts at the old Q19 place (x 45.6 / 41.5): left for block B.
+- **In2 bundle.** Twelve lanes do not fit between H4 (innermost lane r 5.03) and the pad of Q19 pin 1 (corner 8.35 mm
+  from the hole centre; 0.5 mm HV clearance on inner layers): the nine bus lanes stay, SYNCH_1 ... EPWM6A re-stacked
+  at 0.3048 mm pitch from HT_CLK (y -42.977 ... -45.176, EPWM6A 0.78 mm from the pad), the +1V65_BIAS via moved from
+  0.68 mm at the gate pad to (12.4, -44.076) between SYNCH_2 and $HT_CS. **5V, Net-(C63-Pad1), Net-(C11-Pad1) and the
+  DHB_CURRENT sense line cross the pin column on In2 through the gap between Q19 pin 3 and Q7 pin 1** (pads y -53.01 /
+  -57.31): verticals x 14.65 / 15.118 / 15.8 east of the pins, lanes y -53.75 (C63, 0.64 mm from the switch-node pad),
+  -54.2 (5V), -55.55 (C11), -56.5 (sense). 5V: via (9.0, -54.6) west of the column, B.Cu x 9.0 to the kept track at
+  (9.25, -50.4); the 5V via of stage 3e at (10.15, -48.0) is gone. DRV5 pin 3 hangs on the lane by a via in its pad
+  (15.25, -51.99). Nothing new on In1 / In3 / In4.
+- **DRV5 small parts off the pins** (all B.Cu; DRV5 itself not moved): C118 beside R127 in the gap (dead-time net
+  complete), C94 2.3 mm west on the new 5V track, C120 / R129 south of DRV5 on the DAB_DIS track, D19 3.55 mm east
+  with R41 and C96 at it, 15V from a via at the end of the kept In2 15V lane under DRV5 (17.625, -51.0). These are
+  **interim places**.
+
+| | 06889d7 | user edit | now |
+|---|---|---|---|
+| shorts | 0 | 24 | **0** |
+| unconnected | 21 | 33 | 33 |
+| clearance markers (first error per track) | 6 | 95 | 6 (none at the DAB primary; not compared one by one with the six of 06889d7) |
+| courtyard overlaps | 130 | 129 | 133 (the interim places of C118 / C94 / D19 / C96 / R41) |
+| dangling tracks / vias | 32 / 0 | 38 / – | 31 / 0 |
+
+`check_next.sh`, `check_board.py`, `check_domains.py` pass. `check_domains.py` reports 0 accepted pairs: the Q19 / Q21
+slot exception (rule 'PRI-SEC inner layers, Q19/Q21 across the barrier slot', ALLOW) is not used any more.
+
+**Left (block B and later):**
+1. **DRV5 has to be re-laid** - it is on the wrong side now: inputs (pins 1 - 8, x 15.55) face the FET pins 0.78 mm
+   away (pad to pad is legal, a track to pins 1 - 4 from the west is not: 1.2 mm to DC+ / switch node), outputs face
+   TR3. Turned by 180° the outputs face the FETs, but Q19 is G - D - S from the south and the driver is source - gate -
+   VDDB from the south, so gate and source cross once (C92 across the gate track, or the gate under the body), and
+   the strip between the pins and the pads is 1.6 mm. Open because of it: PRI_DHB_HI -> pin 2 (its old loop ran
+   0.3 mm from the DC+ pin: deleted), DAB_DIS -> pin 5.
+2. Gate parts R26 / R53 / D30 / R22 (Q19) and R90 / R92 / D34 / R70 (Q7) are still at x 28 ... 42 / y -44 ... -50,
+   25 - 30 mm from the FETs: both gates open.
+3. DAB primary power not routed: DC+ to Q19 pin 2, switch node Q19 pin 3 / Q7 pin 2 -> TR3 pins 7 + 8 (17 mm), Q7 pin 3
+   -> C54 pin 2 / R83, C92 pin 1. C67 / C70 not moved (still at (26.8, -43), DHB_CURRENT side on its pour only).
+4. SICD1 / SICD2: the 5.1 pours (`Proteus F.Cu pour 29` DC+, `pour 10` / `pour 1` PFC drains) have the relief of the
+   old pads in their outlines; the four pads were held only by the 0.152 mm spokes of the old pads. Spokes deleted,
+   the four pads are open: pour outlines to be re-cut at the new pads.
+5. Via in the pad of DRV5 pin 3 (goes with point 1).
+
 ## Footprints and 3D models (phase 3, 2026-11-18)
 
 Regenerate: `python3 tools/next/gen_next_footprints.py`, `tools/p2k/bin/kicad_env.sh python3

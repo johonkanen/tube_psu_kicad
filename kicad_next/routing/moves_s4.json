@@ -1,0 +1,117 @@
+{
+ "note": "routing stage 4a (2026-11-22), tools/next/route_s4_dab_primary.py - incremental edit of the board, not a rebuild",
+ "moves": [
+  {
+   "ref": "C120",
+   "frm": {
+    "x": 12.55,
+    "y": -48.83,
+    "rot": 180.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 15.3,
+    "y": -46.45,
+    "rot": -90,
+    "side": "B"
+   },
+   "why": "stood on Q19 pin 2: south of DRV5 on the DAB_DIS track (interim place: DRV5 block is to be re-laid, README stage 4a)"
+  },
+  {
+   "ref": "R129",
+   "frm": {
+    "x": 12.55,
+    "y": -50.33,
+    "rot": 180.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 16.6,
+    "y": -46.45,
+    "rot": -90,
+    "side": "B"
+   },
+   "why": "stood on Q19 pin 2: south of DRV5 on the DAB_DIS track (interim place: DRV5 block is to be re-laid, README stage 4a)"
+  },
+  {
+   "ref": "C118",
+   "frm": {
+    "x": 11.35,
+    "y": -53.1,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 12.15,
+    "y": -55.8,
+    "rot": -90,
+    "side": "B"
+   },
+   "why": "pad overlapped Q19 pin 3: beside R127 in the gap between Q19 pin 3 and Q7 pin 1"
+  },
+  {
+   "ref": "C94",
+   "frm": {
+    "x": 13.0,
+    "y": -52.6,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 10.7,
+    "y": -52.6,
+    "rot": 90,
+    "side": "B"
+   },
+   "why": "stood on Q19 pin 3: 2.3 mm west of the pin column, on the 5V track (interim place: DRV5 block is to be re-laid, README stage 4a)"
+  },
+  {
+   "ref": "D19",
+   "frm": {
+    "x": 14.05,
+    "y": -61.0,
+    "rot": 180.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 17.6,
+    "y": -61.0,
+    "rot": 180,
+    "side": "B"
+   },
+   "why": "anode pad on Q7 pin 2: 3.55 mm east (interim place: DRV5 block is to be re-laid, README stage 4a)"
+  },
+  {
+   "ref": "R41",
+   "frm": {
+    "x": 20.15,
+    "y": -61.0,
+    "rot": 0.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 21.6,
+    "y": -62.9,
+    "rot": 0,
+    "side": "B"
+   },
+   "why": "room for D19: north-east of its cathode, pad 2 on the kept VDDB track (interim place: DRV5 block is to be re-laid, README stage 4a)"
+  },
+  {
+   "ref": "C96",
+   "frm": {
+    "x": 10.5,
+    "y": -57.125,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 16.4,
+    "y": -63.6,
+    "rot": 0,
+    "side": "B"
+   },
+   "why": "its 15V via was inside Q7 pin 1: follows D19's anode (interim place: DRV5 block is to be re-laid, README stage 4a)"
+  }
+ ]
+}
