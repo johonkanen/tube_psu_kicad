@@ -73,8 +73,8 @@ HV net; 22 tests in total); `check_footprints.py` also checks the board-specific
 (`BOARD_VARIANTS`: ISO1 with the T slot, non-convex slot outlines handled exactly); and `check_domains.py` on the
 board (the latest trial board until 2026-11-20, now `kicad_next/tube_psu_5_2.kicad_pcb`) – every pair of copper items of two isolation domains on the same layer against the
 clearance / creepage / inner-layer limits of the `.kicad_dru` (table `LIMITS`), with slot credit only where a
-slot blocks the straight line; exit status 1 on any pair below its limit that is not in its `ALLOW` list (the
-Q19 / Q21 slot exception and the TR1 pin 2 / 9 barrels). Stage 1 of the routing (2026-11-20, the trial board
+slot blocks the straight line; exit status 1 on any pair below its limit that is not in its `ALLOW` list (empty
+since routing stage 4k; it held the Q19 / Q21 slot exception and the TR1 pin 2 / 9 barrels). Stage 1 of the routing (2026-11-20, the trial board
 becomes the real board) replaces the plain DRC step (0 violations required, full creepage DRC) by `check_board.py`
 and lets `make_board.py --check` accept internal Edge.Cuts slots inside the unchanged 5.1 outline.
 
@@ -1684,12 +1684,12 @@ netlist). Count after phase 2: primary 156 nets (HV_PRIMARY 43, PRIMARY_LV 5, SI
 | Mounting holes H1–H8 (screws bonded to the earthed chassis, user 2026-11-17) ↔ primary / secondary | basic (PE) | 318 / 420 Vrms | **3.2 / 4.2 mm** | 2.0 / 1.5 mm | 3.2 / 4.2 mm (hole clearance) |
 | Inside a domain: HV nets (DC+, mains, switch nodes, 420V, −100 V) | functional | ≤ 500 V | – | outer 1.2 mm (tracks / zones; pad pairs exempt), inner 0.5 mm | 0.5 mm |
 
-**Exception, DAB bridge Q19 (primary) ↔ Q21 (secondary)** (user 2026-11-19): the two TO-220s sit on the
-fixed heatsink plate pitch with a 1.2 mm L-shaped barrier slot (Edge.Cuts) between them. The slot cuts the
-laminate, so their drill barrels are checked on the inner layers at 4.0 mm (air across the slot) instead of
-11.1 mm; the path round the slot ends is covered by the outer-layer 11.1 mm creepage check, which follows the
-slot. Rule "PRI-SEC inner layers, Q19/Q21 across the barrier slot" in `tube_psu_5_2.kicad_dru`; it is valid
-only while the slot stays between the two parts.
+**Former exception, DAB bridge Q19 (primary) ↔ Q21 (secondary)** (user 2026-11-19, removed in routing stage 4k,
+2026-11-22): while the two TO-220s sat side by side across a 1.2 mm L-shaped barrier slot, their drill barrels were
+checked on the inner layers at 4.0 mm instead of 11.1 mm (rule "PRI-SEC inner layers, Q19/Q21 across the barrier
+slot"). Q19 stands in the single primary heatsink line since stage 4a, the rule had no pair left and is gone from
+`tube_psu_5_2.kicad_dru` and from `ALLOW` in `check_domains.py`: every primary ↔ secondary pair on the inner layers
+is checked at 11.1 mm.
 
 **Alternative if ISO_GND may float** (IEC 62368-1 5.4.1.8: a floating circuit is assumed earthed at the
 point giving the highest working voltage): with the 420V rail earthed, −80/−100 V vs DC+ reaches

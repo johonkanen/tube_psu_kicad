@@ -64,11 +64,7 @@ LIMITS = {
 }
 # Accepted pairs: (regex item A, regex item B, regex layer, smallest accepted distance mm, reason). A pair is
 # accepted if both descriptions match (in either order), the layer matches and the distance is not smaller.
-ALLOW = [
-    (r"^pad Q19\.", r"^pad Q21\.", r"^In", 4.0,
-     "kicad_dru rule 'PRI-SEC inner layers, Q19/Q21 across the barrier slot' (user decision 2026-11-19 (a)): the "
-     "L-slot cuts the laminate between the barrels, 4.0 mm air clearance applies"),
-]
+ALLOW = []        # empty since routing stage 4k (the Q19 / Q21 slot exception was dropped with its kicad_dru rule)
 BARRIERS = {"TR1", "TR2", "TR3", "ISO1", "ISO2", "U11"}      # setup_project.py BARRIERS: two domains in one footprint
 EPS = 1e-6
 
