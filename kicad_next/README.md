@@ -1341,6 +1341,45 @@ Left open by the cut (unconnected 30 -> 38, 0 shorts, 0 parity items): all eight
 (6 -> 11), all at DRV5's old place and gone when it is re-laid: pin 16 (now HV) 0.35 / 0.15 mm from the 15V track / via
 that fed it, pins 15 / 16 0.94 / 0.86 mm from a DHB_CURRENT via, pin 14 0.175 mm from its old ground via.
 
+## Stage 4g: DRV5 west of the Q19 pins, high-side loop (2026-11-22) – not finished
+
+`tools/next/route_s4g_drv5.py` (incremental, not re-runnable; `routing/moves_s4g.json`, `deleted_s4g.json`,
+`s4g_added.json`). Unconnected 38 -> 37, clearance markers 11 -> 6 (the five of stage 4f are gone), 0 shorts, no H4
+marker.
+
+| part | from | to | why |
+|---|---|---|---|
+| DRV5 | B.Cu (20.2, -53.895) | B.Cu (2.3, -49.9) rot 0 | pins 9 – 16 at x 5.9 – 8.0 facing the FET column: 16 / 15 / 14 at y -45.5 / -46.7 / -48.0, 11 / 10 / 9 at y -51.8 / -53.1 / -54.3 |
+| C92 | B.Cu (25.3, -60.9) | B.Cu (9.15, -46.525) rot -90 | bootstrap capacitor on pins 16 / 14 |
+| R26 | B.Cu (39.5, -46.7) | B.Cu (10.85, -46.0) rot -90 | gate resistor between pin 15 and the gate pad of Q19 |
+| C94 | B.Cu (10.7, -52.6) | B.Cu (-4.55, -48.63) rot 90 | 5V decoupling on pins 3 / 4, GND via (-5.75, -49.405) |
+| R103 | B.Cu (4.5, -53.864) | F.Cu (3.3, -55.55) rot 180 | was under the new body; top side west of the heatsink strip |
+| C123 | B.Cu (2.1, -54.4) | F.Cu (3.3, -54.05) rot 0 | as R103 |
+
+Done:
+* High side on B.Cu only: pin 15 -> R26 -> gate pad of Q19 (about 9.0 mm pin centre to pad centre, R26 included);
+  return Q19 pin 3 -> west -> north at x 10.25 (1.25 mm from the DC+ pad) -> C92 pin 1 -> pin 14, about 8.8 mm;
+  bootstrap loop pin 16 -> C92 -> pin 14 about 7 mm. The 10 mm loop target is not met (out + return about 18 mm).
+  Nearest high-side copper to H4: C92 pin 2 / pin 16, 5.0 mm from the hole centre. No VDDA copper on In2 any more.
+* 5V: kept via (4.33, -50.75) of the west In2 feed -> pin 3 -> pin 8 under the body; the link to the east In2 lane
+  (via (9.0, -54.6)) runs on B.Cu y -55.15 south of pin 9 and under the body (0.35 mm from the pads of C11).
+* GND: via (8.25, -54.345) at pin 9. U1A+: via (4.3, -55.25) in pin 1 of R106 / R103; bias via (1.5, -54.9) on the
+  In2 lane x 1.5.
+* Deleted: the dead-end B.Cu 15V track through the window (it fed nothing), the old copper of DRV5 pins 3 / 6 / 8,
+  its GND via (23.25, -51.99) and 5V via (15.25, -51.99), the old gate / bootstrap tracks of C92 and R26.
+
+Still open:
+* **15V of pin 11**: the In3 15V plane starts at x 9.5; between the pads (x 8.0) and the 1.2 mm zone of the source
+  return (x 10.25) only 0.9 mm of B.Cu is left for the low side, so the 15V via, C95 and the exit of pin 10 do not fit
+  beside each other yet. Low side (R90, D34, R92, R70, C95) not moved, pin 10 open.
+* **+1V65_BIAS** to R103 / C123 / R105 / C122 (was open before this stage too): its old B.Cu hop ran through the
+  high-side strip (deleted). The In2 lane ends at (12.4, -44.076) inside the bus; it has to cross HT_CS / EPWM5A /
+  EPWM6A on another layer. Proposal: B.Cu east of the Q19 pins (x 15), west again at y -54.65 between Q19 pin 3
+  and the gate pad of Q7.
+* PRI_DHB_HI, B12, DAB_DIS (pins 1, 2, 5), DT parts R127 / C118, R73 / R74, C120 / R129: not moved, open.
+* R22, D30, R53, D19, R41 still at their old places east of the column; clean-up there and C70 not done.
+* New courtyard overlaps: C92 / DRV5, C92 / R26, R106 / DRV5.
+
 ## Footprints and 3D models (phase 3, 2026-11-18)
 
 Regenerate: `python3 tools/next/gen_next_footprints.py`, `tools/p2k/bin/kicad_env.sh python3

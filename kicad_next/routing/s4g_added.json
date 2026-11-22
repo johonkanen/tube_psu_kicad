@@ -1,0 +1,515 @@
+{
+ "note": "routing stage 4g (2026-11-22), tools/next/route_s4g_drv5.py - incremental edit of the board, not a rebuild",
+ "added": [
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    4.33,
+    -50.75
+   ],
+   "end": [
+    1.575,
+    -47.995
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    1.575,
+    -47.995
+   ],
+   "end": [
+    -0.7,
+    -47.995
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    -0.7,
+    -47.995
+   ],
+   "end": [
+    -2.35,
+    -47.995
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    -0.7,
+    -47.995
+   ],
+   "end": [
+    -0.7,
+    -54.345
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    -0.7,
+    -54.345
+   ],
+   "end": [
+    -2.35,
+    -54.345
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    -2.35,
+    -47.995
+   ],
+   "end": [
+    -4.55,
+    -47.855
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    -2.35,
+    -49.265
+   ],
+   "end": [
+    -4.55,
+    -49.405
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    -4.55,
+    -49.405
+   ],
+   "end": [
+    -5.75,
+    -49.405
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "via",
+   "net": "GND",
+   "at": [
+    -5.75,
+    -49.405
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    9.0,
+    -54.6
+   ],
+   "end": [
+    9.0,
+    -55.15
+   ],
+   "width": 0.25
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    9.0,
+    -55.15
+   ],
+   "end": [
+    5.6,
+    -55.15
+   ],
+   "width": 0.25
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    5.6,
+    -55.15
+   ],
+   "end": [
+    5.2,
+    -54.75
+   ],
+   "width": 0.25
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    5.2,
+    -54.75
+   ],
+   "end": [
+    5.2,
+    -51.62
+   ],
+   "width": 0.25
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    5.2,
+    -51.62
+   ],
+   "end": [
+    4.33,
+    -50.75
+   ],
+   "width": 0.25
+  },
+  {
+   "kind": "via",
+   "net": "Net-(U1A-+)",
+   "at": [
+    4.3,
+    -55.25
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(U1A-+)",
+   "layer": "B.Cu",
+   "start": [
+    4.3,
+    -55.25
+   ],
+   "end": [
+    4.461,
+    -56.0
+   ],
+   "width": 0.2
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(U1A-+)",
+   "layer": "F.Cu",
+   "start": [
+    4.3,
+    -55.25
+   ],
+   "end": [
+    4.125,
+    -55.55
+   ],
+   "width": 0.2
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(U1A-+)",
+   "layer": "F.Cu",
+   "start": [
+    4.125,
+    -55.55
+   ],
+   "end": [
+    4.075,
+    -54.05
+   ],
+   "width": 0.2
+  },
+  {
+   "kind": "via",
+   "net": "+1V65_BIAS",
+   "at": [
+    1.5,
+    -54.9
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "F.Cu",
+   "start": [
+    1.5,
+    -54.9
+   ],
+   "end": [
+    2.475,
+    -55.55
+   ],
+   "width": 0.2
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "F.Cu",
+   "start": [
+    1.5,
+    -54.9
+   ],
+   "end": [
+    2.35,
+    -54.05
+   ],
+   "width": 0.2
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "F.Cu",
+   "start": [
+    2.35,
+    -54.05
+   ],
+   "end": [
+    2.525,
+    -54.05
+   ],
+   "width": 0.2
+  },
+  {
+   "kind": "via",
+   "net": "GND",
+   "at": [
+    8.25,
+    -54.345
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    6.95,
+    -54.345
+   ],
+   "end": [
+    8.25,
+    -54.345
+   ],
+   "width": 0.4
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    6.95,
+    -45.455
+   ],
+   "end": [
+    8.6,
+    -45.2
+   ],
+   "width": 0.4
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    6.95,
+    -47.995
+   ],
+   "end": [
+    9.15,
+    -48.1
+   ],
+   "width": 0.5
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    9.15,
+    -48.1
+   ],
+   "end": [
+    9.6,
+    -48.5
+   ],
+   "width": 0.5
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    9.6,
+    -48.5
+   ],
+   "end": [
+    10.25,
+    -49.15
+   ],
+   "width": 0.5
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    10.25,
+    -49.15
+   ],
+   "end": [
+    10.25,
+    -51.5
+   ],
+   "width": 0.5
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    10.25,
+    -51.5
+   ],
+   "end": [
+    10.8,
+    -52.06
+   ],
+   "width": 0.5
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    10.8,
+    -52.06
+   ],
+   "end": [
+    12.75,
+    -52.06
+   ],
+   "width": 0.5
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    6.95,
+    -46.725
+   ],
+   "end": [
+    9.9,
+    -46.725
+   ],
+   "width": 0.4
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    9.9,
+    -46.725
+   ],
+   "end": [
+    10.4,
+    -47.0
+   ],
+   "width": 0.4
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    10.4,
+    -47.0
+   ],
+   "end": [
+    10.85,
+    -47.0
+   ],
+   "width": 0.4
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    10.85,
+    -45.0
+   ],
+   "end": [
+    11.6,
+    -45.0
+   ],
+   "width": 0.4
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    11.6,
+    -45.0
+   ],
+   "end": [
+    12.4,
+    -45.8
+   ],
+   "width": 0.4
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    12.4,
+    -45.8
+   ],
+   "end": [
+    12.75,
+    -46.98
+   ],
+   "width": 0.4
+  }
+ ]
+}

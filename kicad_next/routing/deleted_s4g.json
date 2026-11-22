@@ -1,0 +1,953 @@
+{
+ "note": "routing stage 4g (2026-11-22), tools/next/route_s4g_drv5.py - incremental edit of the board, not a rebuild",
+ "deleted": [
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    2.6,
+    -49.3
+   ],
+   "end": [
+    2.6,
+    -51.2
+   ],
+   "width": 0.508,
+   "why": "dead-end B.Cu 15V track through the new place of DRV5 (dangling before; 15V is taken from the In3 plane)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    2.6,
+    -49.3
+   ],
+   "end": [
+    6.6,
+    -45.3
+   ],
+   "width": 0.4,
+   "why": "dead-end B.Cu 15V track through the new place of DRV5 (dangling before; 15V is taken from the In3 plane)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    2.6,
+    -51.2
+   ],
+   "end": [
+    0.123,
+    -53.677
+   ],
+   "width": 0.508,
+   "why": "dead-end B.Cu 15V track through the new place of DRV5 (dangling before; 15V is taken from the In3 plane)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    6.6,
+    -45.3
+   ],
+   "end": [
+    8.6,
+    -45.3
+   ],
+   "width": 0.4,
+   "why": "dead-end B.Cu 15V track through the new place of DRV5 (dangling before; 15V is taken from the In3 plane)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    8.6,
+    -45.3
+   ],
+   "end": [
+    10.6,
+    -43.3
+   ],
+   "width": 0.4,
+   "why": "dead-end B.Cu 15V track through the new place of DRV5 (dangling before; 15V is taken from the In3 plane)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    15.231,
+    -38.871
+   ],
+   "end": [
+    10.802,
+    -43.3
+   ],
+   "width": 0.508,
+   "why": "dead-end B.Cu 15V track through the new place of DRV5 (dangling before; 15V is taken from the In3 plane)"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    1.325,
+    -54.4
+   ],
+   "end": [
+    4.325,
+    -51.4
+   ],
+   "width": 0.3,
+   "why": "U1A+ / bias copper of R103, C123 at their old place under DRV5"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    4.5,
+    -51.5
+   ],
+   "end": [
+    4.5,
+    -53.0
+   ],
+   "width": 0.1524,
+   "why": "U1A+ / bias copper of R103, C123 at their old place under DRV5"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    4.5,
+    -51.5
+   ],
+   "end": [
+    1.5,
+    -54.5
+   ],
+   "width": 0.1524,
+   "why": "U1A+ / bias copper of R103, C123 at their old place under DRV5"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    7.9,
+    -49.7
+   ],
+   "end": [
+    9.3,
+    -48.3
+   ],
+   "width": 0.1524,
+   "why": "+1V65_BIAS lane through the high-side strip / under DRV5 (was open towards R103 already): to be re-drawn"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    9.3,
+    -48.3
+   ],
+   "end": [
+    9.3,
+    -46.2
+   ],
+   "width": 0.1524,
+   "why": "+1V65_BIAS lane through the high-side strip / under DRV5 (was open towards R103 already): to be re-drawn"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    9.3,
+    -46.2
+   ],
+   "end": [
+    10.4,
+    -45.1
+   ],
+   "width": 0.1524,
+   "why": "+1V65_BIAS lane through the high-side strip / under DRV5 (was open towards R103 already): to be re-drawn"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    10.4,
+    -45.1
+   ],
+   "end": [
+    11.424,
+    -44.076
+   ],
+   "width": 0.1524,
+   "why": "+1V65_BIAS lane through the high-side strip / under DRV5 (was open towards R103 already): to be re-drawn"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    11.424,
+    -44.076
+   ],
+   "end": [
+    12.4,
+    -44.076
+   ],
+   "width": 0.1524,
+   "why": "+1V65_BIAS lane through the high-side strip / under DRV5 (was open towards R103 already): to be re-drawn"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    5.2,
+    -54.5
+   ],
+   "end": [
+    7.9,
+    -51.8
+   ],
+   "width": 0.1524,
+   "why": "+1V65_BIAS lane through the high-side strip / under DRV5 (was open towards R103 already): to be re-drawn"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    5.2,
+    -58.8
+   ],
+   "end": [
+    5.2,
+    -54.5
+   ],
+   "width": 0.1524,
+   "why": "+1V65_BIAS lane through the high-side strip / under DRV5 (was open towards R103 already): to be re-drawn"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    7.9,
+    -51.8
+   ],
+   "end": [
+    7.9,
+    -49.7
+   ],
+   "width": 0.1524,
+   "why": "+1V65_BIAS lane through the high-side strip / under DRV5 (was open towards R103 already): to be re-drawn"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(U1A-+)",
+   "layer": "B.Cu",
+   "start": [
+    2.875,
+    -54.3885
+   ],
+   "end": [
+    4.075,
+    -54.3885
+   ],
+   "width": 0.2,
+   "why": "U1A+ / bias copper of R103, C123 at their old place under DRV5"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(U1A-+)",
+   "layer": "B.Cu",
+   "start": [
+    2.875,
+    -54.4
+   ],
+   "end": [
+    2.875,
+    -54.3885
+   ],
+   "width": 0.2,
+   "why": "U1A+ / bias copper of R103, C123 at their old place under DRV5"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(U1A-+)",
+   "layer": "B.Cu",
+   "start": [
+    4.075,
+    -54.3885
+   ],
+   "end": [
+    4.175,
+    -54.4885
+   ],
+   "width": 0.2,
+   "why": "U1A+ / bias copper of R103, C123 at their old place under DRV5"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(U1A-+)",
+   "layer": "B.Cu",
+   "start": [
+    4.5,
+    -54.7272
+   ],
+   "end": [
+    4.5,
+    -56.0
+   ],
+   "width": 0.1524,
+   "why": "U1A+ / bias copper of R103, C123 at their old place under DRV5"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    3.6,
+    -49.8
+   ],
+   "end": [
+    4.33,
+    -50.75
+   ],
+   "width": 0.4,
+   "why": "B.Cu 5V link through the new place of DRV5: re-drawn under the body"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    3.6,
+    -49.8
+   ],
+   "end": [
+    5.133,
+    -48.267
+   ],
+   "width": 0.508,
+   "why": "B.Cu 5V link through the new place of DRV5: re-drawn under the body"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    5.133,
+    -48.267
+   ],
+   "end": [
+    7.266,
+    -50.4
+   ],
+   "width": 0.4,
+   "why": "B.Cu 5V link through the new place of DRV5: re-drawn under the body"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    7.266,
+    -50.4
+   ],
+   "end": [
+    9.25,
+    -50.4
+   ],
+   "width": 0.4,
+   "why": "B.Cu 5V link through the new place of DRV5: re-drawn under the body"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    9.0,
+    -50.65
+   ],
+   "end": [
+    9.25,
+    -50.4
+   ],
+   "width": 0.4,
+   "why": "B.Cu 5V link through the new place of DRV5: re-drawn under the body"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    9.0,
+    -51.825
+   ],
+   "end": [
+    10.3,
+    -51.825
+   ],
+   "width": 0.3,
+   "why": "B.Cu 5V link through the new place of DRV5: re-drawn under the body"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    9.0,
+    -54.6
+   ],
+   "end": [
+    9.0,
+    -50.65
+   ],
+   "width": 0.4,
+   "why": "B.Cu 5V link through the new place of DRV5: re-drawn under the body"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    15.55,
+    -51.94
+   ],
+   "end": [
+    16.05,
+    -51.94
+   ],
+   "width": 0.3,
+   "why": "copper of DRV5 at its old place east of the FET column"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    15.55,
+    -51.99
+   ],
+   "end": [
+    15.55,
+    -51.94
+   ],
+   "width": 0.3,
+   "why": "copper of DRV5 at its old place east of the FET column"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    16.05,
+    -51.94
+   ],
+   "end": [
+    17.05,
+    -52.94
+   ],
+   "width": 0.3,
+   "why": "copper of DRV5 at its old place east of the FET column"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    17.05,
+    -52.94
+   ],
+   "end": [
+    17.05,
+    -57.54
+   ],
+   "width": 0.3,
+   "why": "copper of DRV5 at its old place east of the FET column"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    17.05,
+    -57.54
+   ],
+   "end": [
+    16.35,
+    -58.24
+   ],
+   "width": 0.3,
+   "why": "copper of DRV5 at its old place east of the FET column"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-DT)",
+   "layer": "B.Cu",
+   "start": [
+    12.15,
+    -56.575
+   ],
+   "end": [
+    13.45,
+    -56.625
+   ],
+   "width": 0.2,
+   "why": "copper of DRV5 at its old place east of the FET column"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-DT)",
+   "layer": "B.Cu",
+   "start": [
+    14.25,
+    -56.525
+   ],
+   "end": [
+    13.65,
+    -56.525
+   ],
+   "width": 0.4,
+   "why": "copper of DRV5 at its old place east of the FET column"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-DT)",
+   "layer": "B.Cu",
+   "start": [
+    14.95,
+    -55.825
+   ],
+   "end": [
+    14.25,
+    -56.525
+   ],
+   "width": 0.4,
+   "why": "copper of DRV5 at its old place east of the FET column"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-DT)",
+   "layer": "B.Cu",
+   "start": [
+    15.55,
+    -55.8
+   ],
+   "end": [
+    15.55,
+    -55.825
+   ],
+   "width": 0.4,
+   "why": "copper of DRV5 at its old place east of the FET column"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-DT)",
+   "layer": "B.Cu",
+   "start": [
+    15.55,
+    -55.825
+   ],
+   "end": [
+    14.95,
+    -55.825
+   ],
+   "width": 0.4,
+   "why": "copper of DRV5 at its old place east of the FET column"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    23.725,
+    -60.9
+   ],
+   "end": [
+    24.025,
+    -60.6
+   ],
+   "width": 0.3,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    26.875,
+    -60.9
+   ],
+   "end": [
+    26.9125,
+    -60.9
+   ],
+   "width": 0.4,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    26.9125,
+    -60.9
+   ],
+   "end": [
+    27.3125,
+    -61.3
+   ],
+   "width": 0.4,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    27.3125,
+    -61.3
+   ],
+   "end": [
+    27.3125,
+    -62.1
+   ],
+   "width": 0.4,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    27.3125,
+    -62.1
+   ],
+   "end": [
+    24.9125,
+    -62.1
+   ],
+   "width": 0.4,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    24.9125,
+    -62.1
+   ],
+   "end": [
+    23.3125,
+    -63.7
+   ],
+   "width": 0.4,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    23.3125,
+    -63.7
+   ],
+   "end": [
+    23.3125,
+    -63.1
+   ],
+   "width": 0.4,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    23.3125,
+    -63.1
+   ],
+   "end": [
+    21.8125,
+    -61.6
+   ],
+   "width": 0.4,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    21.6,
+    -61.0
+   ],
+   "end": [
+    21.812,
+    -61.6
+   ],
+   "width": 0.4,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    21.6,
+    -61.0
+   ],
+   "end": [
+    21.6,
+    -59.4
+   ],
+   "width": 0.635,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    21.6,
+    -59.4
+   ],
+   "end": [
+    21.6,
+    -58.5
+   ],
+   "width": 0.635,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    21.6,
+    -56.2
+   ],
+   "end": [
+    21.6,
+    -58.5
+   ],
+   "width": 0.635,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    35.2175,
+    -52.6
+   ],
+   "end": [
+    35.2175,
+    -53.3175
+   ],
+   "width": 0.762,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    36.0175,
+    -52.5
+   ],
+   "end": [
+    35.5175,
+    -52.5
+   ],
+   "width": 0.5,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    39.0175,
+    -49.5
+   ],
+   "end": [
+    36.0175,
+    -52.5
+   ],
+   "width": 0.5,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    39.049,
+    -49.486
+   ],
+   "end": [
+    39.0175,
+    -49.5
+   ],
+   "width": 0.5,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    39.248,
+    -49.486
+   ],
+   "end": [
+    39.049,
+    -49.486
+   ],
+   "width": 0.762,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    39.248,
+    -49.486
+   ],
+   "end": [
+    39.502,
+    -49.232
+   ],
+   "width": 0.762,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    39.502,
+    -49.232
+   ],
+   "end": [
+    39.502,
+    -47.708
+   ],
+   "width": 0.762,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    39.502,
+    -45.708
+   ],
+   "end": [
+    40.8101,
+    -45.708
+   ],
+   "width": 0.762,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    40.8101,
+    -45.708
+   ],
+   "end": [
+    41.534,
+    -45.708
+   ],
+   "width": 0.762,
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "via",
+   "net": "+1V65_BIAS",
+   "at": [
+    4.5,
+    -51.5
+   ],
+   "why": "U1A+ / bias copper of R103, C123 at their old place under DRV5"
+  },
+  {
+   "kind": "via",
+   "net": "+1V65_BIAS",
+   "at": [
+    7.9,
+    -49.7
+   ],
+   "why": "+1V65_BIAS lane through the high-side strip / under DRV5 (was open towards R103 already): to be re-drawn"
+  },
+  {
+   "kind": "via",
+   "net": "+1V65_BIAS",
+   "at": [
+    12.4,
+    -44.076
+   ],
+   "why": "+1V65_BIAS lane through the high-side strip / under DRV5 (was open towards R103 already): to be re-drawn"
+  },
+  {
+   "kind": "via",
+   "net": "5V",
+   "at": [
+    15.25,
+    -51.99
+   ],
+   "why": "copper of DRV5 at its old place east of the FET column"
+  },
+  {
+   "kind": "via",
+   "net": "GND",
+   "at": [
+    23.25,
+    -51.99
+   ],
+   "why": "copper of DRV5 at its old place east of the FET column"
+  },
+  {
+   "kind": "via",
+   "net": "Net-(DRV5-VDDA)",
+   "at": [
+    27.312,
+    -62.1
+   ],
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  },
+  {
+   "kind": "via",
+   "net": "Net-(DRV5-VDDA)",
+   "at": [
+    23.312,
+    -63.7
+   ],
+   "why": "old gate / bootstrap copper of the high side east of the column (C92, R26 moved; no VDDA on In2 any more)"
+  }
+ ]
+}

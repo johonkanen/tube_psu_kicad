@@ -1,0 +1,101 @@
+{
+ "note": "routing stage 4g (2026-11-22), tools/next/route_s4g_drv5.py - incremental edit of the board, not a rebuild",
+ "moves": [
+  {
+   "ref": "DRV5",
+   "frm": {
+    "x": 20.2,
+    "y": -53.895,
+    "rot": 0.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 2.3,
+    "y": -49.9,
+    "rot": 0,
+    "side": "B"
+   },
+   "why": "west of the Q19 pins: outputs (pins 9-16) face the FET column at x 5.9-8.0"
+  },
+  {
+   "ref": "R103",
+   "frm": {
+    "x": 4.5,
+    "y": -53.8635,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 3.3,
+    "y": -55.55,
+    "rot": 180,
+    "side": "F"
+   },
+   "why": "was under the new body of DRV5; top side west of the heatsink strip (x < 5)"
+  },
+  {
+   "ref": "C123",
+   "frm": {
+    "x": 2.1,
+    "y": -54.4,
+    "rot": 0.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 3.3,
+    "y": -54.05,
+    "rot": 0,
+    "side": "F"
+   },
+   "why": "was under the new body of DRV5; top side beside R103"
+  },
+  {
+   "ref": "C94",
+   "frm": {
+    "x": 10.7,
+    "y": -52.6,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": -4.55,
+    "y": -48.63,
+    "rot": 90,
+    "side": "B"
+   },
+   "why": "5V decoupling at pins 3 / 4 of DRV5 (input side, west of the pads)"
+  },
+  {
+   "ref": "C92",
+   "frm": {
+    "x": 25.3,
+    "y": -60.9,
+    "rot": 0.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 9.15,
+    "y": -46.525,
+    "rot": -90,
+    "side": "B"
+   },
+   "why": "bootstrap capacitor directly on pins 16 / 14"
+  },
+  {
+   "ref": "R26",
+   "frm": {
+    "x": 39.502,
+    "y": -46.708,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 10.85,
+    "y": -46.0,
+    "rot": -90,
+    "side": "B"
+   },
+   "why": "gate resistor between pin 15 and the gate pad of Q19"
+  }
+ ]
+}
