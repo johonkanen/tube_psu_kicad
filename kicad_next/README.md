@@ -94,10 +94,10 @@ checked for ordering. No part moved in this pass. PNGs of all six copper layers 
 | shorts / unconnected / parity | 0 | 0 | |
 | clearance | 5 (7 with `--all-track-errors`) | 0 | Net class gaps 0.2 mm that were 0.16 ... 0.175 mm: EPWM5A_ISO In2 diagonal 0.09 mm further from the EPWM6A_ISO via (-48.89, -54.21); 5V on B.Cu 0.045 mm west (x -59.745, y -33.0 ... -26.5) past the pads of D9 and D28 pad A (two of the three pads were hidden behind the first marker); GND via (27.1, 5.1) -> (27.15, 5.1); Net-(C11-Pad1) via (28.4, 7.7) -> (28.45, 7.7); GND via (4.45, -56.9) -> (4.45, -56.95). The Net-(C11-Pad1) via now has 0.204 / 0.213 / 0.204 mm to the +1V65_BIAS track (F.Cu), R65 pad 2 and the Net-(C127-Pad1) track (B.Cu). |
 | track_dangling | 26 | 0 | Pieces under / inside a wider track of the same net, zero-length segments, overshoots trimmed to the via / junction, and stubs to nothing (5.1 leftovers of moved parts) deleted back to the next junction, with two vias that only fed such a stub (15V (15.24, -35.02), 5V (-23.9, -53.036) with its In2 lane). The longest: a +3V3 In2 lane of 25 mm from (34.2, -28.6) to a free end at (16.8, -48.4), and a +3V3 In2 stub at the via (5.8, -60.1). The DC+ track of C47 ended in a round hole of 'Proteus F.Cu pour 29' at (45.62, -41.95); it now ends inside the fill at y -42.7. |
-| courtyards_overlap | 132 | 132 | Classified by pad bounding boxes and F.Fab / B.Fab body boxes: 106 pairs stand exactly as in 5.1 (same relative place, side and turn; 17 of them with overlapping body boxes - film / electrolytic capacitors beside C86, C117, C37, C31 / C32 and the paralleled 1210 capacitors C99 / C100 / C101, C90 / C91 on the 420V rail whose same-net pads overlap); 26 pairs are new or changed and courtyard-only (pads of two nets >= 0.238 mm apart, no body box overlap > 0.05 mm; same-net pads touch at C124 / R70, R90 / D34, R79 / R49, R90 / R70). No pair with a new pad or body collision, so no part was moved. |
+| courtyards_overlap | 132 | 132 | Classified by pad bounding boxes and F.Fab / B.Fab body boxes: 106 pairs stand at their 5.1 place (same relative place, side and turn; 17 of them with overlapping body boxes - film / electrolytic capacitors beside C86, C117, C37, C31 / C32 and the paralleled capacitors C99 / C100 / C101, C90 / C91 on the 420V rail. Correction (stage 7): those five were NOT as in 5.1 - change 5.6 made them 1210 (5.1: 1206) at the old 2.0 / 1.9 mm pitch, the bodies overlapped 0.5 / 0.6 mm; re-spaced in stage 7); 26 pairs are new or changed and courtyard-only (pads of two nets >= 0.238 mm apart, no body box overlap > 0.05 mm; same-net pads touch at C124 / R70, R90 / D34, R79 / R49, R90 / R70). No pair with a new pad or body collision, so no part was moved. |
 | pth_inside_courtyard | 2 | 2 | Pin 1 of IN1 and pin 3 of CM1 inside the courtyard of the film capacitor C86 - as in 5.1 (the three parts are where they were). |
 | starved_thermal | 2 | 2 | C102 pin 1 (ISO_GND, (77.0, 13.85)) on In1 and In4: the pin stands in a 1.5 mm neck of the ISO_GND plane, one spoke north and one south. The barrel joins both; bias capacitor, no current. Not changed (a solid connection of this pad was not tried to the end). |
-| lib_footprint_mismatch | 2 | 2 | Q19 and Q21 (TO-220-3_Vertical): the board copies differ from the library footprint. Not looked into. |
+| lib_footprint_mismatch | 2 | 2 | Q19 and Q21 (TO-220-3_Vertical): the board copies differ from the library footprint. Looked into in the verification: only the pad option 'remove unused inner-layer rings' differs (set on purpose, `trial_placement_p2.py`); ignored by `check_board.py` since stage 7. Packages: Q7 / Q8 / Q19 / Q21 (STF7N60M2) are TO-220, pin pitch 2.54 mm; only Q5 / Q6 are TO-247 - earlier notes that took Q7 / Q19 for TO-247 are wrong. |
 
 ### Not checked
 
@@ -123,6 +123,48 @@ checked for ordering. No part moved in this pass. PNGs of all six copper layers 
 * Bobbin measurements of the transformers.
 * J2 pin 18.
 * TR2 dot / turns.
+
+
+## Stage 7: fixes after the draft verification (2026-11-22)
+
+`tools/next/route_s7_fixes.py --group caps,r83,iso2` (incremental, not re-runnable; `routing/moves_s7.json`,
+`deleted_s7.json`, `s7_added.json`). DRC after it: courtyards_overlap 132, pth_inside_courtyard 2, starved_thermal 2,
+0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next.sh` passes.
+
+* **420V 1210 capacitors**: pitch 2.9 mm (body 2.5 mm, gap 0.4 mm; was 2.0 / 1.9 mm with 0.5 / 0.6 mm body overlap).
+  F.Cu: C90 75.4 -> 74.7, C91 77.4 -> 77.6. B.Cu: C99 77.4 -> 78.3, C101 73.5 -> 72.5, C100 stays (75.4); y -75.425
+  and the turn unchanged. All pads stay on the 420V / ISO_GND pours; under C101 two B.Cu patches (`S7_ISO_GND_B_C101`
+  x 71.0 ... 73.2, `S7_420V_B_C101` x 71.0 ... 72.8) carry the pours 1.2 mm further west. The three courtyard pairs
+  C90 / C91, C99 / C100, C100 / C101 still overlap (courtyard 3.29 mm wide, pitch 2.9); no courtyard pair with another
+  part (the F side has 2.85 mm between the TR3 and C30 courtyards for a courtyard-clean pair, so not possible there).
+* **R83 pad 2 (GND)**: there were three vias, not one - (17.96, -64.55) 0.5 / 0.3 on a 0.35 mm track and (17.25, -64.93),
+  (18.55, -64.93) 0.6 / 0.3 on a 0.5 mm track that touched the first only by a 0.02 mm overlap. Now three 0.6 / 0.3
+  vias on a 1.0 mm F.Cu bar (15.4 ... 18.55, y -64.73) that covers the lower half of the pad; south edge y -65.23
+  as the via rings (UART island limit -65.255).
+* **ISO2 pad 8 -> Net-(TR1-S15)**: a plain 0.3 mm shift east is not free (15V_ISO_SEC pad at x 72.5 ... 74.3,
+  y -15.0 ... -13.8, 0.35 mm from the track). Instead the track leaves x 71.9 at y -15.9 on a diagonal straight into
+  the D4 anode pad; the nearest point to ISO2 pad 8 moves from (71.9, -17.2) to (71.9, -15.9): straight distance
+  9.68 -> about 10.35 mm, creepage round the slot 11.2 -> about 11.8 mm (estimate from the geometry, not re-measured).
+* `check_board.py` ignores `lib_footprint_mismatch` (Q19 / Q21, see above).
+
+Not done:
+
+* **DC+ feed of C47** (89 mm, 55 mm of it a 1.5 mm track with 0.75 / 0.8 mm pieces at (45.62, -42.7 ... -47.3) -
+  (41.5, -47.3)). Widening those pieces to 1.5 mm gives two `items_not_allowed` markers (a keep-out area there; which
+  one was not looked up). A short path from the bridge was not found in the time: F.Cu is closed by the switch-node
+  zone (x 12 ... 31, y -57.5 ... -52); on B.Cu the way south from C70 pad 1 (18.2, -48) passes between the 15V via
+  (17.625, -51.0, In2 -> In3 change of the 15V bridge) and C70 pad 2 / the DHB_CURRENT vias (22.6, -49 / -50): 3.1 mm
+  between via ring and pad corner, 0.7 mm left for a track at 1.2 mm HV spacing; In3 is closed by the 15V bridge
+  (y -55.25 / x 17.6 / y -51.6 to x 24). It needs the 15V via / In2 diagonal (22.2, -46.4) - (17.6, -51.0) re-routed
+  first (then B.Cu is free from y -53 to -72 at x 23.5 ... 27, and the south end can come up through vias at
+  x >= 28.2 on the existing F.Cu track east of C47 pad 1; R146 on B.Cu at (24.25, -74.28) blocks vias in the pad).
+* **C95** stays at (19.2, -51.6), 18 / 15 mm from DRV5 pins 11 / 9. B.Cu between the DRV5 pad rows is under the body
+  of DRV5 (same side), not a place. B.Cu east of the pads: the high-side return (x 10.25 down to y -51.5, then y -52.06
+  to Q19 pin 3) leaves 15V copper only x <= 8.8 north of y -53.5 (0.8 mm beside the pin pads); south of that are the
+  gate track, the GND via (8.25, -54.345), the 5V via (9.0, -54.6), C11, R90, D34. F.Cu west of x 5: DC+ pour with
+  a pocket x 3.0 ... 7.5, y -52.0 ... -49.5 that holds the 5V via (4.33, -50.75), and two 0603 parts at x 2.25 ... 4.5,
+  y -56 ... -53.75; a 1206 (pads 4.45 x 1.8 mm plus 1.2 mm to DC+) does not fit. An 0603 might fit in the F.Cu pocket
+  if the 5V via moves (estimate, not tried).
 
 ## Inner layers (routing stage 2, 2026-11-20)
 
