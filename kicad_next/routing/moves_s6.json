@@ -1,0 +1,8 @@
+{
+ "note": "routing stage 6 (2026-11-22), tools/next/route_s6_cleanup.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "clr",
+  "dangling"
+ ],
+ "moves": []
+}

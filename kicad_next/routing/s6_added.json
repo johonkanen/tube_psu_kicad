@@ -1,0 +1,288 @@
+{
+ "note": "routing stage 6 (2026-11-22), tools/next/route_s6_cleanup.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "clr",
+  "dangling"
+ ],
+ "added": [
+  {
+   "group": "clr",
+   "kind": "segment",
+   "net": "EPWM5A_ISO",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -50.9,
+    -54.947
+   ],
+   "end": [
+    -48.85,
+    -54.947
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "clr",
+   "kind": "segment",
+   "net": "EPWM5A_ISO",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -48.85,
+    -54.947
+   ],
+   "end": [
+    -48.2,
+    -54.297
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "clr",
+   "kind": "segment",
+   "net": "EPWM5A_ISO",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -48.2,
+    -54.297
+   ],
+   "end": [
+    -48.2,
+    -53.605
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "clr",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    -59.7,
+    -37.649
+   ],
+   "end": [
+    -59.7,
+    -33.0
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "clr",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    -59.7,
+    -33.0
+   ],
+   "end": [
+    -59.745,
+    -32.955
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "clr",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    -59.745,
+    -32.955
+   ],
+   "end": [
+    -59.745,
+    -26.5
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "clr",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    -59.745,
+    -26.5
+   ],
+   "end": [
+    -59.7,
+    -26.455
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "clr",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    -59.7,
+    -26.455
+   ],
+   "end": [
+    -59.7,
+    -25.585
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "clr",
+   "kind": "via",
+   "net": "GND",
+   "at": [
+    27.15,
+    5.1
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "group": "clr",
+   "kind": "segment",
+   "net": "GND",
+   "layer": "F.Cu",
+   "start": [
+    27.1,
+    5.1
+   ],
+   "end": [
+    27.15,
+    5.1
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "clr",
+   "kind": "via",
+   "net": "Net-(C11-Pad1)",
+   "at": [
+    28.45,
+    7.7
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "group": "clr",
+   "kind": "segment",
+   "net": "Net-(C11-Pad1)",
+   "layer": "F.Cu",
+   "start": [
+    28.45,
+    7.7
+   ],
+   "end": [
+    29.7,
+    7.7
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "clr",
+   "kind": "segment",
+   "net": "Net-(C11-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    29.3,
+    7.7
+   ],
+   "end": [
+    28.45,
+    7.7
+   ],
+   "width": 0.203
+  },
+  {
+   "group": "clr",
+   "kind": "via",
+   "net": "GND",
+   "at": [
+    4.45,
+    -56.95
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "GATE1",
+   "layer": "B.Cu",
+   "start": [
+    6.753,
+    -29.576
+   ],
+   "end": [
+    7.124,
+    -29.95
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    45.62,
+    -42.7
+   ],
+   "end": [
+    45.62,
+    -44.6
+   ],
+   "width": 0.75
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "F.Cu",
+   "start": [
+    73.898,
+    -37.3
+   ],
+   "end": [
+    73.898,
+    -38.0
+   ],
+   "width": 0.762
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    1.5,
+    -54.9
+   ],
+   "end": [
+    1.5,
+    -60.8
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "EPWM5A_ISO",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -53.3,
+    -64.475
+   ],
+   "end": [
+    -53.3,
+    -64.1
+   ],
+   "width": 0.152
+  }
+ ]
+}

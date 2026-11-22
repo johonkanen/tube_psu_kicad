@@ -1,0 +1,971 @@
+{
+ "note": "routing stage 6 (2026-11-22), tools/next/route_s6_cleanup.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "clr",
+  "dangling"
+ ],
+ "deleted": [
+  {
+   "group": "clr",
+   "kind": "segment",
+   "net": "EPWM5A_ISO",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -50.9,
+    -54.947
+   ],
+   "end": [
+    -48.9366,
+    -54.947
+   ],
+   "width": 0.1524,
+   "why": "diagonal 0.09 mm further from the EPWM6A_ISO via"
+  },
+  {
+   "group": "clr",
+   "kind": "segment",
+   "net": "EPWM5A_ISO",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -48.9366,
+    -54.947
+   ],
+   "end": [
+    -48.2,
+    -54.2104
+   ],
+   "width": 0.1524,
+   "why": "diagonal 0.09 mm further from the EPWM6A_ISO via"
+  },
+  {
+   "group": "clr",
+   "kind": "segment",
+   "net": "EPWM5A_ISO",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -48.2,
+    -54.2104
+   ],
+   "end": [
+    -48.2,
+    -53.605
+   ],
+   "width": 0.1524,
+   "why": "diagonal 0.09 mm further from the EPWM6A_ISO via"
+  },
+  {
+   "group": "clr",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    -59.7,
+    -37.6486
+   ],
+   "end": [
+    -59.7,
+    -25.5851
+   ],
+   "width": 0.1524,
+   "why": "0.045 mm west past the pads of D9 and D28 pad A (y -33.0 ... -26.5)"
+  },
+  {
+   "group": "clr",
+   "kind": "segment",
+   "net": "Net-(C11-Pad1)",
+   "layer": "F.Cu",
+   "start": [
+    28.4,
+    7.7
+   ],
+   "end": [
+    29.7,
+    7.7
+   ],
+   "width": 0.1524,
+   "why": "via 0.05 mm east (gap to the +1V65_BIAS diagonal)"
+  },
+  {
+   "group": "clr",
+   "kind": "segment",
+   "net": "Net-(C11-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    29.3,
+    7.7
+   ],
+   "end": [
+    28.4,
+    7.7
+   ],
+   "width": 0.2032,
+   "why": "via 0.05 mm east (gap to the +1V65_BIAS diagonal)"
+  },
+  {
+   "group": "clr",
+   "kind": "via",
+   "net": "GND",
+   "at": [
+    27.1,
+    5.1
+   ],
+   "why": "0.05 mm east (gap to the PFC_PWM2 track x 26.6)"
+  },
+  {
+   "group": "clr",
+   "kind": "via",
+   "net": "Net-(C11-Pad1)",
+   "at": [
+    28.4,
+    7.7
+   ],
+   "why": "0.05 mm east (gap to the +1V65_BIAS diagonal)"
+  },
+  {
+   "group": "clr",
+   "kind": "via",
+   "net": "GND",
+   "at": [
+    4.45,
+    -56.9
+   ],
+   "why": "0.05 mm south (gap to R106 pad 1)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    41.961,
+    16.944
+   ],
+   "end": [
+    41.9504,
+    16.944
+   ],
+   "width": 0.762,
+   "why": "0.011 mm piece inside the two tracks at (41.95, 16.944)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "GATE1",
+   "layer": "B.Cu",
+   "start": [
+    3.7529,
+    -29.576
+   ],
+   "end": [
+    6.3,
+    -29.576
+   ],
+   "width": 0.1524,
+   "why": "lies under the 0.4 mm track (3.753 ... 6.753, -29.576)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "GATE1",
+   "layer": "B.Cu",
+   "start": [
+    6.3,
+    -29.126
+   ],
+   "end": [
+    7.124,
+    -29.95
+   ],
+   "width": 0.1524,
+   "why": "trimmed to the end of the 0.4 mm track (0.64 mm overshoot north-west)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "HEATER_CURRENT",
+   "layer": "B.Cu",
+   "start": [
+    -11.2,
+    -80.4
+   ],
+   "end": [
+    -11.2,
+    -79.1
+   ],
+   "width": 0.1524,
+   "why": "lies under the 0.8 mm track x -11.2"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "HEATER_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -1.5,
+    -66.0
+   ],
+   "end": [
+    0.4,
+    -64.1
+   ],
+   "width": 0.1524,
+   "why": "lies under the 0.2 mm track, 0.28 mm overshoot"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "F.Cu",
+   "start": [
+    15.2591,
+    -33.137
+   ],
+   "end": [
+    15.24,
+    -33.1561
+   ],
+   "width": 0.1524,
+   "why": "0.027 mm piece at the end of the track x 15.24"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    14.2002,
+    -36.233
+   ],
+   "end": [
+    10.8091,
+    -36.233
+   ],
+   "width": 0.508,
+   "why": "stub west of the via (13.67, -36.28); C79 pad 1 - via is the 0.4 mm track"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    14.6701,
+    -36.278
+   ],
+   "end": [
+    14.2002,
+    -36.233
+   ],
+   "width": 0.508,
+   "why": "inside C79 pad 1 / the 0.4 mm track"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    -7.4118,
+    -67.702
+   ],
+   "end": [
+    -7.4118,
+    -64.726
+   ],
+   "width": 0.1524,
+   "why": "lies under the 0.4 mm track x -7.41"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "F.Cu",
+   "start": [
+    73.898,
+    -35.2112
+   ],
+   "end": [
+    73.8978,
+    -35.2112
+   ],
+   "width": 0.1524,
+   "why": "zero-length segment"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "F.Cu",
+   "start": [
+    73.898,
+    -35.2113
+   ],
+   "end": [
+    73.898,
+    -35.2112
+   ],
+   "width": 0.1524,
+   "why": "zero-length segment"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "F.Cu",
+   "start": [
+    73.8979,
+    -35.2113
+   ],
+   "end": [
+    73.898,
+    -35.2113
+   ],
+   "width": 0.1524,
+   "why": "zero-length segment"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "In2.Signal_HV",
+   "start": [
+    74.808,
+    -47.962
+   ],
+   "end": [
+    73.538,
+    -47.962
+   ],
+   "width": 0.762,
+   "why": "0.762 mm piece over the 0.3 mm lane y -48.0"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -23.9,
+    -48.089
+   ],
+   "end": [
+    -21.011,
+    -48.089
+   ],
+   "width": 0.254,
+   "why": "lies under the 0.3 mm track y -48.09, 0.9 mm overshoot"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    1.5,
+    -54.5
+   ],
+   "end": [
+    1.5,
+    -60.8
+   ],
+   "width": 0.1524,
+   "why": "trimmed to the via (1.5, -54.9)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "EPWM5A_ISO",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -53.3,
+    -65.1
+   ],
+   "end": [
+    -53.3,
+    -64.1
+   ],
+   "width": 0.1524,
+   "why": "trimmed to the junction with the 0.4 mm track y -64.475"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "Net-(DRV3-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    -23.9,
+    -56.1
+   ],
+   "end": [
+    -19.4,
+    -56.1
+   ],
+   "width": 0.762,
+   "why": "4.5 mm x 0.762 mm stub to nothing off the end of the 0.4 mm track"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "Net-(DRV3-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    -16.6,
+    -58.699
+   ],
+   "end": [
+    -19.1,
+    -56.199
+   ],
+   "width": 0.4,
+   "why": "stub to nothing (5.1 leftover) from the pin 16 track"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    45.62,
+    -41.95
+   ],
+   "end": [
+    45.62,
+    -44.6
+   ],
+   "width": 0.75,
+   "why": "trimmed: the end stood in a round hole of 'Proteus F.Cu pour 29' (5.1 pad place), now it ends in the fill"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "F.Cu",
+   "start": [
+    15.24,
+    -33.1561
+   ],
+   "end": [
+    15.24,
+    -35.0179
+   ],
+   "width": 0.1524,
+   "why": "1.9 mm stub to nothing north of the via (15.24, -35.02)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "F.Cu",
+   "start": [
+    15.24,
+    -35.0179
+   ],
+   "end": [
+    15.2591,
+    -35.037
+   ],
+   "width": 0.1524,
+   "why": "0.027 mm piece inside that via"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    -7.41,
+    -67.7
+   ],
+   "end": [
+    -7.41,
+    -63.3
+   ],
+   "width": 0.4,
+   "why": "4.4 mm stub to nothing south of the via (-7.24, -62.24)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    -7.41,
+    -63.3
+   ],
+   "end": [
+    -7.21,
+    -63.1
+   ],
+   "width": 0.4,
+   "why": "4.4 mm stub to nothing south of the via (-7.24, -62.24)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    -7.239,
+    -62.2351
+   ],
+   "end": [
+    -7.239,
+    -63.119
+   ],
+   "width": 0.1524,
+   "why": "4.4 mm stub to nothing south of the via (-7.24, -62.24)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "F.Cu",
+   "start": [
+    73.898,
+    -35.2113
+   ],
+   "end": [
+    73.8979,
+    -38.0
+   ],
+   "width": 0.762,
+   "why": "trimmed to the via (73.5, -37.3): 2.1 mm stub to nothing north of it"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    -23.3,
+    -53.0
+   ],
+   "end": [
+    -23.2,
+    -53.1
+   ],
+   "width": 0.3,
+   "why": "rest of the stub from the via (-23.9, -53.036)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    -23.3,
+    -53.036
+   ],
+   "end": [
+    -23.3,
+    -53.0
+   ],
+   "width": 0.3,
+   "why": "rest of the stub from the via (-23.9, -53.036)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    -23.3,
+    -53.036
+   ],
+   "end": [
+    -23.9,
+    -53.036
+   ],
+   "width": 0.254,
+   "why": "rest of the stub from the via (-23.9, -53.036)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -23.9,
+    -53.036
+   ],
+   "end": [
+    -23.9,
+    -48.089
+   ],
+   "width": 0.254,
+   "why": "In2 lane to the via (-23.9, -53.036), which only fed the B.Cu stub"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "HT_GND",
+   "layer": "B.Cu",
+   "start": [
+    -48.2804,
+    -59.2904
+   ],
+   "end": [
+    -48.2804,
+    -59.8746
+   ],
+   "width": 0.1524,
+   "why": "0.58 mm stub to nothing north of the junction"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "F.Cu",
+   "start": [
+    13.1561,
+    12.997
+   ],
+   "end": [
+    11.2561,
+    12.997
+   ],
+   "width": 0.1524,
+   "why": "1.9 mm stub to nothing west of the via (12.96, 13.14)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "Net-(AD1-SDATA)",
+   "layer": "B.Cu",
+   "start": [
+    -48.128,
+    -57.487
+   ],
+   "end": [
+    -48.128,
+    -58.0204
+   ],
+   "width": 0.1524,
+   "why": "0.53 mm stub to nothing south of the via"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "Net-(DRV2-OUTL)",
+   "layer": "B.Cu",
+   "start": [
+    11.943,
+    6.6571
+   ],
+   "end": [
+    13.2221,
+    5.378
+   ],
+   "width": 0.635,
+   "why": "1.8 mm stub to nothing (the old place of R20)"
+  },
+  {
+   "group": "dangling",
+   "kind": "via",
+   "net": "15V",
+   "at": [
+    15.24,
+    -35.02
+   ],
+   "why": "only fed the F.Cu stub to nothing (connected on one layer after the stub is gone)"
+  },
+  {
+   "group": "dangling",
+   "kind": "via",
+   "net": "5V",
+   "at": [
+    -23.9,
+    -53.036
+   ],
+   "why": "only fed the B.Cu stub to nothing"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    -9.5708,
+    -61.932
+   ],
+   "end": [
+    -10.0738,
+    -62.435
+   ],
+   "width": 0.1524,
+   "why": "stub of 15V that ended in nothing at (-10.074, -62.435)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    7.2,
+    -58.1
+   ],
+   "end": [
+    6.6,
+    -58.7
+   ],
+   "width": 0.254,
+   "why": "stub of +3V3 that ended in nothing at (7.2, -58.1)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    6.6,
+    -59.3
+   ],
+   "end": [
+    6.6,
+    -58.7
+   ],
+   "width": 0.3,
+   "why": "stub of +3V3 that ended in nothing at (7.2, -58.1)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    5.8,
+    -60.1
+   ],
+   "end": [
+    6.6,
+    -59.3
+   ],
+   "width": 0.3,
+   "why": "stub of +3V3 that ended in nothing at (7.2, -58.1)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    18.2,
+    -47.0
+   ],
+   "end": [
+    16.8,
+    -48.4
+   ],
+   "width": 0.254,
+   "why": "stub of +3V3 that ended in nothing at (16.8, -48.4)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    20.1,
+    -47.0
+   ],
+   "end": [
+    18.2,
+    -47.0
+   ],
+   "width": 0.254,
+   "why": "stub of +3V3 that ended in nothing at (16.8, -48.4)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    20.4,
+    -46.7
+   ],
+   "end": [
+    20.1,
+    -47.0
+   ],
+   "width": 0.254,
+   "why": "stub of +3V3 that ended in nothing at (16.8, -48.4)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    20.4,
+    -44.3
+   ],
+   "end": [
+    20.4,
+    -46.7
+   ],
+   "width": 0.254,
+   "why": "stub of +3V3 that ended in nothing at (16.8, -48.4)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    31.8,
+    -32.9
+   ],
+   "end": [
+    20.4,
+    -44.3
+   ],
+   "width": 0.254,
+   "why": "stub of +3V3 that ended in nothing at (16.8, -48.4)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    31.8,
+    -29.4
+   ],
+   "end": [
+    31.8,
+    -32.9
+   ],
+   "width": 0.254,
+   "why": "stub of +3V3 that ended in nothing at (16.8, -48.4)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    32.3,
+    -28.9
+   ],
+   "end": [
+    31.8,
+    -29.4
+   ],
+   "width": 0.254,
+   "why": "stub of +3V3 that ended in nothing at (16.8, -48.4)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    33.9,
+    -28.9
+   ],
+   "end": [
+    32.3,
+    -28.9
+   ],
+   "width": 0.254,
+   "why": "stub of +3V3 that ended in nothing at (16.8, -48.4)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    34.2,
+    -28.6
+   ],
+   "end": [
+    33.9,
+    -28.9
+   ],
+   "width": 0.254,
+   "why": "stub of +3V3 that ended in nothing at (16.8, -48.4)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    6.6,
+    -60.4
+   ],
+   "end": [
+    6.4,
+    -60.6
+   ],
+   "width": 0.254,
+   "why": "stub of +3V3 that ended in nothing at (6.6, -60.4)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    6.4,
+    -60.6
+   ],
+   "end": [
+    6.4,
+    -61.0
+   ],
+   "width": 0.254,
+   "why": "stub of +3V3 that ended in nothing at (6.6, -60.4)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    -22.6,
+    -53.1
+   ],
+   "end": [
+    -20.9,
+    -53.1
+   ],
+   "width": 0.1524,
+   "why": "stub of 5V that ended in nothing at (-20.9, -53.1)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    -23.2,
+    -53.1
+   ],
+   "end": [
+    -22.6,
+    -53.1
+   ],
+   "width": 0.3,
+   "why": "stub of 5V that ended in nothing at (-20.9, -53.1)"
+  },
+  {
+   "group": "dangling",
+   "kind": "segment",
+   "net": "PFC_PWM2",
+   "layer": "B.Cu",
+   "start": [
+    14.1,
+    14.9
+   ],
+   "end": [
+    14.1,
+    13.8
+   ],
+   "width": 0.1524,
+   "why": "stub of PFC_PWM2 that ended in nothing at (14.1, 14.9)"
+  }
+ ]
+}
