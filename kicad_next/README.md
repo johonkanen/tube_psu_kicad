@@ -1586,6 +1586,36 @@ Tried on paper against the dump of the board, with C92 / R26 / R22 free to move;
   (14.6, -44.076) / R41 by 1.5 mm, which opens x 14 – 17.5, y -46.6 ... -43.3 for the two parts as they are.
 The gate loop is unchanged (out about 9.0 mm, return about 8.8 mm).
 
+## Stage 4l: DC+ neck at SICD1 widened (2026-11-22)
+
+`tools/next/route_s4l_neck_toff.py` (incremental, step A plain run, step B `--stepB`; neither re-runnable;
+`routing/moves_s4l.json`, `deleted_s4l.json`, `s4l_added.json`). Step A: unconnected 22 -> 22, clearance markers
+6 -> 6, 0 shorts.
+
+**What the neck carries.** The PFC is a bridgeless dual boost: DB1 is on AC1 / AC2 with pin 2 on DC+ and pin 4 on GND
+(DB1 + is DC+ itself, not a rectified-mains net; the upper diodes only carry inrush / bypass current, the lower ones the
+line-frequency return). On the peninsula side of the neck are DB1 pin 2, C73 pin 1 (2.2 µF DC+ - GND) and the cathode of
+SICD2 (strip x 5.4 – 7.9); on the trunk side SICD1 K, the bulk capacitors C56 / C28 / C37 / C29 and everything else on
+DC+. There is no other DC+ copper between the two sides (no DC+ via or track in the area before this stage), so the neck
+carried the whole boost-diode current of the PFC_DRAIN_2 phase (L1 / Q6 / SICD2) to the bulk capacitors, plus the
+inrush pulse of DB1; C73 only takes the HF part.
+
+**Measured** (amap of the refilled copper, 0.1 mm grid): before, F.Cu only, 0.75 – 0.8 mm (y -18.3 ... -19.1 at
+x 12.0 – 13.0). After:
+* F.Cu about 1.25 mm (throat between (13.2, -17.9) and the corner (12.7, -19.05) of the 1.2 mm zone of the anode pad):
+  GND pour 30 cut back to the pad edge of C73 pin 2 (south edge y -17.1 -> -16.7, south-west corner chamfered
+  (13.2, -16.3) - (13.6, -16.7)); pad 2 of C73 and all 15 GND vias stay in the pour. Hard limit on F.Cu is the pad of
+  C73 (1.2 mm) against the anode pad of SICD1: at most about 1.5 mm.
+* B.Cu 1.0 mm track (10.2, -18.65) - (13.6, -18.65) - (14.7, -19.75) - (14.7, -22.1), 1.2 mm from the B.Cu GND tracks of
+  the C73 vias and 1.25 mm from the anode pad (B.Cu had no copper there; GND pour 24 gives way by the 1.2 mm rule).
+* In3 zone `S4L_DC+_In3_neck` (x 9.7 – 15.1, y -22.7 ... -16.9, priority above the +3V3 plane, which gives way from
+  x 15.0 to 15.6 along 4 mm): 2.9 mm wide north of the anode pad, 2.2 mm at the turn round the pad corner (0.5 mm from
+  the pad), 0.5 oz.
+* Vias 0.8 / 0.4: four in the peninsula ((10.2 / 11.3, -17.5 / -18.55)), three in the trunk ((14.7, -19.9 / -21.0 /
+  -22.1), 1.5 mm from the anode pad).
+Sum 1.25 + 1.0 + 2.2 = 4.45 mm of copper width, about 3.3 mm counted as 1 oz (In3 is 0.5 oz). SICD1 not moved; pour 10
+(anode lobe) not changed (its edge is 0.1 mm outside the pad; the pad is the limit).
+
 ## Footprints and 3D models (phase 3, 2026-11-18)
 
 Regenerate: `python3 tools/next/gen_next_footprints.py`, `tools/p2k/bin/kicad_env.sh python3
