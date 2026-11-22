@@ -1421,6 +1421,42 @@ Still open:
 * Switch-node zone `S3A_DHB_HI_SOURCE_F` at Q19 pin 3 after the refill: filled x 11.8 ... 16.4 at y -51.8 (4.6 mm),
   6 mm wide from y -52.5 to -56 (unchanged by this stage; the 15V via (17.625, -51.0) is still there).
 
+## Stage 4i: driver inputs of DRV5 – not routed, blocker found; 5V link moved (stage 4h2, 2026-11-22)
+
+On the board (`tools/next/route_s4h2_5v_link.py`, incremental, not re-runnable; `routing/deleted_s4h2.json`,
+`s4h2_added.json`, `moves_s4h2.json` (empty)): the 5V link on B.Cu under DRV5 runs at y -54.98 instead of -55.15
+(via (9.0, -54.6) -> (9.0, -54.98) -> (5.43, -54.98) -> kept track x 5.2): edge 0.52 mm from the pads of C11 (was
+0.35), 0.21 mm from pin 9. Unconnected 32 -> 32, clearance markers unchanged, 0 shorts. No part moved. The names
+`s4i` (script, `routing/*_s4i.json`) are free for the input block.
+
+Not on the board: PRI_DHB_HI, B12, DAB_DIS to pins 1 / 2 / 5 (R73, R74, C120, R129 not moved). Findings (from the
+coordinates of the board, not from a routing run):
+
+* All three start at J2 (pins 4, 6, 18), east of the FET column; no part of them is west of it. PRI_DHB_HI / B12
+  come down the In2 diagonal as its two south-east lanes (after `Net-(C11-Pad1)`, before the 0.254 mm +3V3 lane) to
+  the vias (19.0, -45.0) / (19.854, -45.0); DAB_DIS comes on In2 from (33.625, -30.13) to the via (27.425, -45.43).
+  Pins 1 / 2 / 5 lie north-west of the control bus, so each signal has to cross the pin column x 9.5 - 13.5 and
+  the whole bus.
+* Crossing the column x 9.5 - 13.5: In3 is the 15V plane strip there (free only at x < 9.5 and x 13.5 - 21); F.Cu
+  is DC+ (pour 29, `S4B_DC+_F`); B.Cu north of the gate pad has 3.26 mm between the pad of C92 (VDDA) and the ring
+  of H4, 1.2 + 3.2 + track needed; In2 north of the gate pad: EPWM6A edge y -45.25, gate pad + 0.5 mm at y -45.53,
+  0.28 mm left, 0.45 mm needed for one 0.152 mm lane; In2 north of the bus: GPIO_BYPASS_RLY is at 5.03 mm from H4.
+* In2 gap between Q19 pin 3 and the gate pad of Q7 (lanes C63 -53.75, 5V -54.2, C11 -55.55): two more lanes fit
+  south of the C11 lane (y -55.88 / -56.19), but they end inside the corner of the C11 lane (x 7.9, y -55.1 ...
+  -57.2) and enter only from x 16.05 - 16.2 east of it; PRI_DHB_HI / B12 leave their pocket between the C11 lane
+  and the +3V3 lane end (16.8, -48.4) through a 0.41 mm gap (0.45 needed).
+* +1V65_BIAS has the same problem (its lane ends at (12.4, -44.076) over the 15V strip, between Q19-G copper on
+  B.Cu and DC+ on F.Cu: no via possible there); the B.Cu proposal of stage 4g (y -54.65) is now taken by D34.
+* R22 / D30 / R53 / D19 / R41 / C96, C95, C70 and the clean-up east of the column were not started: C120 / R129 and
+  the two input vias stand where those parts or C70 would go, and the 15V via (17.625, -51.0) with its B.Cu track
+  still feeds D19 / C96.
+
+Ways out, to be decided: (1) re-lay the In2 bus section x 5.7 - 15.7 with the four extra lanes in it (needs about
+1.2 mm more between H4 and the gate pad of Q19: narrower pitch is not available, so R26 / C92 / the gate pad
+clearance or the H4 measure has to give); (2) open the In3 15V strip between y -45.6 and -41 for an In3 crossing
+(the strip then feeds pin 11 / D19 from the south only); (3) take the four signals round the north of H4 on In2
+(needs them on the north-west flank of the bus already at J2).
+
 ## Footprints and 3D models (phase 3, 2026-11-18)
 
 Regenerate: `python3 tools/next/gen_next_footprints.py`, `tools/p2k/bin/kicad_env.sh python3

@@ -1,0 +1,50 @@
+{
+ "note": "routing stage 4h2 (2026-11-22), tools/next/route_s4h2_5v_link.py - incremental edit of the board, not a rebuild",
+ "deleted": [
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    9.0,
+    -54.6
+   ],
+   "end": [
+    9.0,
+    -55.15
+   ],
+   "width": 0.25,
+   "why": "5V link on B.Cu south of pin 9 of DRV5: 0.35 mm from the pads of C11 (U1A- node), re-drawn 0.15 mm further north"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    9.0,
+    -55.15
+   ],
+   "end": [
+    5.6,
+    -55.15
+   ],
+   "width": 0.25,
+   "why": "5V link on B.Cu south of pin 9 of DRV5: 0.35 mm from the pads of C11 (U1A- node), re-drawn 0.15 mm further north"
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    5.6,
+    -55.15
+   ],
+   "end": [
+    5.2,
+    -54.75
+   ],
+   "width": 0.25,
+   "why": "5V link on B.Cu south of pin 9 of DRV5: 0.35 mm from the pads of C11 (U1A- node), re-drawn 0.15 mm further north"
+  }
+ ]
+}

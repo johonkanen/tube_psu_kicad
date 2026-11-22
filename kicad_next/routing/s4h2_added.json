@@ -1,0 +1,47 @@
+{
+ "note": "routing stage 4h2 (2026-11-22), tools/next/route_s4h2_5v_link.py - incremental edit of the board, not a rebuild",
+ "added": [
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    9.0,
+    -54.6
+   ],
+   "end": [
+    9.0,
+    -54.98
+   ],
+   "width": 0.25
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    9.0,
+    -54.98
+   ],
+   "end": [
+    5.43,
+    -54.98
+   ],
+   "width": 0.25
+  },
+  {
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    5.43,
+    -54.98
+   ],
+   "end": [
+    5.2,
+    -54.75
+   ],
+   "width": 0.25
+  }
+ ]
+}
