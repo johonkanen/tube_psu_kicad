@@ -1,0 +1,689 @@
+{
+ "note": "routing stage 5a (2026-11-22), tools/next/route_s5a_signals.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "pwm2",
+  "p3v3"
+ ],
+ "added": [
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-VERR)",
+   "layer": "B.Cu",
+   "start": [
+    48.77,
+    -2.155
+   ],
+   "end": [
+    49.105,
+    -1.82
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-VERR)",
+   "layer": "B.Cu",
+   "start": [
+    49.105,
+    -1.82
+   ],
+   "end": [
+    51.6,
+    -1.82
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-VERR)",
+   "layer": "B.Cu",
+   "start": [
+    51.6,
+    -1.82
+   ],
+   "end": [
+    51.995,
+    -2.215
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-VERR)",
+   "layer": "B.Cu",
+   "start": [
+    51.995,
+    -2.215
+   ],
+   "end": [
+    51.995,
+    -2.67
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-FB)",
+   "layer": "B.Cu",
+   "start": [
+    47.2,
+    -2.755
+   ],
+   "end": [
+    47.75,
+    -2.205
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-FB)",
+   "layer": "B.Cu",
+   "start": [
+    47.75,
+    -2.205
+   ],
+   "end": [
+    47.75,
+    -1.6
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-FB)",
+   "layer": "B.Cu",
+   "start": [
+    47.75,
+    -1.6
+   ],
+   "end": [
+    48.6,
+    -0.75
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-FB)",
+   "layer": "B.Cu",
+   "start": [
+    48.6,
+    -0.75
+   ],
+   "end": [
+    49.3,
+    -0.745
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "via",
+   "net": "Net-(PWM2-FB)",
+   "at": [
+    49.38,
+    -0.745
+   ],
+   "size": [
+    0.6,
+    0.3
+   ]
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-FB)",
+   "layer": "B.Cu",
+   "start": [
+    49.3,
+    -0.745
+   ],
+   "end": [
+    49.38,
+    -0.745
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-FB)",
+   "layer": "F.Cu",
+   "start": [
+    49.38,
+    -0.745
+   ],
+   "end": [
+    49.38,
+    2.0
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-FB)",
+   "layer": "F.Cu",
+   "start": [
+    49.38,
+    2.0
+   ],
+   "end": [
+    49.78,
+    2.4
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-FB)",
+   "layer": "F.Cu",
+   "start": [
+    49.78,
+    2.4
+   ],
+   "end": [
+    50.9,
+    2.4
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-FB)",
+   "layer": "F.Cu",
+   "start": [
+    50.9,
+    2.4
+   ],
+   "end": [
+    51.705,
+    1.595
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-FB)",
+   "layer": "F.Cu",
+   "start": [
+    51.705,
+    1.595
+   ],
+   "end": [
+    51.705,
+    -0.275
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-VIN)",
+   "layer": "B.Cu",
+   "start": [
+    47.83,
+    10.797
+   ],
+   "end": [
+    48.03,
+    10.6
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-VIN)",
+   "layer": "B.Cu",
+   "start": [
+    48.03,
+    10.6
+   ],
+   "end": [
+    53.65,
+    10.6
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-VIN)",
+   "layer": "B.Cu",
+   "start": [
+    53.65,
+    10.6
+   ],
+   "end": [
+    55.15,
+    9.1
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-VIN)",
+   "layer": "B.Cu",
+   "start": [
+    55.15,
+    9.1
+   ],
+   "end": [
+    55.15,
+    3.7
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "via",
+   "net": "Net-(PWM2-VIN)",
+   "at": [
+    55.15,
+    3.7
+   ],
+   "size": [
+    0.6,
+    0.3
+   ]
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-VIN)",
+   "layer": "F.Cu",
+   "start": [
+    55.15,
+    3.7
+   ],
+   "end": [
+    55.15,
+    0.3
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-VIN)",
+   "layer": "F.Cu",
+   "start": [
+    55.15,
+    0.3
+   ],
+   "end": [
+    54.7,
+    -0.15
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(PWM2-VIN)",
+   "layer": "F.Cu",
+   "start": [
+    54.7,
+    -0.15
+   ],
+   "end": [
+    54.245,
+    -0.15
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "/04 MCU connector/AUX_MEAS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    33.771,
+    3.879
+   ],
+   "end": [
+    35.0,
+    3.879
+   ],
+   "width": 0.15
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "/04 MCU connector/AUX_MEAS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    35.0,
+    3.879
+   ],
+   "end": [
+    36.2,
+    2.679
+   ],
+   "width": 0.15
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "/04 MCU connector/AUX_MEAS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    36.2,
+    2.679
+   ],
+   "end": [
+    36.2,
+    1.93
+   ],
+   "width": 0.15
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "/04 MCU connector/AUX_MEAS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    36.2,
+    1.93
+   ],
+   "end": [
+    36.53,
+    1.6
+   ],
+   "width": 0.15
+  },
+  {
+   "group": "pwm2",
+   "kind": "via",
+   "net": "Net-(D10-PadA)",
+   "at": [
+    36.8,
+    3.2
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(D10-PadA)",
+   "layer": "F.Cu",
+   "start": [
+    36.661,
+    3.2
+   ],
+   "end": [
+    36.8,
+    3.2
+   ],
+   "width": 0.25
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "Net-(D10-PadA)",
+   "layer": "B.Cu",
+   "start": [
+    36.8,
+    3.2
+   ],
+   "end": [
+    37.26,
+    2.975
+   ],
+   "width": 0.25
+  },
+  {
+   "group": "p3v3",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    0.4,
+    -59.175
+   ],
+   "end": [
+    0.8,
+    -59.6
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "p3v3",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    0.8,
+    -59.6
+   ],
+   "end": [
+    0.8,
+    -60.2
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "p3v3",
+   "kind": "via",
+   "net": "+3V3",
+   "at": [
+    0.8,
+    -60.2
+   ],
+   "size": [
+    0.6,
+    0.3
+   ]
+  },
+  {
+   "group": "p3v3",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In3.Power",
+   "start": [
+    0.8,
+    -60.2
+   ],
+   "end": [
+    1.2,
+    -59.8
+   ],
+   "width": 0.25
+  },
+  {
+   "group": "p3v3",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In3.Power",
+   "start": [
+    1.2,
+    -59.8
+   ],
+   "end": [
+    5.5,
+    -59.8
+   ],
+   "width": 0.25
+  },
+  {
+   "group": "p3v3",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In3.Power",
+   "start": [
+    5.5,
+    -59.8
+   ],
+   "end": [
+    5.8,
+    -60.1
+   ],
+   "width": 0.25
+  },
+  {
+   "group": "p3v3",
+   "kind": "segment",
+   "net": "GPIO_BYPASS_RLY",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -20.0,
+    -45.3
+   ],
+   "end": [
+    -13.4,
+    -51.9
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "p3v3",
+   "kind": "segment",
+   "net": "GPIO_BYPASS_RLY",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -13.4,
+    -51.9
+   ],
+   "end": [
+    -11.7,
+    -51.9
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "p3v3",
+   "kind": "segment",
+   "net": "GPIO_BYPASS_RLY",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -11.7,
+    -51.9
+   ],
+   "end": [
+    -11.3,
+    -52.3
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "p3v3",
+   "kind": "segment",
+   "net": "GPIO_BYPASS_RLY",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -11.3,
+    -52.3
+   ],
+   "end": [
+    -1.412,
+    -52.3
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "p3v3",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -12.5,
+    -52.8
+   ],
+   "end": [
+    -12.5,
+    -52.6
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "p3v3",
+   "kind": "via",
+   "net": "+3V3",
+   "at": [
+    -12.5,
+    -52.6
+   ],
+   "size": [
+    0.6,
+    0.3
+   ]
+  },
+  {
+   "group": "p3v3",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In3.Power",
+   "start": [
+    -12.5,
+    -52.6
+   ],
+   "end": [
+    -12.5,
+    -55.5
+   ],
+   "width": 0.25
+  },
+  {
+   "group": "p3v3",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In3.Power",
+   "start": [
+    -12.5,
+    -55.5
+   ],
+   "end": [
+    -8.6,
+    -59.4
+   ],
+   "width": 0.25
+  },
+  {
+   "group": "p3v3",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In3.Power",
+   "start": [
+    -8.6,
+    -59.4
+   ],
+   "end": [
+    0.0,
+    -59.4
+   ],
+   "width": 0.25
+  },
+  {
+   "group": "p3v3",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "In3.Power",
+   "start": [
+    0.0,
+    -59.4
+   ],
+   "end": [
+    0.8,
+    -60.2
+   ],
+   "width": 0.25
+  }
+ ]
+}

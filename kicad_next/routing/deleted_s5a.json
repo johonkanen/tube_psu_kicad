@@ -1,0 +1,89 @@
+{
+ "note": "routing stage 5a (2026-11-22), tools/next/route_s5a_signals.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "pwm2",
+  "p3v3"
+ ],
+ "deleted": [
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "/04 MCU connector/AUX_MEAS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    33.7707,
+    3.8788
+   ],
+   "end": [
+    35.9,
+    3.8788
+   ],
+   "width": 0.15,
+   "why": "AUX_MEAS In2 lane 0.33 mm west under D10 (room for the anode via)"
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "/04 MCU connector/AUX_MEAS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    35.9,
+    3.8788
+   ],
+   "end": [
+    36.53,
+    3.2488
+   ],
+   "width": 0.15,
+   "why": "AUX_MEAS In2 lane 0.33 mm west under D10 (room for the anode via)"
+  },
+  {
+   "group": "pwm2",
+   "kind": "segment",
+   "net": "/04 MCU connector/AUX_MEAS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    36.53,
+    3.2488
+   ],
+   "end": [
+    36.53,
+    1.6
+   ],
+   "width": 0.15,
+   "why": "AUX_MEAS In2 lane 0.33 mm west under D10 (room for the anode via)"
+  },
+  {
+   "group": "p3v3",
+   "kind": "segment",
+   "net": "GPIO_BYPASS_RLY",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -20.0,
+    -45.3
+   ],
+   "end": [
+    -13.0,
+    -52.3
+   ],
+   "width": 0.1524,
+   "why": "GPIO_BYPASS_RLY lane 0.4 mm north round the +3V3 via (-12.5, -52.6)"
+  },
+  {
+   "group": "p3v3",
+   "kind": "segment",
+   "net": "GPIO_BYPASS_RLY",
+   "layer": "In2.Signal_HV",
+   "start": [
+    -13.0,
+    -52.3
+   ],
+   "end": [
+    -1.412,
+    -52.3
+   ],
+   "width": 0.1524,
+   "why": "GPIO_BYPASS_RLY lane 0.4 mm north round the +3V3 via (-12.5, -52.6)"
+  }
+ ]
+}
