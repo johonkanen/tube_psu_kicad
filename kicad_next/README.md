@@ -204,6 +204,35 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 8: C95 as 0603 at DRV5 pins 11 / 9, DC+ into Q19 pin 2 on In3 (2026-11-22)
+
+`tools/next/route_s8_c95_dc.py --group c95,old` and `--group dc` (incremental, not re-runnable; `routing/moves_s8.json`,
+`deleted_s8.json`, `s8_added.json`). DRC before: courtyards_overlap 132, pth_inside_courtyard 2, starved_thermal 2,
+0 unconnected, 0 clearance, 0 dangling, 0 shorts, 0 parity. After: courtyards_overlap 133 (new pair C95 / DRV5, 0.39 mm:
+the 0603 stands 0.21 mm beside the pin pads), the rest unchanged; `check_next.sh` passes.
+
+* **C95 4.7u 1206 -> 0603** (user decision, CHANGES_5_2.md row 3.1c): `lib/part_map_next.csv`,
+  `lib/footprint_map_next.csv`, `lib/jlc_parts_next.csv` (C6119856, 4.7 uF X5R 25 V, the part of C17 / C52 / C79 / C80;
+  was C29823 X7R 50 V), schematic regenerated. `update_board_parts.py` does not change a footprint id, so the script
+  replaces the footprint (entry `REPLACE`: library footprint at the new place, fields / path / pad nets kept);
+  `update_board_parts.py C95` afterwards only set the LCSC field. Compared with the board before: no other pad,
+  track or via changed its net.
+* **Place**: B.Cu (8.66, -53.72) rot -90, standing north-south east of the DRV5 pin row. Pad 2 (15V) at
+  (8.66, -52.945), pad 1 (GND) at (8.66, -54.495); both 0.21 mm east of the pin pads (edge x 7.975 / 8.185).
+  15V: 0.5 mm B.Cu track pin 11 -> (8.5, -51.805) -> into the pad, 1.2 mm between the pad edges (2.7 mm pad centre
+  to pad centre along the track); the via in the pad of pin 11 stays as the feed from the In3 strip. GND: pad 1
+  lies beside pin 9 on its GND via (8.25, -54.345) (ring overlaps the pad) with a 0.4 mm track, 0.2 mm between the pad
+  edges (1.7 mm centre to centre). The 15V pad's north-east corner is 1.24 mm from the high-side return on x 10.25,
+  the 15V track 1.25 mm (rule 1.2 mm) - the capacitor cannot go further north or east.
+* **Re-routed for it**: (a) DHB_LOW_GATE leaves pin 10 on a diagonal and runs on y -53.72 between the two pads of
+  C95 (pad gap 0.65 mm, track 0.2 mm for 1.6 mm, 0.225 mm to each pad; SIGNAL class 0.15 mm), then 0.3 mm
+  (10.0, -53.72) - (10.6, -54.32) - R90 pad 1 - D34 pad C. (b) 5V via (9.0, -54.6) -> (9.68, -54.45) with its In2
+  track; its B.Cu track runs x 9.5 -> y -55.285 south of the GND pad (0.215 mm to the pad and to C11 pad 1) and
+  joins the old line y -54.98 at x 7.6. (c) R90 (10.25, -56.6) -> (10.6, -56.6), 0.35 mm east, for the 5V track on
+  x 9.5 (its Q7 gate tracks still end inside pad 2).
+* **Old place** (18.9, -60.6): 15V via (18.9, -58.85), In3 spur (17.125, -55.25) - (18.9, -57.025) - (18.9, -58.85)
+  and GND via (18.9, -61.7) deleted; nothing else used them.
+
 ## Inner layers (routing stage 2, 2026-11-20)
 
 Made by `tools/p2k/bin/kipy tools/next/route_s2_planes.py` on the real board (re-runnable: everything it makes is

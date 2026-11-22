@@ -1,0 +1,231 @@
+{
+ "note": "routing stage 8 (2026-11-22), tools/next/route_s8_c95_dc.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "c95",
+  "old"
+ ],
+ "deleted": [
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    9.0,
+    -54.6
+   ],
+   "end": [
+    9.0,
+    -54.98
+   ],
+   "width": 0.25,
+   "why": "to the moved via"
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    9.0,
+    -54.98
+   ],
+   "end": [
+    5.43,
+    -54.98
+   ],
+   "width": 0.25,
+   "why": "re-drawn round the GND pad of C95"
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    9.4,
+    -54.2
+   ],
+   "end": [
+    9.0,
+    -54.6
+   ],
+   "width": 0.305,
+   "why": "to the moved via"
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.718,
+    -54.2
+   ],
+   "end": [
+    9.4,
+    -54.2
+   ],
+   "width": 0.305,
+   "why": "re-drawn to the moved via"
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    6.95,
+    -53.075
+   ],
+   "end": [
+    8.6,
+    -53.075
+   ],
+   "width": 0.3,
+   "why": "gate track re-drawn between the pads of C95"
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    8.6,
+    -53.075
+   ],
+   "end": [
+    9.75,
+    -54.1
+   ],
+   "width": 0.3,
+   "why": "same"
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    9.75,
+    -54.1
+   ],
+   "end": [
+    10.25,
+    -54.6
+   ],
+   "width": 0.3,
+   "why": "same"
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    10.25,
+    -54.6
+   ],
+   "end": [
+    10.25,
+    -55.6
+   ],
+   "width": 0.3,
+   "why": "same"
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    10.25,
+    -55.6
+   ],
+   "end": [
+    10.95,
+    -54.9
+   ],
+   "width": 0.3,
+   "why": "R90 moved"
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    10.95,
+    -54.9
+   ],
+   "end": [
+    11.45,
+    -54.9
+   ],
+   "width": 0.3,
+   "why": "R90 moved"
+  },
+  {
+   "group": "c95",
+   "kind": "via",
+   "net": "5V",
+   "at": [
+    9.0,
+    -54.6
+   ],
+   "why": "under the GND pad of the new C95; moved to (9.68, -54.45)"
+  },
+  {
+   "group": "old",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In3.Power",
+   "start": [
+    17.125,
+    -55.25
+   ],
+   "end": [
+    18.9,
+    -57.025
+   ],
+   "width": 1.0,
+   "why": "In3 spur to the old C95"
+  },
+  {
+   "group": "old",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In3.Power",
+   "start": [
+    18.9,
+    -57.025
+   ],
+   "end": [
+    18.9,
+    -58.85
+   ],
+   "width": 1.0,
+   "why": "same"
+  },
+  {
+   "group": "old",
+   "kind": "via",
+   "net": "15V",
+   "at": [
+    18.9,
+    -58.85
+   ],
+   "why": "via in the 15V pad of C95 at its old place"
+  },
+  {
+   "group": "old",
+   "kind": "via",
+   "net": "GND",
+   "at": [
+    18.9,
+    -61.7
+   ],
+   "why": "GND via of C95 at its old place"
+  }
+ ]
+}

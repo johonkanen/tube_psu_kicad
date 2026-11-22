@@ -1,0 +1,47 @@
+{
+ "note": "routing stage 8 (2026-11-22), tools/next/route_s8_c95_dc.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "c95",
+  "old"
+ ],
+ "moves": [
+  {
+   "group": "c95",
+   "ref": "C95",
+   "footprint": {
+    "frm": "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder",
+    "to": "Capacitor_SMD:C_0603_1608Metric"
+   },
+   "frm": {
+    "x": 18.9,
+    "y": -60.6,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 8.66,
+    "y": -53.72,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "why": "0603 at DRV5 pins 11 / 9 (no 1206 place within reach)"
+  },
+  {
+   "group": "c95",
+   "ref": "R90",
+   "frm": {
+    "x": 10.25,
+    "y": -56.6,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 10.6,
+    "y": -56.6,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "why": "0.35 mm east: room for the 5V track on x 9.5 between C95 and R90 pad 1"
+  }
+ ]
+}

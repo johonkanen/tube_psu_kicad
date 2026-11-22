@@ -1,0 +1,277 @@
+{
+ "note": "routing stage 8 (2026-11-22), tools/next/route_s8_c95_dc.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "c95",
+  "old"
+ ],
+ "added": [
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    6.95,
+    -51.805
+   ],
+   "end": [
+    8.5,
+    -51.805
+   ],
+   "width": 0.5
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    8.5,
+    -51.805
+   ],
+   "end": [
+    8.5,
+    -52.9
+   ],
+   "width": 0.5
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    8.25,
+    -54.345
+   ],
+   "end": [
+    8.66,
+    -54.495
+   ],
+   "width": 0.4
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    7.3,
+    -53.075
+   ],
+   "end": [
+    7.945,
+    -53.72
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    7.945,
+    -53.72
+   ],
+   "end": [
+    9.5,
+    -53.72
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    9.5,
+    -53.72
+   ],
+   "end": [
+    10.0,
+    -53.72
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    10.0,
+    -53.72
+   ],
+   "end": [
+    10.6,
+    -54.32
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    10.6,
+    -54.32
+   ],
+   "end": [
+    10.6,
+    -55.6
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    10.6,
+    -55.6
+   ],
+   "end": [
+    11.45,
+    -54.9
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "c95",
+   "kind": "via",
+   "net": "5V",
+   "at": [
+    9.68,
+    -54.45
+   ],
+   "size": [
+    0.6,
+    0.3
+   ]
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.718,
+    -54.2
+   ],
+   "end": [
+    9.93,
+    -54.2
+   ],
+   "width": 0.305
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    9.93,
+    -54.2
+   ],
+   "end": [
+    9.68,
+    -54.45
+   ],
+   "width": 0.305
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    9.68,
+    -54.45
+   ],
+   "end": [
+    9.5,
+    -54.63
+   ],
+   "width": 0.25
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    9.5,
+    -54.63
+   ],
+   "end": [
+    9.5,
+    -55.085
+   ],
+   "width": 0.25
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    9.5,
+    -55.085
+   ],
+   "end": [
+    9.3,
+    -55.285
+   ],
+   "width": 0.25
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    9.3,
+    -55.285
+   ],
+   "end": [
+    7.905,
+    -55.285
+   ],
+   "width": 0.25
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    7.905,
+    -55.285
+   ],
+   "end": [
+    7.6,
+    -54.98
+   ],
+   "width": 0.25
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "5V",
+   "layer": "B.Cu",
+   "start": [
+    7.6,
+    -54.98
+   ],
+   "end": [
+    5.43,
+    -54.98
+   ],
+   "width": 0.25
+  }
+ ]
+}
