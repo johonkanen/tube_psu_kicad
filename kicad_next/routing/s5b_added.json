@@ -1,0 +1,675 @@
+{
+ "note": "routing stage 5b (2026-11-22), tools/next/route_s5b_local.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "u9",
+  "drv2",
+  "dt"
+ ],
+ "added": [
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    27.9,
+    -22.0
+   ],
+   "end": [
+    27.65,
+    -22.4
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    27.65,
+    -22.4
+   ],
+   "end": [
+    27.65,
+    -24.0
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    27.65,
+    -24.0
+   ],
+   "end": [
+    27.9,
+    -24.25
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    27.9,
+    -24.25
+   ],
+   "end": [
+    27.9,
+    -26.15
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    27.65,
+    -23.3
+   ],
+   "end": [
+    26.825,
+    -23.3
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "u9",
+   "kind": "via",
+   "net": "+1V65_BIAS",
+   "at": [
+    27.9,
+    -26.15
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "In2.Signal_HV",
+   "start": [
+    27.9,
+    -26.4
+   ],
+   "end": [
+    27.9,
+    -26.15
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "F.Cu",
+   "start": [
+    31.1,
+    -26.4
+   ],
+   "end": [
+    28.15,
+    -26.4
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "F.Cu",
+   "start": [
+    28.15,
+    -26.4
+   ],
+   "end": [
+    27.9,
+    -26.15
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "Net-(U9--)",
+   "layer": "B.Cu",
+   "start": [
+    28.475,
+    -23.3
+   ],
+   "end": [
+    28.72,
+    -23.6
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "Net-(U9--)",
+   "layer": "B.Cu",
+   "start": [
+    28.72,
+    -23.6
+   ],
+   "end": [
+    28.72,
+    -25.462
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "Net-(U9--)",
+   "layer": "B.Cu",
+   "start": [
+    26.82,
+    -27.738
+   ],
+   "end": [
+    26.82,
+    -26.95
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "Net-(U9--)",
+   "layer": "B.Cu",
+   "start": [
+    26.82,
+    -26.95
+   ],
+   "end": [
+    27.07,
+    -26.7
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "Net-(U9--)",
+   "layer": "B.Cu",
+   "start": [
+    27.07,
+    -26.7
+   ],
+   "end": [
+    28.47,
+    -26.7
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "Net-(U9--)",
+   "layer": "B.Cu",
+   "start": [
+    28.47,
+    -26.7
+   ],
+   "end": [
+    28.72,
+    -26.45
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "Net-(U9--)",
+   "layer": "B.Cu",
+   "start": [
+    28.72,
+    -26.45
+   ],
+   "end": [
+    28.72,
+    -25.462
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    31.6,
+    -25.3
+   ],
+   "end": [
+    33.2,
+    -25.3
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    33.2,
+    -25.3
+   ],
+   "end": [
+    33.705,
+    -25.805
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    33.705,
+    -25.805
+   ],
+   "end": [
+    34.2,
+    -25.805
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "Net-(U9-+)",
+   "layer": "B.Cu",
+   "start": [
+    28.72,
+    -27.738
+   ],
+   "end": [
+    28.72,
+    -27.4
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "Net-(U9-+)",
+   "layer": "B.Cu",
+   "start": [
+    28.72,
+    -27.4
+   ],
+   "end": [
+    29.2,
+    -27.4
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "Net-(U9-+)",
+   "layer": "B.Cu",
+   "start": [
+    29.2,
+    -27.4
+   ],
+   "end": [
+    29.5,
+    -27.1
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "Net-(U9-+)",
+   "layer": "B.Cu",
+   "start": [
+    29.5,
+    -27.1
+   ],
+   "end": [
+    29.5,
+    -26.1
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "Net-(U9-+)",
+   "layer": "B.Cu",
+   "start": [
+    29.5,
+    -26.1
+   ],
+   "end": [
+    29.8,
+    -25.8
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "Net-(U9-+)",
+   "layer": "B.Cu",
+   "start": [
+    29.8,
+    -25.8
+   ],
+   "end": [
+    31.75,
+    -25.8
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "Net-(U9-+)",
+   "layer": "B.Cu",
+   "start": [
+    31.75,
+    -25.8
+   ],
+   "end": [
+    31.75,
+    -27.3
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "Net-(U9-+)",
+   "layer": "B.Cu",
+   "start": [
+    31.75,
+    -27.3
+   ],
+   "end": [
+    31.4,
+    -27.65
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "Net-(U9-+)",
+   "layer": "B.Cu",
+   "start": [
+    31.4,
+    -27.65
+   ],
+   "end": [
+    31.075,
+    -27.8
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "drv2",
+   "kind": "via",
+   "net": "15V",
+   "at": [
+    13.2,
+    8.75
+   ],
+   "size": [
+    0.6,
+    0.3
+   ]
+  },
+  {
+   "group": "drv2",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    12.868,
+    9.126
+   ],
+   "end": [
+    13.2,
+    8.75
+   ],
+   "width": 0.4
+  },
+  {
+   "group": "drv2",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "F.Cu",
+   "start": [
+    13.2,
+    8.75
+   ],
+   "end": [
+    13.2,
+    9.74
+   ],
+   "width": 0.4
+  },
+  {
+   "group": "drv2",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "F.Cu",
+   "start": [
+    13.2,
+    9.74
+   ],
+   "end": [
+    14.06,
+    10.6
+   ],
+   "width": 0.4
+  },
+  {
+   "group": "drv2",
+   "kind": "segment",
+   "net": "Net-(DRV2-OUTH)",
+   "layer": "B.Cu",
+   "start": [
+    12.868,
+    10.076
+   ],
+   "end": [
+    13.5,
+    10.0
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "drv2",
+   "kind": "segment",
+   "net": "Net-(DRV2-OUTH)",
+   "layer": "B.Cu",
+   "start": [
+    13.5,
+    10.0
+   ],
+   "end": [
+    14.1,
+    9.4
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "drv2",
+   "kind": "segment",
+   "net": "Net-(DRV2-OUTH)",
+   "layer": "B.Cu",
+   "start": [
+    14.1,
+    9.4
+   ],
+   "end": [
+    14.737,
+    8.76
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "drv2",
+   "kind": "segment",
+   "net": "Net-(DRV2-OUTH)",
+   "layer": "B.Cu",
+   "start": [
+    14.737,
+    8.76
+   ],
+   "end": [
+    14.737,
+    5.391
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "dt",
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "In2.Signal_HV",
+   "start": [
+    69.975,
+    -48.0
+   ],
+   "end": [
+    66.3,
+    -51.675
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "dt",
+   "kind": "via",
+   "net": "5V_ISOL",
+   "at": [
+    66.3,
+    -51.675
+   ],
+   "size": [
+    0.6,
+    0.3
+   ]
+  },
+  {
+   "group": "dt",
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "B.Cu",
+   "start": [
+    66.3,
+    -51.675
+   ],
+   "end": [
+    66.357,
+    -51.675
+   ],
+   "width": 0.4
+  },
+  {
+   "group": "dt",
+   "kind": "segment",
+   "net": "Net-(DRV6-DT)",
+   "layer": "B.Cu",
+   "start": [
+    65.657,
+    -55.102
+   ],
+   "end": [
+    66.95,
+    -55.102
+   ],
+   "width": 0.25
+  },
+  {
+   "group": "dt",
+   "kind": "via",
+   "net": "Net-(DRV6-DT)",
+   "at": [
+    66.95,
+    -55.102
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "group": "dt",
+   "kind": "segment",
+   "net": "Net-(DRV6-DT)",
+   "layer": "F.Cu",
+   "start": [
+    66.95,
+    -55.102
+   ],
+   "end": [
+    66.95,
+    -49.35
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "dt",
+   "kind": "segment",
+   "net": "Net-(DRV6-DT)",
+   "layer": "F.Cu",
+   "start": [
+    66.95,
+    -49.35
+   ],
+   "end": [
+    66.9,
+    -49.3
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "dt",
+   "kind": "via",
+   "net": "Net-(DRV6-DT)",
+   "at": [
+    66.9,
+    -49.3
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "group": "dt",
+   "kind": "segment",
+   "net": "Net-(DRV6-DT)",
+   "layer": "B.Cu",
+   "start": [
+    66.9,
+    -49.3
+   ],
+   "end": [
+    67.085,
+    -49.1
+   ],
+   "width": 0.25
+  }
+ ]
+}

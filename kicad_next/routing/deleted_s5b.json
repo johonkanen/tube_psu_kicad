@@ -1,0 +1,190 @@
+{
+ "note": "routing stage 5b (2026-11-22), tools/next/route_s5b_local.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "u9",
+  "drv2",
+  "dt"
+ ],
+ "deleted": [
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    27.9,
+    -22.0
+   ],
+   "end": [
+    27.9,
+    -26.4
+   ],
+   "width": 0.1524,
+   "why": "lane between the pads of the turned R131, via 0.25 mm north"
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    26.82,
+    -22.115
+   ],
+   "end": [
+    26.8,
+    -22.115
+   ],
+   "width": 0.3,
+   "why": "old pad stub of R131"
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "B.Cu",
+   "start": [
+    26.8,
+    -22.115
+   ],
+   "end": [
+    27.4,
+    -21.515
+   ],
+   "width": 0.3,
+   "why": "old pad stub of R131"
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "F.Cu",
+   "start": [
+    31.1,
+    -26.4
+   ],
+   "end": [
+    27.9,
+    -26.4
+   ],
+   "width": 0.1524,
+   "why": "via 0.25 mm north"
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    31.6,
+    -25.3
+   ],
+   "end": [
+    32.105,
+    -25.805
+   ],
+   "width": 0.1524,
+   "why": "+3V3 lane steps south 1.6 mm further east (room for Net-(U9-+))"
+  },
+  {
+   "group": "u9",
+   "kind": "segment",
+   "net": "+3V3",
+   "layer": "B.Cu",
+   "start": [
+    32.105,
+    -25.805
+   ],
+   "end": [
+    34.2,
+    -25.805
+   ],
+   "width": 0.1524,
+   "why": "+3V3 lane steps south 1.6 mm further east (room for Net-(U9-+))"
+  },
+  {
+   "group": "u9",
+   "kind": "via",
+   "net": "+1V65_BIAS",
+   "at": [
+    27.9,
+    -26.4
+   ],
+   "why": "0.25 mm north: pin 1 - pin 4 of U9 passes south of it"
+  },
+  {
+   "group": "drv2",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    13.95,
+    9.1
+   ],
+   "end": [
+    13.95,
+    10.5
+   ],
+   "width": 0.381,
+   "why": "15V link of DRV2 pin 1 onto F.Cu (way out for OUTH)"
+  },
+  {
+   "group": "drv2",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    12.8685,
+    9.126
+   ],
+   "end": [
+    13.8685,
+    9.126
+   ],
+   "width": 0.4,
+   "why": "15V link of DRV2 pin 1 onto F.Cu (way out for OUTH)"
+  },
+  {
+   "group": "dt",
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "In2.Signal_HV",
+   "start": [
+    69.975,
+    -48.0
+   ],
+   "end": [
+    66.475,
+    -51.5
+   ],
+   "width": 0.3,
+   "why": "5V_ISOL via 0.25 mm south-west (room for DT past TR3 pin 9)"
+  },
+  {
+   "group": "dt",
+   "kind": "segment",
+   "net": "5V_ISOL",
+   "layer": "B.Cu",
+   "start": [
+    66.475,
+    -51.5
+   ],
+   "end": [
+    66.475,
+    -50.9
+   ],
+   "width": 0.3,
+   "why": "5V_ISOL via 0.25 mm south-west (room for DT past TR3 pin 9)"
+  },
+  {
+   "group": "dt",
+   "kind": "via",
+   "net": "5V_ISOL",
+   "at": [
+    66.475,
+    -51.5
+   ],
+   "why": "0.25 mm south-west (room for DT past TR3 pin 9)"
+  }
+ ]
+}

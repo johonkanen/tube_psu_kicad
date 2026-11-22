@@ -1,0 +1,27 @@
+{
+ "note": "routing stage 5b (2026-11-22), tools/next/route_s5b_local.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "u9",
+  "drv2",
+  "dt"
+ ],
+ "moves": [
+  {
+   "group": "u9",
+   "ref": "R131",
+   "frm": {
+    "x": 26.82,
+    "y": -22.94,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 27.65,
+    "y": -23.3,
+    "rot": 180.0,
+    "side": "B"
+   },
+   "why": "pad 1 (Net-(U9--)) east of the +1V65_BIAS lane, straight north of U9 pin 4"
+  }
+ ]
+}
