@@ -1,0 +1,28 @@
+{
+ "note": "routing stage 7b (2026-11-22), tools/next/route_s7b_c47_dc.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "c95",
+  "r146",
+  "dc",
+  "old"
+ ],
+ "moves": [
+  {
+   "group": "c95",
+   "ref": "C95",
+   "frm": {
+    "x": 19.2,
+    "y": -51.6,
+    "rot": 180.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 18.9,
+    "y": -60.6,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "why": "out of the B.Cu DC+ path; 15V pad north on a new In3 spur, GND pad south"
+  }
+ ]
+}

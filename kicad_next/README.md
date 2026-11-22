@@ -166,6 +166,44 @@ Not done:
   y -56 ... -53.75; a 1206 (pads 4.45 x 1.8 mm plus 1.2 mm to DC+) does not fit. An 0603 might fit in the F.Cu pocket
   if the 5V via moves (estimate, not tried).
 
+## Stage 7b: short DC+ connection to C47, C95 moved (2026-11-22)
+
+`tools/next/route_s7b_c47_dc.py --group c95,r146,dc,old` (incremental, not re-runnable; `routing/moves_s7b.json`,
+`deleted_s7b.json`, `s7b_added.json`). DRC before and after: courtyards_overlap 132, pth_inside_courtyard 2,
+starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next.sh` passes. This closes the two
+"Not done" items of stage 7.
+
+* **DC+ to C47 pad 1**: C70 pad 1 (B.Cu) -> 2.0 mm B.Cu south on x 18.3 (y -49.0 ... -51.2) -> 2.5 mm diagonal to
+  (23.85, -56.75) -> 2.5 mm south on x 23.85 to y -70.9 -> three vias 0.8 / 0.4 at (22.95 / 23.85 / 24.75, -71.75)
+  between the two pads of C47 -> F.Cu bar 2.2 mm (y -72.5) into the north edge of pad 1 (0.24 mm overlap over the
+  bar length). About 25 mm from C70 pad 1, about 31 mm from Q19 pin 2 (F.Cu pour `S4B_DC+_F` 5.5 mm first); minimum
+  width 2.0 mm. North end: the old via (18.3, -48.5) 0.6 / 0.3 plus two new 0.8 / 0.4 at (17.7 / 18.7, -50.0) from the
+  F.Cu pour. Smallest spacings by construction 1.25 mm (R146 pads, TR3 pads 4 / 5 via the moved track, R22 track).
+  The B.Cu GND pour opens along the path by the 1.2 mm rule.
+* **Old feed deleted**: F.Cu (45.62, -42.7) ... (41.5, -47.3) - (41.5, -75.21) - (23.83, -75.21), 89 mm. Nothing
+  else hung on it; unconnected stays 0 without it. The 0.4 mm F.Cu track from pad 1 south to the via (24.28, -88.08)
+  (R143) stays.
+* **DC bus to the bridge** is pour 29, not that track: bulk capacitors -> pour 29 -> (a) joint to `S4B_DC+_F` at
+  y -44.6, x 14.5 ... 17.75 (about 3.2 mm) -> into the east side of Q19 pin 2 over about 1.2 mm of the pad height
+  (the pour keeps 1.2 mm from the gate pad), and (b) pour 29 west of the pins, neck about 1.0 mm at x 9.75 ... 10.5,
+  y -47 ... -48, into the west side of the pad over about 1.2 mm. Both zones connect solid. Widths read from a
+  0.25 mm raster of the fill (estimates).
+* **DHB_CURRENT to R146 pad 2** ran on B.Cu at x 25.28 in the middle of the corridor: via (25.28, -63.68) 0.8 / 0.4
+  -> (26.85, -62.3) 0.6 / 0.3, F.Cu 0.4 mm into C54 pad 2, B.Cu 0.4 mm on x 26.85 (1.25 mm from the TR3 pads 4 / 5)
+  to the pad.
+* **15V**: the In3 bridge already started in the In3 east block at (24.0, -50.4), so the via (17.625, -51.0) and its
+  In2 branch (24.897, -43.39) - (23.561, -43.39) - (22.225, -44.726) - (22.225, -46.4) - (17.625, -51.0) were a second
+  feed and the pad of C95 only: deleted with the In3 stub. There is no In2 -> In3 change at the bridge any more; the
+  In3 plane block feeds it. Negative control on a copy: without the piece (24.0, -51.6) - (17.625, -51.6) DRC shows
+  1 unconnected (15V), with it 0.
+* **C95**: B.Cu (19.2, -51.6) rot 180 -> B.Cu (18.9, -60.6) rot -90, south of the F.Cu switch-node zone. 15V pad
+  north with a via in pad (18.9, -58.85) 0.6 / 0.3 on a new 1.0 mm In3 spur (17.125, -55.25) - (18.9, -57.025) -
+  (18.9, -58.85) of the bridge; own GND via (18.9, -61.7) 0.6 / 0.3 (old GND via (20.4, -50.65) deleted). Copper path
+  to DRV5 pin 11 about 18 mm as before (spur 4.4 mm for 4.45 mm); straight line 14.0 mm (was 10.7); GND via to the
+  GND via of pin 9 12.9 mm (was 12.7). The 15V via stands 0.95 mm south of the switch-node zone outline (the fill
+  retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
+  closer to pin 11 was not found (stage 7 list).
+
 ## Inner layers (routing stage 2, 2026-11-20)
 
 Made by `tools/p2k/bin/kipy tools/next/route_s2_planes.py` on the real board (re-runnable: everything it makes is

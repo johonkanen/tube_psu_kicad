@@ -1,0 +1,297 @@
+{
+ "note": "routing stage 7b (2026-11-22), tools/next/route_s7b_c47_dc.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "c95",
+  "r146",
+  "dc",
+  "old"
+ ],
+ "deleted": [
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    17.625,
+    -51.0
+   ],
+   "end": [
+    17.6375,
+    -51.6
+   ],
+   "width": 0.5,
+   "why": "C95 pad stub"
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In3.Power",
+   "start": [
+    17.625,
+    -51.6
+   ],
+   "end": [
+    17.625,
+    -51.0
+   ],
+   "width": 0.5,
+   "why": "In3 stub to the deleted via"
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    22.225,
+    -46.4
+   ],
+   "end": [
+    17.625,
+    -51.0
+   ],
+   "width": 0.508,
+   "why": "In2 branch that only fed the deleted via"
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    22.225,
+    -44.726
+   ],
+   "end": [
+    22.225,
+    -46.4
+   ],
+   "width": 0.508,
+   "why": "same"
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    23.561,
+    -43.39
+   ],
+   "end": [
+    22.225,
+    -44.726
+   ],
+   "width": 0.508,
+   "why": "same"
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    24.897,
+    -43.39
+   ],
+   "end": [
+    23.561,
+    -43.39
+   ],
+   "width": 0.508,
+   "why": "same"
+  },
+  {
+   "group": "c95",
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    20.7625,
+    -51.6
+   ],
+   "end": [
+    20.4,
+    -50.65
+   ],
+   "width": 0.5,
+   "why": "C95 GND stub"
+  },
+  {
+   "group": "c95",
+   "kind": "via",
+   "net": "15V",
+   "at": [
+    17.625,
+    -51.0
+   ],
+   "why": "In2 -> In3 change at the old C95 pad; in the way of DC+ on B.Cu"
+  },
+  {
+   "group": "c95",
+   "kind": "via",
+   "net": "GND",
+   "at": [
+    20.4,
+    -50.65
+   ],
+   "why": "GND via of C95 at its old place"
+  },
+  {
+   "group": "r146",
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "F.Cu",
+   "start": [
+    25.28,
+    -63.68
+   ],
+   "end": [
+    25.28,
+    -61.78
+   ],
+   "width": 0.4,
+   "why": "to the moved via"
+  },
+  {
+   "group": "r146",
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "B.Cu",
+   "start": [
+    25.28,
+    -73.88
+   ],
+   "end": [
+    25.28,
+    -63.68
+   ],
+   "width": 0.4,
+   "why": "in the DC+ corridor"
+  },
+  {
+   "group": "r146",
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "B.Cu",
+   "start": [
+    25.68,
+    -74.28
+   ],
+   "end": [
+    25.28,
+    -73.88
+   ],
+   "width": 0.4,
+   "why": "same"
+  },
+  {
+   "group": "r146",
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "B.Cu",
+   "start": [
+    25.7125,
+    -74.28
+   ],
+   "end": [
+    25.68,
+    -74.28
+   ],
+   "width": 0.4,
+   "why": "same"
+  },
+  {
+   "group": "r146",
+   "kind": "via",
+   "net": "DHB_CURRENT",
+   "at": [
+    25.28,
+    -63.68
+   ],
+   "why": "moved east, see ADD"
+  },
+  {
+   "group": "old",
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    45.62,
+    -42.7
+   ],
+   "end": [
+    45.62,
+    -44.6
+   ],
+   "width": 0.75,
+   "why": "old long feed of C47, replaced by the B.Cu path"
+  },
+  {
+   "group": "old",
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    45.62,
+    -44.6
+   ],
+   "end": [
+    45.62,
+    -47.3
+   ],
+   "width": 0.8,
+   "why": "same"
+  },
+  {
+   "group": "old",
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    45.62,
+    -47.3
+   ],
+   "end": [
+    41.5,
+    -47.3
+   ],
+   "width": 0.8,
+   "why": "same"
+  },
+  {
+   "group": "old",
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    41.5,
+    -47.3
+   ],
+   "end": [
+    41.5,
+    -75.21
+   ],
+   "width": 1.5,
+   "why": "same"
+  },
+  {
+   "group": "old",
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "start": [
+    41.5,
+    -75.21
+   ],
+   "end": [
+    23.83,
+    -75.21
+   ],
+   "width": 1.5,
+   "why": "same"
+  }
+ ]
+}
