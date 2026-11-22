@@ -636,7 +636,7 @@
       },
       {
         "netclass": "HV_PRIMARY",
-        "pattern": "Net-(DRV5-VDDB)"
+        "pattern": "Net-(DRV5-VDDA)"
       },
       {
         "netclass": "HV_PRIMARY",

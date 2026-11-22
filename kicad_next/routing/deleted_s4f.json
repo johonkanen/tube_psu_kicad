@@ -1,0 +1,458 @@
+{
+ "note": "stage 4f (2026-11-22), tools/next/route_s4f_drv5_swap.py - DRV5 channels swapped in the schematic; copper that ended on a swapped pin with the old net, cut back to the first junction",
+ "restored": [
+  "PCB_VIA (23.25, -51.99) DHB_HI_SOURCE -> GND",
+  "PCB_TRACK (24.85, -51.99) DHB_HI_SOURCE -> GND"
+ ],
+ "renamed": [
+  "R41.2",
+  "C92.2",
+  "16 tracks / vias"
+ ],
+ "cuts": [
+  {
+   "pin": "DRV5.1",
+   "pin_net_now": "PRI_DHB_HI",
+   "cut_net": "B12",
+   "segments": 6,
+   "cut_back_to": [
+    20.3,
+    -45.5272
+   ],
+   "stopped_at": "pad R74.2"
+  },
+  {
+   "pin": "DRV5.9",
+   "pin_net_now": "GND",
+   "cut_net": "DHB_HI_SOURCE",
+   "segments": 2,
+   "cut_back_to": [
+    28.55,
+    -57.24
+   ],
+   "stopped_at": "pad TR3.7"
+  },
+  {
+   "pin": "DRV5.9",
+   "pin_net_now": "GND",
+   "cut_net": "DHB_HI_SOURCE",
+   "segments": 1,
+   "cut_back_to": [
+    24.025,
+    -60.6
+   ],
+   "stopped_at": "pad C92.1"
+  },
+  {
+   "pin": "DRV5.10",
+   "pin_net_now": "DHB_LOW_GATE",
+   "cut_net": "DHB_HI_GATE",
+   "segments": 2,
+   "cut_back_to": [
+    34.95,
+    -53.47
+   ],
+   "stopped_at": "open end / T on another track"
+  },
+  {
+   "pin": "DRV5.10",
+   "pin_net_now": "DHB_LOW_GATE",
+   "cut_net": "DHB_HI_GATE",
+   "segments": 1,
+   "cut_back_to": null,
+   "stopped_at": "inside the pad"
+  },
+  {
+   "pin": "DRV5.11",
+   "pin_net_now": "15V",
+   "cut_net": "Net-(DRV5-VDDA)",
+   "segments": 1,
+   "cut_back_to": null,
+   "stopped_at": "inside the pad"
+  },
+  {
+   "pin": "DRV5.11",
+   "pin_net_now": "15V",
+   "cut_net": "Net-(DRV5-VDDA)",
+   "segments": 1,
+   "cut_back_to": null,
+   "stopped_at": "inside the pad"
+  },
+  {
+   "pin": "DRV5.11",
+   "pin_net_now": "15V",
+   "cut_net": "Net-(DRV5-VDDA)",
+   "segments": 1,
+   "cut_back_to": [
+    21.8,
+    -56.0
+   ],
+   "stopped_at": "open end / T on another track"
+  },
+  {
+   "pin": "DRV5.14",
+   "pin_net_now": "DHB_HI_SOURCE",
+   "cut_net": "GND",
+   "segments": 1,
+   "cut_back_to": [
+    23.25,
+    -51.99
+   ],
+   "stopped_at": "via"
+  },
+  {
+   "pin": "DRV5.15",
+   "pin_net_now": "DHB_HI_GATE",
+   "cut_net": "DHB_LOW_GATE",
+   "segments": 5,
+   "cut_back_to": [
+    34.55,
+    -50.62
+   ],
+   "stopped_at": "open end / T on another track"
+  },
+  {
+   "pin": "DRV5.16",
+   "pin_net_now": "Net-(DRV5-VDDA)",
+   "cut_net": "15V",
+   "segments": 1,
+   "cut_back_to": [
+    25.55,
+    -47.25
+   ],
+   "stopped_at": "pad C95.2"
+  }
+ ],
+ "deleted": [
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "B.Cu",
+   "start": [
+    16.3,
+    -48.8
+   ],
+   "end": [
+    16.3,
+    -49.45
+   ],
+   "width": 0.2,
+   "why": "ended on DRV5 pin 1, which is on PRI_DHB_HI after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "B.Cu",
+   "start": [
+    18.954,
+    -48.8
+   ],
+   "end": [
+    16.3,
+    -48.8
+   ],
+   "width": 0.2,
+   "why": "ended on DRV5 pin 1, which is on PRI_DHB_HI after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "B.Cu",
+   "start": [
+    19.854,
+    -47.9
+   ],
+   "end": [
+    18.954,
+    -48.8
+   ],
+   "width": 0.2,
+   "why": "ended on DRV5 pin 1, which is on PRI_DHB_HI after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "B.Cu",
+   "start": [
+    19.854,
+    -46.4
+   ],
+   "end": [
+    19.854,
+    -47.9
+   ],
+   "width": 0.2,
+   "why": "ended on DRV5 pin 1, which is on PRI_DHB_HI after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "B.Cu",
+   "start": [
+    19.854,
+    -45.9732
+   ],
+   "end": [
+    19.854,
+    -46.4
+   ],
+   "width": 0.1524,
+   "why": "ended on DRV5 pin 1, which is on PRI_DHB_HI after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "B12",
+   "layer": "B.Cu",
+   "start": [
+    20.3,
+    -45.5272
+   ],
+   "end": [
+    19.854,
+    -45.9732
+   ],
+   "width": 0.1524,
+   "why": "ended on DRV5 pin 1, which is on PRI_DHB_HI after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    24.85,
+    -58.34
+   ],
+   "end": [
+    27.45,
+    -58.34
+   ],
+   "width": 0.3,
+   "why": "ended on DRV5 pin 9, which is on GND after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    27.45,
+    -58.34
+   ],
+   "end": [
+    28.55,
+    -57.24
+   ],
+   "width": 0.3,
+   "why": "ended on DRV5 pin 9, which is on GND after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    24.025,
+    -60.6
+   ],
+   "end": [
+    24.025,
+    -58.4
+   ],
+   "width": 0.3,
+   "why": "ended on DRV5 pin 9, which is on GND after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    25.65,
+    -57.07
+   ],
+   "end": [
+    29.25,
+    -53.47
+   ],
+   "width": 0.4,
+   "why": "ended on DRV5 pin 10, which is on DHB_LOW_GATE after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    29.25,
+    -53.47
+   ],
+   "end": [
+    34.95,
+    -53.47
+   ],
+   "width": 0.4,
+   "why": "ended on DRV5 pin 10, which is on DHB_LOW_GATE after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    24.85,
+    -57.07
+   ],
+   "end": [
+    25.65,
+    -57.07
+   ],
+   "width": 0.4,
+   "why": "ended on DRV5 pin 10, which is on DHB_LOW_GATE after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    24.8,
+    -55.8
+   ],
+   "end": [
+    24.6,
+    -56.0
+   ],
+   "width": 0.4,
+   "why": "ended on DRV5 pin 11, which is on 15V after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    24.85,
+    -55.8
+   ],
+   "end": [
+    24.8,
+    -55.8
+   ],
+   "width": 0.4,
+   "why": "ended on DRV5 pin 11, which is on 15V after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    24.6,
+    -56.0
+   ],
+   "end": [
+    21.8,
+    -56.0
+   ],
+   "width": 0.4,
+   "why": "ended on DRV5 pin 11, which is on 15V after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    24.85,
+    -51.99
+   ],
+   "end": [
+    23.25,
+    -51.99
+   ],
+   "width": 0.4,
+   "why": "ended on DRV5 pin 14, which is on DHB_HI_SOURCE after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    24.85,
+    -50.72
+   ],
+   "end": [
+    26.75,
+    -50.72
+   ],
+   "width": 0.4,
+   "why": "ended on DRV5 pin 15, which is on DHB_HI_GATE after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    26.75,
+    -50.72
+   ],
+   "end": [
+    28.35,
+    -49.12
+   ],
+   "width": 0.4,
+   "why": "ended on DRV5 pin 15, which is on DHB_HI_GATE after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    28.35,
+    -49.12
+   ],
+   "end": [
+    31.75,
+    -49.12
+   ],
+   "width": 0.4,
+   "why": "ended on DRV5 pin 15, which is on DHB_HI_GATE after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    31.75,
+    -49.12
+   ],
+   "end": [
+    33.25,
+    -50.62
+   ],
+   "width": 0.4,
+   "why": "ended on DRV5 pin 15, which is on DHB_HI_GATE after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    33.25,
+    -50.62
+   ],
+   "end": [
+    34.55,
+    -50.62
+   ],
+   "width": 0.4,
+   "why": "ended on DRV5 pin 15, which is on DHB_HI_GATE after the channel swap"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    25.55,
+    -47.25
+   ],
+   "end": [
+    25.55,
+    -49.45
+   ],
+   "width": 0.4,
+   "why": "ended on DRV5 pin 16, which is on Net-(DRV5-VDDA) after the channel swap"
+  }
+ ]
+}

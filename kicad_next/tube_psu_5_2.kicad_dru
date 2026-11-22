@@ -74,7 +74,7 @@
 
 (rule "High-side driver group DRV5, outer layers"
 	(layer outer)
-	(condition "(A.NetName == 'DHB_HI_GATE' || A.NetName == 'DHB_HI_SOURCE' || A.NetName == 'Net-(DRV5-VDDB)' || A.NetName == 'Net-(D19-K)' || A.NetName == 'Net-(D30-PadA)' || A.NetName == 'Net-(Q19-G)') && (B.NetName == 'DHB_HI_GATE' || B.NetName == 'DHB_HI_SOURCE' || B.NetName == 'Net-(DRV5-VDDB)' || B.NetName == 'Net-(D19-K)' || B.NetName == 'Net-(D30-PadA)' || B.NetName == 'Net-(Q19-G)') && A.Net != B.Net")
+	(condition "(A.NetName == 'DHB_HI_GATE' || A.NetName == 'DHB_HI_SOURCE' || A.NetName == 'Net-(DRV5-VDDA)' || A.NetName == 'Net-(D19-K)' || A.NetName == 'Net-(D30-PadA)' || A.NetName == 'Net-(Q19-G)') && (B.NetName == 'DHB_HI_GATE' || B.NetName == 'DHB_HI_SOURCE' || B.NetName == 'Net-(DRV5-VDDA)' || B.NetName == 'Net-(D19-K)' || B.NetName == 'Net-(D30-PadA)' || B.NetName == 'Net-(Q19-G)') && A.Net != B.Net")
 	(constraint clearance (min 0.2mm)))
 
 (rule "High-side driver group DRV6, outer layers"

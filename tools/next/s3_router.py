@@ -65,7 +65,7 @@ HV_OUTER = 1.2
 NC_NET = "unconnected-"       # net name KiCad gives the pad of a no-connect pin
 # nets of one floating high-side gate driver: 0.2 mm between them on the outer layers (.kicad_dru "High-side
 # driver group ...", user decision 2026-11-20) - keep in step with the rule file
-HS_GROUPS = {'DRV3': ['/06 Heaters/HEATER_HI_GATE', '/06 Heaters/HEATER_HI_SOURCE', '/06 Heaters/HEATER_HI_DRV', 'Net-(DRV3-VDDA)', 'Net-(D35-K)', 'Net-(D11-K)'], 'DRV5': ['DHB_HI_GATE', 'DHB_HI_SOURCE', 'Net-(DRV5-VDDB)', 'Net-(D19-K)', 'Net-(D30-PadA)', 'Net-(Q19-G)'], 'DRV6': ['DHB_HI_GATE_SEC', 'DHB_HI_SOURCE_SEC', 'Net-(DRV6-VDDA)', 'Net-(D18-K)', 'Net-(D31-PadA)', 'Net-(Q21-G)']}
+HS_GROUPS = {'DRV3': ['/06 Heaters/HEATER_HI_GATE', '/06 Heaters/HEATER_HI_SOURCE', '/06 Heaters/HEATER_HI_DRV', 'Net-(DRV3-VDDA)', 'Net-(D35-K)', 'Net-(D11-K)'], 'DRV5': ['DHB_HI_GATE', 'DHB_HI_SOURCE', 'Net-(DRV5-VDDA)', 'Net-(D19-K)', 'Net-(D30-PadA)', 'Net-(Q19-G)'], 'DRV6': ['DHB_HI_GATE_SEC', 'DHB_HI_SOURCE_SEC', 'Net-(DRV6-VDDA)', 'Net-(D18-K)', 'Net-(D31-PadA)', 'Net-(Q21-G)']}
 HS_OF = {n: k for k, v in HS_GROUPS.items() for n in v}
 EDGE = 0.5
 HARD_ZONES = False            # True: pours of HV nets and the S3A_* zones are not crossed by other nets (stage 3b)

@@ -42,9 +42,9 @@ connection at the pin and routing a signal there.
 | 1 | DGND | GND | power / ground |
 | 2 | 5V | 5V | power / ground |
 | 3 | A12 | EPWM6A | DRV3.2, R77.2 |
-| 4 | A11 | PRI_DHB_HI | DRV5.2, R73.2 |
+| 4 | A11 | PRI_DHB_HI | DRV5.1, R73.2 |
 | 5 | A13 | EPWM5A | DRV3.1, R78.2 |
-| 6 | B12 | B12 | DRV5.1, R74.2 |
+| 6 | B12 | B12 | DRV5.2, R74.2 |
 | 7 | A14 | $HT_CS | ISO1.5 |
 | 8 | B13 | $CUK_CS | ISO2.5 |
 | 9 | A15 | SYNCH_2 | ISO1.4 |

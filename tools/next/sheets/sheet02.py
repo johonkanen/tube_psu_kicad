@@ -12,13 +12,14 @@ from _common import *  # noqa: F401,F403
 
 sh = sheet("02_dhb_gate_drive.kicad_sch")
 
-# Primary driver. PDF label PRI_DHB_LO on INA = IPC net B12 (J2 pin B12); the bootstrap is on the B side
-# (VDDB/OUTB/VSSB = high side), INB = PRI_DHB_HI.
+# Primary driver. Channels swapped 2026-11-22 (user decision, CHANGES_5_2.md 3.1b): the bootstrap is on the A side
+# (VDDA/OUTA/VSSA = high side, as DRV6 / DRV3), INA = PRI_DHB_HI; channel B is the low side, INB = the PDF label
+# PRI_DHB_LO = IPC net B12 (J2 pin B12). The pull-downs stay on their signals (R73 PRI_DHB_HI, R74 B12).
 ucc21520_cell(sh, "DRV5", g(100), g(44), vdd="5V", gnd="GND",
-              pwm=("B12", ("R74", "10k")), nc1=("PRI_DHB_HI", ("R73", "10k")), dt=("R127", "10k", "C118", "100p"),
+              pwm=("PRI_DHB_HI", ("R73", "10k")), nc1=("B12", ("R74", "10k")), dt=("R127", "10k", "C118", "100p"),
               cdec=("C94", "100n", 1),
               boot=(("D19", "S1M"), ("R41", "2R"), ("C92", "1u", 2)), rail="15V",
-              railcaps=[("C95", "4.7u", 2), ("C96", "1u", 1)], boot_side="B",
+              railcaps=[("C95", "4.7u", 2), ("C96", "1u", 1)], boot_side="A",
               vo_hi="DHB_HI_GATE", src_hi="DHB_HI_SOURCE", vo_lo="DHB_LOW_GATE",
               dis=("DAB_DIS", ("R129", "10k"), ("C120", "1n")))
 sh.text("PDF label PRI_DHB_LO = net B12 (J2 pin B12); DC- = GND.", g(48), g(74))

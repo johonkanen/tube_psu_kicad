@@ -1312,6 +1312,35 @@ B.Cu x 2 ... 11.3 / y -66 ... -44, block D2). **Only part 1 of D1 is on the boar
 2. When U1 moves, the Kelvin lane y -64.8 goes with it (it is the only new copper in the D2 window, on In2).
 3. C96 / D19 / R41 untouched (interim); the tap via stands between the pads of C96 on B.Cu.
 
+## Stage 4f: DRV5 channels swapped (2026-11-22)
+
+User decision 2026-11-22 (CHANGES_5_2.md row 3.1b): DRV5 goes to the bottom side west of the Q7 / Q19 pin column, so
+its pin order has to match the FET order. Schematic (`tools/next/sheets/sheet02.py`, `boot_side="A"`):
+
+| DRV5 | before | now |
+|---|---|---|
+| 1 INA | B12 (low-side command, R74) | PRI_DHB_HI (R73) |
+| 2 INB | PRI_DHB_HI (R73) | B12 (R74) |
+| 14 VSSA / 15 OUTA / 16 VDDA | GND / DHB_LOW_GATE / 15V | DHB_HI_SOURCE / DHB_HI_GATE / `Net-(DRV5-VDDA)` (bootstrap D19 / R41 / C92) |
+| 9 VSSB / 10 OUTB / 11 VDDB | DHB_HI_SOURCE / DHB_HI_GATE / `Net-(DRV5-VDDB)` | GND / DHB_LOW_GATE / 15V (C95, C96) |
+
+Pins 3 – 8 unchanged. UCC21520 datasheet SLUSCJ9F: the two output drivers are equal ("two low-side drivers, two
+high-side drivers, or a half-bridge driver", 1500 VDC functional isolation between them, DT / DISABLE act on both);
+TI's half-bridge example has the high side on channel A, as DRV6 and DRV3 here. The bootstrap net is
+`Net-(DRV5-VDDA)` now: `.kicad_dru` "High-side driver group DRV5", `HS_GROUPS` in `s3_router.py` and `HV_NETS` in
+`setup_project.py` follow. The In3 15V plane row above still names DRV5 pin 16 - 15V is pin 11 now.
+
+Board (`update_board_parts.py DRV5`, then `tools/next/route_s4f_drv5_swap.py`, `routing/deleted_s4f.json`): the pad
+nets of DRV5 follow the schematic, the board net `Net-(DRV5-VDDB)` (C92 pin 2, R41 pin 2, 13 tracks) is renamed, and
+the 22 B.Cu segments that ended on pins 1, 9, 10, 11, 14, 15, 16 with the old net are cut back to the first junction
+(pin 2 had no copper). **DRV5 is not moved and not routed** - that is the next block. pcbnew's save had taken the
+ground stub of pin 14 (segment + via 23.25, -51.99) along to DHB_HI_SOURCE; the script puts the via back on GND.
+
+Left open by the cut (unconnected 30 -> 38, 0 shorts, 0 parity items): all eight swapped pins of DRV5 (1 PRI_DHB_HI,
+2 B12, 9 GND, 10 DHB_LOW_GATE, 11 15V, 14 DHB_HI_SOURCE, 15 DHB_HI_GATE, 16 bootstrap). Five new clearance markers
+(6 -> 11), all at DRV5's old place and gone when it is re-laid: pin 16 (now HV) 0.35 / 0.15 mm from the 15V track / via
+that fed it, pins 15 / 16 0.94 / 0.86 mm from a DHB_CURRENT via, pin 14 0.175 mm from its old ground via.
+
 ## Footprints and 3D models (phase 3, 2026-11-18)
 
 Regenerate: `python3 tools/next/gen_next_footprints.py`, `tools/p2k/bin/kicad_env.sh python3

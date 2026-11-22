@@ -101,6 +101,7 @@ slot unchanged.
 | NR | Done | Refdes / value / nets |
 |---|---|---|
 | 3.1 / 3a | yes | DRV5, DRV6 Si8275BB → **UCC21520DWR** (C601651, SOIC-16W, 5.7 kVrms reinforced, 8 V UVLO). Same pin positions as the Si8275, so the connections are those of 5.1: INA / INB from B12 / PRI_DHB_HI (DRV5) and ISO_SEC_DHB_HI / LO (DRV6), bootstrap D19/R41/C92 and D18/R46/C46 unchanged |
+| 3.1b | yes | **DRV5 channels swapped** (user decision 2026-11-22): channel A = high side – INA (pin 1) = PRI_DHB_HI (R73), OUTA (15) → DHB_HI_GATE, VDDA (16) = bootstrap D19 / R41 / C92 (net `Net-(DRV5-VDDA)`, was `Net-(DRV5-VDDB)`), VSSA (14) = DHB_HI_SOURCE; channel B = low side – INB (pin 2) = B12 (PDF label PRI_DHB_LO, R74), OUTB (10) → DHB_LOW_GATE, VDDB (11) = 15V (C95, C96), VSSB (9) = GND. Pins 3–8 unchanged. Reason: the driver goes to the bottom side west of the Q7 / Q19 pin column and its pin order has to match the FET order (no crossing of the two gate loops). Datasheet SLUSCJ9F: the two output drivers are equal ("two low-side drivers, two high-side drivers, or a half-bridge driver", 1500 VDC functional isolation between them; TI's own half-bridge example has the high side on A, as DRV6 / DRV3 here). Supersedes "the connections are those of 5.1" of row 3.1 for DRV5 |
 | 3.2 | yes | **R40, R25 removed**. New DT resistors **R127 / R128 10k** (DT = 10 ns/kΩ → 100 ns hardware minimum below the 150–200 ns FPGA dead time) with **C118 / C119 100p** (datasheet: ≤ 1 nF noise cap) |
 | 3.3 | yes | DISABLE brought out: DRV5 pin 5 = **DAB_DIS** from **J2-18** (spare FPGA pin, ball F16 on the card = the 5.1 single-pin net F16; J2-18 follows the same pattern as the ball-named pins 20, 21, 23, 25, 27–32, 34 that the user confirmed unused on the card 2026-11-20), **R129 10k** pull-down (enabled when not driven, as 5.1's EN tied high), **C120 1n**; DRV6 pin 5 = **DAB_DIS_SEC** from **ISO2 channel C** (pin 4 input, was GND; pin 13 output, was unused) |
 | 3a DRV6 input side | decision | **kept on the secondary** (5V_ISOL / ISO_GND, PWM through ISO2 as in 5.1). Moving it to the primary would free two ISO2 channels but put a second reinforced barrier crossing (the driver itself) next to TR3 and change the ISO2 / 5V_ISOL wiring – no simplification of the barrier; one UCC21520 cell for all three bridges either way |
@@ -290,7 +291,7 @@ Nets: 5.1 208, 5.2 232 (with at least one part pin).
 
 **5.1 nets split in 5.2:** Net-(DRV1-OUTA), Net-(DRV2-OUTA)
 
-**Renamed nets** (same pins, new name): -5V_SEC -> -15V_SEC; /04 MCU connector/ADB0 -> /04 MCU connector/5V_MEAS; /04 MCU connector/F16 -> DAB_DIS; unconnected-(ISO2-VO_C-Pad13) -> DAB_DIS_SEC; Net-(D7-PadA) -> /01 AUX supply/FLY_C; Net-(DRV3-OUT+) -> /06 Heaters/HEATER_HI_DRV; Net-(DRV9-OUTA) -> /06 Heaters/HEATER_LOW_DRV; Net-(R49-Pad1) -> Net-(C127-Pad1); Net-(R2-Pad2) -> Net-(C131-Pad2); Net-(DRV1-OUTA) -> Net-(DRV1-OUTH); Net-(DRV1-OUTA) -> Net-(DRV1-OUTL); Net-(DRV2-OUTA) -> Net-(DRV2-OUTH); Net-(DRV2-OUTA) -> Net-(DRV2-OUTL); Net-(DRV3-VDD2) -> Net-(DRV3-VDDA); Net-(PWM2-E) -> Net-(PWM2-CS); Net-(D5-PadA) -> Net-(TR1-A15); /01 AUX supply/AUX_FB -> Net-(TR1-A5); Net-(D4-PadA) -> Net-(TR1-S15); Net-(D29-PadA) -> Net-(TR1-S5); Net-(L2-2) -> /05 PFC/PFC_DRAIN_1; Net-(L1-1) -> /05 PFC/PFC_DRAIN_2
+**Renamed nets** (same pins, new name): -5V_SEC -> -15V_SEC; /04 MCU connector/ADB0 -> /04 MCU connector/5V_MEAS; /04 MCU connector/F16 -> DAB_DIS; unconnected-(ISO2-VO_C-Pad13) -> DAB_DIS_SEC; Net-(D7-PadA) -> /01 AUX supply/FLY_C; Net-(DRV3-OUT+) -> /06 Heaters/HEATER_HI_DRV; Net-(DRV9-OUTA) -> /06 Heaters/HEATER_LOW_DRV; Net-(R49-Pad1) -> Net-(C127-Pad1); Net-(R2-Pad2) -> Net-(C131-Pad2); Net-(DRV1-OUTA) -> Net-(DRV1-OUTH); Net-(DRV1-OUTA) -> Net-(DRV1-OUTL); Net-(DRV2-OUTA) -> Net-(DRV2-OUTH); Net-(DRV2-OUTA) -> Net-(DRV2-OUTL); Net-(DRV3-VDD2) -> Net-(DRV3-VDDA); Net-(DRV5-VDDB) -> Net-(DRV5-VDDA); Net-(PWM2-E) -> Net-(PWM2-CS); Net-(D5-PadA) -> Net-(TR1-A15); /01 AUX supply/AUX_FB -> Net-(TR1-A5); Net-(D4-PadA) -> Net-(TR1-S15); Net-(D29-PadA) -> Net-(TR1-S5); Net-(L2-2) -> /05 PFC/PFC_DRAIN_1; Net-(L1-1) -> /05 PFC/PFC_DRAIN_2
 
 **Changed connections** (+ pin joined, - pin left; pins of added / removed parts summarised):
 
@@ -299,7 +300,7 @@ Nets: 5.1 208, 5.2 232 (with at least one part pin).
 | +1V65_BIAS | -R3.1 R110.1; new parts C122 C123 C126 R131 |
 | +3V3 | new parts C124 C125 C129 C133 C134 U9 U10 U11 |
 | -5V_SEC -> -15V_SEC | new parts N15V_OUT; removed parts N5V_OUT |
-| 15V | +DRV3.11; -D10.A DRV1.3 DRV1.8 DRV2.3 DRV2.8; new parts R125 R142; removed parts DRV9 |
+| 15V | +DRV3.11 DRV5.11; -D10.A DRV1.3 DRV1.8 DRV2.3 DRV2.8 DRV5.16; new parts R125 R142; removed parts DRV9 |
 | 420V | new parts R150 |
 | 5V | +DRV3.3 DRV3.8; -DRV3.2 DRV3.4 DRV5.5; new parts R126 R133 R138 |
 | 5V_ISOL | -DRV6.5 |
@@ -308,19 +309,22 @@ Nets: 5.1 208, 5.2 232 (with at least one part pin).
 | AC1 | +L2.1; -L2.pri1 |
 | AC2 | +L1.2; -L1.pri2 |
 | /04 MCU connector/AUX_MEAS | +J2.43; -C61.2 J2.40 R11.2 R12.1; new parts R132 |
+| B12 | +DRV5.2; -DRV5.1 |
 | /04 MCU connector/F16 -> DAB_DIS | +DRV5.5 ISO2.4; new parts C120 R129 |
 | unconnected-(ISO2-VO_C-Pad13) -> DAB_DIS_SEC | +DRV6.5 |
 | DC+ | +TR1.11; -TR1.4; new parts R143 R151 R155 |
 | /04 MCU connector/DC_LINK_MEAS | removed parts C4 |
 | /07 DHB/DHB_CAP | +TR3.4 TR3.5; new parts R144 R145; removed parts L3 |
 | DHB_CURRENT | new parts R146 |
-| DHB_HI_SOURCE | +TR3.7 TR3.8; -TR3.2 |
+| DHB_HI_GATE | +DRV5.15; -DRV5.10 |
+| DHB_HI_SOURCE | +DRV5.14 TR3.7 TR3.8; -DRV5.9 TR3.2 |
 | DHB_HI_SOURCE_SEC | +TR3.11 TR3.12; -TR3.4 |
 | DHB_I_MEAS | +J2.38; -J2.37 |
+| DHB_LOW_GATE | +DRV5.10; -DRV5.15 |
 | EPWM5A_ISO | +DRV4.4; -DRV4.3 |
 | EPWM6A | +DRV3.2; removed parts DRV9 |
 | Net-(D7-PadA) -> /01 AUX supply/FLY_C | +PWM2.5 PWM2.6 TR1.12; -TR1.5 |
-| GND | +DRV3.4 DRV3.5 DRV3.9 J2.37 J2.39 J2.40 J2.46 J2.48 J2.50 PWM2.12; -DRV1.9 DRV2.9 DRV3.3 ISO2.4 J4.3 PWM2.3; new parts C118 C120 C121 C124 C125 C128 C129 C130 C132 C133 C134 C138 C139 C140 R125 R126 R127 R129 R130 R134 R139 R141 R154 U9 U10 U11; removed parts C4 C50 DRV9 R40 R84 R85 |
+| GND | +DRV3.4 DRV3.5 DRV3.9 DRV5.9 J2.37 J2.39 J2.40 J2.46 J2.48 J2.50 PWM2.12; -DRV1.9 DRV2.9 DRV3.3 DRV5.14 ISO2.4 J4.3 PWM2.3; new parts C118 C120 C121 C124 C125 C128 C129 C130 C132 C133 C134 C138 C139 C140 R125 R126 R127 R129 R130 R134 R139 R141 R154 U9 U10 U11; removed parts C4 C50 DRV9 R40 R84 R85 |
 | /06 Heaters/HEATER_CAP_MEAS | new parts R156 R157 |
 | HEATER_CURRENT | new parts R158 |
 | Net-(DRV3-OUT+) -> /06 Heaters/HEATER_HI_DRV | +DRV3.15 R59.1; -DRV3.7 |
@@ -340,6 +344,7 @@ Nets: 5.1 208, 5.2 232 (with at least one part pin).
 | Net-(DRV2-OUTA) -> Net-(DRV2-OUTL) | +DRV2.3; -DRV2.6 DRV2.7 R20.1 |
 | Net-(DRV3-VDD2) -> Net-(DRV3-VDDA) | +DRV3.16 R99.2; -DRV3.8 R99.1 |
 | Net-(DRV4-OUTA) | +DRV4.7; -DRV4.8 |
+| Net-(DRV5-VDDB) -> Net-(DRV5-VDDA) | +DRV5.16; -DRV5.11 |
 | Net-(PWM2-E) -> Net-(PWM2-CS) | +PWM2.4; -PWM2.1 PWM2.2 |
 | /01 AUX supply/AUX_FB -> Net-(TR1-A5) | removed parts R64 R81 |
 | Net-(U1A-+) | new parts C123 |
@@ -353,6 +358,7 @@ Nets: 5.1 208, 5.2 232 (with at least one part pin).
 | PFC_I1_MEAS | +J2.42; -J2.43 |
 | PFC_PWM1 | +DRV1.6; -DRV1.2 |
 | PFC_PWM2 | +DRV2.6; -DRV2.2 |
+| PRI_DHB_HI | +DRV5.1; -DRV5.2 |
 | /04 MCU connector/RX | -J4.1; new parts U11 |
 | /07 DHB/TRANS_SEC | +TR3.10 TR3.9; -TR3.3; new parts R148 R149 |
 | /04 MCU connector/TX | -J4.2; new parts U11 |
