@@ -33,6 +33,33 @@ F, B, I2, I3 = "F", "B", "2", "3"
 nm = lambda v: int(round(v * 1e6))  # noqa: E731
 mm = lambda v: round(v / 1e6, 4)  # noqa: E731
 
+def pair(pts, h):
+    """Two lanes at -h / +h from a centre polyline (mitred corners). +h is the side n = (-dy, dx) of the direction."""
+    out = []
+    for sg in (-1, 1):
+        lines = []
+        for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
+            L = ((x1 - x0) ** 2 + (y1 - y0) ** 2) ** 0.5
+            dx, dy = (x1 - x0) / L, (y1 - y0) / L
+            ox, oy = -dy * h * sg, dx * h * sg
+            lines.append(((x0 + ox, y0 + oy), (dx, dy)))
+        res = [lines[0][0]]
+        for (p, d), (q, e) in zip(lines, lines[1:]):
+            den = d[0] * e[1] - d[1] * e[0]
+            t = ((q[0] - p[0]) * e[1] - (q[1] - p[1]) * e[0]) / den
+            res.append((p[0] + d[0] * t, p[1] + d[1] * t))
+        (x0, y0), (x1, y1) = pts[-2], pts[-1]
+        p, d = lines[-1]
+        res.append((p[0] + (x1 - x0), p[1] + (y1 - y0)))
+        out.append([(round(x, 3), round(y, 3)) for x, y in res])
+    return out
+
+
+# centre line of the TX / RX pair on In3 (pitch 0.34 mm: RX is the -h lane = north / west, TX the +h lane)
+UC = [(44.3, -27.37), (40.6, -27.37), (35.27, -32.7), (14.9, -32.7), (14.05, -31.85), (4.0, -31.85), (1.1, -34.75),
+      (-7.9, -34.75), (-8.35, -35.2), (-8.35, -54.2)]
+URX, UTX = pair(UC, 0.17)
+
 LG, TX, RX = "DHB_LOW_GATE_SEC", "/04 MCU connector/TX", "/04 MCU connector/RX"
 GROUPS = {
     # DRV6 pin 10 (low-side gate output, secondary) - D32 cathode / R87 (gate network of Q8). Pin 10 is closed in on
@@ -45,6 +72,29 @@ GROUPS = {
         ("t", LG, I3, 0.3, [(58.3, -53.832), (58.568, -54.1), (71.0, -54.1), (72.5, -52.6), (72.5, -50.3)]),
         ("v", LG, 72.5, -50.3, 0.6, 0.3),
         ("t", LG, B, 0.3, [(72.5, -50.3), (73.3, -49.5), (73.3, -48.45), (73.73, -48.02)]),
+    ]),
+    # UART TX / RX: 5.1 B.Cu ends at (40.6, -19.5) / (40.1, -19.503) - U11 pins 4 / 5. B.Cu south-east (RX stub of 5.1
+    # cut back), vias south of the In2 +3V3 lane, In3 pair (no pour of another net on the way: gap 5V / 15V planes,
+    # corridor y -32.7 between the +3V3 plane and the 15V band, between the two pads of L2, x -8.35 west of the DRV5
+    # input parts, under the In2 control bus), vias south of the bus (in the F.Cu DC+ pour, which gives way), B.Cu
+    # between the 15V track x -6.75 and the +3V3 track x -4.68, vias west of the pins, F.Cu to the pins.
+    "uart": dict(DEL=[
+        (RX, B, 40.1, -19.503, 48.66, -28.063, "5.1 stub towards the old place of ISO2, cut back to the new via"),
+    ], ADD=[
+        ("t", RX, B, 0.152, [(40.1, -19.503), (45.3, -24.703), (45.3, -27.55)]),
+        ("t", TX, B, 0.152, [(40.6, -19.5), (46.1, -25.0), (46.1, -28.1)]),
+        ("v", RX, 45.3, -27.55, 0.5, 0.3),
+        ("v", TX, 46.1, -28.1, 0.5, 0.3),
+        ("t", RX, I3, 0.152, [(45.3, -27.55), (44.95, -27.2)] + URX + [(-8.52, -54.73), (-5.75, -57.5)]),
+        ("t", TX, I3, 0.152, [(46.1, -28.1), (44.86, -28.1)] + UTX + [(-8.18, -54.32), (-5.0, -57.5)]),
+        ("v", RX, -5.75, -57.5, 0.5, 0.3),
+        ("v", TX, -5.0, -57.5, 0.5, 0.3),
+        ("t", RX, B, 0.152, [(-5.75, -57.5), (-5.55, -57.7), (-5.55, -76.765), (-6.15, -77.365)]),
+        ("t", TX, B, 0.152, [(-5.0, -57.5), (-5.2, -57.7), (-5.2, -78.035), (-5.8, -78.635), (-6.15, -78.635)]),
+        ("v", RX, -6.15, -77.365, 0.5, 0.3),
+        ("v", TX, -6.15, -78.635, 0.5, 0.3),
+        ("t", RX, F, 0.2, [(-6.15, -77.365), (-4.65, -77.365)]),
+        ("t", TX, F, 0.2, [(-6.15, -78.635), (-4.65, -78.635)]),
     ]),
 }
 

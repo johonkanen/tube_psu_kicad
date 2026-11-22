@@ -1718,6 +1718,41 @@ Not closed in this stage:
   DAB_DIS_SEC diagonal and the 5V_ISOL lane. In3: 15V_ISO_SEC plane. A via east of pin 10 at about (58.3, -53.83)
   fits on all layers (not placed); the In2 lanes of DAB_DIS_SEC / 5V_ISOL have to be re-drawn first.
 
+## Stage 5c: the last three connections closed (2026-11-22)
+
+`tools/next/route_s5c_last.py --group lowgate` and `--group uart` (incremental, not re-runnable;
+`routing/moves_s5c.json` (empty), `deleted_s5c.json`, `s5c_added.json`). Unconnected 3 -> 0, clearance markers 5 -> 5
+(the same five), 0 shorts. No part moved, no zone outline changed. Aim as in stage 5a: every connection made and
+rule-clean, not optimised.
+
+* **DHB_LOW_GATE_SEC** (DRV6 pin 10 - D32 cathode / R87): B.Cu 0.3 mm from the pin to a via 0.6 / 0.3 at
+  (58.3, -53.832) (1.5 mm east of the F.Cu DHB_HI_SOURCE_SEC track), **In3 0.3 mm, 17.2 mm, inside the 15V_ISO_SEC
+  plane**: y -54.1 between TR3 pins 9 and 10 (0.95 mm from the pad of pin 9), diagonal to x 72.5, via (72.5, -50.3)
+  (1.2 mm rule to the 420V pad of C16 on F.Cu kept), B.Cu 2.4 mm into the west edge of the D32 cathode pad (1.3 mm
+  from R149 pad 2). No In2 lane re-drawn, no rule area: the plane fill gives way round the lane (slot about 0.7 mm
+  wide, 14 mm long); the plane is still one outline (531 -> 518 mm2) and the DRC lists no 15V_ISO_SEC item.
+  Return in the ISO_GND planes In1 / In4.
+* **UART TX / RX** (J2 pins 26 / 24 - U11 pins 4 / 5; 0.152 mm, pitch 0.34 mm on In3, RX the north / west lane):
+  * B.Cu from the 5.1 ends (40.6, -19.5) / (40.1, -19.503) south-east (the 5.1 RX stub to (48.66, -28.063) cut back),
+    then south on x 46.1 / 45.3 to vias 0.5 / 0.3 at (46.1, -28.1) (TX) and (45.3, -27.55) (RX), south of the In2
+    +3V3 lane y -26.87.
+  * In3 82 mm, nowhere through a pour of another net: gap between the 5V and 15V planes (y -27.2 / -27.54), diagonal
+    to the corridor y -32.53 / -32.87 between the +3V3 plane and the 15V band (x 35 ... 15), y -31.68 / -32.02 past the
+    vias of Net-(DRV1-OUTL) / PFC_PWM1 (x 9.4 / 10.4), diagonal to y -34.58 / -34.92 **between the two pads of L2**
+    (1.40 mm from the AC1 pad, 1.46 mm from the PFC_DRAIN_1 pad; more than 7 mm from H4), south on x -8.52 / -8.18
+    west of the DRV5 input parts and under the In2 control bus, diagonals to vias 0.5 / 0.3 at (-5.75, -57.5) (RX)
+    and (-5.0, -57.5) (TX) south of the bus (5V lane y -56.75). The F.Cu DC+ pour gives way round the two vias
+    (1.2 mm); it stays in one piece.
+  * B.Cu south on x -5.55 (RX) / -5.2 (TX) between the 15V track (x -6.75) and the +3V3 track of stage 3g (x -4.68),
+    east of the GND via of pin 7 (-6.15, -74.83; 0.22 mm), to vias (-6.15, -77.365) / (-6.15, -78.635), F.Cu 0.2 mm,
+    1.5 mm to pins 5 / 4. TX copper edge x -5.12: 0.75 mm outside the UART island keep-out (x -4.375), 8.75 mm from
+    the island-side pads of U11 (x 3.625).
+  * Lengths from the 5.1 ends: RX 113 mm, TX 116 mm, three via pairs.
+
+Open: nothing in the unconnected list. Not looked at in this stage (first complete draft): the UART pair runs on In3
+between the pads of the PFC inductor L2 and 82 mm beside / under power stages (GND plane In1 above, In4 below);
+the low-side gate lane of DRV6 is 17 mm on an inner layer.
+
 ## Footprints and 3D models (phase 3, 2026-11-18)
 
 Regenerate: `python3 tools/next/gen_next_footprints.py`, `tools/p2k/bin/kicad_env.sh python3

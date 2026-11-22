@@ -1,7 +1,25 @@
 {
  "note": "routing stage 5c (2026-11-22), tools/next/route_s5c_last.py - incremental edit of the board, not a rebuild",
  "groups": [
-  "lowgate"
+  "lowgate",
+  "uart"
  ],
- "deleted": []
+ "deleted": [
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/RX",
+   "layer": "B.Cu",
+   "start": [
+    40.1,
+    -19.5029
+   ],
+   "end": [
+    48.66,
+    -28.0629
+   ],
+   "width": 0.1524,
+   "why": "5.1 stub towards the old place of ISO2, cut back to the new via"
+  }
+ ]
 }

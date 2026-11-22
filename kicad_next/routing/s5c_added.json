@@ -1,7 +1,8 @@
 {
  "note": "routing stage 5c (2026-11-22), tools/next/route_s5c_last.py - incremental edit of the board, not a rebuild",
  "groups": [
-  "lowgate"
+  "lowgate",
+  "uart"
  ],
  "added": [
   {
@@ -149,6 +150,669 @@
     -48.02
    ],
    "width": 0.3
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/RX",
+   "layer": "B.Cu",
+   "start": [
+    40.1,
+    -19.503
+   ],
+   "end": [
+    45.3,
+    -24.703
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/RX",
+   "layer": "B.Cu",
+   "start": [
+    45.3,
+    -24.703
+   ],
+   "end": [
+    45.3,
+    -27.55
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/TX",
+   "layer": "B.Cu",
+   "start": [
+    40.6,
+    -19.5
+   ],
+   "end": [
+    46.1,
+    -25.0
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/TX",
+   "layer": "B.Cu",
+   "start": [
+    46.1,
+    -25.0
+   ],
+   "end": [
+    46.1,
+    -28.1
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "via",
+   "net": "/04 MCU connector/RX",
+   "at": [
+    45.3,
+    -27.55
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "group": "uart",
+   "kind": "via",
+   "net": "/04 MCU connector/TX",
+   "at": [
+    46.1,
+    -28.1
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/RX",
+   "layer": "In3.Power",
+   "start": [
+    45.3,
+    -27.55
+   ],
+   "end": [
+    44.95,
+    -27.2
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/RX",
+   "layer": "In3.Power",
+   "start": [
+    44.95,
+    -27.2
+   ],
+   "end": [
+    44.3,
+    -27.2
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/RX",
+   "layer": "In3.Power",
+   "start": [
+    44.3,
+    -27.2
+   ],
+   "end": [
+    40.53,
+    -27.2
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/RX",
+   "layer": "In3.Power",
+   "start": [
+    40.53,
+    -27.2
+   ],
+   "end": [
+    35.2,
+    -32.53
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/RX",
+   "layer": "In3.Power",
+   "start": [
+    35.2,
+    -32.53
+   ],
+   "end": [
+    14.97,
+    -32.53
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/RX",
+   "layer": "In3.Power",
+   "start": [
+    14.97,
+    -32.53
+   ],
+   "end": [
+    14.12,
+    -31.68
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/RX",
+   "layer": "In3.Power",
+   "start": [
+    14.12,
+    -31.68
+   ],
+   "end": [
+    3.93,
+    -31.68
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/RX",
+   "layer": "In3.Power",
+   "start": [
+    3.93,
+    -31.68
+   ],
+   "end": [
+    1.03,
+    -34.58
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/RX",
+   "layer": "In3.Power",
+   "start": [
+    1.03,
+    -34.58
+   ],
+   "end": [
+    -7.97,
+    -34.58
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/RX",
+   "layer": "In3.Power",
+   "start": [
+    -7.97,
+    -34.58
+   ],
+   "end": [
+    -8.52,
+    -35.13
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/RX",
+   "layer": "In3.Power",
+   "start": [
+    -8.52,
+    -35.13
+   ],
+   "end": [
+    -8.52,
+    -54.2
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/RX",
+   "layer": "In3.Power",
+   "start": [
+    -8.52,
+    -54.2
+   ],
+   "end": [
+    -8.52,
+    -54.73
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/RX",
+   "layer": "In3.Power",
+   "start": [
+    -8.52,
+    -54.73
+   ],
+   "end": [
+    -5.75,
+    -57.5
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/TX",
+   "layer": "In3.Power",
+   "start": [
+    46.1,
+    -28.1
+   ],
+   "end": [
+    44.86,
+    -28.1
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/TX",
+   "layer": "In3.Power",
+   "start": [
+    44.86,
+    -28.1
+   ],
+   "end": [
+    44.3,
+    -27.54
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/TX",
+   "layer": "In3.Power",
+   "start": [
+    44.3,
+    -27.54
+   ],
+   "end": [
+    40.67,
+    -27.54
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/TX",
+   "layer": "In3.Power",
+   "start": [
+    40.67,
+    -27.54
+   ],
+   "end": [
+    35.34,
+    -32.87
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/TX",
+   "layer": "In3.Power",
+   "start": [
+    35.34,
+    -32.87
+   ],
+   "end": [
+    14.83,
+    -32.87
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/TX",
+   "layer": "In3.Power",
+   "start": [
+    14.83,
+    -32.87
+   ],
+   "end": [
+    13.98,
+    -32.02
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/TX",
+   "layer": "In3.Power",
+   "start": [
+    13.98,
+    -32.02
+   ],
+   "end": [
+    4.07,
+    -32.02
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/TX",
+   "layer": "In3.Power",
+   "start": [
+    4.07,
+    -32.02
+   ],
+   "end": [
+    1.17,
+    -34.92
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/TX",
+   "layer": "In3.Power",
+   "start": [
+    1.17,
+    -34.92
+   ],
+   "end": [
+    -7.83,
+    -34.92
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/TX",
+   "layer": "In3.Power",
+   "start": [
+    -7.83,
+    -34.92
+   ],
+   "end": [
+    -8.18,
+    -35.27
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/TX",
+   "layer": "In3.Power",
+   "start": [
+    -8.18,
+    -35.27
+   ],
+   "end": [
+    -8.18,
+    -54.2
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/TX",
+   "layer": "In3.Power",
+   "start": [
+    -8.18,
+    -54.2
+   ],
+   "end": [
+    -8.18,
+    -54.32
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/TX",
+   "layer": "In3.Power",
+   "start": [
+    -8.18,
+    -54.32
+   ],
+   "end": [
+    -5.0,
+    -57.5
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "via",
+   "net": "/04 MCU connector/RX",
+   "at": [
+    -5.75,
+    -57.5
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "group": "uart",
+   "kind": "via",
+   "net": "/04 MCU connector/TX",
+   "at": [
+    -5.0,
+    -57.5
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/RX",
+   "layer": "B.Cu",
+   "start": [
+    -5.75,
+    -57.5
+   ],
+   "end": [
+    -5.55,
+    -57.7
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/RX",
+   "layer": "B.Cu",
+   "start": [
+    -5.55,
+    -57.7
+   ],
+   "end": [
+    -5.55,
+    -76.765
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/RX",
+   "layer": "B.Cu",
+   "start": [
+    -5.55,
+    -76.765
+   ],
+   "end": [
+    -6.15,
+    -77.365
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/TX",
+   "layer": "B.Cu",
+   "start": [
+    -5.0,
+    -57.5
+   ],
+   "end": [
+    -5.2,
+    -57.7
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/TX",
+   "layer": "B.Cu",
+   "start": [
+    -5.2,
+    -57.7
+   ],
+   "end": [
+    -5.2,
+    -78.035
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/TX",
+   "layer": "B.Cu",
+   "start": [
+    -5.2,
+    -78.035
+   ],
+   "end": [
+    -5.8,
+    -78.635
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/TX",
+   "layer": "B.Cu",
+   "start": [
+    -5.8,
+    -78.635
+   ],
+   "end": [
+    -6.15,
+    -78.635
+   ],
+   "width": 0.152
+  },
+  {
+   "group": "uart",
+   "kind": "via",
+   "net": "/04 MCU connector/RX",
+   "at": [
+    -6.15,
+    -77.365
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "group": "uart",
+   "kind": "via",
+   "net": "/04 MCU connector/TX",
+   "at": [
+    -6.15,
+    -78.635
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/RX",
+   "layer": "F.Cu",
+   "start": [
+    -6.15,
+    -77.365
+   ],
+   "end": [
+    -4.65,
+    -77.365
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "uart",
+   "kind": "segment",
+   "net": "/04 MCU connector/TX",
+   "layer": "F.Cu",
+   "start": [
+    -6.15,
+    -78.635
+   ],
+   "end": [
+    -4.65,
+    -78.635
+   ],
+   "width": 0.2
   }
  ]
 }
