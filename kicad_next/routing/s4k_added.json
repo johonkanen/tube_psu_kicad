@@ -1,0 +1,89 @@
+{
+ "note": "routing stage 4k (2026-11-22), tools/next/route_s4k_hs_sicd.py - incremental edit of the board, not a rebuild",
+ "added": [
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "B.Cu",
+   "start": [
+    3.09,
+    -3.82
+   ],
+   "end": [
+    4.6,
+    -2.436
+   ],
+   "width": 2.4
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "B.Cu",
+   "start": [
+    4.6,
+    -2.436
+   ],
+   "end": [
+    11.389,
+    -2.436
+   ],
+   "width": 2.4
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "B.Cu",
+   "start": [
+    -0.102,
+    3.342
+   ],
+   "end": [
+    -0.3,
+    2.5
+   ],
+   "width": 2.0
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "B.Cu",
+   "start": [
+    -0.3,
+    2.5
+   ],
+   "end": [
+    -0.3,
+    -1.6
+   ],
+   "width": 2.0
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "B.Cu",
+   "start": [
+    -0.3,
+    -1.6
+   ],
+   "end": [
+    1.9,
+    -3.82
+   ],
+   "width": 2.0
+  },
+  {
+   "kind": "segment",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "B.Cu",
+   "start": [
+    1.9,
+    -3.82
+   ],
+   "end": [
+    3.09,
+    -3.82
+   ],
+   "width": 2.0
+  }
+ ]
+}

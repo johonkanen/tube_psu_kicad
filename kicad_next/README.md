@@ -1539,6 +1539,53 @@ Still open:
   between R26 and C92 after moving R26 pin 1 south, or drop the branch.
 * Dangling in the area: +1V65_BIAS In2 at (1.5, -54.5) (older, not touched).
 
+## Stage 4k: SICD1 / SICD2 back in their pours, Q19 / Q21 slot exception dropped (2026-11-22) – turn-off branch still open
+
+`tools/next/route_s4k_hs_sicd.py` (incremental, not re-runnable; `routing/moves_s4k.json` (empty), `deleted_s4k.json`,
+`s4k_added.json`). Unconnected 26 -> 22 (the four SICD items), clearance markers 6 -> 6, 0 shorts.
+
+**SICD1 / SICD2** (moved and turned by 180° by the user: anode and cathode changed sides, so each pad stood in the
+other net's pour). F.Cu outlines of pour 29 (DC+), pour 10 (PFC_DRAIN_1) and pour 1 (PFC_DRAIN_2) re-shaped, outlines
+1.2 mm apart as before (the fill also keeps the 1.2 mm of "HV functional, outer layers"; zone settings unchanged:
+solid pad connection, clearance 0.15 mm, priorities 55 / 36 / 27). The pad cut-outs (zone holes) of the old pad
+positions are removed.
+* **SICD1** (A (11.8, -21.4), K (11.8, -26.48)): the old anode lobe x 9.4 – 14.6, y -30.0 ... -24.3 now belongs to DC+ and
+  joins the DC+ trunk to the east over its whole height (K solid in the pour). Pour 10 ends at x 8.2 and has a new lobe
+  x 8.2 – 12.9, y -23.1 ... -20.3 round the anode (solid). PFC_DRAIN_1 copper 122.3 -> 119.7 mm².
+* **SICD2** (A (3.09, -3.82), K (3.09, 1.26)): the nets cross (L1 north-west, Q6 east, the DC+ peninsula of DB1 / C73
+  south, the cathode in the middle). DC+: strip 2.5 mm wide (x 5.4 – 7.9) from the peninsula north to a field round the
+  cathode (x 2.3 – 7.9, y 0.8 ... 2.4); the peninsula tip is cut back to y -6.1 below the anode. Pour 1 is now only the
+  L1 pad, the column west of the cathode and the anode pad (neck between the cathode pad and the AC2 pour about 1.5 mm);
+  the arm to Q6 is gone from F.Cu. PFC_DRAIN_2 on B.Cu between through-hole pads, no via: SICD2 A -> Q6 drain 2.4 mm wide
+  (8.8 mm), L1 -> SICD2 A 2.0 mm wide (9.3 mm, parallel to the F.Cu neck). PFC_DRAIN_2 copper: F.Cu 90.7 -> 35.5 mm²,
+  B.Cu 0 -> about 40 mm². Nothing of the two drain nets on an inner layer.
+* **Weak point, not solved**: the DC+ peninsula (DB1 pin 2, C73 pin 1, now also the SICD2 cathode strip) reaches the
+  DC+ trunk only through a neck about 0.9 mm wide and 1.5 mm long at (12.8 ... 14.0, -18.8), between the 1.2 mm zone of
+  the new anode pad of SICD1 (corner (12.8, -20.4)) and of the GND pour 30 of C73 (corner (13.2, -17.1)). It is there
+  since the user move (the pad pushes the fill back), not made by this stage. Way out: cut the south-west corner of pour 30
+  back to the GND pad of C73 (neck about 1.5 mm) or move SICD1 0.6 mm south.
+
+**Q19 / Q21 slot exception removed**: rule 'PRI-SEC inner layers, Q19/Q21 across the barrier slot' deleted from
+`tube_psu_5_2.kicad_dru`, `ALLOW` in `check_domains.py` is empty (0 accepted pairs before and after; `check_rules.py`
+had no test of it, 34 / 34 as before).
+
+**Turn-off branch D30 / R53 of Q19: not placed** (parts still at (40.5, -49.5) / (41.5, -46.7), 2 unconnected items).
+Tried on paper against the dump of the board, with C92 / R26 / R22 free to move; the limits on B.Cu are:
+* West of the pins (x 8.2 – 11.55 between the driver pins and the gate pad): C92 and R26 fill it; north of pin 16 every
+  primary pad must stay 4.95 mm from the centre of H4 (ring 1.75 + creepage 3.2), i.e. y <= -43.9 at x 9.0 and
+  y <= -41.8 at x 10.5; south of pin 14 the NC pins and pin 11 (15V, 1.2 mm) leave x 8.5 – 10.0, y -50.3 ... -48.6.
+* East of the pins: the +1V65_BIAS via (14.6, -44.076) and the PRI_DHB_HI via (19.0, -45.0) each keep group copper
+  1.45 mm from their centre, the DC+ pad of C70 starts at x 17.65 (y <= -46.65), R41 pin 2 (VDDA) ends at y -43.03,
+  the gate track runs on y -46.98. What is left is a band y -46.6 ... -45.6 (1.0 mm high), x 13.95 – 16.45 (2.5 mm): D30
+  (SOD-323, 3.6 mm over the pads) does not fit; R53 (0805, 3.2 mm over the pads, 1.4 mm high) does not fit either.
+* With R26 turned (gate-driver end north) R53 fits upright north of the gate pad at (12.5, -44.2) (1.25 mm from the bias
+  via, 0.25 mm from R26), but D30 then has to lie between R53 pin 1 and the H4 circle / the VDDA track on y -42.15: no
+  3.6 mm there.
+* Not checked on the board (only by this geometry): an 0603 R53 + SOD-523 D30 (1.9 mm over the pads) in the east band, the
+  DHB_HI_GATE track 0.25 mm on y -45.7 past the gate pad (0.2 mm) with R26 turned; or moving the +1V65_BIAS via
+  (14.6, -44.076) / R41 by 1.5 mm, which opens x 14 – 17.5, y -46.6 ... -43.3 for the two parts as they are.
+The gate loop is unchanged (out about 9.0 mm, return about 8.8 mm).
+
 ## Footprints and 3D models (phase 3, 2026-11-18)
 
 Regenerate: `python3 tools/next/gen_next_footprints.py`, `tools/p2k/bin/kicad_env.sh python3
