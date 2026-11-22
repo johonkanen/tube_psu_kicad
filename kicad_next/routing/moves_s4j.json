@@ -1,5 +1,5 @@
 {
- "note": "routing stage 4j (2026-11-22), tools/next/route_s4j_drv5_hs.py - incremental edit of the board, not a rebuild",
+ "note": "routing stage 4j (2026-11-22), tools/next/route_s4j_drv5_hs.py (part 1 and part 2) (part 1 and part 2) (part 1 and part 2) - incremental edit of the board, not a rebuild",
  "moves": [
   {
    "ref": "R22",
@@ -64,6 +64,38 @@
     "side": "B"
    },
    "why": "15V capacitor at the anode of D19"
+  },
+  {
+   "ref": "C95",
+   "frm": {
+    "x": 24.0,
+    "y": -47.2,
+    "rot": 0.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 19.2,
+    "y": -51.6,
+    "rot": 180,
+    "side": "B"
+   },
+   "why": "15V decoupling of DRV5: 15V pad on the via (17.625, -51.0) of the In3 15V bridge, GND via (20.4, -50.65)"
+  },
+  {
+   "ref": "C70",
+   "frm": {
+    "x": 26.7745,
+    "y": -41.8,
+    "rot": 0.0,
+    "side": "F"
+   },
+   "to": {
+    "x": 19.7,
+    "y": -48.0,
+    "rot": 0,
+    "side": "B"
+   },
+   "why": "second bridge capacitor under C67 (F.Cu), DC+ via in the pads, DHB_CURRENT on the kept via (22.6, -49.0)"
   }
  ]
 }

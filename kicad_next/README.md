@@ -1494,6 +1494,51 @@ Still open: R22, D30, R53, D19, R41, C96 to the high side (the pocket east of th
 vias (19.0, -45.0) / (19.854, -45.0)), C70, C95, clean-up east of the column (15V via (17.625, -51.0) and its B.Cu
 track still feed D19 / C96).
 
+## Stage 4j: R22, bootstrap charge path, C95, C70 at the DAB primary (2026-11-22) – turn-off branch open
+
+`tools/next/route_s4j_drv5_hs.py` (incremental, two parts: plain run, then `--part2`; neither re-runnable;
+`routing/moves_s4j.json`, `deleted_s4j.json`, `s4j_added.json`). Unconnected 28 -> 26, clearance markers 6 -> 6,
+0 shorts, dangling tracks 30 -> 30.
+
+| part | from | to (all B.Cu) | why |
+|---|---|---|---|
+| R22 | (40.365, -44.152) rot 180 | (15.5, -48.6) rot 90 | gate-source resistor east of the Q19 pins: pin 1 from the gate pad at y -46.98, pin 2 to the source pad at y -52.06 |
+| R41 | (21.6, -62.9) rot 0 | (18.0, -42.15) rot 180 | bootstrap charge resistor, VDDA end west |
+| D19 | (17.6, -61.0) rot 180 | (23.4, -42.15) rot 0 | bootstrap diode, cathode on R41 |
+| C96 | (16.4, -63.6) rot 0 | (28.0, -42.6) rot 90 | 15V capacitor at the anode of D19 (GND pad in the B.Cu pour) |
+| C95 | (24.0, -47.2) rot 0 | (19.2, -51.6) rot 180 | 15V pad on the via (17.625, -51.0) of the In3 15V bridge, new GND via (20.4, -50.65) |
+| C70 | F.Cu (26.774, -41.8) rot 0 | B.Cu (19.7, -48.0) rot 0 | under C67, pad for pad |
+
+* **R22**: gate pad -> east on y -46.98 -> R22 (x 15.5, 1.6 mm from the DC+ pad) -> south on x 15.5 -> west on y -52.06 to the
+  source pad; 0.3 mm tracks, 1.44 mm from the DC+ pad. Loop gate pad - R22 - source pad about 10.5 mm.
+* **Bootstrap charge path** (B.Cu only, no via in a group net): 15V via (25.562, -48.6) of the In3 east block -> B.Cu
+  0.4 mm north on x 25.562 / 24.7 (6.8 mm) -> D19 -> R41 -> one 0.3 mm VDDA track on y -42.15 west across the column
+  north of the In3 window and of the +1V65_BIAS via (1.5 mm from its pad), diagonal (11.65, -42.15) - (9.6, -44.2) to pin 2
+  of C92: 8.7 mm, nearest point 5.4 mm from the centre of H4 (by hand, creepage not run). D19 anode pad to C92 about 16 mm. The GND
+  pour on B.Cu is opened along the row by the 1.2 mm rule.
+* **C95**: 15V path pin 11 -> via in pad -> In3 strip -> bridge (12.0, -55.25) ... (17.625, -51.6) -> via (17.625, -51.0)
+  in the pad of C95, about 18 mm; GND via (20.4, -50.65) -> In1 / In4 -> GND via (8.25, -54.345) at pin 9, 12.7 mm.
+  About 9 mm shorter than from the old place; nothing closer is legal without a via through the switch-node pour or a
+  part under the body (stage 4h).
+* **C70** on B.Cu under C67: DC+ pad joined to the DC+ pad of C67 by one via 0.6 / 0.3 in both pads (18.3, -48.5) - the
+  only position with 0.5 mm to the +3V3 and 15V lanes on In2; DHB_CURRENT pad by 0.8 mm B.Cu to the kept via
+  (22.6, -49.0). Both capacitors: Q19 pin 2 -> F.Cu pour 5.5 mm -> pad; C70 adds the via (1.6 mm).
+* **15V**: second In3 path 1.0 mm round the east of the DAB_DIS via ((27.4, -44.3) - (28.5, -44.3) - (28.5, -46.9) -
+  (27.4, -46.9)) beside the 0.5 mm link. In1 (GND) under the In3 15V bridge is solid: only the antipads of Q19 pin 3 and
+  of the 15V via (17.625, -51.0) (amap, x 9 ... 26, y -57 ... -50).
+* Deleted: old B.Cu copper of R22, D19 / R41 / C96 (15V track x 17.625 from the via (17.625, -51.0), which stays, pour
+  `Proteus B.Cu pour 19`), GND track (22.5, -46.5 ... -44.3), GND via (23.637, -47.2) and stubs of C95.
+
+Still open:
+* **Turn-off branch D30 / R53 not moved** (still at (40.5, -49.5) / (41.5, -46.7); DHB_HI_GATE at D30 and Net-(Q19-G) at
+  R53 unconnected). DHB_HI_GATE exists on B.Cu only in the pocket pin 15 - gap under C92 - pin 1 of R26, closed by VDDA
+  (pin 16 - C92 pin 2, 0.41 mm between the pads), C92 pin 2 / R26 pin 2 (0.24 mm apart), R26 pin 2 / gate pad (0.2 mm),
+  the DC+ pad (1.2 mm) and the source return (x 10.25, C92 pin 1 / pin 14). No 1.0 mm pad of D30 fits in the pocket; a
+  via out of it lands in the In3 lanes (rows -45.455 ... -46.5) and the In2 bus (0.5 mm needed); north of pin 16 is the
+  H4 zone. Ways out: move C92 / R26 (R26 0.6 mm east is not possible, C92 further north is H4), a smaller D30 / R53
+  between R26 and C92 after moving R26 pin 1 south, or drop the branch.
+* Dangling in the area: +1V65_BIAS In2 at (1.5, -54.5) (older, not touched).
+
 ## Footprints and 3D models (phase 3, 2026-11-18)
 
 Regenerate: `python3 tools/next/gen_next_footprints.py`, `tools/p2k/bin/kicad_env.sh python3

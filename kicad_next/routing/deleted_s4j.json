@@ -1,5 +1,5 @@
 {
- "note": "routing stage 4j (2026-11-22), tools/next/route_s4j_drv5_hs.py - incremental edit of the board, not a rebuild",
+ "note": "routing stage 4j (2026-11-22), tools/next/route_s4j_drv5_hs.py (part 1 and part 2) - incremental edit of the board, not a rebuild",
  "deleted": [
   {
    "kind": "segment",
@@ -281,6 +281,45 @@
      -63.2
     ]
    ]
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    22.4375,
+    -47.2
+   ],
+   "end": [
+    23.6375,
+    -47.2
+   ],
+   "width": 0.4,
+   "why": "old place of C95 (moved to the 15V via (17.625, -51.0))"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    25.5625,
+    -47.2
+   ],
+   "end": [
+    25.55,
+    -47.25
+   ],
+   "width": 0.4,
+   "why": "old place of C95 (moved to the 15V via (17.625, -51.0))"
+  },
+  {
+   "kind": "via",
+   "net": "GND",
+   "at": [
+    23.637,
+    -47.2
+   ],
+   "why": "old place of C95 (moved to the 15V via (17.625, -51.0))"
   }
  ]
 }

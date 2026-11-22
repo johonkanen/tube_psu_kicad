@@ -1,5 +1,5 @@
 {
- "note": "routing stage 4j (2026-11-22), tools/next/route_s4j_drv5_hs.py - incremental edit of the board, not a rebuild",
+ "note": "routing stage 4j (2026-11-22), tools/next/route_s4j_drv5_hs.py (part 1 and part 2) (part 1 and part 2) - incremental edit of the board, not a rebuild",
  "added": [
   {
    "kind": "segment",
@@ -196,6 +196,142 @@
     -41.0375
    ],
    "width": 0.4
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In3.Power",
+   "start": [
+    27.4,
+    -44.3
+   ],
+   "end": [
+    28.5,
+    -44.3
+   ],
+   "width": 1.0
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In3.Power",
+   "start": [
+    28.5,
+    -44.3
+   ],
+   "end": [
+    28.5,
+    -46.9
+   ],
+   "width": 1.0
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "In3.Power",
+   "start": [
+    28.5,
+    -46.9
+   ],
+   "end": [
+    27.4,
+    -46.9
+   ],
+   "width": 1.0
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    17.625,
+    -51.0
+   ],
+   "end": [
+    17.6375,
+    -51.6
+   ],
+   "width": 0.5
+  },
+  {
+   "kind": "via",
+   "net": "GND",
+   "at": [
+    20.4,
+    -50.65
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    20.7625,
+    -51.6
+   ],
+   "end": [
+    20.4,
+    -50.65
+   ],
+   "width": 0.5
+  },
+  {
+   "kind": "via",
+   "net": "DC+",
+   "at": [
+    18.3,
+    -48.5
+   ],
+   "size": [
+    0.6,
+    0.3
+   ]
+  },
+  {
+   "kind": "segment",
+   "net": "DC+",
+   "layer": "B.Cu",
+   "start": [
+    18.225,
+    -48.0
+   ],
+   "end": [
+    18.3,
+    -48.5
+   ],
+   "width": 0.6
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "B.Cu",
+   "start": [
+    21.175,
+    -48.0
+   ],
+   "end": [
+    21.9,
+    -49.0
+   ],
+   "width": 0.8
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "B.Cu",
+   "start": [
+    21.9,
+    -49.0
+   ],
+   "end": [
+    22.6,
+    -49.0
+   ],
+   "width": 0.8
   }
  ]
 }

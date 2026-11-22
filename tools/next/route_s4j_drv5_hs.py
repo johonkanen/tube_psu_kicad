@@ -64,6 +64,27 @@ ZONE = {}
 DELZONE = [("Proteus B.Cu pour 19", "B.Cu", "local 15V pour of the old place of D19 / C96 (x 13.6 - 17.6, y -63.2 ... -58.0): isolated once its feed track is gone")]
 NEWZONE = []
 #TB1
+# Part 2 (--part2, run once after part 1 is on the board): C95 and C70 to the bridge, wider In3 15V link, leftovers.
+PART2 = "--part2" in sys.argv
+if PART2:
+    DCP, CUR = "DC+", "DHB_CURRENT"
+    WC = "old place of C95 (moved to the 15V via (17.625, -51.0))"
+    DEL = [(GND, B, 22.438, -47.2, 23.637, -47.2, WC), (V15, B, 25.562, -47.2, 25.55, -47.25, WC)]
+    DELVIA = [(GND, 23.637, -47.2, WC)]
+    DELZONE = []
+    MOVE = [
+        ("C95", 19.2, -51.6, 180, "B", "15V decoupling of DRV5: 15V pad on the via (17.625, -51.0) of the In3 15V bridge, GND via (20.4, -50.65)"),
+        ("C70", 19.7, -48.0, 0, "B", "second bridge capacitor under C67 (F.Cu), DC+ via in the pads, DHB_CURRENT on the kept via (22.6, -49.0)"),
+    ]
+    ADD = [
+        ("t", V15, "3", 1.0, [(27.4, -44.3), (28.5, -44.3), (28.5, -46.9), (27.4, -46.9)]),
+        ("t", V15, B, 0.5, [(17.625, -51.0), (17.6375, -51.6)]),
+        ("v", GND, 20.4, -50.65, 0.5, 0.3),
+        ("t", GND, B, 0.5, [(20.7625, -51.6), (20.4, -50.65)]),
+        ("v", DCP, 18.3, -48.5, 0.6, 0.3),
+        ("t", DCP, B, 0.6, [(18.225, -48.0), (18.3, -48.5)]),
+        ("t", CUR, B, 0.8, [(21.175, -48.0), (21.9, -49.0), (22.6, -49.0)]),
+    ]
 
 
 def edit(path):
@@ -212,7 +233,11 @@ def edit(path):
 def main(argv):
     if os.path.exists(LOCK):
         sys.exit("s4j: the board is open in KiCad; close it first")
-    if os.path.exists(os.path.join(RT, "s4j_added.json")) and "--dry-run" not in argv:
+    if PART2 and not os.path.exists(os.path.join(RT, "s4j_added.json")):
+        sys.exit("s4j: part 1 is not on the board")
+    if PART2 and "--dry-run" not in argv and "part 2" in open(os.path.join(RT, "s4j_added.json")).read(300):
+        sys.exit("s4j: part 2 is on the board already (not re-runnable)")
+    if os.path.exists(os.path.join(RT, "s4j_added.json")) and "--dry-run" not in argv and not PART2:
         sys.exit("s4j: routing/s4j_added.json exists - this block is on the board already (not re-runnable)")
     tmp = tempfile.mkdtemp(prefix=".s4j_", dir=ROOT)
     try:
@@ -226,7 +251,7 @@ def main(argv):
         with open(os.path.join(tmp, NAME + ".kicad_pro"), "w") as f:
             json.dump(pro, f, indent=2)
         pcb = os.path.join(tmp, NAME + ".kicad_pcb")
-        r = subprocess.run([sys.executable, "-u", os.path.abspath(__file__), "--edit", pcb])
+        r = subprocess.run([sys.executable, "-u", os.path.abspath(__file__), "--edit", pcb] + (["--part2"] if PART2 else []))
         if r.returncode:
             sys.exit("s4j: edit failed, the board is unchanged")
         r = subprocess.run([CLI, "pcb", "drc", "--format", "json", "--refill-zones", "--save-board",
@@ -246,8 +271,13 @@ def main(argv):
         shutil.copy(pcb, BOARD)
         note = "routing stage 4j (2026-11-22), tools/next/route_s4j_drv5_hs.py - incremental edit of the board, not a rebuild"
         for name, key in (("deleted_s4j.json", "deleted"), ("s4j_added.json", "added"), ("moves_s4j.json", "moves")):
+            items = j[key]
+            if PART2:
+                with open(os.path.join(RT, name)) as f:
+                    items = json.load(f)[key] + items
+                note = note.replace(" - incremental", " (part 1 and part 2) - incremental")
             with open(os.path.join(RT, name), "w") as f:
-                json.dump({"note": note, key: j[key]}, f, indent=1)
+                json.dump({"note": note, key: items}, f, indent=1)
         print("s4j: wrote the board and routing/*_s4j.json")
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
