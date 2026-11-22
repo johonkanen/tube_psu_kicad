@@ -111,6 +111,211 @@
     ]
    ],
    "holes_kept": 15
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    6.95,
+    -46.725
+   ],
+   "end": [
+    9.9,
+    -46.725
+   ],
+   "width": 0.4,
+   "why": "re-drawn for turn-off branch D30 / R53 of Q19 east of the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    9.9,
+    -46.725
+   ],
+   "end": [
+    10.4,
+    -47.0
+   ],
+   "width": 0.4,
+   "why": "re-drawn for turn-off branch D30 / R53 of Q19 east of the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    10.4,
+    -47.0
+   ],
+   "end": [
+    10.85,
+    -47.0
+   ],
+   "width": 0.4,
+   "why": "re-drawn for turn-off branch D30 / R53 of Q19 east of the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    10.85,
+    -45.0
+   ],
+   "end": [
+    11.6,
+    -45.0
+   ],
+   "width": 0.4,
+   "why": "re-drawn for turn-off branch D30 / R53 of Q19 east of the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    11.6,
+    -45.0
+   ],
+   "end": [
+    12.4,
+    -45.8
+   ],
+   "width": 0.4,
+   "why": "re-drawn for turn-off branch D30 / R53 of Q19 east of the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    12.4,
+    -45.8
+   ],
+   "end": [
+    12.75,
+    -46.98
+   ],
+   "width": 0.4,
+   "why": "re-drawn for turn-off branch D30 / R53 of Q19 east of the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    12.75,
+    -46.98
+   ],
+   "end": [
+    15.5,
+    -46.98
+   ],
+   "width": 0.3,
+   "why": "re-drawn for turn-off branch D30 / R53 of Q19 east of the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    15.5,
+    -46.98
+   ],
+   "end": [
+    15.5,
+    -47.775
+   ],
+   "width": 0.3,
+   "why": "re-drawn for turn-off branch D30 / R53 of Q19 east of the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    11.65,
+    -42.15
+   ],
+   "end": [
+    16.5375,
+    -42.15
+   ],
+   "width": 0.3,
+   "why": "re-drawn for turn-off branch D30 / R53 of Q19 east of the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(D19-K)",
+   "layer": "B.Cu",
+   "start": [
+    19.4625,
+    -42.15
+   ],
+   "end": [
+    21.35,
+    -42.15
+   ],
+   "width": 0.5,
+   "why": "re-drawn for turn-off branch D30 / R53 of Q19 east of the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "+1V65_BIAS",
+   "layer": "In3.Power",
+   "start": [
+    14.6,
+    -44.076
+   ],
+   "end": [
+    11.33,
+    -44.076
+   ],
+   "width": 0.152,
+   "why": "re-drawn for turn-off branch D30 / R53 of Q19 east of the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(D30-PadA)",
+   "layer": "B.Cu",
+   "start": [
+    41.848,
+    -49.486
+   ],
+   "end": [
+    41.534,
+    -49.172
+   ],
+   "width": 0.762,
+   "why": "re-drawn for turn-off branch D30 / R53 of Q19 east of the pins"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(D30-PadA)",
+   "layer": "B.Cu",
+   "start": [
+    41.534,
+    -49.172
+   ],
+   "end": [
+    41.534,
+    -47.708
+   ],
+   "width": 0.762,
+   "why": "re-drawn for turn-off branch D30 / R53 of Q19 east of the pins"
+  },
+  {
+   "kind": "via",
+   "net": "+1V65_BIAS",
+   "at": [
+    14.6,
+    -44.076
+   ],
+   "why": "moved 1.6 mm west along its In2 lane to (13.0, -44.076): out of the way of D30"
   }
- ]
+ ],
+ "stepB": true
 }

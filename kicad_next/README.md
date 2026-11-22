@@ -1586,7 +1586,7 @@ Tried on paper against the dump of the board, with C92 / R26 / R22 free to move;
   (14.6, -44.076) / R41 by 1.5 mm, which opens x 14 – 17.5, y -46.6 ... -43.3 for the two parts as they are.
 The gate loop is unchanged (out about 9.0 mm, return about 8.8 mm).
 
-## Stage 4l: DC+ neck at SICD1 widened (2026-11-22)
+## Stage 4l: DC+ neck at SICD1 widened, turn-off branch D30 / R53 of Q19 placed (2026-11-22)
 
 `tools/next/route_s4l_neck_toff.py` (incremental, step A plain run, step B `--stepB`; neither re-runnable;
 `routing/moves_s4l.json`, `deleted_s4l.json`, `s4l_added.json`). Step A: unconnected 22 -> 22, clearance markers
@@ -1615,6 +1615,30 @@ x 12.0 – 13.0). After:
   -22.1), 1.5 mm from the anode pad).
 Sum 1.25 + 1.0 + 2.2 = 4.45 mm of copper width, about 3.3 mm counted as 1 oz (In3 is 0.5 oz). SICD1 not moved; pour 10
 (anode lobe) not changed (its edge is 0.1 mm outside the pad; the pad is the limit).
+
+### Stage 4l step B: turn-off branch D30 / R53
+
+`route_s4l_neck_toff.py --stepB`. Unconnected 22 -> 20 (DHB_HI_GATE at D30, Net-(Q19-G) at R53), clearance markers
+6 -> 6, 0 shorts, dangling 30 -> 30. Footprints unchanged (SOD-323, 0805). All parts on B.Cu:
+
+| part | from | to | why |
+|---|---|---|---|
+| +1V65_BIAS via 0.5 / 0.3 | (14.6, -44.076) | (13.0, -44.076) | west along its own In2 lane (between SYNCH_2 and $HT_CS, 0.164 mm as before); In2 lane 1.6 mm longer, In3 lane 1.6 mm shorter. Its F.Cu antipad now lies in the antipad of the gate pad: the DC+ pour north-east of the pins is 1.25 mm wider |
+| R41 | (18.0, -42.15) rot 180 | (13.0, -42.05) rot 180 | the via between its pads (1.21 mm to each pad), VDDA pad on the old diagonal to C92; Net-(D19-K) 0.5 mm track on y -41.6 to D19 (6.5 mm, 1.39 mm from the 15V track on y -39.58). R41 cannot go north (15V track) or east (D19) |
+| R26 | (10.85, -46.0) rot -90 | same place, rot 90 | DHB_HI_GATE end north, gate end 0.2 mm beside the gate pad |
+| D30 | (40.548, -49.486) rot 0 | (15.0, -44.98) rot -90 | cathode south (15.0, -46.28), anode north |
+| R53 | (41.534, -46.708) rot -90 | (16.4, -43.95) rot 90 | pin 1 north beside the anode, pin 2 (gate) south; 1.23 mm from the DC+ pad of C70, 1.65 mm from the PRI_DHB_HI via |
+
+* DHB_HI_GATE: pin 15 -> y -46.725 -> between C92 pin 2 and the gate pad of R26 -> R26 pin 1 (0.4 mm); from there 0.25 mm
+  on y -45.69 north of the gate pad (0.21 mm) and south of the bias via (1.24 mm) to the cathode of D30.
+* Gate track to R22 moved from y -46.98 to y -47.2 (1.22 mm from the DC+ pad of Q19); R53 pin 2 joins it on x 16.2
+  (1.3 mm from the DC+ pad of C70).
+* Lengths (centre lines): turn-on pin 15 -> R26 -> gate pad about 8.7 mm (was 9.0), return unchanged about 8.8 mm.
+  Turn-off branch gate pad -> gate track -> R53 -> D30 -> R26 pin 1 about 16.7 mm (21.5 mm to pin 15).
+* DC+ pour at Q19 pin 2 unchanged (about 1.0 mm high at the east edge of the pad, limited by the gate pad; 4.5 mm high
+  from x 15.0).
+* New courtyard overlap R41 / D30 (0.375 mm between the pads); the old leftover track of Net-(D30-PadA) at
+  (41.5, -49.2 ... -47.7) is deleted.
 
 ## Footprints and 3D models (phase 3, 2026-11-18)
 

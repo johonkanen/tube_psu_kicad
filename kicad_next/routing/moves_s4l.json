@@ -1,4 +1,70 @@
 {
  "note": "routing stage 4l (2026-11-22), tools/next/route_s4l_neck_toff.py - incremental edit of the board, not a rebuild",
- "moves": []
+ "moves": [
+  {
+   "ref": "R26",
+   "frm": {
+    "x": 10.85,
+    "y": -46.0,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 10.85,
+    "y": -46.0,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "why": "turned: DHB_HI_GATE end north, gate end 0.2 mm beside the gate pad"
+  },
+  {
+   "ref": "R41",
+   "frm": {
+    "x": 18.0,
+    "y": -42.15,
+    "rot": 180.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 13.0,
+    "y": -42.05,
+    "rot": 180.0,
+    "side": "B"
+   },
+   "why": "5 mm west, the +1V65_BIAS via between its pads: frees x 15.3 - 17.5 for D30 / R53"
+  },
+  {
+   "ref": "D30",
+   "frm": {
+    "x": 40.548,
+    "y": -49.486,
+    "rot": 0.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 15.0,
+    "y": -44.98,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "why": "turn-off branch D30 / R53 of Q19 east of the pins: cathode south at the DHB_HI_GATE track, anode north"
+  },
+  {
+   "ref": "R53",
+   "frm": {
+    "x": 41.534,
+    "y": -46.708,
+    "rot": -90.0,
+    "side": "B"
+   },
+   "to": {
+    "x": 16.4,
+    "y": -43.95,
+    "rot": 90.0,
+    "side": "B"
+   },
+   "why": "turn-off branch D30 / R53 of Q19 east of the pins: pin 1 north at the anode of D30, pin 2 to the gate track"
+  }
+ ],
+ "stepB": true
 }

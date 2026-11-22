@@ -37,6 +37,7 @@ mm = lambda v: round(v / 1e6, 4)  # noqa: E731
 DELETED, ADDED, MOVES, WARN = [], [], [], []
 DCP = "DC+"
 STEPB = "--stepB" in sys.argv
+D30ROT = -90.0
 DELNETS = {}
 DEL = []
 DELVIA = []
@@ -61,7 +62,35 @@ if not STEPB:
     RESHAPE.append(("Proteus F.Cu pour 30", None, None,
                     [(17.1, -16.7), (17.1, -11.0), (13.2, -11.0), (13.2, -16.3), (13.6, -16.7)], WN))
 else:
-    pass
+    HG, QG, VA, DK, DA, BIAS = "DHB_HI_GATE", "Net-(Q19-G)", "Net-(DRV5-VDDA)", "Net-(D19-K)", "Net-(D30-PadA)", "+1V65_BIAS"
+    W = "turn-off branch D30 / R53 of Q19 east of the pins"
+    MOVE += [
+        ("R26", 10.85, -46.0, 90.0, "B", "turned: DHB_HI_GATE end north, gate end 0.2 mm beside the gate pad"),
+        ("R41", 13.0, -42.05, 180.0, "B", "5 mm west, the +1V65_BIAS via between its pads: frees x 15.3 - 17.5 for D30 / R53"),
+        ("D30", 15.0, -44.98, D30ROT, "B", W + ": cathode south at the DHB_HI_GATE track, anode north"),
+        ("R53", 16.4, -43.95, 90.0, "B", W + ": pin 1 north at the anode of D30, pin 2 to the gate track"),
+    ]
+    for net, lay, seg in (
+            (HG, B, (6.95, -46.725, 9.9, -46.725)), (HG, B, (9.9, -46.725, 10.4, -47.0)), (HG, B, (10.4, -47.0, 10.85, -47.0)),
+            (QG, B, (10.85, -45.0, 11.6, -45.0)), (QG, B, (11.6, -45.0, 12.4, -45.8)), (QG, B, (12.4, -45.8, 12.75, -46.98)),
+            (QG, B, (12.75, -46.98, 15.5, -46.98)), (QG, B, (15.5, -46.98, 15.5, -47.775)),
+            (VA, B, (11.65, -42.15, 16.538, -42.15)), (DK, B, (19.462, -42.15, 21.35, -42.15)),
+            (BIAS, I3, (14.6, -44.076, 11.33, -44.076)),
+            (DA, B, (41.848, -49.486, 41.534, -49.172)), (DA, B, (41.534, -49.172, 41.534, -47.708))):
+        DEL.append((net, lay) + seg + ("re-drawn for " + W,))
+    DELVIA.append((BIAS, 14.6, -44.076, "moved 1.6 mm west along its In2 lane to (13.0, -44.076): out of the way of D30"))
+    ADD += [
+        ("v", BIAS, 13.0, -44.076, 0.5, 0.3),
+        ("t", BIAS, I2, 0.152, [(14.6, -44.076), (13.0, -44.076)]),
+        ("t", BIAS, I3, 0.152, [(13.0, -44.076), (11.33, -44.076)]),
+        ("t", HG, B, 0.4, [(6.95, -46.725), (8.9, -46.725), (9.56, -46.05), (10.5, -45.81), (10.85, -45.3)]),
+        ("t", HG, B, 0.25, [(10.85, -45.0), (11.4, -45.0), (12.09, -45.69), (14.41, -45.69), (15.0, -46.28)]),
+        ("t", QG, B, 0.4, [(10.85, -47.0), (12.75, -46.98)]),
+        ("t", QG, B, 0.3, [(12.75, -46.98), (13.2, -47.2), (15.5, -47.2), (15.5, -47.775)]),
+        ("t", QG, B, 0.3, [(16.4, -44.95), (16.2, -45.3), (16.2, -47.2), (15.5, -47.2)]),
+        ("t", DA, B, 0.3, [(15.0, -43.68), (15.65, -43.03), (16.4, -42.95)]),
+        ("t", DK, B, 0.5, [(14.4625, -42.05), (14.9, -41.6), (20.7, -41.6), (21.35, -42.15)]),
+    ]
 
 def edit(path):
     b = pcbnew.LoadBoard(path)
@@ -268,7 +297,7 @@ def main(argv):
         with open(os.path.join(tmp, NAME + ".kicad_pro"), "w") as f:
             json.dump(pro, f, indent=2)
         pcb = os.path.join(tmp, NAME + ".kicad_pcb")
-        r = subprocess.run([sys.executable, "-u", os.path.abspath(__file__), "--edit", pcb])
+        r = subprocess.run([sys.executable, "-u", os.path.abspath(__file__), "--edit", pcb] + (["--stepB"] if STEPB else []))
         if r.returncode:
             sys.exit("s4l: edit failed, the board is unchanged")
         r = subprocess.run([CLI, "pcb", "drc", "--format", "json", "--refill-zones", "--save-board",
