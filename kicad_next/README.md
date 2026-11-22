@@ -78,6 +78,52 @@ since routing stage 4k; it held the Q19 / Q21 slot exception and the TR1 pin 2 /
 becomes the real board) replaces the plain DRC step (0 violations required, full creepage DRC) by `check_board.py`
 and lets `make_board.py --check` accept internal Edge.Cuts slots inside the unchanged 5.1 outline.
 
+## First draft (2026-11-22)
+
+State after the clean-up pass `tools/next/route_s6_cleanup.py --group clr,dangling` (stage 6; incremental, not
+re-runnable; `routing/deleted_s6.json`, `s6_added.json`, `moves_s6.json` (empty)): every connection of the netlist is
+made, 0 shorts, 0 unconnected, `tools/next/check_next.sh` passes. This is the first complete draft, not a board
+checked for ordering. No part moved in this pass. PNGs of all six copper layers of this state: `routing/s3a_F_Cu.png`,
+`s3a_B_Cu.png`, `In1_GND.png` ... `In4_GND.png`, overviews `inner_domains.png`, `s3a_power_nets.png`
+(`render_s3a.py`, `render_inner_layers.py`).
+
+### DRC (check_board.py, without the creepage pass and without silkscreen checks)
+
+| type | before | now | what is left and why |
+|---|---|---|---|
+| shorts / unconnected / parity | 0 | 0 | |
+| clearance | 5 (7 with `--all-track-errors`) | 0 | Net class gaps 0.2 mm that were 0.16 ... 0.175 mm: EPWM5A_ISO In2 diagonal 0.09 mm further from the EPWM6A_ISO via (-48.89, -54.21); 5V on B.Cu 0.045 mm west (x -59.745, y -33.0 ... -26.5) past the pads of D9 and D28 pad A (two of the three pads were hidden behind the first marker); GND via (27.1, 5.1) -> (27.15, 5.1); Net-(C11-Pad1) via (28.4, 7.7) -> (28.45, 7.7); GND via (4.45, -56.9) -> (4.45, -56.95). The Net-(C11-Pad1) via now has 0.204 / 0.213 / 0.204 mm to the +1V65_BIAS track (F.Cu), R65 pad 2 and the Net-(C127-Pad1) track (B.Cu). |
+| track_dangling | 26 | 0 | Pieces under / inside a wider track of the same net, zero-length segments, overshoots trimmed to the via / junction, and stubs to nothing (5.1 leftovers of moved parts) deleted back to the next junction, with two vias that only fed such a stub (15V (15.24, -35.02), 5V (-23.9, -53.036) with its In2 lane). The longest: a +3V3 In2 lane of 25 mm from (34.2, -28.6) to a free end at (16.8, -48.4), and a +3V3 In2 stub at the via (5.8, -60.1). The DC+ track of C47 ended in a round hole of 'Proteus F.Cu pour 29' at (45.62, -41.95); it now ends inside the fill at y -42.7. |
+| courtyards_overlap | 132 | 132 | Classified by pad bounding boxes and F.Fab / B.Fab body boxes: 106 pairs stand exactly as in 5.1 (same relative place, side and turn; 17 of them with overlapping body boxes - film / electrolytic capacitors beside C86, C117, C37, C31 / C32 and the paralleled 1210 capacitors C99 / C100 / C101, C90 / C91 on the 420V rail whose same-net pads overlap); 26 pairs are new or changed and courtyard-only (pads of two nets >= 0.238 mm apart, no body box overlap > 0.05 mm; same-net pads touch at C124 / R70, R90 / D34, R79 / R49, R90 / R70). No pair with a new pad or body collision, so no part was moved. |
+| pth_inside_courtyard | 2 | 2 | Pin 1 of IN1 and pin 3 of CM1 inside the courtyard of the film capacitor C86 - as in 5.1 (the three parts are where they were). |
+| starved_thermal | 2 | 2 | C102 pin 1 (ISO_GND, (77.0, 13.85)) on In1 and In4: the pin stands in a 1.5 mm neck of the ISO_GND plane, one spoke north and one south. The barrel joins both; bias capacitor, no current. Not changed (a solid connection of this pad was not tried to the end). |
+| lib_footprint_mismatch | 2 | 2 | Q19 and Q21 (TO-220-3_Vertical): the board copies differ from the library footprint. Not looked into. |
+
+### Not checked
+
+* The creepage DRC pass of KiCad over the whole board (needs > 3 GB); the isolation distances are checked by
+  `check_domains.py` only.
+* Signal integrity of the UART pair: 82 mm on In3 between the pads of L2 and beside / under the power stages.
+* The via-in-pad process. 71 vias lie in or touch an SMD pad of their own net (47 with the centre inside the pad):
+  Q1 pad 3 (12), Q2 pad 3 (16), C73 pad 2 (10: 5 inside, 5 on the edge), C57 pad 2 (2), C89 pad 1 (2), R93 pad 2 (3),
+  one via shared by C67 pad 1 / C70 pad 1 (18.3, -48.5) and one by D10 pad A / R142 pad 2 (36.8, 3.2), and one each
+  at AD1 pad 3, AD2 pad 3, C125 pad 2, C139 pad 1, C22 pad 1, C27 pad 1, C68 pad 2, C79 pad 2, C80 pad 2, C95 pads 1
+  and 2, DRV2 pad 1, DRV5 pad 11, Q9 pad 1, Q10 pad 1, R103 pad 1, R128 pad 1, R142 pad 1, R21 pad 1, R51 pad 2,
+  R54 pad 2, R83 pad 1, R89 pad 1, U1 pad 4. Open: plugged vias at JLC or move them.
+* Tight spots that pass: round DRV5 (x -10 ... 20, y -60 ... -40) the In2 control bus (nine lanes, 0.152 mm gaps
+  for the 0.15 mm inner rule) and the four In3 lanes in the 15V window (0.158 mm) are at the rule by design; the
+  +1V65_BIAS via (13.0, -44.076) is 0.164 mm from the $HT_CS and SYNCH_2 lanes. None was nudged (each lane has a
+  neighbour on both sides). Pad gaps in that window were not listed.
+* Assembly: the 26 courtyard-only pairs were not checked against real part bodies or a pick-and-place rule.
+
+### Open inputs (user)
+
+* Heatsink footprint and height against C73 (12.5, -14.0) and C87 (5.7, -59.4) on F.Cu.
+* Measured body positions of L1 / L2.
+* Bobbin measurements of the transformers.
+* J2 pin 18.
+* TR2 dot / turns.
+
 ## Inner layers (routing stage 2, 2026-11-20)
 
 Made by `tools/p2k/bin/kipy tools/next/route_s2_planes.py` on the real board (re-runnable: everything it makes is
