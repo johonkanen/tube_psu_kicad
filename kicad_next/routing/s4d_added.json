@@ -1,0 +1,181 @@
+{
+ "note": "routing stage 4d (2026-11-22), tools/next/route_s4d_shunt_u1.py - incremental edit of the board, not a rebuild",
+ "added": [
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    27.55,
+    -49.6
+   ],
+   "end": [
+    22.6,
+    -49.6
+   ],
+   "width": 0.254
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    12.75,
+    -63.34
+   ],
+   "end": [
+    14.3,
+    -63.34
+   ],
+   "width": 1.2
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.3,
+    -63.34
+   ],
+   "end": [
+    15.5,
+    -62.14
+   ],
+   "width": 1.2
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    15.5,
+    -62.14
+   ],
+   "end": [
+    17.4,
+    -62.14
+   ],
+   "width": 1.2
+  },
+  {
+   "kind": "via",
+   "net": "DHB_CURRENT",
+   "at": [
+    16.5,
+    -63.75
+   ],
+   "size": [
+    0.5,
+    0.3
+   ]
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    16.5,
+    -63.75
+   ],
+   "end": [
+    15.45,
+    -64.8
+   ],
+   "width": 0.2
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    15.45,
+    -64.8
+   ],
+   "end": [
+    3.8,
+    -64.8
+   ],
+   "width": 0.2
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    3.8,
+    -64.8
+   ],
+   "end": [
+    2.3,
+    -63.3
+   ],
+   "width": 0.2
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "F.Cu",
+   "start": [
+    15.1,
+    -64.525
+   ],
+   "end": [
+    17.3,
+    -64.525
+   ],
+   "width": 0.35
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "F.Cu",
+   "start": [
+    17.3,
+    -64.525
+   ],
+   "end": [
+    17.96,
+    -64.55
+   ],
+   "width": 0.35
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "F.Cu",
+   "start": [
+    17.25,
+    -64.93
+   ],
+   "end": [
+    18.55,
+    -64.93
+   ],
+   "width": 0.5
+  },
+  {
+   "kind": "via",
+   "net": "GND",
+   "at": [
+    17.25,
+    -64.93
+   ],
+   "size": [
+    0.6,
+    0.3
+   ]
+  },
+  {
+   "kind": "via",
+   "net": "GND",
+   "at": [
+    18.55,
+    -64.93
+   ],
+   "size": [
+    0.6,
+    0.3
+   ]
+  }
+ ]
+}

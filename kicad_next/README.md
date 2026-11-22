@@ -1267,6 +1267,51 @@ Block B, power part only (`routing/deleted_s4b.json` 11, `routing/s4b_added.json
    (In1 GND between them); not moved.
 5. SICD1 / SICD2 pour outlines (4 pads open).
 
+## Stage 4d: shunt R83 at Q7 pin 3 (2026-11-22)
+
+```
+tools/p2k/bin/kipy tools/next/route_s4d_shunt_u1.py [--dry-run OUT.kicad_pcb]   # not re-runnable on its own result
+```
+
+Block D1 of the DRV5 re-lay (user decision 2026-11-22: DRV5 goes to the bottom side west of the Q7 / Q19 pin column,
+B.Cu x 2 ... 11.3 / y -66 ... -44, block D2). **Only part 1 of D1 is on the board: R83. The U1 block is not moved**
+(`routing/moves_s4d.json` 1, `routing/deleted_s4d.json` 26, `routing/s4d_added.json` 13).
+
+- **R83** B.Cu (29.99, -42.0) -> **F.Cu (15.9, -64.04), 90 deg**, pads lying east-west (2.0 x 0.35 mm): pin 1
+  (DHB_CURRENT, y -63.55) inside `S3A_DHB_CURRENT_F`, pin 2 (GND, y -64.525) south of the zone, 0.53 mm inside the
+  8 mm line of the UART island (y -65.255). Bottom side was not possible without moving C96 (its 15V pad lies at
+  x 14.2 ... 15.5 beside the pin). Power path: Q7 pin 3 -> 1.15 mm of the F.Cu zone (0.9 mm wide beside R83: the zone
+  keeps 0.5 mm from the GND pad; about 0.6 mOhm, outside the measurement) -> R83 -> GND: F.Cu 0.35 mm along the pad
+  to **three vias** at its east end, (17.96, -64.55) 0.5 / 0.3 (kept via of C96) and new (17.25 / 18.55, -64.93)
+  0.6 / 0.3, all solid in In1 / In4 (the B.Cu GND pour does not reach them). The bridge input current is off In2.
+- **C67 return** (HF loop): unchanged zone `S4B_DHB_CURRENT_F` -> vias (22.6, -50 / -49) -> In2 1.2 mm x 17.4 -> y -62.14 ->
+  now turns to Q7 pin 3 at x 15.5 / 14.3 (was 17.4 / 16.2) to stay off the Kelvin via. It ends in the through-hole pad
+  of Q7 pin 3, 1.15 mm before R83 pin 1.
+- **Kelvin tap**: via 0.5 / 0.3 at (16.5, -63.75), half in the inner edge of R83 pin 1 (between the two pads), ->
+  In2 0.2 mm lane y -64.8 south of Q7 pin 3 (0.4 mm from its pad, 2.95 mm from the switch-node pad of pin 2) -> the kept
+  via (2.3, -63.3) of R104, 15.3 mm. The old lane (In2 y -56.5 / x 7.2, tapped on the In2 return) is deleted. There is no
+  separate ground-sense net in the schematic: R101 pin 2 is plain GND at the plane.
+- **Old place**: the 1.0 mm F.Cu tie of stage 4b, the pad spokes and 'Proteus B.Cu pour 23' are deleted. C70 pin 2 /
+  'Proteus F.Cu pour 23' / the via (31.795, -41.95) hang on the rest of the old In2 sense line (0.254 mm, ends on the In2
+  return at (22.6, -49.6)) - interim until C70 moves to the bridge.
+
+| | 4b | 4d |
+|---|---|---|
+| shorts | 0 | 0 |
+| unconnected | 30 | 30 (same nets) |
+| clearance markers | 6 | 6 (the same six) |
+| courtyard overlaps / dangling | 132 / 32 | 132 / 32 |
+
+**Left of D1 (not done):**
+1. **U1 block** (U1, C11, C63, C122, C123, C124, C125, C87 on F.Cu, R29, R89, R101 ... R106) still stands in
+   B.Cu x -0.5 ... 10 / y -65.3 ... -52.6, C94 / C118 (DRV5) too. The place proposed for it, south of Q7 (y < -66,
+   x 0 ... 20), is inside 'UART island pour keep-out (8 mm)' (x -4.4 ... 20.25, y < -65.255): no primary copper there.
+   Free B.Cu beside the block is only the strip x -6.2 ... -0.6 / y -65 ... -57 (15V track x -6.75, +3V3 track
+   x -4.68); the block is 10.5 x 13.8 mm as laid, and the In2 bus (y -52.3 ... -56.8 at x < -1.4) lies north of the
+   strip. It needs a new compact layout (both sides) or another place - not decided.
+2. When U1 moves, the Kelvin lane y -64.8 goes with it (it is the only new copper in the D2 window, on In2).
+3. C96 / D19 / R41 untouched (interim); the tap via stands between the pads of C96 on B.Cu.
+
 ## Footprints and 3D models (phase 3, 2026-11-18)
 
 Regenerate: `python3 tools/next/gen_next_footprints.py`, `tools/p2k/bin/kicad_env.sh python3
