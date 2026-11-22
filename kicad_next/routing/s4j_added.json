@@ -1,0 +1,201 @@
+{
+ "note": "routing stage 4j (2026-11-22), tools/next/route_s4j_drv5_hs.py - incremental edit of the board, not a rebuild",
+ "added": [
+  {
+   "kind": "segment",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    12.75,
+    -46.98
+   ],
+   "end": [
+    15.5,
+    -46.98
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    15.5,
+    -46.98
+   ],
+   "end": [
+    15.5,
+    -47.775
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    15.5,
+    -49.425
+   ],
+   "end": [
+    15.5,
+    -52.06
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    15.5,
+    -52.06
+   ],
+   "end": [
+    12.75,
+    -52.06
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    9.15,
+    -44.95
+   ],
+   "end": [
+    9.6,
+    -44.5
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    9.6,
+    -44.5
+   ],
+   "end": [
+    9.6,
+    -44.2
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    9.6,
+    -44.2
+   ],
+   "end": [
+    11.65,
+    -42.15
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    11.65,
+    -42.15
+   ],
+   "end": [
+    16.5375,
+    -42.15
+   ],
+   "width": 0.3
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(D19-K)",
+   "layer": "B.Cu",
+   "start": [
+    19.4625,
+    -42.15
+   ],
+   "end": [
+    21.35,
+    -42.15
+   ],
+   "width": 0.5
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    24.7,
+    -42.15
+   ],
+   "end": [
+    24.7,
+    -45.6
+   ],
+   "width": 0.4
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    24.7,
+    -45.6
+   ],
+   "end": [
+    25.562,
+    -46.462
+   ],
+   "width": 0.4
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    25.562,
+    -46.462
+   ],
+   "end": [
+    25.562,
+    -47.2
+   ],
+   "width": 0.4
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    25.45,
+    -42.15
+   ],
+   "end": [
+    26.56,
+    -41.0375
+   ],
+   "width": 0.4
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    26.56,
+    -41.0375
+   ],
+   "end": [
+    28.0,
+    -41.0375
+   ],
+   "width": 0.4
+  }
+ ]
+}

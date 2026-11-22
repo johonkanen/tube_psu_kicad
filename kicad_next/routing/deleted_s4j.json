@@ -1,0 +1,286 @@
+{
+ "note": "routing stage 4j (2026-11-22), tools/next/route_s4j_drv5_hs.py - incremental edit of the board, not a rebuild",
+ "deleted": [
+  {
+   "kind": "segment",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    41.2292,
+    -44.152
+   ],
+   "end": [
+    41.534,
+    -44.4568
+   ],
+   "width": 0.762,
+   "why": "old place of the part (moved to the high side of DRV5 / Q19)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    41.534,
+    -44.4568
+   ],
+   "end": [
+    41.534,
+    -45.708
+   ],
+   "width": 0.762,
+   "why": "old place of the part (moved to the high side of DRV5 / Q19)"
+  },
+  {
+   "kind": "segment",
+   "net": "Net-(D19-K)",
+   "layer": "B.Cu",
+   "start": [
+    19.65,
+    -61.0
+   ],
+   "end": [
+    20.1375,
+    -62.9
+   ],
+   "width": 0.5,
+   "why": "old place of the part (moved to the high side of DRV5 / Q19)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    15.3,
+    -63.3
+   ],
+   "end": [
+    15.3,
+    -61.4
+   ],
+   "width": 0.5,
+   "why": "old place of the part (moved to the high side of DRV5 / Q19)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    16.6,
+    -59.625
+   ],
+   "end": [
+    16.2,
+    -60.4
+   ],
+   "width": 0.4,
+   "why": "old place of the part (moved to the high side of DRV5 / Q19)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    17.625,
+    -51.0
+   ],
+   "end": [
+    17.625,
+    -58.6
+   ],
+   "width": 0.4,
+   "why": "old place of the part (moved to the high side of DRV5 / Q19)"
+  },
+  {
+   "kind": "segment",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    17.625,
+    -58.6
+   ],
+   "end": [
+    16.6,
+    -59.625
+   ],
+   "width": 0.4,
+   "why": "old place of the part (moved to the high side of DRV5 / Q19)"
+  },
+  {
+   "kind": "segment",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    22.5,
+    -46.5
+   ],
+   "end": [
+    22.5,
+    -44.3
+   ],
+   "width": 0.508,
+   "why": "GND of C95 pin 1 into the B.Cu pour: 1.05 mm from the cathode pad of D19 (C95 keeps its GND via (23.637, -47.2))"
+  },
+  {
+   "kind": "zone",
+   "zone": "Proteus B.Cu pour 19",
+   "net": "15V",
+   "layer": "B.Cu",
+   "why": "local 15V pour of the old place of D19 / C96 (x 13.6 - 17.6, y -63.2 ... -58.0): isolated once its feed track is gone",
+   "outline": [
+    [
+     16.8015,
+     -63.1925
+    ],
+    [
+     16.8223,
+     -63.1777
+    ],
+    [
+     17.5777,
+     -62.4223
+    ],
+    [
+     17.5957,
+     -62.3936
+    ],
+    [
+     17.6,
+     -62.3684
+    ],
+    [
+     17.6,
+     -58.8316
+    ],
+    [
+     17.5925,
+     -58.7985
+    ],
+    [
+     17.5777,
+     -58.7777
+    ],
+    [
+     17.2725,
+     -58.4724
+    ],
+    [
+     17.2437,
+     -58.4544
+    ],
+    [
+     17.21,
+     -58.4506
+    ],
+    [
+     17.178,
+     -58.4618
+    ],
+    [
+     17.1647,
+     -58.4724
+    ],
+    [
+     17.0621,
+     -58.575
+    ],
+    [
+     16.9379,
+     -58.575
+    ],
+    [
+     16.85,
+     -58.4871
+    ],
+    [
+     16.85,
+     -58.3629
+    ],
+    [
+     16.9526,
+     -58.2603
+    ],
+    [
+     16.9706,
+     -58.2316
+    ],
+    [
+     16.9744,
+     -58.1979
+    ],
+    [
+     16.9632,
+     -58.1659
+    ],
+    [
+     16.9526,
+     -58.1525
+    ],
+    [
+     16.8223,
+     -58.0223
+    ],
+    [
+     16.7936,
+     -58.0043
+    ],
+    [
+     16.7684,
+     -58.0
+    ],
+    [
+     14.4316,
+     -58.0
+    ],
+    [
+     14.3985,
+     -58.0075
+    ],
+    [
+     14.3777,
+     -58.0223
+    ],
+    [
+     13.6223,
+     -58.7777
+    ],
+    [
+     13.6043,
+     -58.8064
+    ],
+    [
+     13.6,
+     -58.8316
+    ],
+    [
+     13.6,
+     -62.3684
+    ],
+    [
+     13.6075,
+     -62.4015
+    ],
+    [
+     13.6223,
+     -62.4223
+    ],
+    [
+     14.3777,
+     -63.1777
+    ],
+    [
+     14.4064,
+     -63.1957
+    ],
+    [
+     14.4316,
+     -63.2
+    ],
+    [
+     16.7684,
+     -63.2
+    ]
+   ]
+  }
+ ]
+}
