@@ -204,6 +204,21 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 9: no DC+ on inner layers (2026-11-23)
+
+User decision 2026-11-23: DC+ and its GND return are kept on F.Cu / B.Cu, not on inner layers (the In1 / In4 GND
+planes of the stackup are unchanged). `tools/next/route_s9_no_inner_dc.py` (one-shot, `routing/deleted_s9.json`)
+deletes the only two DC+ items on In3 and the two vias that fed nothing else:
+
+* the 1.8 mm In3 track (12.75, -49.52) - (18.7, -49.52) into Q19 pin 2 of stage 8 (2): the DC+ entry of Q19 is the
+  F.Cu one again, 0.9 + 0.9 mm (5.1: about 2.3 mm);
+* zone `S4L_DC+_In3_neck` of stage 4l and the vias (10.2 / 11.3, -17.5): the neck at SICD1 is F.Cu about 1.25 mm +
+  B.Cu 1.0 mm track = 2.25 mm (was 4.45 mm with In3; 0.75 - 0.8 mm before stage 4l).
+
+DC+ copper now: F.Cu, B.Cu and vias only. GND besides the planes: nine 0.15 mm signal-ground pieces on In2
+(x -62 ... -42, y -42 ... -33), no power current. Unconnected 0, 0 shorts, clearance 0, dangling 0, DRC 137 items
+as before (courtyards_overlap 133, pth_inside_courtyard 2, starved_thermal 2); `check_next.sh` passes.
+
 ## Stage 8: C95 as 0603 at DRV5 pins 11 / 9, DC+ into Q19 pin 2 on In3 (2026-11-22)
 
 `tools/next/route_s8_c95_dc.py --group c95,old` and `--group dc` (incremental, not re-runnable; `routing/moves_s8.json`,
