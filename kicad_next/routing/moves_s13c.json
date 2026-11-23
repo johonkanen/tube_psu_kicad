@@ -1,0 +1,166 @@
+{
+ "footprints": [
+  {
+   "ref": "H1",
+   "at": [
+    -67.029,
+    -87.522
+   ],
+   "old": "tube_psu:MountingHole_3.0mm_NPTH_Ring3.5mm",
+   "new": "tube_psu_next:MountingHole_3.0mm_NPTH"
+  },
+  {
+   "ref": "H2",
+   "at": [
+    6.922,
+    -87.522
+   ],
+   "old": "tube_psu:MountingHole_3.0mm_NPTH_Ring3.5mm",
+   "new": "tube_psu_next:MountingHole_3.0mm_NPTH"
+  },
+  {
+   "ref": "H3",
+   "at": [
+    86.971,
+    -87.522
+   ],
+   "old": "tube_psu:MountingHole_3.0mm_NPTH_Ring3.5mm",
+   "new": "tube_psu_next:MountingHole_3.0mm_NPTH"
+  },
+  {
+   "ref": "H4",
+   "at": [
+    5.842,
+    -40.132
+   ],
+   "old": "tube_psu:MountingHole_3.0mm_NPTH_Ring3.5mm",
+   "new": "tube_psu_next:MountingHole_3.0mm_NPTH"
+  },
+  {
+   "ref": "H6",
+   "at": [
+    -67.029,
+    14.477
+   ],
+   "old": "tube_psu:MountingHole_3.0mm_NPTH_Ring3.5mm",
+   "new": "tube_psu_next:MountingHole_3.0mm_NPTH"
+  },
+  {
+   "ref": "H7",
+   "at": [
+    3.371,
+    14.477
+   ],
+   "old": "tube_psu:MountingHole_3.0mm_NPTH_Ring3.5mm",
+   "new": "tube_psu_next:MountingHole_3.0mm_NPTH"
+  },
+  {
+   "ref": "H8",
+   "at": [
+    84.232,
+    14.477
+   ],
+   "old": "tube_psu:MountingHole_3.0mm_NPTH_Ring3.5mm",
+   "new": "tube_psu_next:MountingHole_3.0mm_NPTH"
+  }
+ ],
+ "keepouts": {
+  "H3": {
+   "old_name": "mounting hole H3 pour keep-out (secondary 4.2 mm creepage)",
+   "new_name": "mounting hole H3 pour keep-out (6 mm head + secondary 4.2 mm)",
+   "r_old": 6.0,
+   "r_new": 7.3,
+   "points": 32
+  },
+  "H6": {
+   "old_name": "mounting hole H6 pour keep-out (primary 3.2 mm creepage)",
+   "new_name": "mounting hole H6 pour keep-out (6 mm head + primary 3.2 mm)",
+   "r_old": 5.0,
+   "r_new": 6.3,
+   "points": 32
+  },
+  "H7": {
+   "old_name": "mounting hole H7 pour keep-out (primary 3.2 mm creepage)",
+   "new_name": "mounting hole H7 pour keep-out (6 mm head + primary 3.2 mm)",
+   "r_old": 5.0,
+   "r_new": 6.3,
+   "points": 32
+  },
+  "H8": {
+   "old_name": "mounting hole H8 pour keep-out (secondary 4.2 mm creepage)",
+   "new_name": "mounting hole H8 pour keep-out (6 mm head + 3.3 mm; C102 pad 1 at 6.23 mm, secondary 4.2 not reached)",
+   "r_old": 6.0,
+   "r_new": 6.3,
+   "points": 32
+  }
+ },
+ "deleted": [
+  {
+   "net": "ISO_UART_GND",
+   "layer": "B.Cu",
+   "start": [
+    11.4,
+    -89.0
+   ],
+   "end": [
+    10.05,
+    -87.65
+   ],
+   "width": 0.3
+  },
+  {
+   "net": "ISO_UART_GND",
+   "layer": "B.Cu",
+   "start": [
+    10.05,
+    -87.65
+   ],
+   "end": [
+    10.05,
+    -83.92
+   ],
+   "width": 0.3
+  }
+ ],
+ "added": [
+  {
+   "net": "ISO_UART_GND",
+   "layer": "B.Cu",
+   "start": [
+    11.4,
+    -89.0
+   ],
+   "end": [
+    10.2,
+    -87.8
+   ],
+   "width": 0.3
+  },
+  {
+   "net": "ISO_UART_GND",
+   "layer": "B.Cu",
+   "start": [
+    10.2,
+    -87.8
+   ],
+   "end": [
+    10.2,
+    -84.07
+   ],
+   "width": 0.3
+  },
+  {
+   "net": "ISO_UART_GND",
+   "layer": "B.Cu",
+   "start": [
+    10.2,
+    -84.07
+   ],
+   "end": [
+    10.05,
+    -83.92
+   ],
+   "width": 0.3
+  }
+ ]
+}

@@ -60,7 +60,21 @@ CASES = [
 # (75, 0), where it is reported). A wrong rule still shows up as a FAIL, a silent slot only as a false FAIL.
 SLOTS = [(x, y) for y in (-70, -40, -10, 15) for x in (-55, -30, 30, 55)] + [(-10, -70), (75, -50), (-10, -15), (75, 0)] + [(-5, -25), (15, -25), (-42.5, 5), (42.5, 5)] + [(-30, -84), (30, -84), (55, -84)]
 assert len(CASES) <= len(SLOTS), "add test positions to SLOTS"
-HOLE_TEST = ("GND", "F", 1.5, {"clearance", "creepage"})          # 1.5 mm from the H4 ring: 2.0 / 3.2 mm rule (earthed screws)
+# Mounting holes (no copper ring since stage 13c; the earthed screw has a 6 mm head): (hole, net, layer, distance of the
+# track edge from the hole CENTRE mm, side of the hole, expected). One test per hole (spots are matched by distance; the
+# side keeps the track away from the other test spots and the board edge). General rules: primary
+# 6.2 mm, secondary 7.2 mm, UART 4.0 mm from the centre; per-hole rules hold what the board achieves (H4 4.9, H7 5.0,
+# H8 6.2, H2 3.1 mm from the centre). The skeleton board has the 5.1 holes, H5 included. KiCad reports an NPTH
+# without copper as hole_clearance and creepage (from the hole wall), on inner layers too.
+HC = {"hole_clearance", "creepage"}
+HOLE_TESTS = [("H6", "GND", "F", 5.9, "N", HC),                       # primary 6.2 > 5.9
+              ("H1", "GND", "In3", 6.4, "S", set()),                  # ... 6.4 passes, inner layer as well
+              ("H3", "ISO_GND", "B", 6.9, "S", HC),                   # secondary 7.2 > 6.9
+              ("H5", "ISO_GND", "F", 7.4, "N", set()),
+              ("H4", "GND", "In2", 4.6, "S", HC),                     # H4 achieved 4.9 > 4.6
+              ("H7", "GND", "B", 5.2, "N", set()),                    # H7 achieved 5.0 < 5.2
+              ("H8", "ISO_GND", "F", 6.0, "E", HC),                   # H8 achieved 6.2 > 6.0
+              ("H2", "ISO_UART_GND", "B", 2.9, "S", {"hole_clearance"})]   # H2 achieved 3.1 > 2.9 (no creepage rule)
 
 
 # Pads of one fine-pitch footprint (VSSOP-8, pad gap 0.15 mm; U10): (nets on odd / even pads, position, expected).
@@ -109,12 +123,24 @@ def main():
             track(b, net(na), L[layer], x - 3, y, x + 3)
             track(b, net(nb), L[layer], x - 3, y + gap + 0.3, x + 3)   # 0.3 mm track width
             spots.append(((x, y + gap / 2), f"{na} / {nb} on {layer}, gap {gap} mm", exp))
-        h4 = next(fp for fp in b.GetFootprints() if fp.GetReference() == "H4").GetPosition()
-        hx, hy = h4.x / 1e6, h4.y / 1e6
-        na, layer, gap, exp = HOLE_TEST
-        yy = hy + 1.75 + gap + 0.15
-        track(b, net(na), L[layer], hx - 3, yy, hx + 3)
-        spots.append(((hx, hy + 2.5), f"{na} {gap} mm from the H4 ring on {layer}", exp))
+        hpos = {fp.GetReference(): fp.GetPosition() for fp in b.GetFootprints() if fp.GetReference().startswith("H")}
+        for ref, na, layer, dist, side, exp in HOLE_TESTS:
+            hx, hy = hpos[ref].x / 1e6, hpos[ref].y / 1e6
+            o = dist + 0.15                                               # 0.3 mm track: edge at dist from the centre
+            if side == "E":                                               # vertical track east of the hole
+                t = pcbnew.PCB_TRACK(b)
+                t.SetStart(pcbnew.VECTOR2I(pcbnew.FromMM(hx + o), pcbnew.FromMM(hy - 3)))
+                t.SetEnd(pcbnew.VECTOR2I(pcbnew.FromMM(hx + o), pcbnew.FromMM(hy + 3)))
+                t.SetWidth(pcbnew.FromMM(0.3))
+                t.SetLayer(L[layer])
+                t.SetNet(net(na))
+                b.Add(t)
+                spot = (hx + dist / 2, hy)
+            else:
+                sgn = 1 if side == "S" else -1
+                track(b, net(na), L[layer], hx - 3, hy + sgn * o, hx + 3)
+                spot = (hx, hy + sgn * dist / 2)
+            spots.append((spot, f"{na} {dist} mm from the centre of {ref} on {layer}", exp))
         lib = os.path.join(os.environ.get("KICAD_MOUNT", ""), "share", "kicad", "footprints", PAD_FP[0] + ".pretty")
         for i, (na, nb, (x, y), exp) in enumerate(PAD_TESTS):
             fp = pcbnew.FootprintLoad(lib, PAD_FP[1])

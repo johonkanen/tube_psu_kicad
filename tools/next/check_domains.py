@@ -10,7 +10,8 @@ Why: KiCad's creepage DRC does not list every pair (trial_from_51/REPORT.md, ste
 test spots where it reports nothing), and the full creepage DRC of the board needs about 2.5 GB. This script
 measures the straight distance between every two copper items of different isolation domains on the same
 layer - pads (true shapes), tracks, vias, the filled zone copper as stored in the board, and the mounting holes
-H1-H8 as protective earth - and compares it with the limits of kicad_next/tube_psu_5_2.kicad_dru (README
+H1-H8 as protective earth (the 6 mm head / standoff of the earthed M3 screw, a disc of HEAD_R round the hole centre,
+on every layer; the holes have no copper since routing stage 13c) - and compares it with the limits of kicad_next/tube_psu_5_2.kicad_dru (README
 "Isolation domains"; the table LIMITS below is a copy of the rules):
 
   outer layers  d < clearance                      -> violation (air, a slot does not help)
@@ -48,6 +49,7 @@ KIPY = os.path.join(ROOT, "tools", "p2k", "bin", "kipy")
 CLASS_DOMAIN = {"HV_PRIMARY": "PRI", "PRIMARY_LV": "PRI", "SIGNAL": "PRI", "HV_SECONDARY": "SEC",
                 "SECONDARY_LV": "SEC", "HEATER": "HEATER", "UART_ISO": "UART", "PE_EARTH": "PE"}
 HOLES = re.compile(r"^H[1-8]$")     # mounting holes: earthed screws, domain HOLE (rules "Mounting hole - ...")
+HEAD_R = 3.0                         # radius of the screw head / standoff (6 mm) round the hole centre (stage 13c)
 # (domain A, domain B): (outer clearance, outer creepage, inner spacing) in mm; None = no rule
 LIMITS = {
     ("PRI", "SEC"): (4.0, 11.1, 11.1),          # reinforced, 552 Vrms
@@ -59,12 +61,20 @@ LIMITS = {
     ("HEATER", "UART"): (1.0, None, 1.0),
     ("PE", "PRI"): (2.0, 3.2, 3.2),             # basic
     ("PE", "SEC"): (1.5, 4.2, 4.2),
-    ("HOLE", "PRI"): (2.0, 3.2, 3.2),           # ring on the outer layers; inner layers: from the hole
-    ("HOLE", "SEC"): (1.5, 4.2, 4.2),
+    ("HOLE", "PRI"): (2.0, 3.2, 3.2),           # basic, from the 6 mm head (HEAD_R) on every layer: 6.2 mm from the centre
+    ("HOLE", "SEC"): (1.5, 4.2, 4.2),           # 7.2 mm from the centre
+    ("HOLE", "UART"): (1.0, None, 1.0),         # functional (UART island at H2)
 }
 # Accepted pairs: (regex item A, regex item B, regex layer, smallest accepted distance mm, reason). A pair is
 # accepted if both descriptions match (in either order), the layer matches and the distance is not smaller.
-ALLOW = []        # empty since routing stage 4k (the Q19 / Q21 slot exception was dropped with its kicad_dru rule)
+# Since stage 13c: the holes where fixed parts stand nearer to the head than the limit (kicad_dru rules "Mounting hole Hn
+# ... (achieved, insulating hardware)", README stage 13c): the copper holds the value below, the hole needs insulating
+# hardware (nylon screw / standoff or insulating washers).
+_NYLON = "insulating hardware (nylon) at this hole, README stage 13c"
+ALLOW = [(r"^hole H4$", r".", r".", 1.9, "H4: DRV5 / R14 / C92 / L2 pads and the In2 control bus within 6.2 mm; " + _NYLON),
+         (r"^hole H7$", r".", r".", 2.0, "H7: R47 / R48 pads (B.Cu) and the In2 Net-(R48-Pad2) track; " + _NYLON),
+         (r"^hole H8$", r".", r".", 3.2, "H8: C102 pad 1 (ISO_GND) 6.23 mm from the centre; " + _NYLON),
+         (r"^hole H2$", r".", r".", 0.1, "H2: J4 pads / ground bus of the UART island; " + _NYLON)]
 BARRIERS = {"TR1", "TR2", "TR3", "ISO1", "ISO2", "U11"}      # setup_project.py BARRIERS: two domains in one footprint
 EPS = 1e-6
 
@@ -200,10 +210,12 @@ def main(argv):
         span[(p["ref"], p["num"], p["net"])].update(p["layers"])
     for p in g["pads"]:
         if HOLES.match(p["ref"]):
-            ring, hole = mk(p["polys"]), mk(p["hole"]) if p["hole"] else None
+            hole = mk(p["hole"]) if p["hole"] else mk(p["polys"])
+            head = Point(hole.centroid.x, hole.centroid.y).buffer(HEAD_R, 64)
             for l in g["layers"]:
-                # outer layers: the copper ring (clearance / creepage); inner layers: the hole (hole clearance)
-                items[l].append((ring if l in outer or hole is None else hole, "HOLE", f"hole {p['ref']}", ALL, p["ref"]))
+                # the earthed screw head / standoff (6 mm) on every layer: outer layers clearance / creepage, inner
+                # layers plan distance (stage 13c; before: the 3.5 mm copper ring outside, the hole inside)
+                items[l].append((head, "HOLE", f"hole {p['ref']}", ALL, p["ref"]))
             continue
         if not p["net"]:
             continue

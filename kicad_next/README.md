@@ -204,6 +204,45 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 13c: mounting holes without copper ring, keep-off from a 6 mm screw head (2026-11-23)
+
+Design review 2026-11-23 (findings 10 D2 / F1, 14 B4 / F6): H1 – H4, H6 – H8 had a 0.25 mm no-net copper ring on all six
+layers (JLC: ≥ 0.45 mm round an NPTH) and the keep-off was measured from that 3.5 mm ring, while any M3 head, washer or
+standoff is larger.
+
+* Footprint `tube_psu_next:MountingHole_3.0mm_NPTH` (`gen_next_footprints.py`, STEP from `gen_next_3d.py`): same
+  3.0 mm NPTH, **no copper**, mask opening 3.0 mm, 6 mm head on F.Fab, the 6.2 / 7.2 mm keep-off circles on Cmts.User,
+  courtyard r 2.0 as before. `tools/next/route_s13c_holes.py` (one-shot, `routing/moves_s13c.json`) swaps the seven
+  footprints in place; `make_board.py --check` now compares place and drill with 5.1 and requires the ring-less footprint.
+* The screw stays earthed metal: rules "Mounting hole - primary / - secondary / - UART" in `tube_psu_5_2.kicad_dru` take
+  the distance from a **6 mm head / standoff** (radius 3.0 mm): KiCad measures from the hole wall, so 4.7 / 5.7 / 2.5 mm
+  (= 3.2 / 4.2 / 1.0 mm from the head; clearance, creepage and hole_clearance, every layer). `check_domains.py` models
+  the head as a 6 mm disc on every layer (HOLE ↔ PRI 2.0 / 3.2 / 3.2, ↔ SEC 1.5 / 4.2 / 4.2, new ↔ UART 1.0 / – / 1.0).
+  `check_rules.py`: eight hole cases (one per hole, distances from the centre).
+* Pour keep-outs grown: H3 r 6.0 → 7.3 mm, H6 / H7 5.0 → 6.3 mm, H8 6.0 → 6.3 mm (32-gons, flats at 0.995 r). H1 / H2 /
+  H4 unchanged (no primary / secondary copper near H1 / H2; at H4 fixed pads stand nearer than any larger keep-out).
+  H2: the B.Cu ISO_UART_GND bus of J4 moved 0.15 mm east (2.98 → 3.13 mm from the centre; it touched a 6 mm head).
+* Where fixed parts stand nearer, nothing else was moved (that needs parts moved, the H4 control bus re-routed or other
+  nets' isolation touched): those holes get per-hole rules "Mounting hole Hn … (achieved, insulating hardware)" with the
+  achieved value and `ALLOW` entries in `check_domains.py`, and **need insulating hardware** (nylon screw + nylon standoff,
+  or nylon washers under head and standoff).
+
+Distance from a 6 mm head (mm; centre distance − 3.0), required primary 3.2 / secondary 4.2 / UART 1.0:
+
+| Hole | Domain | F.Cu | B.Cu | In1 | In2 | In3 | In4 | Nearest item | Insulating hardware |
+|---|---|---|---|---|---|---|---|---|---|
+| H1 | (heater only) | – | – | – | – | – | – | no primary / secondary copper within 12 mm of the centre; HT_6V3 pad 1.89 mm from the head | no |
+| H2 | UART (1.0) | 0.50 | 0.13 | 0.68 | 0.68 | 0.68 | 0.68 | J4 pad 1 (inner), ISO_UART_GND bus (B), UART_TXD (F); primary ≥ 8.3 | **yes** |
+| H3 | SEC (4.2) | 4.26 | 4.26 | 4.26 | 7.13 | 7.13 | 4.26 | ISO_GND / 420V pours at the keep-out | no |
+| H4 | PRI (3.2) | 1.98 | 2.03 | 2.08 | 1.95 | 1.93 | 2.08 | PFC_DRAIN_1 pour (F), DRV5 pad 16 (B), L2 pad 2, control bus (In2), PRI_DHB_HI (In3) | **yes** |
+| H6 | PRI (3.2) | 3.21 | 3.21 | 3.21 | 3.21 | 3.21 | 3.21 | IN2 terminal pad 1 | no |
+| H7 | PRI (3.2) | 3.27 | 2.18 | 3.27 | 2.08 | 3.31 | 3.27 | R48 pad 1 (B), Net-(R48-Pad2) track (In2) | **yes** (bottom standoff side and inner) |
+| H8 | SEC (4.2) | 3.23 | 3.23 | 3.23 | 3.23 | 3.23 | 3.23 | C102 pad 1 (ISO_GND, THT) | **yes** |
+
+Before (from the 3.5 mm ring): H4 ≥ 3.18, H3 / H8 4.22, H6 / H7 3.23 mm – with a 6 mm head 1.5 – 2.2 mm smaller.
+Unconnected 0, 0 shorts, clearance 0, dangling 0, parity 0, DRC 137 items as before; `check_rules.py` 41 / 41,
+`check_domains.py` passes with the four accepted holes; `check_next.sh` passes.
+
 ## Stage 13b: creepage slots of ISO1 / ISO2 / U11 1.0 → 1.5 mm (2026-11-23)
 
 Design review 2026-11-23 (findings 10 C6 / F2, 14 B3 / F3): the slots under ISO2 and U11 and the T slot at ISO1 / TR2
@@ -2214,7 +2253,7 @@ netlist). Count after phase 2: primary 156 nets (HV_PRIMARY 43, PRIMARY_LV 5, SI
 | DAB secondary ↔ heater | functional (user 2026-11-17: heater tied to −100V BIAS or to signal ground via 100 Ω) | to 420V: up to 520 V; to ISO_GND / LV secondary: ≤ 115 V | **5.2 mm** to HV_SECONDARY, **1.5 mm** to SECONDARY_LV | 1.5 / 1.0 mm | 5.2 mm / – |
 | Heater ↔ UART | functional | ELV | – | 1.0 mm | 1.0 mm |
 | PE (Y caps) ↔ primary / secondary | basic | 318 / 420 Vrms | **3.2 / 4.2 mm** | 2.0 / 1.5 mm | 3.2 / 4.2 mm |
-| Mounting holes H1–H8 (screws bonded to the earthed chassis, user 2026-11-17) ↔ primary / secondary | basic (PE) | 318 / 420 Vrms | **3.2 / 4.2 mm** | 2.0 / 1.5 mm | 3.2 / 4.2 mm (hole clearance) |
+| Mounting holes H1–H4, H6–H8 (screws bonded to the earthed chassis, user 2026-11-17) ↔ primary / secondary | basic (PE) | 318 / 420 Vrms | **3.2 / 4.2 mm from a 6 mm screw head / standoff** = 6.2 / 7.2 mm from the hole centre (stage 13c; H2 / H4 / H7 / H8 below that: insulating hardware) | 2.0 / 1.5 mm | 3.2 / 4.2 mm from the head (plan view) |
 | Inside a domain: HV nets (DC+, mains, switch nodes, 420V, −100 V) | functional | ≤ 500 V | – | outer 1.2 mm (tracks / zones; pad pairs exempt), inner 0.5 mm | 0.5 mm |
 
 **Former exception, DAB bridge Q19 (primary) ↔ Q21 (secondary)** (user 2026-11-19, removed in routing stage 4k,
@@ -2248,7 +2287,8 @@ DAB square wave (≤ 420 V) on top.
   margin construction (6 mm) is below 11.1 mm creepage for this working voltage (NEXT_REVISION_PLAN.md
   "Consequences of D6"). EC42 TR3: rows 40 mm apart – fine on the board.
 - Mounting holes have a copper ring on every layer with no net; H4 (5.8, −40.1) sits inside the board –
-  3.2 / 4.2 mm keep-off around it (screws earthed via the chassis).
+  3.2 / 4.2 mm keep-off around it (screws earthed via the chassis). (Since stage 13c: no ring, keep-off from a 6 mm
+  screw head; see there.)
 - Heatsink: the shared PFC + DAB bracket must keep 11.1 mm creepage / 4.0 mm clearance from secondary
   copper unless it is treated as secondary or split (plan, D6).
 

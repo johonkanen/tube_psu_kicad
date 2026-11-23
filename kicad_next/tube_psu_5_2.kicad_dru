@@ -6,7 +6,8 @@
 #   heater    = HEATER                                (HT_GND, 6V3)
 #   uart      = UART_ISO                              (UART island, referenced to the PC / earth; phase 2)
 #   earth     = PE_EARTH                              (protective earth, Y capacitors)
-#   holes     = mounting holes H1-H8 (no-net copper ring on every layer; screws bonded to the earthed chassis)
+#   holes     = mounting holes H1-H4, H6-H8 (plain 3.0 mm NPTH, no copper since routing stage 13c; the M3 screw with its
+#               6 mm head / standoff is bonded to the earthed chassis)
 # Every rule is written for both orders of A and B. Outer layers: clearance (air) + creepage (surface,
 # KiCad follows slots in Edge.Cuts). Inner layers: no creepage in the laminate is claimed (no cemented-
 # joint qualification of the JLC laminate), so the inner-layer spacing equals the outer creepage.
@@ -200,17 +201,61 @@
 	(constraint clearance (min 4.2mm)))
 
 # ---------------------------------------------------------------------------------------------------
-# Mounting holes H1-H8: the screws bond the board to the chassis, which is earthed (user 2026-11-17),
-# so they are protective earth: BASIC like PE above - primary 318 Vrms: creepage 3.2 mm, clearance
-# 2.0 mm; DAB secondary 420 Vrms: 4.2 mm / 1.5 mm.
+# Mounting holes H1-H4, H6-H8: the screws bond the board to the chassis, which is earthed (user 2026-11-17),
+# so they are protective earth: BASIC like PE above - primary 318 Vrms: creepage 3.2 mm, clearance 2.0 mm;
+# DAB secondary 420 Vrms: 4.2 mm / 1.5 mm. Since routing stage 13c (design review 2026-11-23) the holes have no copper
+# ring and the distance is taken from the earthed metal a screw brings: a 6 mm head / standoff (radius 3.0 mm round
+# the 3.0 mm hole). KiCad measures from the hole wall (radius 1.5 mm), so every value below is the distance from the
+# head + 1.5 mm: primary 3.2 + 1.5 = 4.7 mm (6.2 mm from the centre), secondary 4.2 + 1.5 = 5.7 mm (7.2 mm). The
+# clearance / creepage constraints carry the same value (an NPTH without copper is checked through its hole);
+# hole_clearance acts on every layer, i.e. the inner layers keep the same plan distance. check_domains.py models
+# the head as a 6 mm disc on every layer.
 (rule "Mounting hole - primary"
 	(condition "(A.memberOfFootprint('H?') && (B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL'))) || (B.memberOfFootprint('H?') && (A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')))")
-	(constraint clearance (min 2.0mm))
-	(constraint creepage (min 3.2mm))
-	(constraint hole_clearance (min 3.2mm)))
+	(constraint clearance (min 4.7mm))
+	(constraint creepage (min 4.7mm))
+	(constraint hole_clearance (min 4.7mm)))
 
 (rule "Mounting hole - secondary"
 	(condition "(A.memberOfFootprint('H?') && (B.hasNetclass('HV_SECONDARY') || B.hasNetclass('SECONDARY_LV'))) || (B.memberOfFootprint('H?') && (A.hasNetclass('HV_SECONDARY') || A.hasNetclass('SECONDARY_LV')))")
-	(constraint clearance (min 1.5mm))
-	(constraint creepage (min 4.2mm))
-	(constraint hole_clearance (min 4.2mm)))
+	(constraint clearance (min 5.7mm))
+	(constraint creepage (min 5.7mm))
+	(constraint hole_clearance (min 5.7mm)))
+
+# UART island (H2): functional 1.0 mm from the head = 2.5 mm from the hole wall.
+(rule "Mounting hole - UART"
+	(condition "(A.memberOfFootprint('H?') && B.hasNetclass('UART_ISO')) || (B.memberOfFootprint('H?') && A.hasNetclass('UART_ISO'))")
+	(constraint clearance (min 2.5mm))
+	(constraint hole_clearance (min 2.5mm)))
+
+# Holes where fixed parts (pads) stand nearer to the head than the values above: the rule holds what the copper
+# achieves (stage 13c, best effort without moving parts or other nets' isolation), and these holes need insulating
+# hardware (nylon screw / standoff or insulating washers: kicad_next/README.md stage 13c, kicad_next/fab/README.md).
+# Later rules take precedence. Values from the hole wall; from the 6 mm head subtract 1.5 mm.
+#   H4: In3 PRI_DHB_HI 4.93 mm from the centre (In2 control bus 4.95, F.Cu PFC_DRAIN_1 pour 4.98, DRV5 pad 16 5.03,
+#       L2 pad 2 5.08) -> 3.4 mm (head 1.9 mm, 3.2 required)
+#   H7: In2 Net-(R48-Pad2) 5.08 mm, B.Cu R48 pad 1 5.18 mm (F.Cu / In1 / In3 / In4 >= 6.27) -> 3.5 mm (head 2.0 mm)
+#   H8: C102 pad 1 (ISO_GND, all layers) 6.23 mm -> 4.7 mm (head 3.2 mm, 4.2 required)
+#   H2: B.Cu ISO_UART_GND bus 3.13 mm, F.Cu UART_TXD 3.50, J4 pad 1 3.68 -> 1.6 mm (head 0.1 mm, 1.0 required)
+(rule "Mounting hole H4 - primary (achieved, insulating hardware)"
+	(condition "(A.memberOfFootprint('H4') && (B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL'))) || (B.memberOfFootprint('H4') && (A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')))")
+	(constraint clearance (min 3.4mm))
+	(constraint creepage (min 3.4mm))
+	(constraint hole_clearance (min 3.4mm)))
+
+(rule "Mounting hole H7 - primary (achieved, insulating hardware)"
+	(condition "(A.memberOfFootprint('H7') && (B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL'))) || (B.memberOfFootprint('H7') && (A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')))")
+	(constraint clearance (min 3.5mm))
+	(constraint creepage (min 3.5mm))
+	(constraint hole_clearance (min 3.5mm)))
+
+(rule "Mounting hole H8 - secondary (achieved, insulating hardware)"
+	(condition "(A.memberOfFootprint('H8') && (B.hasNetclass('HV_SECONDARY') || B.hasNetclass('SECONDARY_LV'))) || (B.memberOfFootprint('H8') && (A.hasNetclass('HV_SECONDARY') || A.hasNetclass('SECONDARY_LV')))")
+	(constraint clearance (min 4.7mm))
+	(constraint creepage (min 4.7mm))
+	(constraint hole_clearance (min 4.7mm)))
+
+(rule "Mounting hole H2 - UART (achieved, insulating hardware)"
+	(condition "(A.memberOfFootprint('H2') && B.hasNetclass('UART_ISO')) || (B.memberOfFootprint('H2') && A.hasNetclass('UART_ISO'))")
+	(constraint clearance (min 1.6mm))
+	(constraint hole_clearance (min 1.6mm)))

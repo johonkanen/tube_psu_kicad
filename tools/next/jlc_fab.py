@@ -875,6 +875,16 @@ def generate(out):
           "pulls copper back from a non-plated hole, so the ring may come out thinner or vanish. Nothing is soldered to "
           "it; decide whether that matters (the isolation rules treat the hole / ring as earthed) or tell JLC in the remark.")
         n += 1
+    A(f"{n}. **Mounting hardware** (holes {' '.join(mounts)}: plain {fmt(MOUNT_DRILL, 1)} mm NPTH without copper since routing "
+      "stage 13c; the M3 screws bond the board to the earthed chassis). Basic insulation from a **6 mm** head / standoff "
+      "needs primary copper >= 6.2 mm and secondary copper >= 7.2 mm from the hole centre (on every layer). Met at H3 "
+      "(secondary 7.26 mm) and H6 (primary 6.21 mm); H1 has no primary / secondary copper within 12 mm. **H2, H4, H7 and H8 "
+      "need insulating hardware** (nylon screw and nylon standoff, or nylon washers under the head and the standoff): "
+      "H4 primary 4.93 mm from the centre (head 1.93 mm instead of 3.2), H7 primary 5.08 mm (In2; R48 pad 5.18 mm on B.Cu), "
+      "H8 secondary 6.23 mm (C102 pad 1; head 3.23 instead of 4.2), H2 UART island 3.13 mm (head 0.13 instead of 1.0; "
+      "J4 pads 3.68 mm). Metal heads, washers or standoffs wider than 6 mm reduce every figure (kicad_next/README.md "
+      "stage 13c).")
+    n += 1
     A(f"{n}. **No silkscreen**: there is no polarity / pin-1 / refdes marking on the board; JLC's assembly relies on the CPL "
       "alone, and hand-fitted parts need the assembly drawing.")
     n += 1

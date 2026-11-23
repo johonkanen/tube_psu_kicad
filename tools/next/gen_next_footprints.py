@@ -11,6 +11,8 @@ generates for the 1:1 migration of tube_power_5_1 (tools/check_all.sh checks tha
   L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_45deg / _315deg  L1 / L2: upright toroid on the 5.1 RM8 winding holes
                                      (as built on the 5.1 board, user decision 2026-11-19)
   Heatsink_Plate_Keepout_L120mm      outline helper for the PFC + DAB bent-plate heatsink (NR 5.5)
+  MountingHole_3.0mm_NPTH            H1-H8: plain 3.0 mm NPTH, no copper ring (routing stage 13c), 6 mm screw head
+                                     and the 6.2 / 7.2 mm keep-off circles on Cmts.User
 
 3D models: lib/tube_psu_next.3dshapes/<name>.step (tools/next/gen_next_3d.py, CadQuery), referenced
 project-relative as ${KIPRJMOD}/../lib/tube_psu_next.3dshapes/... (the project is kicad_next/).
@@ -411,13 +413,40 @@ def heatsink():
                        models=model(name))
 
 
+# Mounting holes (routing stage 13c, design review 2026-11-23, findings 10 D2 / 14 B4): the 5.1 footprint had a 0.25 mm
+# no-net copper ring on every layer (JLC asks >= 0.45 mm round an NPTH); the 5.2 hole has none. The screw head / standoff
+# (6 mm, MOUNT["head"]) is earthed metal: basic insulation from the head, primary 3.2 mm / secondary 4.2 mm (kicad_dru
+# "Mounting hole" rules, check_domains.py HOLE items), i.e. 6.2 / 7.2 mm from the centre - drawn on Cmts.User.
+# Courtyard as the 5.1 footprint (r 2.0 mm, the hole): the head is not a part body for the courtyard check.
+MOUNT = {"drill": 3.0, "head": 6.0, "keepoff": ((6.2, "PRI 3.2 from the head"), (7.2, "SEC 4.2 from the head"))}
+
+
+def mounting_hole():
+    m = MOUNT
+    d = m["drill"]
+    body = circle(0, 0, d / 2, "F.Fab", 0.1)
+    body += circle(0, 0, m["head"] / 2, "F.Fab", 0.1)
+    body += circle(0, 0, 2.0, "F.CrtYd", 0.05)
+    for r, lbl in m["keepoff"]:
+        body += circle(0, 0, r, "Cmts.User", 0.1)
+        body += text("user", lbl, 0, -r + 0.6, "Cmts.User", 0.5)
+    body += (f"\t(pad \"\" np_thru_hole circle\n\t\t(at 0 0)\n\t\t(size {f(d)} {f(d)})\n\t\t(drill {f(d)})\n"
+             f"\t\t(layers \"*.Cu\" \"*.Mask\")\n\t)\n")
+    name = "MountingHole_3.0mm_NPTH"
+    descr = (f"Unplated {d:g} mm mounting hole without copper; earthed M3 screw, {m['head']:g} mm head / standoff "
+             "(F.Fab); keep-off from the head: primary 3.2 mm, secondary 4.2 mm (Cmts.User) (tube_psu_next, board-only)")
+    return footprint_x(name, descr, "mountinghole NPTH M3", body, -2.95, 2.95,   # texts as the 5.1 footprint
+                       attr="board_only exclude_from_pos_files exclude_from_bom", models=model(name))
+
+
 def main():
     files = {"Transformer_EEL19_V_4+6_FlyLeads.kicad_mod": eel19(),
              "Transformer_EC42x15_2Slot_2x8_P5mm.kicad_mod": ec42(),
              toroid_name() + ".kicad_mod": toroid(),
              toroid_name(True) + ".kicad_mod": toroid(True),
              **{toroid_v_name(r) + ".kicad_mod": toroid_v(r) for r in TOROID_V["variants"]},
-             f"Heatsink_Plate_Keepout_L{HEATSINK['l']:g}mm.kicad_mod": heatsink()}
+             f"Heatsink_Plate_Keepout_L{HEATSINK['l']:g}mm.kicad_mod": heatsink(),
+             "MountingHole_3.0mm_NPTH.kicad_mod": mounting_hole()}
     if "--check" in sys.argv:
         bad = [n for n, t in files.items()
                if not os.path.exists(os.path.join(OUT, n)) or open(os.path.join(OUT, n)).read() != t]

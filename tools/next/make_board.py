@@ -5,11 +5,13 @@
     tools/p2k/bin/kipy tools/next/make_board.py --force   overwrite an existing board (loses edits!)
     tools/p2k/bin/kipy tools/next/make_board.py --check   check the committed board: 6 copper layers with
                                                           the names / types below, the JLC stackup, the
-                                                          5.1 outline and mounting holes H1-H8 unchanged
+                                                          5.1 outline and mounting hole positions / drills
+                                                          unchanged (holes without copper ring since stage 13c)
                                                           (added Edge.Cuts shapes must be internal slots)
 
 The skeleton holds only what is fixed (NEXT_REVISION_PLAN.md D3): the 5.1 board outline (Edge.Cuts) and
-the eight mounting holes copied from kicad/tube_psu.kicad_pcb (locked), the 6-layer copper set and the
+the eight mounting holes at the places / drills of kicad/tube_psu.kicad_pcb (locked; footprint HOLE_FPID, a
+plain 3.0 mm NPTH without the 5.1 copper ring since routing stage 13c), the 6-layer copper set and the
 JLC06161H-7628D stackup (D5: 1 oz outer, 0.5 oz inner, 1.6 mm). Footprints are placed in phase 5; after
 that the board is edited in KiCad and only --check is run (it does not compare bytes).
 Design rules / net classes live in kicad_next/tube_psu_5_2.kicad_pro and tube_psu_5_2.kicad_dru
@@ -27,6 +29,11 @@ OUT = os.path.join(ROOT, "kicad_next", "tube_psu_5_2.kicad_pcb")
 HOLES = [f"H{i}" for i in range(1, 9)]
 # H5 (87.15, -29.81) removed on the real board (user 2026-11-23, route_s10_no_h5.py): not used, no droop without it
 HOLES_REMOVED = {"H5"}
+# Stage 13c (design review 2026-11-23, findings 10 D2 / 14 B4): the 5.1 footprint tube_psu:MountingHole_3.0mm_NPTH_Ring3.5mm
+# (0.25 mm no-net copper ring on all layers, below JLC's 0.45 mm NPTH ring) is replaced by a plain NPTH hole; the screw
+# (6 mm head / standoff) stays earthed metal (kicad_dru "Mounting hole" rules, check_domains.py HOLE items).
+HOLE_FPID = "tube_psu_next:MountingHole_3.0mm_NPTH"
+HOLE_LIB = os.path.join(ROOT, "lib", "tube_psu_next.pretty")
 
 # (layer id, user name, type) - NEXT_REVISION_PLAN.md phase 1 task 2
 COPPER = [
@@ -82,13 +89,27 @@ def outline(board):
 
 
 def holes(board):
+    """reference -> (x, y, sorted (drill, attribute) of the pads): place and drill only (the footprint changed in 13c)"""
     out = {}
     for fp in board.GetFootprints():
         if fp.GetReference() in HOLES:
-            out[fp.GetReference()] = (fp.GetFPIDAsString(), mm(fp.GetPosition().x), mm(fp.GetPosition().y),
-                                      sorted((mm(p.GetSizeX()), mm(p.GetDrillSizeX()), p.GetAttribute())
-                                             for p in fp.Pads()))
+            out[fp.GetReference()] = (mm(fp.GetPosition().x), mm(fp.GetPosition().y),
+                                      sorted((mm(p.GetDrillSizeX()), p.GetAttribute()) for p in fp.Pads()))
     return out
+
+
+def hole_fp_problems(board):
+    """every mounting hole: footprint HOLE_FPID, NPTH pads only, no copper (pad size = drill)"""
+    errs = []
+    for fp in board.GetFootprints():
+        if fp.GetReference() in HOLES:
+            if fp.GetFPIDAsString() != HOLE_FPID:
+                errs.append(f"{fp.GetReference()}: footprint {fp.GetFPIDAsString()}, expected {HOLE_FPID}")
+            for p in fp.Pads():
+                if p.GetAttribute() != pcbnew.PAD_ATTRIB_NPTH or p.GetSizeX() > p.GetDrillSizeX() \
+                        or p.GetSizeY() > p.GetDrillSizeY():
+                    errs.append(f"{fp.GetReference()}: pad with copper (size {mm(p.GetSizeX())}, drill {mm(p.GetDrillSizeX())})")
+    return errs
 
 
 def write(out=OUT, quiet=False):
@@ -106,7 +127,10 @@ def write(out=OUT, quiet=False):
             b.Add(c)
     for fp in src.GetFootprints():
         if fp.GetReference() in HOLES:
-            c = pcbnew.FOOTPRINT(fp)
+            c = pcbnew.FootprintLoad(HOLE_LIB, HOLE_FPID.split(":", 1)[1])
+            c.SetFPID(pcbnew.LIB_ID(pcbnew.UTF8(HOLE_FPID.split(":", 1)[0]), pcbnew.UTF8(HOLE_FPID.split(":", 1)[1])))
+            c.SetReference(fp.GetReference())
+            c.SetPosition(fp.GetPosition())
             c.SetLocked(True)
             b.Add(c)
     b.GetDesignSettings().SetBoardThickness(pcbnew.FromMM(1.6))
@@ -148,7 +172,8 @@ def check():
                             "is not inside the 5.1 outline")
     want = {k: v for k, v in holes(src).items() if k not in HOLES_REMOVED}
     if holes(b) != want or len(holes(b)) != 7:
-        errs.append("mounting holes H1-H4, H6-H8 differ from 5.1")
+        errs.append("mounting holes H1-H4, H6-H8: place or drill differs from 5.1")
+    errs += hole_fp_problems(b)
     with open(OUT) as f:
         text = f.read()
     got = [(m.group(1), float(m.group(2))) for m in

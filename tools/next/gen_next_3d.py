@@ -129,6 +129,9 @@ MODELS = {
     # L1 / L2 upright on the 5.1 RM8 holes (2026-11-19); last in the dict: OCC numbers the assembly
     # occurrences per process, so models added in front would renumber (and rewrite) every later file
     **{gfp.toroid_v_name(r): (lambda r=r: toroid_v(r)) for r in gfp.TOROID_V["variants"]},
+    # H1-H8 (stage 13c): M3 screw head on top, standoff below the 1.6 mm board (height 5 mm assumed), both 6 mm
+    "MountingHole_3.0mm_NPTH": lambda: [(cyl(0, 0, 0, 2.0, gfp.MOUNT["head"]), ALU),
+                                        (cyl(0, 0, -6.6, -1.6, gfp.MOUNT["head"]), ALU)],
 }
 
 
