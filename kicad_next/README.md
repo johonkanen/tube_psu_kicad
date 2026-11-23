@@ -204,6 +204,28 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 11: J4 as 1×6 header, UART island re-routed (2026-11-23)
+
+User decision 2026-11-23: the UART link runs at 12 Mbaud, single-ended, between two FPGA boards, so J4 gets a ground
+pin beside each signal: **1 ISO_UART_GND, 2 UART_TXD (in), 3 ISO_UART_GND, 4 UART_RXD (out), 5 ISO_UART_GND,
+6 UART_3V3 (in)** (was 1×4: GND / 3V3 / TXD / RXD). Symbol `CONN_01X06`, footprint `PinHeader_1x06_P2.54mm_Vertical`,
+part XFCN PZ254V-11-06P C492405 (part page read 2026-11-23; stock and price not shown there). Schematic from
+`sheets/sheet04.py`; board by `tools/next/route_s11_j4.py` (one-shot, `routing/*_s11.json`):
+
+* J4 stays at (11.4, -89.0), rot 0: pin 1 at y -89.0, pin 6 at y -76.3 (two pins further south). Pads end at x 12.25;
+  nearest primary copper in plan view: the DHB_CAP B.Cu track on x 20.68 - 8.23 mm from pin 6, 8.33 mm from pin 5;
+  the island keep-out edge x 20.25 is 8.00 mm from the pads. `check_domains.py` passes.
+* RXD (R137 - pin 4) is unchanged, 3.7 mm. TXD: F.Cu 0.2 mm from R136 round the west of pins 4 / 3 on x 9.9 to pin 2,
+  12.3 mm from R136. The order 3V3 / RXD / TXD at U11 (pins 14 / 13 / 12) is the reverse of the order at J4 (pins 6 /
+  4 / 2), so UART_3V3 goes on B.Cu, 0.3 mm, from a via in C135 pad 1 (7.0, -80.425) to pin 6, 6.1 mm.
+* Ground (the island is a pour keep-out on every layer, no plane): B.Cu 0.3 mm bus on x 10.05 joining pins 1 / 3 / 5,
+  directly under the F.Cu TXD lane, tied to the ground via of U11 pin 16 / C135 (6.25, -81.275); U11 pin 9 keeps its
+  B.Cu link to that via. The 12 Mbaud signals have a ground pin beside them in the cable but no ground plane under
+  the 4 - 12 mm of track on the island.
+
+Unconnected 0, 0 shorts, clearance 0, dangling 0, parity 0, DRC 137 items as before (courtyards_overlap 133,
+pth_inside_courtyard 2, starved_thermal 2); `check_next.sh` passes. Older text in this file says 4-pin header.
+
 ## Stage 10: mounting hole H5 removed (2026-11-23)
 
 User decision 2026-11-23: H5 at (87.15, -29.81) on the east edge is not used and the board does not droop without it.
@@ -489,7 +511,7 @@ pours and tracks (no power item of those nets was open besides the ones below).
   driver's ground pads (Q9 / C35 / R32) are joined to each other only (see open points).
 - **Supply rails.** 15V / 5V / +3V3 / 15V_ISO_SEC / 5V_ISOL / 6V3 pins to their In3 pour or to the kept 5.1 track of
   the net (28 vias); where the 5.1 feed is a track on In2 its end is taken to the nearest free via site on In2 (5V
-  at DRV3 and DRV5, 5V_ISOL at DRV6, +3V3 at ISO2 / C98). UART island: U11 secondary side, C135, J4 pins 1 / 2.
+  at DRV3 and DRV5, 5V_ISOL at DRV6, +3V3 at ISO2 / C98). UART island: U11 secondary side, C135, J4 pins 1 / 2 (J4 is 1×6 since stage 11: 3V3 on pin 6, ground on 1 / 3 / 5).
 - **PE.** The Y capacitors are joined again on B.Cu, 1.0 mm, ≥ 3.2 mm in plan view from primary pads / tracks on both
   outer layers: C84 – C65 direct, C84 → (−56, −6.2) → (−56, −11.5) → (−53.4, −14.1) → (−43.8, −14.1) → C81 / C82, C85 → C81;
   the two PE terminal pins are joined. The placement's four "PE pour keep-out" rule areas are replaced by

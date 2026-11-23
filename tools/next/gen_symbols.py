@@ -82,6 +82,8 @@ def build():
         from_std("Device", "L", "L_TOROID", "L", desc="PFC choke on a sendust toroid, two leads (NR 5.2)"),
         from_std("Connector_Generic", "Conn_01x04", "CONN_01X04", "J",
                  desc="4-pin 2.54 mm UART header: GND, 3V3 in, TXD in, RXD out (NR 3b)"),
+        from_std("Connector_Generic", "Conn_01x06", "CONN_01X06", "J",
+                 desc="6-pin 2.54 mm UART header: GND, TXD in, GND, RXD out, GND, 3V3 in (NR 3b.2, 2026-11-23)"),
     ]
 
     syms += [

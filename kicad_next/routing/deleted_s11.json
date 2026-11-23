@@ -1,0 +1,152 @@
+{
+ "note": "routing stage 11 (2026-11-23), tools/next/route_s11_j4.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "j4"
+ ],
+ "deleted": [
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "UART_3V3",
+   "layer": "F.Cu",
+   "start": [
+    10.1,
+    -84.86
+   ],
+   "end": [
+    11.1,
+    -85.86
+   ],
+   "width": 0.3,
+   "why": "3V3 moved from pin 2 to pin 6"
+  },
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "UART_3V3",
+   "layer": "F.Cu",
+   "start": [
+    10.1,
+    -83.56
+   ],
+   "end": [
+    10.1,
+    -84.86
+   ],
+   "width": 0.3,
+   "why": "same"
+  },
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "UART_3V3",
+   "layer": "F.Cu",
+   "start": [
+    7.0,
+    -80.46
+   ],
+   "end": [
+    10.1,
+    -83.56
+   ],
+   "width": 0.3,
+   "why": "same"
+  },
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "UART_3V3",
+   "layer": "F.Cu",
+   "start": [
+    7.0,
+    -80.425
+   ],
+   "end": [
+    7.0,
+    -80.46
+   ],
+   "width": 0.3,
+   "why": "same (stub in C135 pad 1)"
+  },
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "ISO_UART_GND",
+   "layer": "F.Cu",
+   "start": [
+    7.0,
+    -81.975
+   ],
+   "end": [
+    7.0,
+    -83.4
+   ],
+   "width": 0.3,
+   "why": "ground of J4 now on B.Cu (the TXD lane takes x 9.9 on F.Cu)"
+  },
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "ISO_UART_GND",
+   "layer": "F.Cu",
+   "start": [
+    7.0,
+    -83.4
+   ],
+   "end": [
+    10.1,
+    -86.5
+   ],
+   "width": 0.3,
+   "why": "same"
+  },
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "ISO_UART_GND",
+   "layer": "F.Cu",
+   "start": [
+    10.1,
+    -86.5
+   ],
+   "end": [
+    10.1,
+    -87.7
+   ],
+   "width": 0.3,
+   "why": "same"
+  },
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "ISO_UART_GND",
+   "layer": "F.Cu",
+   "start": [
+    10.1,
+    -87.7
+   ],
+   "end": [
+    10.8,
+    -88.4
+   ],
+   "width": 0.3,
+   "why": "same"
+  },
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "/04 MCU connector/UART_TXD",
+   "layer": "F.Cu",
+   "start": [
+    7.625,
+    -79.62
+   ],
+   "end": [
+    11.225,
+    -83.22
+   ],
+   "width": 0.2,
+   "why": "TXD moved from pin 3 to pin 2"
+  }
+ ]
+}

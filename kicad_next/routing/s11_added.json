@@ -1,0 +1,216 @@
+{
+ "note": "routing stage 11 (2026-11-23), tools/next/route_s11_j4.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "j4"
+ ],
+ "added": [
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "/04 MCU connector/UART_TXD",
+   "layer": "F.Cu",
+   "start": [
+    7.625,
+    -79.62
+   ],
+   "end": [
+    9.9,
+    -81.895
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "/04 MCU connector/UART_TXD",
+   "layer": "F.Cu",
+   "start": [
+    9.9,
+    -81.895
+   ],
+   "end": [
+    9.9,
+    -85.5
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "/04 MCU connector/UART_TXD",
+   "layer": "F.Cu",
+   "start": [
+    9.9,
+    -85.5
+   ],
+   "end": [
+    10.86,
+    -86.46
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "/04 MCU connector/UART_TXD",
+   "layer": "F.Cu",
+   "start": [
+    10.86,
+    -86.46
+   ],
+   "end": [
+    11.4,
+    -86.46
+   ],
+   "width": 0.2
+  },
+  {
+   "group": "j4",
+   "kind": "via",
+   "net": "UART_3V3",
+   "at": [
+    7.0,
+    -80.425
+   ],
+   "size": [
+    0.6,
+    0.3
+   ]
+  },
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "UART_3V3",
+   "layer": "B.Cu",
+   "start": [
+    7.0,
+    -80.425
+   ],
+   "end": [
+    11.125,
+    -76.3
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "UART_3V3",
+   "layer": "B.Cu",
+   "start": [
+    11.125,
+    -76.3
+   ],
+   "end": [
+    11.4,
+    -76.3
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "ISO_UART_GND",
+   "layer": "B.Cu",
+   "start": [
+    11.4,
+    -89.0
+   ],
+   "end": [
+    10.05,
+    -87.65
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "ISO_UART_GND",
+   "layer": "B.Cu",
+   "start": [
+    10.05,
+    -87.65
+   ],
+   "end": [
+    10.05,
+    -83.92
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "ISO_UART_GND",
+   "layer": "B.Cu",
+   "start": [
+    10.05,
+    -83.92
+   ],
+   "end": [
+    10.05,
+    -80.19
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "ISO_UART_GND",
+   "layer": "B.Cu",
+   "start": [
+    10.05,
+    -80.19
+   ],
+   "end": [
+    11.4,
+    -78.84
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "ISO_UART_GND",
+   "layer": "B.Cu",
+   "start": [
+    10.05,
+    -83.92
+   ],
+   "end": [
+    11.4,
+    -83.92
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "ISO_UART_GND",
+   "layer": "B.Cu",
+   "start": [
+    6.25,
+    -81.275
+   ],
+   "end": [
+    7.4,
+    -82.425
+   ],
+   "width": 0.3
+  },
+  {
+   "group": "j4",
+   "kind": "segment",
+   "net": "ISO_UART_GND",
+   "layer": "B.Cu",
+   "start": [
+    7.4,
+    -82.425
+   ],
+   "end": [
+    10.05,
+    -82.425
+   ],
+   "width": 0.3
+  }
+ ]
+}

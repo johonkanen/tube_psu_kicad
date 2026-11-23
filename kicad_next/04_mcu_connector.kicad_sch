@@ -3561,7 +3561,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "tube_psu_next:CONN_01X04"
+		(symbol "tube_psu_next:CONN_01X06"
 			(pin_names
 				(offset 1.016)
 				(hide yes)
@@ -3572,7 +3572,7 @@
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
 			(property "Reference" "J"
-				(at 0 5.08 0)
+				(at 0 7.62 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -3581,8 +3581,8 @@
 					)
 				)
 			)
-			(property "Value" "CONN_01X04"
-				(at 0 -7.62 0)
+			(property "Value" "CONN_01X06"
+				(at 0 -10.16 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -3613,7 +3613,7 @@
 					)
 				)
 			)
-			(property "Description" "4-pin 2.54 mm UART header: GND, 3V3 in, TXD in, RXD out (NR 3b)"
+			(property "Description" "6-pin 2.54 mm UART header: GND, TXD in, GND, RXD out, GND, 3V3 in (NR 3b.2, 2026-11-23)"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -3646,16 +3646,27 @@
 					)
 				)
 			)
-			(symbol "CONN_01X04_1_1"
+			(symbol "CONN_01X06_1_1"
 				(rectangle
-					(start -1.27 3.81)
-					(end 1.27 -6.35)
+					(start -1.27 6.35)
+					(end 1.27 -8.89)
 					(stroke
 						(width 0.254)
 						(type default)
 					)
 					(fill
 						(type background)
+					)
+				)
+				(rectangle
+					(start -1.27 5.207)
+					(end 0 4.953)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
 					)
 				)
 				(rectangle
@@ -3702,8 +3713,19 @@
 						(type none)
 					)
 				)
+				(rectangle
+					(start -1.27 -7.493)
+					(end 0 -7.747)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
 				(pin passive line
-					(at -5.08 2.54 0)
+					(at -5.08 5.08 0)
 					(length 3.81)
 					(name "Pin_1"
 						(effects
@@ -3721,7 +3743,7 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 0 0)
+					(at -5.08 2.54 0)
 					(length 3.81)
 					(name "Pin_2"
 						(effects
@@ -3739,7 +3761,7 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 -2.54 0)
+					(at -5.08 0 0)
 					(length 3.81)
 					(name "Pin_3"
 						(effects
@@ -3757,7 +3779,7 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 -5.08 0)
+					(at -5.08 -2.54 0)
 					(length 3.81)
 					(name "Pin_4"
 						(effects
@@ -3767,6 +3789,42 @@
 						)
 					)
 					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -5.08 0)
+					(length 3.81)
+					(name "Pin_5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -7.62 0)
+					(length 3.81)
+					(name "Pin_6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13585,7 +13643,7 @@
 		)
 	)
 	(symbol
-		(lib_id "tube_psu_next:CONN_01X04")
+		(lib_id "tube_psu_next:CONN_01X06")
 		(at 325.12 223.52 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -13594,22 +13652,22 @@
 		(dnp no)
 		(uuid "bfc2d698-7710-58e0-88d1-6257885f3600")
 		(property "Reference" "J4"
-			(at 325.12 218.44 0)
+			(at 325.12 215.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "UART 1x4"
-			(at 325.12 231.14 0)
+		(property "Value" "UART 1x6"
+			(at 325.12 233.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical"
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical"
 			(at 325.12 223.52 0)
 			(effects
 				(font
@@ -13627,7 +13685,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "4-pin 2.54 mm UART header: GND, 3V3 in, TXD in, RXD out (NR 3b)"
+		(property "Description" "6-pin 2.54 mm UART header: GND, TXD in, GND, RXD out, GND, 3V3 in (NR 3b.2, 2026-11-23)"
 			(at 325.12 223.52 0)
 			(effects
 				(font
@@ -13636,7 +13694,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C2691448"
+		(property "LCSC" "C492405"
 			(at 325.12 223.52 0)
 			(effects
 				(font
@@ -13657,6 +13715,12 @@
 		(pin "4"
 			(uuid "91fa017f-f79d-56e5-ab12-fee291f3fcaa")
 		)
+		(pin "5"
+			(uuid "caa34c0e-82ea-59c5-b7e6-854ead1b617a")
+		)
+		(pin "6"
+			(uuid "31e6caba-90ab-507e-b44c-da128c0488c0")
+		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/50ce8637-beca-4745-9ce6-9d1bd3bb08df"
@@ -13668,7 +13732,7 @@
 	)
 	(wire
 		(pts
-			(xy 320.04 220.98) (xy 312.42 220.98)
+			(xy 320.04 218.44) (xy 312.42 218.44)
 		)
 		(stroke
 			(width 0)
@@ -13678,7 +13742,7 @@
 	)
 	(symbol
 		(lib_id "tube_psu_next:ISO_UART_GND")
-		(at 312.42 220.98 0)
+		(at 312.42 218.44 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13686,7 +13750,7 @@
 		(dnp no)
 		(uuid "fb2cfd81-f729-5589-bf68-67a90338f1b7")
 		(property "Reference" "#PWR048"
-			(at 312.42 227.33 0)
+			(at 312.42 224.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13695,7 +13759,7 @@
 			)
 		)
 		(property "Value" "ISO_UART_GND"
-			(at 312.42 224.79 0)
+			(at 312.42 222.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13703,7 +13767,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 312.42 220.98 0)
+			(at 312.42 218.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13712,7 +13776,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 312.42 220.98 0)
+			(at 312.42 218.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13721,7 +13785,7 @@
 			)
 		)
 		(property "Description" "Power symbol for net \"ISO_UART_GND\" (IPC net name)"
-			(at 312.42 220.98 0)
+			(at 312.42 218.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13743,7 +13807,7 @@
 	)
 	(wire
 		(pts
-			(xy 312.42 220.98) (xy 312.42 218.44)
+			(xy 312.42 218.44) (xy 312.42 215.9)
 		)
 		(stroke
 			(width 0)
@@ -13753,7 +13817,7 @@
 	)
 	(symbol
 		(lib_id "tube_psu_next:PWR_FLAG")
-		(at 312.42 218.44 0)
+		(at 312.42 215.9 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13761,7 +13825,7 @@
 		(dnp no)
 		(uuid "4c2303a3-e109-53a7-89c0-79234d845622")
 		(property "Reference" "#FLG049"
-			(at 312.42 216.535 0)
+			(at 312.42 213.995 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13770,7 +13834,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 312.42 214.63 0)
+			(at 312.42 212.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13778,7 +13842,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 312.42 218.44 0)
+			(at 312.42 215.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13787,7 +13851,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 312.42 218.44 0)
+			(at 312.42 215.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13796,7 +13860,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 312.42 218.44 0)
+			(at 312.42 215.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13818,7 +13882,7 @@
 	)
 	(wire
 		(pts
-			(xy 320.04 223.52) (xy 302.26 223.52)
+			(xy 320.04 223.52) (xy 307.34 223.52)
 		)
 		(stroke
 			(width 0)
@@ -13827,8 +13891,8 @@
 		(uuid "1788693c-d946-58f6-8416-dd61c5e5d2dc")
 	)
 	(symbol
-		(lib_id "tube_psu_next:UART_3V3")
-		(at 302.26 223.52 0)
+		(lib_id "tube_psu_next:ISO_UART_GND")
+		(at 307.34 223.52 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13836,7 +13900,7 @@
 		(dnp no)
 		(uuid "8c520287-016d-5dca-847f-ccfb2b1cb519")
 		(property "Reference" "#PWR050"
-			(at 302.26 227.33 0)
+			(at 300.99 223.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13844,16 +13908,17 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "UART_3V3"
-			(at 302.26 219.964 0)
+		(property "Value" "ISO_UART_GND"
+			(at 304.04 223.52 270)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
-			(at 302.26 223.52 0)
+			(at 307.34 223.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13862,7 +13927,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 302.26 223.52 0)
+			(at 307.34 223.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13870,8 +13935,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"UART_3V3\" (IPC net name)"
-			(at 302.26 223.52 0)
+		(property "Description" "Power symbol for net \"ISO_UART_GND\" (IPC net name)"
+			(at 307.34 223.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13893,7 +13958,7 @@
 	)
 	(wire
 		(pts
-			(xy 302.26 223.52) (xy 302.26 226.06)
+			(xy 320.04 228.6) (xy 307.34 228.6)
 		)
 		(stroke
 			(width 0)
@@ -13902,16 +13967,16 @@
 		(uuid "4fb611c1-ae41-5326-9a53-7080891b7966")
 	)
 	(symbol
-		(lib_id "tube_psu_next:PWR_FLAG")
-		(at 302.26 226.06 180)
+		(lib_id "tube_psu_next:ISO_UART_GND")
+		(at 307.34 228.6 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "f3157ad6-6af5-55f4-9168-ae03afd0c3c2")
-		(property "Reference" "#FLG051"
-			(at 302.26 227.965 0)
+		(uuid "41612c9b-16cd-53b7-897e-3d8639ef6b85")
+		(property "Reference" "#PWR051"
+			(at 300.99 228.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13919,16 +13984,17 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "PWR_FLAG"
-			(at 302.26 229.87 0)
+		(property "Value" "ISO_UART_GND"
+			(at 304.04 228.6 270)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
-			(at 302.26 226.06 0)
+			(at 307.34 228.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13937,7 +14003,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 302.26 226.06 0)
+			(at 307.34 228.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13945,8 +14011,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 302.26 226.06 0)
+		(property "Description" "Power symbol for net \"ISO_UART_GND\" (IPC net name)"
+			(at 307.34 228.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13955,12 +14021,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "05cbf3f3-16bc-54f3-ac3f-a5d5a48744bc")
+			(uuid "36aeb17b-5200-540c-b5d8-9b5bb871d633")
 		)
 		(instances
 			(project "tube_psu_5_2"
 				(path "/cce323c4-7450-4a52-888d-93ce286361fa/50ce8637-beca-4745-9ce6-9d1bd3bb08df"
-					(reference "#FLG051")
+					(reference "#PWR051")
 					(unit 1)
 				)
 			)
@@ -13968,7 +14034,7 @@
 	)
 	(wire
 		(pts
-			(xy 320.04 226.06) (xy 314.96 226.06)
+			(xy 320.04 220.98) (xy 314.96 220.98)
 		)
 		(stroke
 			(width 0)
@@ -13977,7 +14043,7 @@
 		(uuid "353b8fa2-d345-5c8e-b480-4c5ef052f2f1")
 	)
 	(label "UART_TXD"
-		(at 314.96 226.06 180)
+		(at 314.96 220.98 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13988,7 +14054,7 @@
 	)
 	(wire
 		(pts
-			(xy 320.04 228.6) (xy 314.96 228.6)
+			(xy 320.04 226.06) (xy 314.96 226.06)
 		)
 		(stroke
 			(width 0)
@@ -13997,7 +14063,7 @@
 		(uuid "a1b82a13-d90f-5454-bc34-c2091b44ae19")
 	)
 	(label "UART_RXD"
-		(at 314.96 228.6 180)
+		(at 314.96 226.06 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14006,7 +14072,157 @@
 		)
 		(uuid "e90a68c4-d05a-5015-8f37-0c5aea9a8fa5")
 	)
-	(text "J4: UART minimodule 3.3 V (1 GND, 2 3V3 in - powers U11 side 2, 3 TXD in, 4 RXD out); island ISO_UART_GND, >= 8 mm to primary on all layers (NR 3b)."
+	(wire
+		(pts
+			(xy 320.04 231.14) (xy 297.18 231.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "69c1446c-0bd2-5041-8fa9-31264a4df2b1")
+	)
+	(symbol
+		(lib_id "tube_psu_next:UART_3V3")
+		(at 297.18 231.14 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3598affb-3448-5c07-b00f-9e8d4f1ec782")
+		(property "Reference" "#PWR052"
+			(at 297.18 234.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "UART_3V3"
+			(at 297.18 227.584 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 297.18 231.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 297.18 231.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"UART_3V3\" (IPC net name)"
+			(at 297.18 231.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2f6f6158-2f92-55cb-85b9-f4b5803e5964")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/50ce8637-beca-4745-9ce6-9d1bd3bb08df"
+					(reference "#PWR052")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 297.18 231.14) (xy 297.18 233.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4c549110-e306-568d-907f-9d0cca52d53c")
+	)
+	(symbol
+		(lib_id "tube_psu_next:PWR_FLAG")
+		(at 297.18 233.68 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "116093c9-a0db-52e3-8bd4-b76ca691ca0f")
+		(property "Reference" "#FLG053"
+			(at 297.18 235.585 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 297.18 237.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 297.18 233.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 297.18 233.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 297.18 233.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3d8673cf-230e-5363-aaa9-f67e52d62c94")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/50ce8637-beca-4745-9ce6-9d1bd3bb08df"
+					(reference "#FLG053")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(text "J4: UART 3.3 V, 12 Mbaud (1 GND, 2 TXD in, 3 GND, 4 RXD out, 5 GND, 6 3V3 in - powers U11 side 2); island ISO_UART_GND, >= 8 mm to primary on all layers (NR 3b)."
 		(exclude_from_sim no)
 		(at 190.5 254 0)
 		(effects
@@ -14015,7 +14231,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "69c1446c-0bd2-5041-8fa9-31264a4df2b1")
+		(uuid "f6513a41-ee3c-57f5-923d-68b39bc63091")
 	)
 	(embedded_fonts no)
 )

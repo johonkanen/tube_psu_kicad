@@ -116,8 +116,8 @@ slot unchanged.
 | NR | Done | Refdes / value / nets |
 |---|---|---|
 | 3b.1 | yes, part changed | **U11 = CA-IS3721HW** (C5337993, symbol `SI8621`). **Si8621BD is default-LOW** (Skyworks ordering guide: Bx = low, Ex = high), so with no cable the FPGA RX would read a break; the default-high Si8621**ED** has 0 JLC stock, the Chipanalog CA-IS3721HW has the **same WB SOIC-16 pinout** (1/7 GND1, 3 VDD1, 4 A1 in → 13 B1 out, 12 B2 in → 5 A2 out, 9/16 GND2, 14 VDD2) and default-high outputs, 1358 pcs. Side 1: +3V3 / GND, A1 ← **TX** (J2-26), A2 → **RX** (J2-24), C134 100n; side 2: UART_3V3 / ISO_UART_GND, C135 100n |
-| 3b.2 | yes | **J4 → 1×4 2.54 mm UART header** (PZ254V-11-04P, C2691448; user 2026-11-19, was a 6-pin FTDI header): 1 ISO_UART_GND, 2 **UART_3V3 in** (the USB-UART minimodule's 3.3 V powers U11 side 2), 3 TXD in → **R136 47R** → B2, 4 RXD out ← **R137 47R** ← B1 |
-| 3b.3 | removed (user 2026-11-19) | ~~U12 XC6206P332MR LDO UART_5V → UART_3V3, C136 / C137 1µ~~: the minimodule supplies 3.3 V on J4 pin 2; C135 100n stays as U11 side-2 decoupling. Refdes U12, C136, C137 unused |
+| 3b.2 | yes | **J4 → 1×6 2.54 mm UART header** (PZ254V-11-06P, C492405; user 2026-11-23: 12 Mbaud single-ended link between two FPGA boards, a ground pin beside each signal): 1 ISO_UART_GND, 2 **TXD in** → **R136 47R** → B2, 3 ISO_UART_GND, 4 **RXD out** ← **R137 47R** ← B1, 5 ISO_UART_GND, 6 **UART_3V3 in** (the 3.3 V of the other end powers U11 side 2). Before: 1×4 PZ254V-11-04P C2691448 (user 2026-11-19: 1 GND, 2 3V3, 3 TXD, 4 RXD); before that a 6-pin FTDI header |
+| 3b.3 | removed (user 2026-11-19) | ~~U12 XC6206P332MR LDO UART_5V → UART_3V3, C136 / C137 1µ~~: the minimodule supplies 3.3 V on J4 (pin 6 since 2026-11-23, was pin 2); C135 100n stays as U11 side-2 decoupling. Refdes U12, C136, C137 unused |
 | 3b.4 | rules | new domain **UART** (ground ISO_UART_GND, barrier U11) in `setup_project.py`: nets ISO_UART_GND, UART_3V3, UART_TXD, UART_RXD, U11-B1/B2, unconnected U11 pins → class **UART_ISO** (9 nets; 12 before U12 / UART_5V / the J4 n.c. pins were removed); rules PRI-UART 8.0 mm / SEC-UART 8.4 mm / HEATER-UART 1.0 mm were already in the `.kicad_dru`, now tested by 4 new cases in `check_rules.py` (19/19 pass). Layout (slot under U11, island keep-out) phase 5 |
 
 ## 4. Measurements (sheets 4, 8, 9, 10)
@@ -249,7 +249,7 @@ Parts: 5.1 315, 5.2 363; removed 12, added 60.
 | IN2 |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |
 | ISO1 | SI8661 -> CA-IS3761LW |  | tube_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus -> tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0_T_ISO1 |
 | ISO2 | SI8661 -> CA-IS3761LW |  | tube_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus -> tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot11.1 |
-| J4 | 66226-003 -> UART 1x4 | CONN_01X03 -> CONN_01X04 | Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical -> Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical |
+| J4 | 66226-003 -> UART 1x6 | CONN_01X03 -> CONN_01X06 | Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical -> Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical |
 | L1 | 200u -> TBD (measured) | RM8_INDUCTOR -> L_TOROID | tube_psu:L_RM8_Proteus -> tube_psu_next:L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_45deg |
 | L2 | 200u -> TBD (measured) | RM8_INDUCTOR -> L_TOROID | tube_psu:L_RM8_Proteus -> tube_psu_next:L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_315deg |
 | N80V_OUT |  |  | tube_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm -> tube_psu_next_parts:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm |

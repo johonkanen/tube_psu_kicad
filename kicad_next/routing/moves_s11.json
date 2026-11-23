@@ -1,0 +1,29 @@
+{
+ "note": "routing stage 11 (2026-11-23), tools/next/route_s11_j4.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "j4"
+ ],
+ "moves": [
+  {
+   "group": "j4",
+   "ref": "J4",
+   "footprint": {
+    "frm": "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical",
+    "to": "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical"
+   },
+   "frm": {
+    "x": 11.4,
+    "y": -89.0,
+    "rot": 0.0,
+    "side": "F"
+   },
+   "to": {
+    "x": 11.4,
+    "y": -89.0,
+    "rot": 0.0,
+    "side": "F"
+   },
+   "why": "1x6: a ground pin beside each signal (12 Mbaud)"
+  }
+ ]
+}
