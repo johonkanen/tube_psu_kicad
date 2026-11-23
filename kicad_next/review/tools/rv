@@ -1,0 +1,106 @@
+#!/usr/bin/env bash
+# Front end of the 5.2 design-review helpers. Read-only on the repository: it writes only into its cache
+# directory ${TMPDIR:-/tmp}/tube_psu_review_<uid>/ (netlists and board dumps, rebuilt when a source is newer).
+#
+#   kicad_next/review/tools/rv guard            lock file / running KiCad jobs / free RAM - run this first
+#   kicad_next/review/tools/rv setup            export the 5.2 + 5.1 netlists and dump both boards into the cache
+#                                               (4 light KiCad jobs, one after the other, < 10 s, < 300 MB)
+#   kicad_next/review/tools/rv sch   CMD ...    sch.py on the 5.2 netlist   (sheets | sheet N | ref R | net N | bom N | kind C | check | part R | cmp51 N)
+#   kicad_next/review/tools/rv sch51 CMD ...    sch.py on the 5.1 netlist
+#   kicad_next/review/tools/rv bq    CMD ...    bq.py on the 5.2 board      (fp | area | nets | net | pads | dist | near | padgap | neck | xsec | loop | slots | holes | classes)
+#   kicad_next/review/tools/rv bq51  CMD ...    bq.py on the 5.1 board kicad/tube_psu.kicad_pcb (4 layers, every net in class Default)
+#   kicad_next/review/tools/rv pdf FIRST [LAST] text of pages FIRST..LAST of the owner's 2021 design document (pdftotext -layout)
+#   kicad_next/review/tools/rv section FILE 'HEADING REGEX'
+#                                               print one section of a Markdown file: from the first heading that
+#                                               matches (case-insensitive) to the next heading of the same or a
+#                                               higher level, with line numbers (kicad_next/README.md is 2200+ lines)
+#   kicad_next/review/tools/rv headings FILE    the headings of a Markdown file with line numbers
+#   kicad_next/review/tools/rv dir              print the cache directory
+#
+# sch.py / bq.py --help texts: run them without arguments. `rv sch cmp51 N` = `sch.py n52.xml cmp n51.xml N`.
+set -u
+HERE="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
+ROOT="$(cd "$HERE/../../.." && pwd)"
+CACHE="${TMPDIR:-/tmp}/tube_psu_review_$(id -u)"
+PDF="${TUBE_PSU_PDF:-/mnt/c/Users/jaarh/Sync/tube_amp_power.pdf}"
+B52="$ROOT/kicad_next/tube_psu_5_2.kicad_pcb"; B51="$ROOT/kicad/tube_psu.kicad_pcb"
+S52="$ROOT/kicad_next/tube_psu_5_2.kicad_sch"; S51="$ROOT/kicad/tube_psu.kicad_sch"
+quiet() { "$@" 2>&1 | grep -v -e "Debug: Adding duplicate image handler" -e "annotation errors"; return "${PIPESTATUS[0]}"; }
+
+guard() {
+    local bad=0
+    if ls "$ROOT"/kicad_next/*.lck "$ROOT"/kicad_next/~*.lck >/dev/null 2>&1; then
+        echo "STOP: KiCad lock file in kicad_next/ (the GUI has the project open):"; ls "$ROOT"/kicad_next/*.lck "$ROOT"/kicad_next/~*.lck 2>/dev/null; bad=1
+    fi
+    local jobs
+    jobs="$(pgrep -af "kicad-cli|kipy|check_next|python3.11" | grep -v -e pgrep -e "tools/rv" | cut -c1-160)"
+    if [ -n "$jobs" ]; then echo "KiCad jobs running now (wait before starting a heavy one; never pkill -f):"; echo "$jobs"; fi
+    awk '/MemAvailable/ {printf "MemAvailable %.1f GB\n", $2/1048576}' /proc/meminfo
+    return $bad
+}
+
+newer() { [ ! -s "$1" ] || [ "$2" -nt "$1" ]; }   # target missing/empty or source newer
+
+setup() {
+    guard || exit 1
+    mkdir -p "$CACHE"
+    cd "$ROOT" || exit 1
+    local sch_src52 sch_src51
+    sch_src52="$(ls -t kicad_next/*.kicad_sch | head -1)"; sch_src51="$(ls -t kicad/*.kicad_sch | head -1)"
+    if newer "$CACHE/n52.xml" "$sch_src52"; then
+        quiet tools/p2k/bin/kicad-cli sch export netlist --format kicadxml -o "$CACHE/n52.xml.$$" "$S52" && mv "$CACHE/n52.xml.$$" "$CACHE/n52.xml"
+    fi
+    if newer "$CACHE/n51.xml" "$sch_src51"; then
+        quiet tools/p2k/bin/kicad-cli sch export netlist --format kicadxml -o "$CACHE/n51.xml.$$" "$S51" && mv "$CACHE/n51.xml.$$" "$CACHE/n51.xml"
+    fi
+    if newer "$CACHE/b52.json" "$B52" || newer "$CACHE/b52.json" "$HERE/board_dump.py"; then
+        quiet tools/p2k/bin/kipy "$HERE/board_dump.py" "$B52" "$CACHE/b52.json.$$" && mv "$CACHE/b52.json.$$" "$CACHE/b52.json"
+    fi
+    if newer "$CACHE/b51.json" "$B51" || newer "$CACHE/b51.json" "$HERE/board_dump.py"; then
+        quiet tools/p2k/bin/kipy "$HERE/board_dump.py" "$B51" "$CACHE/b51.json.$$" && mv "$CACHE/b51.json.$$" "$CACHE/b51.json"
+    fi
+    ls -la "$CACHE"/n52.xml "$CACHE"/n51.xml "$CACHE"/b52.json "$CACHE"/b51.json
+}
+
+need() { [ -s "$1" ] || { echo "cache missing: run  kicad_next/review/tools/rv setup  first" >&2; exit 1; }; }
+
+cmd="${1:-}"; [ $# -gt 0 ] && shift
+case "$cmd" in
+    guard) guard ;;
+    setup) setup ;;
+    dir) echo "$CACHE" ;;
+    sch)
+        need "$CACHE/n52.xml"
+        if [ "${1:-}" = "cmp51" ]; then shift; exec python3 "$HERE/sch.py" "$CACHE/n52.xml" cmp "$CACHE/n51.xml" "$@"; fi
+        exec python3 "$HERE/sch.py" "$CACHE/n52.xml" "$@" ;;
+    sch51) need "$CACHE/n51.xml"; exec python3 "$HERE/sch.py" "$CACHE/n51.xml" "$@" ;;
+    bq) need "$CACHE/b52.json"; exec python3 "$HERE/bq.py" "$CACHE/b52.json" "$@" ;;
+    bq51) need "$CACHE/b51.json"; exec python3 "$HERE/bq.py" "$CACHE/b51.json" "$@" ;;
+    pdf)
+        [ -r "$PDF" ] || { echo "design document not readable: $PDF (set TUBE_PSU_PDF)" >&2; exit 1; }
+        exec pdftotext -layout -f "${1:?first page}" -l "${2:-$1}" "$PDF" - ;;
+    headings) exec grep -n '^#' "${1:?file}" ;;
+    section)
+        exec python3 - "${1:?file}" "${2:?heading regex}" <<'PY'
+import re, sys
+lines = open(sys.argv[1]).read().split("\n")
+pat = re.compile(sys.argv[2], re.I)
+start = level = None
+for i, l in enumerate(lines):
+    m = re.match(r"(#+)\s", l)
+    if start is None:
+        if m and pat.search(l):
+            start, level = i, len(m.group(1))
+    elif m and len(m.group(1)) <= level:
+        end = i
+        break
+else:
+    end = len(lines)
+if start is None:
+    sys.exit(f"no heading matches {sys.argv[2]!r} (rv headings FILE lists them)")
+for i in range(start, end):
+    print(f"{i + 1:5}  {lines[i]}")
+PY
+        ;;
+    *) sed -n '2,22p' "$0"; exit 1 ;;
+esac
