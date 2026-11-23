@@ -1,0 +1,214 @@
+{
+ "deleted": [
+  {
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    68.88,
+    -41.95
+   ],
+   "end": [
+    68.88,
+    -44.4
+   ],
+   "width": 0.75
+  },
+  {
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "F.Cu",
+   "start": [
+    54.675,
+    -41.95
+   ],
+   "end": [
+    54.675,
+    -44.6
+   ],
+   "width": 0.75
+  },
+  {
+   "net": "15V_ISO_SEC",
+   "layer": "In3.Power",
+   "start": [
+    62.5,
+    -46.0
+   ],
+   "end": [
+    61.2,
+    -47.3
+   ],
+   "width": 0.5
+  },
+  {
+   "net": "15V_ISO_SEC",
+   "layer": "In3.Power",
+   "start": [
+    61.2,
+    -47.3
+   ],
+   "end": [
+    61.2,
+    -50.5
+   ],
+   "width": 0.5
+  }
+ ],
+ "added": [
+  {
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    68.88,
+    -41.95
+   ],
+   "end": [
+    68.88,
+    -43.6
+   ],
+   "width": 0.75
+  },
+  {
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    68.88,
+    -43.6
+   ],
+   "end": [
+    68.88,
+    -44.4
+   ],
+   "width": 1.0
+  },
+  {
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "F.Cu",
+   "start": [
+    54.45,
+    -41.95
+   ],
+   "end": [
+    54.45,
+    -44.6
+   ],
+   "width": 1.2
+  },
+  {
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "F.Cu",
+   "start": [
+    54.45,
+    -44.6
+   ],
+   "end": [
+    54.675,
+    -44.6
+   ],
+   "width": 1.2
+  },
+  {
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "F.Cu",
+   "start": [
+    62.8,
+    -49.2
+   ],
+   "end": [
+    62.8,
+    -48.1
+   ],
+   "width": 1.2
+  },
+  {
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    62.8,
+    -49.2
+   ],
+   "end": [
+    62.4,
+    -49.6
+   ],
+   "width": 1.0
+  },
+  {
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    62.4,
+    -49.6
+   ],
+   "end": [
+    62.0,
+    -49.6
+   ],
+   "width": 1.0
+  },
+  {
+   "net": "DHB_HI_SOURCE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    62.0,
+    -49.6
+   ],
+   "end": [
+    61.2,
+    -49.6
+   ],
+   "width": 0.8
+  },
+  {
+   "net": "15V_ISO_SEC",
+   "layer": "In3.Power",
+   "start": [
+    62.5,
+    -46.0
+   ],
+   "end": [
+    60.0,
+    -48.5
+   ],
+   "width": 0.5
+  },
+  {
+   "net": "15V_ISO_SEC",
+   "layer": "In3.Power",
+   "start": [
+    60.0,
+    -48.5
+   ],
+   "end": [
+    60.0,
+    -50.5
+   ],
+   "width": 0.5
+  }
+ ],
+ "vias": [
+  {
+   "at": [
+    62.8,
+    -48.1
+   ],
+   "size": 0.8,
+   "drill": 0.4
+  },
+  {
+   "at": [
+    62.0,
+    -49.6
+   ],
+   "size": 0.8,
+   "drill": 0.4
+  },
+  {
+   "at": [
+    61.2,
+    -49.6
+   ],
+   "size": 0.8,
+   "drill": 0.4
+  }
+ ]
+}

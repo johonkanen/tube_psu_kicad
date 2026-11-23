@@ -204,6 +204,25 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 13a: Q8 drain link of the DAB secondary node (2026-11-23)
+
+Design review 2026-11-23 (findings 07 D2 / F4, 11 E4 / F1): the secondary switch node DHB_HI_SOURCE_SEC (about
+2.2 A rms) reached Q8 pin 2 through **one** 1.0 / 0.5 via at (62.8, -49.2). `tools/next/route_s13a_q8_drain.py`
+(one-shot, `routing/moves_s13a.json`):
+
+* three 0.8 / 0.4 vias beside it: (62.8, -48.1) on the B.Cu 1.0 mm track (F.Cu 1.2 mm stub from the old via; a longer
+  stub cuts the F.Cu 420V pour between Q21.2 and C16), (62.0, -49.6) and (61.2, -49.6) under the F.Cu 1.2 mm track
+  (B.Cu 1.0 / 0.8 mm piece from the old via). Vias on the path: **1 → 4** (1 × 1.0/0.5 + 3 × 0.8/0.4, ≈ 4.2 A by the
+  via scale of this file for 2.2 A rms).
+* the In3 15V_ISO_SEC link from the via (62.5, -43.8) into the In3 plane moved from x 61.2 to x 60.0 (0.5 mm inner HV
+  clearance to the new vias).
+* Q21.3 exit on F.Cu 0.75 → **1.2 mm** (centre x 54.45, 1.2 mm to Q21.2 / 420V kept).
+* Q8.2 exit on B.Cu: 1.0 mm from y -43.6 on; the first 1.65 mm (was 2.45 mm) between the Q8 pads stays 0.75 mm,
+  because the 1.2 mm HV rule to Q8.1 (gate) and Q8.3 (ISO_GND) leaves at most 0.77 mm there.
+
+Narrowest piece of the power path: 0.75 mm, 1.65 mm long, at Q8.2 (was 0.75 mm at Q8.2 and Q21.3, 2.45 + 2.65 mm).
+Unconnected 0, 0 shorts, clearance 0, dangling 0, parity 0, DRC 137 items as before; `check_next.sh` passes.
+
 ## Stage 12: UART TX / RX gap on the primary side widened (2026-11-23)
 
 User decision 2026-11-23 (12 Mbaud): the two nets `/04 MCU connector/TX` and `/04 MCU connector/RX` ran side by side
