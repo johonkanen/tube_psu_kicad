@@ -25,6 +25,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 SRC = os.path.join(ROOT, "kicad", "tube_psu.kicad_pcb")
 OUT = os.path.join(ROOT, "kicad_next", "tube_psu_5_2.kicad_pcb")
 HOLES = [f"H{i}" for i in range(1, 9)]
+# H5 (87.15, -29.81) removed on the real board (user 2026-11-23, route_s10_no_h5.py): not used, no droop without it
+HOLES_REMOVED = {"H5"}
 
 # (layer id, user name, type) - NEXT_REVISION_PLAN.md phase 1 task 2
 COPPER = [
@@ -144,8 +146,9 @@ def check():
                     and bb.GetTop() < sb.GetTop() and sb.GetBottom() < bb.GetBottom()):
                 errs.append(f"Edge.Cuts {s.GetShapeStr()} at ({mm(s.GetStart().x)}, {mm(s.GetStart().y)}) "
                             "is not inside the 5.1 outline")
-    if holes(b) != holes(src) or len(holes(b)) != 8:
-        errs.append("mounting holes H1-H8 differ from 5.1")
+    want = {k: v for k, v in holes(src).items() if k not in HOLES_REMOVED}
+    if holes(b) != want or len(holes(b)) != 7:
+        errs.append("mounting holes H1-H4, H6-H8 differ from 5.1")
     with open(OUT) as f:
         text = f.read()
     got = [(m.group(1), float(m.group(2))) for m in

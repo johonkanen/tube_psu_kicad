@@ -1,0 +1,17 @@
+{
+ "deleted": [
+  {
+   "kind": "footprint",
+   "ref": "H5",
+   "fpid": "tube_psu:MountingHole_3.0mm_NPTH_Ring3.5mm",
+   "at": [
+    87.148,
+    -29.813
+   ]
+  },
+  {
+   "kind": "rule area",
+   "name": "mounting hole H5 pour keep-out (secondary 4.2 mm creepage)"
+  }
+ ]
+}

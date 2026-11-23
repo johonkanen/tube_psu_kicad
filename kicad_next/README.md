@@ -204,6 +204,14 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 10: mounting hole H5 removed (2026-11-23)
+
+User decision 2026-11-23: H5 at (87.15, -29.81) on the east edge is not used and the board does not droop without it.
+`tools/next/route_s10_no_h5.py` (one-shot, `routing/deleted_s10.json`) deletes the footprint and its pour keep-out
+(secondary 4.2 mm); the ISO_GND pours fill the freed area. Seven holes are left (H1 - H4, H6 - H8;
+`make_board.py --check` compares these with 5.1). No track was moved; the 420V detour round H5 (stage 3 text below)
+is still there and could be shortened. Older text in this file says H1 - H8.
+
 ## Stage 9: no DC+ on inner layers (2026-11-23)
 
 User decision 2026-11-23: DC+ and its GND return are kept on F.Cu / B.Cu, not on inner layers (the In1 / In4 GND
