@@ -32,9 +32,9 @@ CASES = [
     ("GND", "ISO_GND", "In1", 6.0, {"clearance"}),                 # PRI-SEC inner 11.1
     ("GND", "ISO_GND", "In1", 11.5, set()),
     ("GND", "ISO_GND", "B", 3.5, {"clearance", "creepage"}),        # PRI-SEC clearance 4.0
-    ("+3V3", "HT_GND", "F", 7.0, {"creepage"}),                    # PRI-HEATER creepage 8.0
-    ("+3V3", "HT_GND", "In3", 7.0, {"clearance"}),                 # PRI-HEATER inner 8.0
-    ("+3V3", "HT_GND", "F", 8.5, set()),
+    ("+3V3", "HT_GND", "F", 7.0, {"creepage"}),                    # PRI-HEATER creepage 8.2 (8.0 until stage 13d)
+    ("+3V3", "HT_GND", "In3", 8.1, {"clearance"}),                 # PRI-HEATER inner 8.2
+    ("HT_GND", "+3V3", "F", 8.5, set()),                           # (HT_GND first: away from the NC_TESTS DC+ / GND, 8.15 mm)
     ("420V", "HT_GND", "F", 4.5, {"creepage"}),                    # SEC(HV)-HEATER functional creepage 5.2
     ("ISO_GND", "HT_GND", "F", 1.2, {"creepage"}),                 # SEC(LV)-HEATER creepage 1.5
     ("ISO_GND", "HT_GND", "F", 2.0, set()),
@@ -54,11 +54,12 @@ CASES = [
     ("5V", "GND", "In2", 0.16, set()),                              # PRIMARY_LV on inner layers: 0.15 (stage 3d)
     ("5V", "GND", "F", 0.16, {"clearance"}),                       # ... outer layers keep the class clearance 0.2
     ("5V", "DC+", "In2", 0.3, {"clearance"}),                      # ... and a HV net its 0.5 on the inner layers
+    ("GND", "ISO_UART_GND", "In2", 8.1, set()),                    # PRI-UART inner stays 8.0 (heater 8.2 since 13d)
 ]
 # The four extra slots (5.2 UART cases): KiCad 10 reported no creepage violation for test tracks at
 # (-10, -70) and (75, -50) (clearance works there; not understood - the creepage cases sit at (-10, -15) /
 # (75, 0), where it is reported). A wrong rule still shows up as a FAIL, a silent slot only as a false FAIL.
-SLOTS = [(x, y) for y in (-70, -40, -10, 15) for x in (-55, -30, 30, 55)] + [(-10, -70), (75, -50), (-10, -15), (75, 0)] + [(-5, -25), (15, -25), (-42.5, 5), (42.5, 5)] + [(-30, -84), (30, -84), (55, -84)]
+SLOTS = [(x, y) for y in (-70, -40, -10, 15) for x in (-55, -30, 30, 55)] + [(-10, -70), (75, -50), (-10, -15), (75, 0)] + [(-5, -25), (15, -25), (-42.5, 5), (42.5, 5)] + [(-30, -84), (30, -84), (55, -84)] + [(-20, 5)]
 assert len(CASES) <= len(SLOTS), "add test positions to SLOTS"
 # Mounting holes (no copper ring since stage 13c; the earthed screw has a 6 mm head): (hole, net, layer, distance of the
 # track edge from the hole CENTRE mm, side of the hole, expected). One test per hole (spots are matched by distance; the

@@ -108,22 +108,42 @@
 # Q21, so no pair needs it. Every primary <-> secondary pair on the inner layers is checked at 11.1 mm.)
 
 # ---------------------------------------------------------------------------------------------------
-# Primary <-> heater and primary <-> UART island: REINFORCED. Working voltage 318 Vrms / 400 Vpk
-# (domain earthed; the heater may sit at the -100 V bias: sqrt(318^2 + 100^2) = 333 Vrms -> 6.7 mm):
-# creepage 8.0 mm used (= reinforced for 400 Vrms; UART user-touchable, plan target >= 8 mm). Clearance 4.0 mm as above.
-(rule "PRI-HEATER/UART reinforced clearance"
+# Primary <-> heater: REINFORCED. With HT_GND at the -100 V bias (ISO_GND earthed) DC+ - HT = 400 + 100 + GND(t), GND(t) =
+# min(0, 358 sin): the 100 V is a DC shift and adds linearly (not in quadrature as sqrt(318^2 + 100^2) = 333 Vrms
+# assumed before): 410 Vrms, 500 Vpk (design review 2026-11-23, findings 10 A1 / F3). Basic 4.1 mm (IEC 60664-1 F.5 PD2
+# MG III, 400 / 500 V rows 4.0 / 5.0 interpolated), reinforced 2 x 4.1 = 8.2 mm (was 8.0 until routing stage 13d).
+# Clearance 4.0 mm (reinforced for the 2500 V mains transient = 3.0 mm).
+(rule "PRI-HEATER reinforced clearance"
 	(layer outer)
-	(condition "((A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')) && (B.hasNetclass('HEATER') || B.hasNetclass('UART_ISO'))) || ((B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL')) && (A.hasNetclass('HEATER') || A.hasNetclass('UART_ISO')))")
+	(condition "((A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')) && B.hasNetclass('HEATER')) || ((B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL')) && A.hasNetclass('HEATER'))")
 	(constraint clearance (min 4.0mm)))
 
-(rule "PRI-HEATER/UART reinforced creepage"
+(rule "PRI-HEATER reinforced creepage"
 	(layer outer)
-	(condition "((A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')) && (B.hasNetclass('HEATER') || B.hasNetclass('UART_ISO'))) || ((B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL')) && (A.hasNetclass('HEATER') || A.hasNetclass('UART_ISO')))")
+	(condition "((A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')) && B.hasNetclass('HEATER')) || ((B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL')) && A.hasNetclass('HEATER'))")
+	(constraint creepage (min 8.2mm)))
+
+(rule "PRI-HEATER inner layers"
+	(layer inner)
+	(condition "((A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')) && B.hasNetclass('HEATER')) || ((B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL')) && A.hasNetclass('HEATER'))")
+	(constraint clearance (min 8.2mm))
+	(constraint hole_clearance (min 8.2mm)))
+
+# Primary <-> UART island: REINFORCED, user-touchable. Working voltage 318 Vrms / 400 Vpk (island earthed through the PC):
+# reinforced 2 x 3.2 = 6.4 mm, 8.0 mm used (plan target >= 8 mm). Clearance 4.0 mm as above.
+(rule "PRI-UART reinforced clearance"
+	(layer outer)
+	(condition "((A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')) && B.hasNetclass('UART_ISO')) || ((B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL')) && A.hasNetclass('UART_ISO'))")
+	(constraint clearance (min 4.0mm)))
+
+(rule "PRI-UART reinforced creepage"
+	(layer outer)
+	(condition "((A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')) && B.hasNetclass('UART_ISO')) || ((B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL')) && A.hasNetclass('UART_ISO'))")
 	(constraint creepage (min 8.0mm)))
 
-(rule "PRI-HEATER/UART inner layers"
+(rule "PRI-UART inner layers"
 	(layer inner)
-	(condition "((A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')) && (B.hasNetclass('HEATER') || B.hasNetclass('UART_ISO'))) || ((B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL')) && (A.hasNetclass('HEATER') || A.hasNetclass('UART_ISO')))")
+	(condition "((A.hasNetclass('HV_PRIMARY') || A.hasNetclass('PRIMARY_LV') || A.hasNetclass('SIGNAL')) && B.hasNetclass('UART_ISO')) || ((B.hasNetclass('HV_PRIMARY') || B.hasNetclass('PRIMARY_LV') || B.hasNetclass('SIGNAL')) && A.hasNetclass('UART_ISO'))")
 	(constraint clearance (min 8.0mm))
 	(constraint hole_clearance (min 8.0mm)))
 

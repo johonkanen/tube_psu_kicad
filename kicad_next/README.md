@@ -204,6 +204,26 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 13d: primary ↔ heater 8.0 → 8.2 mm (2026-11-23)
+
+Design review 2026-11-23 (findings 10 A1 / F3): with HT_GND at the −100 V bias the primary ↔ heater working voltage
+is 400 + 100 + GND(t) = **410 Vrms / 500 Vpk** (the DC shift adds linearly), so reinforced creepage is 2 × 4.1 =
+**8.2 mm** (isolation table below corrected). The shared rules "PRI-HEATER/UART …" are split: "PRI-HEATER reinforced
+clearance / creepage / inner layers" 4.0 / **8.2** / **8.2** mm, "PRI-UART …" 4.0 / 8.0 / 8.0 mm unchanged;
+`check_domains.py` LIMITS HEATER–PRI (4.0, 8.2, 8.2); `check_rules.py` PRI-HEATER inner case at 8.1 mm and a PRI-UART
+inner pass case at 8.1 mm (42 cases). `tools/next/route_s13d_heater_8v2.py` (one-shot, `routing/moves_s13d.json`):
+
+* north of ISO1 pin 16 (Net-(AD1-VA), heater): In2 5V lane y −41.9 → −41.80 and GND lane −41.55 → −41.48 (the GND lane
+  is held 3.2 mm from the PE pad C82.2, the 5V lane 8.2 mm from ISO1.16, 0.17 mm between them); B.Cu GPIO_BYPASS_RLY
+  y −42.0 → −41.8 with its via (−39.15, −45.3) → (−39.0, −45.15); GND via (−41.7, −41.25) → (−41.5, −41.05).
+* 11 pour keep-outs (`S13D_KO PRI-HEATER 8.2 mm: …`, rule areas on one layer each, 0.2 – 2.6 mm²): the In1 / In4 HT_GND
+  and GND planes round ISO1 / TR2 / R27 / the RL1-COM pour and the In3 6V3 plane, computed as plane fill ∩ (other
+  domain's copper on any layer grown by 8.27 mm).
+
+Smallest primary ↔ heater distance (`check_domains.py` geometry, mm): outer straight / layer-to-layer creepage 8.03 → **8.21**,
+inner spacing 8.14 → **8.28**, layer-to-layer (inner) 8.12 → **8.22**, round a slot 8.11 → **8.32**; nothing below 8.2.
+Unconnected 0, 0 shorts, clearance 0, dangling 0, parity 0, DRC 137 items as before; `check_next.sh` passes.
+
 ## Stage 13c: mounting holes without copper ring, keep-off from a 6 mm screw head (2026-11-23)
 
 Design review 2026-11-23 (findings 10 D2 / F1, 14 B4 / F6): H1 – H4, H6 – H8 had a 0.25 mm no-net copper ring on all six
@@ -2247,8 +2267,8 @@ netlist). Count after phase 2: primary 156 nets (HV_PRIMARY 43, PRIMARY_LV 5, SI
 | Barrier | Grade | Working voltage (assumption) | Creepage | Clearance | Inner layers |
 |---|---|---|---|---|---|
 | Primary ↔ DAB secondary (TR3, TR1, ISO2, heatsink) | reinforced | 420V rail vs GND: 420 + 358·\|sin\| in the negative half-wave → **552 Vrms, 778 Vpk** (ISO_GND earthed through the amplifier chassis) | 2 × 5.52 = **11.1 mm** | **4.0 mm** | 11.1 mm |
-| Primary ↔ heater (TR2, ISO1) | reinforced | DC+ vs HT_GND (earthed, or at the −100 V bias): **318–333 Vrms, ≤ 500 Vpk** | 2 × 3.33 = 6.7 → **8.0 mm** | **4.0 mm** | 8.0 mm |
-| Primary ↔ UART island (Si8621BD) | reinforced, user-touchable | as heater (PC ground = earth): 318 Vrms | 6.4 → **8.0 mm** (plan target) | **4.0 mm** | 8.0 mm |
+| Primary ↔ heater (TR2, ISO1) | reinforced | DC+ vs HT_GND: earthed 318 Vrms; at the −100 V bias DC+ − HT = 400 + 100 + GND(t), GND(t) = min(0, 358·sin) – the 100 V DC shift adds linearly, not in quadrature (√(318² + 100²) = 333 Vrms was wrong): **410 Vrms, 500 Vpk** (design review 2026-11-23) | basic 4.1 (400 / 500 V rows 4.0 / 5.0 interpolated) → 2 × 4.1 = **8.2 mm** (8.0 until stage 13d) | **4.0 mm** | 8.2 mm |
+| Primary ↔ UART island (Si8621BD) | reinforced, user-touchable | PC ground = earth: 318 Vrms | 6.4 → **8.0 mm** (plan target; own rules "PRI-UART …" since stage 13d) | **4.0 mm** | 8.0 mm |
 | DAB secondary ↔ UART | reinforced (ES3 to touchable) | 420 V DC → 420 Vrms | 2 × 4.2 = **8.4 mm** | 3.0 mm (1500 V transient behind reinforced insulation → 1.5 mm, margin) | 8.4 mm |
 | DAB secondary ↔ heater | functional (user 2026-11-17: heater tied to −100V BIAS or to signal ground via 100 Ω) | to 420V: up to 520 V; to ISO_GND / LV secondary: ≤ 115 V | **5.2 mm** to HV_SECONDARY, **1.5 mm** to SECONDARY_LV | 1.5 / 1.0 mm | 5.2 mm / – |
 | Heater ↔ UART | functional | ELV | – | 1.0 mm | 1.0 mm |

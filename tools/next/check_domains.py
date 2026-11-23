@@ -53,7 +53,7 @@ HEAD_R = 3.0                         # radius of the screw head / standoff (6 mm
 # (domain A, domain B): (outer clearance, outer creepage, inner spacing) in mm; None = no rule
 LIMITS = {
     ("PRI", "SEC"): (4.0, 11.1, 11.1),          # reinforced, 552 Vrms
-    ("HEATER", "PRI"): (4.0, 8.0, 8.0),         # reinforced
+    ("HEATER", "PRI"): (4.0, 8.2, 8.2),         # reinforced, 410 Vrms with the heater at -100 V (8.0 until stage 13d)
     ("PRI", "UART"): (4.0, 8.0, 8.0),
     ("SEC", "UART"): (3.0, 8.4, 8.4),
     ("HEATER", "SEC_HV"): (1.5, 5.2, 5.2),      # functional, net class HV_SECONDARY
