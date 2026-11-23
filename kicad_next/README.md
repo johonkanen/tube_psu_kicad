@@ -204,6 +204,47 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 12: UART TX / RX gap on the primary side widened (2026-11-23)
+
+User decision 2026-11-23 (12 Mbaud): the two nets `/04 MCU connector/TX` and `/04 MCU connector/RX` ran side by side
+from J2 to U11 with 0.19 - 0.2 mm between the 0.152 mm tracks. `tools/next/route_s12_uart_gap.py` (one-shot,
+`routing/*_s12.json`) re-draws them 0.76 mm centre to centre = **0.608 mm edge to edge**, same lane, same layers
+(In3 and B.Cu), no new via. Length of TX per track-to-track gap, and the route lengths:
+
+| | < 0.25 mm | 0.25 - 0.45 | 0.45 - 0.6 | 0.6 - 1.0 | ≥ 1.0 | TX length | RX length |
+|---|---|---|---|---|---|---|---|
+| before | 102.2 mm | 16.3 | 1.7 | 8.0 | 3.6 | 131.90 mm | 127.74 mm |
+| after | 0 | 0 | 0 | 120.6 | 10.8 | 131.44 mm | 128.67 mm |
+
+* **In3:** TX keeps its line; RX, the outer track, moves out by 0.42 mm (towards the +3V3 zone edge / C28 on
+  x 15 ... 35, towards pad 1 of L2). Two changes of TX: at the J2 end it runs west on y -28.45 (was y -27.54 after
+  a step towards the RX via), and the 45° step between y -32.02 and y -34.92 is 4.23 mm further east (x 8.3 ... 5.4)
+  so that RX clears the gate pad of Q5 (GATE1, 1.64 mm; was 0.79 mm). TX cannot move north on y -32.02: vias of
+  Net-(DRV1-OUTL) / PFC_PWM1 at (9.40, -32.75) / (10.32, -32.79), 0.35 mm.
+* **B.Cu at J2:** the RX legs on x 37.6 / 40.1 are on x 37.34 / 39.84 (TX on 38.1 / 40.6).
+* **B.Cu at U11:** TX stays on x -5.2 (0.34 mm from the +3V3 track on x -4.68 at the island edge), RX is on x -5.96
+  and passes **west** of the GND via of U11 pin 7 (-6.15, -74.83): the lane between that via and the +3V3 track is
+  1.07 mm, too narrow for both tracks with 0.6 mm between them (RX was 0.22 mm from the via, now 0.32 mm on its
+  other side; the via stands between the two tracks for 2.8 mm).
+* **Not 0.6 mm, at the vias only** (each under 1 mm long): J2 end, via to via 0.47 mm and TX track (B.Cu) to RX via
+  0.47 mm - the RX via (45.3, -27.55) cannot move south, +3V3 tracks on In2; U11 end of In3, via (-5.0, -57.5) /
+  (-6.07, -57.5): via to via 0.57 mm, TX track to RX via 0.43 mm on In3, 0.57 mm on B.Cu.
+
+Measured on the final board (plan view, `check_domains.py --dump` geometry):
+
+* In2 tracks parallel above the In3 part (same direction, centre distance < 0.5 mm, > 5 mm): only **+3V3**, 5.0 mm
+  (x 39.9 ... 44.95, the 0.3 / 0.508 mm tracks on y -26.87, 0.33 mm beside RX on y -27.2; 3.8 mm before). Shorter:
+  PFC_PWM1 (0.4 mm, y -32.79) 1.3 mm straight above TX at x 14.8 ... 16.1 (0.08 mm off centre), as before.
+* L2 (the pair passes between its pads on In3, y -34.92 / -34.16): TX to pad 2 (PFC_DRAIN_1) 1.46 mm (unchanged),
+  RX to pad 1 (AC1) 0.98 mm (was 1.40); the pads are through-hole, the same on every layer. F.Cu: 9.0 mm of each
+  track lie under the PFC_DRAIN_1 pour (x -3.9 ... 5.1; 8.4 - 8.7 mm before), the In1 GND plane is solid between
+  them (before: 0.55 mm of RX under a gap of the plane); the AC1 pour is 0.58 mm (RX) / 1.34 mm (TX) away in plan
+  view. B.Cu: the GATE1 track crosses under the pair (TX 0.55 mm, RX 1.4 mm of track above it; 2.25 / 2.46 mm
+  before), In4 GND plane between. In2 / In3: no PFC copper within 4 mm except the L2 / Q5 pads. The B.Cu part of
+  the pair has no PFC net within 4 mm on any layer.
+
+Unconnected 0, 0 shorts, clearance 0, dangling 0, parity 0, DRC 137 items as before; `check_next.sh` passes.
+
 ## Stage 11: J4 as 1×6 header, UART island re-routed (2026-11-23)
 
 User decision 2026-11-23: the UART link runs at 12 Mbaud, single-ended, between two FPGA boards, so J4 gets a ground

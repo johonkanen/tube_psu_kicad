@@ -1,0 +1,7 @@
+{
+ "note": "routing stage 12 (2026-11-23), tools/next/route_s12_uart_gap.py - incremental edit of the board, not a rebuild",
+ "groups": [
+  "gap"
+ ],
+ "moves": []
+}
