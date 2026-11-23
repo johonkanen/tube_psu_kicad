@@ -1,0 +1,108 @@
+leak {"64T": {"S1": 36.20001997926856, "series": 25.880638669493564, "both": 25.88054442542236, "kA_load": 0.32762611911988176, "kA_mag": 0.37335186336585713, "stack_mm": 4.429}, "66T": {"S1": 37.13945709291635, "series": 26.546687427365914, "both": 26.546631001721728, "kA_load": 0.3424727401247837, "kA_mag": 0.37585018083372584, "stack_mm": 4.429}}
+5.1 X7R eff 12.5n 380.0 6.5 ok 158.1 {'Io': 6.541, 'i_sw_A': 0.99, 'im_pk_A': 0.99, 'Ipri_rms': 0.704, 'vc_pp': 162.982, 'Ipri_pk': 0.99, 't_cond_us': 2.466, 'Isec_pk': 14.872}
+5.1 X7R eff 12.5n 380.0 10.0 ok 154.5 {'Io': 10.037, 'i_sw_A': 1.022, 'im_pk_A': 1.022, 'Ipri_rms': 0.787, 'vc_pp': 187.448, 'Ipri_pk': 1.055, 't_cond_us': 2.7, 'Isec_pk': 21.273}
+5.1 X7R eff 12.5n 380.0 15.0 not reachable: Io at fmin = 9.7 A None {'Io': 9.689, 'i_sw_A': 1.067, 'im_pk_A': 1.067, 'Ipri_rms': 0.808, 'vc_pp': 198.452, 'Ipri_pk': 1.069, 't_cond_us': 2.687, 'Isec_pk': 21.261}
+5.1 X7R eff 12.5n 400.0 6.5 ok 172.4 {'Io': 6.497, 'i_sw_A': 0.922, 'im_pk_A': 0.922, 'Ipri_rms': 0.664, 'vc_pp': 140.16, 'Ipri_pk': 0.922, 't_cond_us': 2.425, 'Isec_pk': 13.759}
+5.1 X7R eff 12.5n 400.0 10.0 ok 167.5 {'Io': 9.999, 'i_sw_A': 0.961, 'im_pk_A': 0.961, 'Ipri_rms': 0.751, 'vc_pp': 163.9, 'Ipri_pk': 1.029, 't_cond_us': 2.657, 'Isec_pk': 19.877}
+5.1 X7R eff 12.5n 400.0 15.0 ok 161.2 {'Io': 15.0, 'i_sw_A': 0.998, 'im_pk_A': 1.001, 'Ipri_rms': 0.867, 'vc_pp': 197.439, 'Ipri_pk': 1.207, 't_cond_us': 2.798, 'Isec_pk': 28.715}
+5.1 X7R eff 12.5n 420.0 6.5 ok 191.1 {'Io': 6.5, 'i_sw_A': 0.848, 'im_pk_A': 0.856, 'Ipri_rms': 0.622, 'vc_pp': 117.229, 'Ipri_pk': 0.896, 't_cond_us': 2.396, 'Isec_pk': 13.369}
+5.1 X7R eff 12.5n 420.0 10.0 ok 184.2 {'Io': 10.001, 'i_sw_A': 0.891, 'im_pk_A': 0.891, 'Ipri_rms': 0.713, 'vc_pp': 140.193, 'Ipri_pk': 1.003, 't_cond_us': 2.606, 'Isec_pk': 18.488}
+5.1 X7R eff 12.5n 420.0 15.0 ok 176.0 {'Io': 14.795, 'i_sw_A': 0.939, 'im_pk_A': 0.939, 'Ipri_rms': 0.833, 'vc_pp': 172.295, 'Ipri_pk': 1.169, 't_cond_us': 2.722, 'Isec_pk': 26.422}
+5.2 C0G 4x3.3n = 13.2n 380.0 6.5 ok 153.6 {'Io': 6.494, 'i_sw_A': 1.018, 'im_pk_A': 1.018, 'Ipri_rms': 0.72, 'vc_pp': 161.86, 'Ipri_pk': 1.018, 't_cond_us': 2.525, 'Isec_pk': 14.812}
+5.2 C0G 4x3.3n = 13.2n 380.0 10.0 ok 150.1 {'Io': 9.977, 'i_sw_A': 1.05, 'im_pk_A': 1.053, 'Ipri_rms': 0.804, 'vc_pp': 185.965, 'Ipri_pk': 1.076, 't_cond_us': 2.766, 'Isec_pk': 21.377}
+5.2 C0G 4x3.3n = 13.2n 380.0 15.0 not reachable: Io at fmin = 0.3 A None {'Io': 0.289, 'i_sw_A': 1.036, 'im_pk_A': 1.036, 'Ipri_rms': 0.625, 'vc_pp': 138.717, 'Ipri_pk': 1.036, 't_cond_us': 1.227, 'Isec_pk': 1.392}
+5.2 C0G 4x3.3n = 13.2n 400.0 6.5 ok 167.5 {'Io': 6.498, 'i_sw_A': 0.947, 'im_pk_A': 0.949, 'Ipri_rms': 0.68, 'vc_pp': 139.32, 'Ipri_pk': 0.949, 't_cond_us': 2.483, 'Isec_pk': 13.896}
+5.2 C0G 4x3.3n = 13.2n 400.0 10.0 ok 162.8 {'Io': 10.001, 'i_sw_A': 0.989, 'im_pk_A': 0.989, 'Ipri_rms': 0.768, 'vc_pp': 162.742, 'Ipri_pk': 1.05, 't_cond_us': 2.722, 'Isec_pk': 19.995}
+5.2 C0G 4x3.3n = 13.2n 400.0 15.0 ok 156.6 {'Io': 15.0, 'i_sw_A': 1.03, 'im_pk_A': 1.03, 'Ipri_rms': 0.884, 'vc_pp': 195.486, 'Ipri_pk': 1.226, 't_cond_us': 2.879, 'Isec_pk': 28.743}
+5.2 C0G 4x3.3n = 13.2n 420.0 6.5 ok 185.8 {'Io': 6.5, 'i_sw_A': 0.882, 'im_pk_A': 0.882, 'Ipri_rms': 0.636, 'vc_pp': 116.433, 'Ipri_pk': 0.917, 't_cond_us': 2.379, 'Isec_pk': 13.542}
+5.2 C0G 4x3.3n = 13.2n 420.0 10.0 ok 178.9 {'Io': 10.001, 'i_sw_A': 0.916, 'im_pk_A': 0.916, 'Ipri_rms': 0.728, 'vc_pp': 139.106, 'Ipri_pk': 1.023, 't_cond_us': 2.666, 'Isec_pk': 18.541}
+5.2 C0G 4x3.3n = 13.2n 420.0 15.0 ok 171.0 {'Io': 14.998, 'i_sw_A': 0.967, 'im_pk_A': 0.967, 'Ipri_rms': 0.853, 'vc_pp': 171.315, 'Ipri_pk': 1.195, 't_cond_us': 2.802, 'Isec_pk': 26.843}
+5.2 BOM C0G 4x4.7n = 18.8n 380.0 6.5 not reachable: Io at fmin = 0.0 A None {'Io': 0.0, 'i_sw_A': 0.965, 'im_pk_A': 0.965, 'Ipri_rms': 0.572, 'vc_pp': 88.483, 'Ipri_pk': 0.965, 't_cond_us': 0.0, 'Isec_pk': 0.0}
+5.2 BOM C0G 4x4.7n = 18.8n 380.0 10.0 not reachable: Io at fmin = 0.0 A None {'Io': 0.0, 'i_sw_A': 0.965, 'im_pk_A': 0.965, 'Ipri_rms': 0.572, 'vc_pp': 88.439, 'Ipri_pk': 0.965, 't_cond_us': 0.0, 'Isec_pk': 0.0}
+5.2 BOM C0G 4x4.7n = 18.8n 380.0 15.0 not reachable: Io at fmin = 0.0 A None {'Io': 0.0, 'i_sw_A': 0.965, 'im_pk_A': 0.965, 'Ipri_rms': 0.572, 'vc_pp': 88.376, 'Ipri_pk': 0.965, 't_cond_us': 0.0, 'Isec_pk': 0.0}
+5.2 BOM C0G 4x4.7n = 18.8n 400.0 6.5 not reachable: Io at fmin = 0.0 A None {'Io': 0.022, 'i_sw_A': 1.016, 'im_pk_A': 1.016, 'Ipri_rms': 0.602, 'vc_pp': 93.177, 'Ipri_pk': 1.016, 't_cond_us': 0.7, 'Isec_pk': 0.179}
+5.2 BOM C0G 4x4.7n = 18.8n 400.0 10.0 not reachable: Io at fmin = 0.0 A None {'Io': 0.0, 'i_sw_A': 1.016, 'im_pk_A': 1.016, 'Ipri_rms': 0.602, 'vc_pp': 93.083, 'Ipri_pk': 1.016, 't_cond_us': 0.0, 'Isec_pk': 0.0}
+5.2 BOM C0G 4x4.7n = 18.8n 400.0 15.0 not reachable: Io at fmin = 0.0 A None {'Io': 0.0, 'i_sw_A': 1.016, 'im_pk_A': 1.016, 'Ipri_rms': 0.602, 'vc_pp': 93.131, 'Ipri_pk': 1.016, 't_cond_us': 0.0, 'Isec_pk': 0.0}
+5.2 BOM C0G 4x4.7n = 18.8n 420.0 6.5 ok 155.9 {'Io': 6.541, 'i_sw_A': 1.021, 'im_pk_A': 1.052, 'Ipri_rms': 0.731, 'vc_pp': 112.023, 'Ipri_pk': 1.06, 't_cond_us': 2.854, 'Isec_pk': 14.513}
+5.2 BOM C0G 4x4.7n = 18.8n 420.0 10.0 not reachable: Io at fmin = 9.8 A None {'Io': 9.77, 'i_sw_A': 1.092, 'im_pk_A': 1.092, 'Ipri_rms': 0.826, 'vc_pp': 132.14, 'Ipri_pk': 1.158, 't_cond_us': 3.047, 'Isec_pk': 18.93}
+5.2 BOM C0G 4x4.7n = 18.8n 420.0 15.0 not reachable: Io at fmin = 0.5 A None {'Io': 0.489, 'i_sw_A': 1.067, 'im_pk_A': 1.067, 'Ipri_rms': 0.639, 'vc_pp': 99.601, 'Ipri_pk': 1.067, 't_cond_us': 1.52, 'Isec_pk': 1.884}
+doc 22n 380.0 6.5 not reachable: Io at fmin = 0.0 A None {'Io': 0.0, 'i_sw_A': 0.943, 'im_pk_A': 0.944, 'Ipri_rms': 0.557, 'vc_pp': 73.461, 'Ipri_pk': 0.944, 't_cond_us': 0.0, 'Isec_pk': 0.0}
+doc 22n 380.0 10.0 not reachable: Io at fmin = 0.0 A None {'Io': 0.0, 'i_sw_A': 0.943, 'im_pk_A': 0.944, 'Ipri_rms': 0.557, 'vc_pp': 73.47, 'Ipri_pk': 0.944, 't_cond_us': 0.0, 'Isec_pk': 0.0}
+doc 22n 380.0 15.0 not reachable: Io at fmin = 0.0 A None {'Io': 0.0, 'i_sw_A': 0.943, 'im_pk_A': 0.944, 'Ipri_rms': 0.557, 'vc_pp': 73.514, 'Ipri_pk': 0.944, 't_cond_us': 0.0, 'Isec_pk': 0.0}
+doc 22n 400.0 6.5 not reachable: Io at fmin = 0.0 A None {'Io': 0.0, 'i_sw_A': 0.993, 'im_pk_A': 0.993, 'Ipri_rms': 0.587, 'vc_pp': 77.42, 'Ipri_pk': 0.993, 't_cond_us': 0.0, 'Isec_pk': 0.0}
+doc 22n 400.0 10.0 not reachable: Io at fmin = 0.0 A None {'Io': 0.0, 'i_sw_A': 0.993, 'im_pk_A': 0.993, 'Ipri_rms': 0.587, 'vc_pp': 77.416, 'Ipri_pk': 0.993, 't_cond_us': 0.0, 'Isec_pk': 0.0}
+doc 22n 400.0 15.0 not reachable: Io at fmin = 0.0 A None {'Io': 0.0, 'i_sw_A': 0.993, 'im_pk_A': 0.993, 'Ipri_rms': 0.586, 'vc_pp': 77.341, 'Ipri_pk': 0.993, 't_cond_us': 0.0, 'Isec_pk': 0.0}
+doc 22n 420.0 6.5 not reachable: Io at fmin = 1.0 A None {'Io': 0.957, 'i_sw_A': 1.045, 'im_pk_A': 1.045, 'Ipri_rms': 0.63, 'vc_pp': 84.344, 'Ipri_pk': 1.045, 't_cond_us': 1.88, 'Isec_pk': 3.0}
+doc 22n 420.0 10.0 not reachable: Io at fmin = 0.0 A None {'Io': 0.045, 'i_sw_A': 1.043, 'im_pk_A': 1.043, 'Ipri_rms': 0.616, 'vc_pp': 81.396, 'Ipri_pk': 1.043, 't_cond_us': 0.887, 'Isec_pk': 0.303}
+doc 22n 420.0 15.0 not reachable: Io at fmin = 0.0 A None {'Io': 0.0, 'i_sw_A': 1.043, 'im_pk_A': 1.043, 'Ipri_rms': 0.616, 'vc_pp': 81.263, 'Ipri_pk': 1.043, 't_cond_us': 0.0, 'Isec_pk': 0.0}
+centre 1.78 mm (MKF -> 320 uH) | 5.1 X7R eff 12.5n | 10.0 A | operating 168 kHz Pw 4.64 (PA 3.28 PB 0.61 S 0.74) core 0.11 Bpk 0.093 Im 0.96 Ipri 0.75 Isec 8.7 Ptot 4.75 dT 79-144
+    per {"PA": {"dc": 0.014, "skin": 0.126, "prox": 3.143, "total": 3.283}, "S1": {"dc": 0.166, "skin": 0.046, "prox": 0.153, "total": 0.365}, "S2": {"dc": 0.166, "skin": 0.046, "prox": 0.165, "total": 0.377}, "PB": {"dc": 0.196, "skin": 0.034, "prox": 0.384, "total": 0.614}}
+centre 1.78 mm (MKF -> 320 uH) | 5.1 X7R eff 12.5n | 10.0 A | corner 150 kHz Pw 4.24 (PA 3.20 PB 0.45 S 0.59) core 0.23 Bpk 0.106 Im 1.10 Ipri 0.72 Isec 7.9 Ptot 4.47 dT 75-135
+    per {"PA": {"dc": 0.013, "skin": 0.137, "prox": 3.048, "total": 3.199}, "S1": {"dc": 0.134, "skin": 0.019, "prox": 0.135, "total": 0.289}, "S2": {"dc": 0.134, "skin": 0.019, "prox": 0.147, "total": 0.301}, "PB": {"dc": 0.178, "skin": 0.027, "prox": 0.246, "total": 0.451}}
+centre 1.78 mm (MKF -> 320 uH) | 5.1 X7R eff 12.5n | 10.0 A | corner 220 kHz Pw 4.27 (PA 3.14 PB 0.48 S 0.65) core 0.12 Bpk 0.072 Im 0.75 Ipri 0.55 Isec 7.9 Ptot 4.39 dT 74-133
+    per {"PA": {"dc": 0.008, "skin": 0.078, "prox": 3.05, "total": 3.136}, "S1": {"dc": 0.134, "skin": 0.04, "prox": 0.147, "total": 0.321}, "S2": {"dc": 0.134, "skin": 0.04, "prox": 0.159, "total": 0.333}, "PB": {"dc": 0.107, "skin": 0.025, "prox": 0.35, "total": 0.482}}
+centre 1.78 mm (MKF -> 320 uH) | 5.1 X7R eff 12.5n | 15.0 A | operating 161 kHz Pw 5.77 (PA 3.61 PB 0.90 S 1.27) core 0.12 Bpk 0.096 Im 1.00 Ipri 0.87 Isec 12.9 Ptot 5.89 dT 95-178
+    per {"PA": {"dc": 0.018, "skin": 0.154, "prox": 3.436, "total": 3.609}, "S1": {"dc": 0.36, "skin": 0.085, "prox": 0.181, "total": 0.626}, "S2": {"dc": 0.36, "skin": 0.085, "prox": 0.194, "total": 0.639}, "PB": {"dc": 0.266, "skin": 0.049, "prox": 0.585, "total": 0.9}}
+centre 1.78 mm (MKF -> 320 uH) | 5.1 X7R eff 12.5n | 15.0 A | corner 150 kHz Pw 5.17 (PA 3.49 PB 0.66 S 1.02) core 0.25 Bpk 0.108 Im 1.12 Ipri 0.83 Isec 11.8 Ptot 5.42 dT 88-164
+    per {"PA": {"dc": 0.017, "skin": 0.153, "prox": 3.32, "total": 3.489}, "S1": {"dc": 0.302, "skin": 0.043, "prox": 0.157, "total": 0.502}, "S2": {"dc": 0.302, "skin": 0.043, "prox": 0.17, "total": 0.515}, "PB": {"dc": 0.241, "skin": 0.035, "prox": 0.383, "total": 0.66}}
+centre 1.78 mm (MKF -> 320 uH) | 5.1 X7R eff 12.5n | 15.0 A | corner 220 kHz Pw 5.57 (PA 3.57 PB 0.83 S 1.17) core 0.12 Bpk 0.074 Im 0.76 Ipri 0.68 Isec 11.8 Ptot 5.69 dT 92-172
+    per {"PA": {"dc": 0.011, "skin": 0.092, "prox": 3.469, "total": 3.572}, "S1": {"dc": 0.302, "skin": 0.09, "prox": 0.186, "total": 0.577}, "S2": {"dc": 0.302, "skin": 0.09, "prox": 0.2, "total": 0.592}, "PB": {"dc": 0.167, "skin": 0.036, "prox": 0.626, "total": 0.83}}
+centre 1.78 mm (MKF -> 320 uH) | 5.2 C0G 4x3.3n = 13.2n | 10.0 A | operating 163 kHz Pw 4.64 (PA 3.29 PB 0.61 S 0.74) core 0.11 Bpk 0.095 Im 0.99 Ipri 0.77 Isec 8.8 Ptot 4.76 dT 79-144
+    per {"PA": {"dc": 0.015, "skin": 0.132, "prox": 3.143, "total": 3.289}, "S1": {"dc": 0.167, "skin": 0.044, "prox": 0.152, "total": 0.364}, "S2": {"dc": 0.167, "skin": 0.044, "prox": 0.164, "total": 0.376}, "PB": {"dc": 0.204, "skin": 0.035, "prox": 0.376, "total": 0.615}}
+centre 1.78 mm (MKF -> 320 uH) | 5.2 C0G 4x3.3n = 13.2n | 15.0 A | operating 157 kHz Pw 5.76 (PA 3.61 PB 0.89 S 1.26) core 0.12 Bpk 0.099 Im 1.03 Ipri 0.88 Isec 12.9 Ptot 5.88 dT 94-178
+    per {"PA": {"dc": 0.019, "skin": 0.16, "prox": 3.43, "total": 3.609}, "S1": {"dc": 0.362, "skin": 0.082, "prox": 0.179, "total": 0.623}, "S2": {"dc": 0.362, "skin": 0.082, "prox": 0.192, "total": 0.636}, "PB": {"dc": 0.276, "skin": 0.049, "prox": 0.569, "total": 0.893}}
+spacer 0.84 mm (MKF -> 320 uH) | 5.1 X7R eff 12.5n | 10.0 A | operating 168 kHz Pw 4.11 (PA 1.24 PB 2.22 S 0.65) core 0.11 Bpk 0.093 Im 0.96 Ipri 0.75 Isec 8.7 Ptot 4.22 dT 72-128
+    per {"PA": {"dc": 0.014, "skin": 0.018, "prox": 1.209, "total": 1.241}, "S1": {"dc": 0.166, "skin": 0.046, "prox": 0.113, "total": 0.325}, "S2": {"dc": 0.166, "skin": 0.046, "prox": 0.113, "total": 0.325}, "PB": {"dc": 0.196, "skin": 0.015, "prox": 2.008, "total": 2.219}}
+spacer 0.84 mm (MKF -> 320 uH) | 5.1 X7R eff 12.5n | 10.0 A | corner 150 kHz Pw 3.67 (PA 1.09 PB 2.08 S 0.49) core 0.15 Bpk 0.106 Im 1.10 Ipri 0.72 Isec 7.9 Ptot 3.81 dT 66-115
+    per {"PA": {"dc": 0.013, "skin": 0.008, "prox": 1.074, "total": 1.095}, "S1": {"dc": 0.134, "skin": 0.019, "prox": 0.094, "total": 0.247}, "S2": {"dc": 0.134, "skin": 0.019, "prox": 0.094, "total": 0.247}, "PB": {"dc": 0.178, "skin": 0.006, "prox": 1.895, "total": 2.08}}
+spacer 0.84 mm (MKF -> 320 uH) | 5.1 X7R eff 12.5n | 10.0 A | corner 220 kHz Pw 3.78 (PA 1.17 PB 2.05 S 0.56) core 0.11 Bpk 0.072 Im 0.75 Ipri 0.55 Isec 7.9 Ptot 3.89 dT 67-118
+    per {"PA": {"dc": 0.008, "skin": 0.008, "prox": 1.157, "total": 1.173}, "S1": {"dc": 0.134, "skin": 0.04, "prox": 0.107, "total": 0.281}, "S2": {"dc": 0.134, "skin": 0.04, "prox": 0.107, "total": 0.281}, "PB": {"dc": 0.107, "skin": 0.009, "prox": 1.933, "total": 2.05}}
+spacer 0.84 mm (MKF -> 320 uH) | 5.1 X7R eff 12.5n | 15.0 A | operating 161 kHz Pw 5.22 (PA 1.50 PB 2.54 S 1.17) core 0.11 Bpk 0.096 Im 1.00 Ipri 0.87 Isec 12.9 Ptot 5.32 dT 87-161
+    per {"PA": {"dc": 0.018, "skin": 0.035, "prox": 1.448, "total": 1.501}, "S1": {"dc": 0.36, "skin": 0.085, "prox": 0.14, "total": 0.585}, "S2": {"dc": 0.36, "skin": 0.085, "prox": 0.14, "total": 0.585}, "PB": {"dc": 0.266, "skin": 0.029, "prox": 2.249, "total": 2.544}}
+spacer 0.84 mm (MKF -> 320 uH) | 5.1 X7R eff 12.5n | 15.0 A | corner 150 kHz Pw 4.57 (PA 1.29 PB 2.36 S 0.92) core 0.16 Bpk 0.108 Im 1.12 Ipri 0.83 Isec 11.8 Ptot 4.73 dT 79-143
+    per {"PA": {"dc": 0.017, "skin": 0.017, "prox": 1.259, "total": 1.294}, "S1": {"dc": 0.302, "skin": 0.043, "prox": 0.114, "total": 0.459}, "S2": {"dc": 0.302, "skin": 0.043, "prox": 0.114, "total": 0.459}, "PB": {"dc": 0.241, "skin": 0.014, "prox": 2.104, "total": 2.359}}
+spacer 0.84 mm (MKF -> 320 uH) | 5.1 X7R eff 12.5n | 15.0 A | corner 220 kHz Pw 5.06 (PA 1.52 PB 2.47 S 1.07) core 0.11 Bpk 0.074 Im 0.76 Ipri 0.68 Isec 11.8 Ptot 5.18 dT 85-157
+    per {"PA": {"dc": 0.011, "skin": 0.018, "prox": 1.495, "total": 1.524}, "S1": {"dc": 0.302, "skin": 0.09, "prox": 0.145, "total": 0.537}, "S2": {"dc": 0.302, "skin": 0.09, "prox": 0.145, "total": 0.536}, "PB": {"dc": 0.167, "skin": 0.02, "prox": 2.278, "total": 2.465}}
+spacer 0.84 mm (MKF -> 320 uH) | 5.2 C0G 4x3.3n = 13.2n | 10.0 A | operating 163 kHz Pw 4.11 (PA 1.24 PB 2.22 S 0.65) core 0.11 Bpk 0.095 Im 0.99 Ipri 0.77 Isec 8.8 Ptot 4.21 dT 72-127
+    per {"PA": {"dc": 0.015, "skin": 0.018, "prox": 1.203, "total": 1.235}, "S1": {"dc": 0.167, "skin": 0.044, "prox": 0.112, "total": 0.323}, "S2": {"dc": 0.167, "skin": 0.044, "prox": 0.111, "total": 0.323}, "PB": {"dc": 0.204, "skin": 0.015, "prox": 2.004, "total": 2.224}}
+spacer 0.84 mm (MKF -> 320 uH) | 5.2 C0G 4x3.3n = 13.2n | 15.0 A | operating 157 kHz Pw 5.19 (PA 1.49 PB 2.54 S 1.16) core 0.11 Bpk 0.099 Im 1.03 Ipri 0.88 Isec 12.9 Ptot 5.30 dT 87-160
+    per {"PA": {"dc": 0.019, "skin": 0.035, "prox": 1.434, "total": 1.488}, "S1": {"dc": 0.362, "skin": 0.082, "prox": 0.138, "total": 0.581}, "S2": {"dc": 0.362, "skin": 0.082, "prox": 0.138, "total": 0.581}, "PB": {"dc": 0.276, "skin": 0.028, "prox": 2.24, "total": 2.544}}
+centre 1.0 mm literal (MKF 455 uH; currents from 320 uH) | 5.1 X7R eff 12.5n | 10.0 A | operating 168 kHz Pw 4.59 (PA 3.26 PB 0.59 S 0.74) core 0.32 Bpk 0.093 Im 0.96 Ipri 0.75 Isec 8.7 Ptot 4.91 dT 81-148
+    per {"PA": {"dc": 0.014, "skin": 0.051, "prox": 3.193, "total": 3.258}, "S1": {"dc": 0.166, "skin": 0.046, "prox": 0.154, "total": 0.366}, "S2": {"dc": 0.166, "skin": 0.046, "prox": 0.161, "total": 0.373}, "PB": {"dc": 0.196, "skin": 0.021, "prox": 0.378, "total": 0.595}}
+centre 1.0 mm literal (MKF 455 uH; currents from 320 uH) | 5.1 X7R eff 12.5n | 10.0 A | corner 150 kHz Pw 4.17 (PA 3.16 PB 0.43 S 0.58) core 1.14 Bpk 0.106 Im 1.10 Ipri 0.72 Isec 7.9 Ptot 5.31 dT 87-161
+    per {"PA": {"dc": 0.013, "skin": 0.048, "prox": 3.098, "total": 3.159}, "S1": {"dc": 0.134, "skin": 0.019, "prox": 0.136, "total": 0.289}, "S2": {"dc": 0.134, "skin": 0.019, "prox": 0.142, "total": 0.296}, "PB": {"dc": 0.178, "skin": 0.013, "prox": 0.239, "total": 0.43}}
+centre 1.0 mm literal (MKF 455 uH; currents from 320 uH) | 5.1 X7R eff 12.5n | 10.0 A | corner 220 kHz Pw 4.25 (PA 3.14 PB 0.47 S 0.65) core 0.32 Bpk 0.072 Im 0.75 Ipri 0.55 Isec 7.9 Ptot 4.57 dT 77-138
+    per {"PA": {"dc": 0.008, "skin": 0.029, "prox": 3.099, "total": 3.136}, "S1": {"dc": 0.134, "skin": 0.04, "prox": 0.147, "total": 0.322}, "S2": {"dc": 0.134, "skin": 0.04, "prox": 0.154, "total": 0.329}, "PB": {"dc": 0.107, "skin": 0.014, "prox": 0.344, "total": 0.466}}
+centre 1.0 mm literal (MKF 455 uH; currents from 320 uH) | 5.1 X7R eff 12.5n | 15.0 A | operating 161 kHz Pw 5.72 (PA 3.58 PB 0.88 S 1.26) core 0.32 Bpk 0.096 Im 1.00 Ipri 0.87 Isec 12.9 Ptot 6.04 dT 97-183
+    per {"PA": {"dc": 0.018, "skin": 0.071, "prox": 3.487, "total": 3.577}, "S1": {"dc": 0.36, "skin": 0.085, "prox": 0.182, "total": 0.627}, "S2": {"dc": 0.36, "skin": 0.085, "prox": 0.189, "total": 0.634}, "PB": {"dc": 0.266, "skin": 0.035, "prox": 0.578, "total": 0.879}}
+centre 1.0 mm literal (MKF 455 uH; currents from 320 uH) | 5.1 X7R eff 12.5n | 15.0 A | corner 150 kHz Pw 5.10 (PA 3.45 PB 0.64 S 1.01) core 1.39 Bpk 0.108 Im 1.12 Ipri 0.83 Isec 11.8 Ptot 6.49 dT 103-196
+    per {"PA": {"dc": 0.017, "skin": 0.059, "prox": 3.371, "total": 3.447}, "S1": {"dc": 0.302, "skin": 0.043, "prox": 0.157, "total": 0.502}, "S2": {"dc": 0.302, "skin": 0.043, "prox": 0.165, "total": 0.51}, "PB": {"dc": 0.241, "skin": 0.02, "prox": 0.376, "total": 0.638}}
+centre 1.0 mm literal (MKF 455 uH; currents from 320 uH) | 5.1 X7R eff 12.5n | 15.0 A | corner 220 kHz Pw 5.55 (PA 3.57 PB 0.81 S 1.17) core 0.33 Bpk 0.074 Im 0.76 Ipri 0.68 Isec 11.8 Ptot 5.88 dT 95-178
+    per {"PA": {"dc": 0.011, "skin": 0.04, "prox": 3.52, "total": 3.572}, "S1": {"dc": 0.302, "skin": 0.09, "prox": 0.187, "total": 0.579}, "S2": {"dc": 0.302, "skin": 0.09, "prox": 0.195, "total": 0.586}, "PB": {"dc": 0.167, "skin": 0.025, "prox": 0.62, "total": 0.812}}
+centre 1.0 mm literal (MKF 455 uH; currents from 320 uH) | 5.2 C0G 4x3.3n = 13.2n | 10.0 A | operating 163 kHz Pw 4.59 (PA 3.26 PB 0.59 S 0.74) core 0.32 Bpk 0.095 Im 0.99 Ipri 0.77 Isec 8.8 Ptot 4.91 dT 81-148
+    per {"PA": {"dc": 0.015, "skin": 0.053, "prox": 3.193, "total": 3.26}, "S1": {"dc": 0.167, "skin": 0.044, "prox": 0.153, "total": 0.364}, "S2": {"dc": 0.167, "skin": 0.044, "prox": 0.16, "total": 0.371}, "PB": {"dc": 0.204, "skin": 0.021, "prox": 0.37, "total": 0.595}}
+centre 1.0 mm literal (MKF 455 uH; currents from 320 uH) | 5.2 C0G 4x3.3n = 13.2n | 15.0 A | operating 157 kHz Pw 5.70 (PA 3.57 PB 0.87 S 1.25) core 0.33 Bpk 0.099 Im 1.03 Ipri 0.88 Isec 12.9 Ptot 6.02 dT 96-182
+    per {"PA": {"dc": 0.019, "skin": 0.073, "prox": 3.481, "total": 3.573}, "S1": {"dc": 0.362, "skin": 0.082, "prox": 0.18, "total": 0.623}, "S2": {"dc": 0.362, "skin": 0.082, "prox": 0.187, "total": 0.63}, "PB": {"dc": 0.276, "skin": 0.034, "prox": 0.562, "total": 0.872}}
+	Command being timed: "python3 run_v2.py S1 series"
+	User time (seconds): 280.65
+	System time (seconds): 0.59
+	Percent of CPU this job got: 102%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 4:34.92
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 276444
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 72
+	Minor (reclaiming a frame) page faults: 185374
+	Voluntary context switches: 467
+	Involuntary context switches: 8530
+	Swaps: 0
+	File system inputs: 186920
+	File system outputs: 256
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

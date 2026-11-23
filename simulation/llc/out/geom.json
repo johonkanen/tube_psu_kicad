@@ -1,0 +1,96 @@
+{
+ "ns1": {
+  "PA": {
+   "layers": 8,
+   "turns_per_layer": 9,
+   "build_mm": 1.970298
+  },
+  "S": {
+   "build_mm": 1.25,
+   "litz_round_od_mm": 1.665968066920852,
+   "litz_axial_width_mm": 1.7438664147537464,
+   "axial_extent_mm": 3.4877328295074927
+  },
+  "PB": {
+   "layers": 3,
+   "turns_per_layer": 28,
+   "build_mm": 0.762228
+  },
+  "tape_each_mm": 0.165,
+  "stack_mm": 4.312526000000001,
+  "window_radial_mm": 4.500000000000001,
+  "window_axial_mm": 15.8,
+  "norwe_window_radial_mm": 4.2,
+  "pitch_factor": 0.866,
+  "fits_norwe_4p2": false,
+  "fits_core_4p5": true,
+  "MLT_mm": {
+   "PA": 41.306840142925296,
+   "S1": 52.94346383703721,
+   "S2": 52.94346383703721,
+   "PB": 59.88776133264892
+  },
+  "window_area_mm2": 71.10000000000002,
+  "mkf_filling_factor": {
+   "areaFillingFactor": 0.6393771313204551,
+   "contiguousFillingFactor": 1.0,
+   "maxLayerFillingFactor": 0.9888607594936708,
+   "overlappingFillingFactor": 0.8850057777777781,
+   "windingFits": true
+  },
+  "copper_mm2": 29.079816624531105,
+  "copper_fill_norwe": 0.4382130293027593,
+  "od2_area_mm2": 45.45971403688437,
+  "od2_fill_norwe": 0.6850469264147735,
+  "stack_no_nesting_round_litz_mm": 5.064968066920852,
+  "stack_nesting_round_litz_mm": 4.728494066920852,
+  "stack_no_nesting_pressed_litz_mm": 4.648999999999998
+ },
+ "ns2": {
+  "PA": {
+   "layers": 8,
+   "turns_per_layer": 9,
+   "build_mm": 1.970298
+  },
+  "S": {
+   "build_mm": 1.25,
+   "litz_round_od_mm": 1.665968066920852,
+   "litz_axial_width_mm": 1.7438664147537464,
+   "axial_extent_mm": 6.9754656590149855
+  },
+  "PB": {
+   "layers": 3,
+   "turns_per_layer": 28,
+   "build_mm": 0.762228
+  },
+  "tape_each_mm": 0.165,
+  "stack_mm": 4.312526000000001,
+  "window_radial_mm": 4.500000000000001,
+  "window_axial_mm": 15.8,
+  "norwe_window_radial_mm": 4.2,
+  "pitch_factor": 0.866,
+  "fits_norwe_4p2": false,
+  "fits_core_4p5": true,
+  "MLT_mm": {
+   "PA": 41.306840142925296,
+   "S1": 52.94346383703721,
+   "S2": 52.94346383703721,
+   "PB": 59.88776133264892
+  },
+  "window_area_mm2": 71.10000000000002,
+  "mkf_filling_factor": {
+   "areaFillingFactor": 0.7006945158054674,
+   "contiguousFillingFactor": 1.0,
+   "maxLayerFillingFactor": 0.9888607594936708,
+   "overlappingFillingFactor": 0.8850057777777781,
+   "windingFits": true
+  },
+  "copper_mm2": 31.278931482043966,
+  "copper_fill_norwe": 0.4713521923153099,
+  "od2_area_mm2": 49.819380073768734,
+  "od2_fill_norwe": 0.7507441240772865,
+  "stack_no_nesting_round_litz_mm": 5.064968066920852,
+  "stack_nesting_round_litz_mm": 4.728494066920852,
+  "stack_no_nesting_pressed_litz_mm": 4.648999999999998
+ }
+}

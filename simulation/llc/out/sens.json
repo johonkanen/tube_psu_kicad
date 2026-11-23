@@ -1,0 +1,158 @@
+{
+ "ns1": [
+  {
+   "case": "baseline (3 tape, pressed litz 1.25, nesting, sec centred)",
+   "stack_mm": 4.312526000000001,
+   "S1_uH": 77.408940674647,
+   "S1_kA": 0.35430028764789495,
+   "series_uH": 53.19254368136413,
+   "series_kA": 0.3539300364604657
+  },
+  {
+   "case": "1 tape layer each side",
+   "stack_mm": 4.092526000000001,
+   "S1_uH": 74.71196993938328,
+   "S1_kA": 0.33809634888497486,
+   "series_uH": 50.94854077889596,
+   "series_kA": 0.3376951794371034
+  },
+  {
+   "case": "6 tape layers each side",
+   "error": "stack 4.643 mm exceeds the window 4.50 mm"
+  },
+  {
+   "case": "round litz 1.67 mm",
+   "stack_mm": 4.728494066920852,
+   "S1_uH": 82.75493215994368,
+   "S1_kA": 0.36599262813885725,
+   "series_uH": 58.59447629215335,
+   "series_kA": 0.36559974229670605
+  },
+  {
+   "case": "no nesting (layer pitch = OD)",
+   "stack_mm": 4.648999999999998,
+   "S1_uH": 81.802648757037,
+   "S1_kA": 0.3384435510059798,
+   "series_uH": 56.213520173567396,
+   "series_kA": 0.33790250883769435
+  },
+  {
+   "case": "+0.25 mm extra gap each side of S",
+   "stack_mm": 4.812526000000001,
+   "S1_uH": 83.9317335350429,
+   "S1_kA": 0.3681476386213046,
+   "series_uH": 58.31751639179861,
+   "series_kA": 0.36770489547681745
+  },
+  {
+   "case": "+0.5 mm extra gap each side of S",
+   "stack_mm": 5.312526,
+   "S1_uH": 83.5081394916059,
+   "S1_kA": 0.185129256129939,
+   "series_uH": 56.16967007524013,
+   "series_kA": 0.18388508538408127
+  },
+  {
+   "case": "+1.0 mm extra gap each side of S",
+   "stack_mm": 6.312526000000001,
+   "S1_uH": 100.62500186903944,
+   "S1_kA": -0.20864691617349673,
+   "series_uH": 66.73481420887452,
+   "series_kA": -0.21229484842264174
+  },
+  {
+   "case": "secondary at one end of the window",
+   "stack_mm": 4.312526000000001,
+   "S1_uH": 118.82614213393497,
+   "S1_kA": 0.49796135372878686,
+   "series_uH": 111.33469986606744,
+   "series_kA": 0.5231030514701096
+  },
+  {
+   "case": "S1 block then S2 block (not bifilar)",
+   "stack_mm": 4.312526000000001,
+   "S1_uH": 77.40894067464656,
+   "S1_kA": 0.35430028764787513,
+   "series_uH": 53.19254368136412,
+   "series_kA": 0.3539300364604657
+  }
+ ],
+ "ns2": [
+  {
+   "case": "baseline (3 tape, pressed litz 1.25, nesting, sec centred)",
+   "stack_mm": 4.312526000000001,
+   "S1_uH": 37.52695670443917,
+   "S1_kA": 0.3790961991821897,
+   "series_uH": 27.110367909116928,
+   "series_kA": 0.3787785615791614
+  },
+  {
+   "case": "1 tape layer each side",
+   "stack_mm": 4.092526000000001,
+   "S1_uH": 35.72571304055245,
+   "S1_kA": 0.36415207788984283,
+   "series_uH": 25.482646187467086,
+   "series_kA": 0.3638292229456477
+  },
+  {
+   "case": "6 tape layers each side",
+   "error": "stack 4.643 mm exceeds the window 4.50 mm"
+  },
+  {
+   "case": "round litz 1.67 mm",
+   "stack_mm": 4.728494066920852,
+   "S1_uH": 42.05984520747991,
+   "S1_kA": 0.3884250900417603,
+   "series_uH": 31.708495446043372,
+   "series_kA": 0.3880894355360171
+  },
+  {
+   "case": "no nesting (layer pitch = OD)",
+   "stack_mm": 4.648999999999998,
+   "S1_uH": 39.53119865587155,
+   "S1_kA": 0.3652490684879548,
+   "series_uH": 28.63100161113878,
+   "series_kA": 0.36486133798834053
+  },
+  {
+   "case": "+0.25 mm extra gap each side of S",
+   "stack_mm": 4.812526000000001,
+   "S1_uH": 41.72484266910985,
+   "S1_kA": 0.39339005311067,
+   "series_uH": 30.72444618929409,
+   "series_kA": 0.3930236020905367
+  },
+  {
+   "case": "+0.5 mm extra gap each side of S",
+   "stack_mm": 5.312526,
+   "S1_uH": 39.00112428098723,
+   "S1_kA": 0.2186336388564779,
+   "series_uH": 27.34983005956501,
+   "series_kA": 0.21786679176012555
+  },
+  {
+   "case": "+1.0 mm extra gap each side of S",
+   "stack_mm": 6.312526000000001,
+   "S1_uH": 46.04106294980117,
+   "S1_kA": -0.16709809027474087,
+   "series_uH": 31.66445146035227,
+   "series_kA": -0.1691397615473324
+  },
+  {
+   "case": "secondary at one end of the window",
+   "stack_mm": 4.312526000000001,
+   "S1_uH": 53.80410370902293,
+   "S1_kA": 0.4365152130388839,
+   "series_uH": 54.51792384112625,
+   "series_kA": 0.46555084255147744
+  },
+  {
+   "case": "S1 block then S2 block (not bifilar)",
+   "stack_mm": 4.312526000000001,
+   "S1_uH": 57.21175647574336,
+   "S1_kA": 0.37937414941433895,
+   "series_uH": 27.11036790911812,
+   "series_kA": 0.37877856157912143
+  }
+ ]
+}
