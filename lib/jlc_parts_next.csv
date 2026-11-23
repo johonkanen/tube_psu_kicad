@@ -295,7 +295,7 @@ SICD1,C3D02060A,tube_psu:TO-220-2_Vertical_AK,,,,,,,2026-11-17,missing,not avail
 SICD2,C3D02060A,tube_psu:TO-220-2_Vertical_AK,,,,,,,2026-11-17,missing,not available,"THT. C3D02060A 0 stock; nearest TO-220-2 SiC: Vishay VS-C04ET07T-M3 C5208854 (650 V 4 A, 480 stock; check pinout and Qc); consign"
 TR1,EEL19_4+6 Lp600u,tube_psu_next:Transformer_EEL19_V_4+6_FlyLeads,,,,,,,2026-11-18,consigned,,"custom transformer, EEL19 PC40 4+6 bobbin, P 52+52 T on fly leads (simulation/flyback/EEL19_DESIGN.md 6/6a)"
 TR2,EF25_8PIN,tube_psu_next_parts:Transformer_EF25_2x5_P5.08mm_8pin,,,,,,,2026-11-17,consigned,,custom transformers (EF20 / EF25 / ETD34)
-TR3,EC42/15 2CH 20:21,tube_psu_next:Transformer_EC42x15_2Slot_2x8_P5mm,,,,,,,2026-11-18,consigned,,"custom transformer: EC42/15 PC40, primary 20 T / secondary 21 T litz 135x0.071, gap 0.35 mm (simulation/dab/DAB_TRANSFORMER.md 5, option B)"
+TR3,EC42/15 2CH 20:21,tube_psu_next:Transformer_EC42x15_2Slot_2x8_P5mm,,,,,,,2026-11-18,consigned,,"custom transformer: EC42/15 PC40, primary 20 T / secondary 21 T litz 135x0.071 (secondary TIW), gap for Lm ~200 uH: ~0.66-0.68 mm centre-leg grind or ~0.335 mm spacer under all legs, set by measuring Lm to 170-210 uH; cut pins 1 2 3 6 13-16 (simulation/dab/DAB_TRANSFORMER.md 5 / 6 / 8, option B)"
 U1,LMH6643,Package_SO:TSSOP-8_3x3mm_P0.65mm,C478382,LMH6643MMX/NOPB,Texas Instruments,extended,15316,0.9518,2026-11-18,exact,,"LMH6643MMX/NOPB (NR 4.10b, D2), VSSOP-8 = the TSSOP-8 3x3 P0.65 footprint, LMH6658 pinout"
 U2,TLV316IDBVR,tube_psu:SOT-23-5_Proteus,C575578,TLV316IDBVR,Texas Instruments,extended,4003,0.6422,2026-11-17,exact,,
 U3,TLV316IDBVR,tube_psu:SOT-23-5_Proteus,C575578,TLV316IDBVR,Texas Instruments,extended,4003,0.6422,2026-11-17,exact,,
