@@ -127,11 +127,13 @@ def derive(src, name, descr_add, drop=lambda b: False, add=(), model=None):
 
 # --- SOIC-16W with a creepage slot ------------------------------------------------------------------
 # KiCad SOIC-16W: pads 2.05 x 0.6 at x = +-4.65 -> pad row gap 7.25 mm (< 8.0 / 11.1 mm creepage).
-# Slot 1.0 mm wide (JLC non-plated slot >= 1.0 mm) on x = 0 from -ys to +ys. Shortest surface path
+# Slot 1.5 mm wide on x = 0 from -ys to +ys (design review 2026-11-23, findings 10 F2 / 14 F3: was 1.0 mm = JLC's
+# minimum non-plated slot; JLC mills to +-0.2 mm and IEC 60664-1 ignores a groove narrower than 1.0 mm at PD2, so
+# 1.5 mm keeps >= 1.3 mm after tolerance; pad rows stay 2.875 mm from the slot edge). Shortest surface path
 # from the inner corner of an end pad (3.625, 4.745) around the slot tip to the other row:
 # 2 * sqrt(3.625^2 + (ys - 4.745)^2) (+ half the tip arc), computed exactly by tools/next/check_footprints.py.
 SOIC_SLOTS = {"8.0": 7.25, "11.1": 9.75}      # required creepage (mm) -> slot half length ys (mm)
-SOIC_SLOT_W = 1.0
+SOIC_SLOT_W = 1.5
 
 
 def slot_lines(xc, y0, y1, w):
@@ -189,14 +191,16 @@ def soic16w_slot(creep):
 
 
 # Board-specific variant for ISO1 (trial placement step 3, user decision 2026-11-19): the slot continues as a T
-# - a 1.0 mm cross slot past the pin-8 / pin-9 end, towards the pin 1-8 side - so that the surface path from the
+# - a cross slot of the same width past the pin-8 / pin-9 end, towards the pin 1-8 side - so that the surface path from the
 # primary pins 5-8 to the heater pins next to that end (TR2 pad 10, WP4) goes round the cross slot. One closed
 # Edge.Cuts outline (KiCad rejects two overlapping slot outlines as self-intersecting; a separate slot would
-# leave a 1 x 1 mm web). Footprint coordinates: stem x = +-0.5 from the tip at y = -7.25 to the bar, bar
-# y = 8.25 ... 9.25 from x = -11.35 (10.85 mm past the pin 1-8 pad row side) to x = 3.15; outer ends rounded by the
-# 1.0 mm cutter, the two inner corners are drawn sharp (the cutter leaves r >= 0.5 mm there, i.e. more slot).
+# leave a 1 x 1 mm web). Footprint coordinates: stem x = +-w/2 from the tip at y = -7.25 to the bar, bar
+# y = 9.25 - w ... 9.25 from x = -11.35 (10.85 mm past the pin 1-8 pad row side) to x = 3.15; outer ends rounded by
+# the cutter (r = w/2), the two inner corners are drawn sharp (the cutter leaves r >= w/2 there, i.e. more slot).
+# Width 1.5 mm since 2026-11-23 (was 1.0, y 8.25 ... 9.25): the bar grows towards ISO1 only, its edge at TR2 pad 10
+# (y = 9.25) stays where it was.
 # ISO1 is placed at 180 deg: board x = x0 - x, y = y0 - y.
-SOIC_T = {"ISO1": dict(creep="8.0", bar_y0=8.25, bar_y1=9.25, bar_x0=-11.35, bar_x1=3.15)}
+SOIC_T = {"ISO1": dict(creep="8.0", bar_y0=9.25 - SOIC_SLOT_W, bar_y1=9.25, bar_x0=-11.35, bar_x1=3.15)}
 
 
 def edge_line(x0, y0, x1, y1):

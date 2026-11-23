@@ -101,7 +101,7 @@ JLC column: `kicad_next/README.md` "JLC manufacturing limits" (multilayer, 1 oz,
 | NPTH hole | 7 x 3 mm | 0.5 mm min | ok |
 | Copper ring round the NPTH holes | 0.25 mm wide, starting at the hole edge, on F.Cu, In1.Cu, In2.Cu, In3.Cu, In4.Cu, B.Cu | NPTH pad ring 0.45 mm (capabilities page, read 2026-11-23) | **narrower than JLC's 0.45 mm** (open item) |
 | Copper to board edge / slot | 0.3 mm (zone ISO_GND In1.Cu) | 0.2 mm | ok |
-| Narrowest milled slot | 1 mm | 1 mm (non-plated slot) | ok (3 slots at the minimum) |
+| Narrowest milled slot | 1.2 mm | 1 mm (non-plated slot) | ok |
 
 Smallest gap per kind of copper pair (different nets, same layer):
 
@@ -123,13 +123,13 @@ Smallest gap per kind of copper pair (different nets, same layer):
 
 | # | Extent (Gerber frame, mm) | Width mm | vs JLC 1 mm |
 |---|---|---|---|
-| 1 | x -45.51 ... -31.01, y 47.59 ... 64.09 | 1 | ok (at the minimum) |
-| 2 | x -0.5 ... 0.5, y 70.75 ... 85.25 | 1 | ok (at the minimum) |
+| 1 | x -45.51 ... -31.01, y 47.6 ... 64.09 | 1.5 | ok |
+| 2 | x -0.75 ... 0.75, y 70.75 ... 85.25 | 1.5 | ok |
 | 3 | x 50.81 ... 68.6, y 39.2 ... 62 | 1.2 | ok |
 | 4 | x 62.92 ... 64.12, y -13.72 ... 14.28 | 1.2 | ok |
-| 5 | x 66.26 ... 67.26, y 16.85 ... 36.35 | 1 | ok (at the minimum) |
+| 5 | x 66.01 ... 67.51, y 16.85 ... 36.35 | 1.5 | ok |
 
-No slot is narrower than JLC's minimum non-plated slot width. 3 of them are exactly 1 mm wide, i.e. at the limit with no margin. The slot outlines are drawn with square corners where two straight edges meet (the L and T shaped slots); the router leaves its tool radius in inside corners.
+No slot is narrower than JLC's minimum non-plated slot width. The slot outlines are drawn with square corners where two straight edges meet (the L and T shaped slots); the router leaves its tool radius in inside corners.
 
 ## Assembly
 
@@ -210,9 +210,8 @@ Footprints whose anchor (= CPL position) is more than 0.05 mm from the centre of
    * U11 (C5337993 CA-IS3721HW): reinforced rating to confirm
 5. **Rotations and bottom-side convention not verified** (section above): check JLC's placement preview before paying.
 6. **Through-hole parts in the BOM** (24 parts): decide whether JLC solders them (table above).
-7. **Slots at JLC's minimum width**: 3 slots are 1 mm wide - JLC may ask or widen; confirm in the order remark that they are creepage slots and must stay open.
-8. PTH pad annular ring 0.155 mm is at JLC's absolute minimum (0.15), below the recommended 0.2 mm (J2.10 B.Cu, 300 pad-layers).
-9. **Mounting holes H1 H2 H3 H4 H6 H7 H8**: non-plated 3 mm holes with a copper ring only 0.25 mm wide that starts at the hole edge (F.Cu, In1.Cu, In2.Cu, In3.Cu, In4.Cu, B.Cu; footprint `MountingHole_3.0mm_NPTH_Ring3.5mm`). JLC asks for a ring of 0.45 mm round an NPTH pad and normally pulls copper back from a non-plated hole, so the ring may come out thinner or vanish. Nothing is soldered to it; decide whether that matters (the isolation rules treat the hole / ring as earthed) or tell JLC in the remark.
-10. **No silkscreen**: there is no polarity / pin-1 / refdes marking on the board; JLC's assembly relies on the CPL alone, and hand-fitted parts need the assembly drawing.
-11. Stackup JLC06161H-7628D excludes economic assembly; confirm the stackup name in JLC's selector at order time (JLC renames / retires stackups).
-12. Not checked by this script: the Gerbers were not viewed in JLC's own Gerber viewer, JLC's DFM result and the price are unknown, inner-layer 0.5 oz track / space limits are not listed by JLC (the outer-layer figures are used).
+7. PTH pad annular ring 0.155 mm is at JLC's absolute minimum (0.15), below the recommended 0.2 mm (J2.10 B.Cu, 300 pad-layers).
+8. **Mounting holes H1 H2 H3 H4 H6 H7 H8**: non-plated 3 mm holes with a copper ring only 0.25 mm wide that starts at the hole edge (F.Cu, In1.Cu, In2.Cu, In3.Cu, In4.Cu, B.Cu; footprint `MountingHole_3.0mm_NPTH_Ring3.5mm`). JLC asks for a ring of 0.45 mm round an NPTH pad and normally pulls copper back from a non-plated hole, so the ring may come out thinner or vanish. Nothing is soldered to it; decide whether that matters (the isolation rules treat the hole / ring as earthed) or tell JLC in the remark.
+9. **No silkscreen**: there is no polarity / pin-1 / refdes marking on the board; JLC's assembly relies on the CPL alone, and hand-fitted parts need the assembly drawing.
+10. Stackup JLC06161H-7628D excludes economic assembly; confirm the stackup name in JLC's selector at order time (JLC renames / retires stackups).
+11. Not checked by this script: the Gerbers were not viewed in JLC's own Gerber viewer, JLC's DFM result and the price are unknown, inner-layer 0.5 oz track / space limits are not listed by JLC (the outer-layer figures are used).

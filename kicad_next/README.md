@@ -204,6 +204,26 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 13b: creepage slots of ISO1 / ISO2 / U11 1.0 → 1.5 mm (2026-11-23)
+
+Design review 2026-11-23 (findings 10 C6 / F2, 14 B3 / F3): the slots under ISO2 and U11 and the T slot at ISO1 / TR2
+were 1.0 mm = JLC's minimum non-plated slot, milled to ±0.2 mm, and IEC 60664-1 ignores a groove narrower than 1.0 mm
+at PD2. The slots are Edge.Cuts shapes of the footprints: `gen_next_footprints_parts.py` `SOIC_SLOT_W` 1.0 → **1.5 mm**
+(the T bar of ISO1 grows towards ISO1 only, board y −64.09 … −62.59, its edge at TR2 pad 10 stays);
+`tools/next/route_s13b_slots.py` (one-shot, `routing/moves_s13b.json`) copies the regenerated graphic items into the
+three board footprints. No copper moved; TR1 and the L cut-out (1.2 mm) unchanged. Even at −0.2 mm the slots stay
+≥ 1.3 mm.
+
+| Slot | Width | Nearest copper (layer) | Nearest plated hole wall | Surface path (check_footprints) |
+|---|---|---|---|---|
+| ISO2 (x 66.01 … 67.51, y −36.35 … −16.85) | 1.5 mm | 2.81 mm GND B.Cu pour; pad rows 2.875 mm | none within 3 mm | 12.50 → **12.57 mm** (≥ 11.1) |
+| U11 (x −0.75 … 0.75, y −85.25 … −70.75) | 1.5 mm | pad rows 2.875 mm | none within 3 mm | 8.85 → **8.87 mm** (≥ 8.0) |
+| ISO1 T (stem x −43.11 … −41.61, bar y −64.09 … −62.59) | 1.5 mm | **0.71 mm** C13.1 B.Cu (ISO1 side of the bar), 0.85 mm TR2.10 pad | 1.16 mm TR2.10 (unchanged) | 8.85 → **8.87 mm** (≥ 8.0) |
+
+Copper to every slot ≥ 0.3 mm (the smallest, 0.30 mm, is the ISO_GND B.Cu pour at the unchanged L cut-out; JLC 0.2 mm).
+Unconnected 0, 0 shorts, clearance 0, dangling 0, parity 0, DRC 137 items as before; `check_domains.py` and
+`check_next.sh` pass.
+
 ## Stage 13a: Q8 drain link of the DAB secondary node (2026-11-23)
 
 Design review 2026-11-23 (findings 07 D2 / F4, 11 E4 / F1): the secondary switch node DHB_HI_SOURCE_SEC (about
@@ -2070,8 +2090,8 @@ ISO_GND, both outputs secondary) are each in one domain (`check_footprints.py` a
 | Part(s) | Footprint | What |
 |---|---|---|
 | L1, L2 | `tube_psu_next:L_Toroid_D31.5mm_W16.7mm_Vertical_RM8_45deg` (L1) / `…_315deg` (L2) | **Upright** toroid (on edge, ring plane along x = the board's long axis), as the chokes are mounted on the built 5.1 board (user decision and photo 2026-11-19). Pads 1 / 2 (Ø 1.3 / 2.6 mm, 0.8 mm wire) = the RM8 winding holes pri1 / pri2 of `tube_psu:L_RM8_Proteus` (8.42 mm apart on a diagonal); the 5.1 RM8s sit at +45° (L1) / −45° (L2), so there is one footprint per RM8 rotation with origin = the 5.1 RM8 origin, placed at **0°** on the 5.1 RM8 position (pads land on the 5.1 holes and keep their tracks). Body 31.5 × 16.7 mm, centre (−12, ±8) mm from the pad midpoint (`TOROID_V` body_dx / body_dy): the toroid's +x end stops at the PFC heatsink / H7 standoff and the body sits on the outer side of the pad pair (L1 towards the bottom board edge, L2 towards −y), read off the photo – **±3 mm, confirm on the built board**. L1's courtyard ends 1.0 mm inside the board edge (no overhang: in the photo the left toroid is flush with the edge, the top only appears to overhang by perspective). Courtyard body + 1.0 mm (33.5 × 18.7) plus a tab over the pad outside the body. 3D: ring standing on the board (31.5 high) with the two leads. The flat-lying `L_Toroid_D31.5mm_H16.7mm_Flat_P16.7mm` (+ `_TieSlots`) stays in the library, unused |
-| ISO1, U11 | `tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0` | KiCad SOIC-16W + 1.0 × 14.5 mm milled slot (Edge.Cuts) on the body axis: surface path **8.85 mm** ≥ 8.0 (primary ↔ heater / UART); pad rows alone 7.25 mm |
-| ISO2 | `…_Slot11.1` | 1.0 × 19.5 mm slot: **12.50 mm** ≥ 11.1 (primary ↔ DAB secondary) |
+| ISO1, U11 | `tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0` | KiCad SOIC-16W + 1.5 × 14.5 mm milled slot (Edge.Cuts; 1.0 mm before stage 13b) on the body axis: surface path **8.87 mm** ≥ 8.0 (primary ↔ heater / UART); pad rows alone 7.25 mm |
+| ISO2 | `…_Slot11.1` | 1.5 × 19.5 mm slot (1.0 before stage 13b): **12.57 mm** ≥ 11.1 (primary ↔ DAB secondary) |
 | TR1 | `Transformer_EEL19_V_4+6_FlyLeads` | slot 1.2 × **28 mm** (y −10 … +18); **fly-lead holes moved 1.5 mm down to y 15.5** and the barrier pads without unused inner-layer rings (`remove_unused_layers`): the inner layers get no slot credit (11.1 mm straight-line rule) and FL_DC's barrel was 10.1 mm from pin 5's (now 11.2 mm). Surface path **12.86 mm** (supersedes the 13.18 mm of EEL19_DESIGN.md 12.6, which used exact circles and the old hole position) |
 | TR3 | `Transformer_EC42x15_2Slot_2x8_P5mm` | PCB creepage pin row ↔ row 37.6 mm – no slot. Added a **12 mm barrier keep-out** (rule area: no tracks / vias / pours on all six layers) under the divider (x −7 … +5). The core counts as primary and sits over the pin rows: secondary pin wraps ↔ core is a transformer item (3 tape layers on the secondary core plate or a core cap, DAB_TRANSFORMER.md 8) – Fab note in the footprint |
 | TR2 | (5.1 EF25, copied) | heater barrier 10.37 mm ≥ 8.0 – no slot |

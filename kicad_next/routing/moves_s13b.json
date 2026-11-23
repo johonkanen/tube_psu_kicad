@@ -1,0 +1,22 @@
+{
+ "footprints": [
+  {
+   "ref": "ISO1",
+   "fpid": "tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0_T_ISO1",
+   "replaced": 21,
+   "added": 21
+  },
+  {
+   "ref": "ISO2",
+   "fpid": "tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot11.1",
+   "replaced": 17,
+   "added": 17
+  },
+  {
+   "ref": "U11",
+   "fpid": "tube_psu_next_parts:SOIC-16W_7.5x10.3mm_P1.27mm_Slot8.0",
+   "replaced": 17,
+   "added": 17
+  }
+ ]
+}
