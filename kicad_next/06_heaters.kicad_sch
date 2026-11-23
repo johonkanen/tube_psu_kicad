@@ -4062,7 +4062,7 @@
 				)
 			)
 		)
-		(property "Value" "4.7n"
+		(property "Value" "3.3n"
 			(at 89.24 53.34 0)
 			(effects
 				(font
@@ -4097,7 +4097,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C342746"
+		(property "LCSC" "C105987"
 			(at 93.98 52.07 0)
 			(effects
 				(font
@@ -4178,7 +4178,7 @@
 				)
 			)
 		)
-		(property "Value" "4.7n"
+		(property "Value" "3.3n"
 			(at 103.8 53.34 0)
 			(effects
 				(font
@@ -4213,7 +4213,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C342746"
+		(property "LCSC" "C105987"
 			(at 99.06 52.07 0)
 			(effects
 				(font
@@ -4330,7 +4330,7 @@
 				)
 			)
 		)
-		(property "Value" "4.7n"
+		(property "Value" "3.3n"
 			(at 89.24 81.28 0)
 			(effects
 				(font
@@ -4365,7 +4365,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C342746"
+		(property "LCSC" "C105987"
 			(at 93.98 80.01 0)
 			(effects
 				(font
@@ -4412,7 +4412,7 @@
 				)
 			)
 		)
-		(property "Value" "4.7n"
+		(property "Value" "3.3n"
 			(at 103.8 81.28 0)
 			(effects
 				(font
@@ -4447,7 +4447,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C342746"
+		(property "LCSC" "C105987"
 			(at 99.06 80.01 0)
 			(effects
 				(font
@@ -4589,7 +4589,7 @@
 		)
 		(uuid "62edea82-5ffb-524f-b3fe-09db6d1c9ae9")
 	)
-	(text "20n resonance cap, note X7R cap voltage bias (PDF note)."
+	(text "Resonance caps 4 x 3.3n C0G = 13.2n, about 214 kHz with the 42 uH leakage of TR2 (5.1: 4 x 4.7n X7R, about 2/3 at 200 V bias, 220 kHz)."
 		(exclude_from_sim no)
 		(at 45.72 99.06 0)
 		(effects

@@ -48,6 +48,7 @@ ICE5AR change (1.5) R64, R81, R84, R85, R86, C50.
 | 2.1 gap | doc | gap target **Lm ≈ 200 µH** (≈ 0.66–0.68 mm centre grind, set by measuring Lm; user 2026-11-18, simulation/dab/DAB_SIMULATION.md) – sheet-7 note updated (was Lm ~300 µH, gap 0.35 mm) |
 | 2.7 | firmware | dead time **150 ns total** (UCC21520 DT 100 ns is a minimum, not additive; notes on sheets 2 / 7 updated) |
 | 2.8 | yes | **R143 + R144** across C47 (DC+ → Net-(R143-Pad2) → DHB_CAP), **R145 + R146** across C54 (DHB_CAP → Net-(R145-Pad2) → DHB_CURRENT), **R150 + R149** across C16 (420V → Net-(R149-Pad2) → TRANS_SEC), **R148 + R147** across C55 (TRANS_SEC → Net-(R147-Pad2) → ISO_GND) (2026-11-21, after the user swapped C16 / C55 on the board: the resistor row under them stays in place and takes the nets of the capacitor above each pair – R147 pin 1 is ISO_GND, R150 pin 2 is 420V; was R147 + R148 across C16, R149 + R150 across C55): split-cap balancing, **220k 1 % 1206** UNI-ROYAL 1206W4F2203T5E (C17956, 200 V, 143 771 pcs, extended), ≤ ≈ 105 V / 50 mW each. Drawn beside the C47 / C54 and C16 / C55 columns; the secondary half bridge moved 12 grid units right (Q2X 184 → 196, C16 / C55 column 132 → 142) to make room. Mid nets in HV_NETS (`setup_project.py`): R143 / R145 → HV_PRIMARY, R147 / R149 → HV_SECONDARY |
+| 2.9 LLC | yes | **C22 / C41 / C42 / C49 4.7n -> 3.3n C0G 630 V 1206** (IHHEC C1206N332J631T, C105987; user 2026-11-23). 5.1 has 4.7 nF **X7R**, which the user measured to give the right resonance at the 200 V bias (220 kHz with the 42 µH leakage of TR2 needs 12.5 nF = about 2/3 of the nominal 18.8 nF). The 4.7 nF C0G of the first 5.2 parts list keeps its value under bias: 18.8 nF -> 179 kHz. 4 × 3.3 nF C0G = 13.2 nF -> about 214 kHz, without bias / temperature drift. JLC stock and price not read; capacitor current / voltage stress at 15 A not calculated yet |
 | 2.8 LLC | yes | **R155 + R156** across C49 ‖ C42 (DC+ → Net-(R155-Pad2) → HEATER_CAP_MEAS), **R157 + R158** across C41 ‖ C22 (HEATER_CAP_MEAS → Net-(R157-Pad2) → HEATER_CURRENT), 220k 1 % 1206 C17956 (user 2026-11-19: balancing resistors in the heater LLC resonance caps too). 100 V per resistor at 400 V, 0.45 mA / 0.18 W; |Z| of each 9.4 nF half at 100 kHz is 170 Ω vs 440 kΩ, so the resonance is unaffected. Mid nets HV_PRIMARY (setup_project.py). Sheet 6, below the resonance notes. |
 
 ### Transformer pins and winding tables (2026-11-21)
@@ -205,6 +206,7 @@ Parts: 5.1 315, 5.2 363; removed 12, added 60.
 | C15 |  |  | Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder -> Capacitor_SMD:C_1210_3225Metric |
 | C19 | 39u -> 68u |  | Capacitor_THT:CP_Radial_D10.0mm_P5.00mm -> tube_psu_next_parts:CP_Radial_D10.0mm_P5.00mm_H50mm |
 | C20 |  |  | Capacitor_SMD:C_1206_3216Metric -> Capacitor_SMD:C_1210_3225Metric |
+| C22 | 4.7n -> 3.3n |  |  |
 | C28 | 82u -> 82u 450V |  | tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus -> tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_Proteus_H45mm |
 | C29 | 82u -> 82u 450V |  | Capacitor_THT:CP_Radial_D12.5mm_P5.00mm -> tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_H45mm |
 | C30 | 39u -> 68u |  | Capacitor_THT:CP_Radial_D10.0mm_P5.00mm -> tube_psu_next_parts:CP_Radial_D10.0mm_P5.00mm_H50mm |
@@ -212,7 +214,10 @@ Parts: 5.1 315, 5.2 363; removed 12, added 60.
 | C32 |  |  | Capacitor_THT:CP_Radial_D8.0mm_P3.50mm -> tube_psu_next_parts:CP_Radial_D8.0mm_P3.50mm_H20mm |
 | C37 | 82u -> 82u 450V |  | tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus -> tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_Proteus_H45mm |
 | C40 | 100u -> 22u 25V |  |  |
+| C41 | 4.7n -> 3.3n |  |  |
+| C42 | 4.7n -> 3.3n |  |  |
 | C45 |  |  | Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder -> Capacitor_SMD:C_1210_3225Metric |
+| C49 | 4.7n -> 3.3n |  |  |
 | C56 | 82u -> 82u 450V |  | tube_psu:CP_Radial_D12.5mm_P5.00mm_Proteus -> tube_psu_next_parts:CP_Radial_D12.5mm_P5.00mm_Proteus_H45mm |
 | C58 | 4.7u -> 22u 35V | C -> C_Polarized | Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder -> Capacitor_SMD:CP_Elec_5x5.4 |
 | C61 | 1n -> 100n |  |  |

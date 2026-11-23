@@ -82,7 +82,7 @@ xc20 = TX + g(28)
 sh.wire((xj, DCP), (xc20, DCP))
 _, ct, cb = vert2(sh, "C", "C20", xc20, DCP + g(3), sh_value("C20"), top=1)      # pin 1 = DC+
 sh.wire(cb, (xc20, HC), (XA, HC))
-sh.text("20n resonance cap, note X7R cap voltage bias (PDF note).", QX - g(14), HC + g(12))
+sh.text("Resonance caps 4 x 3.3n C0G = 13.2n, about 214 kHz with the 42 uH leakage of TR2 (5.1: 4 x 4.7n X7R, about 2/3 at 200 V bias, 220 kHz).", QX - g(14), HC + g(12))
 # 5.2: balancing resistors across the resonance split caps (user 2026-11-19, as R143-R150 on the DAB):
 # R155 + R156 across C49 || C42 (DC+ - HEATER_CAP_MEAS), R157 + R158 across C41 || C22 (HEATER_CAP_MEAS -
 # HEATER_CURRENT), 2 x 220k 1206 each = 100 V per resistor at a 400 V bus, 0.45 mA / 0.18 W in total.

@@ -320,7 +320,7 @@ Sheet 06 (5.2):
 - Q11 (high) / Q10 (low) half bridge on DC+ with the R30 shunt and UCC21520 DRV3 (DT 100 ns).
   Gate 10 Ω on, 3.3 Ω + ZLLS400 off.
 - Resonant capacitor C42 + C49 (DC+ side) and C41 + C22 (return side), 4 × 4.7 nF, i.e. a split
-  18.8 nF.
+  18.8 nF (5.1: X7R, about 12.5 nF at the 200 V bias; 5.2 from 2026-11-23: 4 × 3.3 nF C0G = 13.2 nF, CHANGES 2.9).
 - TR2 EF25 with a centre-tapped secondary to 6V3, synchronous rectifiers Q1 / Q2 (BUK9Y15-60E)
   driven by DRV4 from EPWM5A/6A.
 - There is no separate resonant inductor, so the TR2 leakage is Lr.
