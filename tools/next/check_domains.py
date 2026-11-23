@@ -337,7 +337,7 @@ def main(argv):
                             viol.append(rec)
 
     # ---- layer to layer (distance through insulation): copper of two domains on two different layers ----
-    # KiCad checks nothing between layers. README "Isolation domains": the prepregs (0.0994 / 0.1088 mm) are not
+    # KiCad checks nothing between layers. README "Isolation domains": the dielectrics (0.2 mm cores, 0.2 / 0.43 mm prepreg) are not
     # reinforced solid insulation, so copper of one domain must not overlap copper of another domain on any other
     # layer - and "overlap" is taken with the same plan-view spacing as on one layer, because a plane edge under a
     # pad of the other domain is only a prepreg away from it:

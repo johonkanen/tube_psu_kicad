@@ -10,7 +10,7 @@
 
 The skeleton holds only what is fixed (NEXT_REVISION_PLAN.md D3): the 5.1 board outline (Edge.Cuts) and
 the eight mounting holes copied from kicad/tube_psu.kicad_pcb (locked), the 6-layer copper set and the
-JLC06161H-3313 stackup (D5: 1 oz outer, 0.5 oz inner, 1.6 mm). Footprints are placed in phase 5; after
+JLC06161H-7628D stackup (D5: 1 oz outer, 0.5 oz inner, 1.6 mm). Footprints are placed in phase 5; after
 that the board is edited in KiCad and only --check is run (it does not compare bytes).
 Design rules / net classes live in kicad_next/tube_psu_5_2.kicad_pro and tube_psu_5_2.kicad_dru
 (tools/next/setup_project.py).
@@ -36,8 +36,10 @@ COPPER = [
     (pcbnew.B_Cu, "B.Cu", pcbnew.LT_SIGNAL),     # L6 bottom parts + signals
 ]
 
-# JLC06161H-3313 (jlcpcb.com/impedance, 6 layers, 1 oz outer / 0.5 oz inner, read 2026-11-17).
-# Dielectric thicknesses are the pressed values JLC's calculator uses; Dk: 3313 4.1, 2116 4.16,
+# JLC06161H-7628D (JLC order form "Layer Stackup", 6 layers, 1 oz outer / 0.5 oz inner, read by the user
+# 2026-11-23; was JLC06161H-3313 until then): two plies of 7628 (0.218 + 0.2104 mm, one KiCad dielectric of
+# 0.4284 mm) between the outer layers and the GND planes, for the 400 V DC+ copper on F.Cu / B.Cu. Special
+# stackup: no economic PCB assembly. Dk: 7628 4.4 (JLC calculator guide),
 # core (Nan Ya NP-155F) 4.6; solder mask 0.6 mil (0.015 mm) over copper, Dk 3.8 (JLC calculator guide).
 # Loss tangent 0.02 is a generic FR-4 value (not published per stackup by JLC).
 STACKUP = """\t\t(stackup
@@ -45,15 +47,15 @@ STACKUP = """\t\t(stackup
 \t\t\t(layer "F.Paste" (type "Top Solder Paste"))
 \t\t\t(layer "F.Mask" (type "Top Solder Mask") (thickness 0.015) (material "LPI") (epsilon_r 3.8) (loss_tangent 0))
 \t\t\t(layer "F.Cu" (type "copper") (thickness 0.035))
-\t\t\t(layer "dielectric 1" (type "prepreg") (thickness 0.0994) (material "3313 RC57%") (epsilon_r 4.1) (loss_tangent 0.02))
+\t\t\t(layer "dielectric 1" (type "prepreg") (thickness 0.4284) (material "7628 x2 (0.218 + 0.2104)") (epsilon_r 4.4) (loss_tangent 0.02))
 \t\t\t(layer "In1.Cu" (type "copper") (thickness 0.0152))
-\t\t\t(layer "dielectric 2" (type "core") (thickness 0.55) (material "NP-155F core") (epsilon_r 4.6) (loss_tangent 0.02))
+\t\t\t(layer "dielectric 2" (type "core") (thickness 0.2) (material "NP-155F core") (epsilon_r 4.6) (loss_tangent 0.02))
 \t\t\t(layer "In2.Cu" (type "copper") (thickness 0.0152))
-\t\t\t(layer "dielectric 3" (type "prepreg") (thickness 0.1088) (material "2116 RC54%") (epsilon_r 4.16) (loss_tangent 0.02))
+\t\t\t(layer "dielectric 3" (type "prepreg") (thickness 0.2028) (material "7628") (epsilon_r 4.4) (loss_tangent 0.02))
 \t\t\t(layer "In3.Cu" (type "copper") (thickness 0.0152))
-\t\t\t(layer "dielectric 4" (type "core") (thickness 0.55) (material "NP-155F core") (epsilon_r 4.6) (loss_tangent 0.02))
+\t\t\t(layer "dielectric 4" (type "core") (thickness 0.2) (material "NP-155F core") (epsilon_r 4.6) (loss_tangent 0.02))
 \t\t\t(layer "In4.Cu" (type "copper") (thickness 0.0152))
-\t\t\t(layer "dielectric 5" (type "prepreg") (thickness 0.0994) (material "3313 RC57%") (epsilon_r 4.1) (loss_tangent 0.02))
+\t\t\t(layer "dielectric 5" (type "prepreg") (thickness 0.4284) (material "7628 x2 (0.2104 + 0.218)") (epsilon_r 4.4) (loss_tangent 0.02))
 \t\t\t(layer "B.Cu" (type "copper") (thickness 0.035))
 \t\t\t(layer "B.Mask" (type "Bottom Solder Mask") (thickness 0.015) (material "LPI") (epsilon_r 3.8) (loss_tangent 0))
 \t\t\t(layer "B.Paste" (type "Bottom Solder Paste"))
@@ -63,9 +65,9 @@ STACKUP = """\t\t(stackup
 \t\t)
 """
 # copper / dielectric thickness per stackup position, for --check (mm)
-EXPECT = [("F.Cu", 0.035), ("dielectric 1", 0.0994), ("In1.Cu", 0.0152), ("dielectric 2", 0.55),
-          ("In2.Cu", 0.0152), ("dielectric 3", 0.1088), ("In3.Cu", 0.0152), ("dielectric 4", 0.55),
-          ("In4.Cu", 0.0152), ("dielectric 5", 0.0994), ("B.Cu", 0.035)]
+EXPECT = [("F.Cu", 0.035), ("dielectric 1", 0.4284), ("In1.Cu", 0.0152), ("dielectric 2", 0.2),
+          ("In2.Cu", 0.0152), ("dielectric 3", 0.2028), ("In3.Cu", 0.0152), ("dielectric 4", 0.2),
+          ("In4.Cu", 0.0152), ("dielectric 5", 0.4284), ("B.Cu", 0.035)]
 
 
 def mm(v):
@@ -149,7 +151,7 @@ def check():
     got = [(m.group(1), float(m.group(2))) for m in
            re.finditer(r'\(layer "([^"]+)"\s*\(type "(?:copper|prepreg|core)"\)\s*(?:\(color "[^"]*"\)\s*)?\(thickness ([\d.]+)\)', text)]
     if got != EXPECT:
-        errs.append(f"stackup differs from JLC06161H-3313: {got}")
+        errs.append(f"stackup differs from JLC06161H-7628D: {got}")
     thick = mm(b.GetDesignSettings().GetBoardThickness())
     for e in errs:
         print("make_board: " + e)

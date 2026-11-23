@@ -2006,29 +2006,39 @@ the core-plate height above the board at the secondary pins (≥ 4.0 mm clearanc
 position relative to the RM8 holes on the built board (photo estimate ±3 mm), OD / width with the winding; EF25
 (TR2) height; TBS bridge height; heatsink plate size from the placement.
 
-## Stackup (D5) – JLC06161H-3313, 6 layers, 1.6 mm, 1 oz outer / 0.5 oz inner
+## Stackup (D5) – JLC06161H-7628D, 6 layers, 1.6 mm, 1 oz outer / 0.5 oz inner
 
-Values from JLC's impedance-calculator stackup table (jlcpcb.com/impedance, read 2026-11-17); solder-mask
-0.6 mil over copper, Dk 3.8 (JLC calculator guide); laminate Nan Ya NP-155F (JLC 4–8 layer default).
-Loss tangent 0.02 is a generic FR-4 figure (not published per stackup). Finished thickness 1.6 mm nominal
-(the layers below sum to 1.538 mm + mask; JLC tolerance ±10 %). Surface finish ENIG (JLC: no HASL on
-≥ 6 layers; vias epoxy-filled and capped by default).
+User decision 2026-11-23 (was JLC06161H-3313: one 0.0994 mm 3313 ply under the outer layers, 0.55 mm cores,
+0.1088 mm 2116 between In2 / In3). Reason: the 400 V DC+ copper on F.Cu / B.Cu lies over the In1 / In4 GND planes;
+7628D puts two plies of 7628 (0.428 mm) there instead of one thin ply - about 0.9 kV/mm instead of 4 kV/mm, and no
+single-ply defect path. Thicknesses from the "Layer Stackup" table of JLC's order form (read by the user,
+2026-11-23). **Special stackup: JLC does not offer economic PCB assembly with it** (standard assembly only).
+Solder-mask 0.6 mil over copper, Dk 3.8, 7628 Dk 4.4 (JLC calculator guide); core Dk 4.6 and laminate Nan Ya
+NP-155F are carried over from the 3313 table (not re-read for this stackup). Loss tangent 0.02 is a generic FR-4
+figure. Finished thickness 1.6 mm nominal (the layers below sum to 1.590 mm + mask). Surface finish ENIG; vias
+epoxy-filled and capped by default.
 
 | # | Layer | KiCad name / type | Use | Thickness | Dk |
 |---|---|---|---|---|---|
 | | F.Mask | – | LPI mask | 0.015 | 3.8 |
 | L1 | F.Cu | F.Cu, signal | parts + power copper, signals | 0.035 (1 oz) | |
-| | prepreg 3313 ×1 (RC 57 %) | dielectric 1 | | 0.0994 | 4.1 |
+| | prepreg 7628 ×2 (0.218 + 0.2104) | dielectric 1 | | 0.4284 | 4.4 |
 | L2 | In1.Cu | In1.GND, power | GND planes, one per domain | 0.0152 (0.5 oz) | |
-| | core | dielectric 2 | | 0.55 | 4.6 |
+| | core | dielectric 2 | | 0.2 | 4.6 |
 | L3 | In2.Cu | In2.Signal_HV, signal | signals / HV routing | 0.0152 | |
-| | prepreg 2116 ×1 | dielectric 3 | | 0.1088 | 4.16 |
-| L4 | In3.Cu | In3.Power, mixed | power pours (DC+, 15V, +3V3, …) | 0.0152 | |
-| | core | dielectric 4 | | 0.55 | 4.6 |
+| | prepreg 7628 ×1 | dielectric 3 | | 0.2028 | 4.4 |
+| L4 | In3.Cu | In3.Power, mixed | power pours (15V, +3V3, …), signal lanes; no DC+ (stage 9) | 0.0152 | |
+| | core | dielectric 4 | | 0.2 | 4.6 |
 | L5 | In4.Cu | In4.GND, power | GND planes, one per domain | 0.0152 | |
-| | prepreg 3313 ×1 | dielectric 5 | | 0.0994 | 4.1 |
+| | prepreg 7628 ×2 (0.2104 + 0.218) | dielectric 5 | | 0.4284 | 4.4 |
 | L6 | B.Cu | B.Cu, signal | bottom parts + signals | 0.035 (1 oz) | |
 | | B.Mask | – | LPI mask | 0.015 | 3.8 |
+
+Consequences against 3313: outer copper is 4.3 times further from its plane (higher inductance of loops that
+return through the plane, about 4 times less plane capacitance; not calculated - the DAB gate and power loops run
+side by side on one layer); In2 HV routing is 0.2 mm of core from In1 (was 0.55 mm) and 0.2 mm of prepreg from In3
+(was 0.11 mm). Distances between isolation domains are checked in plan view and do not depend on the stackup.
+Text of the earlier stages in this file quotes the 3313 thicknesses (0.0994 / 0.1088 / 0.55 mm) as they were then.
 
 ## JLC manufacturing limits (jlcpcb.com/capabilities/pcb-capabilities, multilayer, read 2026-11-17)
 
@@ -2079,9 +2089,9 @@ netlist). Count after phase 2: primary 156 nets (HV_PRIMARY 43, PRIMARY_LV 5, SI
   cemented-joint qualification, so **no reduction is claimed**: inner-layer spacing between domains =
   the outer creepage value (conservative; the barrier width is set by the outer creepage anyway).
   Layer to layer: IEC 62368-1 reinforced solid insulation needs ≥ 0.4 mm (or a qualified thin-sheet
-  build – **verify the clause** in the edition used); L1–L2 / L5–L6 have one 0.0994 mm 3313 ply and
-  L3–L4 one 0.1088 mm 2116 ply → **copper of two domains must never overlap on any pair of layers**
-  (only the 0.55 mm cores would pass 0.4 mm). Phase 5/6: barrier keep-out on all six layers.
+  build – **verify the clause** in the edition used); with JLC06161H-7628D (2026-11-23) the cores are 0.2 mm,
+  L3–L4 is one 0.2028 mm 7628 ply, and L1–L2 / L5–L6 are two 7628 plies (0.428 mm, not a qualified build)
+  → **copper of two domains must never overlap on any pair of layers** (no layer pair is relied on). Phase 5/6: barrier keep-out on all six layers.
 
 ### Working voltages and numbers
 
