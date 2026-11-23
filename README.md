@@ -23,7 +23,8 @@ The method follows `tools/p2k/CONVERSION_PLAYBOOK.md`. The tools are the shared
 
 ## Board
 
-3D renders and copper layers of `kicad/tube_psu.kicad_pcb`, made by GitHub Actions on every board change
+3D renders and copper layers of the 5.2 board `kicad_next/tube_psu_5_2.kicad_pcb` (6 layers, in work) and of the
+5.1 board `kicad/tube_psu.kicad_pcb`, made by GitHub Actions on every board change
 ([kicad-board-plots](https://github.com/johonkanen/kicad-board-plots), `.github/workflows/board-plots.yml`;
 the images live on the `renders` branch).
 
