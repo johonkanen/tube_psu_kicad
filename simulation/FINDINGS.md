@@ -319,6 +319,12 @@ scale 18.5 V (2.64 V at 15 V). 5V_MEAS 2.000 V at 5.0 V, full scale 8.15 V, 0.5 
 the 0.1 % divider. LMH6643 inputs at 1.57–1.63 V, inside its common-mode range (≤ 1.9 V over
 temperature at 3.3 V).
 
+**Note 2026-11-24 (shunts 5 mΩ, kicad_next/CHANGES_5_2.md 6.2):** the results above are for the 4 mΩ design value and
+stay as computed. The board is now built with 5 mΩ KRL2012E-M-R005-F-T5: every current-channel gain × 1.25 (PFC
+103.0 mV/A = 9.71 A/V, DHB 227.1 mV/A = 4.40 A/V, HEATER 499.2 mV/A = 2.00 A/V), ranges × 0.8 (PFC −15.6 / +15.7 A,
+DHB ±7.1 A, HEATER ±3.2 A; after 7 mV Vos ±14.1 / ±5.6 / ±1.8 A), LSB 1.96 / 0.89 / 0.40 mA. The ESL compensation
+of 11.4 (τ sized for 4 mΩ) over-compensates by about 25 % – to be tuned on the bench. Not re-simulated.
+
 ### 11.3 Bias buffer U9 stability ([out/5.2/bias_buffer_results.md](out/5.2/bias_buffer_results.md))
 
 U9 drives 22 Ω + 100 nF with the feedback from its output pin: the 22 Ω sets an HF loop attenuation
@@ -359,6 +365,9 @@ DHB is clean up to 1.2 nH). If the bench shows a spike on PFC_I (loop inductance
 (C113/C106, C112/C107 together). DHB 12p is the 1.2 nH value: at the typical 0.5 nH it is
 over-compensated (−23 % at 300 ns, 1 % after 1.3 µs instead of 0.7 µs with 3.9p) – lower it on the
 bench to 5.6–8.2p if a faster edge is wanted.
+
+(2026-11-24: with the 5 mΩ shunts of CHANGES_5_2.md 6.2 the L/R time constant is 20 % shorter and the compensation
+above about 25 % too strong; bench tuning, not re-simulated.)
 
 ### 11.5 ADC mux leakage ([out/5.2/mux_results.md](out/5.2/mux_results.md))
 

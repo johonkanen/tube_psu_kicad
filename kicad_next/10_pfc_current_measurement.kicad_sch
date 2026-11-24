@@ -3717,5 +3717,16 @@
 		)
 		(uuid "0cd05325-27d3-50a3-b136-f4992c34eabe")
 	)
+	(text "Shunts R93 / R21 5 mOhm (KRL2012E-M-R005, 2026-11-24): PFC_I1 / PFC_I2 9.71 A/V around +1V65_BIAS (was 12.13 A/V at 4 mOhm), range about -15.5 / +15.7 A."
+		(exclude_from_sim no)
+		(at 76.2 198.12 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9db233b6-f068-5d95-8b70-463052da2173")
+	)
 	(embedded_fonts no)
 )

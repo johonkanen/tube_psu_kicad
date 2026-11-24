@@ -6069,7 +6069,7 @@
 				)
 			)
 		)
-		(property "Value" "4m"
+		(property "Value" "5m"
 			(at 275.42 111.76 0)
 			(effects
 				(font
@@ -6104,7 +6104,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C2073455"
 			(at 271.78 110.49 0)
 			(effects
 				(font
@@ -6589,7 +6589,7 @@
 				)
 			)
 		)
-		(property "Value" "4m"
+		(property "Value" "5m"
 			(at 275.42 175.26 0)
 			(effects
 				(font
@@ -6624,7 +6624,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C2073455"
 			(at 271.78 173.99 0)
 			(effects
 				(font

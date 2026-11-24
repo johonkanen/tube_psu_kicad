@@ -32,5 +32,6 @@ power_at(sh, "GND", VN, "down")
 
 sh.text("2k = 22k||2.2k (PDF hand note, twice on the page).", g(60), g(150))
 sh.text("5.2: legs already balanced (C113 / C106, C112 / C107 20p): tau = 6.8k * 20p = 136 ns ~ 0.54 nH / 4 mOhm (NR 4.11); offset calibrated (LMH6643 Vos).", g(60), g(153))
+sh.text("Shunts R93 / R21 5 mOhm (KRL2012E-M-R005, 2026-11-24): PFC_I1 / PFC_I2 9.71 A/V around +1V65_BIAS (was 12.13 A/V at 4 mOhm), range about -15.5 / +15.7 A.", g(60), g(156))
 sh.save()
 print("sheet10: written")

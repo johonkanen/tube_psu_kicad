@@ -3,8 +3,8 @@
 amplifies DHB_CURRENT -> DHB_I_MEAS, U1:A HEATER_CURRENT -> HEATER_I_MEAS, both biased at +1V65_BIAS.
 
 5.2 (NR 4.11): shunt-ESL compensation with balanced legs - the feedback cap (C63 / C11) gets a matching cap
-from the + input to +1V65_BIAS (C122 / C123), tau = Rfb * C ~ L/R of the 4 mOhm shunt (~0.5-0.8 nH incl. the
-Kelvin loop -> 125-200 ns): DHB 15k * 12p = 180 ns, HEATER 33k * 5.6p = 185 ns (5.1: 20 pF on the - leg only,
+from the + input to +1V65_BIAS (C122 / C123), tau = Rfb * C ~ L/R of the shunt (4 mOhm design value: ~0.5-0.8 nH incl. the
+Kelvin loop -> 125-200 ns; with the fitted 5 mOhm, 2026-11-24, L/R is ~25 % shorter, i.e. over-compensated): DHB 15k * 12p = 180 ns, HEATER 33k * 5.6p = 185 ns (5.1: 20 pF on the - leg only,
 300 / 660 ns). Start values - tune on the bench (spike = C too small, slow over/undershoot = too large).
 U1 decoupling C124 100n + C125 1u at pin 8 (NR 4.6)."""
 from _common import *  # noqa: F401,F403
@@ -38,6 +38,8 @@ power_at(sh, "GND", VN, "down")
 
 sh.text("C10 / C26 value 'na' (not assembled) in Proteus, pads in the layout. PDF terminals DC- = GND.", g(60), g(150))
 sh.text("2k = 22k||2.2k (PDF hand note).", g(60), g(153))
-sh.text("5.2: LMH6643 Vos <= 5 mV = 1.25 A on 4 mOhm: zero-current offset calibrated at start-up (firmware).", g(60), g(156))
+sh.text("5.2: shunts 5 mOhm (KRL2012E-M-R005, 2026-11-24): DHB_I 4.40 A/V, HEATER_I 2.00 A/V around +1V65_BIAS (was 5.50 / 2.50 A/V at 4 mOhm).", g(60), g(156))
+sh.text("LMH6643 Vos <= 5 mV (7 mV over temperature) = 1.0 A (1.4 A) on 5 mOhm: zero-current offset calibrated at start-up (firmware).", g(60), g(159))
+sh.text("ESL caps C63 / C122, C11 / C123 sized for 4 mOhm: about 25 % over-compensated with 5 mOhm - tune on the bench.", g(60), g(162))
 sh.save()
 print("sheet08: written")

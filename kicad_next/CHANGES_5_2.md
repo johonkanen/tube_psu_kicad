@@ -155,6 +155,7 @@ slot unchanged.
 
 | NR | Done | Refdes / value / nets |
 |---|---|---|
+| 6.2 | yes | **Shunts R21, R30, R83, R93 4 mΩ → 5 mΩ KRL2012E-M-R005-F-T5** (Susumu, LCSC C2073455, JLC extended, 687 pcs, $0.48, 2026-11-24; status changed from "missing" to fitted by JLC), owner decision 2026-11-24 (findings 08 F3). Same footprint `R_0508_1220Metric_KRL2012`: Susumu catalogue p 51–52 (KRL series, file of 2026-01-06): KRL2012 1 W, 3–9 mΩ ±1 % ±50 ppm/K, body 1.25 × 2.00 × 0.50 mm, terminals a = 0.30 ± 0.20 mm; the pads (0.35 × 2.0 mm at ±0.4875 mm) cover the terminals; a Susumu recommended land pattern was not on the fetched page (not confirmed). **Current scales × 0.8** (gains of sheets 8 / 10: PFC 6.8k / 330R = 20.61, DAB 15k / 330R = 45.45, heater 33k / 330R = 100.0; output around +1V65_BIAS): **PFC_I1 / PFC_I2 12.13 → 9.71 A/V** (103.0 mV/A), **DHB_I 5.50 → 4.40 A/V** (227.1 mV/A), **HEATER_I 2.50 → 2.00 A/V** (499.2 mV/A; mV/A from the simulated 4 mΩ gains of simulation/FINDINGS.md 11.1 × 1.25). Ranges (bias 1.642 V, output 0.04–3.26 V): PFC −15.6 / +15.7 A, DAB −7.1 / +7.1 A, heater −3.2 / +3.2 A; LMH6643 Vos 7 mV (over temperature) referred to the input 1.47 / 1.43 / 1.42 A, so ±14.1 / ±5.6 / ±1.8 A after an uncalibrated worst-case offset; 1 LSB (14 bit, 3.3 V) 1.96 / 0.89 / 0.40 mA. Shunt dissipation +25 % (≤ 0.25 W). The ESL compensation caps (4.11, open question 7) were sized for 4 mΩ: with 5 mΩ the shunt time constant L/R is 20 % shorter, so they over-compensate by about 25 % – tune on the bench. Firmware constants: J2_PINOUT.md "Firmware constants and bring-up cautions (5.2)". Check the PFC range against the low-line DCM peak and the heater range against the LLC primary peak on the bench |
 | 6.3 | yes | **−100V BIAS bleeder R68 12.1k → R68 ‖ R159 ‖ R160 ‖ R161 ‖ R162 ‖ R163 = 6 × 73.2k 1 % 1206** (Walsin WR12X7322FTL, C368302, 200 V / 250 mW, JLC extended, 2888 pcs 2026-11-24) = **12.2 kΩ (+0.8 %)**, sheet 1 (findings 01 F1: R68 dissipated 84.4² / 12.1k = **0.59 W** in a 250 mW part, under C102). At the highest simulated rail voltage 84.4 V (EEL19_DESIGN.md 14.6: 80.2–84.4 V) each dissipates 84.4² / 73.2k = **97 mW** (39 % of 250 mW; 0.58 W in total, as before); 84 V per part against 200 V. Six is the smallest count that keeps ≤ 100 mW (five × 60.4k: 118 mW). The 0.8 % higher bleeder resistance changes the bleeder-only rail voltage by far less than the simulated 80–84 V spread (not re-simulated). Board: R68 leaves its place under C102; the six stand on B.Cu in the strip between the P5V_OUT and N80V_OUT terminal rows (four north–south at y 4.3, x 72.7–80.5, pitch 2.6 mm; two east–west at y 4.35, x 83.95 / 88.56), −100V BIAS on a 0.5 mm B.Cu bus at y 7.0 through the N80V_OUT pads. Stage 15b (kicad_next/README.md) |
 | 6.4 | yes | **C141 100n X7R 50 V 0603** (C14663, the part of C93 / C94: no new BOM line) **DRV6 VDDB (pin 11, 15V_ISO_SEC) – VSSB (pin 9, ISO_GND)**, sheet 2 (findings 02 F1, 11 F8: the nearest capacitor, C43, stood 11.9 mm from pin 11; SLUSCJ9F §11.1 "must be connected close to the device"). Board: B.Cu west of the pin row at (54.6, −53.83), pad gaps 0.26 mm to pins 11 / 9, 0.4 mm tracks; local HF bypass, C72 4.7 µF / C43 1 µF stay the rail capacitors. Stage 15a (kicad_next/README.md) |
 | 6.5 | yes | **R4, R5, R6 470k → 200k 1 % 1206** (UNI-ROYAL 1206W4F2003T5E, C17954, 200 V / 250 mW per the JLC parts API, 167 k pcs; the 470k was C17997 of the same family), value only, sheet 5 (findings 05 F5: X-capacitor discharge). X capacitance C86 680n + C38 470n + C117 680n = **1.83 µF** (C64 / C66 47n sit across bridge diodes, about 24 nF more in series across the line: ignored, < 1.3 %). Discharge path IN2 → R4–R6 → RES_IN = **600 kΩ** (was 1.41 MΩ), in parallel the 6 MΩ of the VAC divider (R47 / R48 + R50–R52 through U8, sheet 9) = 545 kΩ. τ = 1.10 s (0.998 s with the divider). Time to 60 V (IEC 62368-1 5.5.2.2: ≤ ES1 2 s after disconnection): from 325 V peak (230 Vrms) **1.86 s** (1.69 s with the divider); from 373 V peak (264 Vrms) **2.01 s** (1.82 s with the divider); with +10 % X capacitance at 264 V 2.21 s / 2.00 s. Reviewer's arithmetic (τ 2.1–2.6 s before, 1.0 s after, 1.7 s at 230 V) confirmed. Stress at 264 Vrms: 88 Vrms / 124 V peak and **39 mW** per resistor (16 % of 250 mW, 62 % of 200 V working voltage). Marginal at 264 V with tolerances: 180k would give 1.82 s at 264 V / +10 % C (open question for the owner) |
@@ -185,7 +186,7 @@ PFC_DRAIN_1/2, HEATER_HI_DRV, Net-(D35-K), Net-(DRV3-VDDA); TRANS_PRI removed).
 6. **Bias buffer stability**: U9 (TLV316) with 22R + 100 nF, feedback from the op-amp output – check with the vendor
    model in phase 4; the 22R drop (≈ 13 mV) shifts the bias of all channels equally.
 7. **ESL caps** 12p / 5.6p are calculated start values (τ ≈ 180 ns ↔ 0.72 nH at 4 mΩ); HEATER at noise gain 101 is
-   limited by the LMH6643 (≈ 0.56 MHz), tune on the bench. If the shunts become 5 mΩ (KRL2012E, NR 5.6) rescale.
+   limited by the LMH6643 (≈ 0.56 MHz), tune on the bench. **The shunts are 5 mΩ since 2026-11-24 (6.2): the caps now over-compensate by about 25 % – bench tuning decides.**
 8. **L1 / L2**: value after measuring the toroids (NR 5.2); footprint = upright toroid on the 5.1 RM8 holes (2026-11-19); confirm the body position on the built board (kicad_next/README.md).
 9. **Q10 / Q11 P7** standard body diode – LLC start-up / overload commutation in the phase-4 simulation (NR 5.4).
 10. **C73** (2.2 µF 450 V X6S 2220 on DC+) left as is (NR 5.6 asks for ≥ 630 V; no stocked 2.2 µF part).
@@ -285,13 +286,13 @@ Parts: 5.1 315, 5.2 369; removed 12, added 66.
 | R6 | 470k -> 200k |  |  |
 | R8 | 2.49R -> 1.37R |  |  |
 | R9 | 2.49R -> 1.37R |  |  |
-| R21 |  |  | tube_psu:R_0508_1220Metric_KRL2012 -> tube_psu_next_parts:R_0508_1220Metric_KRL2012 |
-| R30 |  |  | tube_psu:R_0508_1220Metric_KRL2012 -> tube_psu_next_parts:R_0508_1220Metric_KRL2012 |
+| R21 | 4m -> 5m |  | tube_psu:R_0508_1220Metric_KRL2012 -> tube_psu_next_parts:R_0508_1220Metric_KRL2012 |
+| R30 | 4m -> 5m |  | tube_psu:R_0508_1220Metric_KRL2012 -> tube_psu_next_parts:R_0508_1220Metric_KRL2012 |
 | R49 | 15k -> 12k |  |  |
 | R68 | 12.1K -> 73.2k |  |  |
 | R80 | 15k -> 12k |  |  |
-| R83 |  |  | tube_psu:R_0508_1220Metric_KRL2012 -> tube_psu_next_parts:R_0508_1220Metric_KRL2012 |
-| R93 |  |  | tube_psu:R_0508_1220Metric_KRL2012 -> tube_psu_next_parts:R_0508_1220Metric_KRL2012 |
+| R83 | 4m -> 5m |  | tube_psu:R_0508_1220Metric_KRL2012 -> tube_psu_next_parts:R_0508_1220Metric_KRL2012 |
+| R93 | 4m -> 5m |  | tube_psu:R_0508_1220Metric_KRL2012 -> tube_psu_next_parts:R_0508_1220Metric_KRL2012 |
 | R110 | 220 -> 1.00k |  |  |
 | R114 | 1M -> 4.7M |  | Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder -> Resistor_SMD:R_1206_3216Metric |
 | R115 | 1M -> 4.7M |  | Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder -> Resistor_SMD:R_1206_3216Metric |

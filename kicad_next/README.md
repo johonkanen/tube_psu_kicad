@@ -204,6 +204,13 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 15e: current shunts R21 / R30 / R83 / R93 4 mΩ → 5 mΩ (2026-11-24)
+
+Owner decision on findings 08 F3. Value / part change only: KRL2012E-M-R005-F-T5 (C2073455), same footprint, fitted
+by JLC (was "missing"); board value / LCSC fields by `tools/next/update_board_parts.py R21 R30 R83 R93`. Current
+scales × 0.8: PFC 9.71, DAB 4.40, heater 2.00 A/V; sheet 8 / 10 notes, CHANGES_5_2.md 6.2, simulation/FINDINGS.md
+11.2 note, J2_PINOUT.md firmware section. `check_next.sh` passes.
+
 ## Stage 15d: DAB FETs Q7 / Q8 / Q19 / Q21 → IPA60R280CFD7 (2026-11-24)
 
 Owner decision 2026-11-24 (findings 02 F2, 07 F2): value / part-number change only (Infineon CoolMOS CFD7, TO-220

@@ -3874,7 +3874,7 @@
 		)
 		(uuid "6920f1ec-f600-5dae-93cd-3ac305c3919f")
 	)
-	(text "5.2: LMH6643 Vos <= 5 mV = 1.25 A on 4 mOhm: zero-current offset calibrated at start-up (firmware)."
+	(text "5.2: shunts 5 mOhm (KRL2012E-M-R005, 2026-11-24): DHB_I 4.40 A/V, HEATER_I 2.00 A/V around +1V65_BIAS (was 5.50 / 2.50 A/V at 4 mOhm)."
 		(exclude_from_sim no)
 		(at 76.2 198.12 0)
 		(effects
@@ -3884,6 +3884,28 @@
 			(justify left bottom)
 		)
 		(uuid "af857225-70bc-5c7f-8f15-8a6fa457ecd1")
+	)
+	(text "LMH6643 Vos <= 5 mV (7 mV over temperature) = 1.0 A (1.4 A) on 5 mOhm: zero-current offset calibrated at start-up (firmware)."
+		(exclude_from_sim no)
+		(at 76.2 201.93 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8f251c76-71ec-5551-a68b-657ecb139b54")
+	)
+	(text "ESL caps C63 / C122, C11 / C123 sized for 4 mOhm: about 25 % over-compensated with 5 mOhm - tune on the bench."
+		(exclude_from_sim no)
+		(at 76.2 205.74 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1c55f284-7205-55f3-bd2f-881082a0fba4")
 	)
 	(embedded_fonts no)
 )

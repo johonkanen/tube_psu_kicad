@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Sheet 7 - DHB (PDF page 7): the dual half-bridge. Primary: Q19 / Q7 (DC+ -> DHB_HI_SOURCE ->
-DHB_CURRENT -> R83 4m -> GND), C47 / C54 with the DHB_CAP node -> TR3 primary (5.2: EC42/15, L3 removed),
+DHB_CURRENT -> R83 5m -> GND), C47 / C54 with the DHB_CAP node -> TR3 primary (5.2: EC42/15, L3 removed),
 C67 / C70 across DC+ - DHB_CURRENT. Secondary: Q21 / Q8 (420V -> DHB_HI_SOURCE_SEC -> ISO_GND), C16 /
 C55 with the TRANS_SEC node at TR3's secondary, C89 / C90 on 420V. 5.2: 2 x 220k balancing resistors
 across each split cap (R143-R146 primary, R147-R150 secondary, NR 2.8; secondary since 2026-11-21:

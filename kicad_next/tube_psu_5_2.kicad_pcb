@@ -12566,7 +12566,7 @@
 				)
 			)
 		)
-		(property "Value" "4m"
+		(property "Value" "5m"
 			(at 0 2.03 90)
 			(layer "F.Fab")
 			(uuid "4262ca26-4dc2-49c6-b376-b9451acaf7fd")
@@ -12611,7 +12611,7 @@
 				)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C2073455"
 			(at 0 0 90)
 			(layer "F.SilkS")
 			(uuid "b3775f07-8833-4379-b475-db646bb185af")
@@ -72416,7 +72416,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "4m"
+		(property "Value" "5m"
 			(at 0 -2.03 90)
 			(layer "B.Fab")
 			(uuid "9b66eb8b-0f9d-4853-9a14-9e779b97fbdc")
@@ -72465,7 +72465,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C2073455"
 			(at 0 0 0)
 			(layer "B.SilkS")
 			(uuid "fc7e30f6-5077-4a4c-93bd-4573fcf80ca1")
@@ -73401,7 +73401,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "4m"
+		(property "Value" "5m"
 			(at 0 -2.03 180)
 			(layer "B.Fab")
 			(uuid "03a543ca-0d31-41d6-9b06-d2b5f624937b")
@@ -73450,7 +73450,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C2073455"
 			(at 0 0 0)
 			(layer "B.SilkS")
 			(uuid "53a85bf2-5df7-435e-84ef-80b21ffe4a91")
@@ -91353,7 +91353,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "4m"
+		(property "Value" "5m"
 			(at 0 -2.03 180)
 			(layer "B.Fab")
 			(uuid "2f8c850a-8670-4df2-8a28-5f2c58cd7fa4")
@@ -91402,7 +91402,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C2073455"
 			(at 0 0 0)
 			(layer "B.SilkS")
 			(uuid "5b63e716-3ab4-4257-841b-1b54e331e891")
