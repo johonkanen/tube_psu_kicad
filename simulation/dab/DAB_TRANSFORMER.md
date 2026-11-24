@@ -157,7 +157,17 @@ divider. Values are with the recommended gap (section 4) unless the row says "un
 | 100 kHz sensitivity, ungapped | φ 25.2°, total 2.1 W | φ 15.2°, total 2.8 W, Bpk 0.133 T |
 | ZVS at 400 W (edge current, needs < −0.5 A) | −3.1 A / −3.0 A | −2.9 A / −2.7 A |
 
-**Gap target changed (user decision 2026-11-18, section 4):** option B is now gapped to
+**Gap changed again (owner, 2026-11-24): tape spacer, Lm tuned on the bench.** The DAB FETs become
+IPA60R280CFD7 (Co(tr) 249 pF vs 75.5 pF of the STF7N60M2; `DAB_SIMULATION.md` "CFD7 check (2026-11-24)"), which
+needs **Lm ≈ 120 µH with 200 ns dead time** for soft switching at light load. The core is gapped with **tape (a
+spacer under all legs)** and Lm is adjusted on the bench until the bridge switches soft; no fixed grind dimension is
+a requirement. Starting tape thickness from `gap_for_lm` (option B, TIW-litz secondary, MKF reluctance, run
+2026-11-24): **0.83 mm → 120 µH**; 0.78 mm → 124 µH, 0.88 mm → 117 µH (≈ 3.5 µH per 0.05 mm tape layer around the
+target); 0.615 mm → 140 µH, 1.245 mm → 100 µH; the same function still gives 0.335 mm → 200 µH. The losses / φ of
+the tables in this file were computed for 200–300 µH and are not re-run for 120 µH (the no-load primary current
+grows, ≈ 0.84 A rms vs 0.52 A in the CFD7 scratch run). The 200 µH texts below are superseded.
+
+**Gap target changed (user decision 2026-11-18, section 4; superseded 2026-11-24, see above):** option B is now gapped to
 **Lm ≈ 200 µH** (≈ 0.66–0.68 mm centre grind), not 0.300 mH. The "gapped" rows above are
 for 300 µH; at 200 µH the switching model gives φ +0.4°, I1rms +3 % and about +0.5 W at
 400 W (`DAB_SIMULATION.md` 2.4). Leakage changes by < 1 %.
@@ -278,7 +288,7 @@ shift (section 1).
 |---|---|---|
 | primary, chamber 1 (10.4 mm) | 25 T Litz 135×0.071, 7 per layer, 4 layers | 20 T Litz 135×0.071, 7 per layer, 3 layers |
 | secondary, chamber 2 (12.4 mm) | 26 T Litz 135×0.071, 9 per layer, 3 layers | 21 T Litz 135×0.071, 9 per layer, 3 layers → **reinforced (TIW-jacket) litz 135×0.071, OD ≤ 1.6 mm, 7 per layer, 3 layers (section 8)** |
-| gap (centre leg, total) | 0.58 mm → Lm 337 µH | **≈ 0.66–0.68 mm → Lm ≈ 200 µH** (AL 0.50 µH; MKF 0.659 mm, served or TIW-litz secondary; spacer alternative 0.335 mm under all legs; **set by measuring Lm**, section 6). Was 0.35 mm → 300 µH (user decision 2026-11-18, `DAB_SIMULATION.md` 3) |
+| gap (centre leg, total) | 0.58 mm → Lm 337 µH | **tape spacer under all legs, starting Lm ≈ 120 µH ≈ 0.83 mm (`gap_for_lm`), tuned on the bench for soft switching at light load** (owner 2026-11-24, CFD7 FETs, 200 ns dead time). Was ≈ 0.66–0.68 mm centre grind / 0.335 mm spacer → Lm ≈ 200 µH (STF7N60M2, 150 ns), before that 0.35 mm → 300 µH |
 
 **Wire.** Litz 135×0.071 single-served has OD 1.19–1.29 mm and 0.534 mm² of copper
 (about 4.5 A/mm² at 2.4 A). An alternative is 60×0.1 (OD 1.2 mm), at about +25 % Pcu.
@@ -352,7 +362,10 @@ The ETD34 footprint does not fit. This is not done here.
    - spread the turns over the chamber width (+7 %),
    - put a tape spacer of a few mm at the divider side of each chamber (raises g),
    - if Lsc comes out too low, add a small residual L3.
-3. **Gap.** Grind the centre leg of one half, or both halves by half each, in steps.
+3. **Gap (2026-11-24, B with CFD7 FETs):** tape spacer under all three legs, start at ≈ 0.83 mm (Lm ≈ 120 µH),
+   add / remove 0.05 mm layers (≈ 3.5 µH each) until the switch node completes its swing at no load / light load
+   with 200 ns dead time (step 4). The grind procedure below is the superseded 200 µH plan.
+   *Superseded:* Grind the centre leg of one half, or both halves by half each, in steps.
    Re-measure Lm (primary open) after each step, at 10–100 kHz and a low level. **Stop at
    337 µH (A) or 200 µH (B), tolerance −15 % / +5 %, i.e. B 170–210 µH** (≈ 0.87–0.61 mm
    centre grind; aim for ≈ 200 µH ≈ 0.66 mm and grind in steps of ≈ 0.05 mm: one step is
@@ -360,9 +373,9 @@ The ETD34 footprint does not fit. This is not done here.
    (≈ +0.5 W at 400 W for 200 vs 300 µH). Then re-check Lsc; it should be within 1 % of
    before.
 4. **On the board.** Look at the switch-node transition at no load and at full load, with
-   **150 ns dead time total** (the UCC21520 DT 100 ns is a minimum, not additive). At 200 µH
+   **200 ns dead time total with the CFD7 FETs (was 150 ns), not above 200 ns** (the UCC21520 DT 100 ns is a minimum, not additive). At 200 µH
    the no-load swing is ≈ 66 ns (`DAB_SIMULATION.md` 2.4). If the no-load transition does not
-   finish (the node does not reach the rail before turn-on), grind a little more; do not
+   finish (the node does not reach the rail before turn-on), lower Lm (thicker tape); do not
    go above 200 ns (the sending-side current reverses before turn-on at 100–250 W).
 
 ## 7. Confidence and caveats

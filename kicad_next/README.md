@@ -204,6 +204,15 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 15d: DAB FETs Q7 / Q8 / Q19 / Q21 → IPA60R280CFD7 (2026-11-24)
+
+Owner decision 2026-11-24 (findings 02 F2, 07 F2): value / part-number change only (Infineon CoolMOS CFD7, TO-220
+FullPAK, LCSC C536369, consigned from the owner's 5.1 stock): CSVs, sheet-7 value, board value / LCSC fields by
+`tools/next/update_board_parts.py Q7 Q8 Q19 Q21` (footprint, pads and the removed inner rings of Q19 / Q21 unchanged).
+Same pin order (1 G, 2 D, 3 S, datasheet Rev. 2.2). With it: TR3 gap by a tape spacer, starting Lm ≈ 120 µH
+(≈ 0.83 mm, `gap_for_lm`), tuned on the bench; DAB dead time 200 ns (CHANGES_5_2.md 2.1 gap, 2.7, 6.6;
+simulation/dab/DAB_SIMULATION.md 2.9, DAB_TRANSFORMER.md 4 / 5 / 6). `check_next.sh` passes.
+
 ## Stage 15c: X-capacitor discharge resistors R4–R6 470k → 200k (2026-11-24)
 
 Owner decision on findings 05 F5. Value-only change (UNI-ROYAL 1206W4F2003T5E, C17954; schematic, CSVs, board value /

@@ -4198,7 +4198,7 @@
 		)
 		(uuid "6427c064-6933-5454-b7f2-5e3ac2d4dd86")
 	)
-	(text "UCC21520: DT = 10 ns/kOhm x R_DT -> R127 / R128 10k = 100 ns minimum, not additive (FPGA dead time 150 ns total, NR 2.7)."
+	(text "UCC21520: DT = 10 ns/kOhm x R_DT -> R127 / R128 10k = 100 ns minimum, not additive (FPGA dead time 200 ns total, NR 2.7)."
 		(exclude_from_sim no)
 		(at 60.96 97.79 0)
 		(effects

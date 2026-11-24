@@ -273,6 +273,43 @@ The Co(tr) model is the conservative one.
     start at a high frequency.
   - Starting at a high frequency also reduces the offset transient (volt-seconds ∝ 1/f).
 
+### 2.9 CFD7 check (2026-11-24)
+
+**Scratch-run result, not reproduced by the scripts in this directory** (the device model in `dab_spice.py` is still
+the STF7N60M2; updating it to the IPA60R280CFD7 and re-running is an open item, `next_prompt.md`,
+`kicad_next/review/RESOLUTIONS.md`). A datasheet + SPICE check by another agent (2026-11-24) for the owner's change of
+Q7 / Q8 / Q19 / Q21 to the Infineon **IPA60R280CFD7** (datasheet Rev. 2.2, 2020-01-30; STF7N60M2 from ST DocID024894
+Rev 1, 2013):
+
+| | STF7N60M2 | IPA60R280CFD7 |
+|---|---|---|
+| MOSFET dv/dt rating | 50 V/ns | **120 V/ns** |
+| body-diode dv/dt rating | 15 V/ns | **70 V/ns** |
+| Qrr | 1.55 µC | **0.29 µC** |
+| RDS(on) max (25 °C) | 0.95 Ω | **0.28 Ω** |
+| Co(tr) | 75.5 pF | 249 pF |
+| Qg | 8.8 nC | 18 nC (VGS(th) 3.5–4.5 V, internal RG 11 Ω) |
+| simulated DAB loss at 400 W | 11–12 W | 6.2–6.9 W |
+| no-load primary current | 0.52 A rms | 0.84 A rms (at Lm 120 µH) |
+
+The simulated switch-node slope stays at 62–81 V/ns peak (design figure ≈ 100 V/ns), so the review finding "slope
+above the FET rating" (findings 02 F2 / 07 F2) is resolved by the rating, with 1.6–1.9× margin (120 V/ns). The price
+is the 3.3× larger Co(tr): with Lm 200 µH and 150 ns the bridge hard-switches at light load. ZVS cases (bus mismatch
+±5 %):
+
+| FET, Lm, dead time | matched buses | +5 % | −5 % |
+|---|---|---|---|
+| STF7N60M2, 200 µH, 150 ns | soft | soft | hard at 40–109 W, 6.2 µJ |
+| IPA60R280CFD7, 200 µH, 150 ns | hard at light load, 6.8 µJ | hard, 25 µJ | hard, 35 µJ |
+| **IPA60R280CFD7, 120 µH, 200 ns** | **soft** | **soft** | hard only at 76–93 W, 0.3 µJ |
+| IPA60R280CFD7, 120 µH, 150 ns | soft | partial (≤ 3.6 V) | hard at 14–111 W, 5.8 µJ |
+
+Consequences: **Lm ≈ 120 µH** (tape spacer under all legs, ≈ 0.83 mm by `gap_for_lm`, tuned on the bench,
+DAB_TRANSFORMER.md 4 / 6) and **200 ns dead time, not above 200 ns**; gate resistors unchanged. Not verified by that
+check: no Infineon SPICE model (the Coss curve was synthesised from Co(tr), Eoss and Coss at 400 V), start-up and the
+±2 % mismatch not re-run, STF7N60M2 data from the 2013 revision. Sections 2.1–2.8 and 3 are the STF7N60M2 results;
+their Lm 200 µH / 150 ns recommendation is superseded by this section.
+
 ## 3. Recommendations
 
 - **FPGA dead time: 150 ns total** (FPGA dead time 150 ns > UCC21520 DT 100 ns; the UCC21520 does
@@ -286,7 +323,7 @@ The Co(tr) model is the conservative one.
   - Optional refinement: 150 ns below ≈ 150 W, 100 ns above.
   - With the recommended Lm ≈ 200 µH, 150 ns still applies; the no-load swing drops to 66 ns,
     which leaves margin for parts with a higher Coss.
-- **Gap target: Lm ≈ 200 µH (−10 % / +5 %) instead of 300 µH.** In DAB_TRANSFORMER.md 4 terms that
+- **Gap target: Lm ≈ 200 µH (−10 % / +5 %) instead of 300 µH.** *(Superseded 2026-11-24 by 2.9: CFD7 FETs, Lm ≈ 120 µH by a tape spacer, 200 ns.)* In DAB_TRANSFORMER.md 4 terms that
   is the "100 ns" column for option B (197 µH): a **centre-leg grind of ≈ 0.68 mm** (or a 0.34 mm
   spacer under all legs) instead of 0.34–0.35 mm.
   - With TIW litz, 0.66–0.70 mm; set it by measuring Lm, as in DAB_TRANSFORMER.md 6 step 3.

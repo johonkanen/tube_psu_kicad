@@ -192,8 +192,8 @@ sh.junction(*mid)
 power_at(sh, "ISO_GND", mid, "down")
 flagged_power(sh, "420V", xk + g(16), V4R)
 sh.text("V5.1 (PDF hand note). 1W core loss: ETD34 : 32, RM12 : 26 (PDF note).", g(30), g(86))
-sh.text("5.2: TR3 = EC42/15 PC40 two-chamber 20:21 (leakage ~41 uH = series L, Lm ~200 uH, gap ~0.68 mm set by measuring Lm); L3 removed (NR 2.1 / 2.4).", g(30), g(80))
-sh.text("Layout: C47 / C54 at the TR3 primary pins (NR 2.5), C16 / C55 at the secondary pins; firmware dead time 150 ns total (NR 2.7).", g(30), g(83))
+sh.text("5.2: TR3 = EC42/15 PC40 two-chamber 20:21 (leakage ~41 uH = series L; gap = tape spacer under all legs, start Lm ~120 uH (~0.83 mm), tuned on the bench for soft switching); L3 removed (NR 2.1 / 2.4).", g(30), g(80))
+sh.text("Layout: C47 / C54 at the TR3 primary pins (NR 2.5), C16 / C55 at the secondary pins; firmware dead time 200 ns total, not above (NR 2.7, CFD7 FETs).", g(30), g(83))
 sh.text("The PDF joins the terminals SEC_GND and ISO_GND by a bare wire (one net, ISO_GND); terminal GND is on ISO_GND.", g(30), g(89))
 
 # --- 420V capacitor bank with the terminals +400V / GND, dividers -----------------------------------

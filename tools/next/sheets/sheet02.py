@@ -3,7 +3,7 @@
 replacing the Si8275BB of 5.1): DRV5 for the primary half-bridge (5V / 15V side, outputs DHB_HI_GATE /
 DHB_LOW_GATE) and DRV6 for the secondary (5V_ISOL / 15V_ISO_SEC, outputs DHB_HI_GATE_SEC / DHB_LOW_GATE_SEC),
 each with a bootstrap diode + resistor + cap for the high side, pull-downs on the PWM inputs, a dead-time
-resistor (R127 / R128 10k = 100 ns hardware backstop; the FPGA dead time is 150 ns total, NR 2.7) with its noise
+resistor (R127 / R128 10k = 100 ns hardware backstop; the FPGA dead time is 200 ns total with the CFD7 FETs, NR 2.7) with its noise
 cap, and the DISABLE input brought out (NR 3.3): DAB_DIS from J2-18 on DRV5 (pull-down R129 = enabled by
 default, as the 5.1 EN tied high; bypass C120) and, through ISO2 channel C, DAB_DIS_SEC on DRV6.
 DRV6's input side stays on the secondary domain (ISO2 carries its PWM, as in 5.1) - see kicad_next/CHANGES_5_2.md.
@@ -23,7 +23,7 @@ ucc21520_cell(sh, "DRV5", g(100), g(44), vdd="5V", gnd="GND",
               vo_hi="DHB_HI_GATE", src_hi="DHB_HI_SOURCE", vo_lo="DHB_LOW_GATE",
               dis=("DAB_DIS", ("R129", "10k"), ("C120", "1n")))
 sh.text("PDF label PRI_DHB_LO = net B12 (J2 pin B12); DC- = GND.", g(48), g(74))
-sh.text("UCC21520: DT = 10 ns/kOhm x R_DT -> R127 / R128 10k = 100 ns minimum, not additive (FPGA dead time 150 ns total, NR 2.7).", g(48), g(77))
+sh.text("UCC21520: DT = 10 ns/kOhm x R_DT -> R127 / R128 10k = 100 ns minimum, not additive (FPGA dead time 200 ns total, NR 2.7).", g(48), g(77))
 sh.text("DAB_DIS (J2-18, FPGA): high = all four DAB gates off; R129 pull-down = enabled when the FPGA does not drive it.", g(48), g(80))
 
 # Secondary driver: bootstrap on the A side (VDDA/OUTA/VSSA = high side); DISABLE from ISO2 channel C.

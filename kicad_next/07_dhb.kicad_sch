@@ -1931,7 +1931,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "STF7N60M2"
+		(property "Value" "IPA60R280CFD7"
 			(at 71.12 43.18 0)
 			(effects
 				(font
@@ -1967,7 +1967,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C536369"
 			(at 66.04 50.8 0)
 			(effects
 				(font
@@ -2012,7 +2012,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "STF7N60M2"
+		(property "Value" "IPA60R280CFD7"
 			(at 71.12 68.58 0)
 			(effects
 				(font
@@ -2048,7 +2048,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C536369"
 			(at 66.04 76.2 0)
 			(effects
 				(font
@@ -4418,7 +4418,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "STF7N60M2"
+		(property "Value" "IPA60R280CFD7"
 			(at 254 52.07 0)
 			(effects
 				(font
@@ -4454,7 +4454,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C536369"
 			(at 248.92 50.8 0)
 			(effects
 				(font
@@ -4499,7 +4499,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "STF7N60M2"
+		(property "Value" "IPA60R280CFD7"
 			(at 254 77.47 0)
 			(effects
 				(font
@@ -4535,7 +4535,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C536369"
 			(at 248.92 76.2 0)
 			(effects
 				(font
@@ -6652,7 +6652,7 @@
 		)
 		(uuid "357054f7-a5f8-5699-a925-924138d88771")
 	)
-	(text "5.2: TR3 = EC42/15 PC40 two-chamber 20:21 (leakage ~41 uH = series L, Lm ~200 uH, gap ~0.68 mm set by measuring Lm); L3 removed (NR 2.1 / 2.4)."
+	(text "5.2: TR3 = EC42/15 PC40 two-chamber 20:21 (leakage ~41 uH = series L; gap = tape spacer under all legs, start Lm ~120 uH (~0.83 mm), tuned on the bench for soft switching); L3 removed (NR 2.1 / 2.4)."
 		(exclude_from_sim no)
 		(at 38.1 101.6 0)
 		(effects
@@ -6663,7 +6663,7 @@
 		)
 		(uuid "7375411c-bf7f-5f92-970a-35c4e3635aa9")
 	)
-	(text "Layout: C47 / C54 at the TR3 primary pins (NR 2.5), C16 / C55 at the secondary pins; firmware dead time 150 ns total (NR 2.7)."
+	(text "Layout: C47 / C54 at the TR3 primary pins (NR 2.5), C16 / C55 at the secondary pins; firmware dead time 200 ns total, not above (NR 2.7, CFD7 FETs)."
 		(exclude_from_sim no)
 		(at 38.1 105.41 0)
 		(effects

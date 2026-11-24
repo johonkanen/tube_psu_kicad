@@ -28,7 +28,7 @@ Decided by the user 2026-11-17:
 
 | # | Decision | Result |
 |---|---|---|
-| D1 | DAB transformer | **Option B, 20:21** (leakage ≈ 41 µH, φ ≈ 24° at 400 W, Lm ≈ 200 µH: gap ≈ 0.66–0.68 mm centre-leg grind or ≈ 0.335 mm spacer under all legs, set by measuring Lm to 170–210 µH (CHANGES_5_2 2.1; was gap 0.35 mm / Lm ≈ 300 µH)), L3 removed – NR 2.1 |
+| D1 | DAB transformer | **Option B, 20:21** (leakage ≈ 41 µH, φ ≈ 24° at 400 W, gap by a tape spacer under all legs: starting target Lm ≈ 120 µH with the CFD7 FETs (≈ 0.83 mm, `gap_for_lm`), tuned on the bench for soft switching at light load (owner 2026-11-24; CHANGES_5_2 2.1 / 6.6; was Lm ≈ 200 µH with STF7N60M2, before that gap 0.35 mm / Lm ≈ 300 µH)), L3 removed – NR 2.1 |
 | D2 | Current amplifiers | **LMH6643** difference amplifiers (NR 4.10b), INA241A not used; shunt-ESL compensation via balanced feedback caps (NR 4.11) |
 | D3 | Mechanics | **Board outline and mounting holes unchanged.** The DAB TO-220 row (Q7/Q8/Q19/Q21) sits on a bent aluminium plate that is rebuilt to match, so the row may move; the control card next to it is tightly packed (keep J2 and give the card more room, not less). The PFC parts (Q5/Q6 TO-247, SICD1/2 TO-220-2) are on the **same** plate (its left part), so the whole power row may move with the new bracket. The heater LLC TO-220s (Q10/Q11) have no heatsink: free to move or become SMD |
 | D4 | Flyback controller | **iW1819-00** – NR 1.5 |
