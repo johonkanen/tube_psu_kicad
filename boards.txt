@@ -1,0 +1,2 @@
+tube_psu_5_2	kicad_next/tube_psu_5_2.kicad_pcb
+tube_psu	kicad/tube_psu.kicad_pcb
