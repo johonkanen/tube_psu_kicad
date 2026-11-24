@@ -1,0 +1,3221 @@
+{
+ "stage": "s17b",
+ "script": "tools/next/route_s17b_q19_q7_x.py",
+ "ops": [
+  {
+   "op": "delete_track",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    10.25,
+    -51.5
+   ],
+   "end": [
+    10.8,
+    -52.06
+   ],
+   "width": 0.5
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    9.15,
+    -48.1
+   ],
+   "end": [
+    9.6,
+    -48.5
+   ],
+   "width": 0.5
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    6.95,
+    -47.995
+   ],
+   "end": [
+    9.15,
+    -48.1
+   ],
+   "width": 0.5
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    10.8,
+    -52.06
+   ],
+   "end": [
+    12.75,
+    -52.06
+   ],
+   "width": 0.5
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    10.25,
+    -49.15
+   ],
+   "end": [
+    10.25,
+    -51.5
+   ],
+   "width": 0.5
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    9.6,
+    -48.5
+   ],
+   "end": [
+    10.25,
+    -49.15
+   ],
+   "width": 0.5
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    15.5,
+    -52.06
+   ],
+   "end": [
+    12.75,
+    -52.06
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    10.5,
+    -45.81
+   ],
+   "end": [
+    10.85,
+    -45.3
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    9.56,
+    -46.05
+   ],
+   "end": [
+    10.5,
+    -45.81
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    8.9,
+    -46.725
+   ],
+   "end": [
+    9.56,
+    -46.05
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    11.4,
+    -45.0
+   ],
+   "end": [
+    12.09,
+    -45.69
+   ],
+   "width": 0.25
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    6.95,
+    -46.725
+   ],
+   "end": [
+    8.9,
+    -46.725
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    10.85,
+    -45.0
+   ],
+   "end": [
+    11.4,
+    -45.0
+   ],
+   "width": 0.25
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    9.6,
+    -44.2
+   ],
+   "end": [
+    11.65,
+    -42.15
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    9.15,
+    -44.95
+   ],
+   "end": [
+    9.6,
+    -44.5
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    6.95,
+    -45.455
+   ],
+   "end": [
+    8.6,
+    -45.2
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    9.6,
+    -44.5
+   ],
+   "end": [
+    9.6,
+    -44.2
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    10.85,
+    -47.0
+   ],
+   "end": [
+    12.75,
+    -46.98
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    12.75,
+    -46.98
+   ],
+   "end": [
+    13.2,
+    -47.2
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    10.6,
+    -55.6
+   ],
+   "end": [
+    11.45,
+    -54.9
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    9.5,
+    -53.72
+   ],
+   "end": [
+    10.0,
+    -53.72
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    10.0,
+    -53.72
+   ],
+   "end": [
+    10.6,
+    -54.32
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    10.6,
+    -54.32
+   ],
+   "end": [
+    10.6,
+    -55.6
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(Q7-G)",
+   "layer": "B.Cu",
+   "start": [
+    10.4,
+    -58.775
+   ],
+   "end": [
+    10.25,
+    -57.6
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(Q7-G)",
+   "layer": "B.Cu",
+   "start": [
+    14.6,
+    -58.3
+   ],
+   "end": [
+    12.75,
+    -58.26
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(Q7-G)",
+   "layer": "B.Cu",
+   "start": [
+    10.25,
+    -57.6
+   ],
+   "end": [
+    12.75,
+    -58.26
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "delete_track",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    9.575,
+    -60.8
+   ],
+   "end": [
+    9.575,
+    -61.8
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "delete_track",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    10.2,
+    -60.5
+   ],
+   "end": [
+    9.575,
+    -60.8
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "delete_track",
+   "net": "15V",
+   "layer": "In3.Power",
+   "start": [
+    6.6,
+    -51.805
+   ],
+   "end": [
+    10.3,
+    -51.805
+   ],
+   "width": 0.5
+  },
+  {
+   "op": "delete_via",
+   "net": "GND",
+   "at": [
+    9.575,
+    -61.8
+   ]
+  },
+  {
+   "op": "add_via",
+   "net": "GND",
+   "at": [
+    9.05,
+    -60.8
+   ],
+   "size": 0.6,
+   "drill": 0.3
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(DRV5-DT)",
+   "layer": "B.Cu",
+   "start": [
+    -4.175,
+    -51.805
+   ],
+   "end": [
+    -4.175,
+    -53.1
+   ],
+   "width": 0.25
+  },
+  {
+   "op": "delete_track",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    -5.825,
+    -53.1
+   ],
+   "end": [
+    -5.825,
+    -51.805
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "delete_via",
+   "net": "GND",
+   "at": [
+    8.9,
+    -58.23
+   ]
+  },
+  {
+   "op": "move_footprint",
+   "ref": "DRV5",
+   "old": [
+    2.3,
+    -49.9
+   ],
+   "old_rot": 0.0,
+   "new": [
+    1.45,
+    -49.9
+   ],
+   "new_rot": 0.0
+  },
+  {
+   "op": "move_footprint",
+   "ref": "C95",
+   "old": [
+    8.66,
+    -53.72
+   ],
+   "old_rot": -90.0,
+   "new": [
+    7.81,
+    -53.72
+   ],
+   "new_rot": -90.0
+  },
+  {
+   "op": "move_footprint",
+   "ref": "R127",
+   "old": [
+    -5.0,
+    -51.805
+   ],
+   "old_rot": 180.0,
+   "new": [
+    -5.85,
+    -51.805
+   ],
+   "new_rot": 180.0
+  },
+  {
+   "op": "move_footprint",
+   "ref": "C94",
+   "old": [
+    -4.55,
+    -48.63
+   ],
+   "old_rot": 90.0,
+   "new": [
+    -4.9,
+    -48.63
+   ],
+   "new_rot": 90.0
+  },
+  {
+   "op": "move_via",
+   "net": "15V",
+   "old": [
+    6.6,
+    -51.805
+   ],
+   "new": [
+    5.75,
+    -51.805
+   ]
+  },
+  {
+   "op": "move_via",
+   "net": "GND",
+   "old": [
+    8.25,
+    -54.345
+   ],
+   "new": [
+    7.4,
+    -54.345
+   ]
+  },
+  {
+   "op": "move_via",
+   "net": "5V",
+   "old": [
+    9.68,
+    -54.45
+   ],
+   "new": [
+    8.83,
+    -54.45
+   ]
+  },
+  {
+   "op": "move_via",
+   "net": "PRI_DHB_HI",
+   "old": [
+    -4.1,
+    -45.455
+   ],
+   "new": [
+    -4.95,
+    -45.455
+   ]
+  },
+  {
+   "op": "move_via",
+   "net": "B12",
+   "old": [
+    -4.1,
+    -46.725
+   ],
+   "new": [
+    -4.95,
+    -46.725
+   ]
+  },
+  {
+   "op": "move_via",
+   "net": "DAB_DIS",
+   "old": [
+    -4.1,
+    -50.535
+   ],
+   "new": [
+    -4.95,
+    -50.535
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "GND",
+   "layer": "B.Cu",
+   "old": [
+    6.95,
+    -54.345
+   ],
+   "new": [
+    6.1,
+    -54.345
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "GND",
+   "layer": "B.Cu",
+   "old": [
+    8.25,
+    -54.345
+   ],
+   "new": [
+    7.4,
+    -54.345
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "GND",
+   "layer": "B.Cu",
+   "old": [
+    -4.55,
+    -49.405
+   ],
+   "new": [
+    -4.9,
+    -49.405
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "GND",
+   "layer": "B.Cu",
+   "old": [
+    -5.825,
+    -51.805
+   ],
+   "new": [
+    -6.675,
+    -51.805
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "GND",
+   "layer": "B.Cu",
+   "old": [
+    -2.35,
+    -49.265
+   ],
+   "new": [
+    -3.2,
+    -49.265
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "GND",
+   "layer": "B.Cu",
+   "old": [
+    -4.55,
+    -49.405
+   ],
+   "new": [
+    -4.9,
+    -49.405
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "GND",
+   "layer": "B.Cu",
+   "old": [
+    8.25,
+    -54.345
+   ],
+   "new": [
+    7.4,
+    -54.345
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "GND",
+   "layer": "B.Cu",
+   "old": [
+    8.66,
+    -54.495
+   ],
+   "new": [
+    7.81,
+    -54.495
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "15V",
+   "layer": "B.Cu",
+   "old": [
+    8.5,
+    -51.805
+   ],
+   "new": [
+    7.65,
+    -51.805
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "15V",
+   "layer": "B.Cu",
+   "old": [
+    8.5,
+    -52.9
+   ],
+   "new": [
+    7.65,
+    -52.9
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "15V",
+   "layer": "B.Cu",
+   "old": [
+    6.95,
+    -51.805
+   ],
+   "new": [
+    6.1,
+    -51.805
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "15V",
+   "layer": "B.Cu",
+   "old": [
+    8.5,
+    -51.805
+   ],
+   "new": [
+    7.65,
+    -51.805
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "old": [
+    -2.35,
+    -50.535
+   ],
+   "new": [
+    -3.2,
+    -50.535
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "old": [
+    -4.1,
+    -50.535
+   ],
+   "new": [
+    -4.95,
+    -50.535
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "DAB_DIS",
+   "layer": "B.Cu",
+   "old": [
+    -4.1,
+    -50.535
+   ],
+   "new": [
+    -4.95,
+    -50.535
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "DAB_DIS",
+   "layer": "In3.Power",
+   "old": [
+    -4.1,
+    -50.535
+   ],
+   "new": [
+    -4.95,
+    -50.535
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    -0.7,
+    -54.345
+   ],
+   "new": [
+    -1.55,
+    -54.345
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    -2.35,
+    -54.345
+   ],
+   "new": [
+    -3.2,
+    -54.345
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    -0.7,
+    -47.995
+   ],
+   "new": [
+    -1.55,
+    -47.995
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    -0.7,
+    -54.345
+   ],
+   "new": [
+    -1.55,
+    -54.345
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    9.68,
+    -54.45
+   ],
+   "new": [
+    8.83,
+    -54.45
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    9.5,
+    -54.63
+   ],
+   "new": [
+    8.65,
+    -54.63
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    -2.35,
+    -47.995
+   ],
+   "new": [
+    -3.2,
+    -47.995
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    -4.55,
+    -47.855
+   ],
+   "new": [
+    -4.9,
+    -47.855
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    1.575,
+    -47.995
+   ],
+   "new": [
+    0.725,
+    -47.995
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    1.575,
+    -47.995
+   ],
+   "new": [
+    0.725,
+    -47.995
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    -0.7,
+    -47.995
+   ],
+   "new": [
+    -1.55,
+    -47.995
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    7.6,
+    -54.98
+   ],
+   "new": [
+    6.75,
+    -54.98
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    5.43,
+    -54.98
+   ],
+   "new": [
+    4.93,
+    -54.98
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    7.905,
+    -55.285
+   ],
+   "new": [
+    7.055,
+    -55.285
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    7.6,
+    -54.98
+   ],
+   "new": [
+    6.75,
+    -54.98
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    9.5,
+    -55.085
+   ],
+   "new": [
+    8.65,
+    -55.085
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    9.3,
+    -55.285
+   ],
+   "new": [
+    8.45,
+    -55.285
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    5.2,
+    -51.62
+   ],
+   "new": [
+    4.7,
+    -51.62
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    9.3,
+    -55.285
+   ],
+   "new": [
+    8.45,
+    -55.285
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    7.905,
+    -55.285
+   ],
+   "new": [
+    7.055,
+    -55.285
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    5.43,
+    -54.98
+   ],
+   "new": [
+    4.93,
+    -54.98
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    5.2,
+    -54.75
+   ],
+   "new": [
+    4.7,
+    -54.75
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    5.2,
+    -54.75
+   ],
+   "new": [
+    4.7,
+    -54.75
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    5.2,
+    -51.62
+   ],
+   "new": [
+    4.7,
+    -51.62
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    -0.7,
+    -47.995
+   ],
+   "new": [
+    -1.55,
+    -47.995
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    -2.35,
+    -47.995
+   ],
+   "new": [
+    -3.2,
+    -47.995
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    9.5,
+    -54.63
+   ],
+   "new": [
+    8.65,
+    -54.63
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "B.Cu",
+   "old": [
+    9.5,
+    -55.085
+   ],
+   "new": [
+    8.65,
+    -55.085
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "old": [
+    9.68,
+    -54.45
+   ],
+   "new": [
+    8.83,
+    -54.45
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "PRI_DHB_HI",
+   "layer": "B.Cu",
+   "old": [
+    -4.1,
+    -45.455
+   ],
+   "new": [
+    -4.95,
+    -45.455
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "PRI_DHB_HI",
+   "layer": "B.Cu",
+   "old": [
+    -2.35,
+    -45.455
+   ],
+   "new": [
+    -3.2,
+    -45.455
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "PRI_DHB_HI",
+   "layer": "B.Cu",
+   "old": [
+    -4.1,
+    -45.455
+   ],
+   "new": [
+    -4.95,
+    -45.455
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "PRI_DHB_HI",
+   "layer": "In3.Power",
+   "old": [
+    -4.1,
+    -45.455
+   ],
+   "new": [
+    -4.95,
+    -45.455
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "B12",
+   "layer": "B.Cu",
+   "old": [
+    -4.1,
+    -46.725
+   ],
+   "new": [
+    -4.95,
+    -46.725
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "B12",
+   "layer": "B.Cu",
+   "old": [
+    -2.35,
+    -46.725
+   ],
+   "new": [
+    -3.2,
+    -46.725
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "B12",
+   "layer": "B.Cu",
+   "old": [
+    -4.1,
+    -46.725
+   ],
+   "new": [
+    -4.95,
+    -46.725
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "B12",
+   "layer": "In3.Power",
+   "old": [
+    -4.1,
+    -46.725
+   ],
+   "new": [
+    -4.95,
+    -46.725
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "old": [
+    7.945,
+    -53.72
+   ],
+   "new": [
+    7.095,
+    -53.72
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "old": [
+    9.5,
+    -53.72
+   ],
+   "new": [
+    8.65,
+    -53.72
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "old": [
+    7.3,
+    -53.075
+   ],
+   "new": [
+    6.45,
+    -53.075
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "old": [
+    7.945,
+    -53.72
+   ],
+   "new": [
+    7.095,
+    -53.72
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "Net-(DRV5-DT)",
+   "layer": "B.Cu",
+   "old": [
+    -2.35,
+    -51.805
+   ],
+   "new": [
+    -3.2,
+    -51.805
+   ]
+  },
+  {
+   "op": "move_track_end",
+   "net": "Net-(DRV5-DT)",
+   "layer": "B.Cu",
+   "old": [
+    -4.175,
+    -51.805
+   ],
+   "new": [
+    -5.025,
+    -51.805
+   ]
+  },
+  {
+   "op": "zone_outline",
+   "zone": "S14H_KO DRV5 output side: no GND fill round NC pads 12 / 13, >= 1.5 mm from pad 14",
+   "net": "",
+   "layer": "B.Cu",
+   "old": [
+    [
+     [
+      [
+       4.4,
+       -51.3
+      ],
+      [
+       9.6,
+       -51.3
+      ],
+      [
+       9.6,
+       -46.2
+      ],
+      [
+       4.4,
+       -46.2
+      ]
+     ]
+    ]
+   ],
+   "new": [
+    [
+     [
+      [
+       3.5500000000000003,
+       -51.3
+      ],
+      [
+       8.75,
+       -51.3
+      ],
+      [
+       8.75,
+       -46.2
+      ],
+      [
+       3.5500000000000003,
+       -46.2
+      ]
+     ]
+    ]
+   ],
+   "why": "with DRV5 0.85 mm west"
+  },
+  {
+   "op": "move_footprint",
+   "ref": "Q19",
+   "old": [
+    12.75,
+    -46.98
+   ],
+   "old_rot": 90.0,
+   "new": [
+    11.6,
+    -46.98
+   ],
+   "new_rot": 90.0
+  },
+  {
+   "op": "move_footprint",
+   "ref": "Q7",
+   "old": [
+    12.75,
+    -58.26
+   ],
+   "old_rot": 90.0,
+   "new": [
+    11.6,
+    -58.26
+   ],
+   "new_rot": 90.0
+  },
+  {
+   "op": "move_footprint",
+   "ref": "C92",
+   "old": [
+    9.15,
+    -46.525
+   ],
+   "old_rot": -90.0,
+   "new": [
+    8.38,
+    -46.79
+   ],
+   "new_rot": -90.0
+  },
+  {
+   "op": "move_footprint",
+   "ref": "R26",
+   "old": [
+    10.85,
+    -46.0
+   ],
+   "old_rot": 90.0,
+   "new": [
+    10.05,
+    -46.23
+   ],
+   "new_rot": 90.0
+  },
+  {
+   "op": "move_footprint",
+   "ref": "R90",
+   "old": [
+    10.6,
+    -56.6
+   ],
+   "old_rot": 90.0,
+   "new": [
+    10.0,
+    -56.6
+   ],
+   "new_rot": 90.0
+  },
+  {
+   "op": "move_footprint",
+   "ref": "R70",
+   "old": [
+    10.4,
+    -59.6
+   ],
+   "old_rot": 90.0,
+   "new": [
+    9.6,
+    -59.3
+   ],
+   "new_rot": 90.0
+  },
+  {
+   "op": "move_footprint",
+   "ref": "C67",
+   "old": [
+    19.7,
+    -48.0
+   ],
+   "old_rot": 0.0,
+   "new": [
+    18.55,
+    -48.0
+   ],
+   "new_rot": 0.0
+  },
+  {
+   "op": "move_footprint",
+   "ref": "C118",
+   "old": [
+    -5.0,
+    -53.1
+   ],
+   "old_rot": 180.0,
+   "new": [
+    -4.95,
+    -53.3
+   ],
+   "new_rot": 90.0
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(DRV5-DT)",
+   "layer": "B.Cu",
+   "start": [
+    -5.025,
+    -51.805
+   ],
+   "end": [
+    -4.95,
+    -52.475
+   ],
+   "width": 0.25
+  },
+  {
+   "op": "add_track",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    -4.95,
+    -54.125
+   ],
+   "end": [
+    -5.9,
+    -54.125
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "add_track",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    -5.9,
+    -54.125
+   ],
+   "end": [
+    -5.9,
+    -52.6
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "add_track",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    -5.9,
+    -52.6
+   ],
+   "end": [
+    -6.4,
+    -52.1
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    6.1,
+    -47.995
+   ],
+   "end": [
+    8.38,
+    -48.365
+   ],
+   "width": 0.5
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    8.38,
+    -48.365
+   ],
+   "end": [
+    9.2,
+    -49.0
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    9.2,
+    -49.0
+   ],
+   "end": [
+    9.2,
+    -50.0
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    9.2,
+    -50.0
+   ],
+   "end": [
+    9.45,
+    -50.75
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    9.45,
+    -50.75
+   ],
+   "end": [
+    10.044,
+    -51.377
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    10.044,
+    -51.377
+   ],
+   "end": [
+    10.6,
+    -52.06
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    10.6,
+    -52.06
+   ],
+   "end": [
+    11.6,
+    -52.06
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_HI_SOURCE",
+   "layer": "B.Cu",
+   "start": [
+    15.5,
+    -52.06
+   ],
+   "end": [
+    11.6,
+    -52.06
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    6.1,
+    -46.725
+   ],
+   "end": [
+    7.4,
+    -46.725
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    7.4,
+    -46.725
+   ],
+   "end": [
+    7.9,
+    -46.23
+   ],
+   "width": 0.25
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    7.9,
+    -46.23
+   ],
+   "end": [
+    10.05,
+    -46.23
+   ],
+   "width": 0.25
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    10.05,
+    -46.23
+   ],
+   "end": [
+    10.05,
+    -45.23
+   ],
+   "width": 0.25
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    10.05,
+    -45.23
+   ],
+   "end": [
+    11.4,
+    -45.69
+   ],
+   "width": 0.25
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_HI_GATE",
+   "layer": "B.Cu",
+   "start": [
+    11.4,
+    -45.69
+   ],
+   "end": [
+    12.09,
+    -45.69
+   ],
+   "width": 0.25
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    6.1,
+    -45.455
+   ],
+   "end": [
+    8.38,
+    -45.215
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    8.38,
+    -45.215
+   ],
+   "end": [
+    8.9,
+    -44.8
+   ],
+   "width": 0.25
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    8.9,
+    -44.8
+   ],
+   "end": [
+    9.15,
+    -44.25
+   ],
+   "width": 0.25
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    9.15,
+    -44.25
+   ],
+   "end": [
+    9.95,
+    -44.25
+   ],
+   "width": 0.25
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(DRV5-VDDA)",
+   "layer": "B.Cu",
+   "start": [
+    9.95,
+    -44.25
+   ],
+   "end": [
+    11.65,
+    -42.55
+   ],
+   "width": 0.25
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    10.05,
+    -47.23
+   ],
+   "end": [
+    11.6,
+    -46.98
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(Q19-G)",
+   "layer": "B.Cu",
+   "start": [
+    11.6,
+    -46.98
+   ],
+   "end": [
+    13.2,
+    -47.2
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    8.65,
+    -53.72
+   ],
+   "end": [
+    9.4,
+    -53.72
+   ],
+   "width": 0.2
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    9.4,
+    -53.72
+   ],
+   "end": [
+    10.0,
+    -54.32
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    10.0,
+    -54.32
+   ],
+   "end": [
+    10.0,
+    -55.6
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_LOW_GATE",
+   "layer": "B.Cu",
+   "start": [
+    10.0,
+    -55.6
+   ],
+   "end": [
+    11.45,
+    -54.9
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(Q7-G)",
+   "layer": "B.Cu",
+   "start": [
+    10.0,
+    -57.6
+   ],
+   "end": [
+    11.6,
+    -58.26
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(Q7-G)",
+   "layer": "B.Cu",
+   "start": [
+    14.6,
+    -58.3
+   ],
+   "end": [
+    11.6,
+    -58.26
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(Q7-G)",
+   "layer": "B.Cu",
+   "start": [
+    9.6,
+    -58.475
+   ],
+   "end": [
+    10.0,
+    -57.6
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "add_track",
+   "net": "15V",
+   "layer": "In3.Power",
+   "start": [
+    5.75,
+    -51.805
+   ],
+   "end": [
+    9.6,
+    -51.805
+   ],
+   "width": 0.5
+  },
+  {
+   "op": "delete_track",
+   "net": "+1V65_BIAS",
+   "layer": "In3.Power",
+   "start": [
+    10.93,
+    -46.5
+   ],
+   "end": [
+    6.0,
+    -46.5
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "delete_track",
+   "net": "+1V65_BIAS",
+   "layer": "In3.Power",
+   "start": [
+    11.13,
+    -46.3
+   ],
+   "end": [
+    10.93,
+    -46.5
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "delete_track",
+   "net": "+1V65_BIAS",
+   "layer": "In3.Power",
+   "start": [
+    11.13,
+    -44.276
+   ],
+   "end": [
+    11.13,
+    -46.3
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "add_track",
+   "net": "+1V65_BIAS",
+   "layer": "In3.Power",
+   "start": [
+    11.13,
+    -44.276
+   ],
+   "end": [
+    11.13,
+    -45.815
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "add_track",
+   "net": "+1V65_BIAS",
+   "layer": "In3.Power",
+   "start": [
+    11.13,
+    -45.815
+   ],
+   "end": [
+    10.445,
+    -46.5
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "add_track",
+   "net": "+1V65_BIAS",
+   "layer": "In3.Power",
+   "start": [
+    10.445,
+    -46.5
+   ],
+   "end": [
+    6.0,
+    -46.5
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "delete_track",
+   "net": "DAB_DIS",
+   "layer": "In3.Power",
+   "start": [
+    10.82,
+    -45.95
+   ],
+   "end": [
+    10.62,
+    -46.15
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "delete_track",
+   "net": "DAB_DIS",
+   "layer": "In3.Power",
+   "start": [
+    10.62,
+    -46.15
+   ],
+   "end": [
+    0.5,
+    -46.15
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "delete_track",
+   "net": "DAB_DIS",
+   "layer": "In3.Power",
+   "start": [
+    10.82,
+    -43.634
+   ],
+   "end": [
+    10.82,
+    -45.95
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "add_track",
+   "net": "DAB_DIS",
+   "layer": "In3.Power",
+   "start": [
+    10.82,
+    -43.634
+   ],
+   "end": [
+    10.82,
+    -45.695
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "add_track",
+   "net": "DAB_DIS",
+   "layer": "In3.Power",
+   "start": [
+    10.82,
+    -45.695
+   ],
+   "end": [
+    10.365,
+    -46.15
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "add_track",
+   "net": "DAB_DIS",
+   "layer": "In3.Power",
+   "start": [
+    10.365,
+    -46.15
+   ],
+   "end": [
+    0.5,
+    -46.15
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "delete_track",
+   "net": "B12",
+   "layer": "In3.Power",
+   "start": [
+    10.51,
+    -43.025
+   ],
+   "end": [
+    10.51,
+    -45.6
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "delete_track",
+   "net": "B12",
+   "layer": "In3.Power",
+   "start": [
+    10.31,
+    -45.8
+   ],
+   "end": [
+    -3.0,
+    -45.8
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "delete_track",
+   "net": "B12",
+   "layer": "In3.Power",
+   "start": [
+    10.51,
+    -45.6
+   ],
+   "end": [
+    10.31,
+    -45.8
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "add_track",
+   "net": "B12",
+   "layer": "In3.Power",
+   "start": [
+    10.51,
+    -43.025
+   ],
+   "end": [
+    10.51,
+    -45.575
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "add_track",
+   "net": "B12",
+   "layer": "In3.Power",
+   "start": [
+    10.51,
+    -45.575
+   ],
+   "end": [
+    10.285,
+    -45.8
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "add_track",
+   "net": "B12",
+   "layer": "In3.Power",
+   "start": [
+    10.285,
+    -45.8
+   ],
+   "end": [
+    -3.0,
+    -45.8
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "zone_outline",
+   "zone": "S2_In3_15V_1",
+   "net": "15V",
+   "layer": "In3.Power",
+   "add": [
+    [
+     8.35,
+     -60.6,
+     9.5,
+     -46.9
+    ],
+    [
+     7.4,
+     -60.7,
+     8.4,
+     -57.7
+    ]
+   ],
+   "why": "strip beside the moved Q19 / Q7 pad rings widened west"
+  },
+  {
+   "op": "delete_track",
+   "net": "DC+",
+   "layer": "B.Cu",
+   "start": [
+    18.225,
+    -48.0
+   ],
+   "end": [
+    18.3,
+    -48.5
+   ],
+   "width": 0.6
+  },
+  {
+   "op": "move_via",
+   "net": "DC+",
+   "old": [
+    18.3,
+    -48.5
+   ],
+   "new": [
+    17.93,
+    -48.5
+   ]
+  },
+  {
+   "op": "move_via",
+   "net": "DC+",
+   "old": [
+    17.7,
+    -50.0
+   ],
+   "new": [
+    17.6,
+    -49.5
+   ]
+  },
+  {
+   "op": "delete_via",
+   "net": "DC+",
+   "at": [
+    18.7,
+    -50.0
+   ]
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_CURRENT",
+   "layer": "B.Cu",
+   "start": [
+    21.175,
+    -48.0
+   ],
+   "end": [
+    21.9,
+    -49.0
+   ],
+   "width": 0.8
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_CURRENT",
+   "layer": "B.Cu",
+   "start": [
+    21.9,
+    -49.0
+   ],
+   "end": [
+    22.6,
+    -49.0
+   ],
+   "width": 0.8
+  },
+  {
+   "op": "move_via",
+   "net": "DHB_CURRENT",
+   "old": [
+    22.6,
+    -49.0
+   ],
+   "new": [
+    21.45,
+    -49.0
+   ]
+  },
+  {
+   "op": "move_via",
+   "net": "DHB_CURRENT",
+   "old": [
+    22.6,
+    -50.0
+   ],
+   "new": [
+    21.45,
+    -50.0
+   ]
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_CURRENT",
+   "layer": "B.Cu",
+   "start": [
+    21.175,
+    -48.0
+   ],
+   "end": [
+    21.45,
+    -49.0
+   ],
+   "width": 0.8
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.3,
+    -63.34
+   ],
+   "end": [
+    15.5,
+    -62.14
+   ],
+   "width": 1.2
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    15.5,
+    -62.14
+   ],
+   "end": [
+    17.4,
+    -62.14
+   ],
+   "width": 1.2
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    17.4,
+    -52.3
+   ],
+   "end": [
+    21.2,
+    -52.3
+   ],
+   "width": 1.2
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    17.4,
+    -62.14
+   ],
+   "end": [
+    17.4,
+    -52.3
+   ],
+   "width": 1.2
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    21.2,
+    -52.3
+   ],
+   "end": [
+    22.6,
+    -50.9
+   ],
+   "width": 1.2
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    22.6,
+    -50.9
+   ],
+   "end": [
+    22.6,
+    -49.0
+   ],
+   "width": 1.2
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    12.75,
+    -63.34
+   ],
+   "end": [
+    14.3,
+    -63.34
+   ],
+   "width": 1.2
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    11.6,
+    -63.34
+   ],
+   "end": [
+    13.15,
+    -63.34
+   ],
+   "width": 1.2
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    13.15,
+    -63.34
+   ],
+   "end": [
+    14.35,
+    -62.14
+   ],
+   "width": 1.2
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.35,
+    -62.14
+   ],
+   "end": [
+    16.25,
+    -62.14
+   ],
+   "width": 1.2
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    16.25,
+    -62.14
+   ],
+   "end": [
+    16.25,
+    -52.3
+   ],
+   "width": 1.2
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    16.25,
+    -52.3
+   ],
+   "end": [
+    20.05,
+    -52.3
+   ],
+   "width": 1.2
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    20.05,
+    -52.3
+   ],
+   "end": [
+    21.45,
+    -50.9
+   ],
+   "width": 1.2
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_CURRENT",
+   "layer": "In2.Signal_HV",
+   "start": [
+    21.45,
+    -50.9
+   ],
+   "end": [
+    21.45,
+    -49.0
+   ],
+   "width": 1.2
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(C63-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.65,
+    -46.95
+   ],
+   "end": [
+    14.65,
+    -53.3
+   ],
+   "width": 0.203
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(C63-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.7,
+    -46.9
+   ],
+   "end": [
+    14.65,
+    -46.95
+   ],
+   "width": 0.203
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(C63-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.65,
+    -53.3
+   ],
+   "end": [
+    14.2,
+    -53.75
+   ],
+   "width": 0.203
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(C63-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.2,
+    -53.75
+   ],
+   "end": [
+    7.1,
+    -53.75
+   ],
+   "width": 0.203
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(C63-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.7,
+    -46.9
+   ],
+   "end": [
+    13.5,
+    -48.1
+   ],
+   "width": 0.203
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(C63-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    13.5,
+    -48.1
+   ],
+   "end": [
+    13.5,
+    -53.3
+   ],
+   "width": 0.203
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(C63-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    13.5,
+    -53.3
+   ],
+   "end": [
+    13.05,
+    -53.75
+   ],
+   "width": 0.203
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(C63-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    13.05,
+    -53.75
+   ],
+   "end": [
+    7.1,
+    -53.75
+   ],
+   "width": 0.203
+  },
+  {
+   "op": "delete_track",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    15.118,
+    -53.8
+   ],
+   "end": [
+    14.718,
+    -54.2
+   ],
+   "width": 0.305
+  },
+  {
+   "op": "delete_track",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    15.118,
+    -47.2
+   ],
+   "end": [
+    15.118,
+    -53.8
+   ],
+   "width": 0.305
+  },
+  {
+   "op": "delete_track",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.718,
+    -54.2
+   ],
+   "end": [
+    9.93,
+    -54.2
+   ],
+   "width": 0.305
+  },
+  {
+   "op": "add_track",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    15.118,
+    -47.2
+   ],
+   "end": [
+    13.968,
+    -48.35
+   ],
+   "width": 0.305
+  },
+  {
+   "op": "add_track",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    13.968,
+    -48.35
+   ],
+   "end": [
+    13.968,
+    -53.8
+   ],
+   "width": 0.305
+  },
+  {
+   "op": "add_track",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    13.968,
+    -53.8
+   ],
+   "end": [
+    13.568,
+    -54.2
+   ],
+   "width": 0.305
+  },
+  {
+   "op": "add_track",
+   "net": "5V",
+   "layer": "In2.Signal_HV",
+   "start": [
+    13.568,
+    -54.2
+   ],
+   "end": [
+    9.93,
+    -54.2
+   ],
+   "width": 0.305
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(C11-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    15.3,
+    -55.55
+   ],
+   "end": [
+    8.35,
+    -55.55
+   ],
+   "width": 0.2
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(C11-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    15.8,
+    -48.5
+   ],
+   "end": [
+    15.8,
+    -55.05
+   ],
+   "width": 0.2
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(C11-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    15.8,
+    -55.05
+   ],
+   "end": [
+    15.3,
+    -55.55
+   ],
+   "width": 0.2
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(C11-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    16.4,
+    -47.9
+   ],
+   "end": [
+    15.8,
+    -48.5
+   ],
+   "width": 0.2
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(C11-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    16.4,
+    -47.9
+   ],
+   "end": [
+    14.65,
+    -49.65
+   ],
+   "width": 0.2
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(C11-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.65,
+    -49.65
+   ],
+   "end": [
+    14.65,
+    -55.05
+   ],
+   "width": 0.2
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(C11-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.65,
+    -55.05
+   ],
+   "end": [
+    14.15,
+    -55.55
+   ],
+   "width": 0.2
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(C11-Pad1)",
+   "layer": "In2.Signal_HV",
+   "start": [
+    14.15,
+    -55.55
+   ],
+   "end": [
+    8.35,
+    -55.55
+   ],
+   "width": 0.2
+  },
+  {
+   "op": "zone_outline",
+   "zone": "S4B_DC+_F",
+   "net": "DC+",
+   "layer": "F.Cu",
+   "old": [
+    [
+     [
+      [
+       11.8,
+       -50.45
+      ],
+      [
+       18.9,
+       -50.45
+      ],
+      [
+       18.9,
+       -44.6
+      ],
+      [
+       14.0,
+       -44.6
+      ],
+      [
+       14.0,
+       -48.6
+      ],
+      [
+       11.8,
+       -48.6
+      ]
+     ]
+    ]
+   ],
+   "new": [
+    [
+     [
+      [
+       10.65,
+       -50.45
+      ],
+      [
+       18.2,
+       -50.45
+      ],
+      [
+       18.2,
+       -44.6
+      ],
+      [
+       12.85,
+       -44.6
+      ],
+      [
+       12.85,
+       -48.6
+      ],
+      [
+       10.65,
+       -48.6
+      ]
+     ]
+    ]
+   ],
+   "why": "with the Q19 pins and C67 1.15 mm west"
+  },
+  {
+   "op": "zone_outline",
+   "zone": "S4B_DHB_CURRENT_F",
+   "net": "DHB_CURRENT",
+   "layer": "F.Cu",
+   "old": [
+    [
+     [
+      [
+       20.35,
+       -50.6
+      ],
+      [
+       25.75,
+       -50.6
+      ],
+      [
+       25.75,
+       -49.3
+      ],
+      [
+       28.2,
+       -49.3
+      ],
+      [
+       28.2,
+       -46.1
+      ],
+      [
+       24.0,
+       -46.1
+      ],
+      [
+       24.0,
+       -46.5
+      ],
+      [
+       20.35,
+       -46.5
+      ]
+     ]
+    ]
+   ],
+   "new": [
+    [
+     [
+      [
+       19.2,
+       -50.6
+      ],
+      [
+       25.75,
+       -50.6
+      ],
+      [
+       25.75,
+       -49.3
+      ],
+      [
+       28.2,
+       -49.3
+      ],
+      [
+       28.2,
+       -46.1
+      ],
+      [
+       24.0,
+       -46.1
+      ],
+      [
+       24.0,
+       -46.5
+      ],
+      [
+       19.2,
+       -46.5
+      ]
+     ]
+    ]
+   ],
+   "why": "C67.2 1.15 mm west"
+  },
+  {
+   "op": "zone_outline",
+   "zone": "S3A_DHB_HI_SOURCE_F",
+   "net": "DHB_HI_SOURCE",
+   "layer": "F.Cu",
+   "old": [
+    [
+     [
+      [
+       11.8,
+       -61.75
+      ],
+      [
+       16.6,
+       -61.75
+      ],
+      [
+       16.6,
+       -57.6
+      ],
+      [
+       27.9,
+       -57.6
+      ],
+      [
+       27.9,
+       -58.0
+      ],
+      [
+       31.0,
+       -58.0
+      ],
+      [
+       31.0,
+       -50.6
+      ],
+      [
+       27.9,
+       -50.6
+      ],
+      [
+       27.9,
+       -52.0
+      ],
+      [
+       16.6,
+       -52.0
+      ],
+      [
+       16.6,
+       -51.65
+      ],
+      [
+       11.8,
+       -51.65
+      ]
+     ]
+    ]
+   ],
+   "new": [
+    [
+     [
+      [
+       10.65,
+       -61.75
+      ],
+      [
+       15.45,
+       -61.75
+      ],
+      [
+       15.45,
+       -57.6
+      ],
+      [
+       27.9,
+       -57.6
+      ],
+      [
+       27.9,
+       -58.0
+      ],
+      [
+       31.0,
+       -58.0
+      ],
+      [
+       31.0,
+       -50.6
+      ],
+      [
+       27.9,
+       -50.6
+      ],
+      [
+       27.9,
+       -52.0
+      ],
+      [
+       15.45,
+       -52.0
+      ],
+      [
+       15.45,
+       -51.65
+      ],
+      [
+       10.65,
+       -51.65
+      ]
+     ]
+    ]
+   ],
+   "why": "strip between the pins and the arm 1.15 mm west with the FETs"
+  },
+  {
+   "op": "zone_outline",
+   "zone": "S3A_DHB_CURRENT_F",
+   "net": "DHB_CURRENT",
+   "layer": "F.Cu",
+   "old": [
+    [
+     [
+      [
+       11.8,
+       -64.15
+      ],
+      [
+       25.75,
+       -64.15
+      ],
+      [
+       25.75,
+       -59.2
+      ],
+      [
+       17.9,
+       -59.2
+      ],
+      [
+       17.9,
+       -62.95
+      ],
+      [
+       11.8,
+       -62.95
+      ]
+     ]
+    ]
+   ],
+   "new": [
+    [
+     [
+      [
+       10.65,
+       -64.15
+      ],
+      [
+       25.75,
+       -64.15
+      ],
+      [
+       25.75,
+       -59.2
+      ],
+      [
+       17.9,
+       -59.2
+      ],
+      [
+       17.9,
+       -62.95
+      ],
+      [
+       10.65,
+       -62.95
+      ]
+     ]
+    ]
+   ],
+   "why": "Q7.3 1.15 mm west"
+  }
+ ]
+}

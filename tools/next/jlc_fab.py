@@ -894,7 +894,19 @@ def generate(out):
     A(f"{n}. **SICD1 / SICD2 orientation** (stage 16a, finding 13 F1): before soldering, hold a C3D02060A over SICD1 / "
       "SICD2 with the tab to the heatsink plate: cathode (pin 1, also the tab) must be on the DC+ pad (footprint "
       "`TO-220-2_Vertical_KA`: pad K = pin 1, rectangular, DC+; KiCad board coordinates SICD1 K (11.8, -21.4), SICD2 K "
-      "(3.09, -3.82)).")
+      "(3.40, -3.82) since stage 17a).")
+    n += 1
+    A(f"{n}. **Primary heatsink plate** (stages 17a / 17b, finding 12 F1; nominal datasheet lead-to-back distances, "
+      "caliper check still open): nominal back faces west row Q5 6.15, SICD2 5.99; east row Q6 8.99, SICD1 9.22, "
+      "Q19 / Q7 8.96 (KiCad x, mm). **Insulating pads only under Q5, Q6, SICD1, SICD2** (live tabs); Q19 / Q7 are "
+      "FullPAKs and go on the plate without pad. With 0.25 mm pads the flat plate between the rows can be **2.34 mm "
+      "(touching Q5 and Q6) to 2.56 mm (touching Q5, SICD1, Q19, Q7; Q6 leads pushed 0.22 mm)**, 2.5 mm suggested; "
+      "SICD2 stays 0.17 mm off the plate (lead flex). **Cut-out for the H4 screw head** (6 mm head / standoff at "
+      "(5.84, -40.13), plate side y -43.1 ... -37.1, at least 7 mm wide, or nylon head below the plate). **Notch at "
+      "C87** (0603 on F.Cu, body x 4.9 ... 6.5, y -60.2 ... -58.6, 0.9 mm high) is still needed: the west face of "
+      "the plate is at x 6.15 ... 6.4 there. Exposed F.Cu under the plate strip (x 6.15 ... 9.3): pad 1 of C87 "
+      "(+3V3), pads 2 / 4 of DB1 (DC+ / GND), pad 1 of C73 (DC+) - as on 5.1 for DB1 / C73; the rest of the strip is "
+      "DC+ / GND / PFC_DRAIN_1 pour under solder mask (mask is not insulation).")
     n += 1
     A(f"{n}. Stackup JLC06161H-7628D excludes economic assembly; confirm the stackup name in JLC's selector at order time "
       "(JLC renames / retires stackups).")

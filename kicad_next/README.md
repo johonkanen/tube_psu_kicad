@@ -204,6 +204,78 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 17b: Q19 / Q7 pin column x 12.75 → 11.60, DRV5 group 0.85 mm west (2026-11-24)
+
+Design review 2026-11-24, finding 12 F1, owner approval 2026-11-24. `tools/next/route_s17b_q19_q7_x.py` (one-shot,
+`routing/moves_s17b.json`; the docstring lists every move). **Q19 and Q7 pins x 12.75 → 11.60**, same y, rot 90:
+IPA60R280CFD7 FullPAK back face (A2 2.42 – 2.86, nominal 2.64) 10.11 → **8.96**, on the plane of SICD1's padded tab
+(9.215 − 0.25 = 8.965).
+
+What had to give way (the B.Cu strip between the DRV5 pads and the FET pads shrank from 3.78 to 2.63 mm):
+
+* **DRV5 group 0.85 mm west** (DRV5 2.3 → 1.45, C95, R127, the PRI_DHB_HI / B12 / DAB_DIS In3 vias, the 15V / GND / 5V
+  vias at the east pins and every B.Cu track end in x −6.0 … 9.75 / y −55.35 … −44.4, rubber band). C94 0.35 mm west,
+  C118 turned 90° beside R127 (it stood at the NC pin 7), its GND by B.Cu to the R127 GND pad (the 15V track x −6.75
+  keeps 1.2 mm to D11). Reason: R26 needs 0.2 mm to C92 and its courtyard off the Q19 pin-1 hole (`pth_inside_courtyard`),
+  C92 cannot go west (0.5 mm to the NC pin 13, 3.4 mm to the H4 hole), and R26 east of the pins makes the gate loop longer
+  (pad polygon 24.1 mm, tried on paper).
+* High side (B.Cu only, no via in a group net): C92 → (8.38, −46.79), R26 → (10.05, −46.23); DHB_HI_GATE through the pad
+  gaps of C92 and R26; return Q19.3 → x 9.2 (1.2 mm off the DC+ pad) → C92.1; VDDA C92.2 → y −44.25 → R41.2. R22, D30,
+  R53, R41 and the +1V65_BIAS via stay.
+* Low side: R90 → (10.0, −56.6), R70 → (9.6, −59.3) (GND pad overlaps the GND pad of C124); C124's GND via → 0.6 / 0.3 in
+  its pad (9.05, −60.8); GND via (8.9, −58.23) removed.
+* In3 window: BIAS / DAB_DIS / B12 corners chamfered round the Q19 pin-1 barrel (BIAS lane ≥ 0.52 mm from it, rule 0.5).
+* **Commutation loop kept by moving it with the FETs**: C67 → (18.55, −48.0), its DHB_CURRENT vias (22.6 → 21.45), the
+  1.2 mm In2 return and the In2 lanes C63 / 5V / Net-(C11-Pad1) east of the pins 1.15 mm west, switch-node strip outline
+  east edge 16.6 → 15.45 (strip fill now x 13.80 … 15.45, was 14.95 … 16.60). C70 stays on B.Cu; its DC+ via moved into
+  its pad (17.93, −48.5); F.Cu → B.Cu DC+ vias (17.7, −50.0) → (17.6, −49.5), (18.7, −50.0) removed (C67.2 came next to them).
+* F.Cu zones `S4B_DC+_F` / `S3A_DHB_HI_SOURCE_F` / `S3A_DHB_CURRENT_F` west edges 11.8 → 10.65; In3 15V strip widened
+  west to x 8.35 (y −60.6 … −46.9) and 7.4 (y −60.7 … −57.7, round the C124 GND via).
+
+| requirement (same method as findings 02 / 11, `rv bq`) | before | after |
+|---|---|---|
+| DC+ into Q19.2, `neck DC+ F.Cu pad → (20.2, −17.2)` / F.Cu section beside the pad west + east | 0.92 / 1.02 + 1.02 mm | 0.92 / 1.02 + 1.02 mm (not wider: still the 1.2 mm rule to the gate and source pads; B.Cu enclosed by the high-side group, inner layers not allowed) |
+| commutation loop via C67, corner points as findings 11 (strip centre = pin column + 3.05) | 53.0 mm / 58.2 mm² | 53.0 mm / 58.2 mm² (same polygon, 1.15 mm west); with the fill centre 14.625: 52.9 / 58.4 |
+| same loop via C70 (B.Cu, DC+ via) | 53.6 mm / 56.4 mm² | 53.6 mm / 56.4 mm² |
+| Q19 gate loop `DRV5.15 R26.1 R26.2 Q19.1 Q19.3 DRV5.14` | 21.6 mm / 22.0 mm² | **21.0 mm / 20.5 mm²** |
+| Q7 gate loop `DRV5.10 R90.1 R90.2 Q7.1 Q7.3 DRV5.9` | 25.7 mm / 18.4 mm² | **25.3 mm / 19.0 mm²** |
+| R83 Kelvin tap | via (16.5, −63.75) at the pad, In2 lane | unchanged (R83, Kelvin via, GND vias not moved); Q7.3 → R83.1 F.Cu neck 0.78 → 0.78 mm, length 1.15 → 2.3 mm |
+| In3 15V strip beside the pad rings (west + east piece) | Q19 pins 2.20; Q7.1 2.05; Q7.2 4.45 (band) | Q19 pins 2.20 + 0.85; Q7.1 3.00 + 0.70; Q7.2 1.75 + 0.55 + 0.40 |
+| In3 strip continuity (bridge → south band / → window) | 1.22 / 2.20 mm | 1.16 / 2.10 mm |
+| H4 (rule 3.4 mm from the hole edge) | nearest In3 PRI 3.43, B.Cu VDDA 3.53 | In3 PRI 3.43, B.Cu VDDA (C92.2) 3.47; nothing else new within 3.6 |
+| UART island | Q7.3 ring 0.96 mm from y −65.255 | unchanged (nothing moved south of y −63) |
+
+Group copper only on outer layers, no new switch-node copper on inner layers (the Q7 pad rings are the footprint's as
+before), the four In3 window lanes routed. **Back faces (nominal, KiCad x) and plate:**
+
+| row | part | pin column | lead → back | back face | pad | plate contact face |
+|---|---|---|---|---|---|---|
+| west (tab east) | Q5 TO-247 | 3.752 | 2.40 | 6.152 | 0.25 | 6.402 |
+| west | SICD2 TO-220-2 | 3.40 (was 3.09) | 2.585 | 5.985 | 0.25 | 6.235 |
+| east (tab west) | Q6 TO-247 | 11.389 | 2.40 | 8.989 | 0.25 | 8.739 |
+| east | SICD1 TO-220-2 | 11.80 | 2.585 | 9.215 | 0.25 | 8.965 |
+| east | Q19 / Q7 FullPAK | 11.60 (was 12.75) | 2.64 | 8.96 (was 10.11) | none | 8.96 |
+
+Slots back face to back face: Q5 ↔ SICD1 3.06, SICD2 ↔ Q6 3.00, west plane (Q5) ↔ Q19 / Q7 2.81 mm. Rows flat within
+0.17 (west) / 0.23 mm (east, contact faces). A flat plate between the padded faces: **2.34 mm** (touching Q5 and Q6;
+SICD1 / Q19 / Q7 0.22 mm off) **to 2.56 mm** (touching Q5, SICD1, Q19, Q7; Q6 leads pushed 0.22 mm); 2.5 mm suggested.
+Datasheet tolerances are ±0.2 – 0.25 mm: caliper check of the three packages still open.
+
+F.Cu in the plate strip x 6.15 … 9.3, y −66 … +5 (information, nothing moved for it): parts C87 (0603, body x 4.9 … 6.5,
+pad 1 +3V3 exposed in the strip – plate notch still needed), DB1 (pads 2 DC+ / 4 GND exposed), C73 (pad 1 DC+, x 8.88 …
+9.3), the H4 hole / screw head; the device courtyards of Q5 / Q6 / SICD1 / SICD2 / Q19 / Q7. Tented vias: GND (9.05,
+−60.8) new, GND (7.40, −54.345) and 5V (8.83, −54.45) moved, Net-(C11-Pad1) (7.9, −57.2), +3V3 (6.4, −61.0),
+Net-(C63-Pad1) (6.85, −63.1), Net-(DRV1-OUTL) (9.40, −32.75). Tracks (under mask): C87 +3V3 links, C63 link, DB1 pad
+spokes. Pours under mask: DC+ (pour 29), GND (pour 31 at DB1), PFC_DRAIN_1 (pour 10).
+
+Bodies (Fab outlines; FullPAK modelled 10.65 × 4.9 mm): Q7 front face no longer reaches R83 (was 0.16 mm overlap with
+the 4.9 mm thickness), Q19 body 1.07 mm from the 6 mm H4 head; B side C92 ↔ R26 0.175 → 0.145, C118 ↔ R127 0.383 →
+0.183, C124 ↔ R70 0.287 → 0.20, R26 ↔ Q19.1 lead (1.2 mm square) 0.275, R90 ↔ Q7.1 lead 0.325, D30 ↔ R53 −0.025
+(Fab lines touch, unchanged). Courtyard overlaps 134 → 136 (new C94 / DRV5, C94 / R74; courtyards only),
+pth_inside_courtyard 2 (unchanged). Unconnected 0, shorts 0, clearance 0, dangling 0, parity 0; `check_next.sh`
+passes. Fab package and inner-layer renders regenerated; fab README open item "Primary heatsink plate" added
+(`tools/next/jlc_fab.py`).
+
 ## Stage 17a: SICD2 0.31 mm east, onto the plane of Q5 (2026-11-24)
 
 Design review 2026-11-24, finding 12 F1, owner approval 2026-11-24: all devices of the primary heatsink line sit flat

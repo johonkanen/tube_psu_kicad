@@ -14,13 +14,13 @@ Read first: this file, `kicad_next/review/RESOLUTIONS.md` (status of every shoul
 
 ## Where the design stands
 
-- Fully routed: 0 unconnected, 0 shorts, 0 clearance, 0 dangling, 0 parity, 0 isolation violations; DRC 137 items
-  (courtyards_overlap 135, pth_inside_courtyard 2); gate `tools/next/check_next.sh` passes;
-  `python3 tools/next/check_creepage.py` (four layer-split passes, ≈ 8 min) 0 violations after stage 16b. Acceptance bar: match the bench-verified 5.1 board and add creepage.
+- Fully routed: 0 unconnected, 0 shorts, 0 clearance, 0 dangling, 0 parity, 0 isolation violations; DRC 138 items
+  (courtyards_overlap 136, pth_inside_courtyard 2); gate `tools/next/check_next.sh` passes;
+  `python3 tools/next/check_creepage.py` (four layer-split passes, ≈ 8 min) 0 violations after stage 17b. Acceptance bar: match the bench-verified 5.1 board and add creepage.
 - All fourteen design reviews done (`kicad_next/review/findings/` 01–14). Fixes on the board: stages 13a–13d,
-  14a–14h, 15a–15g, 16a–16b. **Stage 16a fixed a blocker found by review 13: SICD1 / SICD2 were reversed for a diode
+  14a–14h, 15a–15g, 16a–16b, 17a–17b. **Stage 16a fixed a blocker found by review 13: SICD1 / SICD2 were reversed for a diode
   clamped tab-to-plate (cathode on the PFC drain); new footprint `TO-220-2_Vertical_KA`, copper swapped. Boards must
-  not be made from any revision before d3be2f7.** Stage 16b moved C102 clear of the H8 screw head. Owner decisions of 2026-11-24, all in the design:
+  not be made from any revision before d3be2f7.** Stage 16b moved C102 clear of the H8 screw head. Stages 17a / 17b put the primary heatsink line on one flat plate (SICD2 pins x 3.40, Q19 / Q7 pins x 11.60, DRV5 group 0.85 mm west). Owner decisions of 2026-11-24, all in the design:
   - 15a C141 100 nF at DRV6 VDDB; 15b R68 → six 73.2k 1206 (97 mW each); 15c R4–R6 200k (X-cap discharge 1.9 s);
   - 15d DAB FETs Q7 / Q8 / Q19 / Q21 → IPA60R280CFD7 (consigned from the owner's stock), TR3 gapped with tape,
     start Lm ≈ 120 µH (≈ 0.83 mm), DAB dead time 200 ns;
@@ -37,10 +37,11 @@ Read first: this file, `kicad_next/review/RESOLUTIONS.md` (status of every shoul
 
 ## Next steps, in order
 
-1. Heatsink line (findings 12 F1, F3): the back faces of the east row are not coplanar (SICD1 about 8.65, Q6 about
-   9.0, Q19 / Q7 FullPAK 9.6 - 10.6 mm) - needs the owner's caliper measurements, then a stepped bracket, a spacer or
-   moving the Q19 / Q7 column about 1 mm west (board change). Plate cut-out at H4, notch at C87, plate potential and
-   tab insulation undefined.
+1. Heatsink line (findings 12 F1, F3): **board side done** (stages 17a / 17b): SICD2 pins x 3.40, Q19 / Q7 pins
+   x 11.60 (DRV5 group 0.85 mm west). Nominal back faces west Q5 6.15 / SICD2 5.99, east Q6 8.99 / SICD1 9.22 /
+   Q19 / Q7 8.96; flat plate 2.34 - 2.56 mm with 0.25 mm pads under Q5 / Q6 / SICD1 / SICD2 only (README stage 17b).
+   Still open: the owner's caliper check of the three packages, plate cut-out at the H4 head, notch at C87, plate
+   potential and tab insulation (fab README open items).
 2. **Update `simulation/dab/dab_spice.py` to the IPA60R280CFD7** (it still models the STF7N60M2; the CFD7 check in
    DAB_SIMULATION.md 2.9 is a scratch-run result) and re-run ZVS / losses, start-up and the ±2 % mismatch at
    Lm 120 µH / 200 ns.
@@ -53,7 +54,7 @@ Read first: this file, `kicad_next/review/RESOLUTIONS.md` (status of every shoul
 ## Waiting for the owner
 
 - Caliper measurements of one C2M0160120D, one C3D02060A and one IPA60R280CFD7 (lead centreline to back face, body
-  thickness) for the heatsink plate; C102 can diameter; screw-head / washer sizes at H2 and H8.
+  thickness) to confirm the plate thickness of stage 17b (datasheet nominal values used); C102 can diameter; screw-head / washer sizes at H2 and H8.
 - Physical check before soldering: a C3D02060A held over SICD1 / SICD2 with the tab to the plate has its cathode
   (pin 1, tab) on the DC+ pad.
 - Q5 / Q6 (C2M0160120D) and SICD1 / SICD2 (C3D02060A) are obsolete at Wolfspeed: 5.1 spares, or C3M0160120D /
