@@ -3331,7 +3331,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "2n7000"
+		(property "Value" "BSS138"
 			(at 101.6 72.39 0)
 			(effects
 				(font

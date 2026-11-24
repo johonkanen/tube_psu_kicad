@@ -56,8 +56,8 @@ tools/next/check_next.sh                          # everything below, prints ALL
 ```
 
 `check_next.sh` steps: symbol library up to date; schematic regenerated in a temporary directory equals
-`kicad_next/` byte for byte; part footprints up to date; ERC (0 errors / 14 warnings after phase 2:
-12 isolated_pin_label + 2 ground_pin_not_ground on the UCC21520 high-side VSSA); every net in
+`kicad_next/` byte for byte; part footprints up to date; ERC (0 errors / 15 warnings: 12 isolated_pin_label +
+3 ground_pin_not_ground on the UCC21520 high-side VSSA pins 14 of DRV5, DRV6 and DRV3; was 14 / 2 before DRV3 became a UCC21520); every net in
 exactly one isolation domain and the project file up to date; board skeleton (6 layers, names / types,
 stackup thicknesses, outline and H1–H8 equal to `kicad/tube_psu.kicad_pcb`); DRC 0 violations;
 `check_rules.py` – kicad-cli silently drops a broken `.kicad_dru` rule, so 13 pairs of test tracks are
@@ -2545,7 +2545,7 @@ KiCad AppImage with --version.
 
 Work sheet by sheet (NEXT_REVISION_PLAN.md phase 2 table): TR1 -> EEL19 4+6 + fly leads and PWM2 ->
 iW1819-00 (new symbols, Vcc / Vsense / Rsense rechecked, preloads, D8/D4/D5 ratings, C102); sheet 2 R40/R25
-DNP; sheet 4 J2 channel map + UART island (CA-IS3721HW, 4-pin header GND / 3V3 / TXD / RXD powered from the minimodule; nets in a new UART domain);
+DNP; sheet 4 J2 channel map + UART island (CA-IS3721HW, then a 4-pin header GND / 3V3 / TXD / RXD – a 1×6 header since stage 11: 1 GND, 2 TXD in, 3 GND, 4 RXD out, 5 GND, 6 3V3 in, side 2 powered from the far end; nets in a new UART domain);
 measurement fixes (bias buffer, VAC / DC_LINK Cf, R49/R80, AUX + 5V_MEAS followers); sheet 7 TR3 -> EC42
 two-chamber option B 20:21, L3 removed; sheets 8 / 10 LMH6643 with feedback caps on both legs; sheet 5
 L1/L2 toroids; LCSC field for every new part; root title block rev V5.2 (gen_schematic.py ROOT_EDITS).

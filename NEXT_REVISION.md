@@ -61,7 +61,7 @@ JLC stock 2026-11-17. For the DAB the user accepts dual, half-bridge or isolated
 |---|---|---|---|---|
 | DRV5 | DAB primary half-bridge Q7/Q19 | Si8275BB (0 pcs) | **UCC21520DWR C601651** (42 074 pcs, ≈ $0.94) | Isolated dual, 4 A / 6 A, **5.7 kVrms reinforced** SOIC-16W, 8 V output UVLO (= Si8275BB's B grade; UCC21520A = 5 V), DT pin (resistor = hardware dead time / overlap protection as a backstop to the FPGA dead time), **DIS pin** (hardware disable – NR 3.3). Bootstrap high side as today |
 | DRV6 | DAB secondary half-bridge Q8/Q21 | Si8275BB | **UCC21520DWR** | Same part. Option: because it is reinforced, its input side can sit on the **primary** GND/5V and take the FPGA PWM directly – the secondary PWM then no longer needs ISO2 channels / 5V_ISOL on the input side (simplification to decide in phase 2) |
-| DRV3 + DRV9 | heater LLC half-bridge Q10 (high, Si8271) / Q11 (low, IXDD609) | Si8271DB 3365 pcs / IXDD609 SON (0) | **UCC21520DWR** (one part for both) | Inputs EPWM5A / EPWM6A → INA / INB; dead-time resistor; one line item for all three half-bridges |
+| DRV3 + DRV9 | heater LLC half-bridge Q11 (high side, DC+, Si8271) / Q10 (low side, source to the shunt R30, IXDD609) | Si8271DB 3365 pcs / IXDD609 SON (0) | **UCC21520DWR** (one part for both) | Inputs EPWM5A / EPWM6A → INA / INB; dead-time resistor; one line item for all three half-bridges |
 | DRV1, DRV2 | PFC Q5/Q6 (C2M0160120D SiC, 15 V gate) | IXDD609D2TR (0) | **UCC27511ADBVR C2676982** (6148 pcs, ≈ $0.39) | 4 A source / 8 A sink, split OUTH/OUTL (separate turn-on / turn-off resistors), VDD 4.5–18 V on 15V, SOT-23-6. Alternative UCC27531 (35 V, for a negative-bias SiC drive later; 1000 pcs) |
 | DRV4 | heater secondary SR Q1/Q2 (6V3, HT_GND) | IXDD604D2TR (0) | **UCC27524ADR C185857** (20 321 pcs, ≈ $0.25) | Dual 5 A low-side, VDD 4.5–18 V (6.3 V supply OK), SOIC-8 |
 | ISO1, ISO2 | AD1/AD2 SPI + PWM to the isolated sides | Si8661BD (2 pcs) | **CA-IS3761LW C528659** (2315 pcs, ≈ $1.85) | 6-channel 5/1 like the Si8661, wide body; **check** pinout against the Si8661 footprint, the reinforced (VDE) rating and the default output level (L = low; the SPI chip selects want idle high → CA-IS3761H… or pull-ups) |
@@ -81,7 +81,7 @@ on the board; the cable side is powered by the cable itself, so no isolated DC/D
 | 3b.2 | J4 | → **6-pin 2.54 mm UART header** (user 2026-11-23, 12 Mbaud single-ended link between two FPGA boards, a ground beside each signal: 1 GND, 2 TXD in → isolator → J2-24 RX, 3 GND, 4 RXD out ← isolator ← J2-26 TX, 5 GND, 6 3V3 in – powers the isolator side 2, no LDO; 2026-11-19 it was a 4-pin header 1 GND, 2 3V3, 3 TXD, 4 RXD; before that a 6-pin FTDI header + LDO) on its own isolated copper island (ISO_UART_GND) | standard cable plugs straight in | H |
 | 3b.3 | ~~new LDO~~ | **Dropped (user 2026-11-19):** the USB-UART minimodule supplies 3.3 V on J4 (pin 6 since 2026-11-23, was pin 2) for the isolator side 2, so no LDO / 5 V on the island (was: 5 V cable VCC → SOT-23 LDO → 3.3 V) | fewer parts, 4-wire cable | – |
 | 3b.4 | Layout | Isolator straddles the barrier; keep ≥ 8 mm creepage / clearance between the J4 island and any primary copper on all layers (no planes or pours under the island), like the existing Si8661 barrier. 22–100 Ω series resistors on the cable-side TXD/RXD optional (ESD / ringing) | reinforced isolation | H |
-| 3b.5 | Docs | Until then: **never connect a non-isolated USB-UART to J4 while the board is on mains** | safety | H (now) |
+| 3b.5 | Docs | **5.1 only:** never connect a non-isolated USB-UART to J4 while the 5.1 board is on mains (J4 on primary ground). On 5.2 J4 is isolated by U11 (reinforced on paper; its certificates are pending, CHANGES_5_2.md 6.a): a non-isolated USB-UART is acceptable; pin 6 must be the far end's 3.3 V I/O supply and always connected | safety | H (now) |
 
 ## 4. Measurement circuits (sheets 4, 8, 9)
 
@@ -93,7 +93,7 @@ Source: [simulation/FINDINGS.md](simulation/FINDINGS.md) (ngspice + hVHDL_ode, A
 | 4.2 | VAC_MEAS (U8) | 1 nF C0G across R80 and across R49; keep R65 100 Ω, no output capacitor | no filter, +22 dB at 20–50 MHz | H |
 | 4.3 | VAC_MEAS range | R49, R80 15 kΩ → **12 kΩ** (and the 1 nF of 4.2 with them) | clips above ≈ 330 V peak | H |
 | 4.4 | DC_LINK_MEAS (U6) | 1 nF C0G across R17 and across R82; R2 1 kΩ → **100 Ω**; **remove C4** | HF feedthrough; ADC mux leakage 254 LSB at 1 µs | H |
-| 4.5 | AUX_MEAS | C61 1 nF → **1 µF** | ADC mux leakage 505 LSB at 1 µs → 0.7 LSB | H |
+| 4.5 | AUX_MEAS | C61 1 nF → **100 nF + U10A follower + R132 100R** (decided, kicad_next/CHANGES_5_2.md 4.5 / 4c.2; the 1 µF unbuffered option was not taken) | ADC mux leakage 505 LSB at 1 µs → ≈ 0 | H |
 | 4.6 | U1 (LMH6658) | Add 100 nF (+ 1 µF) at pin 8 | no local decoupling | M |
 | 4.7 | C10, C26 | Keep unfitted | mux settling is better without | – |
 | 4.8 | REF1 | Correct the schematic value to the fitted 1.65 V reference (ISL21010CFH315Z is the 1.5 V part) | documentation | L |
@@ -129,7 +129,7 @@ Today the critical channels are split: PFC_I2 on A, PFC_I1 and DHB_I on B, AUX o
   channel can be sampled at the same PWM-locked position every period (or twice, e.g. at the
   PWM centre for the PFC average current).
 - ADC B sees a varying channel order (LLC timing), so its slow, high-impedance channels need the
-  mux-leakage fixes 4.4 (DC_LINK) and 4.5 (AUX, C61 1 µF) – both already in the list.
+  mux-leakage fixes 4.4 (DC_LINK) and 4.5 (AUX: buffered by U10A, C61 100 nF) – both already in the list.
 - Equivalent alternative: keep the power-board pins and swap the mux inputs on the control card
   (its mux table is still open there). Doing it on the power board needs no control-card change.
 - Firmware: update the channel map (ADA4 = PFC_I1, ADA6 = DHB_I, ADB3 = AUX, ADB0 = 5V) and the scales (2026-11-24: VAC
@@ -137,7 +137,7 @@ Today the critical channels are split: PFC_I2 on A, PFC_I1 and DHB_I on B, AUX o
 - **5V_MEAS (new, user 2026-11-17):** the primary-side 5V rail (flyback feedback winding, MCU/control
   card supply; same GND as the ADC). Divider 15 kΩ / 10 kΩ 0.1 % (gain 0.4: 5.0 V → 2.0 V, full scale
   8.25 V, so a light-load rise is still visible; 1 LSB = 0.5 mV), 100 nF across the 10 kΩ (6 kΩ ·
-  100 nF → 1.6 ms), then a **follower + 100 Ω** to J2-49. Use a dual op-amp for both slow rails:
+  100 nF → 0.6 ms; 15k ‖ 10k = 6 kΩ), then a **follower + 100 Ω** to J2-49. Use a dual op-amp for both slow rails:
   **TLV9062IDGKR** C398356 (10 MHz RRIO, 2.5–5.5 V, 48 k pcs, ≈ $0.23) on +3V3 – channel A buffers
   AUX_MEAS (rule 4c.2), channel B buffers 5V_MEAS. The isolated 5V_ISOL cannot go to this ADC
   directly (it would need an isolated measurement like AD1/AD2).

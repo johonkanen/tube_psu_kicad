@@ -189,7 +189,7 @@ Footprints whose anchor (= CPL position) is more than 0.05 mm from the centre of
    * C105987 C1206N332J631T: C22 C41 C42 C49 (row dated 2026-11-23)
    * C492405 PZ254V-11-06P: J4 (row dated 2026-11-23)
 3. **All other stock figures are from 2026-11-17 ... 2026-11-24**, not from today: JLC's BOM page shows the current stock; parts flagged low in the review column below are the likely shortfalls.
-4. **Review notes of the CSV** for parts that are in the BOM (34 parts):
+4. **Review notes of the CSV** for parts that are in the BOM (33 parts):
    * AD1 AD2 (C74860 ADC121S101CIMF/NOPB): stock 276
    * C19 C30 (C913388 KCXE5002W680MF): stock 103
    * C22 C41 C42 C49 (C105987 C1206N332J631T): stock / price not read
@@ -197,16 +197,15 @@ Footprints whose anchor (= CPL position) is more than 0.05 mm from the centre of
    * C73 (C445674 C5750X6S2W225KT000N): 450 V MLCC on DC+ as designed (stock 758)
    * C86 C117 (C2888216 MKP62-275V684KP22.5): X2 680n: generic brand, body size to verify
    * CM1 CM4 (C1534140 SCF20-05-550): LOW STOCK 20 (< 100): 10 boards max
-   * ISO1 ISO2 (C528659 CA-IS3761LW): reinforced certificate to confirm
+   * ISO1 ISO2 (C528659 CA-IS3761LW): owner accepted 2026-11-24; VDE certificate scope for the LW (WB) not confirmed
    * J2 (C2881768 X1321FV-2x25-C43D24): owner: check mating height / orientation against the card J1 (male right-angle 2x25 1.27 mm)
    * J4 (C492405 PZ254V-11-06P): stock / price not read
-   * PWM2 (C17699638 ICE5AR0680AGXUMA1): user bought 10 pcs into the JLC parts stock (2026-11-19); JLC public stock 3
-   * Q9 (C82045 BSS138LT1G): value 2n7000 -> BSS138 (layout device)
+   * PWM2 (C17699638 ICE5AR0680AGXUMA1): user bought 10 pcs into the JLC parts stock (2026-11-19); JLC public stock 3. JLC package string BSOP-12-EP-300mil is wrong: PG-DSO-12 = SO-16 narrow body with two positions per side empty, no exposed pad (datasheet figure 39); footprint and CPL anchor (= body centre, 0.42 mm from the pad centroid because the pads are removed asymmetrically) are right - check pin 1 in the JLC preview against datasheet figure 3
    * R1 R14 R19 R20 (C2999547 FRC1206F4R99TS): 5 Ω -> 4.99 Ω (E96, -0.2 %)
    * R21 R30 R83 R93 (C2073455 KRL2012E-M-R005-F-T5): land pattern not checked against a Susumu recommended pattern (not on the fetched catalogue page); pads 0.35 x 2.0 mm cover the 0.30 mm terminals of the 1.25 x 2.00 mm body
    * R26 R57 R87 R90 (C2933439 FRC0805F40R2TS): 40 Ω -> 40.2 Ω (E96, +0.5 %)
    * R124 (C245506 CR1206F2K61P05Z): stock 75
-   * U11 (C5337993 CA-IS3721HW): reinforced rating to confirm
+   * U11 (C5337993 CA-IS3721HW): owner accepted 2026-11-24; certificates pending in the only datasheet found (rev C)
 5. **Rotations and bottom-side convention not verified** (section above): check JLC's placement preview before paying.
 6. **Through-hole parts in the BOM** (24 parts): decide whether JLC solders them (table above).
 7. PTH pad annular ring 0.159 mm is at JLC's absolute minimum (0.15), below the recommended 0.2 mm (J2.10 B.Cu, 139 pad-layers).

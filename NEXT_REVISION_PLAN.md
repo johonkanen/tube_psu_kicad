@@ -99,7 +99,7 @@ Sheet by sheet (NR items):
 |---|---|
 | 1 aux supply | TR1 → EEL19 4+6 + 2 fly-lead pins (NR 1.1/1.2); PWM2 → iW1819-00 (new symbol, recheck Vcc / Vsense / Rsense, NR 1.5/1.6); preloads 2.2 k / 1 k, R124 2.61 k (1.7/1.8); D8 ≥ 600 V, D4/D5 ≥ 100 V (1.9/1.10); C102 ≥ 160 V |
 | 2 DHB gate drive | DRV5/DRV6 Si8275BB (done in 5.1 KiCad); R40/R25 DNP (3.2); optional EN to FPGA (3.3) |
-| 4 MCU connector | J2 channel map: PFC_I1 → J2-42, DHB_I → J2-38, AUX → J2-43, 5V_MEAS → J2-49, spares to GND (NR 4b); serial: CA-IS3721HW + 4-pin header (GND / 3V3 from the minimodule / TXD / RXD) on the UART island (NR 3b) |
+| 4 MCU connector | J2 channel map: PFC_I1 → J2-42, DHB_I → J2-38, AUX → J2-43, 5V_MEAS → J2-49, spares to GND (NR 4b); serial: CA-IS3721HW + header J4 (1×6 since 2026-11-23: 1 GND, 2 TXD in, 3 GND, 4 RXD out, 5 GND, 6 3V3 in; was a 4-pin header GND / 3V3 from the minimodule / TXD / RXD) on the UART island (NR 3b) |
 | 4 / 9 measurements | bias buffer (4.1); VAC Cf + R49/R80 12 k (4.2/4.3); DC_LINK Cf, R2 100 Ω, no C4 (4.4); AUX + 5V_MEAS TLV9062 followers (4c, 4b); C61 per the buffer decision |
 | 7 DHB | TR3 → EC42/15 two-chamber, **option B 20:21** (2.1/2.2); L3 removed / jumper option (2.4); C47/C54 near the primary pins (layout) |
 | 8 / 10 current measurement | **LMH6643** (D2) in place of the LMH6658; feedback caps on **both** legs (matching cap from the + input to +1V65_BIAS) with τ = Rfb·C ≈ L/R of the shunt (≈ 125–200 ns, bench-tuned) for the ESL compensation (4.11); zero-offset calibration (Vos 5 mV = 1.25 A); U1 decoupling (4.6) |

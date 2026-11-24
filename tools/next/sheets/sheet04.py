@@ -2,7 +2,9 @@
 """Sheet 4 - MCU socket and misc (PDF page 4): the 2x25 MCU header J2, the +3V3 regulator V4
 (TPS73033 from 5V), the +1V65_BIAS reference REF1 with R110 / R3 / C48, the 15V measurement
 divider R11 / R12 (AUX_MEAS), the DC-link measurement amplifier U6 (TLV316, DC+ through
-3 x 1M) -> DC_LINK_MEAS, and the UART connector J4 (RX / TX).
+3 x 1M) -> DC_LINK_MEAS, and the isolated UART: U11 (CA-IS3721HW, side 1 on +3V3 / GND) and the 1x6 header J4
+(1 ISO_UART_GND, 2 TXD in, 3 ISO_UART_GND, 4 RXD out, 5 ISO_UART_GND, 6 UART_3V3 in from the far end; J4 is on the
+isolated UART domain, not on primary ground).
 
 PDF: the J2 pins are labelled with the MCU pin names (A12, B12, C15, ...); the signal names are
 tied to them by separate wires (e.g. EPWM6A - A12). KiCad uses the IPC net names; the MCU pin

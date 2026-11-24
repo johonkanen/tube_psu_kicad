@@ -69135,7 +69135,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "2n7000"
+		(property "Value" "BSS138"
 			(at 0 -2.4 180)
 			(layer "B.Fab")
 			(uuid "17734799-797f-45f0-85fc-ec106049fe1f")
