@@ -1,0 +1,76 @@
+{
+ "stage": "s17a",
+ "script": "tools/next/route_s17a_sicd2_x.py",
+ "ops": [
+  {
+   "op": "move_footprint",
+   "ref": "SICD2",
+   "old": [
+    3.09,
+    -3.82
+   ],
+   "old_rot": -90.0,
+   "new": [
+    3.4,
+    -3.82
+   ],
+   "new_rot": -90.0
+  },
+  {
+   "op": "delete_track",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "B.Cu",
+   "start": [
+    -0.102,
+    3.342
+   ],
+   "end": [
+    3.09,
+    1.26
+   ],
+   "width": 2.4
+  },
+  {
+   "op": "delete_track",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "B.Cu",
+   "start": [
+    3.09,
+    1.26
+   ],
+   "end": [
+    4.4,
+    1.26
+   ],
+   "width": 2.4
+  },
+  {
+   "op": "add_track",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "B.Cu",
+   "start": [
+    -0.102,
+    3.342
+   ],
+   "end": [
+    3.4,
+    1.26
+   ],
+   "width": 2.4
+  },
+  {
+   "op": "add_track",
+   "net": "/05 PFC/PFC_DRAIN_2",
+   "layer": "B.Cu",
+   "start": [
+    3.4,
+    1.26
+   ],
+   "end": [
+    4.4,
+    1.26
+   ],
+   "width": 2.4
+  }
+ ]
+}

@@ -204,6 +204,25 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 17a: SICD2 0.31 mm east, onto the plane of Q5 (2026-11-24)
+
+Design review 2026-11-24, finding 12 F1, owner approval 2026-11-24: all devices of the primary heatsink line sit flat
+on one plate. Nominal back face = pin column ± lead-centre-to-back distance (C3D02060A TO-220-2 dimension V 2.38 –
+2.79, nominal 2.585; C2M0160120D TO-247 A1 2.27 – 2.52, nominal 2.40). `tools/next/route_s17a_sicd2_x.py` (one-shot,
+`routing/moves_s17a.json`):
+
+* **SICD2 pin column x 3.09 → 3.40**, same y, rot −90 kept: K (DC+) (3.40, −3.82), A (PFC_DRAIN_2) (3.40, 1.26).
+  Back face 5.675 → **5.985**, i.e. 0.17 mm west of Q5's back face 6.152 (was 0.48); slot SICD2 ↔ Q6 (back face
+  8.989) 3.31 → **3.00 mm**.
+* B.Cu PFC_DRAIN_2 of stage 16a re-ended at the new anode: L1.1 → SICD2.A and SICD2.A → (4.4, 1.26), 2.4 mm as before
+  (`bq neck PFC_DRAIN_2 B.Cu L1.1 → Q6.2` 2.40 → 2.40 mm). The F.Cu pours keep their outlines; the refill follows.
+* Measured before → after (`rv bq`): DC+ SICD2.K → DB1.2 neck (F.Cu) 5.49 → 5.49 mm; PFC_DRAIN_2 ↔ DC+ F.Cu 1.200 →
+  1.200 mm (pour edges, unchanged), B.Cu 1.906 → 1.687 mm (drain track to the K pad); PFC_DRAIN_2 ↔ GND F.Cu 4.90 →
+  4.90, B.Cu 1.065 → 1.065 mm (at Q6.2, unchanged).
+* DRC 137 → 136 items: the courtyard overlap L1 / SICD2 is gone (courtyards_overlap 135 → 134, pth_inside_courtyard 2);
+  unconnected 0, shorts 0, clearance 0, dangling 0, parity 0; `check_next.sh` passes. Fab package and inner-layer
+  renders regenerated.
+
 ## Stage 16b: C102 away from the screw head at H8 (2026-11-24)
 
 Design review 2026-11-24, finding 12 F2: the D10 can of C102 (Ymin KCXE 56 µF 250 V, `CP_Radial_D10.0mm_P5.00mm_H18mm`,
