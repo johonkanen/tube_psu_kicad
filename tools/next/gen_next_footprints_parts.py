@@ -320,8 +320,9 @@ def fork(name):
 # XKB X1321FV-2x25-C43D24 (LCSC C2881768): female 2x25 1.27 mm straight THT socket; drawing X-X1321FV-2x25-C43D24
 # rev A0: P.C.B layout hole 0.70 mm, pin 0.45 mm, insulator 4.3 mm, tail 2.4 mm, body 3.0 x 32.15 mm. Pad positions
 # stay those of the 5.1 / Proteus footprint (pad 2 at +1.27 mm, the geometry the 5.1 board mated with); drill
-# 0.5 -> 0.70 mm, pad 0.812 -> 1.0 mm (annular ring 0.15 mm), inner-layer pads only where connected.
-SOCKET_DRILL, SOCKET_PAD = 0.7, 1.0
+# 0.5 -> 0.70 mm, pad 0.812 -> 1.02 mm (annular ring 0.16 mm; with 1.0 mm the fab check of jlc_fab.py measured
+# 0.149 mm, below JLC's 0.15 mm), inner-layer pads only where connected.
+SOCKET_DRILL, SOCKET_PAD = 0.7, 1.02
 
 
 def j2_socket():
@@ -333,8 +334,8 @@ def j2_socket():
              '\t\t(offset\n\t\t\t(xyz 1.27 0 0)\n\t\t)\n\t\t(scale\n\t\t\t(xyz 1 1 1)\n\t\t)\n'
              '\t\t(rotate\n\t\t\t(xyz 0 0 0)\n\t\t)\n\t)\n')
     return derive(src, "PinSocket_2x25_P1.27mm_Vertical_XKB_X1321FV",
-                  "5.2 J2 female socket XKB X1321FV-2x25-C43D24 (C2881768): drill 0.70 mm / pad 1.0 mm per the "
-                  "drawing, pad positions of the 5.1 footprint, inner pads only where connected (tube_psu_next_parts)",
+                  "5.2 J2 female socket XKB X1321FV-2x25-C43D24 (C2881768): drill 0.70 mm per the drawing, pad 1.02 mm, "
+                  "pad positions of the 5.1 footprint, inner pads only where connected (tube_psu_next_parts)",
                   model=model)
 
 

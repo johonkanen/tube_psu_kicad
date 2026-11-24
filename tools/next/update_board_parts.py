@@ -15,6 +15,7 @@ The project file is left as it is. Idempotent; --check writes nothing and fails 
 
 First use 2026-11-21: TR3 pins re-assigned (primary start 1+2 -> 4+5, secondary finish 15+16 -> 13+14).
 Second use 2026-11-21: TR3 secondary finish 13+14 -> 11+12.
+Since 2026-11-24 an LCSC field that the schematic leaves empty (consigned / missing part) is emptied on the board too.
 """
 import os
 import sys
@@ -82,8 +83,8 @@ def main(argv):
         if fp.GetValue() != c["value"]:
             changes.append(f"{ref}: value {fp.GetValue()} -> {c['value']}")
             fp.SetValue(c["value"])
-        if c["lcsc"] and (not fp.HasField("LCSC") or fp.GetFieldText("LCSC") != c["lcsc"]):
-            changes.append(f"{ref}: LCSC -> {c['lcsc']}")
+        if (c["lcsc"] or fp.HasField("LCSC")) and (not fp.HasField("LCSC") or fp.GetFieldText("LCSC") != c["lcsc"]):
+            changes.append(f"{ref}: LCSC -> {c['lcsc'] or '(empty)'}")      # empty: part became consigned / missing
             fp.SetField("LCSC", c["lcsc"])
         if not fp.HasField("Description") or fp.GetFieldText("Description") != c["descr"]:
             changes.append(f"{ref}: Description -> {c['descr']}")

@@ -1,0 +1,185 @@
+{
+ "stage": "s15g",
+ "script": "tools/next/route_s15g_j2_pads.py",
+ "ops": [
+  {
+   "op": "replace_footprint",
+   "ref": "J2",
+   "old": "tube_psu_next_parts:PinSocket_2x25_P1.27mm_Vertical_XKB_X1321FV",
+   "new": "tube_psu_next_parts:PinSocket_2x25_P1.27mm_Vertical_XKB_X1321FV",
+   "at": [
+    33.134999,
+    -22.1563
+   ],
+   "rot": 0.0
+  },
+  {
+   "op": "delete_track",
+   "net": "HEATER_I_MEAS",
+   "layer": "F.Cu",
+   "start": [
+    32.4,
+    8.1
+   ],
+   "end": [
+    32.4,
+    8.9
+   ],
+   "width": 0.1524
+  },
+  {
+   "op": "delete_track",
+   "net": "HEATER_I_MEAS",
+   "layer": "F.Cu",
+   "start": [
+    32.4,
+    7.5
+   ],
+   "end": [
+    32.4,
+    6.5195
+   ],
+   "width": 0.1524
+  },
+  {
+   "op": "delete_track",
+   "net": "HEATER_I_MEAS",
+   "layer": "F.Cu",
+   "start": [
+    32.1,
+    7.8
+   ],
+   "end": [
+    32.4,
+    7.5
+   ],
+   "width": 0.1524
+  },
+  {
+   "op": "delete_track",
+   "net": "HEATER_I_MEAS",
+   "layer": "F.Cu",
+   "start": [
+    32.4,
+    6.5195
+   ],
+   "end": [
+    33.1357,
+    5.7838
+   ],
+   "width": 0.1524
+  },
+  {
+   "op": "delete_track",
+   "net": "HEATER_I_MEAS",
+   "layer": "F.Cu",
+   "start": [
+    32.4,
+    8.9
+   ],
+   "end": [
+    33.5,
+    10.0
+   ],
+   "width": 0.1524
+  },
+  {
+   "op": "delete_track",
+   "net": "HEATER_I_MEAS",
+   "layer": "F.Cu",
+   "start": [
+    32.1,
+    7.8
+   ],
+   "end": [
+    32.4,
+    8.1
+   ],
+   "width": 0.1524
+  },
+  {
+   "op": "add_track",
+   "net": "HEATER_I_MEAS",
+   "layer": "F.Cu",
+   "start": [
+    32.1,
+    7.8
+   ],
+   "end": [
+    32.36,
+    7.54
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "add_track",
+   "net": "HEATER_I_MEAS",
+   "layer": "F.Cu",
+   "start": [
+    32.36,
+    7.54
+   ],
+   "end": [
+    32.36,
+    6.5195
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "add_track",
+   "net": "HEATER_I_MEAS",
+   "layer": "F.Cu",
+   "start": [
+    32.36,
+    6.5195
+   ],
+   "end": [
+    33.1357,
+    5.7838
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "add_track",
+   "net": "HEATER_I_MEAS",
+   "layer": "F.Cu",
+   "start": [
+    32.1,
+    7.8
+   ],
+   "end": [
+    32.36,
+    8.06
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "add_track",
+   "net": "HEATER_I_MEAS",
+   "layer": "F.Cu",
+   "start": [
+    32.36,
+    8.06
+   ],
+   "end": [
+    32.36,
+    8.94
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "add_track",
+   "net": "HEATER_I_MEAS",
+   "layer": "F.Cu",
+   "start": [
+    32.36,
+    8.94
+   ],
+   "end": [
+    33.5,
+    10.0
+   ],
+   "width": 0.152
+  }
+ ]
+}

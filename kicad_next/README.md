@@ -204,13 +204,25 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 15g: J2 pads 1.0 → 1.02 mm, fab package (2026-11-24)
+
+The fab check of `tools/next/jlc_fab.py` measured the 1.0 mm / 0.70 mm J2 pads of stage 15f at a 0.149 mm annular
+ring (pad polygon), "below the JLC minimum 0.15 mm". The footprint now has **1.02 mm pads (ring 0.16 mm, measured
+0.159 mm; pad gap 0.25 mm)**; `tools/next/route_s15g_j2_pads.py` (one-shot, `routing/moves_s15g.json`) puts it on
+the board again and moves the F.Cu HEATER_I_MEAS run west of pads 45–49 from x 32.4 to x 32.36 (0.149 → 0.19 mm from
+pads 47 / 49). The DAB FETs (stage 15d, consigned) carry no LCSC number in the CSV / schematic / board any more
+(`jlc_fab.py` refuses a consigned part with one; `update_board_parts.py` now also empties a board LCSC field the
+schematic leaves empty). Fab package and inner-layer renders regenerated (BOM 104 lines / 340 parts, 29 not
+assembled). Unconnected 0, 0 shorts, clearance 0, dangling 0, parity 0; `check_domains.py` clean; `check_next.sh`
+passes.
+
 ## Stage 15f: J2 female socket, drill 0.70 mm (2026-11-24)
 
 Owner decision 2026-11-24 on findings 04 F1: J2 = XKB X1321FV-2x25-C43D24 (C2881768), female 2 × 25, 1.27 mm,
 straight THT (CHANGES_5_2.md 6.1). Its drawing (rev A0) asks for **Ø0.70 mm** holes (pin 0.45 mm). New generated
 footprint `tube_psu_next_parts:PinSocket_2x25_P1.27mm_Vertical_XKB_X1321FV`: every pad position of the old
-`tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus`, drill 0.5 → 0.70 mm, pad 0.812 → 1.0 mm (**annular ring
-0.15 mm**), `remove_unused_layers` with the end layers kept (inner pads only where a pin connects). Pad-to-pad gap
+`tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus`, drill 0.5 → 0.70 mm, pad 0.812 → 1.0 mm (annular ring
+0.15 mm; 1.02 mm since stage 15g), `remove_unused_layers` with the end layers kept (inner pads only where a pin connects). Pad-to-pad gap
 1.27 − 1.0 = **0.27 mm** (SIGNAL clearance 0.15 mm, JLC 0.1 mm). `tools/next/route_s15f_j2_socket.py` (one-shot,
 `routing/moves_s15f.json`) swaps the footprint in place (same position / rotation; fields and nets from the
 netlist) and moves the three tracks that passed between pins:
