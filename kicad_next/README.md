@@ -2487,7 +2487,7 @@ netlist). Count after phase 2: primary 156 nets (HV_PRIMARY 43, PRIMARY_LV 5, SI
 |---|---|---|---|---|---|
 | Primary ↔ DAB secondary (TR3, TR1, ISO2, heatsink) | reinforced | 420V rail vs GND: 420 + 358·\|sin\| in the negative half-wave → **552 Vrms, 778 Vpk** (ISO_GND earthed through the amplifier chassis) | 2 × 5.52 = **11.1 mm** | **4.0 mm** | 11.1 mm |
 | Primary ↔ heater (TR2, ISO1) | reinforced | DC+ vs HT_GND: earthed 318 Vrms; at the −100 V bias DC+ − HT = 400 + 100 + GND(t), GND(t) = min(0, 358·sin) – the 100 V DC shift adds linearly, not in quadrature (√(318² + 100²) = 333 Vrms was wrong): **410 Vrms, 500 Vpk** (design review 2026-11-23) | basic 4.1 (400 / 500 V rows 4.0 / 5.0 interpolated) → 2 × 4.1 = **8.2 mm** (8.0 until stage 13d) | **4.0 mm** | 8.2 mm |
-| Primary ↔ UART island (Si8621BD) | reinforced, user-touchable | PC ground = earth: 318 Vrms | 6.4 → **8.0 mm** (plan target; own rules "PRI-UART …" since stage 13d) | **4.0 mm** | 8.0 mm |
+| Primary ↔ UART island (U11 CA-IS3721HW; Si8621BD in the plan) | reinforced, user-touchable | PC ground = earth: 318 Vrms | 6.4 → **8.0 mm** (plan target; own rules "PRI-UART …" since stage 13d) | **4.0 mm** | 8.0 mm |
 | DAB secondary ↔ UART | reinforced (ES3 to touchable) | 420 V DC → 420 Vrms | 2 × 4.2 = **8.4 mm** | 3.0 mm (1500 V transient behind reinforced insulation → 1.5 mm, margin) | 8.4 mm |
 | DAB secondary ↔ heater | functional (user 2026-11-17: heater tied to −100V BIAS or to signal ground via 100 Ω) | to 420V: up to 520 V; to ISO_GND / LV secondary: ≤ 115 V | **5.2 mm** to HV_SECONDARY, **1.5 mm** to SECONDARY_LV | 1.5 / 1.0 mm | 5.2 mm / – |
 | Heater ↔ UART | functional | ELV | – | 1.0 mm | 1.0 mm |
@@ -2517,10 +2517,11 @@ DAB square wave (≤ 420 V) on top.
 
 ### Consequences found while setting the rules (for phases 2–5)
 
-- **SOIC-16W isolators** (ISO1 / ISO2 Si8661BD, UART Si8621BD): pad row to pad row ≈ 7–8 mm < 11.1 / 8.0 mm →
+- **SOIC-16W isolators** (ISO1 / ISO2 CA-IS3761LW, UART U11 CA-IS3721HW; Si8661BD / Si8621BD when this was written): pad row to pad row ≈ 7–8 mm < 11.1 / 8.0 mm →
   a **slot under each isolator** (Edge.Cuts, KiCad's creepage check follows it) or the rule fails there.
   **Done in phase 3** (`_Slot8.0` / `_Slot11.1` footprints, section "Footprints and 3D models").
-  Check that the Si8661BD reinforced rating (VIOWM / IEC 62368-1 certificate) covers 552 Vrms.
+  Rating check (2026-11-24, CHANGES_5_2.md 6.a): CA-IS3761LW VIOWM 1000 Vrms reinforced (CA-IS376x v1.05) covers
+  552 Vrms 1.81× (older Rev F: 600 Vrms, 1.09×); CA-IS3721HW certificates pending; both accepted by the owner.
 - **EEL19 TR1 footprint** (`Transformer_EEL19_V_4+6_FlyLeads`): pad rows 12.5 mm apart, pad edge to pad
   edge ≈ 10.8 mm < 11.1 mm → slot between the rows or a wider row pitch; and the bobbin's 3 + 3 mm
   margin construction (6 mm) is below 11.1 mm creepage for this working voltage (NEXT_REVISION_PLAN.md
