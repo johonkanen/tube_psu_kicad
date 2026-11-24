@@ -204,6 +204,26 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 14a: Kelvin tap of the heater shunt R30 (2026-11-24)
+
+Design review 2026-11-24 (findings 08 F1 / B1, 06 F1): the In2 HEATER_CURRENT sense lane started on the Q10 source via
+(−12.8, −68.6), so 12.46 mm of 0.8 mm B.Cu carrying the whole Q10 current (≈ 7.7 mΩ at 35 µm, 6.0 mΩ at 45 µm, plus
+half a via) sat in series with the 4 mΩ shunt. F.Cu over R30 pad 1 is the Q11 gate pad / gate track / Q11 DC+ tab (HV,
+1.2 mm), so no through via fits at the pad. `tools/next/route_s14a_heater_kelvin.py` (one-shot, `routing/moves_s14a.json`;
+common frame `tools/next/s14_common.py`):
+
+* Q10 trunk (B.Cu 0.8 mm) moved off the pad tip: (−12.8, −71.0) → (−12.8, −71.6) → (−12.0, −72.4) → (−12.0, −79.8) into
+  the HEATER_CURRENT B.Cu pour 20 west of the pad (9.1 mm instead of 10.1 mm); pour 20 cut back to x ≤ −11.2 (pad
+  centre), so the Q10 current (and the C20 / C22 / C41 return through R158.2) enters pad 1 at its outer edge;
+* Kelvin wire 0.2 mm B.Cu from the inner half of the pad 1 tip (−11.1, −79.6) along x −11.1, diagonal to a 0.5 / 0.3
+  via at (−9.3, −69.9) (1.45 mm from the Q11 tab on F.Cu); In2 lane cut at x −7.7 and joined to that via. The lane no
+  longer touches the Q10 via; it touches the power path only at R30 pad 1.
+
+Series copper between sense point and shunt pad: **12.46 mm × 0.8 mm B.Cu + via (6 – 8 mΩ) → 0** (tap on the pad).
+Reference side (U1A −): R29 330 Ω to the GND plane at (3.2, −57.6), the same pseudo-differential scheme as 5.1 and as
+the DAB shunt R83 (R101 to plane GND); R30 pad 2 sits on the B.Cu GND pour over the In1 / In4 planes — not changed.
+Unconnected 0, 0 shorts, clearance 0, dangling 0, parity 0, DRC 137 items as before; `check_next.sh` passes.
+
 ## Stage 13d: primary ↔ heater 8.0 → 8.2 mm (2026-11-23)
 
 Design review 2026-11-23 (findings 10 A1 / F3): with HT_GND at the −100 V bias the primary ↔ heater working voltage
