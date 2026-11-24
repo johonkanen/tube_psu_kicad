@@ -1,0 +1,46 @@
+{
+ "stage": "s14d",
+ "script": "tools/next/route_s14d_q1_tab_vias.py",
+ "ops": [
+  {
+   "op": "add_via",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "at": [
+    -51.0,
+    -66.3
+   ],
+   "size": 0.5,
+   "drill": 0.3
+  },
+  {
+   "op": "add_via",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "at": [
+    -51.0,
+    -67.5
+   ],
+   "size": 0.5,
+   "drill": 0.3
+  },
+  {
+   "op": "add_via",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "at": [
+    -51.0,
+    -68.7
+   ],
+   "size": 0.5,
+   "drill": 0.3
+  },
+  {
+   "op": "add_via",
+   "net": "/06 Heaters/Q14_DRAIN",
+   "at": [
+    -51.0,
+    -69.9
+   ],
+   "size": 0.5,
+   "drill": 0.3
+  }
+ ]
+}

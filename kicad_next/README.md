@@ -204,6 +204,16 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 14d: Q1 drain tab vias 12 → 16 (2026-11-24)
+
+Design review 2026-11-24 (findings 06 F3): the Q1 tab (synchronous rectifier, net Q14_DRAIN) had 12 vias in a 3 × 4
+grid; 5.1 had 16. `tools/next/route_s14d_q1_tab_vias.py` (one-shot, `routing/moves_s14d.json`) restores the fourth
+column x −51.0, y −66.3 / −67.5 / −68.7 / −69.9 (0.5 / 0.3, the 5.1 positions, where the imported pours still had their
+via holes). Vias **12 → 16**. The narrowest channel TR2 → Q1 stays **4.48 mm** (5.1 7.7 mm): it is set by the heater
+barrier keep-out of ISO1 / TR2 (y −66.0, south) and the 6V3 / HT_GND pours (north), so no local outline change widens
+it; no inner-layer copper added (decision 6). Unconnected 0, 0 shorts, clearance 0, dangling 0, parity 0, DRC 137 items
+as before; no new isolation pair (`check_domains.py`); `check_next.sh` passes.
+
 ## Stage 14c: DC+ link at SICD1, PFC_DRAIN_1 neck (2026-11-24)
 
 Design review 2026-11-24 (findings 05 F2, 11): the DC+ island C73.1 / DB1.2 / SICD2.K joined the trunk through a
