@@ -9,7 +9,7 @@ C139, RSel R141). Primary-side windings: 1 -> D5 -> 15V (C1, C39), 3 -> D6 -> 5V
 (C36, C6, C71). Secondary windings: 10 -> D4 -> 15V_ISO_SEC (C3, C2), 8 -> D14 -> -15V_SEC (C44, C40),
 7 -> D29 -> 5V_ISOL (C114, C115), 5 -> D8 -> -100V BIAS (C45, C102); pin 9 = ISO_GND. The outputs go
 to the terminals +15V OUT / -15V OUT / -80V OUT / +5V OUT / SEC GND (KiCad refdes P15V_OUT, N15V_OUT,
-N80V_OUT, P5V_OUT, SEC_GND) with the bleeders R124 / R123 / R68 / R67.
+N80V_OUT, P5V_OUT, SEC_GND) with the bleeders R124 / R123 / R68 ‖ R159-R163 (6 x 73.2k) / R67.
 
 PDF: DC- = GND, RET_iso / RET_ISO / ISO_GND = ISO_GND (the page joins the terminals RET_iso and
 ISO_GND by a bare wire, no part), 20V_ISO_sec = 15V_ISO_SEC, 5v_isol = 5V_ISOL, -100V bias = -100V
@@ -229,13 +229,22 @@ for i, (tref, rail, rref) in enumerate((("P15V_OUT", "15V_ISO_SEC", "R124"), ("N
                                          ("N80V_OUT", "-100V BIAS", "R68"), ("P5V_OUT", "5V_ISOL", "R67"))):
     y = g(148 + 12 * i)
     terminal(sh, tref, XT, y, "right")
-    sh.wire((XT - g(40), y), (XT, y))
-    power_at(sh, rail, (XT - g(40), y), "left")
+    xrail = XT - g(72) if rref == "R68" else XT - g(40)
+    sh.wire((xrail, y), (XT, y))
+    power_at(sh, rail, (xrail, y), "left")
     _, rt, rb = vert2(sh, "R", rref, XT - g(20), y + g(3), sh_value(rref), top=2)   # pin 2 = rail, pin 1 = ISO_GND
     sh.junction(XT - g(20), y)
     power_at(sh, "ISO_GND", rb, "down")
+    if rref == "R68":   # -100V BIAS bleeder: six 1206 in parallel (owner 2026-11-24, findings 01 F1), <= 100 mW each
+        for j, r_ in enumerate(("R159", "R160", "R161", "R162", "R163")):
+            x_ = XT - g(30 + 8 * j)
+            _, rt_, rb_ = vert2(sh, "R", r_, x_, y + g(3), sh_value(r_), top=2)
+            sh.junction(x_, y)
+            power_at(sh, "ISO_GND", rb_, "down")
 sh.text("Terminals +15V OUT / -15V OUT / -80V OUT / +5V OUT / SEC GND = P15V_OUT / N15V_OUT / N80V_OUT / P5V_OUT / SEC_GND;", g(100), g(200))
 sh.text("the PDF joins the terminals RET_iso and ISO_GND by a bare wire (one net ISO_GND, no part).", g(100), g(203))
+sh.text("-100V BIAS bleeder R68 || R159-R163 = 6 x 73.2k 1206 = 12.2k (was R68 12.1k, 0.59 W): 97 mW each at the simulated 84.4 V (owner 2026-11-24).",
+        g(100), g(206))
 
 # --- PDF notes ----------------------------------------------------------------------------------
 sh.text("5.2: TR1 = EEL19 4+6 (fly leads FL_DC / FL_C, pins 4 / 6 clipped), PWM2 = ICE5AR0680AG (5V regulated through VERR); R8 || R9 = 1.37R || 1.37R = 0.685R.", g(16), g(37))

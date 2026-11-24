@@ -1,0 +1,329 @@
+{
+ "stage": "s15b",
+ "script": "tools/next/route_s15b_r68_bleeders.py",
+ "ops": [
+  {
+   "op": "delete_track",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "start": [
+    75.5025,
+    13.5
+   ],
+   "end": [
+    76.1025,
+    13.5
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "delete_track",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "start": [
+    73.7025,
+    11.7
+   ],
+   "end": [
+    75.5025,
+    13.5
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "delete_track",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "start": [
+    73.7025,
+    11.2
+   ],
+   "end": [
+    73.7025,
+    11.7
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "delete_track",
+   "net": "-100V BIAS",
+   "layer": "B.Cu",
+   "start": [
+    77.0275,
+    8.85
+   ],
+   "end": [
+    76.9275,
+    8.95
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "delete_track",
+   "net": "-100V BIAS",
+   "layer": "B.Cu",
+   "start": [
+    76.9275,
+    8.95
+   ],
+   "end": [
+    76.9275,
+    10.55
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "delete_track",
+   "net": "-100V BIAS",
+   "layer": "B.Cu",
+   "start": [
+    77.0,
+    8.85
+   ],
+   "end": [
+    77.0275,
+    8.85
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "move_footprint",
+   "ref": "R68",
+   "old": [
+    75.165,
+    11.2
+   ],
+   "old_rot": 0.0,
+   "new": [
+    72.7,
+    4.3
+   ],
+   "new_rot": -90.0
+  },
+  {
+   "op": "fields",
+   "ref": "R68",
+   "old_value": "12.1K",
+   "value": "73.2k",
+   "lcsc": "C368302"
+  },
+  {
+   "op": "add_footprint",
+   "ref": "R159",
+   "fpid": "Resistor_SMD:R_1206_3216Metric",
+   "at": [
+    75.3,
+    4.3
+   ],
+   "rot": 270.0,
+   "side": "B",
+   "value": "73.2k",
+   "pads": {
+    "1": [
+     75.3,
+     2.837
+    ],
+    "2": [
+     75.3,
+     5.763
+    ]
+   }
+  },
+  {
+   "op": "add_footprint",
+   "ref": "R160",
+   "fpid": "Resistor_SMD:R_1206_3216Metric",
+   "at": [
+    77.9,
+    4.3
+   ],
+   "rot": 270.0,
+   "side": "B",
+   "value": "73.2k",
+   "pads": {
+    "1": [
+     77.9,
+     2.837
+    ],
+    "2": [
+     77.9,
+     5.763
+    ]
+   }
+  },
+  {
+   "op": "add_footprint",
+   "ref": "R161",
+   "fpid": "Resistor_SMD:R_1206_3216Metric",
+   "at": [
+    80.5,
+    4.3
+   ],
+   "rot": 270.0,
+   "side": "B",
+   "value": "73.2k",
+   "pads": {
+    "1": [
+     80.5,
+     2.837
+    ],
+    "2": [
+     80.5,
+     5.763
+    ]
+   }
+  },
+  {
+   "op": "add_track",
+   "net": "-100V BIAS",
+   "layer": "B.Cu",
+   "start": [
+    72.7,
+    5.7625
+   ],
+   "end": [
+    72.7,
+    7.0
+   ],
+   "width": 0.5
+  },
+  {
+   "op": "add_track",
+   "net": "-100V BIAS",
+   "layer": "B.Cu",
+   "start": [
+    75.3,
+    5.7625
+   ],
+   "end": [
+    75.3,
+    7.0
+   ],
+   "width": 0.5
+  },
+  {
+   "op": "add_track",
+   "net": "-100V BIAS",
+   "layer": "B.Cu",
+   "start": [
+    77.9,
+    5.7625
+   ],
+   "end": [
+    77.9,
+    7.0
+   ],
+   "width": 0.5
+  },
+  {
+   "op": "add_track",
+   "net": "-100V BIAS",
+   "layer": "B.Cu",
+   "start": [
+    80.5,
+    5.7625
+   ],
+   "end": [
+    80.5,
+    7.0
+   ],
+   "width": 0.5
+  },
+  {
+   "op": "add_footprint",
+   "ref": "R162",
+   "fpid": "Resistor_SMD:R_1206_3216Metric",
+   "at": [
+    83.95,
+    4.35
+   ],
+   "rot": 0.0,
+   "side": "B",
+   "value": "73.2k",
+   "pads": {
+    "1": [
+     82.487,
+     4.35
+    ],
+    "2": [
+     85.412,
+     4.35
+    ]
+   }
+  },
+  {
+   "op": "add_footprint",
+   "ref": "R163",
+   "fpid": "Resistor_SMD:R_1206_3216Metric",
+   "at": [
+    88.56,
+    4.35
+   ],
+   "rot": 180.0,
+   "side": "B",
+   "value": "73.2k",
+   "pads": {
+    "1": [
+     90.022,
+     4.35
+    ],
+    "2": [
+     87.097,
+     4.35
+    ]
+   }
+  },
+  {
+   "op": "add_track",
+   "net": "-100V BIAS",
+   "layer": "B.Cu",
+   "start": [
+    85.4125,
+    4.35
+   ],
+   "end": [
+    87.0975,
+    4.35
+   ],
+   "width": 0.5
+  },
+  {
+   "op": "add_track",
+   "net": "-100V BIAS",
+   "layer": "B.Cu",
+   "start": [
+    86.255,
+    4.35
+   ],
+   "end": [
+    86.255,
+    7.0
+   ],
+   "width": 0.5
+  },
+  {
+   "op": "add_track",
+   "net": "-100V BIAS",
+   "layer": "B.Cu",
+   "start": [
+    72.7,
+    7.0
+   ],
+   "end": [
+    88.4,
+    7.0
+   ],
+   "width": 0.5
+  },
+  {
+   "op": "add_via",
+   "net": "ISO_GND",
+   "at": [
+    90.0225,
+    4.35
+   ],
+   "size": 0.6,
+   "drill": 0.3
+  }
+ ]
+}

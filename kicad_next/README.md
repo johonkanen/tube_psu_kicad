@@ -204,6 +204,30 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 15b: −100V BIAS bleeder R68 → six 1206 in parallel (2026-11-24)
+
+Owner decision 2026-11-24 on findings 01 F1 (R68 12.1k 1206 at 0.53–0.59 W, rated 250 mW, under the body of C102):
+**R68 + R159 … R163 = six 73.2k 1 % 1206** (C368302, 200 V / 250 mW) = 12.2 kΩ, **97 mW each** at the highest
+simulated rail voltage 84.4 V (CHANGES_5_2.md 6.3). `tools/next/route_s15b_r68_bleeders.py` (one-shot,
+`routing/moves_s15b.json`): R68 moved from (75.165, 11.2) (B.Cu under C102; its two B.Cu tracks deleted) into a B.Cu
+strip between the P5V_OUT row (y 1.2) and the N80V_OUT row (y 7.0), under the F.Cu −100V BIAS pour:
+
+| Part | Position (B.Cu) | Orientation | ISO_GND pad | −100V BIAS pad |
+|---|---|---|---|---|
+| R68 / R159 / R160 / R161 | x 72.7 / 75.3 / 77.9 / 80.5, y 4.3 | north–south, pitch 2.6 mm | pad 1 north, in the B.Cu ISO_GND pour | pad 2 south → bus |
+| R162 | (83.95, 4.35) | east–west | pad 1 west, in the pour | pad 2 east |
+| R163 | (88.56, 4.35) | east–west | pad 1 east, via in pad 0.6 / 0.3 to In1 / In4 | pad 2 west, joined to R162 pad 2 |
+
+−100V BIAS: 0.5 mm B.Cu bus at y 7.0 from x 72.7 to 88.4 through the two N80V_OUT terminal pads, with a drop from
+each south pad and from the R162 / R163 pad pair (x 86.26). The east–west pair keeps its courtyards off the 1.4 mm
+terminal holes (a north–south 1206 between the two rows cannot: 4.56 mm courtyard in a 4.4 mm gap). Distances: R163
+pad 2 to the B.Cu 5V_ISOL track 1.26 mm (HV functional 1.2 mm), bus edge 7.23 mm from the H8 centre (secondary limit
+7.2 mm), R68 pad 1 1.25 mm from the TR1 pin-5 pad (Net-(D8-K)), nearest pad corner 5.11 mm from the centre of C102's
+10 mm body (not under it); only D8 (F.Cu, US1M, rail current 10–20 mA) stands above the west four. Heat: 0.58 W
+spread over a 20 mm strip instead of 0.59 W in one 1206.
+Unconnected 0, 0 shorts, clearance 0, dangling 0, parity 0, courtyards unchanged; `check_domains.py` clean;
+`check_next.sh` passes.
+
 ## Stage 15a: DRV6 VDDB capacitor C141 (2026-11-24)
 
 Owner decision 2026-11-24 on findings 02 F1 / 11 F8: DRV6 VDDB (pin 11, 15V_ISO_SEC) had no capacitor near the pins

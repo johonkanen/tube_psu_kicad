@@ -235,7 +235,7 @@ R63,4.7R,tube_psu:R_0805_2012Metric_Proteus2.13,C17675,0805W8F470KT5E,UNI-ROYAL(
 R65,100R,Resistor_SMD:R_0603_1608Metric,C22775,0603WAF1000T5E,UNI-ROYAL(Uniroyal Elec),basic,10602078,0.0019,2026-11-17,equivalent,,100 Ω 1 % 0603
 R66,10k,Resistor_SMD:R_0603_1608Metric,C25804,0603WAF1002T5E,UNI-ROYAL(Uniroyal Elec),basic,44852996,0.0019,2026-11-17,equivalent,,10 kΩ 1 % 0603
 R67,12.1K,Resistor_SMD:R_1206_3216Metric,C247391,1206W4F1212T5E,UNI-ROYAL(Uniroyal Elec),extended,4303,0.0045,2026-11-17,equivalent,,12.1 kΩ 1 % 1206
-R68,12.1K,Resistor_SMD:R_1206_3216Metric,C247391,1206W4F1212T5E,UNI-ROYAL(Uniroyal Elec),extended,4303,0.0045,2026-11-17,equivalent,,12.1 kΩ 1 % 1206
+R68,73.2k,Resistor_SMD:R_1206_3216Metric,C368302,WR12X7322FTL,Walsin Tech Corp,extended,2888,0.0047,2026-11-24,changed,,"5.2: 12.1k (C247391, 0.59 W at 84.4 V) -> 73.2k 1 % 1206 200 V 250 mW, one of six in parallel with R159-R163 = 12.2k, 97 mW each at 84.4 V (owner 2026-11-24, findings 01 F1)"
 R69,10k,Resistor_SMD:R_0603_1608Metric,C25804,0603WAF1002T5E,UNI-ROYAL(Uniroyal Elec),basic,44852996,0.0019,2026-11-17,equivalent,,10 kΩ 1 % 0603
 R70,10k,Resistor_SMD:R_0603_1608Metric,C25804,0603WAF1002T5E,UNI-ROYAL(Uniroyal Elec),basic,44852996,0.0019,2026-11-17,equivalent,,10 kΩ 1 % 0603
 R71,10k,Resistor_SMD:R_0603_1608Metric,C25804,0603WAF1002T5E,UNI-ROYAL(Uniroyal Elec),basic,44852996,0.0019,2026-11-17,equivalent,,10 kΩ 1 % 0603
@@ -364,4 +364,9 @@ R156,220k,Resistor_SMD:R_1206_3216Metric,C17956,1206W4F2203T5E,UNI-ROYAL(Uniroya
 R157,220k,Resistor_SMD:R_1206_3216Metric,C17956,1206W4F2203T5E,UNI-ROYAL(Uniroyal Elec),extended,143771,0.0049,2026-11-19,exact,,"new: 220k 1 % 1206 200 V, heater LLC resonance split-cap balancing across C41 || C22 (2 in series, <= 105 V each) (NR 2.8)"
 R158,220k,Resistor_SMD:R_1206_3216Metric,C17956,1206W4F2203T5E,UNI-ROYAL(Uniroyal Elec),extended,143771,0.0049,2026-11-19,exact,,"new: 220k 1 % 1206 200 V, heater LLC resonance split-cap balancing across C41 || C22 (2 in series, <= 105 V each) (NR 2.8)"
 C140,470p,Capacitor_SMD:C_0603_1608Metric,C1620,0603B471K500NT,FH (Guangdong Fenghua Advanced Tech),basic,823360,0.0045,2026-11-19,exact,,new: PWM2 VIN filter 470 pF X7R 50 V (NR 1.5)
-C141,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,31745378,0.0058,2026-11-24,exact,,"new: DRV6 VDDB (pin 11) - VSSB (pin 9) local decoupling, 100 nF X7R 50 V (design review 2026-11-24, findings 02 F1); same part as C93 / C94"
+C141,100n,Capacitor_SMD:C_0603_1608Metric,C14663,CC0603KRX7R9BB104,YAGEO,basic,51886142,0.0058,2026-11-24,exact,,"new: DRV6 VDDB (pin 11) - VSSB (pin 9) local decoupling, 100 nF X7R 50 V (design review 2026-11-24, findings 02 F1); same part as C93 / C94"
+R159,73.2k,Resistor_SMD:R_1206_3216Metric,C368302,WR12X7322FTL,Walsin Tech Corp,extended,2888,0.0047,2026-11-24,exact,,"new: -100V BIAS bleeder, 73.2k 1 % 1206 200 V 250 mW, six in parallel with R68 = 12.2k (owner 2026-11-24, findings 01 F1)"
+R160,73.2k,Resistor_SMD:R_1206_3216Metric,C368302,WR12X7322FTL,Walsin Tech Corp,extended,2888,0.0047,2026-11-24,exact,,"new: -100V BIAS bleeder, 73.2k 1 % 1206 200 V 250 mW, six in parallel with R68 = 12.2k (owner 2026-11-24, findings 01 F1)"
+R161,73.2k,Resistor_SMD:R_1206_3216Metric,C368302,WR12X7322FTL,Walsin Tech Corp,extended,2888,0.0047,2026-11-24,exact,,"new: -100V BIAS bleeder, 73.2k 1 % 1206 200 V 250 mW, six in parallel with R68 = 12.2k (owner 2026-11-24, findings 01 F1)"
+R162,73.2k,Resistor_SMD:R_1206_3216Metric,C368302,WR12X7322FTL,Walsin Tech Corp,extended,2888,0.0047,2026-11-24,exact,,"new: -100V BIAS bleeder, 73.2k 1 % 1206 200 V 250 mW, six in parallel with R68 = 12.2k (owner 2026-11-24, findings 01 F1)"
+R163,73.2k,Resistor_SMD:R_1206_3216Metric,C368302,WR12X7322FTL,Walsin Tech Corp,extended,2888,0.0047,2026-11-24,exact,,"new: -100V BIAS bleeder, 73.2k 1 % 1206 200 V 250 mW, six in parallel with R68 = 12.2k (owner 2026-11-24, findings 01 F1)"

@@ -364,3 +364,8 @@ R157,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, split-c
 R158,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: 200 V rating, split-cap balancing)"
 C140,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C141,tube_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+R159,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: -100V BIAS bleeder, 6 in parallel with R68)"
+R160,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: -100V BIAS bleeder, 6 in parallel with R68)"
+R161,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: -100V BIAS bleeder, 6 in parallel with R68)"
+R162,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: -100V BIAS bleeder, 6 in parallel with R68)"
+R163,tube_psu:R,Resistor_SMD:R_1206_3216Metric,"1206 (5.2: -100V BIAS bleeder, 6 in parallel with R68)"

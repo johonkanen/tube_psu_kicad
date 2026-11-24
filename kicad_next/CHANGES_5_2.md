@@ -8,7 +8,7 @@ Checks: `tools/next/check_next.sh` (ERC 0 errors, every net in one isolation dom
 netlist / CSV check). The generated netlist diff 5.1 → 5.2 is at the end of this file
 (`python3 tools/next/netlist_diff.py --update`).
 
-New refdes (next free numbers of 5.1): R125–R158, C118–C140 (C141 with the review changes of section 6), D35, U9–U11 (U12 / C136 / C137 added and removed again 2026-11-19). Removed: DRV9, L3, R40, R25, C4, and with the
+New refdes (next free numbers of 5.1): R125–R158, C118–C140 (C141, R159–R163 with the review changes of section 6), D35, U9–U11 (U12 / C136 / C137 added and removed again 2026-11-19). Removed: DRV9, L3, R40, R25, C4, and with the
 ICE5AR change (1.5) R64, R81, R84, R85, R86, C50.
 
 ## 1. Auxiliary flyback (sheet 1)
@@ -155,6 +155,7 @@ slot unchanged.
 
 | NR | Done | Refdes / value / nets |
 |---|---|---|
+| 6.3 | yes | **−100V BIAS bleeder R68 12.1k → R68 ‖ R159 ‖ R160 ‖ R161 ‖ R162 ‖ R163 = 6 × 73.2k 1 % 1206** (Walsin WR12X7322FTL, C368302, 200 V / 250 mW, JLC extended, 2888 pcs 2026-11-24) = **12.2 kΩ (+0.8 %)**, sheet 1 (findings 01 F1: R68 dissipated 84.4² / 12.1k = **0.59 W** in a 250 mW part, under C102). At the highest simulated rail voltage 84.4 V (EEL19_DESIGN.md 14.6: 80.2–84.4 V) each dissipates 84.4² / 73.2k = **97 mW** (39 % of 250 mW; 0.58 W in total, as before); 84 V per part against 200 V. Six is the smallest count that keeps ≤ 100 mW (five × 60.4k: 118 mW). The 0.8 % higher bleeder resistance changes the bleeder-only rail voltage by far less than the simulated 80–84 V spread (not re-simulated). Board: R68 leaves its place under C102; the six stand on B.Cu in the strip between the P5V_OUT and N80V_OUT terminal rows (four north–south at y 4.3, x 72.7–80.5, pitch 2.6 mm; two east–west at y 4.35, x 83.95 / 88.56), −100V BIAS on a 0.5 mm B.Cu bus at y 7.0 through the N80V_OUT pads. Stage 15b (kicad_next/README.md) |
 | 6.4 | yes | **C141 100n X7R 50 V 0603** (C14663, the part of C93 / C94: no new BOM line) **DRV6 VDDB (pin 11, 15V_ISO_SEC) – VSSB (pin 9, ISO_GND)**, sheet 2 (findings 02 F1, 11 F8: the nearest capacitor, C43, stood 11.9 mm from pin 11; SLUSCJ9F §11.1 "must be connected close to the device"). Board: B.Cu west of the pin row at (54.6, −53.83), pad gaps 0.26 mm to pins 11 / 9, 0.4 mm tracks; local HF bypass, C72 4.7 µF / C43 1 µF stay the rail capacitors. Stage 15a (kicad_next/README.md) |
 
 ## Isolation domains after phase 2
@@ -198,11 +199,11 @@ Reviewed against the items above: every difference is one of the listed changes 
 re-symbolled parts – PWM2, DRV1–DRV4, TR1, TR3, J4, L1/L2 – show as + / − pins of the same net).
 
 <!-- netlist_diff.py begin -->
-Parts: 5.1 315, 5.2 364; removed 12, added 61.
+Parts: 5.1 315, 5.2 369; removed 12, added 66.
 
 **Removed parts:** C4 (1n), C50 (22pf), DRV9 (IXDD609D2TR), L3 (70u), N5V_OUT (PIN), R25 (82k), R40 (82k), R64 (39k), R81 (15k), R84 (33k), R85 (4.7k), R86 (1k)
 
-**Added parts:** C118 (100p), C119 (100p), C120 (1n), C121 (100p), C122 (12p), C123 (5.6p), C124 (100n), C125 (1u), C126 (1n), C127 (1n), C128 (100n), C129 (100n), C130 (1n), C131 (1n), C132 (100n), C133 (100n), C134 (100n), C135 (100n), C138 (10n), C139 (2.2n), C140 (470p), C141 (100n), D35 (ZLLS400TA), N15V_OUT (PIN), R125 (2.2k), R126 (1k), R127 (10k), R128 (10k), R129 (10k), R130 (10k), R131 (22R), R132 (100R), R133 (15k 0.1%), R134 (10k 0.1%), R135 (100R), R136 (47R), R137 (47R), R138 (88.7k 0.1%), R139 (49.9k 0.1%), R140 (4.7k), R141 (750k), R142 (10R), R143 (220k), R144 (220k), R145 (220k), R146 (220k), R147 (220k), R148 (220k), R149 (220k), R150 (220k), R151 (10M), R152 (10M), R153 (10M), R154 (178k), R155 (220k), R156 (220k), R157 (220k), R158 (220k), U9 (TLV316IDBVR), U10 (TLV9062IDGKR), U11 (CA-IS3721HW)
+**Added parts:** C118 (100p), C119 (100p), C120 (1n), C121 (100p), C122 (12p), C123 (5.6p), C124 (100n), C125 (1u), C126 (1n), C127 (1n), C128 (100n), C129 (100n), C130 (1n), C131 (1n), C132 (100n), C133 (100n), C134 (100n), C135 (100n), C138 (10n), C139 (2.2n), C140 (470p), C141 (100n), D35 (ZLLS400TA), N15V_OUT (PIN), R125 (2.2k), R126 (1k), R127 (10k), R128 (10k), R129 (10k), R130 (10k), R131 (22R), R132 (100R), R133 (15k 0.1%), R134 (10k 0.1%), R135 (100R), R136 (47R), R137 (47R), R138 (88.7k 0.1%), R139 (49.9k 0.1%), R140 (4.7k), R141 (750k), R142 (10R), R143 (220k), R144 (220k), R145 (220k), R146 (220k), R147 (220k), R148 (220k), R149 (220k), R150 (220k), R151 (10M), R152 (10M), R153 (10M), R154 (178k), R155 (220k), R156 (220k), R157 (220k), R158 (220k), R159 (73.2k), R160 (73.2k), R161 (73.2k), R162 (73.2k), R163 (73.2k), U9 (TLV316IDBVR), U10 (TLV9062IDGKR), U11 (CA-IS3721HW)
 
 **Changed parts** (value / symbol / footprint, 5.1 -> 5.2):
 
@@ -278,6 +279,7 @@ Parts: 5.1 315, 5.2 364; removed 12, added 61.
 | R21 |  |  | tube_psu:R_0508_1220Metric_KRL2012 -> tube_psu_next_parts:R_0508_1220Metric_KRL2012 |
 | R30 |  |  | tube_psu:R_0508_1220Metric_KRL2012 -> tube_psu_next_parts:R_0508_1220Metric_KRL2012 |
 | R49 | 15k -> 12k |  |  |
+| R68 | 12.1K -> 73.2k |  |  |
 | R80 | 15k -> 12k |  |  |
 | R83 |  |  | tube_psu:R_0508_1220Metric_KRL2012 -> tube_psu_next_parts:R_0508_1220Metric_KRL2012 |
 | R93 |  |  | tube_psu:R_0508_1220Metric_KRL2012 -> tube_psu_next_parts:R_0508_1220Metric_KRL2012 |
@@ -312,6 +314,7 @@ Nets: 5.1 208, 5.2 232 (with at least one part pin).
 |---|---|
 | +1V65_BIAS | -R3.1 R110.1; new parts C122 C123 C126 R131 |
 | +3V3 | new parts C124 C125 C129 C133 C134 U9 U10 U11 |
+| -100V BIAS | new parts R159 R160 R161 R162 R163 |
 | -5V_SEC -> -15V_SEC | new parts N15V_OUT; removed parts N5V_OUT |
 | 15V | +DRV3.11 DRV5.11; -D10.A DRV1.3 DRV1.8 DRV2.3 DRV2.8 DRV5.16; new parts R125 R142; removed parts DRV9 |
 | 15V_ISO_SEC | new parts C141 |
@@ -346,7 +349,7 @@ Nets: 5.1 208, 5.2 232 (with at least one part pin).
 | /06 Heaters/HEATER_HI_SOURCE | +DRV3.14; -DRV3.5 |
 | Net-(DRV9-OUTA) -> /06 Heaters/HEATER_LOW_DRV | +DRV3.10; removed parts DRV9 |
 | HT_GND | +DRV4.3; -DRV4.7 DRV4.9 |
-| ISO_GND | new parts C119 C141 R128 R147; removed parts R25 |
+| ISO_GND | new parts C119 C141 R128 R147 R159 R160 R161 R162 R163; removed parts R25 |
 | Net-(R49-Pad1) -> Net-(C127-Pad1) | new parts C127 |
 | Net-(R2-Pad2) -> Net-(C131-Pad2) | new parts C131 |
 | Net-(D10-K) | +PWM2.11; -PWM2.5 R114.2 |

@@ -48,9 +48,8 @@ def add_footprint(ed, ref, pos, rot, back=True):
     if hasattr(fp, "SetSheetname"):
         fp.SetSheetname(c["sheet"])
         fp.SetSheetfile(c["sheetfile"])
-    if c["lcsc"]:
-        fp.SetField("LCSC", c["lcsc"])
-        fp.GetField("LCSC").SetVisible(False)
+    fp.SetField("LCSC", c["lcsc"])
+    fp.GetField("LCSC").SetVisible(False)
     fp.SetField("Description", c["descr"])
     fp.GetField("Description").SetVisible(False)
     for p in fp.Pads():
@@ -77,3 +76,32 @@ def pad_xy(ed, ref, num):
     f = ed.footprint(ref)
     p = [q for q in f.Pads() if q.GetNumber() == num][0]
     return tuple(round(x, 4) for x in ed.pt(p.GetPosition()))
+
+
+def delete_tracks_in(ed, net, layer, box):
+    """delete every track of NET on LAYER with both ends inside box = (x0, y0, x1, y1); returns the count"""
+    P = ed.P
+    n = 0
+    for t in list(ed.b.GetTracks()):
+        if t.Type() != P.PCB_TRACE_T or t.GetNetname() != net or ed.b.GetLayerName(t.GetLayer()) != layer:
+            continue
+        s, e = ed.pt(t.GetStart()), ed.pt(t.GetEnd())
+        if all(box[0] <= q[0] <= box[2] and box[1] <= q[1] <= box[3] for q in (s, e)):
+            ed.rec.append(dict(op="delete_track", net=net, layer=layer, start=list(map(lambda v: round(v, 4), s)),
+                               end=list(map(lambda v: round(v, 4), e)), width=ed.mm(t.GetWidth())))
+            ed.b.Delete(t)
+            n += 1
+    return n
+
+
+def sync_fields(ed, ref):
+    """value / LCSC / description of a board footprint from the schematic netlist (as update_board_parts.py)"""
+    comps, _, _ = netlist()
+    c, fp = comps[ref], ed.footprint(ref)
+    old = fp.GetValue()
+    fp.SetValue(c["value"])
+    fp.SetField("LCSC", c["lcsc"])
+    fp.GetField("LCSC").SetVisible(False)
+    fp.SetField("Description", c["descr"])
+    fp.GetField("Description").SetVisible(False)
+    ed.rec.append(dict(op="fields", ref=ref, old_value=old, value=c["value"], lcsc=c["lcsc"]))
