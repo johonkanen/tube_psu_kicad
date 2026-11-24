@@ -204,6 +204,22 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 18b: C10 / C26 "Do not populate" in schematic and board (2026-11-24)
+
+Findings 14 F10. The sheet generator now turns the CSV status `dnp` into KiCad's DNP attribute:
+`tools/next/sheets/_common.py` (`status()`, `_mark_dnp()` in the `Sheet.place` wrapper) writes `(in_bom no)
+(in_pos_files no) (dnp yes)` on the placed symbol of every part with status `dnp` in `lib/jlc_parts_next.csv` (today
+C10 and C26 on sheet 8, value `na`). The netlist then carries `exclude_from_bom`, `exclude_from_pos_files` and `dnp`.
+KiCad's parity check compares "Do not populate" and "Exclude from bill of materials" (with only the schematic
+changed, `check_board.py` reported exactly these 4 `footprint_symbol_mismatch` items); the board footprints got the
+same three attributes (DNP, exclude from BOM, exclude from position files) from the one-shot
+`tools/next/route_s18b_dnp.py` (kipy, attributes only; `update_board_parts.py` does not carry footprint attributes).
+Parity 0 again. Copper fingerprint (counts and hashes of every track, via, zone outline, zone fill, pad and
+footprint position) identical to stage 18a, Gerbers identical apart from the dates; the paste apertures of the two
+pads stay (small solder bumps on bare pads, harmless). `jlc_fab.py` now fails if CSV status `dnp` and the board's DNP /
+exclude attributes disagree, or if a part with an LCSC number is excluded on the board; C10 / C26 stay out of BOM and
+CPL (29 parts not assembled, as before). `check_next.sh` passes.
+
 ## Stage 18a: C69 100n → 1 µF, X-capacitor discharge R4–R6 200k → 180k (2026-11-24)
 
 Owner decisions 2026-11-24 (the two "waiting for the owner" questions of findings 04 F5 / 13 F5 and 05 F5). Value-only

@@ -47,7 +47,7 @@ Read first: this file, `kicad_next/review/RESOLUTIONS.md` (status of every shoul
    Lm 120 µH / 200 ns.
 3. **Assembly-order preparation** (findings 14 F1, F4, F5, F7, F8): rotations in JLC's placement preview, fiducials /
    rails note, assembly drawing / hand-assembly sheet, ready-to-paste order remark, the parts without a JLC number
-   (NOT_ASSEMBLED.md), C10 / C26 DNP (needs the schematic DNP attribute in the sheet generator first).
+   (NOT_ASSEMBLED.md). C10 / C26 DNP done (stage 18b).
 4. Bench items once a board exists: listed at the end of RESOLUTIONS.md (TR3 Lm tuning, DAB phase offset / loop gain,
    ESL caps, heater SR window / f_min, DRV6 VDDB ringing, isolator outputs during DAB switching).
 

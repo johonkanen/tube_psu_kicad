@@ -132,7 +132,8 @@ def dump(board, out):
         ref = fp.GetReference()
         g["fps"].append(dict(ref=ref, value=fp.GetValue(), fpid=fp.GetFPIDAsString(),
                              x=mm(fp.GetPosition().x), y=mm(fp.GetPosition().y), rot=fp.GetOrientationDegrees(),
-                             bottom=fp.IsFlipped(), npads=len(fp.Pads())))
+                             bottom=fp.IsFlipped(), npads=len(fp.Pads()), dnp=fp.IsDNP(),
+                             no_bom=fp.IsExcludedFromBOM(), no_pos=fp.IsExcludedFromPosFiles()))
         for p in fp.Pads():
             hole = None
             if p.HasHole():
@@ -529,9 +530,14 @@ def generate(out):
             problems.append(f"{ref}: value {f['value']!r} on the board, {p['value']!r} in the CSV")
         if bool(p["lcsc"]) != (p["status"] in ("exact", "equivalent", "changed")):
             problems.append(f"{ref}: status {p['status']} with LCSC number {p['lcsc']!r}")
+        if (p["status"] == "dnp") != bool(f.get("dnp")) or (p["status"] == "dnp" and not (f["no_bom"] and f["no_pos"])):
+            problems.append(f"{ref}: CSV status {p['status']}, board attributes DNP {f.get('dnp')} / exclude from BOM "
+                            f"{f.get('no_bom')} / exclude from position files {f.get('no_pos')} (stage 18b: dnp <-> all three)")
         if not p["lcsc"]:
             skipped.append(ref)
             continue
+        if f.get("no_bom") or f.get("no_pos"):
+            problems.append(f"{ref}: has an LCSC number but is excluded from the BOM / position files on the board")
         comment = p["mpn"] if p["status"] == "changed" else p["value"]     # as tools/jlc_bom.py
         groups[p["lcsc"]].append(ref)
         texts[p["lcsc"]].append((comment, f["fpid"].split(":", 1)[-1]))
@@ -602,7 +608,8 @@ def generate(out):
            f"{len(skipped)} of the {len(parts)} parts have no LCSC number (status `missing` / `consigned` / `dnp`) and are "
            f"in neither `{BOM}` nor `{CPL}`. `missing` = wanted from JLC but not stocked: consign it, use JLC global "
            "sourcing, or fit it by hand. `consigned` = owner's part by design (custom magnetics, hardware). `dnp` = "
-           "not fitted.", "",
+           "not fitted (KiCad \"Do not populate\" on symbol and footprint since stage 18b; their top paste apertures "
+           "stay in the stencil, which leaves small solder bumps on the bare pads - harmless).", "",
            md_table(["Status", "Refdes", "Qty", "Value", "Footprint", "Type", "Review", "Note (CSV)"],
                     [(k[0], " ".join(refs), len(refs), k[1], k[2], k[3], k[4], k[5]) for k, refs in na_rows]), "",
            "## Board-only footprints (no part, not in the CSV)", "",

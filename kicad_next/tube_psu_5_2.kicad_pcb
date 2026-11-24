@@ -18040,7 +18040,7 @@
 		(path "/41091289-a0b0-4a3b-96be-33eb8bb03585/331263fa-66c7-5b1f-b53a-dace96c1b46c")
 		(sheetname "08 Current measurement")
 		(sheetfile "08_current_measurement.kicad_sch")
-		(attr smd)
+		(attr smd exclude_from_pos_files exclude_from_bom dnp)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -0.14058 0.51)
@@ -19046,7 +19046,7 @@
 		(path "/41091289-a0b0-4a3b-96be-33eb8bb03585/a354a193-8825-5089-b1fa-5c01f8dc3764")
 		(sheetname "08 Current measurement")
 		(sheetfile "08_current_measurement.kicad_sch")
-		(attr smd)
+		(attr smd exclude_from_pos_files exclude_from_bom dnp)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -0.14058 -0.51)

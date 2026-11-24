@@ -20,7 +20,7 @@ ROOT = os.path.dirname(TOOLS)
 sys.path.insert(0, os.path.join(TOOLS, "p2k"))  # proteus2kicad
 from p2k import sch_builder  # noqa: E402
 from p2k.sch_builder import Sheet  # noqa: E402,F401
-from p2k.sexpr import find_all, load  # noqa: E402
+from p2k.sexpr import Sym, find_all, load  # noqa: E402
 from p2k.sheetkit import *  # noqa: E402,F401,F403
 
 PROJECT = "tube_psu_5_2"                       # KiCad project (kicad_next/tube_psu_5_2.kicad_pro)
@@ -103,7 +103,44 @@ def lcsc(ref):
     return _LCSC.get(ref)
 
 
+_STATUS = None
+
+
+def status(ref):
+    """status column of a refdes in lib/jlc_parts_next.csv (exact / equivalent / changed / consigned / missing /
+    dnp; None if not listed)."""
+    import csv
+    global _STATUS
+    if _STATUS is None:
+        path = os.path.join(LIB_DIR, "jlc_parts_next.csv")
+        _STATUS = {}
+        if os.path.exists(path):
+            with open(path, newline="", encoding="utf-8") as f:
+                _STATUS = {r["refdes"]: r["status"] for r in csv.DictReader(l for l in f if not l.startswith("#"))}
+    return _STATUS.get(ref)
+
+
 _sheet_place = Sheet.place
+
+
+def _mark_dnp(sh, ref):
+    """KiCad "Do not populate" on the placed symbol of `ref` (stage 18b): dnp yes, not in the BOM, not in the
+    position files; on_board stays yes (the pads remain on the board). The board footprint carries the matching
+    attributes (DNP, exclude from BOM, exclude from position files), so schematic parity stays clean."""
+    for node in reversed(sh.tree):
+        if not (isinstance(node, list) and node and str(node[0]) == "symbol"):
+            continue
+        if not any(isinstance(c, list) and c and str(c[0]) == "property" and c[1] == "Reference" and c[2] == ref
+                   for c in node):
+            continue
+        for k, c in enumerate(node):
+            if isinstance(c, list) and c and str(c[0]) in ("in_bom", "dnp"):
+                c[1] = Sym("no" if str(c[0]) == "in_bom" else "yes")
+            elif isinstance(c, list) and c and str(c[0]) == "on_board":
+                on_board = k
+        node.insert(on_board + 1, [Sym("in_pos_files"), Sym("no")])
+        return
+    raise RuntimeError(f"_mark_dnp: placed symbol {ref} not found")
 
 
 def _place_with_lcsc(self, name, ref, *args, **kw):
@@ -111,7 +148,10 @@ def _place_with_lcsc(self, name, ref, *args, **kw):
     if code is not None and len(args) < 6:  # fields not passed positionally
         kw["fields"] = dict(kw.get("fields") or {})
         kw["fields"].setdefault("LCSC", code)
-    return _sheet_place(self, name, ref, *args, **kw)
+    placed = _sheet_place(self, name, ref, *args, **kw)
+    if status(ref) == "dnp":                # CSV status "dnp" -> KiCad DNP attribute (stage 18b, findings 14 F10)
+        _mark_dnp(self, ref)
+    return placed
 
 
 Sheet.place = _place_with_lcsc
