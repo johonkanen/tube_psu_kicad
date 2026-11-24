@@ -14,12 +14,13 @@ Read first: this file, `kicad_next/review/RESOLUTIONS.md` (status of every shoul
 
 ## Where the design stands
 
-- Fully routed: 0 unconnected, 0 shorts, 0 clearance, 0 dangling, 0 parity, 0 isolation violations; DRC 139 items
-  (courtyards_overlap 135, pth_inside_courtyard 2, starved_thermal 2); gate `tools/next/check_next.sh` passes;
-  `python3 tools/next/check_creepage.py` (four layer-split passes, ≈ 8 min) 0 violations after the Part-1 board
-  changes (stage 15g). Acceptance bar: match the bench-verified 5.1 board and add creepage.
-- Twelve design reviews done (`kicad_next/review/findings/` 01–11, 14). Fixes on the board: stages 13a–13d, 14a–14h,
-  15a–15g. Owner decisions of 2026-11-24, all in the design:
+- Fully routed: 0 unconnected, 0 shorts, 0 clearance, 0 dangling, 0 parity, 0 isolation violations; DRC 137 items
+  (courtyards_overlap 135, pth_inside_courtyard 2); gate `tools/next/check_next.sh` passes;
+  `python3 tools/next/check_creepage.py` (four layer-split passes, ≈ 8 min) 0 violations after stage 16b. Acceptance bar: match the bench-verified 5.1 board and add creepage.
+- All fourteen design reviews done (`kicad_next/review/findings/` 01–14). Fixes on the board: stages 13a–13d,
+  14a–14h, 15a–15g, 16a–16b. **Stage 16a fixed a blocker found by review 13: SICD1 / SICD2 were reversed for a diode
+  clamped tab-to-plate (cathode on the PFC drain); new footprint `TO-220-2_Vertical_KA`, copper swapped. Boards must
+  not be made from any revision before d3be2f7.** Stage 16b moved C102 clear of the H8 screw head. Owner decisions of 2026-11-24, all in the design:
   - 15a C141 100 nF at DRV6 VDDB; 15b R68 → six 73.2k 1206 (97 mW each); 15c R4–R6 200k (X-cap discharge 1.9 s);
   - 15d DAB FETs Q7 / Q8 / Q19 / Q21 → IPA60R280CFD7 (consigned from the owner's stock), TR3 gapped with tape,
     start Lm ≈ 120 µH (≈ 0.83 mm), DAB dead time 200 ns;
@@ -36,8 +37,10 @@ Read first: this file, `kicad_next/review/RESOLUTIONS.md` (status of every shoul
 
 ## Next steps, in order
 
-1. Checklists **12** (thermal / mechanical) and **13** (assembly), one fresh Opus agent each, as described in
-   `kicad_next/review/README.md`.
+1. Heatsink line (findings 12 F1, F3): the back faces of the east row are not coplanar (SICD1 about 8.65, Q6 about
+   9.0, Q19 / Q7 FullPAK 9.6 - 10.6 mm) - needs the owner's caliper measurements, then a stepped bracket, a spacer or
+   moving the Q19 / Q7 column about 1 mm west (board change). Plate cut-out at H4, notch at C87, plate potential and
+   tab insulation undefined.
 2. **Update `simulation/dab/dab_spice.py` to the IPA60R280CFD7** (it still models the STF7N60M2; the CFD7 check in
    DAB_SIMULATION.md 2.9 is a scratch-run result) and re-run ZVS / losses, start-up and the ±2 % mismatch at
    Lm 120 µH / 200 ns.
@@ -49,6 +52,12 @@ Read first: this file, `kicad_next/review/RESOLUTIONS.md` (status of every shoul
 
 ## Waiting for the owner
 
+- Caliper measurements of one C2M0160120D, one C3D02060A and one IPA60R280CFD7 (lead centreline to back face, body
+  thickness) for the heatsink plate; C102 can diameter; screw-head / washer sizes at H2 and H8.
+- Physical check before soldering: a C3D02060A held over SICD1 / SICD2 with the tab to the plate has its cathode
+  (pin 1, tab) on the DC+ pad.
+- Q5 / Q6 (C2M0160120D) and SICD1 / SICD2 (C3D02060A) are obsolete at Wolfspeed: 5.1 spares, or C3M0160120D /
+  C6D04065A (diode pin-out to check). C69 100 nF -> 1 µF at REF3325 (recommended, not decided).
 - Caliper measurements: TR1 (EEL19 4+6) and TR3 (EC42) pin diameters and bobbin bases against the drills
   (findings 01 F2, 14 F2).
 - L1 / L2 inductance; TR2 real turns (64 / 66), gap, winding temperature at 10 / 15 A, leakage both ways.
