@@ -6372,6 +6372,223 @@
 		(color 0 0 0 0)
 		(uuid "ed34b0fd-0c62-551a-b3df-7d952d21370b")
 	)
+	(symbol
+		(lib_id "tube_psu_next:C")
+		(at 215.9 149.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "31fe3da4-4cb6-5538-b670-e7248b9fa3e1")
+		(property "Reference" "C141"
+			(at 220.64 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100n"
+			(at 220.64 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 216.8652 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 215.9 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 215.9 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C14663"
+			(at 215.9 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0e06a4be-5c58-5e83-8354-9735c1da4312")
+		)
+		(pin "2"
+			(uuid "27492b60-5fb2-58cd-ba0d-05d5f29f718d")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/8037fda7-c30a-4858-8ec9-bdfcbfc7d405"
+					(reference "C141")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_psu_next:15V_ISO_SEC")
+		(at 215.9 146.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "032b1449-b956-5dd7-bbe5-c408fb898d84")
+		(property "Reference" "#PWR027"
+			(at 215.9 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "15V_ISO_SEC"
+			(at 215.9 142.494 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 215.9 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 215.9 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"15V_ISO_SEC\" (IPC net name)"
+			(at 215.9 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "bf111ad9-eb2b-5e0d-be1f-fdfbc2a13ba5")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/8037fda7-c30a-4858-8ec9-bdfcbfc7d405"
+					(reference "#PWR027")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_psu_next:ISO_GND")
+		(at 215.9 153.67 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a19d014a-45d8-5cd1-bd29-0e6db595ba5f")
+		(property "Reference" "#PWR028"
+			(at 215.9 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "ISO_GND"
+			(at 215.9 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 215.9 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 215.9 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"ISO_GND\" (IPC net name)"
+			(at 215.9 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "41671f6e-c04c-58bd-a657-521158f236c9")
+		)
+		(instances
+			(project "tube_psu_5_2"
+				(path "/cce323c4-7450-4a52-888d-93ce286361fa/8037fda7-c30a-4858-8ec9-bdfcbfc7d405"
+					(reference "#PWR028")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(text "C141 100n X7R: at DRV6 pins 11 (VDDB) / 9 (VSSB) on the board (local HF bypass; C72 / C43 are the rail caps)."
+		(exclude_from_sim no)
+		(at 190.5 161.29 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4902b198-81c3-586e-bb90-edb42ecbc15d")
+	)
 	(text "5.2: DRV5 / DRV6 = UCC21520DWR (5.7 kVrms reinforced, 8 V output UVLO); both sides of each driver stay in one isolation domain."
 		(exclude_from_sim no)
 		(at 60.96 203.2 0)
@@ -6381,7 +6598,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "4902b198-81c3-586e-bb90-edb42ecbc15d")
+		(uuid "06c6f660-4d3f-57ec-8839-691984af704b")
 	)
 	(text "DRV6 input side on the secondary (5V_ISOL / ISO_GND): PWM and DISABLE come through ISO2 (CA-IS3761LW) channels A / B / C."
 		(exclude_from_sim no)
@@ -6392,7 +6609,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "06c6f660-4d3f-57ec-8839-691984af704b")
+		(uuid "5d4525e5-4223-5c49-aabb-a8cdbc1937b7")
 	)
 	(text "The rails entering this sheet (5V, 5V_ISOL, 15V_ISO_SEC, ISO_GND) have their PWR_FLAGs on sheet 1 (AUX supply)."
 		(exclude_from_sim no)
@@ -6403,7 +6620,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "5d4525e5-4223-5c49-aabb-a8cdbc1937b7")
+		(uuid "06c38423-9ad9-5a77-9778-bcf20e0d1417")
 	)
 	(embedded_fonts no)
 )

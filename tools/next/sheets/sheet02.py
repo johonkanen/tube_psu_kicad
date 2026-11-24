@@ -34,6 +34,13 @@ ucc21520_cell(sh, "DRV6", g(100), g(130), vdd="5V_ISOL", gnd="ISO_GND",
               railcaps=[("C72", "4.7u", 2), ("C43", "1u", 2)], boot_side="A",
               vo_hi="DHB_HI_GATE_SEC", src_hi="DHB_HI_SOURCE_SEC", vo_lo="DHB_LOW_GATE_SEC",
               dis=("DAB_DIS_SEC", None, None))
+# C141 (design review 2026-11-24, findings 02 F1 / 11 F8): local VDDB - VSSB decoupling at DRV6 pins 11 / 9; the rail
+# capacitors C72 / C43 stand about 12 mm away on the board.
+_, ct, cb = vert2(sh, "C", "C141", g(170), g(118), sh_value("C141"), top=1)     # pin 1 = 15V_ISO_SEC (VDDB)
+power_at(sh, "15V_ISO_SEC", ct, "up")
+power_at(sh, "ISO_GND", cb, "down")
+sh.text("C141 100n X7R: at DRV6 pins 11 (VDDB) / 9 (VSSB) on the board (local HF bypass; C72 / C43 are the rail caps).",
+        g(150), g(127))
 sh.text("5.2: DRV5 / DRV6 = UCC21520DWR (5.7 kVrms reinforced, 8 V output UVLO); both sides of each driver stay in one isolation domain.",
         g(48), g(160))
 sh.text("DRV6 input side on the secondary (5V_ISOL / ISO_GND): PWM and DISABLE come through ISO2 (CA-IS3761LW) channels A / B / C.",

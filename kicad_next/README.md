@@ -204,6 +204,18 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 15a: DRV6 VDDB capacitor C141 (2026-11-24)
+
+Owner decision 2026-11-24 on findings 02 F1 / 11 F8: DRV6 VDDB (pin 11, 15V_ISO_SEC) had no capacitor near the pins
+(C43 11.9 mm away). New **C141 100 nF X7R 50 V 0603** (C14663, same part as C93 / C94) on sheet 2 and on the board
+(`tools/next/route_s15a_drv6_cap.py`, one-shot, `routing/moves_s15a.json`, helpers in `tools/next/s15_common.py`):
+B.Cu at **(54.6, −53.83)**, standing north–south west of the DRV6 output pin row, pad 1 (15V_ISO_SEC, y −54.607) to
+pin 11 and pad 2 (ISO_GND, y −53.057) to pin 9 (VSSB), each by a 0.4 mm track that leaves the east half of the pad
+(the TR3 barrier keep-out for tracks / vias ends at x 54.5) and runs straight onto the pin. Pad-edge gaps C141.1 ↔
+pin 11 and C141.2 ↔ pin 9 **0.26 mm** (centres 1.83 mm); C141 west pad edge 2.11 mm from the barrier slot edge
+(x 52.015); the pin-10 gate pad between them keeps ≥ 0.26 mm. One more courtyard overlap (C141 / DRV6).
+Unconnected 0, 0 shorts, clearance 0, dangling 0, parity 0; `check_domains.py` clean; `check_next.sh` passes.
+
 ## Stage 14h: small copper clean-ups (2026-11-24)
 
 Design review 2026-11-24. `tools/next/route_s14h_cleanup.py` (one-shot, `routing/moves_s14h.json`):

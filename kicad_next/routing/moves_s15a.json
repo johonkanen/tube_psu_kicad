@@ -1,0 +1,84 @@
+{
+ "stage": "s15a",
+ "script": "tools/next/route_s15a_drv6_cap.py",
+ "ops": [
+  {
+   "op": "add_footprint",
+   "ref": "C141",
+   "fpid": "Capacitor_SMD:C_0603_1608Metric",
+   "at": [
+    54.6,
+    -53.832
+   ],
+   "rot": 270.0,
+   "side": "B",
+   "value": "100n",
+   "pads": {
+    "1": [
+     54.6,
+     -54.607
+    ],
+    "2": [
+     54.6,
+     -53.057
+    ]
+   }
+  },
+  {
+   "op": "add_track",
+   "net": "15V_ISO_SEC",
+   "layer": "B.Cu",
+   "start": [
+    54.85,
+    -54.607
+   ],
+   "end": [
+    55.345,
+    -55.102
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "add_track",
+   "net": "15V_ISO_SEC",
+   "layer": "B.Cu",
+   "start": [
+    55.345,
+    -55.102
+   ],
+   "end": [
+    56.357,
+    -55.102
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "add_track",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "start": [
+    54.85,
+    -53.057
+   ],
+   "end": [
+    55.345,
+    -52.562
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "add_track",
+   "net": "ISO_GND",
+   "layer": "B.Cu",
+   "start": [
+    55.345,
+    -52.562
+   ],
+   "end": [
+    56.357,
+    -52.562
+   ],
+   "width": 0.4
+  }
+ ]
+}
