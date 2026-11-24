@@ -1,0 +1,104 @@
+{
+ "stage": "s14e",
+ "script": "tools/next/route_s14e_q21_gate.py",
+ "ops": [
+  {
+   "op": "delete_track",
+   "net": "DHB_HI_GATE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    57.657,
+    -60.182
+   ],
+   "end": [
+    62.957,
+    -54.882
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_HI_GATE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    63.093,
+    -54.693
+   ],
+   "end": [
+    62.3,
+    -53.9
+   ],
+   "width": 0.7
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_HI_GATE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    62.3,
+    -53.9
+   ],
+   "end": [
+    62.3,
+    -52.1
+   ],
+   "width": 0.762
+  },
+  {
+   "op": "delete_track",
+   "net": "DHB_HI_GATE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    62.3,
+    -52.1
+   ],
+   "end": [
+    59.949,
+    -49.749
+   ],
+   "width": 0.762
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_HI_GATE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    57.657,
+    -60.182
+   ],
+   "end": [
+    60.3,
+    -57.539
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_HI_GATE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    60.3,
+    -57.539
+   ],
+   "end": [
+    60.3,
+    -50.1
+   ],
+   "width": 0.762
+  },
+  {
+   "op": "add_track",
+   "net": "DHB_HI_GATE_SEC",
+   "layer": "B.Cu",
+   "start": [
+    60.3,
+    -50.1
+   ],
+   "end": [
+    59.949,
+    -49.749
+   ],
+   "width": 0.762
+  }
+ ]
+}

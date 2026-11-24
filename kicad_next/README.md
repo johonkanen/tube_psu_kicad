@@ -204,6 +204,18 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 14e: Q21 gate track away from the DRV6 input side (2026-11-24)
+
+Design review 2026-11-24 (findings 02 F3 / C1): DHB_HI_GATE_SEC (0 ↔ 435 V) ran as a B.Cu diagonal under the DRV6 body
+to (62.957, −54.882), **1.211 mm** from the DT pad 6 and **1.254 mm** from DAB_DIS_SEC (5.1 ≈ 2.4 mm).
+`tools/next/route_s14e_q21_gate.py` (one-shot, `routing/moves_s14e.json`) re-routes it as the reviewer suggested: diagonal
+0.4 mm from (57.657, −60.182) only to (60.3, −57.539), then 0.762 mm north along x 60.3 to (60.3, −50.1) and into the old
+track at (59.949, −49.749). B.Cu only (high-side group). Distances on B.Cu: DT **1.211 → 3.95 mm**, DAB_DIS_SEC
+**1.254 → 3.18 mm**, 5V_ISOL 3.38 mm; on the output side DHB_LOW_GATE_SEC via 1.32 mm, ISO_GND / 15V_ISO_SEC vias
+1.56 mm (≥ 1.2 mm HV rule). Gate track DRV6.15 → R57.1 17.3 → 15.2 mm; gate loop estimate (`rv bq loop` through
+DRV6.15 – R57 – Q21.1 / Q21.3 – return via – DRV6.14) 47.3 mm / 92 mm² → 45.1 mm / 81 mm². Unconnected 0, 0 shorts,
+clearance 0, dangling 0, parity 0, DRC 137 items as before; `check_next.sh` passes.
+
 ## Stage 14d: Q1 drain tab vias 12 → 16 (2026-11-24)
 
 Design review 2026-11-24 (findings 06 F3): the Q1 tab (synchronous rectifier, net Q14_DRAIN) had 12 vias in a 3 × 4
