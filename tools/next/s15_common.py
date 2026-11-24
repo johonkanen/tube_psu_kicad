@@ -105,3 +105,51 @@ def sync_fields(ed, ref):
     fp.SetField("Description", c["descr"])
     fp.GetField("Description").SetVisible(False)
     ed.rec.append(dict(op="fields", ref=ref, old_value=old, value=c["value"], lcsc=c["lcsc"]))
+
+
+def replace_footprint(ed, ref):
+    """swap a board footprint for the library footprint the schematic now names (other footprint id): same
+    position / rotation / side, fields and pad nets from the netlist; copper is not touched"""
+    import reuse_51_board as R
+    P, b = ed.P, ed.b
+    old = ed.footprint(ref)
+    comps, pins, _ = netlist()
+    c = comps[ref]
+    new = R.load_fp(c["fpid"])
+    b.Add(new)
+    pos = old.GetPosition()
+    new.SetPosition(pos)
+    if old.IsFlipped():
+        new.Flip(pos, P.FLIP_DIRECTION_LEFT_RIGHT)
+    new.SetOrientation(old.GetOrientation())
+    new.SetReference(ref)
+    for src, dst in ((old.Reference(), new.Reference()), (old.Value(), new.Value())):
+        dst.SetPosition(src.GetPosition())
+        dst.SetTextAngle(src.GetTextAngle())
+        dst.SetVisible(src.IsVisible())
+        dst.SetLayer(src.GetLayer())
+    new.SetValue(c["value"])
+    new.SetLocked(old.IsLocked())
+    new.SetPath(P.KIID_PATH(c["path"]))
+    if hasattr(new, "SetSheetname"):
+        new.SetSheetname(c["sheet"])
+        new.SetSheetfile(c["sheetfile"])
+    new.SetField("LCSC", c["lcsc"])
+    new.GetField("LCSC").SetVisible(False)
+    new.SetField("Description", c["descr"])
+    new.GetField("Description").SetVisible(False)
+    moved = []
+    op = {p.GetNumber(): ed.pt(p.GetPosition()) for p in old.Pads()}
+    for p in new.Pads():
+        n = pins.get(ref, {}).get(p.GetNumber(), "")
+        if n:
+            p.SetNet(b.FindNet(n))
+        q = ed.pt(p.GetPosition())
+        if p.GetNumber() not in op or abs(q[0] - op[p.GetNumber()][0]) > 1e-3 or abs(q[1] - op[p.GetNumber()][1]) > 1e-3:
+            moved.append(p.GetNumber())
+    if moved:
+        ed.fail(f"{ref}: pads {moved} would move")
+    ed.rec.append(dict(op="replace_footprint", ref=ref, old=old.GetFPIDAsString(), new=c["fpid"], at=ed.pt(pos),
+                       rot=old.GetOrientationDegrees()))
+    b.Delete(old)
+    return new

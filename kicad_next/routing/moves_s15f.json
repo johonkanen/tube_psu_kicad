@@ -1,0 +1,321 @@
+{
+ "stage": "s15f",
+ "script": "tools/next/route_s15f_j2_socket.py",
+ "ops": [
+  {
+   "op": "replace_footprint",
+   "ref": "J2",
+   "old": "tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus",
+   "new": "tube_psu_next_parts:PinSocket_2x25_P1.27mm_Vertical_XKB_X1321FV",
+   "at": [
+    33.134999,
+    -22.1563
+   ],
+   "rot": 0.0
+  },
+  {
+   "op": "delete_track",
+   "net": "PFC_I1_MEAS",
+   "layer": "F.Cu",
+   "start": [
+    32.1,
+    4.3
+   ],
+   "end": [
+    32.5212,
+    3.8788
+   ],
+   "width": 0.15
+  },
+  {
+   "op": "delete_track",
+   "net": "PFC_I1_MEAS",
+   "layer": "F.Cu",
+   "start": [
+    32.5212,
+    3.8788
+   ],
+   "end": [
+    33.7707,
+    3.8788
+   ],
+   "width": 0.15
+  },
+  {
+   "op": "delete_track",
+   "net": "PFC_I1_MEAS",
+   "layer": "F.Cu",
+   "start": [
+    33.7707,
+    3.8788
+   ],
+   "end": [
+    34.4057,
+    3.2438
+   ],
+   "width": 0.15
+  },
+  {
+   "op": "add_track",
+   "net": "PFC_I1_MEAS",
+   "layer": "In3.Power",
+   "start": [
+    32.1,
+    4.3
+   ],
+   "end": [
+    32.5212,
+    3.8788
+   ],
+   "width": 0.15
+  },
+  {
+   "op": "add_track",
+   "net": "PFC_I1_MEAS",
+   "layer": "In3.Power",
+   "start": [
+    32.5212,
+    3.8788
+   ],
+   "end": [
+    33.7707,
+    3.8788
+   ],
+   "width": 0.15
+  },
+  {
+   "op": "add_track",
+   "net": "PFC_I1_MEAS",
+   "layer": "In3.Power",
+   "start": [
+    33.7707,
+    3.8788
+   ],
+   "end": [
+    34.4057,
+    3.2438
+   ],
+   "width": 0.15
+  },
+  {
+   "op": "delete_track",
+   "net": "PFC_I2_MEAS",
+   "layer": "B.Cu",
+   "start": [
+    31.115,
+    2.3938
+   ],
+   "end": [
+    31.115,
+    -0.889
+   ],
+   "width": 0.1524
+  },
+  {
+   "op": "delete_track",
+   "net": "PFC_I2_MEAS",
+   "layer": "B.Cu",
+   "start": [
+    32.6,
+    3.8788
+   ],
+   "end": [
+    31.115,
+    2.3938
+   ],
+   "width": 0.1524
+  },
+  {
+   "op": "delete_track",
+   "net": "PFC_I2_MEAS",
+   "layer": "B.Cu",
+   "start": [
+    33.7707,
+    3.8788
+   ],
+   "end": [
+    32.6,
+    3.8788
+   ],
+   "width": 0.1524
+  },
+  {
+   "op": "delete_track",
+   "net": "PFC_I2_MEAS",
+   "layer": "B.Cu",
+   "start": [
+    34.4057,
+    4.5138
+   ],
+   "end": [
+    33.7707,
+    3.8788
+   ],
+   "width": 0.1524
+  },
+  {
+   "op": "add_track",
+   "net": "PFC_I2_MEAS",
+   "layer": "B.Cu",
+   "start": [
+    31.115,
+    -0.889
+   ],
+   "end": [
+    31.115,
+    2.1
+   ],
+   "width": 0.152
+  },
+  {
+   "op": "add_via",
+   "net": "PFC_I2_MEAS",
+   "at": [
+    31.115,
+    2.1
+   ],
+   "size": 0.5,
+   "drill": 0.3
+  },
+  {
+   "op": "add_track",
+   "net": "PFC_I2_MEAS",
+   "layer": "In3.Power",
+   "start": [
+    31.115,
+    2.1
+   ],
+   "end": [
+    31.4,
+    2.385
+   ],
+   "width": 0.15
+  },
+  {
+   "op": "add_track",
+   "net": "PFC_I2_MEAS",
+   "layer": "In3.Power",
+   "start": [
+    31.4,
+    2.385
+   ],
+   "end": [
+    31.4,
+    4.55
+   ],
+   "width": 0.15
+  },
+  {
+   "op": "add_track",
+   "net": "PFC_I2_MEAS",
+   "layer": "In3.Power",
+   "start": [
+    31.4,
+    4.55
+   ],
+   "end": [
+    32.0,
+    5.1488
+   ],
+   "width": 0.15
+  },
+  {
+   "op": "add_track",
+   "net": "PFC_I2_MEAS",
+   "layer": "In3.Power",
+   "start": [
+    32.0,
+    5.1488
+   ],
+   "end": [
+    33.7707,
+    5.1488
+   ],
+   "width": 0.15
+  },
+  {
+   "op": "add_track",
+   "net": "PFC_I2_MEAS",
+   "layer": "In3.Power",
+   "start": [
+    33.7707,
+    5.1488
+   ],
+   "end": [
+    34.4057,
+    4.5138
+   ],
+   "width": 0.15
+  },
+  {
+   "op": "delete_track",
+   "net": "DAB_DIS",
+   "layer": "F.Cu",
+   "start": [
+    35.725,
+    -13.43
+   ],
+   "end": [
+    34.425,
+    -12.13
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "delete_track",
+   "net": "DAB_DIS",
+   "layer": "F.Cu",
+   "start": [
+    35.725,
+    -17.53
+   ],
+   "end": [
+    35.725,
+    -13.43
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "delete_track",
+   "net": "DAB_DIS",
+   "layer": "F.Cu",
+   "start": [
+    35.805,
+    -13.65
+   ],
+   "end": [
+    34.405,
+    -12.25
+   ],
+   "width": 0.2
+  },
+  {
+   "op": "add_track",
+   "net": "DAB_DIS",
+   "layer": "F.Cu",
+   "start": [
+    35.725,
+    -17.53
+   ],
+   "end": [
+    35.725,
+    -12.85
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "add_track",
+   "net": "DAB_DIS",
+   "layer": "F.Cu",
+   "start": [
+    35.725,
+    -12.85
+   ],
+   "end": [
+    34.405,
+    -11.996
+   ],
+   "width": 0.4
+  }
+ ]
+}

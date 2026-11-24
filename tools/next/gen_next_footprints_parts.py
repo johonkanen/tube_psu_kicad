@@ -316,7 +316,30 @@ def fork(name):
                   model=model_block(FORKS[name]))
 
 
-FOOTPRINTS = {"PG-DSO-12_3.9x9.9mm_P1.27mm": pg_dso12}      # name -> function returning the .kicad_mod text
+# --- J2 socket (owner 2026-11-24, findings 04 F1) -----------------------------------------------------
+# XKB X1321FV-2x25-C43D24 (LCSC C2881768): female 2x25 1.27 mm straight THT socket; drawing X-X1321FV-2x25-C43D24
+# rev A0: P.C.B layout hole 0.70 mm, pin 0.45 mm, insulator 4.3 mm, tail 2.4 mm, body 3.0 x 32.15 mm. Pad positions
+# stay those of the 5.1 / Proteus footprint (pad 2 at +1.27 mm, the geometry the 5.1 board mated with); drill
+# 0.5 -> 0.70 mm, pad 0.812 -> 1.0 mm (annular ring 0.15 mm), inner-layer pads only where connected.
+SOCKET_DRILL, SOCKET_PAD = 0.7, 1.0
+
+
+def j2_socket():
+    src = open(os.path.join(LIB51, "PinHeader_2x25_P1.27mm_Vertical_Proteus.kicad_mod")).read()
+    src = src.replace("(size 0.812 0.812)", f"(size {f(SOCKET_PAD)} {f(SOCKET_PAD)})")
+    src = src.replace("(drill 0.5)", f"(drill {f(SOCKET_DRILL)})")
+    src = src.replace("(remove_unused_layers no)", "(remove_unused_layers yes)\n\t\t(keep_end_layers yes)")
+    model = ('\t(model "${KICAD10_3DMODEL_DIR}/Connector_PinSocket_1.27mm.3dshapes/PinSocket_2x25_P1.27mm_Vertical.step"\n'
+             '\t\t(offset\n\t\t\t(xyz 1.27 0 0)\n\t\t)\n\t\t(scale\n\t\t\t(xyz 1 1 1)\n\t\t)\n'
+             '\t\t(rotate\n\t\t\t(xyz 0 0 0)\n\t\t)\n\t)\n')
+    return derive(src, "PinSocket_2x25_P1.27mm_Vertical_XKB_X1321FV",
+                  "5.2 J2 female socket XKB X1321FV-2x25-C43D24 (C2881768): drill 0.70 mm / pad 1.0 mm per the "
+                  "drawing, pad positions of the 5.1 footprint, inner pads only where connected (tube_psu_next_parts)",
+                  model=model)
+
+
+FOOTPRINTS = {"PG-DSO-12_3.9x9.9mm_P1.27mm": pg_dso12,      # name -> function returning the .kicad_mod text
+              "PinSocket_2x25_P1.27mm_Vertical_XKB_X1321FV": j2_socket}
 for _c in SOIC_SLOTS:
     FOOTPRINTS[f"SOIC-16W_7.5x10.3mm_P1.27mm_Slot{_c}"] = (lambda c=_c: soic16w_slot(c))
 for _r in SOIC_T:

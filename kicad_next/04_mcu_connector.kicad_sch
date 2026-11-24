@@ -3854,7 +3854,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "50 PIN HEADER 50TH"
+		(property "Value" "2x25 SOCKET 1.27mm"
 			(at 337.82 161.29 0)
 			(effects
 				(font
@@ -3863,7 +3863,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus"
+		(property "Footprint" "tube_psu_next_parts:PinSocket_2x25_P1.27mm_Vertical_XKB_X1321FV"
 			(at 342.9 127 0)
 			(effects
 				(font
@@ -3890,7 +3890,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C69941"
+		(property "LCSC" "C2881768"
 			(at 342.9 127 0)
 			(effects
 				(font

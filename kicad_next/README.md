@@ -204,6 +204,28 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 15f: J2 female socket, drill 0.70 mm (2026-11-24)
+
+Owner decision 2026-11-24 on findings 04 F1: J2 = XKB X1321FV-2x25-C43D24 (C2881768), female 2 × 25, 1.27 mm,
+straight THT (CHANGES_5_2.md 6.1). Its drawing (rev A0) asks for **Ø0.70 mm** holes (pin 0.45 mm). New generated
+footprint `tube_psu_next_parts:PinSocket_2x25_P1.27mm_Vertical_XKB_X1321FV`: every pad position of the old
+`tube_psu:PinHeader_2x25_P1.27mm_Vertical_Proteus`, drill 0.5 → 0.70 mm, pad 0.812 → 1.0 mm (**annular ring
+0.15 mm**), `remove_unused_layers` with the end layers kept (inner pads only where a pin connects). Pad-to-pad gap
+1.27 − 1.0 = **0.27 mm** (SIGNAL clearance 0.15 mm, JLC 0.1 mm). `tools/next/route_s15f_j2_socket.py` (one-shot,
+`routing/moves_s15f.json`) swaps the footprint in place (same position / rotation; fields and nets from the
+netlist) and moves the three tracks that passed between pins:
+
+| Net | Was | Now |
+|---|---|---|
+| PFC_I1_MEAS | F.Cu via (32.1, 4.3) → between pads 41 / 43 (y 3.879) → pad 42 | same path on **In3** (pads 41 / 43 have no In3 copper; hole walls 0.21 mm from the 0.15 mm track, min hole clearance 0.2 mm) |
+| PFC_I2_MEAS | B.Cu (31.115, 2.39) → between pads 41 / 43 → pad 44 | B.Cu to a new via (31.115, 2.1), **In3** x 31.4 → between holes 43 / 45 (y 5.149) → pad 44; pad 44 → C77 unchanged |
+| DAB_DIS | F.Cu 0.4 mm diagonal to pad 18, 0.12 mm from pad 16 | vertical x 35.725 to y −12.85, diagonal to the pad-18 centre (0.37 mm from pad 16); the parallel 0.2 mm diagonal deleted |
+
+The In2 escapes (diagonals from outside the pin field onto the pads) needed no change. Unconnected 0, 0 shorts,
+clearance 0, dangling 0, parity 0, DRC counts unchanged; `check_domains.py` clean; `check_next.sh` passes. The
+socket's mating height (4.3 mm insulator) and orientation against the card's right-angle header are for the owner
+to check.
+
 ## Stage 15e: current shunts R21 / R30 / R83 / R93 4 mΩ → 5 mΩ (2026-11-24)
 
 Owner decision on findings 08 F3. Value / part change only: KRL2012E-M-R005-F-T5 (C2073455), same footprint, fitted
