@@ -204,6 +204,15 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 14b: mains RES_IN ↔ IN2 gap on F.Cu (2026-11-24)
+
+Design review 2026-11-24 (findings 05 F1): the north-west corner (−60.0, −10.4) of the IN2 F.Cu pour arm
+`S3A_IN2_neutral` (line / neutral before fuse and filter) was 1.81 mm from the RES_IN pour corner (−61.41, −11.46);
+5.1 had 8.61 mm. `tools/next/route_s14b_res_in_gap.py` (one-shot, `routing/moves_s14b.json`) chamfers that corner
+(−60.0, −8.2) – (−58.1, −10.4); the bend of the arm stays ≥ 3.0 mm wide (2.5 mm before), the arm still reaches CM1.3.
+RES_IN ↔ IN2 on F.Cu **1.81 → 3.20 mm** (`rv bq dist RES_IN IN2`; inner / B.Cu ≥ 8.6 mm unchanged).
+Unconnected 0, 0 shorts, clearance 0, dangling 0, parity 0, DRC 137 items as before; `check_next.sh` passes.
+
 ## Stage 14a: Kelvin tap of the heater shunt R30 (2026-11-24)
 
 Design review 2026-11-24 (findings 08 F1 / B1, 06 F1): the In2 HEATER_CURRENT sense lane started on the Q10 source via
