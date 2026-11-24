@@ -1553,7 +1553,7 @@
 				)
 			)
 		)
-		(property "Value" "200k"
+		(property "Value" "180k"
 			(at 0 1.83 270)
 			(layer "F.Fab")
 			(uuid "4b6f1202-61f7-421f-9e02-2ec93a740537")
@@ -1598,7 +1598,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C17954"
+		(property "LCSC" "C17923"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -20028,7 +20028,7 @@
 				)
 			)
 		)
-		(property "Value" "200k"
+		(property "Value" "180k"
 			(at 0 1.83 270)
 			(layer "F.Fab")
 			(uuid "1a678d59-da10-472e-ad5b-15e325f39a6a")
@@ -20073,7 +20073,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C17954"
+		(property "LCSC" "C17923"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -40050,7 +40050,7 @@
 				)
 			)
 		)
-		(property "Value" "200k"
+		(property "Value" "180k"
 			(at 0 1.83 270)
 			(layer "F.Fab")
 			(uuid "1d6bd4c3-4fa9-48cf-b5ca-d24250703479")
@@ -40095,7 +40095,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C17954"
+		(property "LCSC" "C17923"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -80529,7 +80529,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "1u"
 			(at 0 -1.43 270)
 			(layer "B.Fab")
 			(uuid "98342e29-82b9-450d-af29-ce96c7966ad8")
@@ -80578,7 +80578,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C14663"
+		(property "LCSC" "C15849"
 			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)

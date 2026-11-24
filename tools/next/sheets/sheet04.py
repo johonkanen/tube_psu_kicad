@@ -76,7 +76,7 @@ sh.junction(xin, VIN[1])
 sh.wire(cb, (xin, GROW))
 xo = RX_ + g(14)
 sh.wire(VOUT, (xo, VOUT[1]))
-_, ct, cb = vert2(sh, "C", "C69", xo, VOUT[1] + g(3), "100n", top=1)          # pin 1 = REF1 VOUT
+_, ct, cb = vert2(sh, "C", "C69", xo, VOUT[1] + g(3), sh_value("C69"), top=1)          # pin 1 = REF1 VOUT
 sh.junction(xo, VOUT[1])
 sh.wire(cb, (xo, GROW))
 _, rl, rr = horiz2(sh, "R", "R110", RX_ + g(22), VOUT[1], sh_value("R110"), left=2, text="above")   # pin 2 = REF1 VOUT

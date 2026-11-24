@@ -21,7 +21,7 @@ Read first: this file, `kicad_next/review/RESOLUTIONS.md` (status of every shoul
   14a–14h, 15a–15g, 16a–16b, 17a–17b. **Stage 16a fixed a blocker found by review 13: SICD1 / SICD2 were reversed for a diode
   clamped tab-to-plate (cathode on the PFC drain); new footprint `TO-220-2_Vertical_KA`, copper swapped. Boards must
   not be made from any revision before d3be2f7.** Stage 16b moved C102 clear of the H8 screw head. Stages 17a / 17b put the primary heatsink line on one flat plate (SICD2 pins x 3.40, Q19 / Q7 pins x 11.60, DRV5 group 0.85 mm west). Owner decisions of 2026-11-24, all in the design:
-  - 15a C141 100 nF at DRV6 VDDB; 15b R68 → six 73.2k 1206 (97 mW each); 15c R4–R6 200k (X-cap discharge 1.9 s);
+  - 15a C141 100 nF at DRV6 VDDB; 15b R68 → six 73.2k 1206 (97 mW each); 15c R4–R6 200k (X-cap discharge 1.9 s), 18a R4–R6 180k (1.81 s at 264 V) and C69 1 µF at REF3325;
   - 15d DAB FETs Q7 / Q8 / Q19 / Q21 → IPA60R280CFD7 (consigned from the owner's stock), TR3 gapped with tape,
     start Lm ≈ 120 µH (≈ 0.83 mm), DAB dead time 200 ns;
   - 15e shunts 5 mΩ KRL2012E-M-R005-F-T5 (scales PFC 9.71 / DAB 4.40 / heater 2.00 A/V);
@@ -58,13 +58,13 @@ Read first: this file, `kicad_next/review/RESOLUTIONS.md` (status of every shoul
 - Physical check before soldering: a C3D02060A held over SICD1 / SICD2 with the tab to the plate has its cathode
   (pin 1, tab) on the DC+ pad.
 - Q5 / Q6 (C2M0160120D) and SICD1 / SICD2 (C3D02060A) are obsolete at Wolfspeed: 5.1 spares, or C3M0160120D /
-  C6D04065A (diode pin-out to check). C69 100 nF -> 1 µF at REF3325 (recommended, not decided).
+  C6D04065A (diode pin-out to check).
 - Caliper measurements: TR1 (EEL19 4+6) and TR3 (EC42) pin diameters and bobbin bases against the drills
   (findings 01 F2, 14 F2).
 - L1 / L2 inductance; TR2 real turns (64 / 66), gap, winding temperature at 10 / 15 A, leakage both ways.
 - Heatsinks: outlines, potential, insulation (findings 10 F4).
 - J2 socket against the card: mating height (4.3 mm insulator + card pin length) and orientation / pin 1.
-- The CA-IS3761LW VDE certificate scope for the WB part; whether R4–R6 should go to 180k for margin at 264 V.
+- The CA-IS3761LW VDE certificate scope for the WB part.
 - The card's `power_board_header.csv`: J2-18 = J1-17 = ball R3 = DAB_DIS, 5.2 ADC map.
 
 ## Standing rules

@@ -134,10 +134,10 @@ No slot is narrower than JLC's minimum non-plated slot width. The slot outlines 
 ## Assembly
 
 * Board footprints 380 = 369 parts in `lib/jlc_parts_next.csv` + 11 board-only footprints (H1 H2 H3 H4 H6 H7 H8 WP1 WP2 WP3 WP4).
-* Parts by status: equivalent 203, exact 78, changed 59, consigned 21, missing 6, dnp 2.
+* Parts by status: equivalent 202, exact 78, changed 60, consigned 21, missing 6, dnp 2.
 * In the BOM / CPL: **340 parts in 104 BOM lines (= LCSC numbers)** - top 118 (94 SMD + 24 THT), bottom 222 (222 SMD + 0 THT). JLC library type of the placed parts (CSV, checked 2026-11-17 ... 2026-11-24): basic 165 parts / 38 LCSC numbers, extended 175 parts / 66 LCSC numbers.
 * Not in the BOM / CPL: **29 parts** (missing 6, consigned 21, dnp 2) - `NOT_ASSEMBLED.md`.
-* 17 BOM lines cover parts with different value texts or footprint names that use the same JLC part (Comment / Footprint then list each text, separated by " / "): C106211, C12891, C14663, C1674, C17514, C1848, C21190, C22356719, C22775, C23140, C23630, C368302, C38523, C51890374, C528659, C575578, C6119856.
+* 18 BOM lines cover parts with different value texts or footprint names that use the same JLC part (Comment / Footprint then list each text, separated by " / "): C106211, C12891, C14663, C15849, C1674, C17514, C1848, C21190, C22356719, C22775, C23140, C23630, C368302, C38523, C51890374, C528659, C575578, C6119856.
 * BOM: **one line per LCSC number** (the 5.1 tool `tools/jlc_bom.py` wrote one line per value / footprint / LCSC group; here a JLC part number never appears twice). Comment = schematic value, or the MPN where the CSV status is `changed` (as `tools/jlc_bom.py`).
 * CPL frame: Mid X = KiCad x, Mid Y = -KiCad y in mm = the Gerber / drill frame (absolute origin, Y up). Position = footprint anchor. Rotation = KiCad orientation (counter-clockwise seen from the top, bottom-side parts not mirrored or negated), 0 ... 360.
 * Frame check (made on every run): 263 two-pad chip parts (R / C / L) have their CPL position on the centre of their pad flashes in the copper Gerbers (same side as the CPL layer) within 0.002 mm; 189 of 189 plated pad holes of the board are at the same coordinates in the PTH drill file. **Origin and Y direction of CPL, Gerbers and drill files agree.**

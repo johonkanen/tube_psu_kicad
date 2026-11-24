@@ -6631,8 +6631,8 @@
 				)
 			)
 		)
-		(property "Value" "100n"
-			(at 98.72 55.88 0)
+		(property "Value" "1u"
+			(at 97.62 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6666,7 +6666,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C14663"
+		(property "LCSC" "C15849"
 			(at 93.98 54.61 0)
 			(effects
 				(font

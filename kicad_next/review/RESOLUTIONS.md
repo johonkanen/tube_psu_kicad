@@ -29,7 +29,8 @@ gap / temperature / leakage both ways, heatsinks.
 | 05 | F1 | Mains RES_IN ↔ IN2 only 1.81 mm on F.Cu | **fixed** – stage 14b (`debfa1e`): 3.20 mm |
 | 05 | F2 | SICD1 area DC+ / drain necks narrow | **fixed** – stage 14c (`cbb9549`) |
 | 05 | F4 | DRV1 / DRV2 VDD capacitors 2.5–4.2 mm from the pins | **fixed** – stage 14f (`a8df12f`) |
-| 05 | F5 | X-capacitor discharge 3.5–4.4 s (> 2 s) | **fixed** – stage 15c (`8741f8d`): R4–R6 200k, 1.86 s at 230 V (2.01 s at 264 V without, 1.82 s with the VAC divider). **Open (owner):** 180k if margin at 264 V / +10 % C is wanted |
+| 05 | F5 | X-capacitor discharge 3.5–4.4 s (> 2 s) | **fixed** – stage 15c (`8741f8d`): R4–R6 200k, 1.86 s at 230 V (2.01 s at 264 V without, 1.82 s with the VAC divider). **Then 180k** – stage 18a (owner 2026-11-24): 1.67 s at 230 V, 1.81 s at 264 V, 1.99 s at 264 V / +10 % C (1.82 s with the VAC divider), 43 mW per resistor (CHANGES 6.10) |
+| 04 / 13 | F5 (notes) | C69 100 nF on REF3325 OUT at the 0.1 µF minimum (−10 %) | **fixed** – stage 18a (owner 2026-11-24): C69 1 µF X5R 0603 C15849, inside 0.1 … 10 µF (CHANGES 6.9) |
 | 05 | F6 | L1 / L2 inductance not recorded | **open** – owner measurement (L1 / L2), then CHANGES 5.2 value |
 | 05 | F7 | Q9 schematic value 2n7000 | **fixed** – `867ed8c`: value BSS138 (schematic + board) |
 | 06 | F1 | HEATER_I sense tapped at the Q10 source via | **fixed** – stage 14a (`f51c950`): Kelvin tap at R30 |

@@ -204,6 +204,28 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 18a: C69 100n → 1 µF, X-capacitor discharge R4–R6 200k → 180k (2026-11-24)
+
+Owner decisions 2026-11-24 (the two "waiting for the owner" questions of findings 04 F5 / 13 F5 and 05 F5). Value-only
+change, procedure of stage 15c: `lib/jlc_parts_next.csv` and `lib/part_map_next.csv`, sheet 4 now takes the C69 value
+from the part map (`sh_value("C69")`, was a literal), `gen_schematic.py`, `netlist_diff.py --update`, board value / LCSC
+fields by `tools/next/update_board_parts.py R4 R5 R6 C69` (`--check` first: exactly the 8 value / LCSC differences).
+No copper touched: track / via / zone counts (3129 / 403 / 124), the hashes of every track, via, zone outline, stored
+zone fill, pad and footprint position are identical before and after (kipy fingerprint), so `check_creepage.py` was
+not re-run.
+
+* **C69** (REF1 REF3325 **OUT**, datasheet pin 2; board pad "3" of `SOT-23_Proteus`, net Net-(REF1-VOUT)) 100 nF X7R →
+  **1 µF X5R 50 V 0603, C15849** (JLC basic, already used for C68 / C43 …: no new BOM line). TI SBOS392: 0.1 … 10 µF
+  on OUT; 1 µF ± 10 % sits in the middle of the range (CHANGES_5_2.md 6.9).
+* **R4, R5, R6** 200k → **180k 1 % 1206, UNI-ROYAL 1206W4F1803T5E, C17923** (200 V, 250 mW, JLC extended; LCSC stock
+  17 230 on 2026-11-24). 1.83 µF through 540 kΩ (495 kΩ with the VAC divider): τ 0.988 s (0.907 s); 60 V after
+  **1.67 s** from 230 Vrms, **1.81 s** from 264 Vrms, **1.99 s** at 264 Vrms with +10 % X capacitance (1.53 / 1.66 /
+  1.82 s with the divider) – inside 2 s in every case (200k: 1.86 / 2.01 / 2.21 s). Per resistor at 264 Vrms: 88 Vrms /
+  124 V peak (62 % of 200 V) and **43 mW** (17 % of 250 mW) (CHANGES_5_2.md 6.10).
+
+Fab package and renders regenerated (BOM / CPL: C69 moves to the C15849 line; R4–R6 a new LCSC line C17923 instead of
+C17954). `check_next.sh` passes.
+
 ## Stage 17b: Q19 / Q7 pin column x 12.75 → 11.60, DRV5 group 0.85 mm west (2026-11-24)
 
 Design review 2026-11-24, finding 12 F1, owner approval 2026-11-24. `tools/next/route_s17b_q19_q7_x.py` (one-shot,
