@@ -2,7 +2,7 @@
 
 Status of every **should-fix / blocker finding** of the twelve reviews in `findings/` (01–11, 14), plus the checklist
 FAIL rows that the owner asked to track separately (07 B1). The findings files themselves are not edited. Stages
-13a–13d, 14a–14h, 15a–15g, 16a–16b and 17a–17b are described in `kicad_next/README.md`; design changes are in
+13a–13d, 14a–14h, 15a–15g, 16a–16b, 17a–17b and 18a–18c are described in `kicad_next/README.md`; design changes are in
 `kicad_next/CHANGES_5_2.md` (section 6 for the 2026-11-24 owner decisions). State: 2026-11-24, after commit
 `867ed8c` (Part 2 documents) and this file.
 
@@ -49,15 +49,15 @@ gap / temperature / leakage both ways, heatsinks.
 | 10 | F3 | Primary ↔ heater 410 Vrms → 8.2 mm | **fixed** – stage 13d (`07a9b1a`) |
 | 10 | F4 | Heatsink potentials and insulation not defined | **open** – owner (heatsinks: potential, insulation pads, mounting); checklist 12 |
 | 11 | F1 | DAB secondary switch node reaches Q8 drain through one via | **fixed** – stage 13a |
-| 14 | F1 | Rotations / polarity unverified, JLC polarity check needs silkscreen (blocker, PCBA) | **open** – procedural at the order: JLC placement preview checked part by part (assembly-order preparation, owner) |
+| 14 | F1 | Rotations / polarity unverified, JLC polarity check needs silkscreen (blocker, PCBA) | **prepared, owner check open** – stage 18c: `ROTATION_FIX` from the common KiCad → JLC tools (SOT-23 / SOIC / TSSOP / VSSOP 270, CP_Elec 180; PG-DSO-12 / CP_Elec_5x5.4 by geometry), bottom rule 180 − rot + corr, `fab/ROTATION_CHECK.md` (67 parts, marker direction top view / seen from below). **Open:** tick it off in JLC's placement preview; none of the corrections is verified |
 | 14 | F2 | Transformer pin drills not confirmed (blocker, bare board) | **open** – owner measurement of TR1 / TR3 pin diameters before ordering |
 | 14 | F3 | Three slots exactly 1.0 mm | **fixed** – stage 13b |
-| 14 | F4 | Fiducials / edge rails: none, not documented | **open** – assembly-order preparation: state in the order remark / fab README that JLC adds rails and fiducials (checklist 13) |
-| 14 | F5 | No assembly drawing / hand-assembly sheet | **open** – assembly-order preparation (checklist 13) |
+| 14 | F4 | Fiducials / edge rails: none, not documented | **fixed (documents)** – stage 18c: fab README order parameters (no fiducials / rails → tooling holes, rails and fiducials added by JLCPCB, shipped with rails, 15 parts < 2.5 mm from the edge; no local fiducials needed, min pitch 0.65 mm), remark in `fab/ORDER_REMARK.md` |
+| 14 | F5 | No assembly drawing / hand-assembly sheet | **fixed** – stage 18c: `fab/tube_psu_5_2-assembly_top.pdf` / `-assembly_bottom.pdf` (Fab + pads + refdes, bottom mirrored), `fab/HAND_ASSEMBLY.md` (every part JLC does not place, soldering order, notes) |
 | 14 | F6 | NPTH mounting-hole copper rings 0.25 mm | **fixed** – stage 13c (no copper ring) |
-| 14 | F7 | No ready-to-paste order remark | **open** – assembly-order preparation (checklist 13) |
+| 14 | F7 | No ready-to-paste order remark | **fixed** – stage 18c: `fab/ORDER_REMARK.md` (PCB and PCBA remarks; form parameters referenced in the fab README) |
 | 14 | F10 (note) | C10 / C26 (dnp) not flagged DNP on the board | **fixed** – stage 18b: CSV status `dnp` → symbol dnp / not in BOM / not in position files (sheet generator), board footprints DNP / exclude from BOM / exclude from position files (`route_s18b_dnp.py`); parity 0; `jlc_fab.py` checks the agreement; paste apertures kept (harmless) |
-| 14 | F8 | README "anchor off centre" list wrong | **open** – to re-check in `tools/next/jlc_fab.py` with the order preparation (not re-verified here) |
+| 14 | F8 | README "anchor off centre" list wrong | **fixed** – stage 18c: pad bounding-box method, 25 parts (24 THT, TO-252 0.84 mm, LFPAK 0.36 mm) with the pad-box centre; PWM2 / SOT-23 removed from the list |
 | 12 | F1 | East-row tab faces not coplanar; a flat plate cannot touch Q19 / Q7 | **fixed on the board** – owner approval 2026-11-24, stages 17a / 17b: SICD2 pins x 3.09 → 3.40 (back face 5.99, 0.17 mm off Q5's plane), Q19 / Q7 pins x 12.75 → 11.60 (FullPAK back face 8.96 = SICD1 face 9.22 minus its 0.25 mm pad). Nominal back faces: west Q5 6.15 / SICD2 5.99, east Q6 8.99 / SICD1 9.22 / Q19 / Q7 8.96; flat plate 2.34 – 2.56 mm with 0.25 mm pads under Q5 / Q6 / SICD1 / SICD2 only (README stage 17b table). DRV5 group 0.85 mm west to make room for R26; DC+ entry, commutation loop and gate loops not worse (README stage 17b). **Open** – caliper check of the three packages (datasheet nominal values used), H4 head cut-out and C87 notch in the plate (fab README open items) |
 | 12 | F2 | C102 can overlaps a 6 mm screw head at H8 (0.12 mm; 7 mm washer 0.62 mm) | **fixed** – stage 16b: C102 1.25 mm west, can 1.04 mm clear of a 6 mm head and 0.54 mm of a 7 mm washer; TR1 slot-end pour keep-out gave up x 74.5…77.0, y 6.8…18.4 so the pours still reach the pads; C102.1 plane contact one spoke → three (both `starved_thermal` items gone, DRC 139 → 137). H8 keeps nylon hardware (pour edges at 6.27 mm). Washer check of the other holes in README stage 16b: H2 – J4 housing overlaps a 7 mm washer by 0.29 mm (**open**, owner: washer ≤ 6.4 mm at H2), H7 – L1 outline in plan only (toroid high above the board) |
 | 13 | F1 | SICD1 / SICD2 reversed when clamped tab-to-plate (C3D02060A pin 1 = cathode on the pad named A) (blocker) | **fixed** – stage 16a: footprint `TO-220-2_Vertical_KA` (pin 1 = K), copper of the two pad sites swapped (cathode on DC+, anode on the drain); DC+ island ↔ trunk F.Cu 1.34 → 2.48 mm neck (5.27 mm at x = 13), PFC_DRAIN_1 neck 2.78 → 3.13 mm, loops 52.6 / 50.5 → 46.4 / 46.7 mm (5.1 46.3 / 44.3). Fab open item: hold a C3D02060A over the sites before soldering. Orientation check of the other parts below |

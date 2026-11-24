@@ -18,9 +18,17 @@ format, oval holes in "alternate" mode, PDF drill maps. **No silkscreen layers**
 silkscreen (the guide's F.Silkscreen / B.Silkscreen and "subtract soldermask from silkscreen" do not apply).
 
 Assembly files follow the 5.1 tool tools/jlc_bom.py (same BOM / CPL columns, same coordinate frame: X = KiCad x,
-Y = -KiCad y = the Gerber frame, footprint anchors, KiCad orientation also for bottom-side parts). ROTATION_FIX
-is the per-footprint correction for JLC's part models, in degrees, added for top-side parts and subtracted for
-bottom-side parts; it is EMPTY: nothing has been verified against JLC's placement preview yet (do not guess).
+Y = -KiCad y = the Gerber frame, footprint anchors = what `kicad-cli pcb export pos` writes). Rotation (stage 18c,
+findings 14 F1): top side (KiCad orientation + correction) mod 360, bottom side (180 - KiCad orientation +
+correction) mod 360 - the bottom-side rule and the corrections are those of the two common KiCad -> JLC tools
+(kicad-jlcpcb-tools fabrication.py and JLCKicadTools cpl_fix_rotations.py, "Around 2022 July" note; both read
+2026-11-24), NOT verified in JLC's placement preview. ROTATION_FIX holds the per-footprint corrections with
+their source and confidence; ROTATION_CHECK.md lists every polarised / multi-pin part with the position its pin 1 /
+cathode must have in the preview, to be ticked off there before paying.
+
+Also written (stage 18c, findings 14 F4 F5 F7 F8): assembly drawings (F.Fab / B.Fab + outline, pads sketched,
+refdes, bottom mirrored) as PDF, HAND_ASSEMBLY.md (every part JLC does not place, in soldering order),
+ORDER_REMARK.md (ready-to-paste remarks for the PCB and the PCBA order), ROTATION_CHECK.md.
 
 Checks made while generating (any failure -> exit status 1, nothing is hidden in the README):
   * every Gerber has the expected X2 file function, draws something and stays inside the board outline
@@ -61,6 +69,9 @@ LAYERS = [("F.Cu", "gtl", "Copper,L1,Top"), ("In1.Cu", "g1", "Copper,L2,Inr"), (
 ZIP = NAME + "_gerbers.zip"
 BOM = NAME + "_bom.csv"
 CPL = NAME + "_cpl.csv"
+ASM_TOP = NAME + "-assembly_top.pdf"
+ASM_BOT = NAME + "-assembly_bottom.pdf"
+OWNED = ("README.md", "NOT_ASSEMBLED.md", "ROTATION_CHECK.md", "HAND_ASSEMBLY.md", "ORDER_REMARK.md")
 MOUNT = re.compile(r"^H\d+$")
 MOUNT_DRILL = 3.0
 
@@ -69,18 +80,69 @@ MOUNT_DRILL = 3.0
 JLC = {"track": 0.09, "space": 0.09, "via_drill": 0.15, "via_dia": 0.25, "drill": 0.15, "annular": 0.15,
        "annular_rec": 0.20, "npth": 0.50, "npth_ring": 0.45, "slot": 1.0, "edge": 0.20}
 
-# Footprint name (with or without the library prefix) or fnmatch pattern -> degrees. Empty until checked in
-# JLC's placement preview; see the README written below for the families to look at.
-ROTATION_FIX = {
-}
+# Per-footprint rotation correction for JLC's part models (stage 18c). fnmatch pattern on the footprint name without
+# the library prefix -> (degrees, source, confidence). First match wins. Source "table" = the "cpl_rotations_db.csv"
+# of JLCKicadTools (github.com/matthewlai/JLCKicadTools, master, read 2026-11-24; kicad-jlcpcb-tools downloads the
+# same table as its default corrections), "geometry" = not in that table, the correction of the table entry with the
+# same KiCad pad geometry / pin-1 corner is used. NOTHING here has been seen in JLC's placement preview.
+ROTATION_FIX = [
+    ("SOT-23_Proteus", 270, "table ^SOT-23 (-90); pad geometry = KiCad SOT-23 (pads at -x / single pad +x), "
+                            "JEDEC pin 1 = Proteus pad 2", "medium"),
+    ("SOT-23*", 270, "table ^SOT-23 (-90); the _Proteus 5 / 6-pin footprints have KiCad's pad numbering and geometry",
+     "medium"),
+    ("SOIC-*", 270, "table ^SOIC- (270); the slotted SOIC-16W variants keep KiCad's SOIC-16W pads", "medium"),
+    ("TSSOP-*", 270, "table ^TSSOP- (270)", "medium"),
+    ("VSSOP-8_3x3mm_P0.65mm", 270, "table ^VSSOP-8_3.0x3.0mm_P0.65mm (270; KiCad's older name of the same footprint, "
+                                   "not the generic ^VSSOP-8_ 180)", "medium"),
+    ("PG-DSO-12_*", 270, "geometry: not in the table; pads as KiCad SOIC (columns at x -/+2.475, pin 1 top left) -> "
+                         "the SOIC correction", "low"),
+    ("CP_Elec_6.3x7.7*", 180, "table ^CP_Elec_6.3x7.7 (180)", "medium"),
+    ("CP_Elec_5x5.4", 180, "geometry: not in the table; every CP_Elec size in the table (6.3x7.7, 8x5.4, 8x6.7, 8x10, "
+                           "8x10.5, 10x10) has 180", "low"),
+]
 
 
 def rotation_fix(footprint):
+    """(degrees, ROTATION_FIX entry or None) for a footprint id."""
     name = footprint.split(":", 1)[-1]
-    for pat, deg in ROTATION_FIX.items():
-        if fnmatch.fnmatch(footprint, pat) or fnmatch.fnmatch(name, pat):
-            return deg
-    return 0
+    for entry in ROTATION_FIX:
+        if fnmatch.fnmatch(name, entry[0]):
+            return entry[1], entry
+    return 0, None
+
+
+def cpl_rotation(rot, bottom, fix):
+    """CPL rotation: top (rot + fix), bottom (180 - rot + fix), mod 360 (see the module docstring)."""
+    return (((180 - rot) if bottom else rot) + fix) % 360
+
+
+def compass(dx, dy):
+    """8-point direction of a vector in the Gerber frame (y = north)."""
+    v = math.hypot(dx, dy)
+    if v < 1e-6:
+        return "centre"
+    ns = "north" if dy > 0.38 * v else "south" if dy < -0.38 * v else ""
+    ew = "east" if dx > 0.38 * v else "west" if dx < -0.38 * v else ""
+    return "-".join(s for s in (ns, ew) if s)
+
+
+def polarity_pad(name, pads):
+    """(what, pad number) of the pad that marks the orientation of a footprint: pin 1, cathode, +, gate."""
+    nums = {p["num"] for p in pads}
+    if name == "SOT-23_Proteus":
+        return "pin 1 (JEDEC; Proteus pad 2)", "2"
+    if name.startswith("D_") and "C" in nums:
+        return "cathode (band)", "C"
+    if name.startswith("CP_"):
+        return "+ (pad 1)", "1"
+    if name.startswith("LFPAK56"):
+        return "gate = pin 4 (pad 2)", "2"
+    if name.startswith("TO-252"):
+        return "gate = pin 1", "1"
+    if "1" not in nums:                              # e.g. TR3: bobbin pins 1 2 3 6 13-16 cut, no pad
+        low = min((n for n in nums if n.isdigit()), key=int)
+        return f"pin {low} (lowest pad present)", low
+    return "pin 1", "1"
 
 
 def refkey(r):
@@ -127,13 +189,22 @@ def dump(board, out):
         for h in range(edge.HoleCount(i)):
             hh = edge.Hole(i, h)
             g["slots"].append([[mm(hh.CPoint(k).x), mm(hh.CPoint(k).y)] for k in range(hh.PointCount())])
+    def crt(fp):
+        """courtyard bounding box (KiCad frame, mm) or None"""
+        fp.BuildCourtyardCaches()
+        sp = fp.GetCourtyard(pcbnew.B_CrtYd if fp.IsFlipped() else pcbnew.F_CrtYd)
+        if sp.OutlineCount() == 0:
+            return None
+        bb = sp.BBox()
+        return [mm(bb.GetLeft()), mm(bb.GetTop()), mm(bb.GetRight()), mm(bb.GetBottom())]
+
     kinds = {pcbnew.PAD_ATTRIB_PTH: "pth", pcbnew.PAD_ATTRIB_NPTH: "npth", pcbnew.PAD_ATTRIB_SMD: "smd"}
     for fp in b.GetFootprints():
         ref = fp.GetReference()
         g["fps"].append(dict(ref=ref, value=fp.GetValue(), fpid=fp.GetFPIDAsString(),
                              x=mm(fp.GetPosition().x), y=mm(fp.GetPosition().y), rot=fp.GetOrientationDegrees(),
                              bottom=fp.IsFlipped(), npads=len(fp.Pads()), dnp=fp.IsDNP(),
-                             no_bom=fp.IsExcludedFromBOM(), no_pos=fp.IsExcludedFromPosFiles()))
+                             no_bom=fp.IsExcludedFromBOM(), no_pos=fp.IsExcludedFromPosFiles(), crt=crt(fp)))
         for p in fp.Pads():
             hole = None
             if p.HasHole():
@@ -409,7 +480,7 @@ def generate(out):
     problems, summary = [], []
     os.makedirs(out, exist_ok=True)
     for f in os.listdir(out):                       # only files this script owns
-        if f.startswith(NAME) or f in ("README.md", "NOT_ASSEMBLED.md"):
+        if f.startswith(NAME) or f in OWNED:
             os.remove(os.path.join(out, f))
 
     # ---- 1. Gerbers and drill files (kicad-cli reads the board, it does not save it)
@@ -541,7 +612,7 @@ def generate(out):
         comment = p["mpn"] if p["status"] == "changed" else p["value"]     # as tools/jlc_bom.py
         groups[p["lcsc"]].append(ref)
         texts[p["lcsc"]].append((comment, f["fpid"].split(":", 1)[-1]))
-        rot = (f["rot"] + (-1 if f["bottom"] else 1) * rotation_fix(f["fpid"])) % 360
+        rot = cpl_rotation(f["rot"], f["bottom"], rotation_fix(f["fpid"])[0]) % 360
         cpl.append((ref, fmt(f["x"]), fmt(-f["y"]), "Bottom" if f["bottom"] else "Top", fmt(rot)))
     with open(os.path.join(out, BOM), "w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
@@ -561,7 +632,7 @@ def generate(out):
         for (ref, _pin), pts in ginfo[layer]["flashes"].items():
             if ref in fps and (layer == "B.Cu") == fps[ref]["bottom"]:
                 flashes[ref] += pts
-    chip_ok, chip_bad, off_centre = 0, [], []
+    chip_ok, chip_bad = 0, []
     for ref, x, y, _side, _rot in cpl:
         f = fps[ref]
         pts = flashes.get(ref, [])
@@ -575,8 +646,6 @@ def generate(out):
                 chip_ok += 1
             else:
                 chip_bad.append(f"{ref} {d:.3f}")
-        elif d > 0.05:
-            off_centre.append((ref, name, round(d, 3)))
     if chip_bad or chip_ok < 100:
         problems.append(f"CPL frame check: {chip_ok} two-pad chip parts on their Gerber pads, off: {chip_bad[:10]}")
     pad_holes = [(p["drill"][0], p["x"], -p["y"]) for p in g["pads"] if p["kind"] == "pth"]
@@ -584,6 +653,70 @@ def generate(out):
     tht_ok = tht_checked - len(unmatched(pad_holes, pth_hits)[0])
     if tht_ok != tht_checked:
         problems.append(f"drill frame check: {tht_ok} of {tht_checked} plated pad holes found in the PTH drill file")
+
+    # ---- 7b. pad bounding-box centre of every footprint (Gerber frame) and its orientation pad (stage 18c, 14 F1 / F8)
+    pads_of = collections.defaultdict(list)
+    for p in g["pads"]:
+        pads_of[p["ref"]].append(p)
+
+    def pad_box(ref):
+        """Bounding box of the copper of the named pads on the footprint's own outer layer (THT: that layer too)."""
+        layer = "B.Cu" if fps[ref]["bottom"] else "F.Cu"
+        xs, ys = [], []
+        for p in pads_of[ref]:
+            if not p["num"]:
+                continue                             # paste-only / tab windows without a number
+            for ring, _holes in p["shapes"].get(layer, []):
+                xs += [q[0] for q in ring]
+                ys += [-q[1] for q in ring]
+        if not xs:
+            return None
+        return (min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2, max(xs) - min(xs), max(ys) - min(ys)
+
+    centre, anchor_off = {}, []
+    for ref in fps:
+        box = pad_box(ref)
+        if box is None:
+            continue
+        centre[ref] = box[:2]
+    for ref, x, y, _side, _rot in cpl:
+        cx, cy = centre[ref]
+        dx, dy = cx - float(x), cy - float(y)
+        if math.hypot(dx, dy) > 0.05:
+            anchor_off.append((ref, fps[ref]["fpid"].split(":", 1)[-1], math.hypot(dx, dy), dx, dy, cx, cy))
+    anchor_off.sort(key=lambda r: (-round(r[2], 2), refkey(r[0])))
+
+    def orient(ref):
+        """(what, pad, net, dx, dy) of the orientation pad relative to the pad-box centre, Gerber frame (y north)."""
+        name = fps[ref]["fpid"].split(":", 1)[-1]
+        what, num = polarity_pad(name, pads_of[ref])
+        hits = [p for p in pads_of[ref] if p["num"] == num]
+        if not hits:
+            problems.append(f"{ref}: orientation pad {num!r} not found ({name})")
+            return what, num, "", 0.0, 0.0
+        px = sum(p["x"] for p in hits) / len(hits)
+        py = -sum(p["y"] for p in hits) / len(hits)
+        cx, cy = centre[ref]
+        return what, num, hits[0]["net"], px - cx, py - cy
+
+    def tab_dir(ref):
+        """Direction of the tab / heatsink face of a vertical TO-220 / TO-247 (KiCad: body on local -y)."""
+        a = math.radians(fps[ref]["rot"])
+        return compass(-math.sin(a), math.cos(a))   # local (0, -1) -> KiCad (-sin, -cos) -> Gerber (-sin, +cos)
+
+    def polarised(ref):
+        name = fps[ref]["fpid"].split(":", 1)[-1]
+        return len({p["num"] for p in pads_of[ref] if p["num"]}) > 2 or name.startswith(("D_", "CP_"))
+
+    orient_refs = [c[0] for c in cpl if polarised(c[0])]
+    edge_near = []                                   # placed parts with the courtyard < 2.5 mm from the board edge
+    for c in cpl:
+        cb = fps[c[0]].get("crt")
+        if cb:
+            d = min(cb[0] - bx0, cb[1] - by0, bx1 - cb[2], by1 - cb[3])
+            if d < 2.5:
+                edge_near.append((c[0], d))
+    edge_near.sort(key=lambda r: r[1])
 
     # ---- 8. NOT_ASSEMBLED.md
     na = collections.defaultdict(list)
@@ -680,6 +813,12 @@ def generate(out):
         (f"`{BOM}`", f"assembly BOM: Comment, Designator, Footprint, LCSC Part # ({len(groups)} lines, {len(cpl)} parts)"),
         (f"`{CPL}`", f"placement file: Designator, Mid X, Mid Y, Layer, Rotation ({len(cpl)} parts)"),
         ("`NOT_ASSEMBLED.md`", f"the {len(skipped)} parts JLC does not fit, with the reason"),
+        ("`ROTATION_CHECK.md`", f"the {len(orient_refs)} polarised / multi-pin placed parts: where pin 1 / cathode / + must "
+                                "appear in JLC's placement preview (tick list)"),
+        (f"`{ASM_TOP}`, `{ASM_BOT}`", "assembly drawings: F.Fab / B.Fab + outline, pads sketched with their numbers, "
+                                      "refdes; the bottom one mirrored (seen from below); not in the zip"),
+        ("`HAND_ASSEMBLY.md`", "every part JLC does not place, in soldering order, with orientation and fitting notes"),
+        ("`ORDER_REMARK.md`", "ready-to-paste remark texts for the PCB order and the PCBA order"),
         ("`README.md`", "this file")]))
     A("")
     A("**There are no silkscreen Gerbers on purpose** - the board is ordered without silkscreen. JLC's upload page may "
@@ -704,7 +843,8 @@ def generate(out):
     A("")
     A(md_table(["Parameter", "Value"], [
         ("Base material / layers", "FR-4, **6 layers**"),
-        ("Dimensions", f"**{fmt(m['size'][0], 2)} x {fmt(m['size'][1], 2)} mm**, single board, no panel"),
+        ("Dimensions", f"**{fmt(m['size'][0], 2)} x {fmt(m['size'][1], 2)} mm**, single board, no panel (JLC adds the "
+                       "assembly edge rails, see below)"),
         ("Thickness", "**1.6 mm**"),
         ("Stackup", "**JLC06161H-7628D** (\"specify stackup\" / impedance-stackup selector; special stackup: "
                     "**no economic PCB assembly, standard assembly only**)"),
@@ -719,11 +859,20 @@ def generate(out):
         ("Min track / space", f"{fmt(m['track_min'], 3)} / {fmt(overall[1][0], 3)} mm (see below)"),
         ("Min hole", f"{fmt(m['drill_min'], 3)} mm (via)"),
         ("Assembly", f"standard PCBA, **both sides** (top {top}, bottom {bot} parts in the CPL), `{BOM}` + `{CPL}`"),
-        ("Order number mark", "\"remove\" / \"specify position\" as preferred - there is no silkscreen to print it on; check what "
-                              "JLC offers for a board without silkscreen")]))
+        ("Edge rails / fiducials / tooling holes", "**added by JLCPCB** (PCBA options: tooling holes \"Added by JLCPCB\"; "
+         "edge rails / fiducials \"Added by JLCPCB\" where the form offers it). The board has **no fiducials and no edge "
+         f"rails**; {len(edge_near)} placed parts have their courtyard closer than 2.5 mm to the board edge (JLC assembly "
+         f"T&C 2.3: {', '.join(f'{r} {fmt(d, 2)}' for r, d in edge_near)} mm), so rails "
+         "are needed anyway. JLC adds 5 mm rails (normally on two sides) and fiducials on them; the boards ship **with the "
+         "rails** unless removal is ordered (extra fee). Smallest pitch on the board 0.65 mm (TSSOP-8 / VSSOP-8), no "
+         "QFN / BGA: no local fiducials needed"),
+        ("Order number mark", "**\"Remove order number\"** (or the form's equivalent): the board has no silkscreen, a "
+                              "marking would need one"),
+        ("Confirm production file", "**yes** - the rotations are not verified (`ROTATION_CHECK.md`)"),
+        ("Remark", "paste the texts of `ORDER_REMARK.md`")]))
     A("")
-    A("Mask colour, delivery format, gold thickness, confirm-production-file and the assembly options (tooling holes, "
-      "bake, conformal coating ...) are the owner's choice; nothing in the design depends on them.")
+    A("Mask colour, delivery format, gold thickness and the other assembly options (bake, conformal coating ...) are the "
+      "owner's choice; nothing in the design depends on them.")
     A("")
     A("## Measured against the JLC limits")
     A("")
@@ -795,9 +944,9 @@ def generate(out):
     A("* BOM: **one line per LCSC number** (the 5.1 tool `tools/jlc_bom.py` wrote one line per value / footprint / LCSC "
       "group; here a JLC part number never appears twice). Comment = schematic value, or the MPN where the CSV status "
       "is `changed` (as `tools/jlc_bom.py`).")
-    A("* CPL frame: Mid X = KiCad x, Mid Y = -KiCad y in mm = the Gerber / drill frame (absolute origin, Y up). Position = "
-      "footprint anchor. Rotation = KiCad orientation (counter-clockwise seen from the top, bottom-side parts not "
-      "mirrored or negated), 0 ... 360.")
+    A("* CPL frame: Mid X = KiCad x, Mid Y = -KiCad y in mm = the Gerber / drill frame (absolute origin, Y up; bottom-side "
+      "X not mirrored), position = footprint anchor - the same as `kicad-cli pcb export pos`. Rotation 0 ... 360: top "
+      "(KiCad orientation + correction), bottom (180 - KiCad orientation + correction), see \"Rotations\" below.")
     A(f"* Frame check (made on every run): {chip_ok} two-pad chip parts (R / C / L) have their CPL position on the centre of "
       f"their pad flashes in the copper Gerbers (same side as the CPL layer) within 0.002 mm; {tht_ok} of {tht_checked} plated pad "
       "holes of the board are at the same coordinates in the PTH drill file. **Origin and Y direction of CPL, Gerbers "
@@ -814,30 +963,42 @@ def generate(out):
     tht_na = sorted((r for r in skipped if r in tht), key=refkey)
     A(f"Through-hole parts JLC does not fit at all ({len(tht_na)}, see `NOT_ASSEMBLED.md`): {' '.join(tht_na)}.")
     A("")
-    A("### Rotations: NOT verified")
+    A("### Rotations: corrections from convention, NOT verified in JLC's preview")
     A("")
-    A("`ROTATION_FIX` in `tools/next/jlc_fab.py` is empty: every rotation is the plain KiCad orientation. JLC's part "
-      "models do not always have pin 1 where the KiCad footprint has it, and JLC's convention for bottom-side parts has "
-      "to be seen in the preview. **Check every polarised part in JLC's placement preview, on both sides**, and add "
-      "verified corrections to `ROTATION_FIX` (do not guess). Families that typically need it:")
+    A("CPL rotation = (KiCad orientation + correction) mod 360 on the top side, (180 - KiCad orientation + correction) "
+      "mod 360 on the bottom side (stage 18c). The bottom-side rule and the corrections below are those of the two "
+      "common KiCad -> JLC tools (kicad-jlcpcb-tools `fabrication.py`, JLCKicadTools `cpl_fix_rotations.py` / "
+      "`cpl_rotations_db.csv`, read 2026-11-24); **none has been seen in JLC's placement preview**. Every polarised / "
+      f"multi-pin part is listed in `ROTATION_CHECK.md` with the place its pin 1 / cathode / + must have: tick them off in "
+      "the preview (top and bottom) before paying, and choose \"confirm production file\". A part that shows wrong in "
+      "the preview: correct it there, then change `ROTATION_FIX` in `tools/next/jlc_fab.py` and regenerate.")
     A("")
-    fam = [("SOT-23 / SOT-23-5 / SOT-23-6 / SOT-223 / SOT-89 (often 180 deg). `tube_psu:SOT-23*_Proteus` use the Proteus pad "
-            "numbering: their pin 1 is not JEDEC pin 1", r"SOT-"),
-           ("SOIC / SOIC-16W / TSSOP / MSOP / VSSOP / PG-DSO (often 90 or 270 deg)", r"SOIC|SSOP|MSOP|DSO|SOP-"),
-           ("Diodes SOD-123 / SOD-323 / SMA / SMB / SMC, LEDs (180 deg if the cathode is on the other side)", r"^D_|^LED_"),
-           ("Polarised capacitors: SMD electrolytic / tantalum (180 deg) and radial THT cans", r"^CP_"),
-           ("DFN / QFN / LFPAK / PowerPAK / TO-252 / TO-263 (90 deg)", r"DFN|QFN|LFPAK|PowerPAK|TO-252|TO-263|DPAK"),
-           ("Transformers, common-mode chokes, bridge rectifiers, relays, optocouplers, crystals / oscillators", r"Transformer|CommonMode|Bridge|Relay|DIP|SMDIP|Crystal|Oscillator"),
-           ("Pin headers and connectors (pin 1 end)", r"PinHeader|Connector|Terminal|JST|Molex")]
-    for text, pat in fam:
-        refs = sorted((c[0] for c in cpl if re.search(pat, fps[c[0]]["fpid"].split(":", 1)[-1])), key=refkey)
-        A(f"* {text}: {len(refs)} placed parts" + (f" ({' '.join(refs)})" if 0 < len(refs) <= 40 else "") + ".")
+    fix_rows = []
+    for pat, deg, src, conf in ROTATION_FIX:
+        refs = sorted((c[0] for c in cpl if rotation_fix(fps[c[0]]["fpid"])[1] == (pat, deg, src, conf)), key=refkey)
+        fix_rows.append((f"`{pat}`", deg, len(refs), " ".join(refs), src, conf))
+    no_fix = collections.defaultdict(list)
+    for c in cpl:
+        if rotation_fix(fps[c[0]]["fpid"])[1] is None and c[0] in orient_refs:
+            no_fix[fps[c[0]]["fpid"].split(":", 1)[-1]].append(c[0])
+    A(md_table(["Footprint pattern", "Correction deg", "Parts", "Refdes", "Source", "Confidence"], fix_rows))
     A("")
-    if off_centre:
-        A(f"Footprints whose anchor (= CPL position) is more than 0.05 mm from the centre of their pads ({len(off_centre)} "
-          "SMD parts; JLC places by the part centre, so look at these in the preview as well): " +
-          ", ".join(f"{r} ({n}, {fmt(d, 2)} mm)" for r, n, d in sorted(off_centre, key=lambda t: refkey(t[0]))) + ".")
-        A("")
+    A("Polarised / multi-pin footprints **without** a correction (0, no entry in the table; check these with the most "
+      "care): " + "; ".join(f"`{n}` {' '.join(sorted(r, key=refkey))}" for n, r in sorted(no_fix.items())) + ".")
+    A("")
+    A(f"### Anchor not at the pad centre ({len(anchor_off)} placed parts)")
+    A("")
+    A("The CPL position is the footprint anchor (what `kicad-cli pcb export pos` writes; JLC's KiCad guide uses that "
+      "file). JLC calls the column \"centroid\". These parts have their anchor more than 0.05 mm from the centre of "
+      "the bounding box of their pads (copper on their own outer layer; for THT parts the anchor is pin 1). In the "
+      "preview their JLC model may sit off the pads by this amount: drag it onto the pads, or replace Mid X / Mid Y by "
+      "the pad-box centre given here. (The package body centre of TO-252 / LFPAK lies between the leads and the tab; the "
+      "pad box is a close proxy, not the body.)")
+    A("")
+    A(md_table(["Refdes", "Footprint", "Offset mm", "Pad-box centre minus anchor (x / y) mm", "Pad-box centre (Mid X / Mid Y)"],
+               [(r, n, fmt(d, 2), f"{fmt(dx, 2)} / {fmt(dy, 2)}", f"{fmt(cx, 3)} / {fmt(cy, 3)}")
+                for r, n, d, dx, dy, cx, cy in anchor_off]))
+    A("")
     A("## Open items before ordering")
     A("")
     n = 1
@@ -862,7 +1023,8 @@ def generate(out):
     for (rev, lcsc, mpn), refs in sorted(reviews.items(), key=lambda kv: refkey(kv[1][0])):
         A(f"   * {' '.join(refs)} ({lcsc} {mpn}): {rev}")
     n += 1
-    A(f"{n}. **Rotations and bottom-side convention not verified** (section above): check JLC's placement preview before paying.")
+    A(f"{n}. **Rotations and bottom-side convention not verified** (section above): tick off `ROTATION_CHECK.md` in JLC's "
+      "placement preview before paying.")
     n += 1
     A(f"{n}. **Through-hole parts in the BOM** ({n_tht_jlc} parts): decide whether JLC solders them (table above).")
     n += 1
@@ -896,7 +1058,8 @@ def generate(out):
       "(kicad_next/README.md stage 13c).")
     n += 1
     A(f"{n}. **No silkscreen**: there is no polarity / pin-1 / refdes marking on the board; JLC's assembly relies on the CPL "
-      "alone, and hand-fitted parts need the assembly drawing.")
+      f"alone (`ROTATION_CHECK.md`), hand-fitted parts follow `HAND_ASSEMBLY.md` and the assembly drawings `{ASM_TOP}` / "
+      f"`{ASM_BOT}`.")
     n += 1
     A(f"{n}. **SICD1 / SICD2 orientation** (stage 16a, finding 13 F1): before soldering, hold a C3D02060A over SICD1 / "
       "SICD2 with the tab to the heatsink plate: cathode (pin 1, also the tab) must be on the DC+ pad (footprint "
@@ -924,6 +1087,257 @@ def generate(out):
     A("")
     with open(os.path.join(out, "README.md"), "w", encoding="utf-8") as fh:
         fh.write("\n".join(R))
+
+    # ---- 10. ROTATION_CHECK.md (stage 18c, findings 14 F1)
+    def family(ref):
+        name = fps[ref]["fpid"].split(":", 1)[-1]
+        for k, pat in enumerate((r"SOIC|SSOP|DSO|SOT-23", r"LFPAK|TO-252", r"^D_", r"^CP_Elec", r"^CP_Radial",
+                                 r".")):
+            if re.search(pat, name):
+                return k
+        return 9
+
+    def where(ref):
+        what, num, net, dx, dy = orient(ref)
+        d = compass(dx, dy)
+        top_view = f"{what} **{d}** ({fmt(dx, 2)} / {fmt(dy, 2)} mm)"
+        below = compass(-dx, dy) if fps[ref]["bottom"] else "-"
+        name = fps[ref]["fpid"].split(":", 1)[-1]
+        if name.startswith(("LFPAK56", "TO-252")):
+            tab = "3" if name.startswith("LFPAK56") else "2"
+            tp = [p for p in pads_of[ref] if p["num"] == tab]
+            tdx = sum(p["x"] for p in tp) / len(tp) - centre[ref][0]
+            tdy = -sum(p["y"] for p in tp) / len(tp) - centre[ref][1]
+            top_view += f"; tab (drain) **{compass(tdx, tdy)}**"
+            if fps[ref]["bottom"]:
+                below += f"; tab {compass(-tdx, tdy)}"
+        return num, net, top_view, below
+
+    rows_rc = []
+    for ref in sorted(orient_refs, key=lambda r: (family(r), fps[r]["fpid"], refkey(r))):
+        f = fps[ref]
+        num, net, top_view, below = where(ref)
+        deg, _e = rotation_fix(f["fpid"])
+        crot = next(c[4] for c in cpl if c[0] == ref)
+        rows_rc.append(("[ ]", ref, f["fpid"].split(":", 1)[-1], parts[ref]["lcsc"], "Bottom" if f["bottom"] else "Top",
+                        fmt(f["rot"] % 360), crot, deg, f"{num} ({net})", top_view, below))
+    plain = collections.defaultdict(list)
+    for c in cpl:
+        if c[0] not in orient_refs:
+            nm = fps[c[0]]["fpid"].split(":", 1)[-1]
+            mt = re.match(r"^([RCL])_(\d{4})_", nm)
+            plain[f"{mt.group(1)}_{mt.group(2)}" if mt else nm].append(c)
+    RC = [f"# tube_power 5.2 - rotation / polarity check in JLC's placement preview", "",
+          f"Generated by `tools/next/jlc_fab.py` from `kicad_next/{NAME}.kicad_pcb`; do not edit by hand. Stage 18c, "
+          "findings 14 F1.", "",
+          "**The board has no silkscreen** (on purpose): there is no pin-1 dot, polarity mark or refdes on the board, "
+          "and JLC's engineers cannot compare against a legend. Judge pin 1 / cathode / + in the preview from the pad "
+          "pattern (copper) and the position given here. The rotations in the CPL use the corrections of "
+          "`ROTATION_FIX` (README \"Rotations\"), which come from the common KiCad -> JLC tools and are **not verified "
+          "in JLC's preview**.", "",
+          "How to read the table:", "",
+          "* Directions are board directions in the **top view** (as the Gerbers are drawn: north = up = +Y of the "
+          "CPL, east = right = +X). For bottom-side parts the top view looks *through* the board; the last column gives "
+          "the same direction **seen from below** (east and west swapped), which is how a bottom view normally shows "
+          "it - check which of the two JLC's bottom preview uses with one part first (e.g. the first bottom SOIC).",
+          "* The marker is the pad that fixes the orientation: IC pin 1 (dot / bevel on the package), diode cathode "
+          "(band), electrolytic + (on SMD cans the cut corners of the plastic base are on the + side, the dark mark on "
+          "the top is -), LFPAK / DPAK gate pin and tab. The offset is from the centre of the part's pad pattern, "
+          "in mm (x / y).",
+          "* `CPL rot` is what JLC receives; `KiCad rot` the board orientation; `Corr.` the `ROTATION_FIX` value.",
+          "* Proteus-numbered footprints (`*_Proteus`): the pad names differ from the data-sheet pin numbers on "
+          "SOT-23_Proteus (JEDEC pin 1 = pad 2, the single pad = pad 1); the position given is the physical pin 1.", "",
+          md_table(["OK", "Refdes", "Footprint", "LCSC", "Side", "KiCad rot", "CPL rot", "Corr.", "Marker pad (net)",
+                    "Marker in the top view", "Seen from below (bottom parts)"], rows_rc), "",
+          "## Two-pin parts without polarity", "",
+          "No orientation to check (0 and 180 degrees are the same part); only that each sits centred on its two pads:", ""]
+    for fam_name, cs in sorted(plain.items()):
+        RC.append(f"* `{fam_name}`: {len(cs)} part{'s' if len(cs) > 1 else ''} (top {sum(1 for c in cs if c[3] == 'Top')}, bottom "
+                  f"{sum(1 for c in cs if c[3] == 'Bottom')})")
+    RC += ["", f"{len(rows_rc)} rows to tick + {sum(len(v) for v in plain.values())} non-polarised two-pin parts = "
+           f"{len(cpl)} CPL rows.", ""]
+    if len(rows_rc) + sum(len(v) for v in plain.values()) != len(cpl):
+        problems.append("ROTATION_CHECK.md does not cover every CPL row")
+    with open(os.path.join(out, "ROTATION_CHECK.md"), "w", encoding="utf-8") as fh:
+        fh.write("\n".join(RC))
+
+    # ---- 11. assembly drawings (kicad-cli reads the board, it does not save it)
+    common = ["--mode-single", "--scale", "0", "--exclude-value", "--sketch-pads-on-fab-layers",
+              "--crossout-DNP-footprints-on-fab-layers", "--black-and-white", "--drill-shape-opt", "1"]
+    run([CLI, "pcb", "export", "pdf", "-o", os.path.join(out, ASM_TOP), "-l", "F.Fab,Edge.Cuts"] + common + [PCB])
+    run([CLI, "pcb", "export", "pdf", "-o", os.path.join(out, ASM_BOT), "-l", "B.Fab,Edge.Cuts", "--mirror"] + common + [PCB])
+    for f in (ASM_TOP, ASM_BOT):
+        if not os.path.exists(os.path.join(out, f)) or os.path.getsize(os.path.join(out, f)) < 10000:
+            problems.append(f"{f} missing or empty")
+
+    # ---- 12. HAND_ASSEMBLY.md (stage 18c, findings 14 F5)
+    HAND_NOTES = {
+        "C10 C26": "value `na`: **not fitted** (DNP since stage 18b). Their pads get paste from the stencil: small solder "
+                   "bumps, harmless.",
+        "DB1": "TBS22K bridge (MCC), not stocked at JLC: consign or fit by hand. Pads 1 AC2, 2 DC+, 3 AC1, 4 GND - the "
+               "footprint, position and pad nets of the bench-verified 5.1 board. Under the primary heatsink strip "
+               "(fab README open item: exposed DC+ / GND pads under the plate).",
+        "GND HT_6V3 HT_GND IN1 IN2 N15V_OUT N80V_OUT P15V_OUT P400V P5V_OUT PE SEC_GND":
+            "faston blade terminals (2 x 1 pins, 5.0 mm, drill 1.4 mm). Fit them before the tall parts.",
+        "R27": "Ohmite TWW10 47 Ω 10 W radial (TWW10J47RE), not stocked at JLC: consign. No polarity. Stands upright.",
+        "Q5 Q6": "C2M0160120D TO-247-3 (obsolete at Wolfspeed: 5.1 spares, or C3M0160120D, same pin-out 1 G / 2 D / "
+                 "3 S, tab = drain). **0.25 mm insulating pad** under the tab (live, drain). Tab against the primary "
+                 "plate.",
+        "SICD1 SICD2": "C3D02060A TO-220-2 SiC diode (obsolete: 5.1 spares or a checked substitute). **Cathode = pin 1 "
+                       "= tab, on the rectangular pad K = DC+**, tab to the plate (footprint `TO-220-2_Vertical_KA`, "
+                       "stage 16a): hold a part over the site with its tab to the plate before soldering. **0.25 mm "
+                       "insulating pad** under the tab (live).",
+        "Q7 Q19": "IPA60R280CFD7 TO-220 FullPAK, **consigned** (owner's stock), pin 1 G / 2 D / 3 S. On the primary "
+                  "plate **without** pad (insulated package); pins at x 11.60 (stage 17b) so the face is on the "
+                  "plate plane.",
+        "Q8 Q21": "IPA60R280CFD7 TO-220 FullPAK, **consigned**. Tab to the secondary plate south of the pair, no pad.",
+        "TR1": "EEL19 4 + 6 custom flyback transformer (winding specification at the top of "
+               "`simulation/flyback/EEL19_DESIGN.md`). **Bobbin pins 4 and 6 clipped** (no pad). Confirm the pin "
+               "diameter against the drills (1.0 / 0.9 mm) with calipers before the PCB is ordered (findings 14 F2).",
+        "TR2": "EF25 2 x 5 heater LLC transformer, 64 / 2 / 2 T, **pins 3 and 8 not fitted**. The two 2-turn secondary "
+               "halves and the centre tap are heavy wires soldered to WP1 - WP4 (as 5.1): half 1 from pins 9 + 10 / WP4 "
+               "(Q14_DRAIN) to the centre tap WP3 (6V3), half 2 from the centre tap WP2 (6V3) to pins 6 + 7 / WP1 "
+               "(Q13_DRAIN); primary start 1 + 2, finish 4 + 5 (dots: kicad_next/CHANGES_5_2.md, TR2 table - check against "
+               "the 5.1 transformer).",
+        "TR3": "EC42/15 DAB transformer, 20 : 21 T. **Cut bobbin pins 1, 2, 3, 6, 13 - 16.** Gap by a tape spacer under "
+               "all legs: start at about **0.83 mm (Lm ≈ 120 µH)**, tune on the bench for soft switching at light load "
+               "(`simulation/dab/DAB_TRANSFORMER.md` 5 / 6 / 8). Confirm the pin diameter against the 1.2 mm drill and the "
+               "core-plate clearance before the PCB is ordered (findings 14 F2).",
+        "L1 L2": "PFC chokes, sendust toroid OD 31.5 x 16.7 mm, **upright** as on the 5.1 board, ring plane along the "
+                 "board's long axis, the two leads in the RM8 holes. Measure L at 0 A and at the PFC peak current "
+                 "(value `TBD (measured)`).",
+        "WP1 WP2 WP3 WP4": "wire pads (drill 2.55 mm) for the TR2 secondary: WP1 Q13_DRAIN, WP2 / WP3 6V3 (centre tap), "
+                           "WP4 Q14_DRAIN - see TR2.",
+        "H1 H2 H3 H4 H6 H7 H8": "plain 3.0 mm NPTH mounting holes, no copper (stage 13c). **H2, H4, H7, H8: nylon screw "
+                                "and nylon standoff** (or nylon washers under head and standoff) - copper of other domains "
+                                "is closer than a metal 6 mm head allows; **no washer wider than 6.4 mm at H2** (J4 "
+                                "housing). H1, H3, H6: metal M3 allowed (they bond the board to the earthed chassis). "
+                                "**H4 head under the primary plate: cut-out in the plate** (y -43.1 ... -37.1 KiCad, "
+                                ">= 7 mm wide) or a nylon head below it.",
+    }
+    groups_hand = [
+        ("1. Not fitted", ["C10 C26"]),
+        ("2. SMD by hand (before any through-hole part)", ["DB1"]),
+        ("3. Low through-hole parts", ["GND HT_6V3 HT_GND IN1 IN2 N15V_OUT N80V_OUT P15V_OUT P400V P5V_OUT PE SEC_GND",
+                                       "R27"]),
+        ("4. Heatsink-mounted semiconductors - fit the plates first", ["Q5 Q6", "SICD1 SICD2", "Q7 Q19", "Q8 Q21"]),
+        ("5. Magnetics (last: tallest and heaviest)", ["L1 L2", "TR1", "TR2", "TR3", "WP1 WP2 WP3 WP4"]),
+        ("6. Mounting hardware", ["H1 H2 H3 H4 H6 H7 H8"]),
+    ]
+    covered = [r for _g, keys in groups_hand for k in keys for r in k.split()]
+    must = set(skipped) | set(board_only)
+    if sorted(covered, key=refkey) != sorted(must, key=refkey) or len(covered) != len(set(covered)):
+        problems.append("HAND_ASSEMBLY.md groups do not cover the parts JLC does not place exactly once: "
+                        f"missing {sorted(must - set(covered), key=refkey)}, extra {sorted(set(covered) - must, key=refkey)}")
+
+    def hand_orient(ref):
+        name = fps[ref]["fpid"].split(":", 1)[-1]
+        if ref in board_only or re.match(r"^(H|WP)\d+$", ref):
+            return "-"
+        if re.match(r"^TO-2(20|47)", name):
+            return f"tab / back face **{tab_dir(ref)}**"
+        nums = {p["num"] for p in pads_of[ref] if p["num"]}
+        if len(nums) <= 2 and not name.startswith(("D_", "CP_")):
+            return "no polarity" if not name.startswith("Terminal") else "-"
+        what, num, net, dx, dy = orient(ref)
+        return f"{what} ({net}) **{compass(dx, dy)}** of the centre"
+
+    HA = [f"# tube_power 5.2 - hand assembly sheet", "",
+          f"Generated by `tools/next/jlc_fab.py` from `kicad_next/{NAME}.kicad_pcb` and `lib/jlc_parts_next.csv`; "
+          "do not edit by hand. Stage 18c, findings 14 F5.", "",
+          f"Every part JLC does **not** place ({len(skipped)} parts without an LCSC number + {len(board_only)} board-only "
+          f"footprints), in soldering order. **The board has no silkscreen**: use the assembly drawings `{ASM_TOP}` "
+          f"(top) and `{ASM_BOT}` (bottom, mirrored = seen from below) for the positions; they show the Fab outline, "
+          "the pads with their numbers and the refdes. Directions below are top-view board directions (north = up "
+          "in the drawing). Pin 1 of a through-hole footprint is the square / rectangular pad.", ""]
+    for title, keys in groups_hand:
+        HA += [f"## {title}", ""]
+        rows_h = []
+        for k in keys:
+            refs = k.split()
+            r0 = refs[0]
+            p = parts.get(r0)
+            val = " / ".join(dict.fromkeys(parts[r]["value"] for r in refs)) if p else "-"
+            fpn = " / ".join(dict.fromkeys(fps[r]["fpid"].split(":", 1)[-1] for r in refs))
+            st = (p["status"] + (f" ({p['lcsc']})" if p and p["lcsc"] else "")) if p else "board-only"
+            ors = sorted({hand_orient(r) for r in refs})
+            orient_txt = ors[0] if len(ors) == 1 else "; ".join(f"{r}: {hand_orient(r)}" for r in refs)
+            rows_h.append((" ".join(refs), len(refs), val, fpn, st, orient_txt, HAND_NOTES[k]))
+        HA.append(md_table(["Refdes", "Qty", "Value", "Footprint", "Status", "Orientation", "Notes"], rows_h))
+        HA.append("")
+        if title.startswith("4."):
+            HA += ["Primary plate (stages 17a / 17b; nominal data-sheet lead-to-back distances, caliper check open): flat "
+                   "plate 2.34 ... 2.56 mm thick between the rows (2.5 mm suggested), insulating pads only under Q5, Q6, "
+                   "SICD1, SICD2; notch at C87 and the H4 head cut-out (fab README open items). Clamp every part to its "
+                   "plate, then solder the leads, so no lead is stressed.", ""]
+    tht_bom_refs = sorted((r for v in tht_jlc.values() for r in v), key=refkey)
+    HA += ["## Through-hole parts in the BOM (JLC fits them unless unticked)", "",
+           f"{len(tht_bom_refs)} parts: {' '.join(tht_bom_refs)} (README \"Through-hole parts in the BOM\"). If they "
+           "are unticked at the order, fit them after group 3 here. Orientation as `ROTATION_CHECK.md` (electrolytics: "
+           "+ on the square pad). Notes:", "",
+           "* **J2** (XKB X1321FV-2x25-C43D24, female 2 x 25, 1.27 mm): check mating height (4.3 mm insulator + card "
+           "pin length) and orientation / pin 1 against the control card's male right-angle header before soldering.",
+           "* **J4** (UART 1 x 6, 2.54 mm): 1 ISO_UART_GND, 2 TXD in, 3 ISO_UART_GND, 4 RXD out, 5 ISO_UART_GND, "
+           "6 UART_3V3 in. Pin 6 must be the far end's 3.3 V I/O supply and must always be connected (findings 04 F6).",
+           "* **C102** (56 µF 250 V): + on ISO_GND, - on -100V BIAS (negative rail): the square pad is + as on every "
+           "electrolytic.", ""]
+    with open(os.path.join(out, "HAND_ASSEMBLY.md"), "w", encoding="utf-8") as fh:
+        fh.write("\n".join(HA))
+
+    # ---- 13. ORDER_REMARK.md (stage 18c, findings 14 F7)
+    def slot_owner(s):
+        x0, y0, x1, y1 = s["bounds"]
+        best = None
+        for r in ("ISO1", "ISO2", "U11", "TR1"):
+            if r in fps:
+                fx, fy = fps[r]["x"], -fps[r]["y"]
+                d = math.hypot(max(x0 - fx, 0, fx - x1), max(y0 - fy, 0, fy - y1))
+                if d < 8 and (best is None or d < best[0]):
+                    best = (d, r)
+        return best[1] if best else None
+
+    slot_txt = []
+    for w in sorted({s["width"] for s in m["slots"]}, reverse=True):
+        ss = [s for s in m["slots"] if s["width"] == w]
+        owners = [o for o in (slot_owner(s) for s in ss) if o]
+        rest = len(ss) - len(owners)
+        what = [f"at {', '.join(sorted(set(owners), key=refkey))}"] if owners else []
+        if rest:
+            what.append(f"{rest} {'other' if owners else ''} cut-out{'s' if rest > 1 else ''}".replace("  ", " "))
+        slot_txt.append(f"{len(ss)} x {fmt(w, 2)} mm ({'; '.join(what)})")
+    na_txt = " ".join(sorted(skipped, key=refkey))
+    pcb_remark = (
+        f"6-layer board, please use stackup JLC06161H-7628D (1.6 mm, outer 1 oz, inner 0.5 oz). Layer order: GTL = L1 "
+        "(top), G1 = L2, G2 = L3, G3 = L4, G4 = L5, GBL = L6 (bottom); the Gerber X2 file attributes give the same "
+        "order. NO SILKSCREEN IS INTENTIONAL: no silkscreen files are supplied, please do not add any marking and do not "
+        "print an order number on the board (\"remove order number\" selected). "
+        f"The {len(m['slots'])} internal cut-outs drawn in the outline file (GM1) are intentional milled creepage slots, "
+        f"non-plated: {', '.join(slot_txt)}. Please do not plate, fill or narrow them; the widths are minimum finished "
+        f"widths. The {len(mounts)} mounting holes ({MOUNT_DRILL:.1f} mm) are plain non-plated holes without copper. Vias "
+        "inside SMD pads are intentional: epoxy filled and capped.")
+    pcba_remark = (
+        f"Standard PCBA, both sides: top {top} parts, bottom {bot} parts, as in the BOM / CPL. The board has NO "
+        "SILKSCREEN on purpose, so there is no polarity or pin-1 mark: please take orientation from the CPL and the pad "
+        "pattern; we check every polarised part in the placement preview and ask for the production file for confirmation. The board has NO "
+        "FIDUCIALS and NO EDGE RAILS: please add edge rails and fiducials (added by JLCPCB); several parts are closer "
+        "than 2.5 mm to the board edge. Place only the parts in the BOM / CPL. The following parts are NOT to be placed "
+        f"(we fit them ourselves, leave their pads empty): {na_txt}; C10 and C26 are not fitted at all. PWM2 "
+        "(C17699638, Infineon ICE5AR0680AG): the package is PG-DSO-12 (SO-16 narrow body with two positions per side "
+        "empty, no exposed pad), not BSOP-12-EP; pin 1 as in the CPL.")
+    OR = [f"# tube_power 5.2 - order remarks (JLCPCB)", "",
+          f"Generated by `tools/next/jlc_fab.py` from `kicad_next/{NAME}.kicad_pcb` and `lib/jlc_parts_next.csv`; "
+          "do not edit by hand. Stage 18c, findings 14 F7.", "",
+          "The order-form parameters (layers, size, stackup, copper, finish, silkscreen none, via covering, rails / "
+          "fiducials, order number, confirm production file) are in `README.md` section **\"Order parameters to select "
+          "by hand\"** - one source, not repeated here. Below: the remark texts, ready to paste.", "",
+          "## PCB order remark", "", "```text", pcb_remark, "```", "",
+          "## PCBA order remark", "", "```text", pcba_remark, "```", "",
+          "If the THT parts in the BOM are unticked at the order (README \"Through-hole parts in the BOM\"), add their "
+          "refdes to the \"NOT to be placed\" sentence. Character count: PCB remark "
+          f"{len(pcb_remark)}, PCBA remark {len(pcba_remark)} (JLC's remark field length limit was not checked).", ""]
+    with open(os.path.join(out, "ORDER_REMARK.md"), "w", encoding="utf-8") as fh:
+        fh.write("\n".join(OR))
+
 
     summary.append(f"jlc_fab: {len(LAYERS)} Gerbers, {len(pth_hits)} plated + {len(npth_hits)} non-plated holes, "
                    f"{len(m['slots'])} slots; BOM {len(groups)} lines / {len(cpl)} parts (top {top}, bottom {bot}), "
@@ -1001,7 +1415,7 @@ def main(argv):
             return 1
         os.makedirs(OUT, exist_ok=True)
         for f in os.listdir(OUT):
-            if f.startswith(NAME) or f in ("README.md", "NOT_ASSEMBLED.md"):
+            if f.startswith(NAME) or f in OWNED:
                 os.remove(os.path.join(OUT, f))
         for f in sorted(os.listdir(tmp)):
             shutil.copy(os.path.join(tmp, f), os.path.join(OUT, f))

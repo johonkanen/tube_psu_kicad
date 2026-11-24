@@ -10,7 +10,7 @@ State written 2026-11-24, end of the review-resolution session (tube_power 5.2, 
 Continue the tube_power 5.2 board in `/home/jari/dev/tube_psu_kicad` (`kicad_next/tube_psu_5_2.kicad_pcb`, 6 layers).
 Read first: this file, `kicad_next/review/RESOLUTIONS.md` (status of every should-fix finding of the twelve reviews),
 `kicad_next/review/README.md`, `kicad_next/CHANGES_5_2.md` section 6, `kicad_next/fab/README.md`, and the newest
-"Stage" sections at the top of `kicad_next/README.md` (15a–15g).
+"Stage" sections at the top of `kicad_next/README.md` (18c … 15a).
 
 ## Where the design stands
 
@@ -18,7 +18,7 @@ Read first: this file, `kicad_next/review/RESOLUTIONS.md` (status of every shoul
   (courtyards_overlap 136, pth_inside_courtyard 2); gate `tools/next/check_next.sh` passes;
   `python3 tools/next/check_creepage.py` (four layer-split passes, ≈ 8 min) 0 violations after stage 17b. Acceptance bar: match the bench-verified 5.1 board and add creepage.
 - All fourteen design reviews done (`kicad_next/review/findings/` 01–14). Fixes on the board: stages 13a–13d,
-  14a–14h, 15a–15g, 16a–16b, 17a–17b. **Stage 16a fixed a blocker found by review 13: SICD1 / SICD2 were reversed for a diode
+  14a–14h, 15a–15g, 16a–16b, 17a–17b, 18a–18c. **Stage 16a fixed a blocker found by review 13: SICD1 / SICD2 were reversed for a diode
   clamped tab-to-plate (cathode on the PFC drain); new footprint `TO-220-2_Vertical_KA`, copper swapped. Boards must
   not be made from any revision before d3be2f7.** Stage 16b moved C102 clear of the H8 screw head. Stages 17a / 17b put the primary heatsink line on one flat plate (SICD2 pins x 3.40, Q19 / Q7 pins x 11.60, DRV5 group 0.85 mm west). Owner decisions of 2026-11-24, all in the design:
   - 15a C141 100 nF at DRV6 VDDB; 15b R68 → six 73.2k 1206 (97 mW each); 15c R4–R6 200k (X-cap discharge 1.9 s), 18a R4–R6 180k (1.81 s at 264 V) and C69 1 µF at REF3325;
@@ -31,7 +31,7 @@ Read first: this file, `kicad_next/review/RESOLUTIONS.md` (status of every shoul
     footprints.
 - Documents: TR1 winding specification consolidated at the top of `simulation/flyback/EEL19_DESIGN.md`; firmware
   constants and bring-up cautions in `kicad_next/J2_PINOUT.md`.
-- Fabrication set: `kicad_next/fab/` from `tools/next/jlc_fab.py` (regenerated after stage 15g; `--check` up to date).
+- Fabrication set: `kicad_next/fab/` from `tools/next/jlc_fab.py` (regenerated after stage 18c with rotation check list, hand-assembly sheet, order remarks and assembly drawings; `--check` up to date).
 - New one-shot board-edit helpers: `tools/next/s15_common.py` (add / replace footprints from the netlist) on top of
   `s14_common.py`; `tools/next/update_board_parts.py` now also empties an LCSC field the schematic leaves empty.
 
@@ -45,9 +45,11 @@ Read first: this file, `kicad_next/review/RESOLUTIONS.md` (status of every shoul
 2. **Update `simulation/dab/dab_spice.py` to the IPA60R280CFD7** (it still models the STF7N60M2; the CFD7 check in
    DAB_SIMULATION.md 2.9 is a scratch-run result) and re-run ZVS / losses, start-up and the ±2 % mismatch at
    Lm 120 µH / 200 ns.
-3. **Assembly-order preparation** (findings 14 F1, F4, F5, F7, F8): rotations in JLC's placement preview, fiducials /
-   rails note, assembly drawing / hand-assembly sheet, ready-to-paste order remark, the parts without a JLC number
-   (NOT_ASSEMBLED.md). C10 / C26 DNP done (stage 18b).
+3. **Assembly-order preparation: done** (stages 18b / 18c): `kicad_next/fab/` now holds `ROTATION_CHECK.md`,
+   `HAND_ASSEMBLY.md`, `ORDER_REMARK.md` and the assembly drawings; rails / fiducials note and anchor list in the fab
+   README; C10 / C26 DNP. **Left for the owner at the order:** tick off `ROTATION_CHECK.md` in JLC's placement preview
+   (the rotation corrections and the bottom-side rule come from the common KiCad → JLC tools and are not verified),
+   decide the 24 THT parts in the BOM, the parts with status `missing`, paste the remarks, "confirm production file".
 4. Bench items once a board exists: listed at the end of RESOLUTIONS.md (TR3 Lm tuning, DAB phase offset / loop gain,
    ESL caps, heater SR window / f_min, DRV6 VDDB ringing, isolator outputs during DAB switching).
 
