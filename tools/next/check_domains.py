@@ -73,7 +73,8 @@ LIMITS = {
 _NYLON = "insulating hardware (nylon) at this hole, README stage 13c"
 ALLOW = [(r"^hole H4$", r".", r".", 1.9, "H4: DRV5 / R14 / C92 / L2 pads and the In2 control bus within 6.2 mm; " + _NYLON),
          (r"^hole H7$", r".", r".", 2.0, "H7: R47 / R48 pads (B.Cu) and the In2 Net-(R48-Pad2) track; " + _NYLON),
-         (r"^hole H8$", r".", r".", 3.2, "H8: C102 pad 1 (ISO_GND) 6.23 mm from the centre; " + _NYLON),
+         (r"^hole H8$", r".", r".", 3.2, "H8: ISO_GND / -100V BIAS pour edges at the 6.3 mm keep-out (6.27 mm from the centre; C102 pad 1 "
+          "7.48 mm since stage 16b, N80V_OUT pads about 6.5 mm); " + _NYLON),
          (r"^hole H2$", r".", r".", 0.1, "H2: J4 pads / ground bus of the UART island; " + _NYLON)]
 BARRIERS = {"TR1", "TR2", "TR3", "ISO1", "ISO2", "U11"}      # setup_project.py BARRIERS: two domains in one footprint
 EPS = 1e-6

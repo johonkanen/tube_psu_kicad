@@ -204,6 +204,37 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 16b: C102 away from the screw head at H8 (2026-11-24)
+
+Design review 2026-11-24, finding 12 F2: the D10 can of C102 (Ymin KCXE 56 µF 250 V, `CP_Radial_D10.0mm_P5.00mm_H18mm`,
+F.Fab circle r 5.0) stood with its centre (77.0, 11.35) 7.88 mm from the centre of H8 (84.232, 14.477): a 6 mm screw
+head overlapped it by 0.12 mm, a 7 mm washer by 0.62 mm. `tools/next/route_s16b_c102_h8.py` (one-shot,
+`routing/moves_s16b.json`):
+
+* **C102 1.25 mm west**, rot 90 kept: pads (75.75, 13.85) ISO_GND / (75.75, 8.85) −100V BIAS; can centre
+  (75.75, 11.35) **9.04 mm** from H8 = **1.04 mm clear of a 6 mm head, 0.54 mm clear of a 7 mm washer** (nominal can;
+  the KCXE diameter tolerance is not known). North is blocked by D8 (can top at y 6.35, D8 courtyard ends at 6.0),
+  south / east bring it nearer to H8. The can clears the TR1 bobbin outline (F.Fab) by 1.16 mm and the TR1 courtyard
+  by 0.45 mm; no new courtyard overlap. No track or via ends on the C102 pads (pours only).
+* **Pour keep-out "around the TR1 slot end at the fly leads"** (one rule area on all six layers, x 57.5…77.0,
+  y 4…18.4) gives up x 74.5…77.0, y 6.8…18.4: without that the moved pads would stand inside it and no pour could
+  reach them. The TR1 primary fly-lead pads (TR1.11 DC+, TR1.12 FLY_C) stay > 12 mm away across the TR1 slot end
+  (11.1 mm needed); `check_domains.py` finds no pair below its limit.
+* **C102 pin 1 (ISO_GND)**: In1 / In4 plane contact about 0.6 → 1.8 mm (one spoke → three; the two `starved_thermal`
+  items are gone: **DRC 139 → 137 items**), B.Cu 1.3 → 4.2 mm, F.Cu 0 → 0.8 mm. Pin 2 (−100V BIAS) F.Cu 3.6 → 3.1 mm.
+* **H8**: C102 pad 1 6.23 → **7.48 mm** from the centre (above the 7.2 mm secondary figure); the nearest secondary
+  copper is now the pour edge at the 6.3 mm keep-out (6.27 mm; N80V_OUT pads ≈ 6.5 mm), so H8 still needs the nylon
+  hardware (`check_domains.py` ALLOW text and fab README updated). The keep-out's name still quotes the old 6.23 mm.
+
+Washer check of the other holes (7 mm washer = r 3.5 mm, against the F.Fab / B.Fab body outlines; not changed here):
+H2 – J4 housing 3.21 mm from the centre: a 6 mm head clears it by 0.21 mm, **a 7 mm washer overlaps by 0.29 mm** (moving
+J4 means re-routing the UART island: not done; fab README: no washer wider than 6.4 mm at H2), U11 5.40 mm (+1.90);
+H4 – DRV5 (B side, standoff) 4.62 mm (+1.12), R14 5.11, L2 5.14; H6 – IN2 5.88 mm (+2.38); H7 – **L1 outline 2.70 mm**
+(plan view, −0.80), but the upright toroid is about 12.7 mm above the board there (finding 12 D2; not re-measured),
+R48 / R47 (B) 5.18 / 5.36 mm; H1 / H3 – no body within 6 mm. Unconnected 0, 0 shorts, clearance 0, dangling 0, parity
+0; `check_next.sh` passes. Fab package and inner-layer renders regenerated (the In1 / In4 ISO_GND planes grew into the
+freed corner).
+
 ## Stage 16a: SICD1 / SICD2 lead assignment, footprint TO-220-2_Vertical_KA (2026-11-24)
 
 Design review 2026-11-24, finding 13 F1 (blocker): **both PFC boost diodes were reversed** for a part clamped
@@ -539,6 +570,9 @@ Distance from a 6 mm head (mm; centre distance − 3.0), required primary 3.2 / 
 | H6 | PRI (3.2) | 3.21 | 3.21 | 3.21 | 3.21 | 3.21 | 3.21 | IN2 terminal pad 1 | no |
 | H7 | PRI (3.2) | 3.27 | 2.18 | 3.27 | 2.08 | 3.31 | 3.27 | R48 pad 1 (B), Net-(R48-Pad2) track (In2) | **yes** (bottom standoff side and inner) |
 | H8 | SEC (4.2) | 3.23 | 3.23 | 3.23 | 3.23 | 3.23 | 3.23 | C102 pad 1 (ISO_GND, THT) | **yes** |
+
+> **Note 2026-11-24 (stage 16b):** C102 moved 1.25 mm west; its pad 1 is now 7.48 mm from the H8 centre. H8 still
+> has secondary pour edges at 6.27 mm (head 3.27 mm), so the "yes" stays.
 
 Before (from the 3.5 mm ring): H4 ≥ 3.18, H3 / H8 4.22, H6 / H7 3.23 mm – with a 6 mm head 1.5 – 2.2 mm smaller.
 Unconnected 0, 0 shorts, clearance 0, dangling 0, parity 0, DRC 137 items as before; `check_rules.py` 41 / 41,

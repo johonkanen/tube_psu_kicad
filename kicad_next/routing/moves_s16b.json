@@ -1,0 +1,79 @@
+{
+ "stage": "s16b",
+ "script": "tools/next/route_s16b_c102_h8.py",
+ "ops": [
+  {
+   "op": "move_footprint",
+   "ref": "C102",
+   "old": [
+    77.0,
+    13.85
+   ],
+   "old_rot": 90.0,
+   "new": [
+    75.75,
+    13.85
+   ],
+   "new_rot": 90.0
+  },
+  {
+   "op": "zone_outline",
+   "zone": "barrier pour keep-out: around the TR1 slot end at the fly leads",
+   "net": "",
+   "layer": "undefined",
+   "old": [
+    [
+     [
+      [
+       57.5,
+       4.0
+      ],
+      [
+       77.0,
+       4.0
+      ],
+      [
+       77.0,
+       18.4
+      ],
+      [
+       57.5,
+       18.4
+      ]
+     ]
+    ]
+   ],
+   "new": [
+    [
+     [
+      [
+       57.5,
+       4.0
+      ],
+      [
+       77.0,
+       4.0
+      ],
+      [
+       77.0,
+       6.8
+      ],
+      [
+       74.5,
+       6.8
+      ],
+      [
+       74.5,
+       18.4
+      ],
+      [
+       57.5,
+       18.4
+      ]
+     ]
+    ]
+   ],
+   "why": "east end x 74.5..77.0, y 6.8..18.4 freed: C102 moved 1.25 mm west (finding 12 F2)"
+  }
+ ]
+}

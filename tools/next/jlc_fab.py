@@ -881,9 +881,12 @@ def generate(out):
       "(secondary 7.26 mm) and H6 (primary 6.21 mm); H1 has no primary / secondary copper within 12 mm. **H2, H4, H7 and H8 "
       "need insulating hardware** (nylon screw and nylon standoff, or nylon washers under the head and the standoff): "
       "H4 primary 4.93 mm from the centre (head 1.93 mm instead of 3.2), H7 primary 5.08 mm (In2; R48 pad 5.18 mm on B.Cu), "
-      "H8 secondary 6.23 mm (C102 pad 1; head 3.23 instead of 4.2), H2 UART island 3.13 mm (head 0.13 instead of 1.0; "
-      "J4 pads 3.68 mm). Metal heads, washers or standoffs wider than 6 mm reduce every figure (kicad_next/README.md "
-      "stage 13c).")
+      "H8 secondary 6.27 mm (pour edges at the 6.3 mm keep-out; head 3.27 instead of 4.2; C102 pad 1 7.48 mm, can "
+      "1.04 mm clear of a 6 mm head and 0.54 mm of a 7 mm washer since stage 16b), H2 UART island 3.13 mm (head 0.13 instead "
+      "of 1.0; "
+      "J4 pads 3.68 mm; the J4 housing is 3.21 mm from the centre: a 7 mm washer at H2 overlaps it by 0.29 mm, so no "
+      "washer wider than 6.4 mm there). Metal heads, washers or standoffs wider than 6 mm reduce every figure "
+      "(kicad_next/README.md stage 13c).")
     n += 1
     A(f"{n}. **No silkscreen**: there is no polarity / pin-1 / refdes marking on the board; JLC's assembly relies on the CPL "
       "alone, and hand-fitted parts need the assembly drawing.")
