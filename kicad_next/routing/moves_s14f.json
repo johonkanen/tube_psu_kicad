@@ -1,0 +1,326 @@
+{
+ "stage": "s14f",
+ "script": "tools/next/route_s14f_pfc_driver_caps.py",
+ "ops": [
+  {
+   "op": "delete_track",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    14.67,
+    -36.28
+   ],
+   "end": [
+    13.67,
+    -36.28
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "delete_via",
+   "net": "15V",
+   "at": [
+    13.67,
+    -36.28
+   ]
+  },
+  {
+   "op": "delete_track",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    14.6701,
+    -36.278
+   ],
+   "end": [
+    14.6701,
+    -37.929
+   ],
+   "width": 0.762
+  },
+  {
+   "op": "delete_track",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    16.2701,
+    -36.278
+   ],
+   "end": [
+    16.8452,
+    -36.278
+   ],
+   "width": 0.2032
+  },
+  {
+   "op": "delete_via",
+   "net": "GND",
+   "at": [
+    16.8452,
+    -36.278
+   ]
+  },
+  {
+   "op": "move_footprint",
+   "ref": "C79",
+   "old": [
+    15.47,
+    -36.278
+   ],
+   "old_rot": 0.0,
+   "new": [
+    12.44,
+    -36.5
+   ],
+   "new_rot": 0.0
+  },
+  {
+   "op": "add_track",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    11.515,
+    -34.749
+   ],
+   "end": [
+    11.665,
+    -36.5
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "add_track",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    14.6701,
+    -37.929
+   ],
+   "end": [
+    14.6701,
+    -37.6
+   ],
+   "width": 0.5
+  },
+  {
+   "op": "add_track",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    14.6701,
+    -37.6
+   ],
+   "end": [
+    12.2,
+    -37.6
+   ],
+   "width": 0.5
+  },
+  {
+   "op": "add_track",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    12.2,
+    -37.6
+   ],
+   "end": [
+    11.665,
+    -36.5
+   ],
+   "width": 0.5
+  },
+  {
+   "op": "add_track",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    13.215,
+    -36.5
+   ],
+   "end": [
+    14.1,
+    -36.5
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "add_via",
+   "net": "GND",
+   "at": [
+    14.1,
+    -36.5
+   ],
+   "size": 0.6,
+   "drill": 0.3
+  },
+  {
+   "op": "delete_track",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    14.6701,
+    -36.278
+   ],
+   "end": [
+    14.7151,
+    -36.233
+   ],
+   "width": 0.1524
+  },
+  {
+   "op": "delete_track",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    12.96,
+    14.14
+   ],
+   "end": [
+    12.96,
+    13.14
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "delete_track",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    12.959,
+    14.141
+   ],
+   "end": [
+    13.1561,
+    13.9439
+   ],
+   "width": 0.1524
+  },
+  {
+   "op": "delete_via",
+   "net": "15V",
+   "at": [
+    12.96,
+    13.14
+   ]
+  },
+  {
+   "op": "delete_track",
+   "net": "15V",
+   "layer": "F.Cu",
+   "start": [
+    12.96,
+    13.14
+   ],
+   "end": [
+    12.96,
+    13.04
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "delete_track",
+   "net": "15V",
+   "layer": "F.Cu",
+   "start": [
+    14.06,
+    12.1
+   ],
+   "end": [
+    13.16,
+    13.0
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "delete_track",
+   "net": "15V",
+   "layer": "F.Cu",
+   "start": [
+    14.06,
+    10.6
+   ],
+   "end": [
+    14.06,
+    12.1
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "move_footprint",
+   "ref": "C80",
+   "old": [
+    12.159,
+    14.141
+   ],
+   "old_rot": 180.0,
+   "new": [
+    13.3,
+    7.225
+   ],
+   "new_rot": 90.0
+  },
+  {
+   "op": "add_track",
+   "net": "15V",
+   "layer": "B.Cu",
+   "start": [
+    12.868,
+    9.126
+   ],
+   "end": [
+    13.3,
+    8.0
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "add_track",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    13.3,
+    6.45
+   ],
+   "end": [
+    13.3,
+    5.5
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "add_track",
+   "net": "GND",
+   "layer": "B.Cu",
+   "start": [
+    13.3,
+    5.5
+   ],
+   "end": [
+    12.6,
+    5.5
+   ],
+   "width": 0.4
+  },
+  {
+   "op": "add_via",
+   "net": "GND",
+   "at": [
+    13.3,
+    5.5
+   ],
+   "size": 0.6,
+   "drill": 0.3
+  },
+  {
+   "op": "add_via",
+   "net": "GND",
+   "at": [
+    12.6,
+    5.5
+   ],
+   "size": 0.6,
+   "drill": 0.3
+  }
+ ]
+}

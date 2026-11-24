@@ -204,6 +204,29 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 14f: PFC driver supply capacitors C79 / C80 at the VDD pins (2026-11-24)
+
+Design review 2026-11-24 (findings 05 F4): the UCC27511A drivers DRV1 / DRV2 (SOT-23-6, B.Cu) replaced the IXDD609 on
+the old origins, C79 / C80 stayed: VDD reached them only through vias and an inner / F.Cu route. On the SOT-23-6 VDD
+(pin 1) and GND (pin 4) are diagonal corners, so an 0603 cannot sit at both; each capacitor now sits at pin 1 with a
+direct B.Cu track and returns to the In4 / In1 GND planes through via(s) at its GND pad.
+`tools/next/route_s14f_pfc_driver_caps.py` (one-shot, moves and copper in `routing/moves_s14f.json`):
+
+* **C79** (15.47, −36.278) → **(12.44, −36.5)**, 0°: pin 1 → C79.1 0.4 mm track; the B.Cu 15V trunk from (14.67, −37.929)
+  ends in C79.1 ((14.67, −37.6) → (12.2, −37.6) → C79.1); old stub, 15V via (13.67, −36.28) and the old C79.2 GND via
+  (16.845, −36.278) removed; C79.2 → GND via (14.1, −36.5) in the B.Cu GND pour (before, the nearest GND via to DRV1 pin 4
+  was 16 mm away; now 4.1 mm). Kept ≥ 6.2 mm from the H4 centre.
+* **C80** (12.159, 14.141) → **(13.3, 7.225)**, 90°: pin 1 → C80.1 track; C80.2 → two GND vias (13.3 / 12.6, 5.5); the old
+  C80 feed (F.Cu 15V (14.06, 10.6) → (14.06, 12.1) → via (12.96, 13.14) → B.Cu) removed; the old C80.2 GND via
+  (11.359, 14.649) stays as a pour stitch 3.7 mm from pin 4.
+* No GND via fits at pin 4 of either driver (In3 UART lanes / In2 PFC_PWM / OUTL lanes / In2 HV lanes); pins 4 / 5 sit in
+  the B.Cu GND pour.
+
+Pad gaps (edge to edge): DRV1.1–C79.1 **2.54 → 0.61 mm**, DRV2.1–C80.1 **4.24 → 0.38 mm**; GND side DRV1.4–C79.2 3.54 →
+2.89 mm, DRV2.4–C80.2 2.34 → 4.25 mm (the GND loop now closes through the plane under the driver). Courtyard overlaps
+133 → **135** (C80 with DRV2 and R20; courtyards only, the bodies do not touch). Unconnected 0, 0 shorts, clearance 0,
+dangling 0, parity 0; `check_next.sh` passes.
+
 ## Stage 14e: Q21 gate track away from the DRV6 input side (2026-11-24)
 
 Design review 2026-11-24 (findings 02 F3 / C1): DHB_HI_GATE_SEC (0 ↔ 435 V) ran as a B.Cu diagonal under the DRV6 body
