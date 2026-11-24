@@ -132,8 +132,9 @@ class Editor:
                 ps.Append(self.MM(x), self.MM(y))
             for h in rings[1:]:
                 ps.NewHole()
-                for x, y in h:
-                    ps.Append(self.MM(x), self.MM(y))      # appends to the last ring (this hole)
+                o = ps.OutlineCount() - 1
+                for x, y in h:          # aHole = -1 would mean the OUTER ring (bug of the first 14a run)
+                    ps.Append(self.MM(x), self.MM(y), o, ps.HoleCount(o) - 1)
         self.rec.append(dict(op="zone_outline", zone=z.GetZoneName(), net=z.GetNetname(),
                              layer=self.b.GetLayerName(z.GetLayer()), old=old, new=polys, why=why))
 

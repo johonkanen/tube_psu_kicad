@@ -204,6 +204,27 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 14c: DC+ link at SICD1, PFC_DRAIN_1 neck (2026-11-24)
+
+Design review 2026-11-24 (findings 05 F2, 11): the DC+ island C73.1 / DB1.2 / SICD2.K joined the trunk through a
+1.34 mm F.Cu channel and one 1.0 mm B.Cu track (10.2, −18.65) → (13.6, −18.65) → (14.7, −19.75) → (14.7, −22.1). That
+track cannot grow to 2 mm: between the SICD1 anode pad (B.Cu, PFC_DRAIN_1) and the hard copper of the C73.2 GND via
+cluster (via (13.8, −16.4), 1.016 mm GND tracks) only 1.1 mm of copper fits with 1.2 mm HV spacing on both sides
+(trimming the pour does not help; removing C73.2 GND vias would weaken the C73 loop). `tools/next/route_s14c_sicd1_dc_link.py`
+(one-shot, `routing/moves_s14c.json`), outer layers only:
+
+* **second B.Cu DC+ link, 2.0 mm**, west of SICD1: island (11.3 / 10.2, −17.8) → (8.4, −19.6) → (8.4, −26.48) → SICD1.K
+  (THT, in the F.Cu trunk pour); 1.4 mm from the SICD1 anode and the Q5 pads;
+* vias: island 2 → 4 (+ (10.2 / 11.3, −17.4)), trunk end of the old link 3 → 4 (+ (14.7, −23.2));
+* PFC_DRAIN_1 F.Cu pour 10 outline opened towards the DC+ corner (8.2 … 9.4, −25.7 … −23.1) and south to y −20.3
+  (x 6.3 … 10.7); the fill keeps its 1.2 mm to DC+ / Q5.3 by itself.
+* correction of stage 14a: the HEATER_CURRENT B.Cu pour 20 outline had its old hole (octagon at (−12.87, −80.4)) merged
+  into the outer ring (bug in `s14_common.set_outline`, fixed); restored as rectangle + hole. Electrically the same.
+
+Widths (`rv bq neck`): island ↔ trunk F.Cu 1.34 mm (unchanged) + B.Cu **1.0 → 1.0 + 2.0 mm** (two links); Q5.2 → SICD1.A
+drain neck **1.37 → 2.78 mm** (5.1 4.55 mm). Unconnected 0, 0 shorts, clearance 0, dangling 0, parity 0, DRC 137 items
+as before; `check_next.sh` passes.
+
 ## Stage 14b: mains RES_IN ↔ IN2 gap on F.Cu (2026-11-24)
 
 Design review 2026-11-24 (findings 05 F1): the north-west corner (−60.0, −10.4) of the IN2 F.Cu pour arm
