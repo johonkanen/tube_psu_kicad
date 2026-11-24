@@ -14,6 +14,8 @@ Kept apart from tools/next/gen_next_footprints.py (transformers, toroids, heatsi
       positions 5, 6, 11, 12 removed and the pads renumbered 1-12 (datasheet figure 39: e 1.27, b1 3.81 BSC)
   CP_Radial_*_H<height>mm        KiCad CP_Radial footprints with a 3D model of the real can height (the
       library models are 8 / 10 / 12.5 mm tall; the 5.2 parts are 18-50 mm)
+  TO-220-2_Vertical_KA           SICD1 / SICD2 (C3D02060A): the 5.1 TO-220-2_Vertical_AK with pin 1 named K,
+      pin 2 named A (data sheet pin-out; stage 16a)
   forks of lib/tube_psu.pretty footprints that have no (or a missing) 3D model: same name, pads and
       graphics, model from lib/tube_psu_next.3dshapes (lib/tube_psu.pretty is the frozen 5.1 library)
 
@@ -339,8 +341,29 @@ def j2_socket():
                   model=model)
 
 
+# --- SiC boost diodes SICD1 / SICD2 (design review 2026-11-24, finding 13 F1; stage 16a) ---------------------
+# Wolfspeed C3D02060A (data sheet Rev. 10, Oct 2024, p 6 "Package Dimensions & Pin-Out", TO-220-2): pin 1 =
+# CATHODE, pin 2 = ANODE, 3 (case / tab) = CATHODE; pin 1 is the left lead seen from the front (moulded side,
+# leads down). The 5.1 footprint tube_psu:TO-220-2_Vertical_AK named the pin-1 pad "A": a diode fitted as its
+# outline shows (tab on local -y) puts its cathode into pad A. This copy names the pin-1 pad (rectangular, local
+# (0, 0)) "K" and the pin-2 pad (round, (5.08, 0)) "A"; drills, pad sizes, graphics and the KiCad TO-220-2 model
+# are those of the 5.1 footprint, so outline, pad names and the real part agree.
+def to220_2_ka():
+    src = open(os.path.join(LIB51, "TO-220-2_Vertical_AK.kicad_mod")).read()
+    for a, b in (('(pad "A" thru_hole rect', '(pad "@K" thru_hole rect'),
+                 ('(pad "K" thru_hole circle', '(pad "A" thru_hole circle'), ('(pad "@K"', '(pad "K"')):
+        if src.count(a) != 1:
+            sys.exit(f"gen_next_footprints_parts: TO-220-2_Vertical_AK: '{a}' not found once")
+        src = src.replace(a, b)
+    src = src.replace("pads A (pin 1) / K (pin 2, tab), Proteus pad positions",
+                      "pads K (pin 1, cathode = tab) / A (pin 2, anode) as Wolfspeed C3D02060A, Proteus pad positions")
+    return derive(src, "TO-220-2_Vertical_KA",
+                  "5.2 copy with the pad names of the C3D02060A pin-out: pin 1 K (rect), pin 2 A (tube_psu_next_parts)")
+
+
 FOOTPRINTS = {"PG-DSO-12_3.9x9.9mm_P1.27mm": pg_dso12,      # name -> function returning the .kicad_mod text
-              "PinSocket_2x25_P1.27mm_Vertical_XKB_X1321FV": j2_socket}
+              "PinSocket_2x25_P1.27mm_Vertical_XKB_X1321FV": j2_socket,
+              "TO-220-2_Vertical_KA": to220_2_ka}
 for _c in SOIC_SLOTS:
     FOOTPRINTS[f"SOIC-16W_7.5x10.3mm_P1.27mm_Slot{_c}"] = (lambda c=_c: soic16w_slot(c))
 for _r in SOIC_T:

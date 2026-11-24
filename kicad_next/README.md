@@ -204,6 +204,65 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 16a: SICD1 / SICD2 lead assignment, footprint TO-220-2_Vertical_KA (2026-11-24)
+
+Design review 2026-11-24, finding 13 F1 (blocker): **both PFC boost diodes were reversed** for a part clamped
+tab-to-plate. Wolfspeed C3D02060A (data sheet Rev. 10, Oct 2024, p 6 "Package Dimensions & Pin-Out", fetched
+2026-11-24): **pin 1 = cathode, pin 2 = anode, 3 (case / tab) = cathode**; the front view of the drawing (moulded
+side with the ejector mark, leads down) has pin 1 on the left. `tube_psu:TO-220-2_Vertical_AK` named the pin-1 pad
+(rectangular, local (0, 0), left seen from the front with the tab on local −y) "A". On 5.1 the outlines faced away
+from the plate and the real diodes were fitted against their outline, which put the cathode into K. Stage 4a / 4k turned
+both footprints by 180° so that the outlines face the plate and kept the nets on the pad names: with the tab on the
+plate, pin 1 (cathode) of SICD1 stood in the south site (11.8, −21.4) = PFC_DRAIN_1 and pin 1 of SICD2 in the north
+site (3.09, −3.82) = PFC_DRAIN_2, the anodes on DC+ (DC+ shorted through diode and FET when Q5 / Q6 turn on). The same
+check on every other heatsink-mounted or polarised power part (Q5 / Q6, Q7 / Q19 / Q8 / Q21, DB1, Q10 / Q11, Q1 / Q2,
+the electrolytics) found no other reversal (table in `review/RESOLUTIONS.md`, 13 F1).
+
+* **Footprint** `tube_psu_next_parts:TO-220-2_Vertical_KA` (`gen_next_footprints_parts.py`, from the 5.1 AK
+  footprint): pin-1 pad (rect, (0, 0)) named **K**, pin-2 pad (round, (5.08, 0)) named **A**; drills 1.1 mm, pads
+  2.0 mm, graphics and the KiCad TO-220-2 model unchanged. Outline, pad names and the real part now agree; the tab
+  (cathode) is the K side electrically as well. `lib/footprint_map_next.csv`, `lib/jlc_parts_next.csv`, schematic
+  footprint fields (`gen_schematic.py`), CHANGES netlist table. The symbol pins A / K keep their nets.
+* **Placement unchanged** (each diode stays across the plate from its own FET at the same height; exchanging the two
+  diodes would put each about 20 mm from its FET). The pad sites keep their places and swap nets:
+  SICD1 south (11.8, −21.4) PFC_DRAIN_1 → **DC+ (K)**, north (11.8, −26.48) DC+ → **PFC_DRAIN_1 (A)**;
+  SICD2 north (3.09, −3.82) PFC_DRAIN_2 → **DC+ (K)**, south (3.09, 1.26) DC+ → **PFC_DRAIN_2 (A)**.
+  At SICD1 this is the 5.1 copper topology again (drain north, cathode south between the DC+ island and the trunk).
+* **Copper** (`tools/next/route_s16a_sicd_ka.py`, one-shot, `routing/moves_s16a.json`; outer layers only, zone
+  priorities and settings unchanged, the fills keep their clearances):
+  * DC+ pour 29: − x 5.5…14.0, y −30.0…−23.0 (old cathode lobe of SICD1), + x 8.6…14.5, y −23.0…−18.6 and
+    x 7.4…9.6, y −20.0…−16.9 (island and trunk meet across the SICD1 cathode); + x 1.9…5.6, y −6.3…−1.8 (SICD2
+    cathode joined to the DB1 / C73 peninsula), − x 1.5…8.5, y −1.5…3.2 (old SICD2 cathode field).
+  * PFC_DRAIN_1 pour 10: − x 6.3…14.0, y −23.4…−19.0, + x 6.9…13.6, y −28.8…−23.4 (Q5.2 → SICD1.A north).
+  * PFC_DRAIN_2 pour 1: − x −5…5, y −6…−0.7, + x 0.5…4.6, y −0.7…3.0 (L1.1 and SICD2.A in one F.Cu pour).
+  * B.Cu DC+ 2.0 mm link of stage 14c re-ended: island (10.2, −17.8) → (11.8, −19.4) → SICD1.K (was → (8.4, −19.6) →
+    (8.4, −26.48) → old cathode site); the 1.0 mm link (10.2, −18.65) … (14.7, −23.2) unchanged.
+  * B.Cu PFC_DRAIN_2 2.4 mm: L1.1 → SICD2.A; SICD2.A → (4.4, 1.26) → (8.1, −2.436) → Q6.2 (was L1.1 → (−0.3, 2.5) →
+    (−0.3, −1.6) → old anode site 2.0 mm and → Q6.2 2.4 mm).
+
+| Measure (`rv bq`) | before | after | 5.1 |
+|---|---|---|---|
+| DC+ island ↔ trunk, F.Cu neck C73.1 → C56.1 | 1.34 mm | **2.48 mm** (limit now at the C73.1 pad between GND pours 31 / 30) | 3.14 mm |
+| DC+ DB1.2 → C56.1, F.Cu neck | 1.34 mm | 2.00 mm | |
+| DC+ F.Cu cross-section at x = 13.0 | 2.18 mm | **5.27 mm** | 5.49 mm |
+| DC+ B.Cu links island ↔ trunk | 1.0 + 2.0 mm (2.0 to the old SICD1.K) | 1.0 + 2.0 mm (2.0 to SICD1.K, which reaches the trunk through 5.10 mm of F.Cu) | |
+| SICD2.K → peninsula (DB1.2), F.Cu | 1.60 mm | 5.49 mm | 2.97 mm |
+| PFC_DRAIN_1 neck Q5.2 → SICD1.A, F.Cu | 2.78 mm | **3.13 mm** (cross-section x = 9: 4.60 mm) | 4.55 mm |
+| PFC_DRAIN_1 Q5.2 → L2.2, F.Cu | 2.59 mm | 2.59 mm | |
+| PFC_DRAIN_2 Q6.2 → SICD2.A, B.Cu | 2.40 mm | 2.40 mm | |
+| PFC_DRAIN_2 L1.1 → SICD2.A | B.Cu 2.00 + F.Cu 1.25 mm | B.Cu 2.40 + F.Cu 3.70 mm | |
+| drain ↔ DC+ (smallest, outer) | 1.200 / 1.052 mm (D1 / D2; 1.052 = pad L1.1 ↔ SICD2.K) | 1.200 / 1.200 mm | |
+| drain ↔ GND (smallest, outer) | D1 2.63, D2 1.065 mm | D1 1.61, D2 1.065 mm (pad Q6.2 ↔ B.Cu GND pad, unchanged) | |
+| loop Q5.2 SICD1.A SICD1.K C73.1 C73.2 R93 Q5.3 (path / area, pad centres) | 52.6 mm / 66.1 mm² | **46.4 mm** / 74.5 mm² | 46.3 / 73.0 |
+| loop Q6.2 SICD2.A SICD2.K C73.1 C73.2 R21 Q6.3 | 50.5 mm / 60.7 mm² | **46.7 mm** / 99.0 mm² | 44.3 / 92.2 |
+
+The loop paths are now as 5.1 (the stage-4k path doubled back through the pad pair); the plan-view areas grew to the 5.1
+values because the polygon no longer crosses itself. No DC+ / drain copper on an inner layer (inner-layer copper
+geometry identical before / after: only the pad rings of the two sites changed net). Unconnected 0, 0 shorts,
+clearance 0, dangling 0, parity 0, DRC 139 items as before; `check_domains.py` clean; `check_next.sh` passes. Fab
+package regenerated (open item: hold a C3D02060A over the sites before soldering); inner-layer renders not regenerated
+(inner copper unchanged).
+
 ## Stage 15g: J2 pads 1.0 → 1.02 mm, fab package (2026-11-24)
 
 The fab check of `tools/next/jlc_fab.py` measured the 1.0 mm / 0.70 mm J2 pads of stage 15f at a 0.149 mm annular
@@ -374,6 +433,9 @@ it; no inner-layer copper added (decision 6). Unconnected 0, 0 shorts, clearance
 as before; no new isolation pair (`check_domains.py`); `check_next.sh` passes.
 
 ## Stage 14c: DC+ link at SICD1, PFC_DRAIN_1 neck (2026-11-24)
+
+> **Correction 2026-11-24 (stage 16a):** the "SICD1 anode pad" below is the south site (11.8, −21.4), which is the
+> cathode (DC+) since stage 16a; the 2.0 mm link now ends there and the neck figures of this stage are superseded.
 
 Design review 2026-11-24 (findings 05 F2, 11): the DC+ island C73.1 / DB1.2 / SICD2.K joined the trunk through a
 1.34 mm F.Cu channel and one 1.0 mm B.Cu track (10.2, −18.65) → (13.6, −18.65) → (14.7, −19.75) → (14.7, −22.1). That
@@ -2130,6 +2192,10 @@ Still open:
 
 `tools/next/route_s4k_hs_sicd.py` (incremental, not re-runnable; `routing/moves_s4k.json` (empty), `deleted_s4k.json`,
 `s4k_added.json`). Unconnected 26 -> 22 (the four SICD items), clearance markers 6 -> 6, 0 shorts.
+
+> **Correction 2026-11-24 (stage 16a, finding 13 F1):** keeping the nets on the pad names after the 180° turn was
+> wrong. The C3D02060A has pin 1 = cathode at the pad named A; with the tab on the plate this put the cathodes on the
+> PFC drains. Stage 16a renames the pads (footprint `TO-220-2_Vertical_KA`) and swaps the copper of the two sites.
 
 **SICD1 / SICD2** (moved and turned by 180° by the user: anode and cathode changed sides, so each pad stood in the
 other net's pour). F.Cu outlines of pour 29 (DC+), pour 10 (PFC_DRAIN_1) and pour 1 (PFC_DRAIN_2) re-shaped, outlines

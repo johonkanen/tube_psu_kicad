@@ -2,7 +2,7 @@
 
 Status of every **should-fix / blocker finding** of the twelve reviews in `findings/` (01–11, 14), plus the checklist
 FAIL rows that the owner asked to track separately (07 B1). The findings files themselves are not edited. Stages
-13a–13d, 14a–14h and 15a–15g are described in `kicad_next/README.md`; design changes are in
+13a–13d, 14a–14h, 15a–15g and 16a are described in `kicad_next/README.md`; design changes are in
 `kicad_next/CHANGES_5_2.md` (section 6 for the 2026-11-24 owner decisions). State: 2026-11-24, after commit
 `867ed8c` (Part 2 documents) and this file.
 
@@ -57,6 +57,25 @@ gap / temperature / leakage both ways, heatsinks.
 | 14 | F7 | No ready-to-paste order remark | **open** – assembly-order preparation (checklist 13) |
 | 14 | F10 (note) | C10 / C26 (dnp) not flagged DNP on the board | **open** – a board-only DNP flag would be a schematic-parity difference; needs the DNP attribute on the schematic symbols (sheet generator) first; fab files already leave them out (CHANGES 6.b) |
 | 14 | F8 | README "anchor off centre" list wrong | **open** – to re-check in `tools/next/jlc_fab.py` with the order preparation (not re-verified here) |
+| 13 | F1 | SICD1 / SICD2 reversed when clamped tab-to-plate (C3D02060A pin 1 = cathode on the pad named A) (blocker) | **fixed** – stage 16a: footprint `TO-220-2_Vertical_KA` (pin 1 = K), copper of the two pad sites swapped (cathode on DC+, anode on the drain); DC+ island ↔ trunk F.Cu 1.34 → 2.48 mm neck (5.27 mm at x = 13), PFC_DRAIN_1 neck 2.78 → 3.13 mm, loops 52.6 / 50.5 → 46.4 / 46.7 mm (5.1 46.3 / 44.3). Fab open item: hold a C3D02060A over the sites before soldering. Orientation check of the other parts below |
+
+### 13 F1 follow-up: orientation of every heatsink-mounted / polarised power part (stage 16a, 2026-11-24)
+
+Tab side from the footprint rotation (KiCad TO-220 / TO-247 vertical: pin 1 at local (0, 0), tab on local −y, so
+pin 1 is the left lead seen from the front); plate = primary heatsink line x ≈ 5–13 (west row tabs east, east row tabs
+west), secondary plate south of Q8 / Q21 (keep-out "Q21 / Q8 to ISO2 under the heatsink plate", y −39.2 … −33).
+
+| Part | Data sheet pins | Board (tab / mark as mounted) | Verdict |
+|---|---|---|---|
+| Q5 C2M0160120D TO-247-3 (Rev. 07; C3M0160120D Rev. 04 the same: 1 G, 2 D, 3 S, tab D) | 1 G, 2 D, 3 S | rot −90, tab east to the plate: pad 1 (−29.565) GATE1, 2 PFC_DRAIN_1, 3 PFC CURRENT 2+ | OK |
+| Q6 same | 1 G, 2 D, 3 S | rot 90, tab west: 1 (3.014) GATE2, 2 PFC_DRAIN_2, 3 PFC CURRENT 3+ | OK |
+| SICD1 / SICD2 C3D02060A TO-220-2 (Rev. 10) | 1 K, 2 A, case K | before stage 16a: cathode on the drain | **wrong → fixed** (stage 16a) |
+| Q7 / Q19 IPA60R280CFD7 TO-220 FullPAK (Rev. 2.2) | 1 G, 2 D, 3 S | rot 90, tab west: Q7 1 Net-(Q7-G), 2 DHB_HI_SOURCE, 3 DHB_CURRENT; Q19 1 Net-(Q19-G), 2 DC+, 3 DHB_HI_SOURCE | OK |
+| Q8 / Q21 same | 1 G, 2 D, 3 S | rot 180, tab south to the secondary plate (as 5.1): Q8 1 Net-(Q8-G), 2 DHB_HI_SOURCE_SEC, 3 ISO_GND; Q21 1 Net-(Q21-G), 2 420V, 3 DHB_HI_SOURCE_SEC | OK |
+| DB1 TBS22K (SMD) | symbol 1 AC, 2 +, 3 AC, 4 − | pads 1 AC2, 2 DC+, 3 AC1, 4 GND; footprint, position, rotation and pad nets identical to the bench-verified 5.1 | OK as 5.1 (MCC drawing not fetched: 404 / 403) |
+| Q10 / Q11 IPD60R280P7S TO-252 | 1 G, 2 / tab D, 3 S | Q10 1 HEATER_LOW_GATE, tab HEATER_HI_SOURCE, 3 HEATER_CURRENT; Q11 1 HEATER_HI_GATE, tab DC+, 3 HEATER_HI_SOURCE (SMD, cannot be fitted turned) | OK |
+| Q1 / Q2 BUK9Y15-60E LFPAK56 | 1–3 S, 4 G, mb D | pad "1" ×3 HT_GND, pad 2 (gate) at the pin-4 end, pad 3 (mb) drain | OK |
+| C19 C30 C28 C29 C37 C56 C31 C32 C102 (THT), C1 C2 C58 (SMD) | symbol `C_Polarized` pin 1 = +, footprint pad 1 = + (rect / roundrect) | + on 420V, DC+, 6V3, ISO_GND (C102: −100V BIAS on −), 15V, 15V_ISO_SEC, PWM2 VCC | OK |
 
 ## Checklist FAIL rows (not notes) and where they are covered
 

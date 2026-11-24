@@ -888,6 +888,11 @@ def generate(out):
     A(f"{n}. **No silkscreen**: there is no polarity / pin-1 / refdes marking on the board; JLC's assembly relies on the CPL "
       "alone, and hand-fitted parts need the assembly drawing.")
     n += 1
+    A(f"{n}. **SICD1 / SICD2 orientation** (stage 16a, finding 13 F1): before soldering, hold a C3D02060A over SICD1 / "
+      "SICD2 with the tab to the heatsink plate: cathode (pin 1, also the tab) must be on the DC+ pad (footprint "
+      "`TO-220-2_Vertical_KA`: pad K = pin 1, rectangular, DC+; KiCad board coordinates SICD1 K (11.8, -21.4), SICD2 K "
+      "(3.09, -3.82)).")
+    n += 1
     A(f"{n}. Stackup JLC06161H-7628D excludes economic assembly; confirm the stackup name in JLC's selector at order time "
       "(JLC renames / retires stackups).")
     n += 1

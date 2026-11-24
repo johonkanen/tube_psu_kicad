@@ -5901,7 +5901,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tube_psu:TO-220-2_Vertical_AK"
+		(property "Footprint" "tube_psu_next_parts:TO-220-2_Vertical_KA"
 			(at 284.48 88.9 0)
 			(effects
 				(font
@@ -6421,7 +6421,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tube_psu:TO-220-2_Vertical_AK"
+		(property "Footprint" "tube_psu_next_parts:TO-220-2_Vertical_KA"
 			(at 284.48 152.4 0)
 			(effects
 				(font
