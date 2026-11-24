@@ -13,7 +13,68 @@ board are not changed.**
 Net names are the KiCad names: 15V, 5V, 15V_ISO_SEC, 5V_ISOL, −5V_SEC, −80 V (−100V BIAS). The
 scripts keep the Proteus labels `20V` / `20V_ISO_SEC` internally.
 
+## TR1 winding specification – current build (consolidated 2026-11-24)
+
+**This is the one specification to wind TR1 from.** It collects sections 12.3 (order, pins, dots, terminations), 14.4
+(strands, Lp, Rcs) and 16.2 (SN5 −15 V in the S15 layer) and changes no design value; those sections stay below as
+the derivation and are marked superseded where they differ. Pin nets checked against the 5.2 schematic
+(`tools/next/sheets/sheet01.py`, CHANGES_5_2.md 1.1): 1 = A15 → D5 (15V), 2 = GND, 3 = A5 → D6 (5V), 4 crossover post
+(no pad), 5 = SHV → D8 cathode (−100V BIAS, the "−80 V" rail), 6 spare (no pad), 7 = S5 → D29 anode (5V_ISOL),
+8 = SN5 → D14 cathode (−15V_SEC), 9 = ISO_GND, 10 = S15 → D4 anode (15V_ISO_SEC), FL_DC = DC+, FL_C = FLY_C (PWM2
+drain). Bobbin EEL19 vertical 4+6 (6a): primary row pins 1–4 (3.5 mm pitch), isolated row pins 5–10 (= S1–S6,
+2.7 mm pitch), rows 12.5 mm apart; pins 4 and 6 are clipped flush after terminating.
+
+- **Core / gap / Lp:** EEL19 PC40, spacer under all three legs ≈ 0.4 mm, set by measurement to **Lp = 600 µH ± 5 %**
+  (P1 + P2 in series, all other windings open; AL 55.5 nH; or 50 µH on a 30-turn test coil, section 4).
+- **Direction / dots:** all windings in the same rotational direction; **the start of each winding is its dot**.
+- **Width:** every winding spread over the full bobbin window (model 21.2 mm; the S15 + SN5 bundle 19.2 mm), no
+  margin tape. Radial build ≈ 3.00 mm of 3.975 mm.
+
+| # | Winding | Turns | Wire | Layers | Start (dot) → finish (pin) |
+|---|---|---|---|---|---|
+| 1 | **P1** primary half 1 | 52 | 1 × AWG32 heavy enamel (0.24 mm) | 1, spread over the full width | **FL_DC (DC+)** at the base end → top flange; return lead down the primary-side flange to **pin 4** (crossover post) |
+| – | tape | | 1 layer polyester 25 µm, full width (mechanical only) | | |
+| 2 | **S15 + SN5** trifilar bundle (strands S15, SN5, S15 side by side) | 16 | **S15 2 × TEX-E 0.20, SN5 1 × TEX-E 0.20** | 1, spread over 19.2 mm | **S15: pin 9 → pin 10**; **SN5: pin 8 → pin 9** (all three strands from the same end, same direction) |
+| – | tape | | 1 layer | | |
+| 3 | **SHV** (−100V BIAS) | 84 | 1 × TEX-E 0.20 | 2 (42 + 42, each spread) | **pin 5 → pin 9** |
+| – | tape | | 1 layer | | |
+| 4 | **S5** (5V_ISOL) | 6 | 4 × TEX-E 0.20 in parallel | 1, spread over the full width | **pin 9 → pin 7** |
+| – | tape | | 1 layer | | |
+| 5 | **A5** (5V, PWM2 regulation) | 6 | 10 × AWG32 heavy in parallel | 1, spread | **pin 2 → pin 3** |
+| – | tape | | 1 layer | | |
+| 6 | **A15** (15V) | 16 | 4 × AWG32 heavy in parallel | 1, spread | **pin 2 → pin 1** |
+| – | tape | | 1 layer | | |
+| 7 | **P2** primary half 2 | 52 | 1 × AWG32 heavy | 1, spread over the full width | **pin 4** → wound top to bottom → **FL_C (collector / FLY_C)** at the base end; P1 + P2 in series aiding |
+| – | outer wrap | | 2 layers tape; after assembly **3 layers of polyester tape around the bottom yoke and the outer legs** (or an insulating core cap) | | |
+
+- **Insulation:** the TEX-E (triple-insulated, IEC 62368-1 Annex J) is the reinforced barrier between every
+  isolated winding and every enamel winding and the core; the single tape layers are mechanical. Every TEX-E end runs
+  unbroken, insulation intact, from its layer to its isolated-row pin, leaving along the isolated-side flange only;
+  strip / tin only the pin wrap (≤ 3 mm above the base). Enamel ends (A5, A15, crossover) stay on the primary side;
+  fly leads AWG32 doubled and twisted (or spliced to a 0.4–0.5 mm tinned lead) in PTFE sleeving to the FL_DC / FL_C
+  holes (12.3, 12.5).
+- **Pin 9** carries S15 start (2) + SN5 finish (1) + SHV finish (1) + S5 start (4) = 8 strands. SN5 + S15 form a
+  centre-tapped 32 T winding 8 – 9 – 10: in the flyback interval pin 10 ≈ +15 V, pin 8 ≈ −15 V, pin 5 ≈ −84 V,
+  pin 7 ≈ +5 V against pin 9.
+- **Checks:** turns ratio 104 : 16 (S15) : 16 (SN5) : 6 (S5) : 6 (A5) : 16 (A15) : 84 (SHV); Lp 600 µH ± 5 %;
+  leakage P with all others shorted ≈ 3 µH (model, 12.3); DC resistance at 60 °C (MKF, 14.4 / 16.2): P1 0.78 Ω,
+  P2 1.30 Ω, S15 136 mΩ, SN5 271 mΩ, SHV 1.62 Ω, S5 33 mΩ, A5 14 mΩ, A15 96 mΩ; **hipot 3 kV rms 1 min (or
+  4.2 kV DC)** from the primary (pins 1–3, FL_DC / FL_C) **and the core** to the isolated pins 5, 7–10 (12.5); PD
+  test on first samples, extinction ≥ 1.2 kVpk (12.5).
+- **Wire to buy:** TEX-E 0.20 ≈ 6.2 m per transformer (SHV ≈ 3.5 m, S15 + SN5 48 turns, S5 24 turns); AWG32 heavy
+  enamel for P1 / P2 / A5 / A15. TEX-E 0.30 is not used.
+- **Open questions (not resolvable from the schematic; owner):** (1) bobbin pin diameter, base outline and base
+  creepage (≥ 11.1 mm between the rows along the surface) are not measured (6a, 12.5; review 01 F2); (2) the TEX-E
+  certificate's permitted working voltage against 552 Vrms / 778 Vpk is not confirmed (12.5); (3) the hipot level
+  3 kV rms is the document's value – confirm it against the reinforced electric-strength test of the standard used
+  for 552 Vrms / 778 Vpk working voltage; (4) the yoke-to-isolated-pin distance after taping is to be checked by the
+  hipot (12.5, review 01 F10).
+
 ## Summary
+
+> **Current build (2026-11-24): see "TR1 winding specification – current build" above** (SN5 16 T for −15 V in the
+> S15 layer, every isolated winding TEX-E 0.20, every enamel winding AWG32). The bullets below are the history: the
+> TIW recommendation of 2026-11-18 (S15 2 × 0.30, S5 / SN5 3 × 0.30, −5 V) and the enamel design are superseded.
 
 > **Update 2026-11-18: reinforced isolation is required** (552 Vrms / 778 Vpk, 11.1 mm creepage).
 > The 3 + 3 mm margins of the enamel build below are too small. **The recommendation is now the
@@ -725,7 +786,11 @@ Observations:
   120 °C class), and about 17 °C at nominal load. At the 12 W continuous design value it is
   well within limits.
 
-### 12.3 Recommended TIW build: `eel19_tiw_sandwich_s_pre3` (winding spec)
+### 12.3 Recommended TIW build: `eel19_tiw_sandwich_s_pre3` (superseded winding spec – wind from "TR1 winding specification – current build" at the top)
+
+> **Superseded 2026-11-19 / 2026-11-24:** strands changed in 14.4, SN5 changed to 16 T in the S15 layer in 16.2
+> (−15 V); this table still shows S15 2 × TEX-E 0.30, S5 + SN5 6 + 6 T (−5 V) and TEX-E 0.30. Order, pins, dots and
+> terminations below are still valid and are in the consolidated specification.
 
 ![TIW recommended geometry](geometry_eel19_tiw_sandwich_s.png)
 
@@ -1330,7 +1395,10 @@ Findings:
   0.6 W at 450 V. At 450 V the capacitive turn-on loss of Co(er) 24 pF + 10 pF dominates (DCM,
   turn-on at ≈ Vin at 100 kHz, ≈ 0.35 W). It is the same for every candidate.
 
-### 14.4 Chosen design: `eel19_wide` = `eel19w_n52_l600_a32_t` (winding spec)
+### 14.4 Chosen design: `eel19_wide` = `eel19w_n52_l600_a32_t` (superseded winding spec – see the consolidated specification at the top)
+
+> **Superseded 2026-11-19 by 16.2** for S15 / SN5 / S5 (SN5 16 T in the S15 layer, S15 2 strands); the A5 / A15 /
+> P strands, Lp, gap and Rcs below are current and are in the consolidated specification.
 
 MAS: [mas/tr1_eel19_wide.json](mas/tr1_eel19_wide.json). It is section 12.3 with **only the strands
 changed**: same turns, order, pins, Lp 600 µH and gap.
@@ -1705,7 +1773,8 @@ through MKF and ngspice:
   271 mΩ: 0.7 mW at 50 mA DC.
 - TEX-E 0.20 per transformer: SHV ≈ 3.5 m, S15 + SN5 48 turns, S5 24 turns: **≈ 6.2 m** (was ≈ 7 m).
 
-**Winding spec (changes to 14.4 only; order P1 | S15+SN5 | SHV | S5 | A5 | A15 | P2):**
+**Winding spec (changes to 14.4 only; order P1 | S15+SN5 | SHV | S5 | A5 | A15 | P2; merged 2026-11-24 into the
+consolidated "TR1 winding specification – current build" at the top of this file):**
 
 | # | winding | turns | wire | layer | start → finish (pins) |
 |---|---|---|---|---|---|
