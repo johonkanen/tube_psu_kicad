@@ -7567,7 +7567,7 @@
 				)
 			)
 		)
-		(property "Value" "470k"
+		(property "Value" "200k"
 			(at 60.96 193.04 90)
 			(effects
 				(font
@@ -7602,7 +7602,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C17997"
+		(property "LCSC" "C17954"
 			(at 60.96 190.5 0)
 			(effects
 				(font
@@ -7653,7 +7653,7 @@
 				)
 			)
 		)
-		(property "Value" "470k"
+		(property "Value" "200k"
 			(at 73.66 193.04 90)
 			(effects
 				(font
@@ -7688,7 +7688,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C17997"
+		(property "LCSC" "C17954"
 			(at 73.66 190.5 0)
 			(effects
 				(font
@@ -7739,7 +7739,7 @@
 				)
 			)
 		)
-		(property "Value" "470k"
+		(property "Value" "200k"
 			(at 86.36 193.04 90)
 			(effects
 				(font
@@ -7774,7 +7774,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C17997"
+		(property "LCSC" "C17954"
 			(at 86.36 190.5 0)
 			(effects
 				(font

@@ -204,6 +204,13 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 15c: X-capacitor discharge resistors R4–R6 470k → 200k (2026-11-24)
+
+Owner decision on findings 05 F5. Value-only change (UNI-ROYAL 1206W4F2003T5E, C17954; schematic, CSVs, board value /
+LCSC fields by `tools/next/update_board_parts.py R4 R5 R6`, no copper touched). 1.83 µF of X capacitance through
+600 kΩ (545 kΩ with the VAC divider): 60 V after 1.86 s from 230 Vrms, 2.01 s from 264 Vrms (1.69 / 1.82 s with
+the divider); 39 mW and 88 Vrms per resistor at 264 Vrms (CHANGES_5_2.md 6.5). `check_next.sh` passes.
+
 ## Stage 15b: −100V BIAS bleeder R68 → six 1206 in parallel (2026-11-24)
 
 Owner decision 2026-11-24 on findings 01 F1 (R68 12.1k 1206 at 0.53–0.59 W, rated 250 mW, under the body of C102):

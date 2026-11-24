@@ -157,6 +157,7 @@ slot unchanged.
 |---|---|---|
 | 6.3 | yes | **−100V BIAS bleeder R68 12.1k → R68 ‖ R159 ‖ R160 ‖ R161 ‖ R162 ‖ R163 = 6 × 73.2k 1 % 1206** (Walsin WR12X7322FTL, C368302, 200 V / 250 mW, JLC extended, 2888 pcs 2026-11-24) = **12.2 kΩ (+0.8 %)**, sheet 1 (findings 01 F1: R68 dissipated 84.4² / 12.1k = **0.59 W** in a 250 mW part, under C102). At the highest simulated rail voltage 84.4 V (EEL19_DESIGN.md 14.6: 80.2–84.4 V) each dissipates 84.4² / 73.2k = **97 mW** (39 % of 250 mW; 0.58 W in total, as before); 84 V per part against 200 V. Six is the smallest count that keeps ≤ 100 mW (five × 60.4k: 118 mW). The 0.8 % higher bleeder resistance changes the bleeder-only rail voltage by far less than the simulated 80–84 V spread (not re-simulated). Board: R68 leaves its place under C102; the six stand on B.Cu in the strip between the P5V_OUT and N80V_OUT terminal rows (four north–south at y 4.3, x 72.7–80.5, pitch 2.6 mm; two east–west at y 4.35, x 83.95 / 88.56), −100V BIAS on a 0.5 mm B.Cu bus at y 7.0 through the N80V_OUT pads. Stage 15b (kicad_next/README.md) |
 | 6.4 | yes | **C141 100n X7R 50 V 0603** (C14663, the part of C93 / C94: no new BOM line) **DRV6 VDDB (pin 11, 15V_ISO_SEC) – VSSB (pin 9, ISO_GND)**, sheet 2 (findings 02 F1, 11 F8: the nearest capacitor, C43, stood 11.9 mm from pin 11; SLUSCJ9F §11.1 "must be connected close to the device"). Board: B.Cu west of the pin row at (54.6, −53.83), pad gaps 0.26 mm to pins 11 / 9, 0.4 mm tracks; local HF bypass, C72 4.7 µF / C43 1 µF stay the rail capacitors. Stage 15a (kicad_next/README.md) |
+| 6.5 | yes | **R4, R5, R6 470k → 200k 1 % 1206** (UNI-ROYAL 1206W4F2003T5E, C17954, 200 V / 250 mW per the JLC parts API, 167 k pcs; the 470k was C17997 of the same family), value only, sheet 5 (findings 05 F5: X-capacitor discharge). X capacitance C86 680n + C38 470n + C117 680n = **1.83 µF** (C64 / C66 47n sit across bridge diodes, about 24 nF more in series across the line: ignored, < 1.3 %). Discharge path IN2 → R4–R6 → RES_IN = **600 kΩ** (was 1.41 MΩ), in parallel the 6 MΩ of the VAC divider (R47 / R48 + R50–R52 through U8, sheet 9) = 545 kΩ. τ = 1.10 s (0.998 s with the divider). Time to 60 V (IEC 62368-1 5.5.2.2: ≤ ES1 2 s after disconnection): from 325 V peak (230 Vrms) **1.86 s** (1.69 s with the divider); from 373 V peak (264 Vrms) **2.01 s** (1.82 s with the divider); with +10 % X capacitance at 264 V 2.21 s / 2.00 s. Reviewer's arithmetic (τ 2.1–2.6 s before, 1.0 s after, 1.7 s at 230 V) confirmed. Stress at 264 Vrms: 88 Vrms / 124 V peak and **39 mW** per resistor (16 % of 250 mW, 62 % of 200 V working voltage). Marginal at 264 V with tolerances: 180k would give 1.82 s at 264 V / +10 % C (open question for the owner) |
 
 ## Isolation domains after phase 2
 
@@ -274,6 +275,9 @@ Parts: 5.1 315, 5.2 369; removed 12, added 66.
 | Q11 | IPA60R280CFD7XKSA1 -> IPD60R280P7S |  | Package_TO_SOT_THT:TO-220-3_Vertical -> Package_TO_SOT_SMD:TO-252-2 |
 | R2 | 1k -> 100R |  |  |
 | R3 | 470 -> 1.96k |  |  |
+| R4 | 470k -> 200k |  |  |
+| R5 | 470k -> 200k |  |  |
+| R6 | 470k -> 200k |  |  |
 | R8 | 2.49R -> 1.37R |  |  |
 | R9 | 2.49R -> 1.37R |  |  |
 | R21 |  |  | tube_psu:R_0508_1220Metric_KRL2012 -> tube_psu_next_parts:R_0508_1220Metric_KRL2012 |
