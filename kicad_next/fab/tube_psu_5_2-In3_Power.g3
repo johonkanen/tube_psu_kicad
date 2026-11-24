@@ -1,12 +1,12 @@
 %TF.GenerationSoftware,KiCad,Pcbnew,10.0.7*%
-%TF.CreationDate,2026-11-24T08:04:34+02:00*%
+%TF.CreationDate,2026-11-24T08:07:49+02:00*%
 %TF.ProjectId,tube_psu_5_2,74756265-5f70-4737-955f-355f322e6b69,rev?*%
 %TF.SameCoordinates,Original*%
 %TF.FileFunction,Copper,L4,Inr*%
 %TF.FilePolarity,Positive*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 10.0.7) date 2026-11-24 08:04:34*
+G04 Created by KiCad (PCBNEW 10.0.7) date 2026-11-24 08:07:49*
 %MOMM*%
 %LPD*%
 G01*
@@ -930,7 +930,6 @@ X2300000Y63300000D03*
 D36*
 X22600000Y50000000D03*
 D38*
-X31795000Y41950000D03*
 %TO.N,+1V65_BIAS*%
 X29210000Y-9182000D03*
 D37*

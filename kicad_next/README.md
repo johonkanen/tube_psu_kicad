@@ -204,6 +204,23 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 14h: small copper clean-ups (2026-11-24)
+
+Design review 2026-11-24. `tools/next/route_s14h_cleanup.py` (one-shot, `routing/moves_s14h.json`):
+
+1. (findings 08 F4, 07) leftover 5.1 DHB_CURRENT copper without a pad deleted: 'Proteus F.Cu pour 23' (x 27.6 … 32.7,
+   y −54.8 … −40.4), the via (31.795, −41.95) at the 5.1 Q7.3 place with its two F.Cu stubs, and the 0.254 mm In2 stub
+   from that via to (22.6, −49.6) (DAB_DIS was 0.235 mm from it). The C67 / C70 return (In2 1.2 mm, vias (22.6, −49.0 /
+   −50.0), S4B_DHB_CURRENT_F) and the R83 Kelvin line are unchanged; unconnected stays 0.
+2. (findings 02 B7) B.Cu pour keep-out `S14H_KO DRV5 output side …` (rule area, no zone fill) x 4.4 … 9.6, y −51.3 …
+   −46.2: B.Cu GND fill to DRV5 pad 12 **0.20 → 0.54 mm**, pad 13 **0.20 → 1.77 mm**, pad 14 (switch node) **1.20 →
+   3.02 mm**.
+3. (findings 07 F10) the floating 0.9 mm² DC+ fill island at the old 5.1 Q19 place is no longer in the stored fill (the
+   refills of stages 13 / 14 removed it; island removal is on) — nothing to do.
+
+Unconnected 0, 0 shorts, clearance 0, dangling 0, parity 0, DRC 138 items (courtyards 134, from stages 14f / 14g);
+`check_next.sh` passes.
+
 ## Stage 14g: VAC divider pad gaps R47 / R48 ↔ R50 / R51 (2026-11-24)
 
 Design review 2026-11-24 (findings 09 F2, 05 F3): the AC1 leg R47 / R48 and the AC2 leg R50 / R51 (0805, B.Cu) were
