@@ -1,0 +1,230 @@
+{
+ "stage": "s14g",
+ "script": "tools/next/route_s14g_vac_divider.py",
+ "ops": [
+  {
+   "op": "move_footprint",
+   "ref": "R47",
+   "old": [
+    0.8,
+    8.6
+   ],
+   "old_rot": 0.0,
+   "new": [
+    -0.2,
+    9.15
+   ],
+   "new_rot": 0.0
+  },
+  {
+   "op": "move_footprint",
+   "ref": "R48",
+   "old": [
+    4.3,
+    8.6
+   ],
+   "old_rot": 0.0,
+   "new": [
+    4.9,
+    8.7
+   ],
+   "new_rot": 0.0
+  },
+  {
+   "op": "move_footprint",
+   "ref": "R51",
+   "old": [
+    4.3,
+    6.5
+   ],
+   "old_rot": 0.0,
+   "new": [
+    4.3,
+    6.05
+   ],
+   "new_rot": 0.0
+  },
+  {
+   "op": "delete_track",
+   "net": "AC1",
+   "layer": "B.Cu",
+   "start": [
+    -0.2,
+    8.6
+   ],
+   "end": [
+    -1.1,
+    9.5
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "delete_track",
+   "net": "AC1",
+   "layer": "B.Cu",
+   "start": [
+    -1.1,
+    9.5
+   ],
+   "end": [
+    -3.5,
+    9.5
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "add_track",
+   "net": "AC1",
+   "layer": "B.Cu",
+   "start": [
+    -1.2,
+    9.5
+   ],
+   "end": [
+    -3.5,
+    9.5
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(R47-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    1.8,
+    8.6
+   ],
+   "end": [
+    3.3,
+    8.6
+   ],
+   "width": 0.1524
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(R47-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    0.8,
+    9.15
+   ],
+   "end": [
+    3.9,
+    8.7
+   ],
+   "width": 0.25
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(R50-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    3.3,
+    6.5
+   ],
+   "end": [
+    1.8,
+    6.5
+   ],
+   "width": 0.1524
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(R50-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    1.8,
+    6.5
+   ],
+   "end": [
+    3.3,
+    6.05
+   ],
+   "width": 0.25
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(R48-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    5.3272,
+    8.6
+   ],
+   "end": [
+    6.2,
+    8.6
+   ],
+   "width": 0.1524
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(R48-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    5.3,
+    8.6
+   ],
+   "end": [
+    6.2,
+    8.6
+   ],
+   "width": 0.1524
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(R48-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    5.3,
+    8.6
+   ],
+   "end": [
+    6.4,
+    8.6
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "add_track",
+   "net": "Net-(R48-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    5.9,
+    8.7
+   ],
+   "end": [
+    6.4,
+    8.6
+   ],
+   "width": 0.3
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(R51-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    5.3,
+    6.5
+   ],
+   "end": [
+    6.1,
+    6.5
+   ],
+   "width": 0.1524
+  },
+  {
+   "op": "delete_track",
+   "net": "Net-(R51-Pad2)",
+   "layer": "B.Cu",
+   "start": [
+    6.1,
+    6.5
+   ],
+   "end": [
+    5.3272,
+    6.5
+   ],
+   "width": 0.1524
+  }
+ ]
+}

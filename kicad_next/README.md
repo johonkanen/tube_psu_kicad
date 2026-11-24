@@ -204,6 +204,20 @@ starved_thermal 2, 0 unconnected, 0 clearance, 0 dangling, 0 shorts; `check_next
   retreats locally to 1.2 mm), the GND via in the F.Cu DHB_CURRENT pour (2 mm of pour left south of it). A place
   closer to pin 11 was not found (stage 7 list).
 
+## Stage 14g: VAC divider pad gaps R47 / R48 ↔ R50 / R51 (2026-11-24)
+
+Design review 2026-11-24 (findings 09 F2, 05 F3): the AC1 leg R47 / R48 and the AC2 leg R50 / R51 (0805, B.Cu) were
+0.70 mm apart pad to pad (AC1–AC2 and both intermediate node pairs; same as 5.1). A plain 0.5 mm shift of R47 / R48
+south would bring R48 pad 1 / R47 pad 2 inside the achieved H7 limit (3.5 mm from the hole wall = 5.0 mm from the
+centre, kicad_dru "Mounting hole H7 …"), and R50 cannot go north (L1 pad 1, 1.16 mm). `tools/next/route_s14g_vac_divider.py`
+(one-shot, moves in `routing/moves_s14g.json`): **R47** (0.8, 8.6) → **(−0.2, 9.15)**, **R48** (4.3, 8.6) → **(4.9, 8.7)**,
+**R51** (4.3, 6.5) → **(4.3, 6.05)**; links R47.2 → R48.1, R50.2 → R51.1, R48.2 → via (6.4, 8.6) re-drawn, AC1 track
+shortened to the R47.1 centre, old 0.15 mm pad stubs removed. B.Cu distances: AC1–AC2 **0.70 → 1.28 mm**,
+Net-(R47-Pad2)–Net-(R50-Pad2) **0.70 → 1.25 mm**, Net-(R48-Pad2)–Net-(R51-Pad2) **0.70 → 1.25 mm** (cross pairs ≥ 1.28 mm).
+H7: R48 pad 1 5.18 → 5.08 mm from the centre (3.58 mm from the hole wall ≥ 3.5; the kicad_dru comment still quotes 5.18),
+H7 pairs within 6.2 mm 11 → 8, smallest unchanged 2.08 mm (the In2 track). Courtyard overlaps 135 → 134. Unconnected 0,
+0 shorts, clearance 0, dangling 0, parity 0; `check_next.sh` passes.
+
 ## Stage 14f: PFC driver supply capacitors C79 / C80 at the VDD pins (2026-11-24)
 
 Design review 2026-11-24 (findings 05 F4): the UCC27511A drivers DRV1 / DRV2 (SOT-23-6, B.Cu) replaced the IXDD609 on
