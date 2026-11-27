@@ -50,7 +50,7 @@ gap / temperature / leakage both ways, heatsinks.
 | 10 | F4 | Heatsink potentials and insulation not defined | **open** – owner (heatsinks: potential, insulation pads, mounting); checklist 12 |
 | 11 | F1 | DAB secondary switch node reaches Q8 drain through one via | **fixed** – stage 13a |
 | 14 | F1 | Rotations / polarity unverified, JLC polarity check needs silkscreen (blocker, PCBA) | **prepared, owner check open** – stage 18c: `ROTATION_FIX` from the common KiCad → JLC tools (SOT-23 / SOIC / TSSOP / VSSOP 270, CP_Elec 180; PG-DSO-12 / CP_Elec_5x5.4 by geometry), bottom rule 180 − rot + corr, `fab/ROTATION_CHECK.md` (67 parts, marker direction top view / seen from below). **Open:** tick it off in JLC's placement preview; none of the corrections is verified |
-| 14 | F2 | Transformer pin drills not confirmed (blocker, bare board) | **open** – owner measurement of TR1 / TR3 pin diameters before ordering |
+| 14 | F2 | Transformer pin drills not confirmed (blocker, bare board) | **closed** – owner 2026-11-27: TR1 (EEL19) and TR3 (EC42) pins are square, diagonal just below the limits (≈ 0.7 / 0.8 mm for the 0.9 / 1.0 mm TR1 drills, ≈ 1.0 mm for the 1.2 mm TR3 drill); drills unchanged |
 | 14 | F3 | Three slots exactly 1.0 mm | **fixed** – stage 13b |
 | 14 | F4 | Fiducials / edge rails: none, not documented | **fixed (documents)** – stage 18c: fab README order parameters (no fiducials / rails → tooling holes, rails and fiducials added by JLCPCB, shipped with rails, 15 parts < 2.5 mm from the edge; no local fiducials needed, min pitch 0.65 mm), remark in `fab/ORDER_REMARK.md` |
 | 14 | F5 | No assembly drawing / hand-assembly sheet | **fixed** – stage 18c: `fab/tube_psu_5_2-assembly_top.pdf` / `-assembly_bottom.pdf` (Fab + pads + refdes, bottom mirrored), `fab/HAND_ASSEMBLY.md` (every part JLC does not place, soldering order, notes) |
@@ -103,4 +103,3 @@ west), secondary plate south of Q8 / Q21 (keep-out "Q21 / Q8 to ISO2 under the h
 - Bench: TR3 Lm tuning for soft switching at light load, DAB zero-power phase offset and loop gain, ESL-compensation
   tuning of the current channels (5 mΩ), SR window and f_min of the heater LLC, DRV6 VDDB ringing, ISO2 / U11 outputs
   during DAB switching (CMTI margin, CHANGES 6.a).
-- Checklists 12 (thermal / mechanical) and 13 (assembly) still to run.

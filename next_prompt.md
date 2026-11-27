@@ -12,6 +12,33 @@ Read first: this file, `kicad_next/review/RESOLUTIONS.md` (status of every shoul
 `kicad_next/review/README.md`, `kicad_next/CHANGES_5_2.md` section 6, `kicad_next/fab/README.md`, and the newest
 "Stage" sections at the top of `kicad_next/README.md` (18c … 15a).
 
+## Session 2026-11-25 (status check only, no design change)
+
+- Re-verified at `1e37a8a`: `tools/next/check_next.sh` ALL PASSED, `jlc_fab.py --check` up to date. Creepage not
+  re-run: stages 18a–18c moved no copper, so the 0-violation result from stage 17b stands.
+- Pre-order checklist made. **Blockers for the bare board:** (1) TR1 / TR3 pin diameters vs drills (14 F2),
+  (2) caliper check of C2M0160120D / C3D02060A / IPA60R280CFD7 for the heatsink plate (12 F1), (3) J2 mating height
+  and orientation against the card. **Decide before ordering:** use 5.1 spares or substitutes for Q5 / Q6 / SICD1 /
+  SICD2 (check substitute pin-outs against `TO-220-2_Vertical_KA`); fit of C38 / C86 / C117; land pattern of the
+  5 mΩ shunts. **At the order:** `fab/ROTATION_CHECK.md` in JLC's preview, stock on the day (C105987, J4, CM1 /
+  CM4 = 20), THT decision, stackup name, J2 annular ring 0.159 mm, JLC Gerber viewer / DFM. Can wait: dab_spice CFD7
+  update, bench items.
+- Stale line to fix: `RESOLUTIONS.md` "Checklists 12 (thermal / mechanical) and 13 (assembly) still to run". Both
+  have been run.
+- KiCad MCP server (`~/dev/KiCAD-MCP-Server`, KiCad 10.0.7 Python through `kicad10_python.sh`) registered for this
+  project, local scope (`claude mcp get kicad`). Its tools load in a new session.
+
+## Session 2026-11-27 (no copper change)
+
+- Creepage slots re-checked against the pads and domains: all five correctly placed, `check_domains.py` 0 below limit.
+- **14 F2 closed**: owner says TR1 / TR3 square pins are just below the limits for the existing 0.9 / 1.0 / 1.2 mm
+  drills; drills unchanged (RESOLUTIONS, README, `jlc_fab.py` notes → `fab/HAND_ASSEMBLY.md`). Stale "checklists 12 / 13
+  still to run" line removed.
+- Owner will hand-solder the large parts and choose Q5 / Q6 / SICD1 / SICD2 on the bench (TO-247-3 G-D-S,
+  TO-220-2 KA = pin 1 / tab cathode; DSC04C065 checked compatible). The plate is made after the parts are chosen, so
+  the package caliper check is no longer an ordering blocker. **Only remaining bare-board blocker: J2 mating height /
+  orientation against the card.** Then the order-time items (SMD-only assembly, rotation check, stock, stackup, DFM).
+
 ## Where the design stands
 
 - Fully routed: 0 unconnected, 0 shorts, 0 clearance, 0 dangling, 0 parity, 0 isolation violations; DRC 138 items

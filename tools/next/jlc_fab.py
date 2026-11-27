@@ -1192,8 +1192,8 @@ def generate(out):
                   "plate plane.",
         "Q8 Q21": "IPA60R280CFD7 TO-220 FullPAK, **consigned**. Tab to the secondary plate south of the pair, no pad.",
         "TR1": "EEL19 4 + 6 custom flyback transformer (winding specification at the top of "
-               "`simulation/flyback/EEL19_DESIGN.md`). **Bobbin pins 4 and 6 clipped** (no pad). Confirm the pin "
-               "diameter against the drills (1.0 / 0.9 mm) with calipers before the PCB is ordered (findings 14 F2).",
+               "`simulation/flyback/EEL19_DESIGN.md`). **Bobbin pins 4 and 6 clipped** (no pad). Pin diameter "
+               "checked by the owner against the drills (1.0 / 0.9 mm, 2026-11-27, findings 14 F2): square pins fit.",
         "TR2": "EF25 2 x 5 heater LLC transformer, 64 / 2 / 2 T, **pins 3 and 8 not fitted**. The two 2-turn secondary "
                "halves and the centre tap are heavy wires soldered to WP1 - WP4 (as 5.1): half 1 from pins 9 + 10 / WP4 "
                "(Q14_DRAIN) to the centre tap WP3 (6V3), half 2 from the centre tap WP2 (6V3) to pins 6 + 7 / WP1 "
@@ -1201,8 +1201,9 @@ def generate(out):
                "the 5.1 transformer).",
         "TR3": "EC42/15 DAB transformer, 20 : 21 T. **Cut bobbin pins 1, 2, 3, 6, 13 - 16.** Gap by a tape spacer under "
                "all legs: start at about **0.83 mm (Lm ≈ 120 µH)**, tune on the bench for soft switching at light load "
-               "(`simulation/dab/DAB_TRANSFORMER.md` 5 / 6 / 8). Confirm the pin diameter against the 1.2 mm drill and the "
-               "core-plate clearance before the PCB is ordered (findings 14 F2).",
+               "(`simulation/dab/DAB_TRANSFORMER.md` 5 / 6 / 8). Pin diameter checked by the owner against the "
+               "1.2 mm drill (2026-11-27, findings 14 F2). Check the core-plate clearance at the secondary pins "
+               "(>= 4 mm, or tape) when fitting.",
         "L1 L2": "PFC chokes, sendust toroid OD 31.5 x 16.7 mm, **upright** as on the 5.1 board, ring plane along the "
                  "board's long axis, the two leads in the RM8 holes. Measure L at 0 A and at the PFC peak current "
                  "(value `TBD (measured)`).",

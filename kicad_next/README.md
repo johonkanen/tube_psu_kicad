@@ -2656,6 +2656,7 @@ assumed), KRL2012 shunt, heatsink plate (30 mm assumed). Tallest parts: C19/C30 
 TR3 31.5, TR1 29.2, R27 26 (library model), TO-247 25.4, CM1/CM4 25. R27 (TWW10, no LCSC) keeps the KiCad
 `R_Radial_Power_L13.0mm_W9.0mm_P5.00mm` model.
 
+*Pin diameters done (owner 2026-11-27, findings 14 F2): the EEL19 and EC42 square pins fit the 0.9 / 1.0 / 1.2 mm drills.*
 **Still to confirm with calipers** (then change the generator constants and rerun): EEL19 4+6 bobbin base
 outline (15.8 × 22.5 is 5+5 data), pin diameter (drills 1.0 / 0.9 mm), seated height and the real base
 creepage between the rows; EC42 set: pin diameter (drill 1.2), base 46 × 40, core depth, seated height and
